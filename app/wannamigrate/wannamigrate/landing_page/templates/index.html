@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<htmL>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link media="only screen and (min-width: 320px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main320.css" %}">
+		<link media="only screen and (min-width: 800px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main800.css" %}">
+		<style type="text/css">
+			@media screen and (min-width: 1920px)
+			{
+				body{ background-size: 100% 100%; }
+			}
+		</style>
+		<script type="text/javascript" src="{% static "landing_page/js/jquery-2.1.1.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.min.js" %}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				// CONSTANTS
+				var PROXIMITY_FACTOR = 0.15;
+				var PLUS_MODIFIER = 10;
+
+				// Feature's icons margins
+				var icons_default_margin = parseFloat( $( ".feature > span.icon" ).css( "margin-top" ) );
+				var icons_hover_margin = PLUS_MODIFIER + icons_default_margin - ( icons_default_margin * PROXIMITY_FACTOR );
+				// Feature's text margins
+				var text_default_margin = parseFloat( $( ".feature > p.description" ).css( "margin-top" ) );
+				var text_hover_margin = PLUS_MODIFIER + text_default_margin - ( text_default_margin * 2 * PROXIMITY_FACTOR );
+
+				$(".feature").hover(function(){ 
+					icon = $(this).find( "span.icon" ).animate( { 'margin-top': icons_hover_margin + 'px' }, "fast" );
+					$(this).find( "p" ).animate( { 'margin-top': text_hover_margin + 'px' }, "fast" );
+				},
+				function(){ 
+					icon = $(this).find( "span.icon" ).animate( { 'margin-top': icons_default_margin + 'px' }, "fast" );
+					$(this).find( "p" ).animate( { 'margin-top': text_default_margin + 'px' }, "fast" );
+				});
+
+				$(".Feature").click( function(){
+					$("#email").focus();
+				});
+
+				$( "#form_email" ).submit(function( e ){
+					// Validates non-empty e-mails.
+                    if ( $("#email").val().length == 0 )
+                    {
+                        onFormSubmitError( "Invalid e-mail. Try again." );
+                        e.preventDefault();
+                        return;
+                    }
+
+                    // Lock the submit button.
+					$("#submit").addClass( "processing" ).attr( "disabled", "disabled" );
+					
+					ajax_data = {
+						type: $( "#form_email" ).attr('method'),
+            			url: $( "#form_email" ).attr('action'),
+            			data: $( "#form_email" ).serialize(),
+					};
+
+					$.ajax( ajax_data ).done(function( response ){
+
+						if ( response.email_saved == 1 )
+							onFormSubmitSuccess( response.message );
+						else
+						{
+							onFormSubmitError( response.message );
+							$("#shake_wrapper").effect( "shake", { distance: 10 }, "slow" );
+						}
+
+					}).fail( function(){
+						onFormSubmitError( "Ajax Error! Please reload the page and try again." );
+					});
+
+					e.preventDefault();
+
+				});
+
+				onFormSubmitSuccess = function( msg ) {
+					$("#message").text( msg ).removeClass( "error" ).addClass( "success" );
+					$("#submit").removeClass("processing").removeAttr( "disabled" );
+					$("#email").val( '' );
+				}
+				onFormSubmitError = function( msg ) {
+					$("#message").text( msg ).removeClass( "success" ).addClass( "error" );
+					$("#submit").removeClass("processing").removeAttr( "disabled" );
+				}
+
+				$('.share').click(function(event) {
+	                var width  = 575,
+	                    height = 400,
+	                    left   = ($(window).width()  - width)  / 2,
+	                    top    = ($(window).height() - height) / 2,
+	                    url    = this.href,
+	                    opts   = 'status=1' +
+	                             ',width='  + width  +
+	                             ',height=' + height +
+	                             ',top='    + top    +
+	                             ',left='   + left;
+
+	                window.open(url, 'twitter', opts);
+
+	                return false;
+                });
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="bg">
+			<div id="logo"></div>
+			<h1 id="title"><span>Live</span> abroad. <span>Change</span> your life.</h1>
+			<div id="features_container">
+				<div class="feature one">
+					<span class="icon"></span>
+					<p class="description">Discover what <span>countries needs your profile</span></p>
+				</div>
+				<div class="feature two">
+					<span class="icon"></span>
+					<p class="description">Build your <span>visa application online</span></p>
+				</div>
+				<div class="feature three">
+					<span class="icon"></span>
+					<p class="description">Check your <span>language</span> skills</p>
+				</div>
+				<div class="feature four">
+					<span class="icon"></span>
+					<p class="description">Receive worldwide <span>job alerts</span></p>
+				</div>
+				<div class="feature five">
+					<span class="icon"></span>
+					<p class="description"><span>Learn shortcuts</span> to achieve your visa faster</p>
+				</div>
+			</div>
+			<form id="form_email" action="/" method="post">{% csrf_token %}
+				<label id="message">Let me know when ready:</label>
+				<div id="shake_wrapper">
+					{{ form.email }}
+					<input id="submit" type="submit" value="" />
+				</div>
+			</form>
+			<div id="share_container">
+				<a href="http://www.facebook.com/share.php?u=www.wannamigrate.com" alt="Share on facebook" class="share facebook"></a>
+				<a alt="Share on Twitter" href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wannamigrate.com&text=Are%20you%20tired%20of%20living%20in%20your%20country%3F%20%40wannamigrate&tw_p=tweetbutton&url=http%3A%2F%2Fwww.wannamigrate.com" class="share twitter"></a>
+				<a href="https://plus.google.com/share?url=http://www.wannamigrate.com" alt="Share on Google Plus" class="share plus"></a>
+			</div>
+		</div>
+	</body>
+
+</html>
