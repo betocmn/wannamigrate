@@ -1,7 +1,20 @@
 {% load staticfiles %}
 <htmL>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<head>
+
+	    <!-- Meta -->
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	    <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
+	    <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
+	    <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+	    <meta name="Robots" content="all">
+	    <meta name="og:image" content="{% static "landing_page/imgs/logo_social.png" %}">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+
+	    <!-- CSS -->
+	    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
 		<link media="only screen and (min-width: 320px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main320.css" %}">
 		<link media="only screen and (min-width: 800px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main800.css" %}">
 		<style type="text/css">
@@ -10,13 +23,32 @@
 				body{ background-size: 100% 100%; }
 			}
 		</style>
+
+	    <!-- start Google Analytics -->
+	    <script type="text/javascript">
+	        var _gaq = _gaq || [];
+	        _gaq.push(['_setAccount', 'UA-7734790-20']);
+	        _gaq.push(['_trackPageview']);
+
+	        (function() {
+	            var ga = document.createElement('script');
+	            ga.type = 'text/javascript';
+	            ga.async = true;
+	            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	            var s = document.getElementsByTagName('script')[0];
+	            s.parentNode.insertBefore(ga, s);
+	        })();
+	    </script>
+	    <!-- end Google Analytics -->
+
+	    <!-- Javascript -->
 		<script type="text/javascript" src="{% static "landing_page/js/jquery-2.1.1.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.min.js" %}"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				// CONSTANTS
 				var PROXIMITY_FACTOR = 0.15;
-				var PLUS_MODIFIER = 10;
+				var PLUS_MODIFIER = 8;
 
 				// Feature's icons margins
 				var icons_default_margin = parseFloat( $( ".feature > span.icon" ).css( "margin-top" ) );
@@ -102,6 +134,7 @@
                 });
 			});
 		</script>
+		<!-- End Javascripts -->
 	</head>
 
 	<body>
@@ -111,7 +144,7 @@
 			<div id="features_container">
 				<div class="feature one">
 					<span class="icon"></span>
-					<p class="description">Discover what <span>countries needs your profile</span></p>
+					<p class="description">Discover what <span>countries need people with yours skills</span></p>
 				</div>
 				<div class="feature two">
 					<span class="icon"></span>
@@ -119,7 +152,7 @@
 				</div>
 				<div class="feature three">
 					<span class="icon"></span>
-					<p class="description">Check your <span>language</span> skills</p>
+					<p class="description">Check and improve your <span>language skills </span></p>
 				</div>
 				<div class="feature four">
 					<span class="icon"></span>
@@ -127,7 +160,7 @@
 				</div>
 				<div class="feature five">
 					<span class="icon"></span>
-					<p class="description"><span>Learn shortcuts</span> to achieve your visa faster</p>
+					<p class="description">Learn shortcuts to get <span>extra immigration points</span></p>
 				</div>
 			</div>
 			<form id="form_email" action="/" method="post">{% csrf_token %}

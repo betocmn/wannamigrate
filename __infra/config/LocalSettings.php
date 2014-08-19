@@ -30,7 +30,7 @@ $wgScriptPath = "";
 $wgScriptExtension = ".php";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost:8181";
+$wgServer = "http://54.213.143.121:81";
 
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
@@ -44,8 +44,8 @@ $wgLogo = "$wgStylePath/common/images/wiki.png";
 $wgEnableEmail = true;
 $wgEnableUserEmail = true; # UPO
 
-$wgEmergencyContact = "apache@localhost:8181";
-$wgPasswordSender = "apache@localhost:8181";
+$wgEmergencyContact = "apache@54.213.143.121:81";
+$wgPasswordSender = "apache@54.213.143.121:81";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
@@ -56,7 +56,7 @@ $wgDBtype = "mysql";
 $wgDBserver = "localhost";
 $wgDBname = "wiki";
 $wgDBuser = "wiki";
-$wgDBpassword = "wiki#surf.au";
+$wgDBpassword = "wanna#wiki.au";
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -99,11 +99,11 @@ $wgShellLocale = "en_US.utf8";
 # Site language code, should be one of the list in ./languages/Names.php
 $wgLanguageCode = "pt-br";
 
-$wgSecretKey = "6694f2b23681b5f1c013b6f91379db156858e0b68f6415658226e0e7a3ca0542";
+$wgSecretKey = "3cd24fc73899891fba4386caea63cf258f4205795abf4287f664ae1a2b3f5076";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "ac5d945246e397d7";
+$wgUpgradeKey = "fd1bb14a18e6a591";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'cologneblue', 'monobook', 'vector':
