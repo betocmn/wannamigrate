@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
+    '54.191.0.133',
     '.wannamigrate.com',
 ]
 
