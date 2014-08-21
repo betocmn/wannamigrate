@@ -47,7 +47,7 @@ deactivate
 echo "--------------------------"
 echo "DOWNLOADING MEDIA WIKI"
 echo "--------------------------"
-cd /www
+cd /wanna
 wget http://releases.wikimedia.org/mediawiki/1.23/mediawiki-1.23.2.tar.gz
 tar -zxf mediawiki-1.23.2.tar.gz
 rm mediawiki-1.23.2.tar.gz
@@ -55,8 +55,8 @@ mv mediawiki-1.23.2 wiki
 echo "--------------------------"
 echo "UPDATING APACHE CONFIGURATION FILES"
 echo "--------------------------"
-cp /infra/config/wsgi.conf /etc/apache2/mods-enabled/wsgi.conf
-cp /infra/config/wannamigrate.conf /etc/apache2/sites-enabled/wannamigrate.conf
+cp /wanna/__infra/config/wsgi.conf /etc/apache2/mods-enabled/wsgi.conf
+cp /wanna/__infra/config/wannamigrate.conf /etc/apache2/sites-enabled/wannamigrate.conf
 rm /etc/apache2/sites-enabled/000-default.conf
 service apache2 restart
 
@@ -70,5 +70,5 @@ echo "2. Access your mysql and create a database called 'wannamigrate'"
 echo "   => mysql -u root -p"
 echo "3. Activate your virtualenv and run a 'syncdb' inside your django application."
 echo "   => source /wannavenv/bin/activate"
-echo "   => python /www/wannamigrate/manage.py syncdb"
+echo "   => python /wanna/app/wannamigrate/manage.py syncdb"
 echo "4. If you want to configure your wiki, access http://localhost:8181/mw-config/index.php and follow the installation instructions"
