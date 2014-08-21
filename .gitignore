@@ -1,4 +1,3 @@
 *.pyc
 __infra/.vagrant/
-wannamigrate/static
 wiki
