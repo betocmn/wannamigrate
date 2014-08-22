@@ -30,14 +30,14 @@ $wgScriptPath = "";
 $wgScriptExtension = ".php";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://54.213.143.121:81";
+$wgServer = "http://www.wannamigrate.com:81";
 
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
 
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = "../wannamigrate/static/wiki/imgs/logo_wiki.png";
+$wgLogo = "$wgStylePath/../images/logo_wiki.png";
 
 ## UPO means: this is also a user preference option
 
