@@ -120,7 +120,17 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
+$wgGroupPermissions['*']['createaccount'] = false;
+$wgGroupPermissions['*']['edit'] = false;
 
+# Disable reading by anonymous users
+$wgGroupPermissions['*']['read'] = false;
+ 
+# But allow them to read e.g., these pages:
+$wgWhitelistRead =  array ( "Main Page", "Special:Userlogin", "Help:Contents", "-");
+ 
+# Like previous, but for French (be careful of encoding! save file as UTF-8!)
+# $wgWhitelistRead = array( ":Page Principale", "Special:Userlogin", "Aide en français");
 
 # End of automatically generated settings.
 # Add more configuration options below.
