@@ -143,14 +143,14 @@ body
 	cursor: default;
 }
 
-#share_container
+#social_container
 {
 	width: 146px;
 	height: 46px;
 	margin: 20px auto 0;
 }
 
-.share
+.social
 {
 	display: block;
 	float: left;
@@ -159,19 +159,19 @@ body
 	margin-left: 4px;
 }
 
-.share:first-child { margin-left: 0 !important; }
+.social:first-child { margin-left: 0 !important; }
 
-.share.facebook 
+.social.facebook 
 {
 	background-image: url( '../imgs/facebook.png' );
 }
 
-.share.twitter
+.social.twitter
 {
 	background-image: url( '../imgs/twitter.png' );
 }
 
-.share.plus
+.social.insta
 {
-	background-image: url( '../imgs/plus.png' );
+	background-image: url( '../imgs/insta.png' );
 }
