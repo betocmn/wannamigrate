@@ -33,8 +33,8 @@ echo "INSTALLING MYSQL TOOLS"
 echo "--------------------------"
 apt-get install libmysqlclient-dev --yes
 apt-get install mysql-client --yes
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password wanna#surf.au'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password wanna#surf.au'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password 79uhGLua19UOSAmav'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 79uhGLua19UOSAmav'
 apt-get -y install mysql-server
 echo "--------------------------"
 echo "CREATING THE VIRTUAL ENVIRONMENT"

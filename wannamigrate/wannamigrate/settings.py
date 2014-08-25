@@ -70,8 +70,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
         'NAME': 'wannamigrate',
-        'USER': 'root',
-        'PASSWORD': 'wanna#surf.au',
+        'USER': 'wannamigrate',
+        'PASSWORD': '4tiq3PAwFjnBsdZ91',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
