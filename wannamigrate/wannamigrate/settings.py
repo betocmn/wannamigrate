@@ -1,59 +1,65 @@
 """
-Django settings for wannamigrate project.
+Django settings for wannamigrate_new project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.utils.translation import ugettext_lazy as _
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+import pymysql
+pymysql.install_as_MySQLdb()
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# Base directory path
+BASE_DIR = os.path.dirname( os.path.dirname( __file__ ) )
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-gfw35qa!nvv+n6vhhn*%y300(a-^!v!#gz5@-(_$u5o&ybze4'
+SECRET_KEY = '&3je*i!yr=4y3sk&sm7^_@(fhd@^z7re&$y-b-wx(zsm3(6nyk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+#DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '54.191.0.133',
-    '54.213.143.121',
-    '.wannamigrate.com',
-]
+TEMPLATE_DEBUG = True
 
+# Access Restrictions
+ALLOWED_HOSTS = []
+
+INTERNAL_IPS = (
+    '127.0.0.1'
+)
 
 # Application definition
-
-DJANGO_APPS = (
-    #'django.contrib.admin',
-    #'django.contrib.auth',
+DEFAULT_APPS = (
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+)
+THIRD_PARTY_APPS = (
+    #'debug_toolbar'
+)
+LOCAL_APPS = (
+    'wannamigrate.core',
+    'wannamigrate.admin'
 )
 
-WANNAMIGRATE_APPS = (
-    'wannamigrate.landing_page',
-)
-
-INSTALLED_APPS = DJANGO_APPS + WANNAMIGRATE_APPS
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -64,11 +70,11 @@ WSGI_APPLICATION = 'wannamigrate.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql', #'ENGINE': 'mysql.connector.django',
         'NAME': 'wannamigrate',
         'USER': 'wannamigrate',
         'PASSWORD': '4tiq3PAwFjnBsdZ91',
@@ -78,7 +84,7 @@ DATABASES = {
 }
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# https://docs.djangoproject.com/en/dev/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -90,10 +96,34 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ( 'en-us', _( 'English' ) ),
+    ( 'pt-br', _( 'Portuguese (BR)' ) ),
+)
+
+LOCALE_PATHS = (
+    os.path.join( BASE_DIR, 'locale' ),
+)
+
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join( BASE_DIR, "static" ),
+STATIC_ROOT = os.path.join( BASE_DIR, 'static' )
+
+# Templates
+TEMPLATE_DIRS = (
+    os.path.join( BASE_DIR, 'templates' ),
 )
+
+# User Model
+AUTH_USER_MODEL = 'core.User'
+
+# Login URL
+LOGIN_URL = 'admin:login'
+
+# Email Settings
+DEFAULT_FROM_EMAIL = 'Wanna Migrate <contact@wannamigrate.com>'
+EMAIL_HOST = 'smtp.wannamigrate.com'
+EMAIL_HOST_USER = 'contact@wannamigrate.com'
+EMAIL_HOST_PASSWORD = 'ju829sj'
+EMAIL_PORT = 587
