@@ -2,191 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48443390-e85c-4960-ba7c-0eeaa7c80092" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/ajax-loader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/back_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/img/background.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/close.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/close_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/djdt_vertical.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/img/indicator.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/img/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/img/logo_admin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/images/spritemap.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/images/spritemap@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_bordered-pulled.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_core.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_fixed-width.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_icons.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_larger.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_list.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_path.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_rotated-flipped.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_spinning.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_stacked.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/_variables.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/admin_user/add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/group/add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/css/basic.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/css/stylus/basic.styl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/bordered-pulled.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/core.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/db_translations/core_answer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/db_translations/core_country.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/demo/dashboard-demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/plugins/dataTables/dataTables.bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/dataTables/dataTables.bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/admin_user/details.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/group/details.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/locale/pt-BR/LC_MESSAGES/django.po" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/css/dropzone.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/dropzone.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/dropzone/css/stylus/dropzone.styl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/admin_user/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/group/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/login/edit_my_account.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/lightbox/ekko-lightbox.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/lightbox/ekko-lightbox.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/flot/excanvas.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/fixed-width.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/demo/flot-demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/css/font-awesome.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/font-awesome.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/scss/font-awesome.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/layouts/form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/fonts/glyphicons-halflings-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/icons.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/home/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/login/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/js/jquery-ui-date-picker-pt-br.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/jquery-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/js/jquery-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/dataTables/jquery.dataTables.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/flot/jquery.flot.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/flot/jquery.flot.pie.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/flot/jquery.flot.resize.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/flot/jquery.flot.tooltip.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery.maskedinput.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/metisMenu/jquery.metisMenu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/larger.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/admin_user/list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/group/list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/list.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/emails/user/login_details.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/layouts/main.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/mixins.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/plugins/morris/morris-0.4.3.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/demo/morris-demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/morris/morris.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/login/my_account.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/path.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/plugins/morris/raphael-2.1.0.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/rotated-flipped.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/sb-admin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/sb-admin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/plugins/social-buttons/social-buttons.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/spinning.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/stacked.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/templates/admin/layouts/status.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/css/plugins/timeline/timeline.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/css/toolbar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/js/toolbar.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/js/toolbar.profiling.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/js/toolbar.sql.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/js/toolbar.template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/debug_toolbar/js/toolbar.timer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/font-awesome/less/variables.less" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/admin/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/admin/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/css/main320.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/css/main800.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/Apache License.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-Bold.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-BoldItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-ExtraBold.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-ExtraBoldItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-Italic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-Light.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-LightItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-Regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-Semibold.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/fonts/opensans/OpenSans-SemiboldItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/Untitled-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/bg_email.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/bt_submit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/facebook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/feature_five.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/feature_four.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/feature_one.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/feature_three.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/feature_two.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/insta copy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/insta.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/loading2.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/logo_social.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/logo_wanna_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/plus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/reference.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/imgs/twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-2.1.1.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/external/jquery/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_flat_10_000000_40x100.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.structure.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.structure.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/static/wiki/imgs/logo_wiki.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/forms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/templates/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/landing_page/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wannamigrate/wsgi.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/favicon.ico" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/img/favicon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/animated-overlay.gif" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/animated-overlay.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_diagonals-thick_18_b81900_40x40.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_diagonals-thick_20_666666_40x40.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_glass_100_f6f6f6_1x400.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_glass_100_fdf5ce_1x400.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_gloss-wave_35_f6a828_500x100.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-icons_222222_256x240.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-icons_222222_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-icons_228ef1_256x240.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-icons_228ef1_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-icons_ef8c08_256x240.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-icons_ef8c08_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-icons_ffd27a_256x240.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-icons_ffd27a_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/static/landing_page/js/jquery-ui-1.11.0.custom/images/ui-icons_ffffff_256x240.png" afterPath="$PROJECT_DIR$/wannamigrate/static/admin/js/jquery-ui/css/ui-lightness/images/ui-icons_ffffff_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/wannamigrate/wannamigrate/__init__.py" afterPath="$PROJECT_DIR$/wannamigrate/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__infra/.idea/workspace.xml" afterPath="$PROJECT_DIR$/__infra/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wannamigrate/.idea/workspace.xml" afterPath="$PROJECT_DIR$/wannamigrate/.idea/workspace.xml" />
     </list>
     <ignored path="wanna.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -208,7 +27,18 @@
     <favorites_list name="wanna" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.09202454" vertical-offset="0" max-vertical-offset="652">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -223,6 +53,7 @@
       <list>
         <option value="$PROJECT_DIR$/wannamigrate/wannamigrate/settings.py" />
         <option value="$PROJECT_DIR$/wannamigrate/wannamigrate/admin/forms.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -257,7 +88,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -278,6 +108,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,9 +208,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -401,6 +229,9 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -456,14 +287,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -501,13 +332,6 @@
     <entry file="file://$PROJECT_DIR$/wannamigrate/locale/pt-BR/LC_MESSAGES/django.po">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2745">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="652">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
@@ -570,6 +394,14 @@
           <folding>
             <element signature="e#327#382#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09202454" vertical-offset="0" max-vertical-offset="652">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
