@@ -1,0 +1,177 @@
+@font-face { font-family: "open_sans_regular"; src: url("../fonts/opensans/OpenSans-Regular.ttf"); }
+@font-face { font-family: "open_sans_bold"; src: url("../fonts/opensans/OpenSans-Bold.ttf"); }
+@font-face { font-family: "open_sans_extrabold"; src: url("../fonts/opensans/OpenSans-ExtraBold.ttf" ); }
+
+
+*, body
+{
+	margin:0;
+	padding:0;
+}
+
+
+body
+{
+	font-family: "open_sans_regular";
+	background: url("../imgs/bg_email.png") no-repeat top center;
+}
+
+#logo
+{
+	margin: 4% auto 0;
+	width: 306px;
+	height: 45px;
+	background: url("../imgs/logo_wanna_white.png") no-repeat;
+	background-size: 100% 100%;
+
+}
+
+#title
+{
+	margin-top: 5%;
+	margin-left: 2%;
+	width: 96%;
+	text-align: center;
+	color: #ffffff;
+	font-family: "open_sans_regular";
+	font-size: 54px;
+}
+
+#title span 
+{ 
+	font-family: "open_sans_extrabold";
+}
+
+#features_container
+{
+	position: relative;
+	margin: 56px auto 0;
+	width: 780px;
+	height: 136px;
+	padding-top: 62px;
+}
+
+.feature
+{
+	float: left;
+	width: 19.50%;
+	height: 95.06%;
+	margin: 0.21%;
+
+
+}
+.feature span.icon
+{
+	display: block;
+	width: 67.95%;
+	height: 61.03%;
+	margin: -30.51% auto;
+	background-size: 100% 100% !important;
+}
+	.feature.one { background-color: #7d4191; }
+	.feature.one span.icon { background: url("../imgs/feature_one.png") no-repeat; }
+	.feature.two { background-color: #2a809c; }
+	.feature.two span.icon { background: url("../imgs/feature_two.png") no-repeat; }
+	.feature.three { background-color: #f26c4f; }
+	.feature.three span.icon { background: url("../imgs/feature_three.png") no-repeat; }
+	.feature.four { background-color: #a3c756; }
+	.feature.four span.icon { background: url("../imgs/feature_four.png") no-repeat; }
+	.feature.five { background-color: #2da794; }
+	.feature.five span.icon { background: url("../imgs/feature_five.png") no-repeat; }
+
+.feature p 
+{
+	font-size: 14px;
+	margin: 36% 13.81%;
+	color: #ffffff;
+	cursor: default;
+}
+
+.feature p span
+{
+	font-family: "open_sans_bold";
+}
+
+
+#form_email
+{
+	margin: 40px auto 0;
+	width: 395px;
+
+}
+
+#message
+{
+	width: 100%;
+	text-align: left;
+	display: block;
+	font-family: "open_sans_regular";
+	font-size: 18px;
+	color:#ffffff;
+	font-weight: normal;
+	margin-bottom: 12px;
+}
+#message.success { color:#d1ff6e; }
+#message.error { color:#ff7253; }
+
+#email
+{
+	width: 335px;
+	height: 46px;
+	background: none;
+	padding-left: 16px;
+	color: #ffffff;
+	border: solid 2px #ffffff;
+	border-radius: 2px;
+	font-size: 16px;
+}
+
+#submit
+{
+	width: 46px;
+	height: 46px;
+	border: none;
+	margin-left: 6px;
+	vertical-align: middle;
+	cursor: pointer;
+	background: url("../imgs/bt_submit.png") no-repeat;
+}
+
+#submit.processing
+{
+	background: url("../imgs/loading.gif") no-repeat center center;
+	cursor: default;
+}
+
+#social_container
+{
+	width: 146px;
+	height: 46px;
+	margin: 20px auto 0;
+}
+
+.social
+{
+	display: block;
+	float: left;
+	width: 46px;
+	height: 46px;
+	margin-left: 4px;
+}
+
+.social:first-child { margin-left: 0 !important; }
+
+.social.facebook 
+{
+	background-image: url( '../imgs/facebook.png' );
+}
+
+.social.twitter
+{
+	background-image: url( '../imgs/twitter.png' );
+}
+
+.social.insta
+{
+	background-image: url( '../imgs/insta.png' );
+}
