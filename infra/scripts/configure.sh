@@ -42,7 +42,7 @@ echo "--------------------------"
 virtualenv /wannavenv
 source /wannavenv/bin/activate
 pip install django
-pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.1.6.tar.gz
+pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz
 deactivate
 echo "--------------------------"
 echo "DOWNLOADING MEDIA WIKI"
