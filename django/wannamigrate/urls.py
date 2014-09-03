@@ -4,6 +4,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     url(r'^', include( 'wannamigrate.landing_page.urls', namespace="landing_page" ) ),
     url(r'^admin/', include( 'wannamigrate.admin.urls', namespace="admin" ) ),
+    url(r'^site/', include( 'wannamigrate.site.urls', namespace="site" ) ),
 )
 
 #if settings.DEBUG:

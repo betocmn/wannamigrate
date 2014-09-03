@@ -61,3 +61,13 @@ class Mailer( object ):
 
         body = Mailer.build_body_from_template( 'emails/user/login_details.html', template_data )
         return Mailer.send( 'Your Login Details', body, [to] )
+
+    @staticmethod
+    def send_contact_email( template_data ):
+        """
+        Sends contact e-mail form site
+
+        :param: template_data
+        """
+        body = Mailer.build_body_from_template( 'emails/site/contact.html', template_data )
+        return Mailer.send( 'Contact from site', body, ["contact@wannamigrate.com"], template_data[ 'email' ] )

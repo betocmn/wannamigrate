@@ -2,5 +2,5 @@
 .idea/*
 */.idea
 */.idea/*
-__infra/.vagrant/
+infra/.vagrant/
 wiki/*
