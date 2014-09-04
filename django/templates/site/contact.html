@@ -1,70 +1,46 @@
+{% extends "site/layouts/main.html" %}
 {% load staticfiles %}
-<htmL>
-    <head>
-        <head>
 
-        <!-- Meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
-        <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
-        <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
-        <meta name="Robots" content="all">
-        <meta name="og:image" content="http://wannamigrate.com{% static "landing_page/imgs/logo_social.png" %}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+{% block head %}
 
-        <!-- CSS -->
-        <link rel="shortcut icon" href="{% static "favicon.ico" %}">
-        <link media="only screen and (min-width: 320px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main320.css" %}">
-        <link media="only screen and (min-width: 800px)" rel="stylesheet" type="text/css" href="{% static "landing_page/css/main800.css" %}">
-        <style type="text/css">
-            @media screen and (min-width: 1920px)
-            {
-                body{ background-size: 100% 100%; }
-            }
-        </style>
+    {{ block.super }}
 
-        <!-- start Google Analytics -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-7734790-20']);
-            _gaq.push(['_trackPageview']);
+    <link rel="stylesheet" type="text/css" href="{% static 'site/jquery-ui-1.11.1/jquery-ui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'site/bootstrap-3.2.0/css/bootstrap.min.css' %}">
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-        <!-- end Google Analytics -->
+{% endblock head %}
 
-        <!-- Javascript -->
-        <script type="text/javascript" src="{% static "landing_page/js/jquery-2.1.1.min.js" %}"></script>
-        <script type="text/javascript" src="{% static "landing_page/js/jquery-ui-1.11.0.custom/jquery-ui.min.js" %}"></script>
-        <!-- End Javascripts -->
-    </head>
 
-    <body>
-        <div id="bg">
-            <div id="logo"></div>
-            <h1 id="title"><span>Live</span> abroad. <span>Change</span> your life.</h1>
-            <form id="form_email" method="post">{% csrf_token %}
-                <label id="message">Get in touch with us:</label>
-                <div id="shake_wrapper">
-                    {{ form.email }}
-                    {{ form.message }}
-                    <input id="submit" type="submit" value="" />
-                </div>
-            </form>
-            <div id="social_container">
-                <a href="https://www.facebook.com/wannamigrate" alt="Follow us on facebook" class="social facebook" target="_blank"></a>
-                <a alt="Follow us on Twitter" href="https://twitter.com/wannamigrate" class="social twitter" target="_blank"></a>
-                <a href="https://instagram.com/wannamigrate" alt="Follow us on Instagram" class="social insta" target="_blank"></a>
-            </div>
-        </div>
-    </body>
+{% block content %}
 
-</html>
+    <div>
+        <h1>Get in touch with us: </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.email }}
+            {{ form.message }}
+            <input id="submit" type="submit" value="Send" />
+        </form>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            SIGN UP
+        </button>
+    </div>
+
+    <div id="dialog">
+        {% include "site/popups/signup.html" %}
+    </div>
+    <!-- JQuery UI -->
+    <script type="text/javascript" src="{% static "site/jquery-ui-1.11.1/jquery-ui.min.js" %}"></script>
+    <!-- ./JQuery UI -->
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static "site/bootstrap-3.2.0/js/bootstrap.min.js" %}"></script>
+    <!-- ./Bootstrap -->
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+        
+    </script>
+    <!-- ./INLINE JS -->
+
+{% endblock content %}

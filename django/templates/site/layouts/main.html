@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!doctype html>
+<htmL>
+    {% block head %}
+    <head>
+        <!-- Meta -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
+        <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
+        <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+        <meta name="Robots" content="all">
+        <meta name="og:image" content="http://wannamigrate.com{% static "site/img/logo_social.png" %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+        <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+        <!-- main.css -->
+        <link rel="stylesheet" type="text/css" href="{% static "site/css/main.css" %}">
+        <!-- ./main.css -->
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-7734790-20']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <!-- ./Google Analytics -->
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="{% static 'site/js/jquery-2.1.1.min.js' %}"></script>
+        <!-- ./JQuery -->
+
+    </head>
+    {% endblock head %}
+
+    <body>
+        {% block content %}{% endblock content %}
+    </body>
+
+</html>
