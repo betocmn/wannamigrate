@@ -152,7 +152,7 @@ def admin_user_list_json( request ):
     info = {
         'fields_to_select': [ 'id', 'name', 'email', 'is_superuser' ],
         'fields_to_search': [ 'id', 'name', 'email', 'is_superuser' ],
-        'default_order_by': 'name',
+        'default_order_by': 'id',
         'url_base_name': 'admin_user',
     }
 

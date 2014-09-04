@@ -1,3 +1,4 @@
+from functools import reduce
 from django.db.models import Q
 import json
 from io import StringIO

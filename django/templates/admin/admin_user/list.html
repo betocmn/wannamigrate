@@ -18,7 +18,7 @@
 		    $('#datatable_data').dataTable( {
 		        "bProcessing": true,
 		        "bServerSide": true,
-                "aaSorting": [[ 1, "asc" ]],
+                "aaSorting": [[ 0, "asc" ]],
 		        "aoColumns": [ null, null, null, null, { "bSortable": false} ],
 		        "sAjaxSource": "{% url 'admin:admin_user_json' %}"
 		    });
