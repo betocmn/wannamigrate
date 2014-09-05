@@ -4,9 +4,18 @@ from wannamigrate.core.mailer import Mailer
 
 # Contact page
 def contact( request ):
+
+    login_redirect_url = request.build_absolute_uri( '/site/login' )
+    
+    template_data = {
+        'login_redirect' : login_redirect_url
+    }
+
+
     # If the form has been submitted...
     if request.method == 'POST':
         form = ContactForm( request.POST )
+        template_data[ 'form' ] = form
 
         if form.is_valid():
             email = form.cleaned_data[ 'email' ]
@@ -15,17 +24,18 @@ def contact( request ):
             send_result = Mailer.send_contact_email( { 'email': email, 'message': message } )
             
             if send_result == True:
-                return render( request, 'site/contact.html', { 'form': form, 'error': False } )
+                template_data[ 'error' ] = False
             else:
-                return render( request, 'site/contact.html', { 'form': form, 'error': 'Error, try again.' } )
+                template_data[ 'error' ] = 'Error, please try again.'
 
         else:
-            return render( request, 'site/contact.html', { 'form': form, 'error': 'Please provide valid information.' } )
+            template_data[ 'error' ] = 'Please provide valid information.'
 
     else:
-        # Creates an e-mail form and renders the page.
-        form = ContactForm()
-        return render( request, 'site/contact.html', { 'form': form, } )
+        # Creates a form and renders the page.
+        template_data[ 'form' ] = ContactForm()
+    
+    return render( request, 'site/contact.html', template_data )
 
 def home_index( request ):
     pass
