@@ -1,1 +1,1 @@
-{"virtualbox":{"/wanna":{"guestpath":"/wanna","hostpath":"/Users/marcio/wanna","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/marcio/wanna/infra","disabled":false}}}
+{"virtualbox":{"/wanna":{"guestpath":"/wanna","hostpath":"/Users/humbertomoreira/wanna","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/humbertomoreira/wanna/infra","disabled":false}}}
