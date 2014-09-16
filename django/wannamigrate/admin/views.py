@@ -146,7 +146,7 @@ def admin_user_list_json( request ):
 
     # Query data
     user = get_user_model()
-    objects = user.objects.all()
+    objects = user.objects.filter( is_admin = True )
 
     # settings
     info = {
