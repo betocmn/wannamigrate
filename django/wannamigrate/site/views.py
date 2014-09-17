@@ -4,9 +4,17 @@ from wannamigrate.core.mailer import Mailer
 
 # Contact page
 def contact( request ):
+    """
+    Displays the contact page.
 
+    :param request:
+    :return The contact page rendered
+    """
+
+    # The url to open when the user is logged.
     login_redirect_url = request.build_absolute_uri( '/site/login' )
     
+
     template_data = {
         'login_redirect' : login_redirect_url
     }

@@ -1,0 +1,4 @@
+# Facebook app ID
+FACEBOOK_APP_ID = "336536879856373"
+# LinkedIn app ID
+LINKEDIN_APP_ID = "77eu4cz7x6srp6"

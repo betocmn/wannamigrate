@@ -1,154 +1,103 @@
-<!-- Modal -->
-
-<style>
-.line-thru
-{
-  display: block;
-  font-size: .875em;
-  margin-bottom: 1em;
-  position: relative;
-  text-align: center;
-  width: 100%;
-  z-index: 1;
-}
-.line-thru:before {
-width: 40px;
-height: 10px;
-background-color: #FFF;
-content: '';
-margin: -5px 0 0 -20px;
-left: 50%;
-position: absolute;
-top: 50%;
-z-index: -1;
-}
-
-.line-thru:after {
-border-bottom: 1px solid #dfe0e6;
-content: '';
-display: block;
-position: absolute;
-top: 49%;
-width: 100%;
-z-index: -2;
-}
-</style>
+{% load template_utilities %}
 <!-- Facebook Login SDK -->
 <script>
   
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook. Redirect...
-      alert( "logged with facebook" );
-      //window.location = "{{ login_redirect }}";
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      
-    }
-  }
-
+  /** Starts the login with facebook action. */
   function fb_login() {
-    FB.login( statusChangeCallback );
+      FB.login(statusChangeCallback);
+  }
+   
+  /** Callback function that is called when the facebook's api returns.
+  This method handles the login response and threat its results.
+  @param response The response object from facebook's api. */
+  function statusChangeCallback(response) {
+      console.log(response);
+      // The response object is returned with a status field that lets the
+      // app know the current login status of the person.
+      // Full docs on the response object can be found in the documentation
+      // for FB.getLoginStatus().
+      if (response.status === 'connected') {
+          // Logged into your app and Facebook. Redirect...
+          alert("logged with facebook");
+          //window.location = "{{ login_redirect }}";
+      } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+
+      } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+
+      }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
+  // Initializes the facebook api
   window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '336536879856373',
-      cookie     : true,  // enable cookies to allow the server to access 
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.1' // use version 2.1
-    });
-
-    // Now that we've initialized the JavaScript SDK, we call 
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-    //FB.getLoginStatus(function(response) {
-    //  statusChangeCallback(response);
-    //});
-
+      FB.init({
+          appId: '{% get_constant_value "FACEBOOK_APP_ID" %}',
+          cookie: true, // enable cookies to allow the server to access 
+          // the session
+          xfbml: true, // parse social plugins on this page
+          version: 'v2.1' // use version 2.1
+      });
   };
 
-  // Load the SDK asynchronously
+   // Load the SDK asynchronously
   (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <!-- ./Facebook Login SDK -->
 
+
+<!-- LinkedIn Login SDK Hosted -->
 <script type="text/javascript" src="https://platform.linkedin.com/in.js">
-  api_key: 77eu4cz7x6srp6
+  api_key: {% get_constant_value "LINKEDIN_APP_ID" %}
   onLoad: onLinkedInLoad
   authorize: false
 </script>
 <!-- ./LinkedIn Login SDK Hosted -->
 
+<!-- LinkedIn Login SDK Custom -->
 <script type="text/javascript">
-  
+
+  /** Replaces the linkedIn default button. This functions is a workaround. */
   function replace_linkedin_button() {
     var linkedin_login_img_src = "http://thumb.mais.uol.com.br/14306616-small.jpg"
-    var bt_linkedin_login_img = $( "<img/>" ).addClass( "linkedin_login_button" ).attr( "src", linkedin_login_img_src );
+    var bt_linkedin_login_img = $("<img/>").addClass("linkedin_login_button").attr("src", linkedin_login_img_src);
     // Changes the LinkedIn button to a custom image
-    $('a[id*=li_ui_li_gen_]').html( bt_linkedin_login_img );
+    $('a[id*=li_ui_li_gen_]').html(bt_linkedin_login_img);
   }
-  // 2. Runs when the JavaScript framework is loaded
+
+  /** Initialize things when the linkedin api is ready, such as replace of linkedin button and register a callback to handle when the user log in. */
   function onLinkedInLoad() {
-    replace_linkedin_button();
-    IN.Event.on(IN, "auth", onLinkedInAuth);
+      replace_linkedin_button();
+      IN.Event.on(IN, "auth", onLinkedInAuth);
   }
 
-  // 2. Runs when the viewer has authenticated
+  /** Callback function. Handles the user information provided by the linkedin app. */
   function onLinkedInAuth() {
-    IN.API.Profile("me").result(displayProfiles);
+      IN.API.Profile("me").result(displayProfiles);
   }
 
-  // 2. Runs when the Profile() API call returns successfully
+  // example function threating the data provided by the linkedin.
   function displayProfiles(profiles) {
-    member = profiles.values[0];
-    alert( "<p id=\"" + member.id + "\">Hello " +  member.firstName + " " + member.lastName + "</p>" );;
+      member = profiles.values[0];
+      alert("<p id=\"" + member.id + "\">Hello " + member.firstName + " " + member.lastName + "</p>");;
   }
 </script>
 <!-- ./LinkedIn Login SDK Custom -->
 
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="login_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-        <div class="modal-header" style="background-color: #4a356c;">
-            <center><img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/218944-872e78045bad898911a3e4a97724c658-medium_jpg.jpg" /></center>
+        <div class="modal-header">
+            <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/218944-872e78045bad898911a3e4a97724c658-medium_jpg.jpg" />
         </div>
         <div class="modal-body">
 
@@ -158,48 +107,35 @@ z-index: -2;
             <!-- LinkedIn Login Button -->
             <script type="IN/Login"></script>
 
-
-            <div class="js-general-error alert alert-danger hidden" data-error="Desculpe, você não pode entrar. Não tem uma conta? <a href=&quot;/br/signup/&quot;>Inscreva-se</a>."></div>
-
             <strong class="line-thru">ou</strong>
 
-            <form id="js-login-form-email" method="post" role="form" action="/br/xhr/json/login.php" novalidate="novalidate"><div class="hidden ajax-spinner"></div>
-              <input type="hidden" class="js-sp-csrf" name="sp_csrf" value="YToyOntpOjA7czo0MDoiMDcwYjNmNjRjYzdhMmMwNDdlZjY2ODI2MGViMDYwNmFkNjViMzlhOCI7aToxO2k6MTQxMDM4Nzc2MDt9" id="cei2">
-              <div class="js-general-error alert alert-info hidden" data-error="Ôpa, algo deu errado. Tente de novo ou confira nossa <a href=&quot;/help/&quot;>área de ajuda</a> de testes"></div>
-              <input type="hidden" id="login-forward-url" name="forward_url" value="/br/">
-              <input type="hidden" name="referrer" value="" id="cei3">
-              <input type="hidden" name="utm-keywords" value="13b008972995278780e32efc3027ccc3" id="cei4">
-
-
-
+            <form id="login_form_email" method="post" role="form" action="">
+              <div class="hidden ajax_spinner"></div>
               <fieldset>
                 <ul>
                   <li>
-                    <label class="sr-only" for="login-username">Nome do usuário:</label>
-                    <input placeholder="Nome do usuário" type="text" id="login-username" required="" data-msg-required="Por favor, insira seu nome de usuário do Spotify." name="user_name" autocapitalization="off" autocomplete="off" autocorrect="off">
+                    <label for="login_username">E-mail:</label>
+                    <input placeholder="E-mail" type="text" id="login_input_email" name="email" />
                   </li>
                   <li>
-                    <label class="sr-only" for="login-password">Senha:</label>
-                    <input placeholder="Senha" type="password" id="login-password" required="" data-msg-required="Por favor, insira sua senha." name="password" autocomplete="off">
+                    <label for="login_password">Senha:</label>
+                    <input placeholder="Senha" type="password" id="login_input_password" name="password">
                   </li>
                 </ul>
               </fieldset>
-              <button id="login-button-login-submit" type="submit" class="button button-highlight">Entrar</button>
+              <button id="login_button_submit" type="submit" class="btn btn-success">Entrar</button>
             </form>
 
-            <a id="login-link-password" href="/br/password-reset/" class="primary js-link" data-section="password-reset">Esqueceu sua senha?</a>
+            <a id="login_link_reset_password" href="{% url 'site:contact' %}">Esqueceu sua senha?</a>
 
-            <p class="primary">Não tem uma conta?      <a id="login-link-signup-email" href="/br/signup/" class="js-link" data-section="signup-select">Inscrever-se</a>
+            <p class="primary">
+              Não tem uma conta? <a id="login_link_signup" href="#" class="js-link" data-section="signup-select">Inscrever-se</a>
             </p>
 
         </div>
         <div class="modal-footer">
-            Se clicar em "Entrar com o Facebook" e não for usuário do Wanna Migrate, você será cadastrado e estará aceitando os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
+            Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será cadastrado e estará aceitando os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
         </div>
     </div>
   </div>
 </div>
-
-<!--div class="sign-up module">
-    
-</div-->
