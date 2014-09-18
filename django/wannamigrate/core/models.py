@@ -44,6 +44,7 @@ class Country( BaseModel ):
     name = models.CharField( _( "name" ), max_length = 100 )
     continent = models.CharField( _( "continent" ), max_length = 30 )
     code = models.CharField( _( "code" ), max_length = 2 )
+    immigration_enabled = models.BooleanField( _( "immigration enabled?" ), default = False )
 
 class CountryPoints( BaseModel ):
     """
@@ -58,6 +59,27 @@ class CountryPoints( BaseModel ):
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     answer = models.ForeignKey( Answer, verbose_name = _( 'answer' ) )
     points = models.IntegerField( _( "points" ) )
+
+    def get_all_points_per_question( self, question_id ):
+        """
+        Get answers and points for every enabled country per question
+
+        :param: self
+        :param: question_id
+        :return: Queryset
+        """
+
+        sql = """ SELECT core_countrypoints.id, core_answer.id as answer_id, core_countrypoints.points, core_countrypoints.country_id
+                  FROM core_answer
+                  INNER JOIN core_countrypoints ON core_answer.id = core_countrypoints.answer_id
+                  INNER JOIN core_country ON core_country.id = core_countrypoints.country_id
+                  INNER JOIN core_question ON core_answer.question_id = core_question.id
+                  WHERE core_country.immigration_enabled = 1 AND core_question.id = %s
+                  ORDER BY core_country.name ASC """
+
+        return CountryPoints.objects.raw( sql, [question_id] )
+
+
     
 class Language( BaseModel ):
     """
@@ -80,6 +102,12 @@ class Question( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+        permissions = (
+            ( "admin_add_immigration_rule", "ADMIN: Can add immigration rule" ),
+            ( "admin_change_immigration_rule", "ADMIN: Can change immigration rule" ),
+            ( "admin_delete_immigration_rule", "ADMIN: Can delete immigration rule" ),
+            ( "admin_view_immigration_rule", "ADMIN: Can view immigration rules" )
+        )
 
     # Model Attributes
     description = models.CharField( _( "description" ), max_length = 255 )

@@ -89,9 +89,11 @@
                         <li>
                             <a href="#"><i class="fa fa-gears fa-fw"></i> System Settings<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Immigration Rules</a>
-                                </li>
+                                {% if perms.core.admin_view_immigration_rule %}
+                                    <li>
+                                        <a href="{% url 'admin:immigration_rules' %}">Immigration Rules</a>
+                                    </li>
+                                {% endif %}
                                 <li>
                                     <a href="#">Translations</a>
                                 </li>

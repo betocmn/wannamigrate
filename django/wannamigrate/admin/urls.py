@@ -26,4 +26,12 @@ urlpatterns = patterns('',
     url( r'^groups/edit/(?P<group_id>\d+)$', views.group_edit, name='group_edit' ),
     url( r'^groups/delete/(?P<group_id>\d+)$', views.group_delete, name='group_delete' ),
 
+    # Immigration Rules (Questions, answers and points)
+    url( r'^immigration_rules/$', views.question_list, name='immigration_rules' ),
+    url( r'^immigration_rules/json/$', views.question_list_json, name='immigration_rule_json' ),
+    url( r'^immigration_rules/add/$', views.question_add, name='immigration_rule_add' ),
+    url( r'^immigration_rules/details/(?P<question_id>\d+)$', views.question_details, name='immigration_rule_details' ),
+    url( r'^immigration_rules/edit/(?P<question_id>\d+)$', views.question_edit, name='immigration_rule_edit' ),
+    url( r'^immigration_rules/delete/(?P<question_id>\d+)$', views.question_delete, name='immigration_rule_delete' ),
+
 )

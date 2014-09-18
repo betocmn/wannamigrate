@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm
 from django.contrib.auth import get_user_model
+from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import Helper
 
 
@@ -419,3 +420,166 @@ def group_delete( request, group_id ):
     messages.success( request, 'group was successfully marked as INACTIVE.')
     return HttpResponseRedirect( reverse( 'admin:admin_groups' ) )
 
+
+#######################
+# IMMIGRATION RULES (QUESTIONS, ANSWERS AND POINTS)
+#######################
+@permission_required( 'core.admin_view_immigration_rule' )
+def question_list( request ):
+    """
+    Lists all immigration rules (questions)
+
+    :param: request
+    :return: String
+    """
+
+    context = {}
+    return render( request, 'admin/question/list.html', context )
+
+
+@permission_required( 'core.admin_view_immigration_rule' )
+def question_list_json( request ):
+    """
+    Generates JSON for the listing (required for the JS plugin www.datatables.net)
+
+    :param: request
+    :return: String
+    """
+
+    # Query data
+    objects = Question.objects.all()
+
+    # settings
+    info = {
+        'fields_to_select': [ 'id', 'description' ],
+        'fields_to_search': [ 'id', 'description', 'help_text' ],
+        'default_order_by': 'id',
+        'url_base_name': 'immigration_rule',
+    }
+
+    #build json data and return it to the screen
+    json = Helper.build_datatable_json( request, objects, info )
+    return HttpResponse( json )
+
+@permission_required( 'core.admin_add_immigration_rule' )
+def question_add( request ):
+    """
+    Add new Immigration Rule (question, answers and points)
+
+    :param: request
+    :return: String
+    """
+
+    # When form is submitted
+    if request.method == 'POST':
+
+        # Tries to validate form and save data
+        form = AdminUserForm( request.POST )
+        if form.is_valid():
+
+            # Sets additional data
+            form.is_active = True
+            form.is_admin = True
+
+            # Saves User
+            user = form.save()
+            messages.success( request, 'User was successfully added.')
+
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( user.id, ) ) )
+
+    else:
+        form = AdminUserForm()
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:immigration_rules' ) }
+
+    # Print Template
+    return render( request, 'admin/question/add.html', context )
+
+
+@permission_required( 'core.admin_view_immigration_rule' )
+def question_details( request, question_id ):
+    """
+    View Immigration Rule page
+
+    :param: request
+    :param: question_id
+    :return: String
+    """
+
+    # Identify database record
+    question = get_object_or_404( Question, pk = question_id )
+
+    # Get countries supported for immigration
+    countries = Country.objects.filter( immigration_enabled = True )
+
+    # Get all answer points per country supported
+    country_points = CountryPoints()
+    points = country_points.get_all_points_per_question( question_id )
+    points_per_country = {}
+    for point in points:
+        if not point.country_id in points_per_country:
+            points_per_country[point.country_id] = {}
+        points_per_country[point.country_id][point.answer_id] = point.points
+
+    #return HttpResponse( points_per_country[1][1] )
+
+    # Template data
+    context = { 'question': question, 'countries': countries, 'points_per_country': points_per_country }
+
+    # Print Template
+    return render( request, 'admin/question/details.html', context )
+
+
+@permission_required( 'core.admin_change_immigration_rule' )
+def question_edit( request, question_id ):
+    """
+    Edit Immigration Rule page
+
+    :param: request
+    :param: question_id
+    :return: String
+    """
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = question_id )
+
+    # When form is submitted
+    if request.method == 'POST':
+
+        # Tries to validate form and save data
+        form = AdminUserForm( request.POST, instance = user )
+        if form.is_valid():
+            form.save()
+            messages.success( request, 'User was successfully updated.')
+            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) )
+
+    else:
+        form = AdminUserForm( instance = user )
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) }
+
+    # Print Template
+    return render( request, 'admin/question/edit.html', context )
+
+
+@permission_required( 'core.admin_delete_immigration_rule' )
+def question_delete( request, question_id ):
+    """
+    Delete Immigration Rule.
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = question_id )
+
+    # mark as INACTIVE
+    user.is_active = False
+    user.save()
+
+    # Redirect with success message
+    messages.success( request, 'User was successfully marked as INACTIVE.')
+    return HttpResponseRedirect( reverse( 'admin:immigration_rules' ) )
