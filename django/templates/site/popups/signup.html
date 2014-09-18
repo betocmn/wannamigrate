@@ -1,4 +1,4 @@
-{% load template_utilities %}
+{% load constants_extras %}
 <!-- Facebook Login SDK -->
 <script>
   
@@ -92,6 +92,34 @@
 </script>
 <!-- ./LinkedIn Login SDK Custom -->
 
+<!-- Custom js -->
+<script type="text/javascript">
+  function switch_to_login()
+  {
+    $( ".password_recovery_item" ).hide();
+    $( ".signup_item" ).hide();
+    $( ".login_item" ).fadeIn();
+  }
+
+  function switch_to_signup()
+  {
+    $( ".login_item" ).hide();
+    $( ".signup_item" ).fadeIn();
+  }
+
+  function switch_to_password_recovery()
+  {
+    $( ".login_item" ).hide();
+    $( ".password_recovery_item" ).fadeIn();
+  }
+
+  $(document).ready(function(){
+    switch_to_login();
+  });
+  
+</script>
+<!-- ./Custom js -->
+
 
 <div id="login_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -101,15 +129,16 @@
         </div>
         <div class="modal-body">
 
-            <!-- Facebook Login Button -->
-            <a href="javascript:fb_login();"><img src="https://pbs.twimg.com/profile_images/503940439909494784/0z4644EY_normal.png"></a>
+            <div class="login_item signup_item">
+              <a href="javascript:fb_login();"><img src="https://pbs.twimg.com/profile_images/503940439909494784/0z4644EY_normal.png"></a>
 
-            <!-- LinkedIn Login Button -->
-            <script type="IN/Login"></script>
+              <script type="IN/Login"></script>
 
-            <strong class="line-thru">ou</strong>
+              <strong class="line-thru">ou</strong>
+            </div>
 
-            <form id="login_form_email" method="post" role="form" action="">
+            <!-- LOGIN -->
+            <form id="login_form_email" class="login_item" method="post" role="form" action="">
               <div class="hidden ajax_spinner"></div>
               <fieldset>
                 <ul>
@@ -126,16 +155,77 @@
               <button id="login_button_submit" type="submit" class="btn btn-success">Entrar</button>
             </form>
 
-            <a id="login_link_reset_password" href="{% url 'site:contact' %}">Esqueceu sua senha?</a>
+            <a id="login_link_reset_password" class="login_item" href="javascript:switch_to_password_recovery();">Esqueceu sua senha?</a>
 
-            <p class="primary">
-              Não tem uma conta? <a id="login_link_signup" href="#" class="js-link" data-section="signup-select">Inscrever-se</a>
+            <p class="primary login_item">
+              Não tem uma conta? <a id="login_link_signup" href="javascript:switch_to_signup();" >Inscrever-se</a>
             </p>
+            <!-- ./LOGIN -->
+
+            <!-- SIGNUP -->
+            <form id="signup_form_email" class="signup_item" method="post" role="form" action="">
+                <div class="hidden ajax_spinner"></div>
+                <fieldset>
+                  <ul>
+                    <li>
+                      <label for="signup_input_email">E-mail:</label>
+                      <input placeholder="E-mail" type="text" id="signup_input_email" name="email" />
+                    </li>
+                    <li>
+                      <label for="signup_input_email_confirm">Confirmação de e-mail:</label>
+                      <input placeholder="Confirme seu e-mail" type="text" id="signup_input_email_confirm" name="email_confirm" />
+                    </li>
+                    <li>
+                      <label for="signup_input_password">Senha:</label>
+                      <input placeholder="Senha" type="password" id="signup_input_password" name="password">
+                    </li>
+                  </ul>
+                </fieldset>
+                <button id="signup_button_submit" type="submit" class="btn btn-success">Inscrever</button>
+              </form>
+              <p class="primary signup_item">
+                Já possui cadastro? <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">Efetuar login!</a>
+              </p>
+              <!-- SIGNUP -->
+
+            <!-- PASSWORD RECOVERY -->
+            <p class="primary password_recovery_item">
+              Informe seu e-mail abaixo e lhe enviaremos um link de redefinição de senha.
+            </p>
+            <form id="login_form_email" class="password_recovery_item" method="post" role="form" action="">
+              <div class="hidden ajax_spinner"></div>
+              <fieldset>
+                <ul>
+                  <li>
+                    <label for="password_recovery_email">E-mail:</label>
+                    <input placeholder="E-mail" type="text" id="password_recovery_email" name="email" />
+                  </li>
+                </ul>
+              </fieldset>
+              <button id="password_recovery_submit" type="submit" class="btn btn-success">Enviar</button>
+            </form>
+            <p class="primary password_recovery_item">
+              <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« Voltar</a>
+            </p>
+            <!-- ./PASSWORD RECOVERY -->
+
 
         </div>
-        <div class="modal-footer">
-            Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será cadastrado e estará aceitando os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
+        <!-- LOGIN FOOTER -->
+        <div class="modal-footer login_item">
+            Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será automaticamente cadastrado e estará aceitando os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
         </div>
+        <!-- ./LOGIN FOOTER -->
+        <!-- SIGNUP FOOTER -->
+        <div id="modal_footer" class="modal-footer signup_item">
+            Ao cadastrar-se na plataforma você declara estar de acordo com os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
+        </div>
+        <!-- ./SIGNUP FOOTER -->
+        <!-- PASSWORD RECOVERY FOOTER -->
+        <div id="modal_footer" class="modal-footer password_recovery_item">
+            Ainda com problemas? Entre em contato com o nosso <a href="">suporte.</a>
+        </div>
+        <!-- ./PASSWORD RECOVERY FOOTER -->
     </div>
   </div>
 </div>
