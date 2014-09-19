@@ -1,5 +1,6 @@
 {% extends "admin/layouts/main.html" %}
 {% load staticfiles %}
+{% load dictionary_extras %}
 
 {% block head %}
 
@@ -33,7 +34,7 @@
             <div class="row">
             
                 <div class="col-lg-12">
-                    <h1 class="page-header">Edit Admin User</h1>
+                    <h1 class="page-header">Edit Immigration Rule</h1>
                 </div>
                 
             </div>
@@ -44,18 +45,66 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            User ID# {{ user.id }}
+                            Immigration Rule ID# {{ question.id }}
                         </div>
                                                 
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                
-                                    {% include "admin/layouts/form.html" %}
-                                    
+
+                            <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                        {% csrf_token %}
+
+                                        {% for field in form %}
+
+                                            <div class="form-group {% if field.errors %}has-error{% endif %}">
+                                                <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                                {{ field }}
+                                                {{ field.errors }}
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
+
                                 </div>
 
-                            </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="datatable_data">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Answer</th>
+                                                {% for country in countries %}
+                                                    <th>{{ country.name }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            {% for answer in question.answer_set.all %}
+                                                <tr>
+                                                    <td>{{ answer.description }}</td>
+                                                    {% for country in countries %}
+                                                        <td>{{ points_per_country|get_key:country.id|get_key:answer.id }} Points</td>
+                                                    {% endfor %}
+                                                </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div class="text-center buttons">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                                    <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+                                </div>
+
+                            </form>
                             
                         </div>
                    

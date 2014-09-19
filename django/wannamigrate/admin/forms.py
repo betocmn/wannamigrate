@@ -4,6 +4,7 @@ from django.forms import TextInput, PasswordInput, SelectMultiple
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.core.models import Question, Answer, CountryPoints, Country
 
 #######################
 # LOGIN / LOGOUT / MY ACCOUNT
@@ -92,9 +93,10 @@ class AdminUserForm( BaseModelForm ):
             user.set_password( plain_password )
         if commit:
             user.save()
-            # Sends Login Info Email
-            # TODO Change this to a celery/signal background task
-            Mailer.send_login_email( user.email, { 'user': user, 'plain_password': plain_password } )
+            if 'plain_password' in locals():
+                # Sends Login Info Email
+                # TODO Change this to a celery/signal background task
+                Mailer.send_login_email( user.email, { 'user': user, 'plain_password': plain_password } )
         return user
 
 
@@ -112,4 +114,21 @@ class GroupForm( BaseModelForm ):
         widgets = {
             'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
             'permissions': SelectMultiple( attrs = { 'class': 'form-control', 'style': 'height: 200px;' } )
+        }
+
+
+#######################
+# IMMIGRATION RULES (QUESTION, ANSWERS AND POINTS)
+#######################
+class QuestionForm( BaseModelForm ):
+    """
+    Form for ADD and EDIT immigration rules (questions, answers and points)
+    """
+
+    class Meta:
+        model = Question
+        fields = [ 'description', 'help_text' ]
+        widgets = {
+            'description': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
+            'help_text': TextInput( attrs = { 'class': 'form-control' } )
         }

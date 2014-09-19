@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm
+from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm
 from django.contrib.auth import get_user_model
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import Helper
@@ -172,26 +172,22 @@ def admin_user_add( request ):
     :return: String
     """
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Instantiate FORM
+    form = AdminUserForm( request.POST or None )
 
-        # Tries to validate form and save data
-        form = AdminUserForm( request.POST )
-        if form.is_valid():
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
 
-            # Sets additional data
-            form.is_active = True
-            form.is_admin = True
+        # Sets additional data
+        form.is_active = True
+        form.is_admin = True
 
-            # Saves User
-            user = form.save()
-            messages.success( request, 'User was successfully added.')
+        # Saves User
+        user = form.save()
+        messages.success( request, 'User was successfully added.' )
 
-            # Redirect with success message
-            return HttpResponseRedirect( reverse( 'admin:admin_user_details', args = ( user.id, ) ) )
-
-    else:
-        form = AdminUserForm()
+        # Redirect with success message
+        return HttpResponseRedirect( reverse( 'admin:admin_user_details', args = ( user.id, ) ) )
 
     # Template data
     context = { 'form': form, 'cancel_url': reverse( 'admin:admin_users' ) }
@@ -232,18 +228,14 @@ def admin_user_edit( request, user_id ):
     # Identify database record
     user = get_object_or_404( get_user_model(), pk = user_id )
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Instantiate FORM
+    form = AdminUserForm( request.POST or None, instance = user )
 
-        # Tries to validate form and save data
-        form = AdminUserForm( request.POST, instance = user )
-        if form.is_valid():
-            form.save()
-            messages.success( request, 'User was successfully updated.')
-            return HttpResponseRedirect( reverse( 'admin:admin_user_details', args = ( user_id, ) ) )
-
-    else:
-        form = AdminUserForm( instance = user )
+    # When form is submitted , it tries to validate and save data
+    if form.is_valid():
+        form.save()
+        messages.success( request, 'User was successfully updated.' )
+        return HttpResponseRedirect( reverse( 'admin:admin_user_details', args = ( user_id, ) ) )
 
     # Template data
     context = { 'form': form, 'cancel_url': reverse( 'admin:admin_user_details', args = ( user_id, ) ) }
@@ -523,8 +515,6 @@ def question_details( request, question_id ):
             points_per_country[point.country_id] = {}
         points_per_country[point.country_id][point.answer_id] = point.points
 
-    #return HttpResponse( points_per_country[1][1] )
-
     # Template data
     context = { 'question': question, 'countries': countries, 'points_per_country': points_per_country }
 
@@ -542,23 +532,41 @@ def question_edit( request, question_id ):
     :return: String
     """
     # Identify database record
-    user = get_object_or_404( get_user_model(), pk = question_id )
+    question = get_object_or_404( Question, pk = question_id )
+
+    # Get countries supported for immigration
+    countries = Country.objects.filter( immigration_enabled = True )
+
+    # Get all answer points per country supported
+    country_points = CountryPoints()
+    points = country_points.get_all_points_per_question( question_id )
+    points_per_country = {}
+    for point in points:
+        if not point.country_id in points_per_country:
+            points_per_country[point.country_id] = {}
+        points_per_country[point.country_id][point.answer_id] = point.points
 
     # When form is submitted
     if request.method == 'POST':
 
         # Tries to validate form and save data
-        form = AdminUserForm( request.POST, instance = user )
+        form = QuestionForm( request.POST, instance = question )
         if form.is_valid():
             form.save()
-            messages.success( request, 'User was successfully updated.')
+            messages.success( request, 'Immigration Rule was successfully updated.')
             return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) )
 
     else:
-        form = AdminUserForm( instance = user )
+        form = QuestionForm( instance = question )
 
     # Template data
-    context = { 'form': form, 'cancel_url': reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) }
+    context = {
+        'form': form,
+        'cancel_url': reverse( 'admin:immigration_rule_details', args = ( question_id, ) ),
+        'question': question,
+        'countries': countries,
+        'points_per_country': points_per_country
+    }
 
     # Print Template
     return render( request, 'admin/question/edit.html', context )
