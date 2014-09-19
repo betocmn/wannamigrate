@@ -93,6 +93,7 @@ class AdminUserForm( BaseModelForm ):
             user.set_password( plain_password )
         if commit:
             user.save()
+            user.groups = self.cleaned_data['groups']
             if 'plain_password' in locals():
                 # Sends Login Info Email
                 # TODO Change this to a celery/signal background task
