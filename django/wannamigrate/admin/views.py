@@ -5,8 +5,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm
+from django.forms.models import inlineformset_factory
 from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.core.exceptions import ValidationError
+from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import Helper
 
@@ -462,29 +465,44 @@ def question_add( request ):
     :return: String
     """
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Instantiate Question Form
+    question_form = QuestionForm( request.POST or None )
 
-        # Tries to validate form and save data
-        form = AdminUserForm( request.POST )
-        if form.is_valid():
+    # Instantiate Answer Formset
+    AnswerInlineFormSet = inlineformset_factory( Question, Answer, form = AnswerForm,  extra = 10 )
+    answer_formset = AnswerInlineFormSet( request.POST or None )
 
-            # Sets additional data
-            form.is_active = True
-            form.is_admin = True
+    # Form was submitted so it tries to validate and save data
+    if question_form.is_valid():
 
-            # Saves User
-            user = form.save()
-            messages.success( request, 'User was successfully added.')
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
 
-            # Redirect with success message
-            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( user.id, ) ) )
+            # Saves Question
+            question = question_form.save()
 
-    else:
-        form = AdminUserForm()
+            # Saves answers
+            answer_formset = AnswerInlineFormSet( request.POST or None, instance = question )
+            if answer_formset.is_valid():
+                answer_formset.save()
+                # Redirect with success message
+                messages.success( request, 'Immigration Rule was successfully added.')
+                return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question.id, ) ) )
+            else:
+                transaction.set_rollback( True )
+
+
+
+    # Get countries supported for immigration
+    countries = Country.objects.filter( immigration_enabled = True )
 
     # Template data
-    context = { 'form': form, 'cancel_url': reverse( 'admin:immigration_rules' ) }
+    context = {
+        'question_form': question_form,
+        'answer_formset': answer_formset,
+        'cancel_url': reverse( 'admin:immigration_rules' ),
+        'countries': countries
+    }
 
     # Print Template
     return render( request, 'admin/question/add.html', context )
@@ -546,22 +564,19 @@ def question_edit( request, question_id ):
             points_per_country[point.country_id] = {}
         points_per_country[point.country_id][point.answer_id] = point.points
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Instantiate Question Form
+    question_form = QuestionForm( request.POST or None, instance = question )
 
-        # Tries to validate form and save data
-        form = QuestionForm( request.POST, instance = question )
-        if form.is_valid():
-            form.save()
-            messages.success( request, 'Immigration Rule was successfully updated.')
-            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) )
+    # Form was submitted so it tries to validate and save data
+    if question_form.is_valid():
+        question_form.save()
+        messages.success( request, 'Immigration Rule was successfully updated.')
+        return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) )
 
-    else:
-        form = QuestionForm( instance = question )
 
     # Template data
     context = {
-        'form': form,
+        'question_form': question_form,
         'cancel_url': reverse( 'admin:immigration_rule_details', args = ( question_id, ) ),
         'question': question,
         'countries': countries,

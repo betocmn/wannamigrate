@@ -7,8 +7,8 @@ urlpatterns = patterns('',
     url(r'^site/', include( 'wannamigrate.site.urls', namespace="site" ) ),
 )
 
-#if settings.DEBUG:
-    #import debug_toolbar
-    #urlpatterns += patterns('',
-        #url(r'^__debug__/', include(debug_toolbar.urls)),
-   # )
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

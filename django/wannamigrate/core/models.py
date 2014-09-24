@@ -28,7 +28,7 @@ class Answer( BaseModel ):
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    description = models.CharField(  _( 'description' ), max_length = 255 )
+    description = models.CharField(  _( 'Answer' ), max_length = 1 )
 
 
 class Country( BaseModel ):
@@ -110,7 +110,7 @@ class Question( BaseModel ):
         )
 
     # Model Attributes
-    description = models.CharField( _( "description" ), max_length = 255 )
+    description = models.CharField( _( "question" ), max_length = 255 )
     help_text = models.TextField( _( "help text" ), null = True, blank = True )
 
 class UserManager( BaseUserManager ):

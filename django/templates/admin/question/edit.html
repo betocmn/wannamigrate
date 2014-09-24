@@ -16,7 +16,7 @@
 
 			// JS FORM Validation
 			$( "#main_form" ).submit( function() {
-				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+				return validate_empty_fields( this, '{{ question_form.get_required_fields }}' );
 			});
 
 			// JS for onload
@@ -57,7 +57,7 @@
 
                                         {% csrf_token %}
 
-                                        {% for field in form %}
+                                        {% for field in question_form %}
 
                                             <div class="form-group {% if field.errors %}has-error{% endif %}">
                                                 <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>

@@ -1,8 +1,8 @@
 from django import forms
-from wannamigrate.core.forms import BaseForm, BaseModelForm
-from django.forms import TextInput, PasswordInput, SelectMultiple
+from django.forms import TextInput, SelectMultiple, HiddenInput
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.models import Question, Answer, CountryPoints, Country
 
@@ -123,7 +123,7 @@ class GroupForm( BaseModelForm ):
 #######################
 class QuestionForm( BaseModelForm ):
     """
-    Form for ADD and EDIT immigration rules (questions, answers and points)
+    Form for ADD and EDIT Questions
     """
 
     class Meta:
@@ -133,3 +133,42 @@ class QuestionForm( BaseModelForm ):
             'description': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
             'help_text': TextInput( attrs = { 'class': 'form-control' } )
         }
+
+
+class AnswerForm( BaseModelForm ):
+    """
+    Form for ADD and EDIT Answers
+    """
+
+    class Meta:
+        model = Answer
+        fields = [ 'id', 'description', 'question' ]
+        widgets = {
+            'description': TextInput( attrs = { 'class': 'form-control' } ),
+            'question': HiddenInput(),
+            'id': HiddenInput()
+        }
+
+    def __init__( self, *args, **kwargs ):
+        super( AnswerForm, self ).__init__( *args, **kwargs )
+        countries = Country.objects.filter( immigration_enabled = True )
+        for country in countries:
+            name = "points_%s" % ( country.id )
+            self.fields[name] = forms.IntegerField( widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
+
+    def save( self, commit = True ):
+        """
+        Extra processing: Set additional default values for new users
+
+        :return: Dictionary
+        """
+        answer = super( AnswerForm, self ).save( commit = True )
+        for form_element_name in self.cleaned_data:
+            if 'points' in form_element_name:
+                country_points = CountryPoints()
+                country_points.answer_id = answer.id
+                country_points.country_id = form_element_name.split( '_' )[-1] # name is similar to 'points_3' where 3 is the country ID
+                country_points.points = int( self.cleaned_data[form_element_name] )
+                country_points.save()
+
+        return answer

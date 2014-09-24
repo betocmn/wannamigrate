@@ -9,12 +9,12 @@ from django import template
 register = template.Library()
 
 @register.filter( name = 'get_key' )
-def get_key(dict, key):
+def get_key( dict, key ):
     """
-        Returns the value of a key in a dictionary.
+    Returns the value of a key in a dictionary.
 
-        :param key: The key to be catched.
-        :return The value for the given key in the dictionary, or empty if not set.
+    :param key: The key to be catched.
+    :return The value for the given key in the dictionary, or empty if not set.
     """
     try:
         return dict[key]

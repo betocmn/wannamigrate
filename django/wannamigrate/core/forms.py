@@ -23,4 +23,3 @@ class BaseModelForm( _BaseForm, forms.ModelForm ):
 
 class BaseForm( _BaseForm, forms.Form ):
     pass
-
