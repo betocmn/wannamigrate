@@ -19,18 +19,26 @@ BASE_DIR = os.path.dirname( os.path.dirname( __file__ ) )
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '&3je*i!yr=4y3sk&sm7^_@(fhd@^z7re&$y-b-wx(zsm3(6nyk'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG Settings SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#DEBUG_TOOLBAR_PATCH_SETTINGS = False
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 TEMPLATE_DEBUG = True
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': "%s.true" % __name__,
+}
+
+def true(request):
+    return True
+
 
 # Access Restrictions
 ALLOWED_HOSTS = []
 
 INTERNAL_IPS = (
-    '127.0.0.1'
+    '127.0.0.1',
 )
 
 # Application definition
@@ -42,8 +50,8 @@ DEFAULT_APPS = (
     'django.contrib.staticfiles'
 )
 THIRD_PARTY_APPS = (
-    #'debug_toolbar'
     'django_facebook',
+    'debug_toolbar.apps.DebugToolbarConfig',
 )
 LOCAL_APPS = (
     'wannamigrate.core',
@@ -55,7 +63,7 @@ LOCAL_APPS = (
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',

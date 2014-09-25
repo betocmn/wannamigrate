@@ -5,6 +5,9 @@
 {% block head %}
 
     {{ block.super }}
+
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="{% static 'admin/js/jquery.formset.js' %}"></script>
 		
 	<script type="text/javascript">
 
@@ -14,9 +17,14 @@
 		 */
 		$(document).ready(function() {
 
+            // Jquery Formset
+            $( '#main_form tbody tr' ).formset({
+                prefix: '{{ answer_formset.prefix }}'
+            });
+
 			// JS FORM Validation
 			$( "#main_form" ).submit( function() {
-				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+				return validate_empty_fields( this, '{{ question_form.get_required_fields }}' );
 			});
 
 			// JS for onload
@@ -57,7 +65,7 @@
 
                                         {% csrf_token %}
 
-                                        {% for field in form %}
+                                        {% for field in question_form %}
 
                                             <div class="form-group {% if field.errors %}has-error{% endif %}">
                                                 <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -85,12 +93,30 @@
 
                                         <tbody>
 
-                                            {% for answer in question.answer_set.all %}
+                                            {{ answer_formset.management_form }}
+                                            {% for answer_form in answer_formset %}
                                                 <tr>
-                                                    <td>{{ answer.description }}</td>
-                                                    {% for country in countries %}
-                                                        <td>{{ points_per_country|get_key:country.id|get_key:answer.id }} Points</td>
-                                                    {% endfor %}
+                                                    <td>
+                                                        {{ answer_form.id }}
+                                                        <div class="form-group {% if answer_form.description.errors %}has-error{% endif %}">
+                                                            {% if answer_form.instance.pk %}{{ answer_form.DELETE }}{% endif %}
+                                                            {{ answer_form.description }}
+                                                            {{ answer_form.description.errors }}
+                                                        </div>
+                                                    </td>
+
+                                                        {% for field in answer_form %}
+                                                            {% if 'points_' in field.name %}
+                                                                <td>
+                                                                    <div class="form-group {% if field.errors %}has-error{% endif %}">
+                                                                        {{ field }}
+                                                                        {{ field.errors }}
+                                                                    </div>
+                                                                    &nbsp;
+                                                                    Points
+                                                                </td>
+                                                            {% endif %}
+                                                        {% endfor %}
                                                 </tr>
                                             {% endfor %}
 

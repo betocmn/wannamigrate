@@ -11,8 +11,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('django_facebook.auth_urls')), #Don't add this line if you use django registration or userena for registration and auth.
 )
 
-#if settings.DEBUG:
-    #import debug_toolbar
-    #urlpatterns += patterns('',
-        #url(r'^__debug__/', include(debug_toolbar.urls)),
-   # )
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

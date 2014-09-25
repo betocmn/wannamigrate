@@ -5,8 +5,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm
+from django.forms.models import inlineformset_factory
 from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.db.models import ProtectedError
+from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import Helper
 
@@ -462,29 +465,50 @@ def question_add( request ):
     :return: String
     """
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Get countries supported for immigration
+    countries = Country.objects.filter( immigration_enabled = True )
 
-        # Tries to validate form and save data
-        form = AdminUserForm( request.POST )
-        if form.is_valid():
+    # Get all answer points per country supported
+    points_per_country = {}
 
-            # Sets additional data
-            form.is_active = True
-            form.is_admin = True
+    # Instantiate Question Form
+    question_form = QuestionForm( request.POST or None )
 
-            # Saves User
-            user = form.save()
-            messages.success( request, 'User was successfully added.')
+    # Instantiate Answer Formset
+    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 10, can_delete = True )
+    answer_formset = AnswerInlineFormSet( request.POST or None, countries = countries, points_per_country = points_per_country )
 
-            # Redirect with success message
-            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( user.id, ) ) )
+    #answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
 
-    else:
-        form = AdminUserForm()
+
+    # Form was submitted so it tries to validate and save data
+    if question_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves Question
+            question = question_form.save()
+
+            # Saves answers
+            answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
+            if answer_formset.is_valid():
+                answer_formset.save()
+                # Redirect with success message
+                messages.success( request, 'Immigration Rule was successfully added.')
+                return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question.id, ) ) )
+            else:
+                transaction.set_rollback( True )
+
+
 
     # Template data
-    context = { 'form': form, 'cancel_url': reverse( 'admin:immigration_rules' ) }
+    context = {
+        'question_form': question_form,
+        'answer_formset': answer_formset,
+        'cancel_url': reverse( 'admin:immigration_rules' ),
+        'countries': countries
+    }
 
     # Print Template
     return render( request, 'admin/question/add.html', context )
@@ -507,13 +531,7 @@ def question_details( request, question_id ):
     countries = Country.objects.filter( immigration_enabled = True )
 
     # Get all answer points per country supported
-    country_points = CountryPoints()
-    points = country_points.get_all_points_per_question( question_id )
-    points_per_country = {}
-    for point in points:
-        if not point.country_id in points_per_country:
-            points_per_country[point.country_id] = {}
-        points_per_country[point.country_id][point.answer_id] = point.points
+    points_per_country = CountryPoints.get_all_points_per_question( question_id )
 
     # Template data
     context = { 'question': question, 'countries': countries, 'points_per_country': points_per_country }
@@ -538,34 +556,47 @@ def question_edit( request, question_id ):
     countries = Country.objects.filter( immigration_enabled = True )
 
     # Get all answer points per country supported
-    country_points = CountryPoints()
-    points = country_points.get_all_points_per_question( question_id )
-    points_per_country = {}
-    for point in points:
-        if not point.country_id in points_per_country:
-            points_per_country[point.country_id] = {}
-        points_per_country[point.country_id][point.answer_id] = point.points
+    points_per_country = CountryPoints.get_all_points_per_question( question_id )
 
-    # When form is submitted
-    if request.method == 'POST':
+    # Instantiate Question Form
+    question_form = QuestionForm( request.POST or None, instance = question )
 
-        # Tries to validate form and save data
-        form = QuestionForm( request.POST, instance = question )
-        if form.is_valid():
-            form.save()
-            messages.success( request, 'Immigration Rule was successfully updated.')
-            return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question_id, ) ) )
+    # Instantiate Answer Formset
+    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 0, can_delete = True )
+    answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
 
-    else:
-        form = QuestionForm( instance = question )
+    # Form was submitted so it tries to validate question first
+    if question_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves Question
+            question = question_form.save()
+
+            # Validate answers
+            if answer_formset.is_valid():
+
+                # Try to save with a integrity check try
+                try:
+                    answer_formset.save()
+                    messages.success( request, 'Immigration Rule was successfully updated.')
+                    return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question.id, ) ) )
+
+                except ProtectedError:
+                    transaction.set_rollback( True )
+                    messages.error( request, 'ERROR: Operation could not be completed because you tried to delete records already related to other itens in the system' )
+                    return HttpResponseRedirect( reverse( 'admin:immigration_rule_edit', args = ( question.id, ) ) )
+            else:
+                transaction.set_rollback( True )
 
     # Template data
     context = {
-        'form': form,
-        'cancel_url': reverse( 'admin:immigration_rule_details', args = ( question_id, ) ),
         'question': question,
-        'countries': countries,
-        'points_per_country': points_per_country
+        'question_form': question_form,
+        'answer_formset': answer_formset,
+        'cancel_url': reverse( 'admin:immigration_rules' ),
+        'countries': countries
     }
 
     # Print Template

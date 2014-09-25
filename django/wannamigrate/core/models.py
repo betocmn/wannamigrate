@@ -28,7 +28,7 @@ class Answer( BaseModel ):
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    description = models.CharField(  _( 'description' ), max_length = 255 )
+    description = models.CharField(  _( 'Answer' ), max_length = 255 )
 
 
 class Country( BaseModel ):
@@ -60,13 +60,14 @@ class CountryPoints( BaseModel ):
     answer = models.ForeignKey( Answer, verbose_name = _( 'answer' ) )
     points = models.IntegerField( _( "points" ) )
 
-    def get_all_points_per_question( self, question_id ):
+    @staticmethod
+    def get_all_points_per_question( question_id ):
         """
         Get answers and points for every enabled country per question
 
         :param: self
         :param: question_id
-        :return: Queryset
+        :return: Dictionary
         """
 
         sql = """ SELECT core_countrypoints.id, core_answer.id as answer_id, core_countrypoints.points, core_countrypoints.country_id
@@ -77,7 +78,15 @@ class CountryPoints( BaseModel ):
                   WHERE core_country.immigration_enabled = 1 AND core_question.id = %s
                   ORDER BY core_country.name ASC """
 
-        return CountryPoints.objects.raw( sql, [question_id] )
+        points = CountryPoints.objects.raw( sql, [question_id] )
+
+        points_per_country = {}
+        for point in points:
+            if not point.country_id in points_per_country:
+                points_per_country[point.country_id] = {}
+            points_per_country[point.country_id][point.answer_id] = point.points
+
+        return points_per_country
 
 
     
@@ -110,7 +119,7 @@ class Question( BaseModel ):
         )
 
     # Model Attributes
-    description = models.CharField( _( "description" ), max_length = 255 )
+    description = models.CharField( _( "question" ), max_length = 255 )
     help_text = models.TextField( _( "help text" ), null = True, blank = True )
 
 class UserManager( BaseUserManager ):
@@ -229,7 +238,7 @@ class UserLanguage( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     language = models.ForeignKey( Language, verbose_name = _( 'language' ) )
-    language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ) )
+    language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ), on_delete = models.PROTECT )
 
 class UserPersonal( BaseModel ):
     """
