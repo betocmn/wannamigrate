@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import TextInput, SelectMultiple, HiddenInput
+from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
@@ -150,11 +151,20 @@ class AnswerForm( BaseModelForm ):
         }
 
     def __init__( self, *args, **kwargs ):
+        self.countries = kwargs.pop( "countries" )
+        self.points_per_country = kwargs.pop( "points_per_country" )
         super( AnswerForm, self ).__init__( *args, **kwargs )
-        countries = Country.objects.filter( immigration_enabled = True )
-        for country in countries:
-            name = "points_%s" % ( country.id )
-            self.fields[name] = forms.IntegerField( widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
+        countries = self.countries
+        points_per_country = self.points_per_country
+        answer_id = self.instance.id
+        if countries is not None:
+            for country in countries:
+                name = "points_%s" % ( country.id )
+                if country.id in points_per_country and answer_id in points_per_country[country.id]:
+                    value = points_per_country[country.id][answer_id]
+                else:
+                    value = ''
+                self.fields[name] = forms.IntegerField( initial = value, widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
 
     def save( self, commit = True ):
         """
@@ -172,3 +182,33 @@ class AnswerForm( BaseModelForm ):
                 country_points.save()
 
         return answer
+
+
+class BaseAnswerFormSet( BaseInlineFormSet ):
+    """
+    Formset for answers / country points
+    """
+
+    def __init__( self, *args, **kwargs ):
+
+        self.countries = kwargs.pop( "countries" )
+        self.points_per_country = kwargs.pop( "points_per_country" )
+        super( BaseAnswerFormSet, self ).__init__( *args, **kwargs )
+
+    def _construct_form( self, *args, **kwargs ):
+        # inject user in each form on the formset
+        kwargs['countries'] = self.countries
+        kwargs['points_per_country'] = self.points_per_country
+        return super( BaseAnswerFormSet, self )._construct_form( *args, **kwargs )
+
+    """
+    def add_fields( self, form, index ):
+        super( BaseAnswerFormSet, self ).add_fields( form, index )
+        countries = self.countries
+        points_per_country = self.points_per_country
+        if countries is not None:
+            for country in countries:
+                name = "points_%s" % ( country.id )
+                #if country.id in points_per_country and
+                form.fields[name] = forms.IntegerField( initial = self.answer.id, widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
+    """

@@ -4,7 +4,10 @@
 {% block head %}
 
     {{ block.super }}
-		
+
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="{% static 'admin/js/jquery.formset.js' %}"></script>
+
 	<script type="text/javascript">
 
 		/**
@@ -12,6 +15,9 @@
 		 *
 		 */
 		$(document).ready(function() {
+
+            // Jquery Formset
+            $( '#main_form tbody tr' ).formset();
 
 			// JS FORM Validation
 			$( "#main_form" ).submit( function() {

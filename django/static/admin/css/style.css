@@ -28,6 +28,22 @@ a:hover, a:active{
     color: #463A4B;
 }
 
+a.delete-row{
+    color: #a94442;
+    text-decoration: underline;
+}
+a.delete-row:hover, a:active{
+    color: #463A4B;
+}
+
+a.add-row{
+    color: #428bca;
+    text-decoration: underline;
+}
+a.add-row:hover, a:active{
+    color: #428bca;
+}
+
 /* Extra validation styles */
 div.has-error ul {
     color: #a94442;
