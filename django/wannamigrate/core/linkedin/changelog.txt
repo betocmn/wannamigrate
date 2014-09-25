@@ -1,0 +1,28 @@
+linkedin.py
+    line 10
+        removed StringIO from "from .utils import enum, to_utf8, raise_for_error, json, StringIO"
+    line 294
+        except (requests.ConnectionError, requests.HTTPError), error:
+        except (requests.ConnectionError, requests.HTTPError) as error:
+    line 306
+        except (requests.ConnectionError, requests.HTTPError), error:
+        except (requests.ConnectionError, requests.HTTPError) as error:
+
+
+utils.py
+    line 4~8
+        removed 
+            try:
+                from cStringIO import StringIO
+            except ImportError:
+                from StringIO import StringIO
+
+    line 29
+        for k, v in methods.iteritems():
+        for k, v in methods.items():
+
+
+    line 54
+        removed if clausule and changed the else statement
+        else:
+            raise LinkedInError( str( error ) )

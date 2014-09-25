@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from wannamigrate import constants
 from django.utils.translation import ugettext_lazy as _
 import os
 
@@ -42,6 +43,7 @@ DEFAULT_APPS = (
 )
 THIRD_PARTY_APPS = (
     #'debug_toolbar'
+    'django_facebook',
 )
 LOCAL_APPS = (
     'wannamigrate.core',
@@ -113,6 +115,27 @@ STATIC_ROOT = os.path.join( BASE_DIR, 'static' )
 # Templates
 TEMPLATE_DIRS = (
     os.path.join( BASE_DIR, 'templates' ),
+)
+
+# Template Context Processors
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+
+    # Needed to facebook auth.
+    'django_facebook.context_processors.facebook',
+    'django.core.context_processors.request',
+)
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # User Model

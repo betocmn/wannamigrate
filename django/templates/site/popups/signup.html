@@ -1,96 +1,4 @@
 {% load constants_extras %}
-<!-- Facebook Login SDK -->
-<script>
-  
-  /** Starts the login with facebook action. */
-  function fb_login() {
-      FB.login(statusChangeCallback);
-  }
-   
-  /** Callback function that is called when the facebook's api returns.
-  This method handles the login response and threat its results.
-  @param response The response object from facebook's api. */
-  function statusChangeCallback(response) {
-      console.log(response);
-      // The response object is returned with a status field that lets the
-      // app know the current login status of the person.
-      // Full docs on the response object can be found in the documentation
-      // for FB.getLoginStatus().
-      if (response.status === 'connected') {
-          // Logged into your app and Facebook. Redirect...
-          alert("logged with facebook");
-          //window.location = "{{ login_redirect }}";
-      } else if (response.status === 'not_authorized') {
-          // The person is logged into Facebook, but not your app.
-
-      } else {
-          // The person is not logged into Facebook, so we're not sure if
-          // they are logged into this app or not.
-
-      }
-  }
-
-  // Initializes the facebook api
-  window.fbAsyncInit = function() {
-      FB.init({
-          appId: '{% get_constant_value "FACEBOOK_APP_ID" %}',
-          cookie: true, // enable cookies to allow the server to access 
-          // the session
-          xfbml: true, // parse social plugins on this page
-          version: 'v2.1' // use version 2.1
-      });
-  };
-
-   // Load the SDK asynchronously
-  (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- ./Facebook Login SDK -->
-
-
-<!-- LinkedIn Login SDK Hosted -->
-<script type="text/javascript" src="https://platform.linkedin.com/in.js">
-  api_key: {% get_constant_value "LINKEDIN_APP_ID" %}
-  onLoad: onLinkedInLoad
-  authorize: false
-</script>
-<!-- ./LinkedIn Login SDK Hosted -->
-
-<!-- LinkedIn Login SDK Custom -->
-<script type="text/javascript">
-
-  /** Replaces the linkedIn default button. This functions is a workaround. */
-  function replace_linkedin_button() {
-    var linkedin_login_img_src = "http://thumb.mais.uol.com.br/14306616-small.jpg"
-    var bt_linkedin_login_img = $("<img/>").addClass("linkedin_login_button").attr("src", linkedin_login_img_src);
-    // Changes the LinkedIn button to a custom image
-    $('a[id*=li_ui_li_gen_]').html(bt_linkedin_login_img);
-  }
-
-  /** Initialize things when the linkedin api is ready, such as replace of linkedin button and register a callback to handle when the user log in. */
-  function onLinkedInLoad() {
-      replace_linkedin_button();
-      IN.Event.on(IN, "auth", onLinkedInAuth);
-  }
-
-  /** Callback function. Handles the user information provided by the linkedin app. */
-  function onLinkedInAuth() {
-      IN.API.Profile("me").result(displayProfiles);
-  }
-
-  // example function threating the data provided by the linkedin.
-  function displayProfiles(profiles) {
-      member = profiles.values[0];
-      alert("<p id=\"" + member.id + "\">Hello " + member.firstName + " " + member.lastName + "</p>");;
-  }
-</script>
-<!-- ./LinkedIn Login SDK Custom -->
 
 <!-- Custom js -->
 <script type="text/javascript">
@@ -130,15 +38,15 @@
         <div class="modal-body">
 
             <div class="login_item signup_item">
-              <a href="javascript:fb_login();"><img src="https://pbs.twimg.com/profile_images/503940439909494784/0z4644EY_normal.png"></a>
-
-              <script type="IN/Login"></script>
+              <a href="{% url 'site:facebook_auth' %}">Login with Facebook</a>
+              <a href="{% url 'site:linkedin_auth' %}">Login with Linkedin</a>
 
               <strong class="line-thru">ou</strong>
             </div>
 
             <!-- LOGIN -->
-            <form id="login_form_email" class="login_item" method="post" role="form" action="">
+            <form id="login_form_email" class="login_item" method="post" role="form" action="{% url 'site:login' %}">
+              {% csrf_token %}
               <div class="hidden ajax_spinner"></div>
               <fieldset>
                 <ul>
