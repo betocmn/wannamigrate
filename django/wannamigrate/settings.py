@@ -50,7 +50,6 @@ DEFAULT_APPS = (
     'django.contrib.staticfiles'
 )
 THIRD_PARTY_APPS = (
-    'django_facebook',
     'debug_toolbar.apps.DebugToolbarConfig',
 )
 LOCAL_APPS = (
@@ -134,16 +133,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-
-    # Needed to facebook auth.
-    'django_facebook.context_processors.facebook',
-    'django.core.context_processors.request',
-)
-
-# Authentication backends
-AUTHENTICATION_BACKENDS = (
-    'django_facebook.auth_backends.FacebookBackend',
-    'django.contrib.auth.backends.ModelBackend',
 )
 
 # User Model

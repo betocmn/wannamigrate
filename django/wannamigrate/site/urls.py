@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     url( r'^logout/$', views.logout, name='logout' ),
     url( r'^contact/$', views.contact, name='contact' ),
     url( r'^linkedin_auth/$', views.linkedin_auth, name='linkedin_auth' ),
-    url( r'^facebook_auth/$', views.linkedin_auth, name='facebook_auth' ),
+    url( r'^facebook_auth/$', views.facebook_auth, name='facebook_auth' ),
 
 )

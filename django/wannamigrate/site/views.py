@@ -14,12 +14,25 @@ def contact( request ):
     :return The contact page rendered
     """
 
+    #####################################################################################################################################
+    # The following code should be placed on the view that handles the template containing signing up with social networks.
+    #####################################################################################################################################
+    # The URL to authenticate on linkedin and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
+    linkedin_redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' ) # The URL to return when user allows the app.
+    linkedin_auth_url = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=" + LINKEDIN_API_KEY + "&scope=" + LINKEDIN_SCOPE + "&state=" + LINKEDIN_STATE + "&redirect_uri=" + linkedin_redirect_uri
+    # The URL to authenticate on facebook and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
+    facebook_redirect_uri = request.build_absolute_uri( '/site/facebook_auth' )
+    facebook_auth_url = "https://www.facebook.com/dialog/oauth?client_id=" + FACEBOOK_APP_ID + "&redirect_uri=" + facebook_redirect_uri
+    #####################################################################################################################################
+
     # The url to open when the user is logged.
     login_redirect_url = request.build_absolute_uri( '/site/login' )
     
 
     template_data = {
-        'login_redirect' : login_redirect_url
+        'login_redirect' : login_redirect_url,
+        'linkedin_auth_url' : linkedin_auth_url,
+        'facebook_auth_url' : facebook_auth_url
     }
 
 
@@ -51,8 +64,6 @@ def contact( request ):
 def home_index( request ):
     pass
 
-#TODO: fix this
-from django_facebook.api import *
 
 def login( request ):
 
@@ -85,41 +96,9 @@ def logout( request ):
 
 
 def linkedin_auth( request ):
-
-    # Checks if the authorization code is returned via get and then logs the user on the platform
-    if "code" in request.GET:
-        if request.GET[ 'state' ] != LINKEDIN_STATE:
-            return HttpResponse( "error" )  #TODO: FIX THIS
-
-        # Imports the linkedin lib.
-        from wannamigrate.core.linkedin import linkedin
-
-        # Gets the authorization code
-        authorization_code = request.GET[ 'code' ]        
-
-        # TODO: try-catch this to handle linkedin errors 
-        redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' )
-        # Creates the authentication object
-        authentication = linkedin.LinkedInAuthentication( LINKEDIN_API_KEY, LINKEDIN_API_SECRET, redirect_uri, linkedin.PERMISSIONS.enums.values() )
-        authentication.authorization_code = authorization_code # Sets the authorization code
-        authentication.get_access_token() # Gets the access token
-        
-        # Pass it in to the app...
-        application = linkedin.LinkedInApplication(authentication)
-
-        # Use the app....
-        t = application.get_profile()
-
-        return HttpResponse( t['firstName'] )
-
-    # No code given, means that it's not returning from linkedin.
-    else:
-        redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' ) # The URL to return when user allows the app.
-        linkedin_auth_url = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=" + LINKEDIN_API_KEY + "&scope=" + LINKEDIN_SCOPE + "&state=" + LINKEDIN_STATE + "&redirect_uri=" + redirect_uri
-        return HttpResponseRedirect( linkedin_auth_url )
-
-
-
+    pass
+    
 def facebook_auth( request ):
-    return_url = reverse( "site:login" ) # The URL to return when user allows the app.
+    pass
+
 
