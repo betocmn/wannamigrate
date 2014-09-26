@@ -147,3 +147,13 @@ EMAIL_HOST = 'smtp.wannamigrate.com'
 EMAIL_HOST_USER = 'contact@wannamigrate.com'
 EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
+
+################################################
+# Social Auth Plugin Configurations
+################################################
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',    # Default auth backend
+    'social.backends.facebook.FacebookOauth2',      # Facebook auth backend
+    'social.backends.linkedin.LinkedinOauth2',      # Facebook auth backend
+
+)

@@ -19,10 +19,10 @@ def contact( request ):
     #####################################################################################################################################
     # The URL to authenticate on linkedin and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
     linkedin_redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' ) # The URL to return when user allows the app.
-    linkedin_auth_url = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=" + LINKEDIN_API_KEY + "&scope=" + LINKEDIN_SCOPE + "&state=" + LINKEDIN_STATE + "&redirect_uri=" + linkedin_redirect_uri
+    linkedin_auth_url = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=" + SOCIAL_AUTH_LINKEDIN_KEY + "&redirect_uri=" + linkedin_redirect_uri
     # The URL to authenticate on facebook and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
     facebook_redirect_uri = request.build_absolute_uri( '/site/facebook_auth' )
-    facebook_auth_url = "https://www.facebook.com/dialog/oauth?client_id=" + FACEBOOK_APP_ID + "&redirect_uri=" + facebook_redirect_uri
+    facebook_auth_url = "https://www.facebook.com/dialog/oauth?client_id=" + SOCIAL_AUTH_FACEBOOK_KEY + "&redirect_uri=" + facebook_redirect_uri
     #####################################################################################################################################
 
     # The url to open when the user is logged.

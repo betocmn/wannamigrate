@@ -1,8 +1,15 @@
-# Facebook app ID
-FACEBOOK_APP_ID = "336536879856373"
-FACEBOOK_APP_SECRET = "4ca87548565ab5d9c40e60bb6309e219"
-# LinkedIn app ID
-LINKEDIN_API_KEY = "77eu4cz7x6srp6"
-LINKEDIN_API_SECRET = "VOaF1eUDOlHziUTn"
-LINKEDIN_STATE = "h1wHRtfy1MGAD5as7H"
-LINKEDIN_SCOPE = "r_fullprofile%20r_emailaddress"
+
+
+# Facebook APP Key
+SOCIAL_AUTH_FACEBOOK_KEY = "336536879856373"
+# Facebook APP Secret
+SOCIAL_AUTH_FACEBOOK_SECRET = "4ca87548565ab5d9c40e60bb6309e219"
+# Facebook APP Scope
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+# Linkedin APP Key
+SOCIAL_AUTH_LINKEDIN_KEY = "77eu4cz7x6srp6"
+# Linkedin APP Secret
+SOCIAL_AUTH_LINKEDIN_SECRET = "VOaF1eUDOlHziUTn"
+# Linkedin APP Scope (Full profile, e-mail address)
+SOCIAL_AUTH_LINKEDIN_SCOPE = [ 'r_fullprofile', 'r_emailaddress' ]
