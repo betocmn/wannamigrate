@@ -37,6 +37,11 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password 79u
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 79uhGLua19UOSAmav'
 apt-get -y install mysql-server
 echo "--------------------------"
+echo "INSTALLING EXTRA TOOLS"
+echo "--------------------------"
+echo "### Instaling gettext"
+apt-get install gettext --yes
+echo "--------------------------"
 echo "CREATING THE VIRTUAL ENVIRONMENT"
 echo "--------------------------"
 virtualenv /wannavenv
@@ -44,6 +49,7 @@ source /wannavenv/bin/activate
 pip install django
 pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz
 pip install django-debug-toolbar
+pip install python-social-auth
 deactivate
 echo "--------------------------"
 echo "DOWNLOADING MEDIA WIKI"
