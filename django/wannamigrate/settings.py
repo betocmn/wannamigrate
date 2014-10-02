@@ -51,6 +51,7 @@ DEFAULT_APPS = (
 )
 THIRD_PARTY_APPS = (
     'debug_toolbar.apps.DebugToolbarConfig',
+    'social.apps.django_app.default',
 )
 LOCAL_APPS = (
     'wannamigrate.core',
@@ -133,6 +134,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
+
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 # User Model
@@ -148,12 +152,75 @@ EMAIL_HOST_USER = 'contact@wannamigrate.com'
 EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
 
-################################################
-# Social Auth Plugin Configurations
-################################################
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',    # Default auth backend
-    'social.backends.facebook.FacebookOauth2',      # Facebook auth backend
-    'social.backends.linkedin.LinkedinOauth2',      # Facebook auth backend
+###########################
+# Social Settings
+###########################
 
+# Django changed the default session serialization method to JSON instead of Pickle, 
+# which doesn't work with object instances. The following line is switching it back to pickle.
+# This change is required to python-social-auth work properly.
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+# Facebook APP Key
+SOCIAL_AUTH_FACEBOOK_KEY = "336536879856373"
+# Facebook APP Secret
+SOCIAL_AUTH_FACEBOOK_SECRET = "4ca87548565ab5d9c40e60bb6309e219"
+# Facebook APP Scope
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+# Linkedin APP Key
+SOCIAL_AUTH_LINKEDIN_KEY = "77eu4cz7x6srp6"
+# Linkedin APP Secret
+SOCIAL_AUTH_LINKEDIN_SECRET = "VOaF1eUDOlHziUTn"
+# Linkedin APP Scope
+SOCIAL_AUTH_LINKEDIN_SCOPE = [ 'r_emailaddress' ]
+SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address']
+# Arrange to add the fields to UserSocialAuth.extra_data
+SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
+    ('id', 'id'),
+    ('firstName', 'first_name'),
+    ('lastName', 'last_name'),
+    ('email', 'email_address'),
+]
+
+# Twitter APP Key
+SOCIAL_AUTH_TWITTER_KEY = "LIK43CXqkCJjEDKmP4LsqPLD7"
+# Twitter APP Secret
+SOCIAL_AUTH_TWITTER_SECRET = "BpK70KSeb3RePk6WXoFumG6jMV2sRLY623hzpkHVdXr85eq7sD"
+
+# Google APP Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "90947248109-nvu6v5d6rvpav60ps1sgrtplt5vlinhp.apps.googleusercontent.com"
+# Google APP Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "4I7fFTTrlVfoHLbPNn6lviCK"
+
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.linkedin.LinkedinOAuth',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GooglePlusAuth',
+    #'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/site/dashboard/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/site/login-error/'
+SOCIAL_AUTH_USER_MODEL = 'core.User'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = [ 'email' ]
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+SOCIAL_AUTH_SLUGIFY_USERNAMES = False
+#SOCIAL_AUTH_URL_NAMESPACE = "social"
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
 )

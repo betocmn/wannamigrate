@@ -38,8 +38,10 @@
         <div class="modal-body">
 
             <div class="login_item signup_item">
-              <a href="{{ facebook_auth_url }}">Login with Facebook</a>
-              <a href="{{ linkedin_auth_url }}">Login with Linkedin</a>
+              <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+              <a href="{% url 'social:begin' 'linkedin' %}">Login with Linkedin</a>
+              <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+              <!-- a href="#">Login with Twitter</a-->
 
               <strong class="line-thru">ou</strong>
             </div>

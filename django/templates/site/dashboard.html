@@ -12,22 +12,19 @@
 
 
 {% block content %}
+    <h2>Dashboard</h2>    
+    <h3> Hello, {{ user.email }} </h3>
+    <a href="{% url 'site:logout' %}">Logout</a>
 
-    <div>
-        <h1>Get in touch with us: </h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.email }}
-            {{ form.message }}
-            <input id="submit" type="submit" value="Send" />
-        </form>
-    </div>
+
     <!-- JQuery UI -->
     <script type="text/javascript" src="{% static "site/jquery-ui-1.11.1/jquery-ui.min.js" %}"></script>
     <!-- ./JQuery UI -->
+
     <!-- Bootstrap -->
     <script type="text/javascript" src="{% static "site/bootstrap-3.2.0/js/bootstrap.min.js" %}"></script>
     <!-- ./Bootstrap -->
+
     <!-- INLINE JS -->
     <script type="text/javascript">
         

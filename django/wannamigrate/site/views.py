@@ -4,6 +4,10 @@ from wannamigrate.core.mailer import Mailer
 from django.http import HttpResponse, HttpResponseRedirect
 from wannamigrate.constants import *
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout
+
+
 
 # Contact page
 def contact( request ):
@@ -19,10 +23,10 @@ def contact( request ):
     #####################################################################################################################################
     # The URL to authenticate on linkedin and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
     linkedin_redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' ) # The URL to return when user allows the app.
-    linkedin_auth_url = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=" + SOCIAL_AUTH_LINKEDIN_KEY + "&redirect_uri=" + linkedin_redirect_uri
+    linkedin_auth_url = "#"
     # The URL to authenticate on facebook and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
     facebook_redirect_uri = request.build_absolute_uri( '/site/facebook_auth' )
-    facebook_auth_url = "https://www.facebook.com/dialog/oauth?client_id=" + SOCIAL_AUTH_FACEBOOK_KEY + "&redirect_uri=" + facebook_redirect_uri
+    facebook_auth_url = "#"
     #####################################################################################################################################
 
     # The url to open when the user is logged.
@@ -61,8 +65,8 @@ def contact( request ):
     
     return render( request, 'site/contact.html', template_data )
 
-def home_index( request ):
-    pass
+def home( request ):
+    return render( request, 'site/home.html' )
 
 
 def login( request ):
@@ -92,7 +96,8 @@ def login( request ):
 
 
 def logout( request ):
-    pass
+    auth_logout( request )
+    return HttpResponseRedirect( reverse( "site:home" ) )
 
 
 def linkedin_auth( request ):
@@ -100,5 +105,18 @@ def linkedin_auth( request ):
     
 def facebook_auth( request ):
     pass
+
+@login_required
+def dashboard( request ):
+    """
+    Process the dashboard page. 
+    
+    The dashboard is the main screen of the system, 
+    where the users can view its informations, progress, etc.
+
+    :param request:
+    :return The dashboard page.
+    """
+    return render( request, 'site/dashboard.html' )
 
 
