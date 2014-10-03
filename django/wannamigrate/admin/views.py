@@ -12,6 +12,8 @@ from django.db.models import ProtectedError
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import Helper
+from django.utils.translation import ugettext as _
+from django.utils.translation import activate
 
 
 #######################

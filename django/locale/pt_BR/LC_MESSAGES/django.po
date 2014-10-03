@@ -1,0 +1,1170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-30 16:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/admin/admin_user/add.html:37
+msgid "Add New Admin User"
+msgstr "Adicionar Novo Usuário"
+
+#: templates/db_translations/core_answer.html:3
+msgid "Advancedx"
+msgstr ""
+
+#: templates/db_translations/core_country.html:2
+msgid "Algeria"
+msgstr ""
+
+#: templates/db_translations/core_country.html:3
+msgid "Angola"
+msgstr ""
+
+#: templates/db_translations/core_country.html:4
+msgid "Ascension"
+msgstr ""
+
+#: templates/db_translations/core_country.html:5
+msgid "Benin"
+msgstr ""
+
+#: templates/db_translations/core_country.html:6
+msgid "Botswana"
+msgstr ""
+
+#: templates/db_translations/core_country.html:7
+msgid "Burkina Faso"
+msgstr ""
+
+#: templates/db_translations/core_country.html:8
+msgid "Burundi"
+msgstr ""
+
+#: templates/db_translations/core_country.html:9
+msgid "Cameroon"
+msgstr ""
+
+#: templates/db_translations/core_country.html:10
+msgid "Cape Verde Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:11
+msgid "Central African Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:12
+msgid "Chad Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:13
+msgid "Comoros"
+msgstr ""
+
+#: templates/db_translations/core_country.html:14
+msgid "Congo"
+msgstr ""
+
+#: templates/db_translations/core_country.html:15
+msgid "Djibouti"
+msgstr ""
+
+#: templates/db_translations/core_country.html:16
+msgid "Egypt"
+msgstr ""
+
+#: templates/db_translations/core_country.html:17
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:18
+msgid "Eritrea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:19
+msgid "Ethiopia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:20
+msgid "Gabon Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:21
+msgid "Gambia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:22
+msgid "Ghana"
+msgstr ""
+
+#: templates/db_translations/core_country.html:23
+msgid "Guinea-Bissau"
+msgstr ""
+
+#: templates/db_translations/core_country.html:24
+msgid "Guinea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:25
+msgid "Ivory Coast"
+msgstr ""
+
+#: templates/db_translations/core_country.html:26
+msgid "Kenya"
+msgstr ""
+
+#: templates/db_translations/core_country.html:27
+msgid "Lesotho"
+msgstr ""
+
+#: templates/db_translations/core_country.html:28
+msgid "Liberia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:29
+msgid "Libya"
+msgstr ""
+
+#: templates/db_translations/core_country.html:30
+msgid "Madagascar"
+msgstr ""
+
+#: templates/db_translations/core_country.html:31
+msgid "Malawi"
+msgstr ""
+
+#: templates/db_translations/core_country.html:32
+msgid "Mali Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:33
+msgid "Mauritania"
+msgstr ""
+
+#: templates/db_translations/core_country.html:34
+msgid "Mauritius"
+msgstr ""
+
+#: templates/db_translations/core_country.html:35
+msgid "Mayotte Island"
+msgstr ""
+
+#: templates/db_translations/core_country.html:36
+msgid "Morocco"
+msgstr ""
+
+#: templates/db_translations/core_country.html:37
+msgid "Mozambique"
+msgstr ""
+
+#: templates/db_translations/core_country.html:38
+msgid "Namibia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:39
+msgid "Niger Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:40
+msgid "Nigeria"
+msgstr ""
+
+#: templates/db_translations/core_country.html:41
+msgid "Principe"
+msgstr ""
+
+#: templates/db_translations/core_country.html:42
+msgid "Reunion Island"
+msgstr ""
+
+#: templates/db_translations/core_country.html:43
+msgid "Rwanda"
+msgstr ""
+
+#: templates/db_translations/core_country.html:44
+msgid "Sao Tome"
+msgstr ""
+
+#: templates/db_translations/core_country.html:45
+msgid "Senegal Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:46
+msgid "Seychelles"
+msgstr ""
+
+#: templates/db_translations/core_country.html:47
+msgid "Sierra Leone"
+msgstr ""
+
+#: templates/db_translations/core_country.html:48
+msgid "Somalia Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:49
+msgid "South Africa"
+msgstr ""
+
+#: templates/db_translations/core_country.html:50
+msgid "St. Helena"
+msgstr ""
+
+#: templates/db_translations/core_country.html:51
+msgid "Sudan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:52
+msgid "Swaziland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:53
+msgid "Tanzania"
+msgstr ""
+
+#: templates/db_translations/core_country.html:54
+msgid "Togo"
+msgstr ""
+
+#: templates/db_translations/core_country.html:55
+msgid "Tunisia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:56
+msgid "Uganda"
+msgstr ""
+
+#: templates/db_translations/core_country.html:57
+msgid "Zaire"
+msgstr ""
+
+#: templates/db_translations/core_country.html:58
+msgid "Zambia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:59
+msgid "Zanzibar"
+msgstr ""
+
+#: templates/db_translations/core_country.html:60
+msgid "Zimbabwe"
+msgstr ""
+
+#: templates/db_translations/core_country.html:61
+msgid "South Sudan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:62
+msgid "Dem. Republic of the Congo"
+msgstr ""
+
+#: templates/db_translations/core_country.html:63
+msgid "Afghanistan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:64
+msgid "Armenia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:65
+msgid "Azerbaijan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:66
+msgid "Bahrain"
+msgstr ""
+
+#: templates/db_translations/core_country.html:67
+msgid "Bangladesh"
+msgstr ""
+
+#: templates/db_translations/core_country.html:68
+msgid "Bhutan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:69
+msgid "Brunei"
+msgstr ""
+
+#: templates/db_translations/core_country.html:70
+msgid "Cambodia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:71
+msgid "China"
+msgstr ""
+
+#: templates/db_translations/core_country.html:72
+msgid "Christmas Island"
+msgstr ""
+
+#: templates/db_translations/core_country.html:73
+msgid "Cocos Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:74
+msgid "Diego Garcia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:75
+msgid "Georgia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:76
+msgid "Hong Kong"
+msgstr ""
+
+#: templates/db_translations/core_country.html:77
+msgid "India"
+msgstr ""
+
+#: templates/db_translations/core_country.html:78
+msgid "Indonesia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:79
+msgid "Iran"
+msgstr ""
+
+#: templates/db_translations/core_country.html:80
+msgid "Iraq"
+msgstr ""
+
+#: templates/db_translations/core_country.html:81
+msgid "Israel"
+msgstr ""
+
+#: templates/db_translations/core_country.html:82
+msgid "Japan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:83
+msgid "Jordan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:84
+msgid "Kazakhstan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:85
+msgid "North Korea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:86
+msgid "South Korea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:87
+msgid "Kuwait"
+msgstr ""
+
+#: templates/db_translations/core_country.html:88
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:89
+msgid "Laos"
+msgstr ""
+
+#: templates/db_translations/core_country.html:90
+msgid "Lebanon"
+msgstr ""
+
+#: templates/db_translations/core_country.html:91
+#: templates/db_translations/core_country.html:98
+msgid "Macau"
+msgstr ""
+
+#: templates/db_translations/core_country.html:92
+msgid "Malaysia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:93
+msgid "Maldives"
+msgstr ""
+
+#: templates/db_translations/core_country.html:94
+msgid "Mongolia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:95
+msgid "Myanmar"
+msgstr ""
+
+#: templates/db_translations/core_country.html:96
+msgid "Nepal"
+msgstr ""
+
+#: templates/db_translations/core_country.html:97
+msgid "Oman"
+msgstr ""
+
+#: templates/db_translations/core_country.html:99
+msgid "Pakistan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:100
+msgid "Philippines"
+msgstr ""
+
+#: templates/db_translations/core_country.html:101
+msgid "Qatar"
+msgstr ""
+
+#: templates/db_translations/core_country.html:102
+msgid "Saudi Arabia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:103
+msgid "Singapore"
+msgstr ""
+
+#: templates/db_translations/core_country.html:104
+msgid "Sri Lanka"
+msgstr ""
+
+#: templates/db_translations/core_country.html:105
+#: templates/db_translations/core_country.html:106
+msgid "Syria"
+msgstr ""
+
+#: templates/db_translations/core_country.html:107
+msgid "Taiwan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:108
+msgid "Tajikistan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:109
+msgid "Thailand"
+msgstr ""
+
+#: templates/db_translations/core_country.html:110
+msgid "Turkey"
+msgstr ""
+
+#: templates/db_translations/core_country.html:111
+msgid "Turkmenistan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:112
+msgid "United Arab Emirates"
+msgstr ""
+
+#: templates/db_translations/core_country.html:113
+msgid "Uzbekistan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:114
+msgid "Vietnam"
+msgstr ""
+
+#: templates/db_translations/core_country.html:115
+msgid "Yemen"
+msgstr ""
+
+#: templates/db_translations/core_country.html:116
+msgid "Palestine"
+msgstr ""
+
+#: templates/db_translations/core_country.html:117
+msgid "American Samoa"
+msgstr ""
+
+#: templates/db_translations/core_country.html:118
+msgid "Australia"
+msgstr "Austrália"
+
+#: templates/db_translations/core_country.html:119
+msgid "Chatham Island, NZ"
+msgstr ""
+
+#: templates/db_translations/core_country.html:120
+msgid "Cook Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:121
+msgid "Fiji Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:122
+msgid "French Polynesia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:123
+msgid "Guam"
+msgstr ""
+
+#: templates/db_translations/core_country.html:124
+msgid "Kiribati"
+msgstr ""
+
+#: templates/db_translations/core_country.html:125
+msgid "American"
+msgstr ""
+
+#: templates/db_translations/core_country.html:126
+msgid "Mariana Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:127
+msgid "Marshall Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:128
+msgid "Federated States of Micronesia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:129
+msgid "Midway Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:130
+msgid "Nauru"
+msgstr ""
+
+#: templates/db_translations/core_country.html:131
+msgid "New Caledonia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:132
+msgid "New Zealand"
+msgstr "Nova Zelândia"
+
+#: templates/db_translations/core_country.html:133
+msgid "Niue"
+msgstr ""
+
+#: templates/db_translations/core_country.html:134
+msgid "Norfolk Island"
+msgstr ""
+
+#: templates/db_translations/core_country.html:135
+msgid "Palau"
+msgstr ""
+
+#: templates/db_translations/core_country.html:136
+msgid "Papua New Guinea"
+msgstr ""
+
+#: templates/db_translations/core_country.html:137
+msgid "Saipan"
+msgstr ""
+
+#: templates/db_translations/core_country.html:138
+msgid "Solomon Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:139
+msgid "Tokelau"
+msgstr ""
+
+#: templates/db_translations/core_country.html:140
+msgid "Tonga"
+msgstr ""
+
+#: templates/db_translations/core_country.html:141
+msgid "Tuvalu"
+msgstr ""
+
+#: templates/db_translations/core_country.html:142
+msgid "Vanuatu"
+msgstr ""
+
+#: templates/db_translations/core_country.html:143
+msgid "Wake Island"
+msgstr ""
+
+#: templates/db_translations/core_country.html:144
+msgid "Wallis and Futuna Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:145
+msgid "Samoa"
+msgstr ""
+
+#: templates/db_translations/core_country.html:146
+msgid "East Timor"
+msgstr ""
+
+#: templates/db_translations/core_country.html:147
+msgid "Antarctica"
+msgstr ""
+
+#: templates/db_translations/core_country.html:148
+msgid "Albania"
+msgstr ""
+
+#: templates/db_translations/core_country.html:149
+msgid "Andorra"
+msgstr ""
+
+#: templates/db_translations/core_country.html:150
+msgid "Austria"
+msgstr ""
+
+#: templates/db_translations/core_country.html:151
+msgid "Belarus"
+msgstr ""
+
+#: templates/db_translations/core_country.html:152
+msgid "Belgium"
+msgstr ""
+
+#: templates/db_translations/core_country.html:153
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+#: templates/db_translations/core_country.html:154
+msgid "Bulgaria"
+msgstr ""
+
+#: templates/db_translations/core_country.html:155
+msgid "Croatia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:156
+msgid "Cyprus"
+msgstr ""
+
+#: templates/db_translations/core_country.html:157
+msgid "Czech Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:158
+msgid "Denmark"
+msgstr ""
+
+#: templates/db_translations/core_country.html:159
+msgid "Estonia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:160
+msgid "Faroe Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:161
+msgid "Finland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:162
+msgid "France"
+msgstr ""
+
+#: templates/db_translations/core_country.html:163
+msgid "Germany"
+msgstr ""
+
+#: templates/db_translations/core_country.html:164
+msgid "Gibraltar"
+msgstr ""
+
+#: templates/db_translations/core_country.html:165
+msgid "Greece"
+msgstr ""
+
+#: templates/db_translations/core_country.html:166
+msgid "Hungary"
+msgstr ""
+
+#: templates/db_translations/core_country.html:167
+msgid "Iceland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:168
+msgid "Ireland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:169
+msgid "Italy"
+msgstr ""
+
+#: templates/db_translations/core_country.html:170
+msgid "Latvia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:171
+msgid "Liechtenstein"
+msgstr ""
+
+#: templates/db_translations/core_country.html:172
+msgid "Lithuania"
+msgstr ""
+
+#: templates/db_translations/core_country.html:173
+msgid "Luxembourg"
+msgstr ""
+
+#: templates/db_translations/core_country.html:174
+msgid "Macedonia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:175
+msgid "Malta"
+msgstr ""
+
+#: templates/db_translations/core_country.html:176
+msgid "Moldova"
+msgstr ""
+
+#: templates/db_translations/core_country.html:177
+msgid "Monaco"
+msgstr ""
+
+#: templates/db_translations/core_country.html:178
+msgid "Netherlands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:179
+msgid "Norway"
+msgstr ""
+
+#: templates/db_translations/core_country.html:180
+msgid "Poland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:181
+msgid "Portugal"
+msgstr ""
+
+#: templates/db_translations/core_country.html:182
+msgid "Romania"
+msgstr ""
+
+#: templates/db_translations/core_country.html:183
+msgid "Russia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:184
+msgid "San Marino"
+msgstr ""
+
+#: templates/db_translations/core_country.html:185
+msgid "Serbia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:186
+msgid "Slovakia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:187
+msgid "Slovenia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:188
+msgid "Spain"
+msgstr ""
+
+#: templates/db_translations/core_country.html:189
+msgid "Sweden"
+msgstr ""
+
+#: templates/db_translations/core_country.html:190
+msgid "Switzerland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:191
+msgid "Ukraine"
+msgstr ""
+
+#: templates/db_translations/core_country.html:192
+msgid "United Kingdom"
+msgstr ""
+
+#: templates/db_translations/core_country.html:193
+msgid "Vatican city"
+msgstr ""
+
+#: templates/db_translations/core_country.html:194
+msgid "Yugoslavia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:195
+msgid "Kosovo"
+msgstr ""
+
+#: templates/db_translations/core_country.html:196
+msgid "Montenegro"
+msgstr ""
+
+#: templates/db_translations/core_country.html:197
+msgid "Anguilla"
+msgstr ""
+
+#: templates/db_translations/core_country.html:198
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: templates/db_translations/core_country.html:199
+msgid "Aruba"
+msgstr ""
+
+#: templates/db_translations/core_country.html:200
+msgid "Bahamas"
+msgstr ""
+
+#: templates/db_translations/core_country.html:201
+msgid "Barbados"
+msgstr ""
+
+#: templates/db_translations/core_country.html:202
+msgid "Belize"
+msgstr ""
+
+#: templates/db_translations/core_country.html:203
+msgid "Bermuda"
+msgstr ""
+
+#: templates/db_translations/core_country.html:204
+msgid "British Virgin Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:205
+msgid "Canada"
+msgstr "Canadá"
+
+#: templates/db_translations/core_country.html:206
+msgid "Cayman Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:207
+msgid "Costa Rica"
+msgstr ""
+
+#: templates/db_translations/core_country.html:208
+msgid "Cuba"
+msgstr ""
+
+#: templates/db_translations/core_country.html:209
+msgid "Curacao"
+msgstr ""
+
+#: templates/db_translations/core_country.html:210
+msgid "Dominica"
+msgstr ""
+
+#: templates/db_translations/core_country.html:211
+msgid "Dominican Republic"
+msgstr ""
+
+#: templates/db_translations/core_country.html:212
+msgid "El Salvador"
+msgstr ""
+
+#: templates/db_translations/core_country.html:213
+msgid "Greenland"
+msgstr ""
+
+#: templates/db_translations/core_country.html:214
+msgid "Grenada and Carriacuou"
+msgstr ""
+
+#: templates/db_translations/core_country.html:215
+msgid "Guadeloupe"
+msgstr ""
+
+#: templates/db_translations/core_country.html:216
+msgid "Guatemala"
+msgstr ""
+
+#: templates/db_translations/core_country.html:217
+msgid "Haiti"
+msgstr ""
+
+#: templates/db_translations/core_country.html:218
+msgid "Honduras"
+msgstr ""
+
+#: templates/db_translations/core_country.html:219
+msgid "Jamaica"
+msgstr ""
+
+#: templates/db_translations/core_country.html:220
+msgid "Martinique"
+msgstr ""
+
+#: templates/db_translations/core_country.html:221
+msgid "Mexico"
+msgstr ""
+
+#: templates/db_translations/core_country.html:222
+msgid "Miquelon"
+msgstr ""
+
+#: templates/db_translations/core_country.html:223
+msgid "Montserrat"
+msgstr ""
+
+#: templates/db_translations/core_country.html:224
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: templates/db_translations/core_country.html:225
+msgid "Nevis"
+msgstr ""
+
+#: templates/db_translations/core_country.html:226
+msgid "Nicaragua"
+msgstr ""
+
+#: templates/db_translations/core_country.html:227
+msgid "Panama"
+msgstr ""
+
+#: templates/db_translations/core_country.html:228
+msgid "Puerto Rico"
+msgstr ""
+
+#: templates/db_translations/core_country.html:229
+msgid "St. Kitts"
+msgstr ""
+
+#: templates/db_translations/core_country.html:230
+msgid "St. Lucia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:231
+msgid "St. Pierre and Miquelon"
+msgstr ""
+
+#: templates/db_translations/core_country.html:232
+msgid "St. Vincent"
+msgstr ""
+
+#: templates/db_translations/core_country.html:233
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: templates/db_translations/core_country.html:234
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:235
+msgid "US Virgin Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:236
+msgid "United States"
+msgstr ""
+
+#: templates/db_translations/core_country.html:237
+msgid "Sint Maarten"
+msgstr ""
+
+#: templates/db_translations/core_country.html:238
+msgid "Bonaire"
+msgstr ""
+
+#: templates/db_translations/core_country.html:239
+msgid "Saba"
+msgstr ""
+
+#: templates/db_translations/core_country.html:240
+msgid "Sint Eustatius"
+msgstr ""
+
+#: templates/db_translations/core_country.html:241
+msgid "Argentina"
+msgstr ""
+
+#: templates/db_translations/core_country.html:242
+msgid "Bolivia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:243
+msgid "Brazil"
+msgstr ""
+
+#: templates/db_translations/core_country.html:244
+msgid "Chile"
+msgstr ""
+
+#: templates/db_translations/core_country.html:245
+msgid "Colombia"
+msgstr ""
+
+#: templates/db_translations/core_country.html:246
+msgid "Ecuador"
+msgstr ""
+
+#: templates/db_translations/core_country.html:247
+msgid "Falkland Islands"
+msgstr ""
+
+#: templates/db_translations/core_country.html:248
+msgid "French Guiana"
+msgstr ""
+
+#: templates/db_translations/core_country.html:249
+msgid "Guiana"
+msgstr ""
+
+#: templates/db_translations/core_country.html:250
+msgid "Guyana"
+msgstr ""
+
+#: templates/db_translations/core_country.html:251
+msgid "Paraguay"
+msgstr ""
+
+#: templates/db_translations/core_country.html:252
+msgid "Peru"
+msgstr ""
+
+#: templates/db_translations/core_country.html:253
+msgid "Suriname"
+msgstr ""
+
+#: templates/db_translations/core_country.html:254
+msgid "Uruguay"
+msgstr ""
+
+#: templates/db_translations/core_country.html:255
+msgid "Venezuela"
+msgstr ""
+
+#: wannamigrate/core/models.py:17
+msgid "created date"
+msgstr ""
+
+#: wannamigrate/core/models.py:18
+msgid "modified date"
+msgstr ""
+
+#: wannamigrate/core/models.py:30 wannamigrate/core/models.py:135
+msgid "question"
+msgstr ""
+
+#: wannamigrate/core/models.py:31
+msgid "Answer"
+msgstr ""
+
+#: wannamigrate/core/models.py:44 wannamigrate/core/models.py:57
+#: wannamigrate/core/models.py:116 wannamigrate/core/models.py:196
+msgid "name"
+msgstr ""
+
+#: wannamigrate/core/models.py:58
+msgid "continent"
+msgstr ""
+
+#: wannamigrate/core/models.py:59 wannamigrate/core/models.py:117
+msgid "code"
+msgstr ""
+
+#: wannamigrate/core/models.py:60
+msgid "immigration enabled?"
+msgstr ""
+
+#: wannamigrate/core/models.py:72 wannamigrate/core/models.py:235
+#: wannamigrate/core/models.py:271 wannamigrate/core/models.py:286
+#: wannamigrate/core/models.py:301
+msgid "country"
+msgstr ""
+
+#: wannamigrate/core/models.py:73
+msgid "answer"
+msgstr ""
+
+#: wannamigrate/core/models.py:74
+msgid "points"
+msgstr ""
+
+#: wannamigrate/core/models.py:136
+msgid "help text"
+msgstr ""
+
+#: wannamigrate/core/models.py:195
+msgid "e-mail"
+msgstr ""
+
+#: wannamigrate/core/models.py:197
+msgid "is active?"
+msgstr ""
+
+#: wannamigrate/core/models.py:198
+msgid "is admin?"
+msgstr ""
+
+#: wannamigrate/core/models.py:234 wannamigrate/core/models.py:252
+#: wannamigrate/core/models.py:270 wannamigrate/core/models.py:285
+#: wannamigrate/core/models.py:299
+msgid "user"
+msgstr ""
+
+#: wannamigrate/core/models.py:236
+msgid "education level"
+msgstr ""
+
+#: wannamigrate/core/models.py:237
+msgid "education field"
+msgstr ""
+
+#: wannamigrate/core/models.py:238
+msgid "school"
+msgstr ""
+
+#: wannamigrate/core/models.py:239
+msgid "start year"
+msgstr ""
+
+#: wannamigrate/core/models.py:240
+msgid "end year"
+msgstr ""
+
+#: wannamigrate/core/models.py:253
+msgid "language"
+msgstr ""
+
+#: wannamigrate/core/models.py:254
+msgid "language level"
+msgstr ""
+
+#: wannamigrate/core/models.py:272
+msgid "birth date"
+msgstr ""
+
+#: wannamigrate/core/models.py:273
+msgid "gender"
+msgstr ""
+
+#: wannamigrate/core/models.py:287
+msgid "score"
+msgstr ""
+
+#: wannamigrate/core/models.py:300
+msgid "occupation"
+msgstr ""
+
+#: wannamigrate/core/models.py:302
+msgid "company"
+msgstr ""
+
+#: wannamigrate/core/models.py:303
+msgid "start date"
+msgstr ""
+
+#: wannamigrate/core/models.py:304
+msgid "end date"
+msgstr ""
+
+#: wannamigrate/settings.py:108
+msgid "English"
+msgstr ""
+
+#: wannamigrate/settings.py:109
+msgid "Portuguese (BR)"
+msgstr ""

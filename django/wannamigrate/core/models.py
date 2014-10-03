@@ -17,6 +17,7 @@ class BaseModel( models.Model ):
     created_date = models.DateTimeField( _( 'created date' ), auto_now_add = True, auto_now = False )
     modified_date = models.DateTimeField( _( 'modified date' ), auto_now = True, auto_now_add = False )
 
+
 class Answer( BaseModel ):
     """
     Answer Model - These are possible answers for questions (immigration requirements)
@@ -28,7 +29,35 @@ class Answer( BaseModel ):
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
+    answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
     description = models.CharField(  _( 'Answer' ), max_length = 255 )
+
+
+class AnswerCategory( BaseModel ):
+    """
+    Answer Category Model - Some answers are grouped into categories
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
+    name = models.CharField(  _( 'Name' ), max_length = 100 )
+
+
+class Continent( BaseModel ):
+    """
+    Continent Model - ex: Oceania, Europe, etc.
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 100 )
 
 
 class Country( BaseModel ):
@@ -42,7 +71,7 @@ class Country( BaseModel ):
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
-    continent = models.CharField( _( "continent" ), max_length = 30 )
+    continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
     code = models.CharField( _( "code" ), max_length = 2 )
     immigration_enabled = models.BooleanField( _( "immigration enabled?" ), default = False )
 
@@ -100,8 +129,8 @@ class Language( BaseModel ):
         default_permissions = []
 
     # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 15 )
-    code = models.CharField( _( "code" ), max_length = 5 )
+    name = models.CharField( _( "name" ), max_length = 25 )
+    code = models.CharField( _( "code" ), max_length = 6 )
 
 class Question( BaseModel ):
     """

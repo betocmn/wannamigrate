@@ -16,7 +16,7 @@ class Command( BaseCommand ):
             # Instatiates model to be used (based on table name)
             if table_name == 'core_country':
                 model = Country
-                possible_fields = [ 'name', 'continent' ]
+                possible_fields = [ 'name' ]
             elif table_name == 'core_language':
                 model = Language
                 possible_fields = [ 'name' ]

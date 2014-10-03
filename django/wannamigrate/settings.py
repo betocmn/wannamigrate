@@ -96,7 +96,12 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ( 'en-us', _( 'English' ) ),
+    ( 'pt-BR', _( 'Portuguese (BR)' ) ),
+)
+
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -105,11 +110,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-LANGUAGES = (
-    ( 'en-us', _( 'English' ) ),
-    ( 'pt-br', _( 'Portuguese (BR)' ) ),
-)
 
 LOCALE_PATHS = (
     os.path.join( BASE_DIR, 'locale' ),
