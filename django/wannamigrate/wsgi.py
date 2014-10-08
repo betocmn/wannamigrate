@@ -8,11 +8,15 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+
 
 
 # We check if there' a local settings file, if so, we are in dev
 BASE_DIR = os.path.dirname( __file__ )
 settings_file_path = os.path.join( BASE_DIR, '_settings', 'local.py' )
+
 
 # check if file exists
 if os.path.isfile( settings_file_path ):

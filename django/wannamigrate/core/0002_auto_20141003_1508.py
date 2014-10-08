@@ -3159,6 +3159,54 @@ def core_question_initial_values( apps, schema_editor ):
     question.help_text = ''
     question.save()
 
+    question = Question()
+    question.id = 10
+    question.description = 'Do you have a partner in a skilled occupation in demand?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 11
+    question.description = 'Do you plan to invest or open a business?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 12
+    question.description = 'Do you have a letter of support for a start-up venture from a canadian designated entity?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 13
+    question.description = 'Are You a U.S citizen?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 14
+    question.description = 'Did you study in regional Australia or low population growth metropolitan area?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 15
+    question.description = 'Did you complete a Professional Year (Course) in Australia?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 16
+    question.description = 'Are you willing to live and work in regional Australia?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 17
+    question.description = 'Can you be accredited as a translator or interpreter in a Credentialled community language (Australia)?'
+    question.help_text = ''
+    question.save()
+
 
 
 #######################
@@ -9222,6 +9270,116 @@ def core_answer_initial_values( apps, schema_editor ):
     answer.description = 'Flight Attendant'
     answer.save()
 
+    # -- Partner Skills? -----------------------------
+    answer = Answer()
+    answer.id = 878
+    answer.question = Question.objects.get( pk = 10 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 879
+    answer.question = Question.objects.get( pk = 10 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Invest or open a business? -----------------------------
+    answer = Answer()
+    answer.id = 880
+    answer.question = Question.objects.get( pk = 11 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 881
+    answer.question = Question.objects.get( pk = 11 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Letter from startup canadian venture? -----------------------------
+    answer = Answer()
+    answer.id = 882
+    answer.question = Question.objects.get( pk = 12 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 883
+    answer.question = Question.objects.get( pk = 12 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- US Citizen? -----------------------------
+    answer = Answer()
+    answer.id = 884
+    answer.question = Question.objects.get( pk = 13 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 885
+    answer.question = Question.objects.get( pk = 13 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Studied in Regional Australia? -----------------------------
+    answer = Answer()
+    answer.id = 886
+    answer.question = Question.objects.get( pk = 14 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 887
+    answer.question = Question.objects.get( pk = 14 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Professional year in Australia? -----------------------------
+    answer = Answer()
+    answer.id = 888
+    answer.question = Question.objects.get( pk = 15 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 889
+    answer.question = Question.objects.get( pk = 15 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Willing to live and work in Australia? -----------------------------
+    answer = Answer()
+    answer.id = 890
+    answer.question = Question.objects.get( pk = 16 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 891
+    answer.question = Question.objects.get( pk = 16 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- Credentialled community language in Australia? -----------------------------
+    answer = Answer()
+    answer.id = 892
+    answer.question = Question.objects.get( pk = 17 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 893
+    answer.question = Question.objects.get( pk = 17 )
+    answer.description = 'No'
+    answer.save()
 
 
 #######################

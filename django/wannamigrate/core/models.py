@@ -117,7 +117,6 @@ class CountryPoints( BaseModel ):
 
         return points_per_country
 
-
     
 class Language( BaseModel ):
     """
@@ -131,6 +130,7 @@ class Language( BaseModel ):
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 25 )
     code = models.CharField( _( "code" ), max_length = 6 )
+
 
 class Question( BaseModel ):
     """
@@ -150,6 +150,7 @@ class Question( BaseModel ):
     # Model Attributes
     description = models.CharField( _( "question" ), max_length = 255 )
     help_text = models.TextField( _( "help text" ), null = True, blank = True )
+
 
 class UserManager( BaseUserManager ):
     """
@@ -187,6 +188,7 @@ class UserManager( BaseUserManager ):
         user.is_active = True
         user.save( using = self._db )
         return user
+
 
 class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     """
@@ -237,9 +239,24 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+
 class UserEducation( BaseModel ):
     """
-    User Education Model - Ex: Stores each education achieved (ex: bachelors, in brazil, universidade UFMA, from 2003-2007
+    User Education Model - Ex: Stores education related information
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    regional_australia_study = models.BooleanField( _( "studied in regional australia?" ), default = False )
+
+
+class UserEducationHistory( BaseModel ):
+    """
+    User Education History Model - Ex: Stores each education achieved (ex: bachelors, in brazil, universidade UFMA, from 2003-2007
     """
 
     # META Options
@@ -250,14 +267,28 @@ class UserEducation( BaseModel ):
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     education_level_answer = models.ForeignKey( Answer, related_name = 'education_level', verbose_name = _( 'education level' ) )
-    education_field_answer = models.ForeignKey( Answer, related_name = 'education_field', verbose_name = _( 'education field' ) )
     school = models.CharField( _( "school" ), max_length = 100 )
     year_start = models.CharField( _( "start year" ), max_length = 4 )
     year_end = models.CharField( _( "end year" ), max_length = 4 )
 
+
 class UserLanguage( BaseModel ):
     """
-    User Language Model - Ex: Stores each language and level the user can speak
+    User Language Model - Ex: Stores language related information
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    australian_community_language = models.BooleanField( _( "credentialled community language in australia?" ), default = False )
+
+
+class UserLanguageProficiency( BaseModel ):
+    """
+    User Language Proficiency Model - Ex: Stores each language and level the user can speak
     """
 
     # META Options
@@ -268,6 +299,7 @@ class UserLanguage( BaseModel ):
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     language = models.ForeignKey( Language, verbose_name = _( 'language' ) )
     language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ), on_delete = models.PROTECT )
+
 
 class UserPersonal( BaseModel ):
     """
@@ -280,13 +312,28 @@ class UserPersonal( BaseModel ):
 
     # Model Attributes
     GENDERS = (
-        ( 'F', 'Femanle' ),
+        ( 'F', 'Female' ),
         ( 'M', 'Male' ),
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     birth_date = models.DateField( _( "birth date" ) )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS )
+    australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
+
+
+class UserPersonalFamily( BaseModel ):
+    """
+    User Personal Family Model - Ex: Stores countries where the user has relatives as citizens
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
 
 class UserResult( BaseModel ):
     """
@@ -302,9 +349,42 @@ class UserResult( BaseModel ):
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     score = models.IntegerField( _( "score" ))
 
+
 class UserWork( BaseModel ):
     """
-    User Work Model - Ex: Stores each work experience
+    User Work Model - Ex: Stores work related information
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ) )
+    partner_skills = models.BooleanField( _( "partner skills?" ), default = False )
+    willing_to_invest = models.BooleanField( _( "willing to invest?" ), default = False )
+    canadian_startup_letter = models.BooleanField( _( "startup letter from canada?" ), default = False )
+    australian_professional_year = models.BooleanField( _( "professional year course in australia?" ), default = False )
+
+
+class UserWorkOffer( BaseModel ):
+    """
+    User Work Offer Model - Ex: Stores countries where the user has written job offers
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+
+
+class UserWorkExperience( BaseModel ):
+    """
+    User Work Experience Model - Ex: Stores each work experience
     """
 
     # META Options
