@@ -8,15 +8,10 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
-import sys
-
-
-
 
 # We check if there' a local settings file, if so, we are in dev
 BASE_DIR = os.path.dirname( __file__ )
 settings_file_path = os.path.join( BASE_DIR, '_settings', 'local.py' )
-
 
 # check if file exists
 if os.path.isfile( settings_file_path ):
@@ -24,8 +19,9 @@ if os.path.isfile( settings_file_path ):
 else:
     settings_file = 'wannamigrate._settings.prod'
 
-
+# Set the correct settings file to django
 os.environ.setdefault( "DJANGO_SETTINGS_MODULE", settings_file )
 
+# Start django application
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

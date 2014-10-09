@@ -1103,7 +1103,7 @@ msgstr ""
 #: wannamigrate/core/models.py:270 wannamigrate/core/models.py:285
 #: wannamigrate/core/models.py:299
 msgid "user"
-msgstr ""
+msgstr “”
 
 #: wannamigrate/core/models.py:236
 msgid "education level"

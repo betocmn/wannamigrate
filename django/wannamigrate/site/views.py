@@ -7,40 +7,38 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 
 
-
-# Contact page
-def contact( request ):
+#######################
+# HOME-PAGE VIEWS
+#######################
+def home( request ):
     """
-    Displays the contact page.
+    Home-Page - Used as a provocative landing page to conquer new users
 
     :param request:
-    :return The contact page rendered
+    :return String - The contact page rendered:
     """
 
-    #####################################################################################################################################
-    # The following code should be placed on the view that handles the template containing signing up with social networks.
-    #####################################################################################################################################
-    # The URL to authenticate on linkedin and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
-    linkedin_redirect_uri = request.build_absolute_uri( '/site/linkedin_auth' ) # The URL to return when user allows the app.
-    linkedin_auth_url = "#"
-    # The URL to authenticate on facebook and the REDIRECT_URL when users authenticate the Wanna Migrate to get their informations.
-    facebook_redirect_uri = request.build_absolute_uri( '/site/facebook_auth' )
-    facebook_auth_url = "#"
-    #####################################################################################################################################
+    # Print Template
+    return render( request, 'site/home.html' )
 
-    # The url to open when the user is logged.
-    login_redirect_url = request.build_absolute_uri( '/site/login' )
-    
 
-    template_data = {
-        'login_redirect' : login_redirect_url,
-        'linkedin_auth_url' : linkedin_auth_url,
-        'facebook_auth_url' : facebook_auth_url
-    }
+#######################
+# CONTACT US VIEWS
+#######################
+def contact( request ):
+    """
+    Displays the contact page with a form to send us a message by email.
 
+    :param request:
+    :return String - The contact page rendered:
+    """
+
+    # Initialize template data dictionary
+    template_data = {}
 
     # If the form has been submitted...
     if request.method == 'POST':
+
         form = ContactForm( request.POST )
         template_data[ 'form' ] = form
 
@@ -48,6 +46,8 @@ def contact( request ):
             email = form.cleaned_data[ 'email' ]
             message = form.cleaned_data[ 'message' ]
 
+            # Send Email with message
+            # TODO: Change this to a celery background event and use a try/exception block
             send_result = Mailer.send_contact_email( { 'email': email, 'message': message } )
             
             if send_result == True:
@@ -59,52 +59,45 @@ def contact( request ):
             template_data[ 'error' ] = 'Please provide valid information.'
 
     else:
-        # Creates a form and renders the page.
         template_data[ 'form' ] = ContactForm()
-    
+
+    # Print Template
     return render( request, 'site/contact.html', template_data )
 
-def home( request ):
-    return render( request, 'site/home.html' )
 
-
+#######################
+# LOGIN VIEWS
+#######################
 def login( request ):
+    """
+    Process traditional login with email/password combination
 
-    # E-mail authentication
-    if request.method == 'POST':
-        return HttpResponse( "email" )
+    :param request:
+    :return String - The html page rendered:
+    """
 
-    else:
-
-        if "facebook_login" in request.GET:
-            access_token = request.GET[ 'access_token' ]
-            graph = get_facebook_graph( request, access_token )
-            profile = graph.get('me')
-
-            # Informações uteis do facebook:
-            # profile[ 'first_name' ]
-            # profile[ 'last_name' ]
-            # profile[ 'email' ]
-
-            #TODO: Check if the user is already registered
-            # and if not, register the user on the plataform.
-            return HttpResponse( 'FACEBOOK' )
-
-        elif "linkedin" in request.GET:
-            pass
+    # -----> code here, márcio boy
 
 
 def logout( request ):
+    """
+    Process Logout
+
+    :param request:
+    :return HTTP Redirection:
+    """
+
+    # Executes auth Logout
     auth_logout( request )
+
+    # Print Template
     return HttpResponseRedirect( reverse( "site:home" ) )
 
 
-def linkedin_auth( request ):
-    pass
-    
-def facebook_auth( request ):
-    pass
 
+#######################
+# DASHBOARD VIEWS
+#######################
 @login_required
 def dashboard( request ):
     """
@@ -114,8 +107,10 @@ def dashboard( request ):
     where the users can view its informations, progress, etc.
 
     :param request:
-    :return The dashboard page.
+    :return String - HTML from The dashboard page.
     """
+
+    # Print Template
     return render( request, 'site/dashboard.html' )
 
 

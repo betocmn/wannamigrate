@@ -1,6 +1,9 @@
 from django import forms
 
 class _BaseForm( object ):
+    """
+    The BASE form.  All forms in the system should extend this class
+    """
 
     def get_required_fields( self, compare_with_html_id = True ):
         """
@@ -18,8 +21,14 @@ class _BaseForm( object ):
 
 
 class BaseModelForm( _BaseForm, forms.ModelForm ):
+    """
+    Making the Base Model Form use our _BaseForm
+    """
     pass
 
 
 class BaseForm( _BaseForm, forms.Form ):
+    """
+    Making the Base Form use our _BaseForm
+    """
     pass
