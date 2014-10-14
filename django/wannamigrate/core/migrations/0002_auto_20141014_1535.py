@@ -3207,6 +3207,30 @@ def core_question_initial_values( apps, schema_editor ):
     question.help_text = ''
     question.save()
 
+    question = Question()
+    question.id = 18
+    question.description = 'Has your partner worked or studied in Canada?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 19
+    question.description = 'What is your partner English Level?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 20
+    question.description = 'What is your partner French Level?'
+    question.help_text = ''
+    question.save()
+
+    question = Question()
+    question.id = 21
+    question.description = 'What is your partner level of education?'
+    question.help_text = ''
+    question.save()
+
 
 
 #######################
@@ -9379,6 +9403,121 @@ def core_answer_initial_values( apps, schema_editor ):
     answer.id = 893
     answer.question = Question.objects.get( pk = 17 )
     answer.description = 'No'
+    answer.save()
+
+    # -- Partner studied or worked in CANADA? -----------------------------
+    answer = Answer()
+    answer.id = 894
+    answer.question = Question.objects.get( pk = 18 )
+    answer.description = 'Yes'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 895
+    answer.question = Question.objects.get( pk = 18 )
+    answer.description = 'No'
+    answer.save()
+
+
+    # -- What is your PARTNER ENGLISH level? -----------------------------
+    answer = Answer()
+    answer.id = 896
+    answer.question = Question.objects.get( pk = 19 )
+    answer.description = 'None'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 897
+    answer.question = Question.objects.get( pk = 19 )
+    answer.description = 'Basic Proficiency'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 898
+    answer.question = Question.objects.get( pk = 19 )
+    answer.description = 'Moderate Proficiency'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 899
+    answer.question = Question.objects.get( pk = 19 )
+    answer.description = 'High Proficiency'
+    answer.save()
+
+
+    # -- What is your PARTNER FRENCH level? -----------------------------
+    answer = Answer()
+    answer.id = 900
+    answer.question = Question.objects.get( pk = 20 )
+    answer.description = 'None'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 901
+    answer.question = Question.objects.get( pk = 20 )
+    answer.description = 'Basic Proficiency'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 902
+    answer.question = Question.objects.get( pk = 20 )
+    answer.description = 'Moderate Proficiency'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 903
+    answer.question = Question.objects.get( pk = 20 )
+    answer.description = 'High Proficiency'
+    answer.save()
+
+
+    # -- What is your PARTNER'S highest degree of education? -----------------------------
+    answer = Answer()
+    answer.id = 904
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'None'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 905
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Primary Education'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 906
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Secondary Education - Lower'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 907
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Secondary Education - Upper (High-School)'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 908
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Post Secondary Education (Trades, associate, technical)'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 909
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Bachelors Level'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 910
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Masters Level'
+    answer.save()
+
+    answer = Answer()
+    answer.id = 911
+    answer.question = Question.objects.get( pk = 21 )
+    answer.description = 'Doctoral Level'
     answer.save()
 
 

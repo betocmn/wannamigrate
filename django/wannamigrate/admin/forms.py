@@ -164,7 +164,7 @@ class AnswerForm( BaseModelForm ):
                     value = points_per_country[country.id][answer_id]
                 else:
                     value = ''
-                self.fields[name] = forms.IntegerField( initial = value, widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
+                self.fields[name] = forms.IntegerField( initial = value, widget = TextInput( attrs = { 'class': 'form-control points', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
 
     def save( self, commit = True ):
         """

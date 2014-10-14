@@ -11,9 +11,8 @@ from django.db import transaction
 from django.db.models import ProtectedError
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
-from wannamigrate.core.util import Helper
-from django.utils.translation import ugettext as _
-from django.utils.translation import activate
+from wannamigrate.core.util import build_datatable_json
+from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 
 
 #######################
@@ -121,6 +120,9 @@ def home_index( request ):
     :return: String
     """
 
+    immigration_calculator = ImmigrationCalculator( 1, 117 )
+    return HttpResponse( immigration_calculator.get_total_points()['total'] )
+
     context = { 'user': request.user }
     return render( request, 'admin/home/index.html', context )
 
@@ -163,7 +165,7 @@ def admin_user_list_json( request ):
     }
 
     #build json data and return it to the screen
-    json = Helper.build_datatable_json( request, objects, info )
+    json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
 
@@ -309,7 +311,7 @@ def group_list_json( request ):
     }
 
     #build json data and return it to the screen
-    json = Helper.build_datatable_json( request, objects, info )
+    json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
 @permission_required( 'auth.add_group' )
@@ -455,7 +457,7 @@ def question_list_json( request ):
     }
 
     #build json data and return it to the screen
-    json = Helper.build_datatable_json( request, objects, info )
+    json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
 @permission_required( 'core.admin_add_immigration_rule' )
@@ -582,7 +584,7 @@ def question_edit( request, question_id ):
                 # Try to save with a integrity check try
                 try:
                     answer_formset.save()
-                    messages.success( request, 'Immigration Rule was successfully updated.')
+                    messages.success( request, 'Immigration Rule was successfully updated.' )
                     return HttpResponseRedirect( reverse( 'admin:immigration_rule_details', args = ( question.id, ) ) )
 
                 except ProtectedError:

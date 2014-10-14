@@ -117,7 +117,7 @@ class CountryPoints( BaseModel ):
 
         return points_per_country
 
-    
+
 class Language( BaseModel ):
     """
     Language Model - Ex: english, french, portuguese, etc.
@@ -252,6 +252,7 @@ class UserEducation( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     regional_australia_study = models.BooleanField( _( "studied in regional australia?" ), default = False )
+    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), null = True )
 
 
 class UserEducationHistory( BaseModel ):
@@ -284,7 +285,8 @@ class UserLanguage( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     australian_community_language = models.BooleanField( _( "credentialled community language in australia?" ), default = False )
-
+    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, null = True  )
+    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, null = True  )
 
 class UserLanguageProficiency( BaseModel ):
     """
@@ -320,6 +322,7 @@ class UserPersonal( BaseModel ):
     birth_date = models.DateField( _( "birth date" ) )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS )
     australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
+    canadian_partner_work_study_experience = models.BooleanField( _( "has partner worked or studied in canada?" ), default = False )
 
 
 class UserPersonalFamily( BaseModel ):
