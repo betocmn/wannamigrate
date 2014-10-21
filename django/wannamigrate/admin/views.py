@@ -12,7 +12,6 @@ from django.db.models import ProtectedError
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import build_datatable_json
-from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 
 
 #######################
@@ -119,9 +118,6 @@ def home_index( request ):
     :param: request
     :return: String
     """
-
-    immigration_calculator = ImmigrationCalculator( 1, 117 )
-    return HttpResponse( immigration_calculator.get_total_points()['total'] )
 
     context = { 'user': request.user }
     return render( request, 'admin/home/index.html', context )

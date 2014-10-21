@@ -1,37 +1,37 @@
 {% extends "site/layouts/main.html" %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block head %}
 
     {{ block.super }}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'site/jquery-ui-1.11.1/jquery-ui.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'site/bootstrap-3.2.0/css/bootstrap.min.css' %}">
+    <!-- JQuery UI -->
+    <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
+    <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
+
+    <!-- Bootstratp -->
+    <link rel="stylesheet" type="text/css" href="{% static 'site/js/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static "site/js/bootstrap/js/bootstrap.min.js" %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+    </script>
 
 {% endblock head %}
 
 
 {% block content %}
-    <h2>Home, sweet home.</h2>    
+
+    <h2>{% trans "Home, Sweet Home" %}</h2>
+
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login_modal">
-        SIGN UP
+        {% trans "SIGN UP" %}
     </button>
 
     <div id="dialog">
         {% include "site/popups/signup.html" %}
     </div>
-    <!-- JQuery UI -->
-    <script type="text/javascript" src="{% static "site/jquery-ui-1.11.1/jquery-ui.min.js" %}"></script>
-    <!-- ./JQuery UI -->
-
-    <!-- Bootstrap -->
-    <script type="text/javascript" src="{% static "site/bootstrap-3.2.0/js/bootstrap.min.js" %}"></script>
-    <!-- ./Bootstrap -->
-
-    <!-- INLINE JS -->
-    <script type="text/javascript">
-        
-    </script>
-    <!-- ./INLINE JS -->
 
 {% endblock content %}

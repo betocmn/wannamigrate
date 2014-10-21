@@ -1,8 +1,10 @@
 {% load staticfiles %}
 <!doctype html>
 <htmL>
+
     {% block head %}
     <head>
+
         <!-- Meta -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
@@ -13,9 +15,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
         <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+
         <!-- main.css -->
         <link rel="stylesheet" type="text/css" href="{% static "site/css/main.css" %}">
-        <!-- ./main.css -->
 
         <!-- Google Analytics -->
         <script type="text/javascript">
@@ -32,11 +34,12 @@
                 s.parentNode.insertBefore(ga, s);
             })();
         </script>
-        <!-- ./Google Analytics -->
 
         <!-- JQuery -->
-        <script type="text/javascript" src="{% static 'site/js/jquery-2.1.1.min.js' %}"></script>
-        <!-- ./JQuery -->
+        <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
+
+        <!-- Utility Functions (JS) -->
+        <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
 
     </head>
     {% endblock head %}

@@ -1,120 +1,206 @@
+{% load staticfiles %}
+{% load i18n %}
 
 <!-- Custom js -->
 <script type="text/javascript">
-  function switch_to_login()
-  {
-    $( ".password_recovery_item" ).hide();
-    $( ".signup_item" ).hide();
-    $( ".login_item" ).fadeIn();
-  }
 
-  function switch_to_signup()
-  {
-    $( ".login_item" ).hide();
-    $( ".signup_item" ).fadeIn();
-  }
+    /**
+     * Displays the LOGIN form
+     *
+     */
+    function switch_to_login(){
+        $( ".password_recovery_item" ).hide();
+        $( ".signup_item" ).hide();
+        $( ".login_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+    }
 
-  function switch_to_password_recovery()
-  {
-    $( ".login_item" ).hide();
-    $( ".password_recovery_item" ).fadeIn();
-  }
+    /**
+     * Displays the SIGNUP form
+     *
+     */
+    function switch_to_signup(){
+        $( ".login_item" ).hide();
+        $( ".signup_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+    }
 
-  $(document).ready(function(){
-    switch_to_login();
-  });
-  
+    /**
+     * Displays the RECOVER PASSWORD form
+     *
+     */
+    function switch_to_password_recovery(){
+        $( ".login_item" ).hide();
+        $( ".password_recovery_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+    }
+
+    /**
+     * Jquery On Load
+     *
+     */
+    $( document ).ready( function(){
+
+        // Defaults to login screen
+        switch_to_login();
+
+        // Attach a submit handler to the Login Form
+        $( ".ajax-submit" ).submit( function( event ) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // JS FORM Validation (for required fields)
+            if ( this.id == 'login_form_email' ){
+                var required_fields = 'login_email,login_password';
+            } else if ( this.id == 'signup_form_email' ){
+                var required_fields = 'signup_email,signup_email_confirmation,signup_password';
+            } else {
+                var required_fields = 'recovery_email';
+            }
+            if ( !validate_empty_fields( this, required_fields ) ) {
+              return false;
+            }
+
+            // Get some values from elements on the page:
+            var $form = $( this );
+            var url = $form.attr( "action" );
+            //var csrftoken = getCookie('csrftoken');
+            var csrftoken = document.getElementsByName( 'csrfmiddlewaretoken' )[0].value;
+
+            $.ajax({
+            type: "POST",
+            url: url,  // or just url: "/my-url/path/"
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+                email: $form.find( "input[name='email']" ).val(),
+                email_confirmation: $form.find( "input[name='email_confirmation']" ).val(),
+                password: $form.find( "input[name='password']" ).val()
+            },
+            success: function( result ) {
+                if ( result == "OK" ){
+                    window.location = "{% url 'site:dashboard' %}";
+                } else if ( result == 'EMAIL_SENT' ){
+                    switch_to_login();
+                    display_success_message( '{% trans "We have successfully sent you an email with a link to reset your password." %}' );
+                } else {
+                    display_error_message( result, true );
+                }
+
+            }
+            //error: function(xhr, textStatus, errorThrown) {
+               // alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+            //}
+            });
+
+        });
+
+    });
+
 </script>
-<!-- ./Custom js -->
 
+<div id="result"></div>
 
 <div id="login_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+
   <div class="modal-dialog">
+
     <div class="modal-content">
+
         <div class="modal-header">
             <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/218944-872e78045bad898911a3e4a97724c658-medium_jpg.jpg" />
         </div>
+
         <div class="modal-body">
 
             <div class="login_item signup_item">
-              <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-              <a href="{% url 'social:begin' 'linkedin' %}">Login with Linkedin</a>
-              <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-              <!-- a href="#">Login with Twitter</a-->
+              <a href="{% url 'social:begin' 'facebook' %}">{% trans "Login with Facebook" %}</a>
+              <a href="{% url 'social:begin' 'linkedin' %}">{% trans "Login with LinkedIn" %}</a>
+              <a href="{% url 'social:begin' 'google-oauth2' %}">{% trans "Login with Google" %}</a>
 
-              <strong class="line-thru">ou</strong>
+              <strong class="line-thru">{% trans "OR" %}</strong>
             </div>
 
+            {% include "site/layouts/status.html" %}
+
             <!-- LOGIN -->
-            <form id="login_form_email" class="login_item" method="post" role="form" action="{% url 'site:login' %}">
+            <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
               {% csrf_token %}
               <div class="hidden ajax_spinner"></div>
               <fieldset>
                 <ul>
                   <li>
-                    <label for="login_username">E-mail:</label>
-                    <input placeholder="E-mail" type="text" id="login_input_email" name="email" />
+                    <label class="" for="{{ login_form.email.id_for_label }}">{{ login_form.email.label }}</label>
+                    {{ login_form.email }}
                   </li>
                   <li>
-                    <label for="login_password">Senha:</label>
-                    <input placeholder="Senha" type="password" id="login_input_password" name="password">
+                    <label class="" for="{{ login_form.password.id_for_label }}">{{ login_form.password.label }}</label>
+                    {{ login_form.password }}
                   </li>
                 </ul>
               </fieldset>
-              <button id="login_button_submit" type="submit" class="btn btn-success">Entrar</button>
+              <button id="login_button_submit" type="submit" class="btn btn-success">{% trans "Login" %}</button>
             </form>
 
-            <a id="login_link_reset_password" class="login_item" href="javascript:switch_to_password_recovery();">Esqueceu sua senha?</a>
+            <a id="login_link_reset_password" class="login_item" href="javascript:switch_to_password_recovery();">
+                {% trans "Forgot your password?" %}
+            </a>
 
             <p class="primary login_item">
-              Não tem uma conta? <a id="login_link_signup" href="javascript:switch_to_signup();" >Inscrever-se</a>
+                {% trans "Don't have an account?" %}
+                <a id="login_link_signup" href="javascript:switch_to_signup();" >
+                    {% trans "Sign-Up" %}
+                </a>
             </p>
             <!-- ./LOGIN -->
 
             <!-- SIGNUP -->
-            <form id="signup_form_email" class="signup_item" method="post" role="form" action="">
+            <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
                 <div class="hidden ajax_spinner"></div>
                 <fieldset>
                   <ul>
                     <li>
-                      <label for="signup_input_email">E-mail:</label>
-                      <input placeholder="E-mail" type="text" id="signup_input_email" name="email" />
+                      <label class="" for="{{ signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label>
+                      {{ signup_form.email }}
                     </li>
                     <li>
-                      <label for="signup_input_email_confirm">Confirmação de e-mail:</label>
-                      <input placeholder="Confirme seu e-mail" type="text" id="signup_input_email_confirm" name="email_confirm" />
+                      <label class="" for="{{ signup_form.email_confirmation.id_for_label }}">{{ signup_form.email_confirmation.label }}</label>
+                      {{ signup_form.email_confirmation }}
                     </li>
                     <li>
-                      <label for="signup_input_password">Senha:</label>
-                      <input placeholder="Senha" type="password" id="signup_input_password" name="password">
+                      <label class="" for="{{ signup_form.password.id_for_label }}">{{ signup_form.password.label }}</label>
+                      {{ signup_form.password }}
                     </li>
                   </ul>
                 </fieldset>
-                <button id="signup_button_submit" type="submit" class="btn btn-success">Inscrever</button>
+                <button id="signup_button_submit" type="submit" class="btn btn-success">{% trans "Sign-Up" %}</button>
               </form>
               <p class="primary signup_item">
-                Já possui cadastro? <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">Efetuar login!</a>
+                {% trans "Already registered?" %}
+                <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">
+                    {% trans "Proceed to Login" %}
+                </a>
               </p>
               <!-- SIGNUP -->
 
             <!-- PASSWORD RECOVERY -->
             <p class="primary password_recovery_item">
-              Informe seu e-mail abaixo e lhe enviaremos um link de redefinição de senha.
+                {% trans "Fill in your email address and you will recieve a link to reset your password." %}
             </p>
-            <form id="login_form_email" class="password_recovery_item" method="post" role="form" action="">
+            <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
               <div class="hidden ajax_spinner"></div>
               <fieldset>
                 <ul>
                   <li>
-                    <label for="password_recovery_email">E-mail:</label>
-                    <input placeholder="E-mail" type="text" id="password_recovery_email" name="email" />
+                      <label class="" for="{{ recovery_form.email.id_for_label }}">{{ recovery_form.email.label }}</label>
+                      {{ recovery_form.email }}
                   </li>
                 </ul>
               </fieldset>
-              <button id="password_recovery_submit" type="submit" class="btn btn-success">Enviar</button>
+              <button id="password_recovery_submit" type="submit" class="btn btn-success">{% trans "Recover Password" %}</button>
             </form>
             <p class="primary password_recovery_item">
-              <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« Voltar</a>
+              <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« {% trans "Go Back" %}</a>
             </p>
             <!-- ./PASSWORD RECOVERY -->
 

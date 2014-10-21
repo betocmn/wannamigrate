@@ -1,21 +1,104 @@
 from django import forms
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from django.forms import TextInput, PasswordInput, SelectMultiple
+from django.forms import TextInput, PasswordInput
+from django.contrib.auth import get_user_model
+from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.mailer import Mailer
 
 
 #######################
 # LOGIN FORMS
 #######################
-# Login class here
+class LoginForm( BaseForm ):
+    """
+    Form for LOGIN to DASHBOARD
+    """
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': '', 'id': 'login_email' } ) )
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': '', 'id': 'login_password' } ) )
 
+
+class PasswordRecoveryForm( BaseForm ):
+    """
+    Form for RECOVER PASSWORD
+    """
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class': '', 'id': 'recovery_email' } ) )
+
+
+class PasswordResetForm( BaseForm ):
+    """
+    Form to set a new password
+
+    """
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+    password_confirmation = forms.CharField( required = True, label = _( "Confirm Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+
+    def clean( self ):
+        """
+        Extra validation for fields that depends on other fields
+
+        :return: Dictionary
+        """
+        cleaned_data = super( PasswordResetForm, self ).clean()
+        password = cleaned_data.get( "password" )
+        password_confirmation = cleaned_data.get( "password_confirmation" )
+
+        if password != password_confirmation:
+            raise forms.ValidationError( _( "The two passwords do not match." ) )
+
+        return cleaned_data
 
 
 #######################
 # SIGNUP FORMS
 #######################
-# Signup class here
+class SignupForm( BaseModelForm ):
+    """
+    Form for SIGNUP
+    """
 
+    email_confirmation = forms.EmailField(
+        required = True,
+        label = _( "E-Email Confirmation" ),
+        error_messages = { 'required': _( 'Please confirm your e-mail address' ) },
+        widget = forms.TextInput( attrs = { 'placeholder': _( 'Confirm E-mail' ), 'class': '', 'id': 'signup_email_confirmation' } )
+    )
+
+    class Meta:
+        model = get_user_model()
+        fields = [ 'email', 'password' ]
+        widgets = {
+            'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': '', 'id': 'signup_email' } ),
+            'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': '', 'id': 'signup_password' } )
+        }
+        error_messages = {
+            'email': { 'required': _( 'E-mail is required.' ) },
+            'password': { 'required': _( 'Password is required' ) }
+        }
+
+
+    def save( self, commit = True ):
+        """
+        Saves user using the 'create_user' manager method
+
+        :return: Dictionary
+        """
+        user = get_user_model().objects.create_user( self.cleaned_data["email"], name = '', password = self.cleaned_data["password"] )
+        return user
+
+    def clean( self ):
+        """
+        Extra validation for fields that depends on other fields
+
+        :return: Dictionary
+        """
+        cleaned_data = super( SignupForm, self ).clean()
+        email = cleaned_data.get( "email" )
+        email_confirmation = cleaned_data.get( "email_confirmation" )
+
+        if email != email_confirmation:
+            raise forms.ValidationError( _( "The two e-mails do not match." ) )
+
+        return cleaned_data
 
 
 #######################
@@ -29,8 +112,9 @@ class ContactForm( BaseForm ):
         email    EmailField that grabs the e-mail of the user.
         message  CharField that grabs the message of the user.
     """
-    email = forms.EmailField( widget = forms.TextInput( attrs = { 'placeholder':'E-mail', 'class' : 'form-control' } ) )
-    message = forms.CharField( widget = forms.Textarea( attrs = { 'placeholder':'Message', 'class' : 'form-control' } ) )
+    name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'placeholder': _( 'Name' ), 'class' : '' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class' : '' } ) )
+    message = forms.CharField( required = True, label = _( "Message" ), widget = forms.Textarea( attrs = { 'placeholder': _( 'Message' ), 'class' : '' } ) )
 
 
 #######################

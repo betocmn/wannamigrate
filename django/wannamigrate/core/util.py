@@ -4,7 +4,8 @@ import json
 from io import StringIO
 from django.core.urlresolvers import reverse
 from django.shortcuts import _get_queryset
-from datetime import date
+from calendar import monthrange
+from datetime import date, datetime, timedelta
 
 
 def calculate_age( birth_date ):
@@ -17,6 +18,33 @@ def calculate_age( birth_date ):
 
     today = date.today()
     return today.year - birth_date.year - ( ( today.month, today.day) < ( birth_date.month, birth_date.day ) )
+
+
+def date_difference( start_date, end_date, mode = 'months' ):
+    """
+    Calculates difference between 2 dates and return in mode (months or years)
+
+    :param start_date:
+    :param end_date:
+    :param mode:
+    :return Mixed:
+    """
+    months = 0
+    while True:
+        mdays = monthrange( start_date.year, start_date.month )[1]
+        start_date += timedelta( days = mdays )
+        if start_date <= end_date:
+            months += 1
+        else:
+            break
+
+    if mode == 'months':
+        result = months
+    elif mode == 'years':
+        result = round( months / 12, 2 )
+
+    return result
+
 
 def build_datatable_json( request, objects, info ):
     """

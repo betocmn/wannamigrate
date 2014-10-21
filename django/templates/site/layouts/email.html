@@ -1,8 +1,8 @@
-
+{% load i18n %}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Login Details To Wanna Migrate Admin</title>
+<title>{% trans "Email from Wanna Migrate" %}</title>
 </head>
 
 <body style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0; background-color:#e3dae8;">
@@ -16,21 +16,10 @@
 					<table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#e3dae8;" >
 						<tr>
 							<td width="520" style="padding-left:40px; padding-top:20px; padding-right:40px; padding-bottom:40px; vertical-align:top; background-color:#f8f7f4;">
-                    
-			                    <h3 style="color:#54266f; font-family:Arial, Helvetica, sans-serif; font-weight:100; font-size:20px; padding-top:20px; line-height:20px;  border-bottom:1px solid #ddd;">
-		                    	  Wanna Migrate - Login Details to ADMIN SYSTEM
-			                    </h3>
-                    
-			                    <p style="color:#4C4D4F; font-family:Cambria, Georgia, 'Times New Roman', Times, serif;font-size:16px; line-height:24px; text-align:left;">
-		                    	Hello, {{ user.name }}.</p>
-			                    
-		                      <p style="color:#4C4D4F; font-family:Cambria, Georgia, 'Times New Roman', Times, serif;font-size:16px; line-height:24px; text-align:left;">You can use the details below to access our system:</p>
-			                   
-			                    <p style="color:#4C4D4F; font-family:Cambria, Georgia, 'Times New Roman', Times, serif;font-size:16px; line-height:24px; text-align:left;">
-	                    	        <strong>Your Email:</strong> {{ user.email }} <br />
-	                    	        <strong>Your Password:</strong> {{ plain_password }} <br />
-                                </p>
-			                </td>
+
+                                {% block content %}{% endblock content %}
+
+                            </td>
 						</tr>
 					</table>
               
@@ -44,14 +33,21 @@
 				                            <p style="font-family:Helvetica, Arial;font-size:12px;color:#fefefe;line-height:18px; text-align:left;">
 				                            	
                 							  Wanna Migrate<br />
-				                              E-mail: <a href="mailto:contact@wannamigrate.com" style="color:#ffffff; text-decoration:none;">contact@wannamigrate.com</a><br />
-					                            <span style="color:#f9c438;"><em><a href="http://www.wannamigrate.com" style="color:#f9c438">WannaMigrate.com</a> - Work Anywhere. Live Anywhere.</em></span>
+				                              {% trans "E-mail" %}: <a href="mailto:contact@wannamigrate.com" style="color:#ffffff; text-decoration:none;">contact@wannamigrate.com</a><br />
+					                            <span style="color:#f9c438;">
+                                                    <em>
+                                                        <a href="{{ base_url_secure }}" style="color:#f9c438">
+                                                            WannaMigrate.com
+                                                        </a> - {% trans "Work Anywhere. Live Anywhere." %}
+                                                    </em>
+                                                </span>
+
 											</p>
 				                            
 										</td>
 										<td width="180" style="text-align:left;padding-left:20px;padding-top:20px;padding-bottom:20px;padding-right:20px;">
-											<a href="http://www.wannamigrate.com">
-												<img src="http://www.wannamigrate.com/img/logo2.png" alt="WannaMigrate.com" border="0" />
+											<a href="{{ base_url_secure }}">
+												<img src="{{ logo_url }}" alt="WannaMigrate.com" border="0" />
 											</a>
 										</td>
 									</tr>

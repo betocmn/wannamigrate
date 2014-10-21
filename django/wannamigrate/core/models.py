@@ -303,6 +303,20 @@ class UserLanguageProficiency( BaseModel ):
     language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ), on_delete = models.PROTECT )
 
 
+class UserLoginHistory( BaseModel ):
+    """
+    User Login History - Ex: Records every time an user logs in to the system
+    """
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    # Model Attributes
+    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    is_logout = models.BooleanField( _( "is logout" ), default = False )
+
+
 class UserPersonal( BaseModel ):
     """
     User Personal Model - Ex: Stores personal information from the user, such as age, gender, etc..
@@ -322,7 +336,6 @@ class UserPersonal( BaseModel ):
     birth_date = models.DateField( _( "birth date" ) )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS )
     australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
-    canadian_partner_work_study_experience = models.BooleanField( _( "has partner worked or studied in canada?" ), default = False )
 
 
 class UserPersonalFamily( BaseModel ):
@@ -338,6 +351,7 @@ class UserPersonalFamily( BaseModel ):
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
 
+
 class UserResult( BaseModel ):
     """
     User Restul Model - Stores the final result score of an user for each country available
@@ -350,7 +364,11 @@ class UserResult( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    score = models.IntegerField( _( "score" ))
+    score_total = models.IntegerField( _( "total score" ))
+    score_personal = models.IntegerField( _( "score personal" ))
+    score_language = models.IntegerField( _( "score language" ))
+    score_education = models.IntegerField( _( "score education" ))
+    score_work = models.IntegerField( _( "score work" ))
 
 
 class UserWork( BaseModel ):
@@ -369,6 +387,7 @@ class UserWork( BaseModel ):
     willing_to_invest = models.BooleanField( _( "willing to invest?" ), default = False )
     canadian_startup_letter = models.BooleanField( _( "startup letter from canada?" ), default = False )
     australian_professional_year = models.BooleanField( _( "professional year course in australia?" ), default = False )
+    canadian_partner_work_study_experience = models.BooleanField( _( "has partner worked or studied in canada?" ), default = False )
 
 
 class UserWorkOffer( BaseModel ):

@@ -72,14 +72,13 @@ TEMPLATE_DIRS = (
 
 # Template Context Processors
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
 )
@@ -89,11 +88,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #########################################
 # EMAIL SETTINGS
 #########################################
+
+# Default email to send messages to users
 DEFAULT_FROM_EMAIL = 'Wanna Migrate <contact@wannamigrate.com>'
+
+# SMTP Config
 EMAIL_HOST = 'smtp.wannamigrate.com'
 EMAIL_HOST_USER = 'contact@wannamigrate.com'
 EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
+
+# Email to reiceve contact form messages
+CONTACT_FORM_EMAIL = 'humberto@wannamigrate.com'
 
 
 
@@ -107,16 +113,16 @@ EMAIL_PORT = 587
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # Facebook APP Key
-SOCIAL_AUTH_FACEBOOK_KEY = "336536879856373"
+SOCIAL_AUTH_FACEBOOK_KEY = '336536879856373'
 # Facebook APP Secret
-SOCIAL_AUTH_FACEBOOK_SECRET = "4ca87548565ab5d9c40e60bb6309e219"
+SOCIAL_AUTH_FACEBOOK_SECRET = '4ca87548565ab5d9c40e60bb6309e219'
 # Facebook APP Scope
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Linkedin APP Key
-SOCIAL_AUTH_LINKEDIN_KEY = "77eu4cz7x6srp6"
+SOCIAL_AUTH_LINKEDIN_KEY = '77eu4cz7x6srp6'
 # Linkedin APP Secret
-SOCIAL_AUTH_LINKEDIN_SECRET = "VOaF1eUDOlHziUTn"
+SOCIAL_AUTH_LINKEDIN_SECRET = 'VOaF1eUDOlHziUTn'
 # Linkedin APP Scope
 SOCIAL_AUTH_LINKEDIN_SCOPE = [ 'r_emailaddress' ]
 SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address']
@@ -129,14 +135,14 @@ SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
 ]
 
 # Twitter APP Key
-SOCIAL_AUTH_TWITTER_KEY = "LIK43CXqkCJjEDKmP4LsqPLD7"
+SOCIAL_AUTH_TWITTER_KEY = 'LIK43CXqkCJjEDKmP4LsqPLD7'
 # Twitter APP Secret
-SOCIAL_AUTH_TWITTER_SECRET = "BpK70KSeb3RePk6WXoFumG6jMV2sRLY623hzpkHVdXr85eq7sD"
+SOCIAL_AUTH_TWITTER_SECRET = 'BpK70KSeb3RePk6WXoFumG6jMV2sRLY623hzpkHVdXr85eq7sD'
 
 # Google APP Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "90947248109-nvu6v5d6rvpav60ps1sgrtplt5vlinhp.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '90947248109-nvu6v5d6rvpav60ps1sgrtplt5vlinhp.apps.googleusercontent.com'
 # Google APP Secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "4I7fFTTrlVfoHLbPNn6lviCK"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4I7fFTTrlVfoHLbPNn6lviCK'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
@@ -153,7 +159,7 @@ SOCIAL_AUTH_USER_MODEL = 'core.User'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = [ 'email' ]
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_SLUGIFY_USERNAMES = False
-#SOCIAL_AUTH_URL_NAMESPACE = "social"
+#SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
@@ -174,6 +180,16 @@ SOCIAL_AUTH_PIPELINE = (
 # IMMIGRATION POINTS SETTINGS
 #########################################
 
+# Database IDs for countries with immigration enabled
+ID_COUNTRY_AUSTRALIA = 117
+ID_COUNTRY_NEW_ZEALAND = 131
+ID_COUNTRY_CANADA = 204
+ID_COUNTRY_UNITED_STATES = 235
+
+# Database IDs for languages that are worth immigration points
+ID_LANGUAGE_ENGLISH = 34
+ID_LANGUAGE_FRENCH = 42
+
 # Database IDs of questions used on code
 ID_QUESTION_FAMILY_OVERSEAS = 1
 ID_QUESTION_AGE = 2
@@ -192,3 +208,7 @@ ID_QUESTION_STUDY_REGIONAL_AU = 14
 ID_QUESTION_PROFESSIONAL_YEAR_AU = 15
 ID_QUESTION_LIVE_REGIONAL_AU = 16
 ID_QUESTION_COMMUNITY_LANGUAGE_AU = 17
+ID_QUESTION_PARNER_WORKED_STUDIED_CA = 18
+ID_QUESTION_PARNER_ENGLISH = 19
+ID_QUESTION_PARNER_FRENCH = 20
+ID_QUESTION_PARNER_EDUCATION_DEGREE = 21

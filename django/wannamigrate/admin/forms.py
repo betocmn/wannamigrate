@@ -14,8 +14,8 @@ class LoginForm( BaseForm ):
     """
     Form for LOGIN to ADMIN
     """
-    email = forms.EmailField( widget = forms.TextInput( attrs = { 'placeholder':'E-mail', 'class' : 'form-control' } ) )
-    password = forms.CharField( widget = forms.PasswordInput( attrs = { 'placeholder' : 'Password', 'class' : 'form-control'  } ) )
+    email = forms.EmailField( widget = forms.TextInput( attrs = { 'placeholder':'E-mail', 'class': 'form-control' } ) )
+    password = forms.CharField( widget = forms.PasswordInput( attrs = { 'placeholder': 'Password', 'class': 'form-control' } ) )
 
 
 class MyAccountForm( BaseModelForm ):
@@ -95,10 +95,9 @@ class AdminUserForm( BaseModelForm ):
         if commit:
             user.save()
             user.groups = self.cleaned_data['groups']
-            if 'plain_password' in locals():
-                # Sends Login Info Email
-                # TODO Change this to a celery/signal background task
-                Mailer.send_login_email( user.email, { 'user': user, 'plain_password': plain_password } )
+            # Sends Login Info Email
+            # TODO Change this to a celery/signal background task
+            Mailer.send_welcome_email( user )
         return user
 
 

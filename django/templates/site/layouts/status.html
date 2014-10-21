@@ -1,7 +1,12 @@
 
-<div id="global_alert" class="alert alert-danger" style="display: none;">
-    <button id="global_alert_close" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <span id="global_alert_msg"></span>
+<div id="global_alert_error" class="alert alert-danger" style="display: none;">
+    <button id="global_alert_error_close" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <span id="global_alert_error_msg"></span>
+</div>
+
+<div id="global_alert_success" class="alert alert-success" style="display: none;">
+    <button id="global_alert_success_close" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <span id="global_alert_success_msg"></span>
 </div>
 
 {% if form.errors %}
