@@ -124,6 +124,10 @@ def signup( request ):
                 user = authenticate( email = email, password = password )
                 auth_login( request, user )
 
+                # Sends Welcome Email to User
+                # TODO Change this to a celery/signal background task
+                Mailer.send_welcome_email( user )
+
                 # Return success to Ajax
                 return HttpResponse( 'OK' )
 
@@ -227,7 +231,6 @@ def reset_password( request, uidb64 = None, token = None ):
 
 
 
-
 #######################
 # CONTACT US VIEWS
 #######################
@@ -265,6 +268,21 @@ def contact( request ):
 
 
 #######################
+# TOUR VIEWS
+#######################
+def tour( request ):
+    """
+    Displays "how It Works" static page
+
+    :param request:
+    :return String - HTML from The dashboard page.
+    """
+
+    # Print Template
+    return render( request, 'site/tour.html' )
+
+
+#######################
 # DASHBOARD VIEWS
 #######################
 @login_required
@@ -283,3 +301,39 @@ def dashboard( request ):
     return render( request, 'site/dashboard.html' )
 
 
+
+#######################
+# MY ACCOUNT VIEWS
+#######################
+@login_required
+def account( request ):
+    """
+    Displays "My Account" page
+
+    :param request:
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initialize template data dictionary
+    template_data = { 'finished': False }
+
+    # Create form
+    form = ContactForm( request.POST or None )
+
+    # If the form has been submitted...
+    if form.is_valid():
+
+        email = form.cleaned_data[ 'email' ]
+        name = form.cleaned_data[ 'name' ]
+        message = form.cleaned_data[ 'message' ]
+
+        # Send Email with message
+        # TODO: Change this to a celery background event and use a try/exception block
+        send_result = Mailer.send_contact_email( email, name, message )
+        template_data['finished'] = True
+
+    # pass form to template
+    template_data['form'] = form
+
+    # Print Template
+    return render( request, 'site/account.html' )

@@ -1,5 +1,6 @@
 from django.conf.urls import url, patterns, include
 from django.conf import settings
+from django.conf.urls.static import static
 
 # Include all desired apps that will have URLs
 urlpatterns = patterns('',
@@ -8,7 +9,7 @@ urlpatterns = patterns('',
     url( r'^site/', include( 'wannamigrate.site.urls', namespace = "site" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
 
-)
+) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 
 # Used by the debug toolbar app
 """

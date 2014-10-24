@@ -21,9 +21,6 @@ BASE_DIR = os.path.dirname( os.path.dirname( __file__ ) )
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '&3je*i!yr=4y3sk&sm7^_@(fhd@^z7re&$y-b-wx(zsm3(6nyk'
 
-# The base URL Conf
-ROOT_URLCONF = 'wannamigrate.urls'
-
 # Path of wsgi app
 WSGI_APPLICATION = 'wannamigrate.wsgi.application'
 
@@ -54,21 +51,38 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = (
-    os.path.join( BASE_DIR, '../locale' ),
+    os.path.join( BASE_DIR, '..', 'locale' ),
 )
 
 
 
 #########################################
-# STATIC AND TEMPLATE FILES
+# PATHS FOR STATIC, UPLOAD and TEMPLATES
 #########################################
+# Global UPLOAD folder
+MEDIA_ROOT = os.path.join( BASE_DIR, '..', 'upload' )
+MEDIA_URL = '/upload/'
+
+# User Profile Pictures
+UPLOAD_USER_PICTURE_FOLDER = 'user_pictures'
+
+# Statis Files paths
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join( BASE_DIR, '../static' )
+STATIC_ROOT = os.path.join( BASE_DIR, '..', 'static' )
 
 # Templates
 TEMPLATE_DIRS = (
-    os.path.join( BASE_DIR, '../templates' ),
+    os.path.join( BASE_DIR, '..', 'templates' ),
 )
+
+# The base URL Conf
+ROOT_URLCONF = 'wannamigrate.urls'
+
+
+
+#########################################
+# TEMPLATE SETTINGS
+#########################################
 
 # Template Context Processors
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -124,14 +138,21 @@ SOCIAL_AUTH_LINKEDIN_KEY = '77eu4cz7x6srp6'
 # Linkedin APP Secret
 SOCIAL_AUTH_LINKEDIN_SECRET = 'VOaF1eUDOlHziUTn'
 # Linkedin APP Scope
-SOCIAL_AUTH_LINKEDIN_SCOPE = [ 'r_emailaddress' ]
-SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address']
-# Arrange to add the fields to UserSocialAuth.extra_data
+SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
+SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = [
+    'email-address',
+    'picture-urls::(original)',
+    'first-name',
+    'last-name',
+    'email-address',
+    'picture-url',
+]
 SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
     ('id', 'id'),
     ('firstName', 'first_name'),
     ('lastName', 'last_name'),
-    ('email', 'email_address'),
+    ('emailAddress', 'email_address'),
+    ('public-profile-url', 'public_profile_url'),
 ]
 
 # Twitter APP Key
@@ -171,7 +192,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details'
+    'social.pipeline.user.user_details',
+    'wannamigrate.core.social_auth_pipelines.save_extra_data',
 )
 
 

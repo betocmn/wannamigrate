@@ -112,9 +112,9 @@ class ContactForm( BaseForm ):
         email    EmailField that grabs the e-mail of the user.
         message  CharField that grabs the message of the user.
     """
-    name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'placeholder': _( 'Name' ), 'class' : '' } ) )
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class' : '' } ) )
-    message = forms.CharField( required = True, label = _( "Message" ), widget = forms.Textarea( attrs = { 'placeholder': _( 'Message' ), 'class' : '' } ) )
+    name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
+    message = forms.CharField( required = True, label = _( "Message" ), widget = forms.Textarea( attrs = { 'class' : '' } ) )
 
 
 #######################

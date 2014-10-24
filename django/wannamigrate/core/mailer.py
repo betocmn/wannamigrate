@@ -70,7 +70,7 @@ class Mailer( object ):
         """
 
         template_data = { 'user': user }
-        body = Mailer.build_body_from_template( 'emails/welcome_email.html', template_data )
+        body = Mailer.build_body_from_template( 'emails/welcome.html', template_data )
         return Mailer.send( _( 'Welcome to Wanna Migrate' ), body, user.email )
 
     @staticmethod

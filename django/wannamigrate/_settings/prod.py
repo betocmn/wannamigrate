@@ -61,6 +61,7 @@ DEFAULT_APPS = (
 )
 THIRD_PARTY_APPS = (
     'social.apps.django_app.default',
+    'stdimage',
 )
 LOCAL_APPS = (
     'wannamigrate.core',

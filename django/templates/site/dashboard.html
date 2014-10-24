@@ -6,29 +6,228 @@
 
     {{ block.super }}
 
-    <!-- JQuery UI -->
-    <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
-    <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
+    <!-- JQuery Diagram -->
+    <script type="text/javascript" src="{% static "site/js/jquery.diagram.js" %}"></script>
 
-    <!-- Bootstratp -->
-    <link rel="stylesheet" type="text/css" href="{% static 'site/js/bootstrap/css/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{% static "site/js/bootstrap/js/bootstrap.min.js" %}"></script>
+    <!-- Dashboard Custom JS -->
+    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
     </script>
 
+    <!-- INLINE CSS -->
+    <style type="text/css">
+        body,html{
+            overflow-y: hidden;
+        }
+    </style>
+
 {% endblock head %}
 
 
 {% block content %}
 
-    <h2>{% trans "Dashboard" %}</h2>
+	<div class="column column1" style="background:#f4f4f4;">
 
-    <h3> {% trans "Hello," %} {{ user.email }} </h3>
+		<div id="title1">
+			<div>
+			<div class="titleNumber">1</div>
+			<div class="titleText" style="margin-top:5px;">Fill in the form below</div>
+			</div>
+		</div>
 
-    <a href="{% url 'site:logout' %}">{% trans "Logout" %}</a>
+		<div class="formBtn">
+			<div class="formType formPersonal"></div>
+			<div class="formProgressOut">
+				<h3>Personal</h3>
+				<div class="progressTrack">
+					<div class="progressFill progressFillGreen progressFillSize95">
 
+					</div>
+				</div>
+				<p>COMPLETED</p>
+			</div>
+			<div class="formPercentage">97<span>%</span></div>
+			<a href="#" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formLanguage"></div>
+			<div class="formProgressOut">
+				<h3>Language</h3>
+				<div class="progressTrack">
+					<div class="progressFill progressFillYellow progressFillSize60">
+
+					</div>
+				</div>
+				<p>COMPLETED</p>
+			</div>
+			<div class="formPercentage">62<span>%</span></div>
+			<a href="#" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formEducation"></div>
+			<div class="formProgressOut">
+				<h3>Education</h3>
+				<div class="progressTrack">
+					<div class="progressFill progressFillOrange progressFillSize45">
+
+					</div>
+				</div>
+				<p>COMPLETED</p>
+			</div>
+			<div class="formPercentage">43<span>%</span></div>
+			<a href="#" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formWork"></div>
+			<div class="formProgressOut">
+				<h3>Work</h3>
+				<div class="progressTrack">
+					<div class="progressFill progressFillDarkOrange progressFillSize20">
+
+					</div>
+				</div>
+				<p>COMPLETED</p>
+			</div>
+			<div class="formPercentage">18<span>%</span></div>
+			<a href="#" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+	</div>
+	<div class="column column2" style="background:#f8f8f8;">
+		<div id="title2">
+			<div>
+			<div class="titleNumber">2</div>
+			<div class="titleText" style="margin-top: -5px;">Check in which countries<br />you can get the work visa</div>
+			</div>
+		</div>
+
+		<div class="countriesOuter selectAustralia">
+		<div class="countries">
+		<div class="circleProgressBar green72">
+			<div class="australiaProgressBar"></div>
+		</div>
+		<div class="countriesProgress">
+			<p>Australia</p>
+			<div class="textUnderLeft">11</div>
+			<div class="textUnderRight">
+				<p>POINTS</p>
+				<p>OF <span>45</span> POSSIBLE</p>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="clear"> </div>
+		</div>
+		</div>
+
+
+
+		<div class="countriesOuter selectCanada">
+		<div class="countries">
+		<div class="circleProgressBar yellow48">
+			<div class="canadaProgressBar"></div>
+		</div>
+		<div class="countriesProgress">
+			<p>Canada</p>
+			<div class="textUnderLeft">23</div>
+			<div class="textUnderRight">
+				<p>POINTS</p>
+				<p>OF <span>45</span> POSSIBLE</p>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="clear"> </div>
+		</div>
+		</div>
+
+
+
+		<div class="countriesOuter selectJapan">
+		<div class="countries">
+		<div class="circleProgressBar orange12">
+			<div class="japanProgressBar"></div>
+		</div>
+		<div class="countriesProgress">
+			<p>New Zealand</p>
+			<div class="textUnderLeft">08</div>
+			<div class="textUnderRight">
+				<p>POINTS</p>
+				<p>OF <span>45</span> POSSIBLE</p>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="clear"> </div>
+		</div>
+		</div>
+
+
+	</div>
+	<div class="column column3" style="background:#f4f4f4;">
+		<div id="title3">
+			<div>
+			<div class="titleNumber">3</div>
+			<div class="titleText" style="margin-top:5px;">Get step-by-step guides</div>
+			</div>
+		</div>
+
+		<div id="selectCountry">
+			<p>Select country aside</p>
+			<!-- <p>aside</p> -->
+		</div>
+
+		<div class="australiaSelect">
+		<p class="lowPoints">
+			<img src="{% static "site/img/red-lock.png" %}" />
+			<br />
+			You still don’t have enough points<br />
+			to migrate to this country
+		</p>
+		<a href="my-situation-australia.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
+		<a href="visa-application-australia.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
+		<a href="moving-to-australia.html" class="stepGuideBtn movingBtn"><span>Moving to Australia</span></a>
+		</div>
+
+		<div class="canadaSelect">
+		<p class="lowPoints">
+			<img src="{% static "site/img/red-lock.png" %}" />
+			<br />
+			You still don’t have enough points<br />
+			to migrate to this country
+		</p>
+		<a href="my-situation-canada.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
+		<a href="visa-application-canada.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
+		<a href="moving-to-canada.html" class="stepGuideBtn movingBtn"><span>Moving to Canada</span></a>
+		</div>
+
+		<div class="japanSelect">
+		<p class="lowPoints">
+			<img src="{% static "site/img/red-lock.png" %}" />
+			<br />
+			You still don’t have enough points<br />
+			to migrate to this country
+		</p>
+		<a href="my-situation-newzeeland.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
+		<a href="visa-application-newzeeland.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
+		<a href="moving-to-newzeeland.html" class="stepGuideBtn movingBtn"><span>Moving to New Zealand</span></a>
+		</div>
+
+
+
+
+	</div>
 
 {% endblock content %}

@@ -4,7 +4,6 @@ from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.models import Question, Answer, CountryPoints, Country
 
 #######################
@@ -95,9 +94,6 @@ class AdminUserForm( BaseModelForm ):
         if commit:
             user.save()
             user.groups = self.cleaned_data['groups']
-            # Sends Login Info Email
-            # TODO Change this to a celery/signal background task
-            Mailer.send_welcome_email( user )
         return user
 
 

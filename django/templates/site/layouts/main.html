@@ -1,51 +1,100 @@
 {% load staticfiles %}
-<!doctype html>
-<htmL>
+{% load i18n %}
+<!DOCTYPE HTML>
+<html>
 
-    {% block head %}
     <head>
+        {% block head %}
 
-        <!-- Meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
-        <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
-        <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
-        <meta name="Robots" content="all">
-        <meta name="og:image" content="http://wannamigrate.com{% static "site/img/logo_social.png" %}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
-        <link rel="shortcut icon" href="{% static "favicon.ico" %}">
 
-        <!-- main.css -->
-        <link rel="stylesheet" type="text/css" href="{% static "site/css/main.css" %}">
+            <!-- Meta -->
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
+            <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
+            <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+            <meta name="Robots" content="all">
+            <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+            <link rel="shortcut icon" href="{% static "favicon.ico" %}">
 
-        <!-- Google Analytics -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-7734790-20']);
-            _gaq.push(['_trackPageview']);
+            <!-- Default CSS -->
+            <link rel="stylesheet" type="text/css" href="{% static "site/css/reset.css" %}">
+            <link rel="stylesheet" type="text/css" href="{% static "site/css/style.css" %}">
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+            <!-- HTML5 shim for IE backwards compatibility -->
+            <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
 
-        <!-- JQuery -->
-        <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
+            <!-- Google Analytics -->
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-7734790-20']);
+                _gaq.push(['_trackPageview']);
 
-        <!-- Utility Functions (JS) -->
-        <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+                (function() {
+                    var ga = document.createElement('script');
+                    ga.type = 'text/javascript';
+                    ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+
+            <!-- JQuery -->
+            <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
+
+            <!-- Utility Functions (JS) -->
+            <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+
+            <script type="text/javascript">
+
+
+                $( window ).ready(function(){
+
+                    // Hover options for account profile
+                    $( ".userName" ).click(function(){
+                        $( "#popup" ).toggleClass( "showIt" );
+                    });
+
+                    $( 'select' ).on( 'change', function ( e ) {
+                        $( this ).addClass( "selectChange" );
+                    });
+
+                });
+
+
+            </script>
+
+        {% endblock head %}
 
     </head>
-    {% endblock head %}
+
 
     <body>
+
+        <div id="topBar">
+            <a href="{% url 'site:dashboard' %}" id="logo"></a>
+            <div id="topMenu">
+                <ul id="topBarMenu">
+                    <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
+                    <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
+                </ul>
+                <img src="{{ user.userpersonal.avatar.thumbnail.url }}">
+                <a href="#" class="userName">
+                    {% trans "My Profile" as default_name %}
+                    {{ user.name|default_if_none:default_name|truncatechars:25 }}
+                    <span></span>
+                </a>
+                <div id="popup">
+                    <a href="{% url 'site:account' %}">My account</a>
+                    <a href="{% url 'site:logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+
         {% block content %}{% endblock content %}
+
     </body>
 
 </html>

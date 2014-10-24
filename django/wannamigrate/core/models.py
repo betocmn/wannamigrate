@@ -3,6 +3,9 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group
 )
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
+from stdimage.models import StdImageField
+from stdimage.utils import UploadToUUID
 
 class BaseModel( models.Model ):
     """
@@ -252,7 +255,7 @@ class UserEducation( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     regional_australia_study = models.BooleanField( _( "studied in regional australia?" ), default = False )
-    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), null = True )
+    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), blank = True, null = True )
 
 
 class UserEducationHistory( BaseModel ):
@@ -285,8 +288,8 @@ class UserLanguage( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     australian_community_language = models.BooleanField( _( "credentialled community language in australia?" ), default = False )
-    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, null = True  )
-    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, null = True  )
+    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, blank = True, null = True  )
 
 class UserLanguageProficiency( BaseModel ):
     """
@@ -320,6 +323,8 @@ class UserLoginHistory( BaseModel ):
 class UserPersonal( BaseModel ):
     """
     User Personal Model - Ex: Stores personal information from the user, such as age, gender, etc..
+
+    Using this for image resize: https://github.com/codingjoe/django-stdimage
     """
 
     # META Options
@@ -331,10 +336,16 @@ class UserPersonal( BaseModel ):
         ( 'F', 'Female' ),
         ( 'M', 'Male' ),
     )
+
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    birth_date = models.DateField( _( "birth date" ) )
-    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS )
+    country = models.ForeignKey( Country, verbose_name = _( 'country' ), blank = True, null = True )
+    avatar = StdImageField( _( "avatar" ), upload_to = settings.UPLOAD_USER_PICTURE_FOLDER, blank = True, null = True, variations = {
+        'large': (600, 400),
+        'thumbnail': (40, 40, True ),
+        'medium': (300, 200),
+    })
+    birth_date = models.DateField( _( "birth date" ), blank = True, null = True )
+    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True )
     australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
 
 
@@ -382,7 +393,7 @@ class UserWork( BaseModel ):
 
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ) )
+    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ), blank = True, null = True )
     partner_skills = models.BooleanField( _( "partner skills?" ), default = False )
     willing_to_invest = models.BooleanField( _( "willing to invest?" ), default = False )
     canadian_startup_letter = models.BooleanField( _( "startup letter from canada?" ), default = False )

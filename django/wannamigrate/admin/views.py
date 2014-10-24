@@ -12,6 +12,7 @@ from django.db.models import ProtectedError
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import build_datatable_json
+from wannamigrate.core.mailer import Mailer
 
 
 #######################
@@ -188,6 +189,10 @@ def admin_user_add( request ):
         # Saves User
         user = form.save()
         messages.success( request, 'User was successfully added.' )
+
+        # Sends Welcome Email to User
+        # TODO Change this to a celery/signal background task
+        Mailer.send_welcome_email( user )
 
         # Redirect with success message
         return HttpResponseRedirect( reverse( 'admin:admin_user_details', args = ( user.id, ) ) )

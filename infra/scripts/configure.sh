@@ -41,6 +41,8 @@ echo "INSTALLING EXTRA TOOLS"
 echo "--------------------------"
 echo "### Instaling gettext"
 apt-get install gettext --yes
+echo "### Instaling libjpeg"
+apt-get install libjpeg-dev --yes
 echo "--------------------------"
 echo "CREATING THE VIRTUAL ENVIRONMENT"
 echo "--------------------------"
@@ -50,6 +52,8 @@ pip install django
 pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz
 pip install django-debug-toolbar
 pip install python-social-auth
+pip install pillow
+pip install std-image
 deactivate
 echo "--------------------------"
 echo "DOWNLOADING MEDIA WIKI"
