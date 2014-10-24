@@ -1,0 +1,91 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        /**
+		 * Jquery On Load
+		 *
+		 */
+		$( document ).ready(function() {
+
+			// JS FORM Validation
+			$( "#main_form" ).submit( function() {
+				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+			});
+
+			// JS for onload
+			{{ on_load|default:'' }}
+
+		});
+
+    </script>
+
+    <!-- INLINE CSS -->
+    <style type="text/css">
+        body{
+            background: url( "{% static 'site/img/bg_contact.jpg' %}" ) no-repeat center center fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+
+{% endblock head %}
+
+
+{% block content %}
+
+
+    <div id="contactBox">
+
+        <h1>{% trans "Contact Us" %}</h1>
+
+        {% if finished %}
+
+            <h2>
+                <span class="makeYellow">Thank You!</span> <br />
+                {% trans "Your message has been sent <br /> and will reply in less than 24 hours." %}
+            </h2>
+
+        {% else %}
+
+            <h2>
+                <span class="makeYellow">Wanna Migrate</span>
+                {% trans "is in BETA version and we are working around the<br />clock to have a full software solution to help future immigrants." %}
+            </h2>
+
+            <p>{% trans "Your feedback is very valuable for us, so feel free to get in touch using the form below:" %}</p>
+
+            <div style="width: 700px; margin: 0 auto;">
+                {% include "site/layouts/status.html" %}
+            </div>
+
+            <form method="post" action="" id="main_form">
+
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                    <label class="{% if field.errors %}has-error{% endif %}" for="{{ field.id_for_label }}">
+                        <span>{{ field.label }}:</span>
+                        {{ field }}
+                        {{ field.errors }}
+                    </label>
+
+
+                {% endfor %}
+
+                <input type="submit" />
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+{% endblock content %}
