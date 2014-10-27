@@ -15,6 +15,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
         <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+        
+        <link rel="stylesheet" type="text/css" href="{% static "site/css/font-awesome.min.css"%}">
+        <link rel="stylesheet" type="text/css" href="{% static "site/css/main.css" %}">
 
         <!-- HTML5 shim for IE backwards compatibility -->
         <!--[if lt IE 9]>
@@ -22,7 +25,7 @@
         <![endif]-->
 
         <!-- JQuery -->
-        <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/jquery-2.1.1.min.js' %}"></script>
 
         <!-- Utility Functions (JS) -->
         <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
@@ -31,30 +34,225 @@
         <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
         <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
 
-        <!-- Bootstratp -->
+        <!-- Bootstratp ->
         <link rel="stylesheet" type="text/css" href="{% static 'site/js/bootstrap/css/bootstrap.min.css' %}">
-        <script type="text/javascript" src="{% static "site/js/bootstrap/js/bootstrap.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "site/js/bootstrap/js/bootstrap.min.js" %}"></script-->
+        
+        <!-- MOUSEWHEEL LIB -->
+        <script type="text/javascript" src="{% static 'site/js/jquery.mousewheel.min.js' %}"></script>
+
+        <!-- MAIN JS -->
+        <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
 
         <!-- INLINE JS -->
         <script type="text/javascript">
+            $(document).ready(function(){
+                
+                // Initializes the scene controller.
+                SceneController.init();
 
+                // Initializes the signup dialog.
+                $( "#dialog" ).dialog({
+                    autoOpen: true,
+                    modal: true,
+                });
+
+
+            });
         </script>
+
+        
 
     </head>
 
 
     <body>
+        <a href="javascript:SceneController.nextPage();" id="bt-more" class="gui"></a>
+        <div id="menu" class="gui">
+            <a href="index.html" id="menu-logo"></a>
+            <a href="#" id="login-button" class="bt bt-purple bold white f8">Entrar</a>
+            <div id="language-container">
+                <a href="#" class="dropdown-button"></a>
+                <span class="selected-language f8 almost-white">
+                    <i class="flag br"></i> <span class="country">Português</span>
+                </span>
+            </div>
+        </div>
+        
 
-        <h2>{% trans "Home, Sweet Home" %}</h2>
+        <!-- page0-content -->
+        <div id="page0-content" class="fg">
+            <div id="page0-title" class="f50 light white">
+                More em um <span class="bold">novo país.</span>
+                <span class="bold">Mude</span> de vida.
+            </div>
+            <div id="page0-subtitle" class="f15 light white">
+                Da <span class="bold">aplicação do visto</span> à hora da <span class="bold">mudança.</span>
+            </div>
+            <a id="p0-signup" href="#" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
+        </div>
+        <!-- ./page0-content -->
 
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login_modal">
-            {% trans "SIGN UP" %}
-        </button>
+        <!-- left -->
+        <div id="left">
+            <div id="l0" class="section-item active">
+                <div class="page0-overlay fg"></div>
+            </div>
+            <div id="l1" class="section-item next">
+                <div id="l1h" class="f22 light almost-black hide">
+                    Se você pudesse <span class="white bold">morar em qualquer lugar,</span> para onde iria<span class="white">?</span>
+                </div>
+            </div>
+            <div id="l2" class="section-item">
+                <div class="feature-container"></div>
+                <div class="feature-container"></div>
+                <div class="feature-container"></div>
+                <div class="feature-container"></div>
+                <div class="feature-container"></div>
+                <div class="feature-container"></div>
+            </div>
+            <div id="l3" class="section-item">
+                <div class="testimonial-container">
+                    <div class="testimonial-image"></div>
+                    <div class="testimonial deep-purple">
+                        <p class="testimonial-text f11 light-italic">
+                            <span id="open-quote" class="quote"></span>
+                            Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                        </p>
+                        <p class="testimonial-separator"></p>
+                        <p class="testimonial-user f10 bold">Humberto Moreira</p>
+                        <p class="testimonial-user-job f8 light">Diretor de arte na Nova Zelandia</p>
+                    </div>
+                </div>
+            </div>
+            <div id="l4" class="section-item clear">
+                <div class="page4-content">
+                    <span id="l4-msg" class="p4-wrapper vcenter white f32 light">A maneira <span class="bold">mais fácil</span> de imigrar</span>
+                </div>
+                <div class="page4-footer">
+                    <div id="l4-logo" class="vcenter"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ./left -->
+        <!-- right -->
+        <div id="right">
+            <div id="r0" class="section-item active">
+                <div class="page0-overlay fg"></div>
+            </div>
+            <div id="r1" class="section-item next">
+                <ul id="r1ul" class="light dark-grey hide">
+                    <li>
+                        <span class="f20 teal bold">Descubra países incríveis</span> que estão de portas abertas a novos profissionais.
+                    </li>
+                    <li>
+                        Mais de <span class="f20 teal bold">500,000 pessoas</span> obtem um visto para morar na <span class="teal bold">Austrália</span> e no <span class="teal bold">Canadá.</span>
+                    </li>
+                </ul>
+                <a id="r1-signup" href="#" class="bt bt-blue f12"><span class="bold">Comece agora.</span> É grátis!</a>
+            </div>
+            <div id="r2" class="section-item">
+                <div class="feature-container">
+                    <div class="feature full light purple f17 hide">
+                        Uma <span class="bold">ferramenta gratuita</span> para gerenciar seu processo de imigração.
+                    </div>
+                </div>
+                <div class="feature-container">
+                    <div class="feature left hide dark-purple f13">
+                        <span class="oddText vcenter">
+                            Descubra quais países precisam do <span class="bold">seu perfil</span>
+                        </span>
+                        <span id="feature0-icon" class="oddImage vcenter"></span>
+                    </div>
+                </div>
+                <div class="feature-container">
+                    <div class="feature right hide white f13">
+                        <span id="feature1-icon" class="evenImage vcenter"></span>
+                        <span class="evenText vcenter">
+                            <span class="bold yellow">Construa</span> sua aplicação online
+                        </span>
+                    </div>
+                </div>
+                <div class="feature-container">
+                    <div class="feature left hide dark-purple f13">
+                        <span class="oddText vcenter">
+                            Reveja suas habilidades de <span class="bold">linguagem</span>
+                        </span>
+                        <span id="feature2-icon" class="oddImage vcenter"></span>
+                    </div>
+                </div>
+                <div class="feature-container">
+                    <div class="feature right hide white f13">
+                        <span id="feature3-icon" class="evenImage vcenter"></span>
+                        <span class="evenText vcenter">
+                            Receba alertas de <span class="bold yellow">emprego</span> de todo o mundo
+                        </span>
+                    </div>
+                </div>
+                <div class="feature-container">
+                    <div class="feature left hide dark-purple f13">
+                        <span class="oddText vcenter">
+                            Aprenda <span class="bold">atalhos</span> para conseguir seu visto mais rápido.
+                        </span>
+                        <span id="feature4-icon" class="oddImage vcenter"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="r3" class="section-item">
+                <div class="testimonial-container">
+                    <div class="testimonial-image">
+                    </div>
+                    <div class="testimonial deep-purple">
+                        <p class="testimonial-text f11 light-italic">
+                            <span id="open-quote" class="quote"></span>
+                            Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                        </p>
+                        <p class="testimonial-separator"></p>
+                        <p class="testimonial-user f10 bold">Humberto Moreira</p>
+                        <p class="testimonial-user-job f8 light">Diretor de arte na Nova Zelandia</p>
+                    </div>
+                </div>
+                <a id="r3-signup" href="#" class="bt bt-purple f12"><span class="bold">Comece agora.</span> É grátis!</a>
+            </div>
+            <div id="r4" class="section-item">
+                <div class="page4-content">
+                    <p id="r4-msg" class="white f25 bold p4-wrapper">
+                        O que você está esperando?
+                    </p>
+                    <p class="p4-wrapper white f12 light">
+                        <span class="bold">Acesse gratuitamente</span> nossa plataforma e <span class="bold">realize seus sonhos</span> em um novo país.
+                    </p>
+                    <a id="r4-signup" href="#" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
+                </div>
+                <div class="page4-footer">
+                    <div id="social">
+                        <a class="social-button" href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="social-button" href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="social-button" href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div id="backers-separator" class="f9 light grey">
+                        Apoiadores do projeto
+                    </div>
+                    <div id="backers-container">
+                        <a id="fapema" class="backer" href="#"></a>
+                        <a id="startupchile" class="backer" href="#"></a>
+                        <a id="finep" class="backer" href="#"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./right -->
 
-        <div id="dialog">
+        <div id="dialog" class="hide">
             {% include "site/popups/signup.html" %}
         </div>
 
     </body>
 
-</htmL>
+</html>
