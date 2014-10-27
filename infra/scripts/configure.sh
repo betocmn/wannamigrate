@@ -53,7 +53,7 @@ pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector
 pip install django-debug-toolbar
 pip install python-social-auth
 pip install pillow
-pip install std-image
+pip install django-stdimage
 deactivate
 echo "--------------------------"
 echo "DOWNLOADING MEDIA WIKI"
