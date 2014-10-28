@@ -73,7 +73,7 @@
 
     <body>
 
-        <div id="topBar">
+        <div id="topBar" class="{{ top_bar_css_class|default_if_none:'' }}">
             <a href="{% url 'site:dashboard' %}" id="logo"></a>
             <div id="topMenu">
                 <ul id="topBarMenu">

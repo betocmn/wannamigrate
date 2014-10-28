@@ -1,9 +1,13 @@
 from django import forms
-from wannamigrate.core.forms import BaseForm, BaseModelForm
-from django.forms import TextInput, PasswordInput
+from django.forms import TextInput, PasswordInput, RadioSelect
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.core.forms import BaseForm, BaseModelForm
+from wannamigrate.core.models import (
+    UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
+    UserWork, UserWorkExperience, UserWorkOffer
+)
 
 
 #######################
@@ -120,4 +124,16 @@ class ContactForm( BaseForm ):
 #######################
 # DASHBOARD FORMS
 #######################
-# Dashboard class here
+class EditUserPersonal( BaseModelForm ):
+    """
+    Form for EDIT PERSONAL data
+    """
+
+    gender = forms.ChoiceField( label = _( "Gender" ), widget = forms.RadioSelect( attrs = { 'class' : 'css-checkbox'  } ) )
+
+    class Meta:
+        model = UserPersonal
+        fields = [ 'birth_date', 'australian_regional_immigration', 'country' ]
+        """widgets = {
+            'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+        }"""

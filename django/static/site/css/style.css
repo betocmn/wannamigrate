@@ -912,14 +912,14 @@ body{
 }
 .formBox #update{
 	padding-left: 35px;
-	height: 129px;
+	height: 99px;
 	background: #f9f9f9;
 	border-bottom: 1px solid #e8e8e8;
 }
 .formBox #update h2{
 	color: #845996;
-	font-size: 26px;
-	padding-top: 30px;
+	font-size: 24px;
+	padding-top: 20px;
 	font-weight: 700; 
 }
 .formBox #update p{
@@ -1250,8 +1250,12 @@ form .has-error input, form .has-error textarea, form .has-error select {
 	top: 130px;
 	padding-bottom: 100px;
 }
+.takeMeAwayFromTheTop100px{
+	top: 100px;
+	padding-bottom: 100px;
+}
 .saveBtnSpecial{
-	top:48px;
+	top: 31px;
 	right: 54px;
 }
 

@@ -333,8 +333,8 @@ class UserPersonal( BaseModel ):
 
     # Model Attributes
     GENDERS = (
-        ( 'F', 'Female' ),
-        ( 'M', 'Male' ),
+        ( 'F', _( 'Female' ) ),
+        ( 'M', _( 'Male' ) ),
     )
 
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
@@ -345,7 +345,7 @@ class UserPersonal( BaseModel ):
         'medium': (300, 200),
     })
     birth_date = models.DateField( _( "birth date" ), blank = True, null = True )
-    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True )
+    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
     australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
 
 

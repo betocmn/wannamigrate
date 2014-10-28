@@ -12,7 +12,10 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.util import get_object_or_false
-from wannamigrate.site.forms import ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm
+from wannamigrate.site.forms import (
+    ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
+    EditUserPersonal
+)
 from wannamigrate.core.mailer import Mailer
 
 
@@ -282,25 +285,6 @@ def tour( request ):
     return render( request, 'site/tour.html' )
 
 
-#######################
-# DASHBOARD VIEWS
-#######################
-@login_required
-def dashboard( request ):
-    """
-    Process the dashboard page. 
-    
-    The dashboard is the main screen of the system, 
-    where the users can view its informations, progress, etc.
-
-    :param request:
-    :return String - HTML from The dashboard page.
-    """
-
-    # Print Template
-    return render( request, 'site/dashboard.html' )
-
-
 
 #######################
 # MY ACCOUNT VIEWS
@@ -314,26 +298,95 @@ def account( request ):
     :return String - HTML from The dashboard page.
     """
 
-    # Initialize template data dictionary
-    template_data = { 'finished': False }
+    return HttpResponse( "MY Account Page" )
+
+
+
+#######################
+# DASHBOARD VIEWS
+#######################
+@login_required
+def dashboard( request ):
+    """
+    Process the dashboard page.
+
+    The dashboard is the main screen of the system,
+    where the users can view its informations, progress, etc.
+
+    :param request:
+    :return String - HTML from The dashboard page.
+    """
+
+    # Print Template
+    return render( request, 'site/dashboard.html' )
+
+
+
+#######################
+# EDIT USER INFORMATION VIEWS
+#######################
+def edit_personal( request ):
+    """
+    Form to edit PERSONAL user data
+
+    :param request:
+    :return String - HTML.
+    """
+
+    # Initial Settings
+    template_data = {}
+
+    # Set top bar css class to be fixed on top
+    template_data['top_bar_css_class'] = "fixTopBar"
 
     # Create form
-    form = ContactForm( request.POST or None )
+    form = EditUserPersonal( request.POST or None )
 
     # If the form has been submitted...
     if form.is_valid():
 
-        email = form.cleaned_data[ 'email' ]
-        name = form.cleaned_data[ 'name' ]
-        message = form.cleaned_data[ 'message' ]
-
-        # Send Email with message
-        # TODO: Change this to a celery background event and use a try/exception block
-        send_result = Mailer.send_contact_email( email, name, message )
-        template_data['finished'] = True
+        # Save to the DB and redirect
+        form.save()
+        return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
     # pass form to template
     template_data['form'] = form
 
     # Print Template
-    return render( request, 'site/account.html' )
+    return render( request, 'site/edit_personal.html', template_data )
+
+
+def edit_language( request ):
+    """
+    Form to edit LANGUAGE data from the user
+
+    :param request:
+    :return String - HTML.
+    """
+
+    # Print Template
+    return HttpResponse( "Edit Language" )
+
+
+def edit_education( request ):
+    """
+    Form to edit EDUCATION data from the user
+
+    :param request:
+    :return String - HTML.
+    """
+
+    # Print Template
+    return HttpResponse( "Edit Education" )
+
+
+def edit_work( request ):
+    """
+    Form to edit WORK data from the user
+
+    :param request:
+    :return String - HTML.
+    """
+
+    # Print Template
+    return HttpResponse( "Edit Work" )
