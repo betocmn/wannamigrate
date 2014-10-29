@@ -7,6 +7,7 @@
 
 
 /** Font sizes */
+.f6 { font-size: 6pt; }
 .f7{ font-size: 7pt; }
 .f8{ font-size: 8pt; }
 .f9{ font-size: 9pt; }
@@ -39,9 +40,11 @@
 .dark-purple { color: #4b2558; }
 .deep-purple { color: #2c0d3f; } /** Yeah. This is an easteregg. */
 .yellow { color: #fff600; }
+.green { color: #7ca745; }
 
 
 /** Layering classes */
+.popup { z-index: 200; }
 .gui { z-index: 100; }
 .l { z-index: 20; } /** Left elements */
 .r { z-index: 30; } /** Right elements have priority over left elements. */
@@ -60,6 +63,7 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 #right { position: absolute; width: 50%; height: 100%; left:50%; }
 .flag { position: relative; display: inline-block; width: 20px; height: 20px; background-size: contain !important; vertical-align: center; }
 .country{ vertical-align: super; }
+.clear { clear: both; }
 
 #menu-logo { position:relative; float:left; display: block; width: 13%; height: 100%; margin-left: 3%; background: url(../img/logo_wannamigrate.png) center center no-repeat; background-size: contain; }
 #language-container { float:right; width: 30%; height: 100%; }
@@ -67,6 +71,8 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 #language-container > span, #language-container > a { float:right; }
 .dropdown-button { position: relative; top:50%; margin-top: -10px; display: block; width: 20px; height: 20px; background: url(../img/dropdown_button.png) no-repeat; background-size: cover; margin-left: 2%; }
 #login-button { float:right; margin: -13px 3% 0 3%; position: relative; top:50%; min-width: 0 !important; padding: 5px 15px !important; }
+.vcenter { position: absolute; top:50%; -ms-transform:translate(0,-50%); -webkit-transform:translate(0,-50%); -moz-transform:translate(0,-50%); -o-transform:translate(0,-50%); transform:translate(0,-50%); }
+.text-center { text-align: center; }
 
 .bt { display: inline-block; text-decoration: none; width: auto; height: auto; text-align: center; border-radius: 3px; padding: 15px 0; min-width: 270px; }
 .bt-purple { color:#ffffff; text-shadow: 0px -1px 1px rgba(0,0,0,0.4); background: -webkit-linear-gradient( #915bbb, #9f6fc1); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #915bbb, #9f6fc1); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #915bbb, #9f6fc1); /* For Firefox 3.6 to 15 */ background: linear-gradient( #915bbb, #9f6fc1); /* Standard syntax */ box-shadow: 1px 2px 2px #8c5ab4; }
@@ -112,7 +118,7 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 .feature.right.hide { -ms-transform:translate(0,0) !important; -webkit-transform:translate(0,0) !important; -moz-transform:translate(0,0) !important; -o-transform:translate(0,0) !important; transform:translate(0,0) !important; }
 .feature.full { width: 200%; height: 100%; padding-top:14%; text-align: center; -ms-transform:translate(-50%,0) !important; -webkit-transform:translate(-50%,0) !important; -moz-transform:translate(-50%,0) !important; -o-transform:translate(-50%,0) !important; transform:translate(-50%,0) !important; }
 
-.vcenter { position: absolute; top:50%; -ms-transform:translate(0,-50%); -webkit-transform:translate(0,-50%); -moz-transform:translate(0,-50%); -o-transform:translate(0,-50%); transform:translate(0,-50%); }
+
 .oddText { right: 75px; width: 150%; text-align: right; }
 .evenText { left: 75px; width: 150%; text-align: left; }
 .oddImage { right: -65px; width: 130px; height: 130px; }
@@ -196,43 +202,76 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 /** SIGNUP CSS. TODO: FORMAT THIS */
 #dialog
 {
-
+    position: absolute;
+    margin-left: 37.3%;
+    width: 24.4%;
+    height: 40.2%;
+    padding: 2%;
+    border-radius: 2px;
+    background: white;
 }
 
-
-/* SIGNUP */
-.line-thru 
+#overlay
 {
+    content: "";
     display: block;
-    font-size: .875em;
-    margin-bottom: 1em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 150;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.table-container
+{
+    display: table;
+    width: 100%;
+    height: auto;
+}
+
+.row
+{
+    display: table-row;
+    width: 100%;
+}
+
+.full {
+    padding-top: 7px;
+    width: 100%;
+    display: table-cell;
+}
+.half {
     position: relative;
-    text-align: center;
-    width: 100%;
-    z-index: 1;
+    padding-top: 7px;
+    width: 50%;
+    display: table-cell;   
 }
 
-.line-thru:before 
-{
-    width: 40px;
-    height: 10px;
-    background-color: #FFF;
-    content: '';
-    margin: -5px 0 0 -20px;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    z-index: -1;
-}
-
-.line-thru:after 
-{
-    border-bottom: 1px solid #dfe0e6;
-    content: '';
-    display: block;
-    position: absolute;
-    top: 49%;
+.full-collum { width: 100%; }
+.modal-body input {
+    position: relative;
     width: 100%;
-    z-index: -2;
+    font-size: 7pt;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    color: #888888;
+    padding:3%;
 }
-/* ./SIGNUP */
+.half-collum { width: 48%; margin-right: 2%; display: inline-block; height: 30px; }
+.half-collum:last-child { margin-right: 0 !important; }
+
+.modal-header { margin-bottom: 5px; }
+#login_link_reset_password { text-decoration: none; }
+#login_link_reset_password:hover { text-decoration: underline; }
+
+#login-button {  display: inline-block; text-decoration: none; width: auto; height: auto; text-align: center; border-radius: 3px; padding: 15px 0; min-width: 270px; }
+
+.social-button.facebook { color: white; background: -webkit-linear-gradient( #293876, #3080b0 ); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #293876, #3080b0 ); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #293876, #3080b0 ); /* For Firefox 3.6 to 15 */ background: linear-gradient( #293876, #3080b0 ); /* Standard syntax */ box-shadow: 0px 3px 0px #2f77a9; }
+.social-button.linkedin { color: white; background: -webkit-linear-gradient( #0179b1, #16c2da ); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #0179b1, #16c2da ); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #0179b1, #16c2da ); /* For Firefox 3.6 to 15 */ background: linear-gradient( #0179b1, #16c2da ); /* Standard syntax */ box-shadow: 0px 3px 0px #019ac5; }
+.social-button.google { color: white; background: -webkit-linear-gradient( #d14634, #e96c50 ); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #d14634, #e96c50 ); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #d14634, #e96c50 ); /* For Firefox 3.6 to 15 */ background: linear-gradient( #d14634, #e96c50 ); /* Standard syntax */ box-shadow: 0px 3px 0px #e36b56; }
+
+.modal-footer { margin-top: 10px; margin-bottom: 10px; border-top: solid 1px #DDD; text-align: center; }
+.modal-footer > a { text-decoration: none; }
+.modal-footer > a:hover { text-decoration: underline; }

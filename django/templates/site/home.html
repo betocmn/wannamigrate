@@ -47,22 +47,10 @@
         <!-- INLINE JS -->
         <script type="text/javascript">
             $(document).ready(function(){
-                
                 // Initializes the scene controller.
                 SceneController.init();
-
-                // Initializes the signup dialog.
-                $( "#dialog" ).dialog({
-                    autoOpen: true,
-                    modal: true,
-                });
-
-
             });
         </script>
-
-        
-
     </head>
 
 
@@ -248,10 +236,10 @@
             </div>
         </div>
         <!-- ./right -->
-
-        <div id="dialog" class="hide">
-            {% include "site/popups/signup.html" %}
-        </div>
+            <div id="overlay"></div>
+            <div id="dialog" class="popup vcenter">
+                {% include "site/popups/signup.html" %}
+            </div>
 
     </body>
 

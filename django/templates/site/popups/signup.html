@@ -99,128 +99,120 @@
 
 </script>
 
-<div id="result"></div>
+<!-- HEADER --> 
+<div class="modal-header f14 bold purple regular text-center"> Sign Up </div>
+<!-- ./HEADER -->
 
-<div id="login_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- BODY -->
+<div class="modal-body">
+  <div id="result"></div>
+  {% include "site/layouts/status.html" %}
 
-  <div class="modal-dialog">
+    <!-- LOGIN -->
+    <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
+      {% csrf_token %}
+      <div class="hidden ajax_spinner"></div>
 
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/218944-872e78045bad898911a3e4a97724c658-medium_jpg.jpg" />
+      <div class="table-container">
+        <div class="row">
+          <div class="full">{{ login_form.email }}</div>
         </div>
-
-        <div class="modal-body">
-
-            <div class="login_item signup_item">
-              <a href="{% url 'social:begin' 'facebook' %}">{% trans "Login with Facebook" %}</a>
-              <a href="{% url 'social:begin' 'linkedin' %}">{% trans "Login with LinkedIn" %}</a>
-              <a href="{% url 'social:begin' 'google-oauth2' %}">{% trans "Login with Google" %}</a>
-
-              <strong class="line-thru">{% trans "OR" %}</strong>
-            </div>
-
-            {% include "site/layouts/status.html" %}
-
-            <!-- LOGIN -->
-            <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
-              {% csrf_token %}
-              <div class="hidden ajax_spinner"></div>
-              <fieldset>
-                <ul>
-                  <li>
-                    <label class="" for="{{ login_form.email.id_for_label }}">{{ login_form.email.label }}</label>
-                    {{ login_form.email }}
-                  </li>
-                  <li>
-                    <label class="" for="{{ login_form.password.id_for_label }}">{{ login_form.password.label }}</label>
-                    {{ login_form.password }}
-                  </li>
-                </ul>
-              </fieldset>
-              <button id="login_button_submit" type="submit" class="btn btn-success">{% trans "Login" %}</button>
-            </form>
-
-            <a id="login_link_reset_password" class="login_item" href="javascript:switch_to_password_recovery();">
-                {% trans "Forgot your password?" %}
+        <div class="row">
+          <div class="half">{{ login_form.password }}</div>
+          <div class="half">
+            <button id="login_button_submit" type="submit" class="btn btn-success">{% trans "Login" %}</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="half">
+            <a id="login_link_reset_password" class="login_item f6 green" href="javascript:switch_to_password_recovery();">
+            {% trans "Forgot your password?" %}
             </a>
-
-            <p class="primary login_item">
-                {% trans "Don't have an account?" %}
-                <a id="login_link_signup" href="javascript:switch_to_signup();" >
-                    {% trans "Sign-Up" %}
-                </a>
-            </p>
-            <!-- ./LOGIN -->
-
-            <!-- SIGNUP -->
-            <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
-                <div class="hidden ajax_spinner"></div>
-                <fieldset>
-                  <ul>
-                    <li>
-                      <label class="" for="{{ signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label>
-                      {{ signup_form.email }}
-                    </li>
-                    <li>
-                      <label class="" for="{{ signup_form.email_confirmation.id_for_label }}">{{ signup_form.email_confirmation.label }}</label>
-                      {{ signup_form.email_confirmation }}
-                    </li>
-                    <li>
-                      <label class="" for="{{ signup_form.password.id_for_label }}">{{ signup_form.password.label }}</label>
-                      {{ signup_form.password }}
-                    </li>
-                  </ul>
-                </fieldset>
-                <button id="signup_button_submit" type="submit" class="btn btn-success">{% trans "Sign-Up" %}</button>
-              </form>
-              <p class="primary signup_item">
-                {% trans "Already registered?" %}
-                <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">
-                    {% trans "Proceed to Login" %}
-                </a>
-              </p>
-              <!-- SIGNUP -->
-
-            <!-- PASSWORD RECOVERY -->
-            <p class="primary password_recovery_item">
-                {% trans "Fill in your email address and you will recieve a link to reset your password." %}
-            </p>
-            <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
-              <div class="hidden ajax_spinner"></div>
-              <fieldset>
-                <ul>
-                  <li>
-                      <label class="" for="{{ recovery_form.email.id_for_label }}">{{ recovery_form.email.label }}</label>
-                      {{ recovery_form.email }}
-                  </li>
-                </ul>
-              </fieldset>
-              <button id="password_recovery_submit" type="submit" class="btn btn-success">{% trans "Recover Password" %}</button>
-            </form>
-            <p class="primary password_recovery_item">
-              <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« {% trans "Go Back" %}</a>
-            </p>
-            <!-- ./PASSWORD RECOVERY -->
-
-
+          </div>
         </div>
-        <!-- LOGIN FOOTER -->
-        <div class="modal-footer login_item">
-            Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será automaticamente cadastrado e estará aceitando os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
-        </div>
-        <!-- ./LOGIN FOOTER -->
-        <!-- SIGNUP FOOTER -->
-        <div id="modal_footer" class="modal-footer signup_item">
-            Ao cadastrar-se na plataforma você declara estar de acordo com os <a href="#">Termos e condições</a> e a <a href="#">Política de privacidade</a> do Wanna Migrate.
-        </div>
-        <!-- ./SIGNUP FOOTER -->
-        <!-- PASSWORD RECOVERY FOOTER -->
-        <div id="modal_footer" class="modal-footer password_recovery_item">
-            Ainda com problemas? Entre em contato com o nosso <a href="">suporte.</a>
-        </div>
-        <!-- ./PASSWORD RECOVERY FOOTER -->
-    </div>
+      </div>
+    </form>
+    <!-- ./LOGIN -->
+
+    <!-- SIGNUP -->
+    <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
+        <div class="hidden ajax_spinner"></div>
+        <fieldset>
+          <ul>
+            <li>
+              <label class="" for="{{ signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label>
+              {{ signup_form.email }}
+            </li>
+            <li>
+              <label class="" for="{{ signup_form.email_confirmation.id_for_label }}">{{ signup_form.email_confirmation.label }}</label>
+              {{ signup_form.email_confirmation }}
+            </li>
+            <li>
+              <label class="" for="{{ signup_form.password.id_for_label }}">{{ signup_form.password.label }}</label>
+              {{ signup_form.password }}
+            </li>
+          </ul>
+        </fieldset>
+        <button id="signup_button_submit" type="submit" class="btn btn-success">{% trans "Sign-Up" %}</button>
+      </form>
+      <p class="primary signup_item">
+        {% trans "Already registered?" %}
+        <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">
+            {% trans "Proceed to Login" %}
+        </a>
+      </p>
+      <!-- SIGNUP -->
+
+
+
+  <div class="login_item signup_item">
+    <div class="f9 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
+    <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+    <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
+    <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-button google"><i class="fa fa-google"></i></a>
   </div>
+
+  <div class="full-collum">
+    <a id="login_link_signup" href="javascript:switch_to_signup();" class="">
+        {% trans "Don't have an account? Sign-Up" %}
+    </a>
+  </div>
+
+    <!-- PASSWORD RECOVERY -->
+    <p class="primary password_recovery_item">
+        {% trans "Fill in your email address and you will recieve a link to reset your password." %}
+    </p>
+    <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
+      <div class="hidden ajax_spinner"></div>
+      <fieldset>
+        <ul>
+          <li>
+              <label class="" for="{{ recovery_form.email.id_for_label }}">{{ recovery_form.email.label }}</label>
+              {{ recovery_form.email }}
+          </li>
+        </ul>
+      </fieldset>
+      <button id="password_recovery_submit" type="submit" class="btn btn-success">{% trans "Recover Password" %}</button>
+    </form>
+    <p class="primary password_recovery_item">
+      <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« {% trans "Go Back" %}</a>
+    </p>
+    <!-- ./PASSWORD RECOVERY -->
+</div>
+
+<!-- LOGIN FOOTER -->
+<div class="modal-footer login_item f6 grey regular">
+    Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será automaticamente cadastrado e estará aceitando os <a class="bold green" href="#">Termos e condições</a> e a <a class="bold green" href="#">Política de privacidade</a> do Wanna Migrate.
+</div>
+<!-- ./LOGIN FOOTER -->
+<!-- SIGNUP FOOTER -->
+<div class="modal-footer signup_item">
+    Ao cadastrar-se na plataforma você declara estar de acordo com os <a class="bold green" href="#">Termos e condições</a> e a <a class="bold green" href="#">Política de privacidade</a> do Wanna Migrate.
+</div>
+<!-- ./SIGNUP FOOTER -->
+<!-- PASSWORD RECOVERY FOOTER -->
+<div class="modal-footer password_recovery_item">
+    Ainda com problemas? Entre em contato com o nosso <a class="bold green" href="">suporte.</a>
+</div>
+<!-- ./PASSWORD RECOVERY FOOTER -->
 </div>
