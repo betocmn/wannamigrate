@@ -5,14 +5,51 @@
 <script type="text/javascript">
 
     /**
+    * Shows the login form.
+    *
+    */
+    function doLogin()
+    {
+        InputHandler.lock();
+        switch_to_login();
+        $( "#overlay" ).show();
+        $( "#dialog" ).fadeIn();
+    }
+    
+    /**
+    * Shows the signup form.
+    *
+    */
+    function doSignup()
+    {
+        InputHandler.lock();
+        switch_to_signup();
+        $( "#overlay" ).show();
+        $( "#dialog" ).fadeIn();
+    }
+
+    /**
+    * Closes the dialog.
+    *
+    */
+    function closeDialog()
+    {
+        InputHandler.unlock();
+        $( "#dialog" ).fadeOut();
+        $( "#overlay" ).hide();
+    }
+
+    /**
      * Displays the LOGIN form
      *
      */
     function switch_to_login(){
+        clear_status();
         $( ".password_recovery_item" ).hide();
         $( ".signup_item" ).hide();
         $( ".login_item" ).fadeIn();
         $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Sign in" %}' );
     }
 
     /**
@@ -20,9 +57,11 @@
      *
      */
     function switch_to_signup(){
+        clear_status();
         $( ".login_item" ).hide();
         $( ".signup_item" ).fadeIn();
         $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Sign up" %}' );
     }
 
     /**
@@ -30,9 +69,20 @@
      *
      */
     function switch_to_password_recovery(){
+        clear_status();
         $( ".login_item" ).hide();
         $( ".password_recovery_item" ).fadeIn();
         $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Password recovery" %}' );
+    }
+
+    /**
+    * Clears the status message
+    *
+    */
+    function clear_status(){
+      // Removes the error msg
+      $( "#global_alert_error_msg" ).html('');
     }
 
     /**
@@ -44,8 +94,14 @@
         // Defaults to login screen
         switch_to_login();
 
+        // Closes the dialog if the overlay was clicked.
+        $( "#overlay" ).click( closeDialog );
+
         // Attach a submit handler to the Login Form
         $( ".ajax-submit" ).submit( function( event ) {
+
+            // TODO: SHOW LOADING..
+            clear_status();
 
             // Stop form from submitting normally
             event.preventDefault();
@@ -100,103 +156,72 @@
 </script>
 
 <!-- HEADER --> 
-<div class="modal-header f14 bold purple regular text-center"> Sign Up </div>
+<div class="modal-header f14 bold purple regular text-center"> Sign in </div>
 <!-- ./HEADER -->
 
 <!-- BODY -->
 <div class="modal-body">
-  <div id="result"></div>
-  {% include "site/layouts/status.html" %}
+  <div id="result" class="f8 red">
+    {% include "site/layouts/status.html" %}
+  </div>
 
     <!-- LOGIN -->
     <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
       {% csrf_token %}
       <div class="hidden ajax_spinner"></div>
-
-      <div class="table-container">
-        <div class="row">
-          <div class="full">{{ login_form.email }}</div>
-        </div>
-        <div class="row">
-          <div class="half">{{ login_form.password }}</div>
-          <div class="half">
-            <button id="login_button_submit" type="submit" class="btn btn-success">{% trans "Login" %}</button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="half">
-            <a id="login_link_reset_password" class="login_item f6 green" href="javascript:switch_to_password_recovery();">
-            {% trans "Forgot your password?" %}
-            </a>
-          </div>
-        </div>
-      </div>
+      
+      {{ login_form.email }}
+      {{ login_form.password }}
+      <button id="login-submit" type="submit" class="submit f8">{% trans "Login" %}</button>
+      <a id="login-link-reset-password" class="login_item f6 green" href="javascript:switch_to_password_recovery();">
+        {% trans "Forgot your password?" %}
+      </a>
     </form>
     <!-- ./LOGIN -->
 
     <!-- SIGNUP -->
     <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
+        {% csrf_token %}
         <div class="hidden ajax_spinner"></div>
-        <fieldset>
-          <ul>
-            <li>
-              <label class="" for="{{ signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label>
-              {{ signup_form.email }}
-            </li>
-            <li>
-              <label class="" for="{{ signup_form.email_confirmation.id_for_label }}">{{ signup_form.email_confirmation.label }}</label>
-              {{ signup_form.email_confirmation }}
-            </li>
-            <li>
-              <label class="" for="{{ signup_form.password.id_for_label }}">{{ signup_form.password.label }}</label>
-              {{ signup_form.password }}
-            </li>
-          </ul>
-        </fieldset>
-        <button id="signup_button_submit" type="submit" class="btn btn-success">{% trans "Sign-Up" %}</button>
+        
+        {{ signup_form.email }}
+        {{ signup_form.email_confirmation }}
+        {{ signup_form.password }}
+        <button id="signup_button_submit" type="submit" class="submit f8">{% trans "Sign-Up" %}</button>
       </form>
-      <p class="primary signup_item">
-        {% trans "Already registered?" %}
-        <a id="login_link_signup" href="javascript:switch_to_login();" class="js-link">
-            {% trans "Proceed to Login" %}
-        </a>
-      </p>
       <!-- SIGNUP -->
 
 
 
-  <div class="login_item signup_item">
-    <div class="f9 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
-    <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-    <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
-    <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-button google"><i class="fa fa-google"></i></a>
-  </div>
+    <div id="login-social-container" class="login_item signup_item">
+      <div class="f9 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
+      <div id="social-buttons-container">
+        <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+        <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
+        <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-button google"><i class="fa fa-google"></i></a>
+      </div>
+    </div>
+    <div class="clear"></div>
 
-  <div class="full-collum">
-    <a id="login_link_signup" href="javascript:switch_to_signup();" class="">
+    <a id="login-switch-to-signup" class="switcher login_item f7" href="javascript:switch_to_signup();">
         {% trans "Don't have an account? Sign-Up" %}
     </a>
-  </div>
+    
+    <a id="login-switch-to-signup" class="switcher signup_item f7" href="javascript:switch_to_login();">
+        {% trans "Already registered?" %} <span class="bold"> {% trans "Proceed to Login" %} </span>
+    </a>
+
 
     <!-- PASSWORD RECOVERY -->
-    <p class="primary password_recovery_item">
-        {% trans "Fill in your email address and you will recieve a link to reset your password." %}
+    <p class="primary password_recovery_item f8 grey">
+        {% trans "Fill in your email address and you will receive a link to reset your password." %}
     </p>
     <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
-      <div class="hidden ajax_spinner"></div>
-      <fieldset>
-        <ul>
-          <li>
-              <label class="" for="{{ recovery_form.email.id_for_label }}">{{ recovery_form.email.label }}</label>
-              {{ recovery_form.email }}
-          </li>
-        </ul>
-      </fieldset>
-      <button id="password_recovery_submit" type="submit" class="btn btn-success">{% trans "Recover Password" %}</button>
+      {{ recovery_form.email }}
+      <button id="password_recovery_submit" type="submit" class="submit half">{% trans "Recover Password" %}</button>
     </form>
-    <p class="primary password_recovery_item">
-      <a id="password_recovery_link_login" href="javascript:switch_to_login();" class="js-link">« {% trans "Go Back" %}</a>
-    </p>
+
+    <a id="password_recovery_link_login" class="switcher f7 password_recovery_item" href="javascript:switch_to_login();">« {% trans "Go Back" %}</a>
     <!-- ./PASSWORD RECOVERY -->
 </div>
 
@@ -206,12 +231,12 @@
 </div>
 <!-- ./LOGIN FOOTER -->
 <!-- SIGNUP FOOTER -->
-<div class="modal-footer signup_item">
+<div class="modal-footer signup_item f6 grey regular">
     Ao cadastrar-se na plataforma você declara estar de acordo com os <a class="bold green" href="#">Termos e condições</a> e a <a class="bold green" href="#">Política de privacidade</a> do Wanna Migrate.
 </div>
 <!-- ./SIGNUP FOOTER -->
 <!-- PASSWORD RECOVERY FOOTER -->
-<div class="modal-footer password_recovery_item">
+<div class="modal-footer password_recovery_item f6 grey regular">
     Ainda com problemas? Entre em contato com o nosso <a class="bold green" href="">suporte.</a>
 </div>
 <!-- ./PASSWORD RECOVERY FOOTER -->

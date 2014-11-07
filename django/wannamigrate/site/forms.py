@@ -17,15 +17,15 @@ class LoginForm( BaseForm ):
     """
     Form for LOGIN to DASHBOARD
     """
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': '', 'id': 'login_email' } ) )
-    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': '', 'id': 'login_password' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': 'full', 'id': 'login-email' } ) )
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': 'half', 'id': 'login-password' } ) )
 
 
 class PasswordRecoveryForm( BaseForm ):
     """
     Form for RECOVER PASSWORD
     """
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class': '', 'id': 'recovery_email' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class': 'full', 'id': 'recovery_email' } ) )
 
 
 class PasswordResetForm( BaseForm ):
@@ -64,15 +64,15 @@ class SignupForm( BaseModelForm ):
         required = True,
         label = _( "E-Email Confirmation" ),
         error_messages = { 'required': _( 'Please confirm your e-mail address' ) },
-        widget = forms.TextInput( attrs = { 'placeholder': _( 'Confirm E-mail' ), 'class': '', 'id': 'signup_email_confirmation' } )
+        widget = forms.TextInput( attrs = { 'placeholder': _( 'Confirm E-mail' ), 'class': 'full', 'id': 'signup_email_confirmation' } )
     )
 
     class Meta:
         model = get_user_model()
         fields = [ 'email', 'password' ]
         widgets = {
-            'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': '', 'id': 'signup_email' } ),
-            'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': '', 'id': 'signup_password' } )
+            'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': 'full', 'id': 'signup_email' } ),
+            'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': 'half', 'id': 'signup_password' } )
         }
         error_messages = {
             'email': { 'required': _( 'E-mail is required.' ) },

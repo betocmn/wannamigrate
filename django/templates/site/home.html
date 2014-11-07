@@ -46,6 +46,7 @@
 
         <!-- INLINE JS -->
         <script type="text/javascript">
+
             $(document).ready(function(){
                 // Initializes the scene controller.
                 SceneController.init();
@@ -57,8 +58,8 @@
     <body>
         <a href="javascript:SceneController.nextPage();" id="bt-more" class="gui"></a>
         <div id="menu" class="gui">
-            <a href="index.html" id="menu-logo"></a>
-            <a href="#" id="login-button" class="bt bt-purple bold white f8">Entrar</a>
+            <span id="menu-logo"></span>
+            <a href="javascript:doLogin();" id="login-button" class="bt bt-purple bold white f8">Entrar</a>
             <div id="language-container">
                 <a href="#" class="dropdown-button"></a>
                 <span class="selected-language f8 almost-white">
@@ -77,7 +78,7 @@
             <div id="page0-subtitle" class="f15 light white">
                 Da <span class="bold">aplicação do visto</span> à hora da <span class="bold">mudança.</span>
             </div>
-            <a id="p0-signup" href="#" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
+            <a id="p0-signup" href="javascript:doSignup();" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
         </div>
         <!-- ./page0-content -->
 
@@ -137,7 +138,7 @@
                         Mais de <span class="f20 teal bold">500,000 pessoas</span> obtem um visto para morar na <span class="teal bold">Austrália</span> e no <span class="teal bold">Canadá.</span>
                     </li>
                 </ul>
-                <a id="r1-signup" href="#" class="bt bt-blue f12"><span class="bold">Comece agora.</span> É grátis!</a>
+                <a id="r1-signup" href="javascript:doSignup();" class="bt bt-blue f12"><span class="bold">Comece agora.</span> É grátis!</a>
             </div>
             <div id="r2" class="section-item">
                 <div class="feature-container">
@@ -200,7 +201,7 @@
                         <p class="testimonial-user-job f8 light">Diretor de arte na Nova Zelandia</p>
                     </div>
                 </div>
-                <a id="r3-signup" href="#" class="bt bt-purple f12"><span class="bold">Comece agora.</span> É grátis!</a>
+                <a id="r3-signup" href="javascript:doSignup();" class="bt bt-purple f12"><span class="bold">Comece agora.</span> É grátis!</a>
             </div>
             <div id="r4" class="section-item">
                 <div class="page4-content">
@@ -210,7 +211,7 @@
                     <p class="p4-wrapper white f12 light">
                         <span class="bold">Acesse gratuitamente</span> nossa plataforma e <span class="bold">realize seus sonhos</span> em um novo país.
                     </p>
-                    <a id="r4-signup" href="#" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
+                    <a id="r4-signup" href="javascript:doSignup();" class="bt bt-green f12"><span class="bold">Comece agora.</span> É grátis!</a>
                 </div>
                 <div class="page4-footer">
                     <div id="social">
@@ -236,8 +237,8 @@
             </div>
         </div>
         <!-- ./right -->
-            <div id="overlay"></div>
-            <div id="dialog" class="popup vcenter">
+            <div id="overlay" style="display:none;"></div>
+            <div id="dialog" style="display:none;" class="popup vcenter">
                 {% include "site/popups/signup.html" %}
             </div>
 
