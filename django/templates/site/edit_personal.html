@@ -6,11 +6,41 @@
 
     {{ block.super }}
 
-    <!-- JQuery Diagram -->
-    <script type="text/javascript" src="{% static "site/js/jquery.diagram.js" %}"></script>
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="{% static 'site/js/jquery.formset.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
+
+        /**
+		 * Jquery On Load
+		 *
+		 */
+		$( document ).ready(function() {
+
+            // Jquery Formset
+            $( '#main_form div.which-country' ).formset();
+
+			// JS FORM Validation
+			//$( "#main_form" ).submit( function() {
+				//return validate_empty_fields( this, '{{ question_form.get_required_fields }}' );
+			//});
+
+            $( 'input[name^=family_overseas]' ).click( function(){
+                if ( this.value == 'yes' )
+                    $( "#user_personal_family_container").slideDown();
+                else
+                    $( "#user_personal_family_container").slideUp();
+            });
+
+			// JS for onload
+			{{ on_load|default:'' }}
+
+
+
+		});
+
+
 
     </script>
 
@@ -32,181 +62,80 @@
 			<a href="#" class="saveBtn saveBtnSpecial">Save and Exit</a>
 		</div>
 
-		<form class="takeMeAwayFromTheTop100px" method="post">
+		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form">
 
 			<p>PERSONAL DETAILS</p>
 
 			<div class="break10"></div>
 			<div class="break10"></div>
 
-            <label class="control-label" for="{{ form.birth_date.id_for_label }}">
-                {{ form.birth_date.label }}
-                {{ form.birth_date }}
-                {{ form.birth_date.errors }}
+            <label class="control-label" for="{{ user_personal_form.birth_date.id_for_label }}">
+                {{ user_personal_form.birth_date.label }}:
+                {{ user_personal_form.birth_date }}
+                {{ user_personal_form.birth_date.errors }}
             </label>
 
             <div class="break10"></div>
 
             <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Gender: &nbsp;</span>
-            {% for radio in form.gender %}
+            {% for radio in user_personal_form.gender %}
                 {{ radio.tag }}
                 <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
             {% endfor %}
 
             <div class="break10"></div>
+            <div class="break10"></div>
 
-            <!--
-			<input type="radio" name="checkboxG1" id="checkboxG1" class="css-checkbox" /><label for="checkboxG1" class="css-label">Male</label>
-
-			<input type="radio" name="checkboxG1" id="checkboxG2" class="css-checkbox" /><label for="checkboxG2" class="css-label">Female</label>
-
-			<div class="break10"></div>
-			-->
-
-            <br />
-
-			<label>
-                Full name:
-				<input type="text" name="name" class="" />
-			</label>
-
-			<br />
-
-			<div class="break10"></div>
-
-			<span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Date of birth: &nbsp;</span>
+            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.country.label }}: &nbsp;</span>
 			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="">14 / 08 / 1991</option>
-			  </select>
+			    {{ user_personal_form.country }}
+                {{ user_personal_form.country.errors }}
 			</div>
 
-			<div class="break10"></div>
+            <div class="break10"></div>
+            <div class="break10"></div>
 
 			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Any family member who are citizens in other countries?</span>
 
 			<div class="break10"></div>
 			&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="checkboxG2" id="checkboxG3" class="css-checkbox" /><label for="checkboxG3" class="css-label">Yes</label>
+			<input type="radio" name="family_overseas" id="family_overseas_yes" class="css-checkbox" value="yes" /><label for="family_overseas_yes" class="css-label">Yes</label>
 
-			<input type="radio" name="checkboxG2" id="checkboxG4" class="css-checkbox" /><label for="checkboxG4" class="css-label">No</label>
-
-			<div class="break10"></div>
-			<div class="break10"></div>
-			<div class="line-break"></div>
-			<div class="break10"></div>
-
-			<div class="which-country">
-				<a href="javascript:void(0);" class="closeBtn"></a>
-			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Which country?</span>
-			<div class="break10"></div>
-			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="Brazil">Brazil</option>
-			  </select>
-			</div>
-
-			</div>
-
-			<div class="which-country">
-				<a href="javascript:void(0);" class="closeBtn"></a>
-			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Which country?</span>
-			<div class="break10"></div>
-			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="Brazil">Brazil</option>
-			  </select>
-			</div>
-
-			</div>
-
-			<!-- <div id="whichCountries"> </div> -->
-
-			<a href="javascript:void(0)" class="addAnother">+ Add Another</a>
-			<br />
-
-			<span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Your nationality: &nbsp;</span>
-			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="">Brazil</option>
-			  </select>
-			</div>
-			<br />
-
-			<span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Add below how many years of experience:&nbsp;</span>
-			<br />
-			<div class="which-country">
-				<!-- <a href="javascript:void(0);" class="closeBtn"></a> -->
-			<label class="smallInput">Company:
-				<input type="text" name="name" />
-			</label>
-			<div class="smallSelect">
-			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Ocupation</span><br />
-			<!-- <div class="break10"></div> -->
-			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="1">1</option>
-			    <option value="2">2</option>
-			    <option value="3">3</option>
-			  </select>
-			</div>
-			</div>
-			<div class="clear"> </div>
+			<input type="radio" name="family_overseas" id="family_overseas_no" class="css-checkbox" value="no" /><label for="family_overseas_no" class="css-label">No</label>
 
 			<div class="break10"></div>
-			<label class="smallInput evenSmallerInput">From:
-				<input type="text" name="name" placeholder="MM/YYYY" />
-			</label>
-			<span class="lineBetween"> - </span>
-			<label class="smallInput evenSmallerInput">To:
-				<input type="text" name="name" placeholder="MM/YYYY" />
-			</label>
-			<div class="clear"> </div>
-
-			</div>
-
-			<div class="which-country">
-				<a href="javascript:void(0);" class="closeBtn"></a>
-			<label class="smallInput">Company:
-				<input type="text" name="name" />
-			</label>
-			<div class="smallSelect">
-			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Ocupation</span>
-			<!-- <div class="break10"></div> -->
-			<div class="select-style">
-			  <select>
-			    <option>Select</option>
-			    <option value="1">1</option>
-			    <option value="2">2</option>
-			    <option value="3">3</option>
-			  </select>
-			</div>
-			</div>
-			<div class="clear"> </div>
-
 			<div class="break10"></div>
-			<label class="smallInput evenSmallerInput">From:
-				<input type="text" name="name" placeholder="MM/YYYY" />
-			</label>
-			<span class="lineBetween"> - </span>
-			<label class="smallInput evenSmallerInput">To:
-				<input type="text" name="name" placeholder="MM/YYYY" />
-			</label>
-			<div class="clear"> </div>
 
-			</div>
+            <div id="user_personal_family_container" style="display: none;">
 
-						<!-- <div id="whichCountries"> </div> -->
+                <div class="line-break"></div>
+			    <div class="break10"></div>
 
-			<a href="javascript:void(0)" class="addAnother">+ Add Another</a>
-			<br />
-			<br />
-			<a href="javascript:void(0)" class="bigAdditional">+ Additional fields to improve my chances</a>
+                {{ user_personal_family_formset.management_form }}
+
+                {% for user_personal_family_form in user_personal_family_formset %}
+
+                    <div class="which-country">
+                        <a href="javascript:void(0);" class="closeBtn"></a>
+                        <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_family_form.country.label }}?</span>
+                        <div class="break10"></div>
+                        <div class="select-style">
+                          {{ user_personal_family_form.country }}
+                          {{ user_personal_family_form.country.errors }}
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                <a href="javascript:void(0)" class="addAnother">+ Add Another</a>
+
+            </div>
+
+
+            <br />
+            <br />
+
+            <a href="javascript:void(0)" class="bigAdditional">+ Additional fields to improve my chances</a>
 
 			<div class="additionalBox">
 				<p>Additional field</p>

@@ -30,6 +30,9 @@ class Answer( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( self.description )
+
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
     answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
@@ -45,6 +48,9 @@ class AnswerCategory( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( self.name )
+
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
     name = models.CharField(  _( 'Name' ), max_length = 100 )
@@ -59,6 +65,9 @@ class Continent( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( self.name )
+
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
 
@@ -71,6 +80,9 @@ class Country( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+    def __str__( self ):
+        return '%s' % ( self.name )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
@@ -130,6 +142,9 @@ class Language( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( self.name )
+
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 25 )
     code = models.CharField( _( "code" ), max_length = 6 )
@@ -149,6 +164,9 @@ class Question( BaseModel ):
             ( "admin_delete_immigration_rule", "ADMIN: Can delete immigration rule" ),
             ( "admin_view_immigration_rule", "ADMIN: Can view immigration rules" )
         )
+
+    def __str__( self ):
+        return '%s' % ( self.description )
 
     # Model Attributes
     description = models.CharField( _( "question" ), max_length = 255 )
@@ -232,8 +250,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
         # The user is identified by their email address
         return self.email
 
-    # On Python 3: def __str__(self):
-    def __unicode__( self ):
+    def __str__( self ):
         return self.email
 
     @property
@@ -338,14 +355,14 @@ class UserPersonal( BaseModel ):
     )
 
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ), blank = True, null = True )
+    country = models.ForeignKey( Country, verbose_name = _( 'country of residence' ), blank = True, null = True )
     avatar = StdImageField( _( "avatar" ), upload_to = settings.UPLOAD_USER_PICTURE_FOLDER, blank = True, null = True, variations = {
         'large': (600, 400),
         'thumbnail': (40, 40, True ),
         'medium': (300, 200),
     })
     birth_date = models.DateField( _( "birth date" ), blank = True, null = True )
-    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
+    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, null = True, default = None )
     australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
 
 

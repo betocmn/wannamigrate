@@ -9,12 +9,13 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.forms.formsets import formset_factory
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
-    EditUserPersonal
+    UserPersonalForm, UserPersonalFamilyForm
 )
 from wannamigrate.core.mailer import Mailer
 
@@ -339,18 +340,21 @@ def edit_personal( request ):
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
 
-    # Create form
-    form = EditUserPersonal( request.POST or None )
+    # Create forms
+    user_personal_form = UserPersonalForm( request.POST or None )
+    UserPersonalFamilyFormset = formset_factory( UserPersonalFamilyForm )
+    user_personal_family_formset = UserPersonalFamilyFormset()
 
     # If the form has been submitted...
-    if form.is_valid():
+    if user_personal_form.is_valid():
 
         # Save to the DB and redirect
-        form.save()
+        user_personal_form.save()
         return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
     # pass form to template
-    template_data['form'] = form
+    template_data['user_personal_form'] = user_personal_form
+    template_data['user_personal_family_formset'] = user_personal_family_formset
 
     # Print Template
     return render( request, 'site/edit_personal.html', template_data )

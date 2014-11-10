@@ -1,12 +1,12 @@
 from django import forms
-from django.forms import TextInput, PasswordInput, RadioSelect
+from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.models import (
-    UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
-    UserWork, UserWorkExperience, UserWorkOffer
+    Country, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
+    UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily
 )
 
 
@@ -124,16 +124,28 @@ class ContactForm( BaseForm ):
 #######################
 # DASHBOARD FORMS
 #######################
-class EditUserPersonal( BaseModelForm ):
+class UserPersonalForm( BaseModelForm ):
     """
-    Form for EDIT PERSONAL data
+    Form for USER PERSONAL data
     """
 
-    gender = forms.ChoiceField( label = _( "Gender" ), widget = forms.RadioSelect( attrs = { 'class' : 'css-checkbox'  } ) )
+    country = ModelChoiceField( required = False, label = _( "Country of Residence" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
 
     class Meta:
         model = UserPersonal
-        fields = [ 'birth_date', 'australian_regional_immigration', 'country' ]
-        """widgets = {
+        fields = [ 'birth_date', 'australian_regional_immigration', 'gender' ]
+        widgets = {
             'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
-        }"""
+        }
+
+
+class UserPersonalFamilyForm( BaseModelForm ):
+    """
+    Form for USER PERSONAL FAMILY data (If user has family in any other country)
+    """
+
+    country = ModelChoiceField( required = False, label = _( "In Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+
+    class Meta:
+        model = UserPersonalFamily
+        #fields = [ 'country' ]
