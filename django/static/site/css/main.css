@@ -62,18 +62,22 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 #menu.translucid { background-color: rgba(0,0,0,0.8); }
 #left { position: absolute; width: 50%; height: 100%; float: left; }
 #right { position: absolute; width: 50%; height: 100%; left:50%; }
-.flag { position: relative; display: inline-block; width: 20px; height: 20px; background-size: contain !important; vertical-align: center; }
 .country{ vertical-align: super; }
 .clear { clear: both; }
 
 #menu-logo { position:relative; float:left; display: block; width: 13%; height: 100%; margin-left: 3%; background: url(../img/logo_wannamigrate.png) center center no-repeat; background-size: contain; }
-#language-container { float:right; width: 30%; height: 100%; }
-.selected-language { position: relative; top: 50%; margin-top: -12px; }
-#language-container > span, #language-container > a { float:right; }
-.dropdown-button { position: relative; top:50%; margin-top: -10px; display: block; width: 20px; height: 20px; background: url(../img/dropdown_button.png) no-repeat; background-size: cover; margin-left: 2%; }
+
 #login-button { float:right; margin: -13px 3% 0 3%; position: relative; top:50%; min-width: 0 !important; padding: 5px 15px !important; }
 .vcenter { position: absolute; top:50%; -ms-transform:translate(0,-50%); -webkit-transform:translate(0,-50%); -moz-transform:translate(0,-50%); -o-transform:translate(0,-50%); transform:translate(0,-50%); }
 .text-center { text-align: center; }
+
+/** Flags classes */
+.flag { position: relative; display: inline-block; width: 20px; height: 20px; background-size: contain !important; vertical-align: center; }
+.br { background: url(../img/flags/Brazil.png) no-repeat center; } /* Brazil */
+.au { background: url(../img/flags/Australia.png) no-repeat center; } /* Australia */
+.us { background: url(../img/flags/USA.png) no-repeat center; } /* US English */
+.cn { background: url(../img/flags/China.png) no-repeat center; } /* Chinese */
+.es { background: url(../img/flags/Spain.png) no-repeat center; } /* Chinese */
 
 .bt { display: inline-block; text-decoration: none; width: auto; height: auto; text-align: center; border-radius: 3px; padding: 15px 0; min-width: 270px; }
 .bt-purple { color:#ffffff; text-shadow: 0px -1px 1px rgba(0,0,0,0.4); background: -webkit-linear-gradient( #915bbb, #9f6fc1); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #915bbb, #9f6fc1); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #915bbb, #9f6fc1); /* For Firefox 3.6 to 15 */ background: linear-gradient( #915bbb, #9f6fc1); /* Standard syntax */ box-shadow: 1px 2px 2px #8c5ab4; }
@@ -84,6 +88,13 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 #bt-more.page1 { background-position-y: -62px; }
 #bt-more.page3 { background-position-y: -125px; }
 
+/** Language container */
+#language-container { float:right; width: 10%; height: auto; }
+.language-ul { list-style: none; padding: 0;}
+.country-name { display: inline-block; margin-left: 2%; vertical-align: super; }
+.dropdown-button { display: inline-block; width: 20px; height: 20px; background: url(../img/dropdown_button.png) no-repeat; background-size: cover; margin-left: 1%; }
+.language-ul li a { display: block; text-decoration: none; }
+.language-ul li a:hover span.country-name { text-decoration: underline; }
 
 /** Page 0 elements */
 #page0-content { position: absolute; width: 100%; height: 100%; }
@@ -186,11 +197,6 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 /** r2 has no bg */
 #r3 { background: url( "../img/r3.png" ) no-repeat; background-size: cover; background-position: right center; }
 #r4 { background: url( "../img/r4.png" ) no-repeat; background-size: cover; background-position: right center; }
-
-
-/** Flags classes */
-.br { background: url(../img/flags/Brazil.png) no-repeat center; } /* Brazil */
-.au { background: url(../img/flags/Australia.png) no-repeat center; } /* Australia */
 
 
 /** SIGNUP / LOGIN / PASSWORD RECOVERY CSS. */
