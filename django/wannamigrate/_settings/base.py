@@ -37,10 +37,10 @@ LOGIN_URL = 'admin:login'
 #########################################
 LANGUAGES = (
     ( 'en-us', _( 'English' ) ),
-    ( 'pt-BR', _( 'Portuguese (BR)' ) ),
+    ( 'pt-br', _( 'Portuguese (BR)' ) ),
 )
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 

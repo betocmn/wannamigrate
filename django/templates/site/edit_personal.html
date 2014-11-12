@@ -13,25 +13,59 @@
     <script type="text/javascript">
 
         /**
+		 * Hide/Show personal family overseas options
+		 *
+		 */
+        function toggle_family_overseas_container(){
+            var radio_value = $( "input[name='family_overseas']:checked" ).val();
+            if ( radio_value == 'True' ) {
+                $( "#user_personal_family_container" ).slideDown();
+                if ( $( ".dynamic-form" ).length == 0 ){
+                    $( '#main_form div.which-country' ).formset({
+                        prefix: '{{ user_personal_family_formset.prefix }}',
+                        addCssClass: 'addAnother',
+                        deleteCssClass: 'closeBtn',
+                        deleteText: ''
+                    });
+                }
+            } else
+                $( "#user_personal_family_container" ).slideUp();
+        }
+
+        /**
 		 * Jquery On Load
 		 *
 		 */
 		$( document ).ready(function() {
 
-            // Jquery Formset
-            $( '#main_form div.which-country' ).formset();
+            //Submit form when navigating through action links
+            $( ".submit-form" ).click( function() {
 
-			// JS FORM Validation
-			//$( "#main_form" ).submit( function() {
-				//return validate_empty_fields( this, '{{ question_form.get_required_fields }}' );
-			//});
+                // set next page by looking to the class name
+                if ( $( this ).hasClass( "go-to-personal" ) ){
+                    $( '#next').val( '{% url 'site:edit_personal' %}' );
+                } else if ( $( this ).hasClass( "go-to-language" ) ){
+                    $( '#next').val( '{% url 'site:edit_language' %}' );
+                } else if ( $( this ).hasClass( "go-to-education" ) ){
+                    $( '#next').val( '{% url 'site:edit_education' %}' );
+                } else if ( $( this ).hasClass( "go-to-work" ) ){
+                    $( '#next').val( '{% url 'site:edit_work' %}' );
+                }
 
+                // submit form
+                $( '#main_form').submit();
+
+
+			});
+
+            //Hide/Show personal family overseas options
             $( 'input[name^=family_overseas]' ).click( function(){
-                if ( this.value == 'yes' )
-                    $( "#user_personal_family_container").slideDown();
-                else
-                    $( "#user_personal_family_container").slideUp();
+                toggle_family_overseas_container();
             });
+            toggle_family_overseas_container()
+
+            // include a <div class="select-style"> around all selects without this parent
+            $( "select.force-style" ).wrap( "<div class='select-style' style='width: 120px; float: left; margin-right: 10px;'></div>" );
 
 			// JS for onload
 			{{ on_load|default:'' }}
@@ -59,49 +93,80 @@
 		<div id="update" class="updateFix">
 			<h2>Update your details</h2>
 			<p>Once completed you will be able to check a list of countries you can go :)</p>
-			<a href="#" class="saveBtn saveBtnSpecial">Save and Exit</a>
+			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">Save and Exit</a>
 		</div>
 
-		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form">
+		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
+
+            {% csrf_token %}
 
 			<p>PERSONAL DETAILS</p>
 
+            {% if user_personal_form.errors or user_personal_family_formset.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                    <ul>
+                        <li><strong>Please correct the following errors:</strong></li>
+                        {% for error in user_personal_form.non_field_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                        {% for error in user_personal_family_formset.non_form_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
 			<div class="break10"></div>
 			<div class="break10"></div>
 
-            <label class="control-label" for="{{ user_personal_form.birth_date.id_for_label }}">
-                {{ user_personal_form.birth_date.label }}:
-                {{ user_personal_form.birth_date }}
+            <div class="{% if user_personal_form.birth_date.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.birth_date.label }}: &nbsp;</span>
+                <div>
+                    {{ user_personal_form.birth_date }}
+                </div>
                 {{ user_personal_form.birth_date.errors }}
-            </label>
+            </div>
 
+            <div class="clear break10"></div>
             <div class="break10"></div>
 
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Gender: &nbsp;</span>
-            {% for radio in user_personal_form.gender %}
-                {{ radio.tag }}
-                <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-            {% endfor %}
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.country.label }}: &nbsp;</span>
-			<div class="select-style">
-			    {{ user_personal_form.country }}
-                {{ user_personal_form.country.errors }}
-			</div>
+            <div class="{% if user_personal_form.gender.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.gender.label }}: &nbsp;</span>
+                {% for radio in user_personal_form.gender %}
+                    {% if radio.choice_label != '---------' %}
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                    {% endif %}
+                {% endfor %}
+                {{ user_personal_form.gender.errors }}
+            </div>
 
             <div class="break10"></div>
             <div class="break10"></div>
 
-			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Any family member who are citizens in other countries?</span>
+            <div class="{% if user_personal_form.country.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.country.label }}: &nbsp;</span>
+                <div class="select-style">
+                    {{ user_personal_form.country }}
+                    {{ user_personal_form.country.errors }}
+                </div>
+            </div>
 
-			<div class="break10"></div>
-			&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="family_overseas" id="family_overseas_yes" class="css-checkbox" value="yes" /><label for="family_overseas_yes" class="css-label">Yes</label>
+            <div class="break10"></div>
+            <div class="break10"></div>
 
-			<input type="radio" name="family_overseas" id="family_overseas_no" class="css-checkbox" value="no" /><label for="family_overseas_no" class="css-label">No</label>
+            <div class="{% if user_personal_form.family_overseas.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.family_overseas.label }}</span>
+                <div class="break10"></div>
+                &nbsp;&nbsp;&nbsp;
+                {% for radio in user_personal_form.family_overseas %}
+                    {% if radio.choice_label != '---------' %}
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                    {% endif %}
+                {% endfor %}
+                {{ user_personal_form.family_overseas.errors }}
+            </div>
 
 			<div class="break10"></div>
 			<div class="break10"></div>
@@ -111,55 +176,48 @@
                 <div class="line-break"></div>
 			    <div class="break10"></div>
 
-                {{ user_personal_family_formset.management_form }}
+                    {{ user_personal_family_formset.management_form }}
+                    {% for user_personal_family_form in user_personal_family_formset %}
 
-                {% for user_personal_family_form in user_personal_family_formset %}
+                        <div>
 
-                    <div class="which-country">
-                        <a href="javascript:void(0);" class="closeBtn"></a>
-                        <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_family_form.country.label }}?</span>
-                        <div class="break10"></div>
-                        <div class="select-style">
-                          {{ user_personal_family_form.country }}
-                          {{ user_personal_family_form.country.errors }}
+                            <div class="which-country {% if user_personal_family_form.country.errors %}has-error{% endif %}">
+
+                                {{ user_personal_family_form.id }}
+                                {{ user_personal_family_form.DELETE }}
+                                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_family_form.country.label }}?</span>
+                                <div class="break10"></div>
+                                <div class="select-style">
+                                  {{ user_personal_family_form.country }}
+                                  {{ user_personal_family_form.country.errors }}
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
 
-                {% endfor %}
+                    {% endfor %}
 
-                <a href="javascript:void(0)" class="addAnother">+ Add Another</a>
+                <div class="break10"></div>
 
             </div>
 
+            <div class="break10"></div>
 
-            <br />
-            <br />
 
-            <a href="javascript:void(0)" class="bigAdditional">+ Additional fields to improve my chances</a>
+            <div class="{% if user_personal_form.australian_regional_immigration.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.australian_regional_immigration.label }}</span>
+                <div class="break10"></div>
+                &nbsp;&nbsp;&nbsp;
+                {% for radio in user_personal_form.australian_regional_immigration %}
+                    {% if radio.choice_label != '---------' %}
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                    {% endif %}
+                {% endfor %}
+                {{ user_personal_form.australian_regional_immigration.errors }}
+            </div>
 
-			<div class="additionalBox">
-				<p>Additional field</p>
-				<div class="additionalBoxBody">
-				<span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Is your partner in a skilled occupation? &nbsp;</span><br /><br />
-			<input type="radio" name="checkboxG5" id="checkboxG5" class="css-checkbox" /><label for="checkboxG5" class="css-label">Yes</label>
-			&nbsp;
-			&nbsp;
-			&nbsp;
-			<input type="radio" name="checkboxG5" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">No</label>
-
-			<div class="break10"></div>
-
-			<span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;Is your partner in a skilled occupation? &nbsp;</span><br /><br />
-			<input type="radio" name="checkboxG7" id="checkboxG7" class="css-checkbox" /><label for="checkboxG7" class="css-label">Yes</label>
-			&nbsp;
-			&nbsp;
-			&nbsp;
-			<input type="radio" name="checkboxG7" id="checkboxG8" class="css-checkbox" /><label for="checkboxG8" class="css-label">No</label>
-
-				</div>
-			</div>
-			<br />
-			<a href="#" class="forgotPass">Forgot your password?</a>
+            <input type="hidden" id="next" name="next" value="" />
 
 		</form>
 	</div>
@@ -176,15 +234,15 @@
 
 	<div class="staticFooter">
 		<div>
-			<a href="#" class="activeFooterLink">PERSONAL</a>
+			<a href="javascript:void(0)" class="activeFooterLink go-to-personal submit-form">PERSONAL</a>
 			<span class="leftArrow"> </span>
-			<a href="#">LANGUAGE</a>
+			<a href="javascript:void(0)" class="go-to-language submit-form">LANGUAGE</a>
 			<span class="leftArrow"> </span>
-			<a href="#">EDUCATION</a>
+			<a href="javascript:void(0)" class="go-to-education submit-form">EDUCATION</a>
 			<span class="leftArrow"> </span>
-			<a href="#">WORK</a>
+			<a href="javascript:void(0)" class="go-to-work submit-form">WORK</a>
 		</div>
-		<a href="#" class="nextBtn">NEXT &gt;</a>
+		<a href="javascript:void(0)" class="nextBtn go-to-language submit-form">NEXT &gt;</a>
 	</div>
 
 {% endblock content %}

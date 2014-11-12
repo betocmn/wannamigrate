@@ -31,7 +31,7 @@ class Answer( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
-        return '%s' % ( self.description )
+        return '%s' % ( _( self.description ) )
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
@@ -49,7 +49,7 @@ class AnswerCategory( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
-        return '%s' % ( self.name )
+        return '%s' % ( _( self.name ) )
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
@@ -66,7 +66,7 @@ class Continent( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
-        return '%s' % ( self.name )
+        return '%s' % ( _( self.name ) )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
@@ -82,13 +82,14 @@ class Country( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
-        return '%s' % ( self.name )
+        return '%s' % ( _( self.name ) )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
     continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
     code = models.CharField( _( "code" ), max_length = 2 )
     immigration_enabled = models.BooleanField( _( "immigration enabled?" ), default = False )
+
 
 class CountryPoints( BaseModel ):
     """
@@ -143,7 +144,7 @@ class Language( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
-        return '%s' % ( self.name )
+        return '%s' % ( _( self.name ) )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 25 )
@@ -166,7 +167,7 @@ class Question( BaseModel ):
         )
 
     def __str__( self ):
-        return '%s' % ( self.description )
+        return '%s' % ( _( self.description ) )
 
     # Model Attributes
     description = models.CharField( _( "question" ), max_length = 255 )
@@ -351,7 +352,11 @@ class UserPersonal( BaseModel ):
     # Model Attributes
     GENDERS = (
         ( 'F', _( 'Female' ) ),
-        ( 'M', _( 'Male' ) ),
+        ( 'M', _( 'Male' ) )
+    )
+    BOOLEAN_CHOICES = (
+        ( True, _( 'Yes' ) ),
+        ( False, _( 'No' ) )
     )
 
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
@@ -361,9 +366,10 @@ class UserPersonal( BaseModel ):
         'thumbnail': (40, 40, True ),
         'medium': (300, 200),
     })
-    birth_date = models.DateField( _( "birth date" ), blank = True, null = True )
-    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, null = True, default = None )
-    australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
+    birth_date = models.DateField( _( "birth date" ), blank = True, null = True  )
+    gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
+    australian_regional_immigration = models.NullBooleanField( _( "Would you be willing to live in Regional Australia?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    family_overseas = models.NullBooleanField( _( "Any family members who are citizens in other countries?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
 
 
 class UserPersonalFamily( BaseModel ):

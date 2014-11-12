@@ -163,7 +163,7 @@ class AnswerForm( BaseModelForm ):
 
     def save( self, commit = True ):
         """
-        Extra processing: Set additional default values for new users
+        Extra processing
 
         :return: Dictionary
         """
@@ -191,19 +191,8 @@ class BaseAnswerFormSet( BaseInlineFormSet ):
         super( BaseAnswerFormSet, self ).__init__( *args, **kwargs )
 
     def _construct_form( self, *args, **kwargs ):
-        # inject user in each form on the formset
+        # inject extra values in each form on the formset
         kwargs['countries'] = self.countries
         kwargs['points_per_country'] = self.points_per_country
         return super( BaseAnswerFormSet, self )._construct_form( *args, **kwargs )
-
-    """
-    def add_fields( self, form, index ):
-        super( BaseAnswerFormSet, self ).add_fields( form, index )
-        countries = self.countries
-        points_per_country = self.points_per_country
-        if countries is not None:
-            for country in countries:
-                name = "points_%s" % ( country.id )
-                #if country.id in points_per_country and
-                form.fields[name] = forms.IntegerField( initial = self.answer.id, widget = TextInput( attrs = { 'class': 'form-control', 'maxlength': '2', 'style': 'width: 60px; float: left;' } ) )
-    """
+""

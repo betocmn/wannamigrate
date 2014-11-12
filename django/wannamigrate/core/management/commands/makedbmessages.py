@@ -24,7 +24,7 @@ class Command( BaseCommand ):
                 model = Answer
                 possible_fields = [ 'description' ]
             else:
-                raise CommandError( 'Invalid table' )
+                raise CommandError( 'Table does not need translations or do not exist' )
 
             # grab values from the db table and build the content
             file_content = '{% load i18n %}\n'
@@ -36,7 +36,7 @@ class Command( BaseCommand ):
                 file_content += '\n'
 
             # creates new file and writes the db content
-            file_name = os.path.join( settings.BASE_DIR, 'templates', 'db_translations', table_name + '.html' )
+            file_name = os.path.join( settings.BASE_DIR, '..', 'templates', 'db_translations', table_name + '.html' )
             with open( file_name, 'w' ) as f:
                 template_file = File( f )
                 template_file.write( file_content )

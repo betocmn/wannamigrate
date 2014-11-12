@@ -1100,6 +1100,7 @@ label > input[type=text]:focus{
 }
 form .has-error li {
     color: #ed1c24;
+    font-size: 14px;
 }
 
 form .has-error input, form .has-error textarea, form .has-error select {

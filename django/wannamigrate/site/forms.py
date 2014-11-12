@@ -1,8 +1,12 @@
 from django import forms
-from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField
+from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField, ChoiceField, Select
+from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
+from django.forms.models import BaseInlineFormSet
+from datetime import date
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.core.util import get_object_or_false
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.models import (
     Country, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
@@ -133,10 +137,35 @@ class UserPersonalForm( BaseModelForm ):
 
     class Meta:
         model = UserPersonal
-        fields = [ 'birth_date', 'australian_regional_immigration', 'gender' ]
+        fields = [ 'birth_date', 'australian_regional_immigration', 'gender', 'country', 'family_overseas' ]
         widgets = {
+            #'birth_date': TextInput( attrs = { 'class': 'date', 'placeholder': _( 'DD/MM/YYYY' ) } ),
+            'birth_date': SelectDateWidget( years = range( 1940, date.today().year - 15 ), attrs = { 'class': 'force-style', 'style': 'display: inline; width: 120px;' } ),
             'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'australian_regional_immigration': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'family_overseas': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
         }
+
+    def __init__( self, *args, **kwargs ):
+
+        # add user to the form
+        if 'user' in kwargs:
+            self.user = kwargs.pop( "user" )
+        super( UserPersonalForm, self ).__init__( *args, **kwargs )
+
+
+    def save( self, commit = True ):
+        """
+        Set the request user
+
+        :return: Dictionary
+        """
+        user_personal = super( UserPersonalForm, self ).save( commit = False )
+        if hasattr( self, 'user' ):
+            user_personal.user = self.user
+        if commit:
+            user_personal.save()
+        return user_personal
 
 
 class UserPersonalFamilyForm( BaseModelForm ):
@@ -144,8 +173,25 @@ class UserPersonalFamilyForm( BaseModelForm ):
     Form for USER PERSONAL FAMILY data (If user has family in any other country)
     """
 
-    country = ModelChoiceField( required = False, label = _( "In Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    country = ModelChoiceField( required = False, label = _( "In Which Country?" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
 
     class Meta:
         model = UserPersonalFamily
-        #fields = [ 'country' ]
+        fields = [ 'id', 'country', 'user' ]
+
+class BaseUserPersonalFamilyFormSet( BaseInlineFormSet ):
+    """
+    Formset for answers / country points
+    """
+
+    def clean( self ):
+        """Checks that no two records have the same country."""
+        if any( self.errors ):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+        countries = []
+        for form in self.forms:
+            country = form.cleaned_data['country']
+            if country in countries:
+                raise forms.ValidationError( _( "You must choose different countries on family overseas option." ) )
+            countries.append( country )
