@@ -156,12 +156,12 @@
 </script>
 
 <!-- HEADER --> 
-<div class="modal-header f14 bold purple regular text-center"> Sign in </div>
+<div class="modal-header f18 bold purple regular text-center"> Sign in </div>
 <!-- ./HEADER -->
 
 <!-- BODY -->
 <div class="modal-body">
-  <div id="result" class="f8 red">
+  <div id="result" class="f12 red">
     {% include "site/layouts/status.html" %}
   </div>
 
@@ -172,8 +172,8 @@
       
       {{ login_form.email }}
       {{ login_form.password }}
-      <button id="login-submit" type="submit" class="submit f8">{% trans "Login" %}</button>
-      <a id="login-link-reset-password" class="login_item f6 green" href="javascript:switch_to_password_recovery();">
+      <button id="login-submit" type="submit" class="submit f12">{% trans "Login" %}</button>
+      <a id="login-link-reset-password" class="login_item f10 green" href="javascript:switch_to_password_recovery();">
         {% trans "Forgot your password?" %}
       </a>
     </form>
@@ -187,33 +187,33 @@
         {{ signup_form.email }}
         {{ signup_form.email_confirmation }}
         {{ signup_form.password }}
-        <button id="signup_button_submit" type="submit" class="submit f8">{% trans "Sign-Up" %}</button>
+        <button id="signup_button_submit" type="submit" class="submit f12">{% trans "Sign-Up" %}</button>
       </form>
       <!-- SIGNUP -->
 
 
 
     <div id="login-social-container" class="login_item signup_item">
-      <div class="f9 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
-      <div id="social-buttons-container">
-        <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-        <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
-        <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-button google"><i class="fa fa-google"></i></a>
+      <div class="f14 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
+      <div id="social-login-buttons-container">
+        <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-login facebook f16"><i class="fa fa-facebook"></i></a>
+        <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-login linkedin f16"><i class="fa fa-linkedin"></i></a>
+        <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-login google f16"><i class="fa fa-google"></i></a>
       </div>
     </div>
     <div class="clear"></div>
 
-    <a id="login-switch-to-signup" class="switcher login_item f7" href="javascript:switch_to_signup();">
+    <a id="login-switch-to-signup" class="switcher login_item f12" href="javascript:switch_to_signup();">
         {% trans "Don't have an account? Sign-Up" %}
     </a>
     
-    <a id="login-switch-to-signup" class="switcher signup_item f7" href="javascript:switch_to_login();">
+    <a id="login-switch-to-signup" class="switcher signup_item f12" href="javascript:switch_to_login();">
         {% trans "Already registered?" %} <span class="bold"> {% trans "Proceed to Login" %} </span>
     </a>
 
 
     <!-- PASSWORD RECOVERY -->
-    <p class="primary password_recovery_item f8 grey">
+    <p class="primary password_recovery_item f12 grey">
         {% trans "Fill in your email address and you will receive a link to reset your password." %}
     </p>
     <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
@@ -221,22 +221,22 @@
       <button id="password_recovery_submit" type="submit" class="submit half">{% trans "Recover Password" %}</button>
     </form>
 
-    <a id="password_recovery_link_login" class="switcher f7 password_recovery_item" href="javascript:switch_to_login();">« {% trans "Go Back" %}</a>
+    <a id="password_recovery_link_login" class="switcher f12 password_recovery_item" href="javascript:switch_to_login();">« {% trans "Go Back" %}</a>
     <!-- ./PASSWORD RECOVERY -->
 </div>
 
 <!-- LOGIN FOOTER -->
-<div class="modal-footer login_item f6 grey regular">
+<div class="modal-footer login_item f10 grey regular">
     Ao clicar nos botões do facebook ou do linkedin e não for usuário do Wanna Migrate, você será automaticamente cadastrado e estará aceitando os <a class="bold green" href="#">Termos e condições</a> e a <a class="bold green" href="#">Política de privacidade</a> do Wanna Migrate.
 </div>
 <!-- ./LOGIN FOOTER -->
 <!-- SIGNUP FOOTER -->
-<div class="modal-footer signup_item f6 grey regular">
+<div class="modal-footer signup_item f10 grey regular">
     Ao cadastrar-se na plataforma você declara estar de acordo com os <a class="bold green" href="#">Termos e condições</a> e a <a class="bold green" href="#">Política de privacidade</a> do Wanna Migrate.
 </div>
 <!-- ./SIGNUP FOOTER -->
 <!-- PASSWORD RECOVERY FOOTER -->
-<div class="modal-footer password_recovery_item f6 grey regular">
+<div class="modal-footer password_recovery_item f10 grey regular">
     Ainda com problemas? Entre em contato com o nosso <a class="bold green" href="">suporte.</a>
 </div>
 <!-- ./PASSWORD RECOVERY FOOTER -->
