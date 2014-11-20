@@ -12,10 +12,8 @@ urlpatterns = patterns('',
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 
 # Used by the debug toolbar app
-"""
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += patterns('',
         url( r'^__debug__/', include( debug_toolbar.urls ) ),
     )
-"""

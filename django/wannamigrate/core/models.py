@@ -30,6 +30,9 @@ class Answer( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( _( self.description ) )
+
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
     answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
@@ -45,6 +48,9 @@ class AnswerCategory( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( _( self.name ) )
+
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
     name = models.CharField(  _( 'Name' ), max_length = 100 )
@@ -59,6 +65,9 @@ class Continent( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( _( self.name ) )
+
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
 
@@ -72,11 +81,33 @@ class Country( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        """
+        String representation of this model
+        :return: String
+        """
+        return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple():
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        countries = Country.objects.order_by( 'name' )
+        result = []
+        for country in countries:
+            result.append( ( country.id, _( country.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Country' ) )] + result  )
+
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
     continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
     code = models.CharField( _( "code" ), max_length = 2 )
     immigration_enabled = models.BooleanField( _( "immigration enabled?" ), default = False )
+
 
 class CountryPoints( BaseModel ):
     """
@@ -130,6 +161,23 @@ class Language( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def __str__( self ):
+        return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple():
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        languages = Language.objects.order_by( 'name' )
+        result = []
+        for language in languages:
+            result.append( ( language.id, _( language.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Language' ) )] + result  )
+
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 25 )
     code = models.CharField( _( "code" ), max_length = 6 )
@@ -149,6 +197,9 @@ class Question( BaseModel ):
             ( "admin_delete_immigration_rule", "ADMIN: Can delete immigration rule" ),
             ( "admin_view_immigration_rule", "ADMIN: Can view immigration rules" )
         )
+
+    def __str__( self ):
+        return '%s' % ( _( self.description ) )
 
     # Model Attributes
     description = models.CharField( _( "question" ), max_length = 255 )
@@ -232,8 +283,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
         # The user is identified by their email address
         return self.email
 
-    # On Python 3: def __str__(self):
-    def __unicode__( self ):
+    def __str__( self ):
         return self.email
 
     @property
@@ -334,19 +384,24 @@ class UserPersonal( BaseModel ):
     # Model Attributes
     GENDERS = (
         ( 'F', _( 'Female' ) ),
-        ( 'M', _( 'Male' ) ),
+        ( 'M', _( 'Male' ) )
+    )
+    BOOLEAN_CHOICES = (
+        ( True, _( 'Yes' ) ),
+        ( False, _( 'No' ) )
     )
 
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ), blank = True, null = True )
+    country = models.ForeignKey( Country, verbose_name = _( 'country of residence' ), blank = True, null = True )
     avatar = StdImageField( _( "avatar" ), upload_to = settings.UPLOAD_USER_PICTURE_FOLDER, blank = True, null = True, variations = {
         'large': (600, 400),
         'thumbnail': (40, 40, True ),
         'medium': (300, 200),
     })
-    birth_date = models.DateField( _( "birth date" ), blank = True, null = True )
+    birth_date = models.DateField( _( "birth date" ), blank = True, null = True  )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
-    australian_regional_immigration = models.BooleanField( _( "willing to move to regional australia?" ), default = False )
+    australian_regional_immigration = models.NullBooleanField( _( "Would you be willing to live in Regional Australia?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    family_overseas = models.NullBooleanField( _( "Any family members who are citizens in other countries?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
 
 
 class UserPersonalFamily( BaseModel ):

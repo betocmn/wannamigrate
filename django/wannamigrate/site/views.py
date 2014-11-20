@@ -9,12 +9,22 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.forms.formsets import formset_factory
+from django.forms.models import inlineformset_factory
+from django.db import transaction
+from django.db.models import ProtectedError
+from django.utils.translation import activate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from wannamigrate.core.util import get_object_or_false
+from wannamigrate.core.util import get_object_or_false, get_list_or_false
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
-    EditUserPersonal
+    UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
+    UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet
+)
+from wannamigrate.core.models import (
+    User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
+    UserLanguage, UserLanguageProficiency
 )
 from wannamigrate.core.mailer import Mailer
 
@@ -333,24 +343,57 @@ def edit_personal( request ):
     :return String - HTML.
     """
 
+    activate( 'pt-br' )
+
     # Initial Settings
     template_data = {}
 
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
 
-    # Create form
-    form = EditUserPersonal( request.POST or None )
+    # Identify UserPersonal object (if it exists)
+    user_personal = get_object_or_false( UserPersonal, user = request.user )
 
-    # If the form has been submitted...
-    if form.is_valid():
+    # Instantiate UserPersonal Form
+    if user_personal:
+        user_personal_form = UserPersonalForm( request.POST or None, instance = user_personal )
+    else:
+        user_personal_form = UserPersonalForm( request.POST or None, user = request.user )
 
-        # Save to the DB and redirect
-        form.save()
-        return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+    # Define if we start with 1 new open field for FamilyOverseas
+    if user_personal and user_personal.family_overseas:
+        extra = 0
+    else:
+        extra = 1
 
-    # pass form to template
-    template_data['form'] = form
+    # Instantiate UserPersonalFamily Formset
+    UserPersonalFamilyInlineFormset = inlineformset_factory( User, UserPersonalFamily, form = UserPersonalFamilyForm, formset = BaseUserPersonalFamilyFormSet, extra = extra, can_delete = True )
+    user_personal_family_formset = UserPersonalFamilyInlineFormset( request.POST or None, instance = request.user )
+
+    # Form was submitted so it tries to validate and save data
+    if user_personal_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves UserPersonal
+            user_personal = user_personal_form.save()
+
+            # Saves UserPersonalFamily Formset
+            if not user_personal.family_overseas:
+                UserPersonalFamily.objects.filter( user = request.user ).delete()
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
+
+            else:
+                if user_personal_family_formset.is_valid():
+                    instances = user_personal_family_formset.save()
+                    return HttpResponseRedirect( request.POST.get( 'next' ) )
+                else:
+                    transaction.set_rollback( True )
+
+    # pass the forms to the template
+    template_data['user_personal_form'] = user_personal_form
+    template_data['user_personal_family_formset'] = user_personal_family_formset
 
     # Print Template
     return render( request, 'site/edit_personal.html', template_data )
@@ -364,8 +407,56 @@ def edit_language( request ):
     :return String - HTML.
     """
 
+    activate( 'pt-br' )
+
+    # Initial Settings
+    template_data = {}
+
+    # Set top bar css class to be fixed on top
+    template_data['top_bar_css_class'] = "fixTopBar"
+
+    # Identify UserPersonal object (if it exists)
+    user_language = get_object_or_false( UserLanguage, user = request.user )
+
+    # Instantiate UserPersonal Form
+    if user_language:
+        user_language_form = UserLanguageForm( request.POST or None, instance = user_language )
+    else:
+        user_language_form = UserLanguageForm( request.POST or None, user = request.user )
+
+    # count if is there any languages added
+    user_language_proficiency = get_list_or_false( UserLanguageProficiency, user = request.user )
+    if user_language_proficiency:
+        extra = 0
+    else:
+        extra = 1
+
+    # Instantiate UserLanguageProficiency Formset
+    UserLanguageProficiencyInlineFormset = inlineformset_factory( User, UserLanguageProficiency, form = UserLanguageProficiencyForm, formset = BaseUserLanguageProficiencyFormSet, extra = extra, can_delete = True )
+    user_language_proficiency_formset = UserLanguageProficiencyInlineFormset( request.POST or None, instance = request.user )
+
+    # Form was submitted so it tries to validate and save data
+    if user_language_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves UserLanguage
+            user_language = user_language_form.save()
+
+            # Saves UserLanguageProficiency Formset
+            if user_language_proficiency_formset.is_valid():
+                instances = user_language_proficiency_formset.save()
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
+            else:
+                transaction.set_rollback( True )
+
+    # pass the forms to the template
+    template_data['user_language_form'] = user_language_form
+    template_data['user_language_proficiency_formset'] = user_language_proficiency_formset
+
     # Print Template
-    return HttpResponse( "Edit Language" )
+    return render( request, 'site/edit_language.html', template_data )
 
 
 def edit_education( request ):

@@ -483,9 +483,6 @@ def question_add( request ):
     AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 10, can_delete = True )
     answer_formset = AnswerInlineFormSet( request.POST or None, countries = countries, points_per_country = points_per_country )
 
-    #answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
-
-
     # Form was submitted so it tries to validate and save data
     if question_form.is_valid():
 
@@ -582,7 +579,7 @@ def question_edit( request, question_id ):
             # Validate answers
             if answer_formset.is_valid():
 
-                # Try to save with a integrity check try
+                # Try to save with a integrity check
                 try:
                     answer_formset.save()
                     messages.success( request, 'Immigration Rule was successfully updated.' )
