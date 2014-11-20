@@ -128,7 +128,7 @@ class ContactForm( BaseForm ):
 
 
 #######################
-# DASHBOARD - PERSONAL FORMS
+# USER PERSONAL FORMS
 #######################
 class UserPersonalForm( BaseModelForm ):
     """
@@ -176,7 +176,7 @@ class UserPersonalFamilyForm( BaseModelForm ):
     Form for USER PERSONAL FAMILY data (If user has family in any other country)
     """
 
-    country = CountryChoiceField( required = False, label = _( "In Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    country = CountryChoiceField( required = True, label = _( "In Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
 
     class Meta:
         model = UserPersonalFamily
@@ -235,7 +235,7 @@ class BaseUserPersonalFamilyFormSet( BaseInlineFormSet ):
 
 
 #######################
-# DASHBOARD - LANGUAGE FORMS
+# USER LANGUAGE FORMS
 #######################
 class UserLanguageForm( BaseModelForm ):
     """
@@ -248,10 +248,6 @@ class UserLanguageForm( BaseModelForm ):
     class Meta:
         model = UserLanguage
         fields = [ 'australian_community_language', 'partner_english_level_answer', 'partner_french_level_answer' ]
-        widgets = {
-            'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
-            'australian_community_language': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
-        }
 
     def __init__( self, *args, **kwargs ):
         """
@@ -387,3 +383,61 @@ class BaseUserLanguageProficiencyFormSet( BaseInlineFormSet ):
             user_language.save()
 
         return instances
+
+
+#######################
+# USER EDUCATION FORMS
+#######################
+class UserEducationForm( BaseModelForm ):
+    """
+    Form for USER EDUCATION data
+    """
+
+    partner_education_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her highest Degree" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE ), empty_label = _( 'Select Degree' ) )
+
+    class Meta:
+        model = UserEducation
+        fields = [ 'regional_australia_study', 'partner_education_level_answer' ]
+        widgets = {
+            'regional_australia_study': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+        }
+
+    def __init__( self, *args, **kwargs ):
+        """
+        Injects user to the form
+
+        :return: Model Object
+        """
+        if 'user' in kwargs:
+            self.user = kwargs.pop( "user" )
+        super( UserEducationForm, self ).__init__( *args, **kwargs )
+
+    def save( self, commit = True ):
+        """
+        Set the request user before saving to the DB
+
+        :return: Model Object
+        """
+        user_education = super( UserEducationForm, self ).save( commit = False )
+        if hasattr( self, 'user' ):
+            user_education.user = self.user
+        if commit:
+            user_education.save()
+        return user_education
+
+
+class UserEducationHistoryForm( BaseModelForm ):
+    """
+    Form for USER EDUCATION HISTORY data (degrees of education)
+    """
+
+    YEARS = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year ) )
+
+    education_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_EDUCATION_DEGREE ), empty_label = _( 'Select Level' ) )
+    country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    year_start = ChoiceField( required = True, label = _( "Start Year" ), choices = YEARS )
+    year_end = ChoiceField( required = True, label = _( "End Year" ), choices = YEARS )
+
+    class Meta:
+        model = UserEducationHistory
+        fields = [ 'id', 'school', 'year_start', 'year_end', 'country', 'education_level_answer', 'user' ]

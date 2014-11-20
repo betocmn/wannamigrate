@@ -71,7 +71,7 @@
 		<div id="update" class="updateFix">
 			<h2>{% trans "Language Details" %}</h2>
 			<p>{% trans "We need all this information to calculate your points." %}</p>
-			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save & Exit" %}</a>
+			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save and Exit" %}</a>
 		</div>
 
 		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
@@ -92,7 +92,7 @@
                 </div>
             {% endif %}
 
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{% trans "What languages do you speak (including your native one)?" %}&nbsp;</span>
+            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{% trans "What languages do you speak (including your native one)?" %}</strong>&nbsp;</span>
             <div class="break10"></div>
 
             {{ user_language_proficiency_formset.management_form }}
@@ -131,7 +131,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_language_form.partner_english_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_language_form.partner_english_level_answer.label }}: &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_language_form.partner_english_level_answer.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_language_form.partner_english_level_answer }}
                     {{ user_language_form.partner_english_level_answer.errors }}
@@ -142,7 +142,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_language_form.partner_french_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_language_form.partner_french_level_answer.label }}: &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_language_form.partner_french_level_answer.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_language_form.partner_french_level_answer }}
                     {{ user_language_form.partner_french_level_answer.errors }}

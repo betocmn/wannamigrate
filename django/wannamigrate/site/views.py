@@ -20,7 +20,8 @@ from wannamigrate.core.util import get_object_or_false, get_list_or_false
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
-    UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet
+    UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
+    UserEducationForm, UserEducationHistoryForm
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
@@ -461,14 +462,62 @@ def edit_language( request ):
 
 def edit_education( request ):
     """
-    Form to edit EDUCATION data from the user
+    Form to edit LANGUAGE data from the user
 
     :param request:
     :return String - HTML.
     """
 
+    activate( 'pt-br' )
+
+    # Initial Settings
+    template_data = {}
+
+    # Set top bar css class to be fixed on top
+    template_data['top_bar_css_class'] = "fixTopBar"
+
+    # Identify UserEducation object (if it exists)
+    user_education = get_object_or_false( UserEducation, user = request.user )
+
+    # Instantiate UserEducationForm
+    if user_education:
+        user_education_form = UserEducationForm( request.POST or None, instance = user_education )
+    else:
+        user_education_form = UserEducationForm( request.POST or None, user = request.user )
+
+    # count if is there any education degrees added
+    user_education_history = get_list_or_false( UserEducationHistory, user = request.user )
+    if user_education_history:
+        extra = 0
+    else:
+        extra = 1
+
+    # Instantiate UserEducationHistory Formset
+    UserEducationHistoryInlineFormset = inlineformset_factory( User, UserEducationHistory, form = UserEducationHistoryForm, extra = extra, can_delete = True )
+    user_education_history_formset = UserEducationHistoryInlineFormset( request.POST or None, instance = request.user )
+
+    # Form was submitted so it tries to validate and save data
+    if user_education_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves UserEducation
+            user_education = user_education_form.save()
+
+            # Saves UserEducationHistory Formset
+            if user_education_history_formset.is_valid():
+                instances = user_education_history_formset.save()
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
+            else:
+                transaction.set_rollback( True )
+
+    # pass the forms to the template
+    template_data['user_education_form'] = user_education_form
+    template_data['user_education_history_formset'] = user_education_history_formset
+
     # Print Template
-    return HttpResponse( "Edit Education" )
+    return render( request, 'site/edit_education.html', template_data )
 
 
 def edit_work( request ):

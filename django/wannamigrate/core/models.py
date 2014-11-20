@@ -303,8 +303,12 @@ class UserEducation( BaseModel ):
         default_permissions = []
 
     # Model Attributes
+    BOOLEAN_CHOICES = (
+        ( True, _( 'Yes' ) ),
+        ( False, _( 'No' ) )
+    )
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    regional_australia_study = models.BooleanField( _( "studied in regional australia?" ), default = False )
+    regional_australia_study = models.NullBooleanField( _( "studied in regional part of australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), blank = True, null = True )
 
 
@@ -321,7 +325,7 @@ class UserEducationHistory( BaseModel ):
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     education_level_answer = models.ForeignKey( Answer, related_name = 'education_level', verbose_name = _( 'education level' ) )
-    school = models.CharField( _( "school" ), max_length = 100 )
+    school = models.CharField( _( "school/university" ), max_length = 100 )
     year_start = models.CharField( _( "start year" ), max_length = 4 )
     year_end = models.CharField( _( "end year" ), max_length = 4 )
 

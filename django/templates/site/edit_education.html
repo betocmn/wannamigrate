@@ -1,0 +1,222 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="{% static 'site/js/jquery.formset.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+
+        /**
+		 * Jquery On Load
+		 *
+		 */
+		$( document ).ready(function() {
+
+            //Submit form when navigating through action links
+            $( ".submit-form" ).click( function() {
+
+                // set next page by looking to the class name
+                if ( $( this ).hasClass( "go-to-personal" ) ){
+                    $( '#next').val( '{% url 'site:edit_personal' %}' );
+                } else if ( $( this ).hasClass( "go-to-language" ) ){
+                    $( '#next').val( '{% url 'site:edit_language' %}' );
+                } else if ( $( this ).hasClass( "go-to-education" ) ){
+                    $( '#next').val( '{% url 'site:edit_education' %}' );
+                } else if ( $( this ).hasClass( "go-to-work" ) ){
+                    $( '#next').val( '{% url 'site:edit_work' %}' );
+                }
+
+                // submit form
+                $( '#main_form').submit();
+
+
+			});
+
+            // Load Formset
+            $( '#main_form div.which-country' ).formset({
+                prefix: '{{ user_education_history_formset.prefix }}',
+                addCssClass: 'addAnother',
+                deleteCssClass: 'closeBtn',
+                deleteText: ''
+            });
+
+			// JS for onload
+			{{ on_load|default:'' }}
+
+		});
+
+
+
+    </script>
+
+    <!-- INLINE CSS -->
+    <style type="text/css">
+
+
+    </style>
+
+{% endblock head %}
+
+
+{% block content %}
+
+	<div class="formBox fullWidth">
+		<div id="update" class="updateFix">
+			<h2>{% trans "Education Details" %}</h2>
+			<p>{% trans "We need all this information to calculate your points." %}</p>
+			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save and Exit" %}</a>
+		</div>
+
+		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
+
+            {% csrf_token %}
+
+            {% if user_education_form.errors or user_education_history_formset.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                    <ul>
+                        <li><strong>{% trans "Errors Found!" %}</strong></li>
+                        {% for error in user_education_form.non_field_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                        {% for error in user_education_history_formset.non_form_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{% trans "What are your education degrees?" %}</strong>&nbsp;</span>
+            <div class="break10"></div>
+
+            {{ user_education_history_formset.management_form }}
+            {% for user_education_history_form in user_education_history_formset %}
+
+                <div>
+
+                    <div class="which-country">
+
+                        {{ user_education_history_form.id }}
+                        {{ user_education_history_form.DELETE }}
+
+
+                        <div style="width: 201px !important;">
+                            <label style="width: 190px !important;" class="smallInput {% if user_education_history_form.school.errors %}has-error{% endif %}">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.school.label }}:
+                                {{ user_education_history_form.school }}
+                                {{ user_education_history_form.school.errors }}
+                            </label>
+                        </div>
+
+                        <div style="width: 201px !important;" class="smallSelect {% if user_education_history_form.country.errors %}has-error{% endif %}">
+                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.country.label }}:</span>
+                            <!-- <div class="break10"></div> -->
+                            <div class="select-style" style="width: 190px !important;">
+                                {{ user_education_history_form.country }}
+                            </div>
+                            {{ user_education_history_form.country.errors }}
+                        </div>
+
+                        <div class="clear"> </div>
+                        <div class="break10"></div>
+
+                        <div style="width: 391px !important; margin-left: 10px;" class="{% if user_education_history_form.education_level_answer.errors %}has-error{% endif %}">
+                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.education_level_answer.label }}:</span>
+                            <!-- <div class="break10"></div> -->
+                            <div class="select-style" style="width: 370px !important;">
+                                {{ user_education_history_form.education_level_answer }}
+                            </div>
+                            {{ user_education_history_form.education_level_answer.errors }}
+                        </div>
+
+                        <div class="clear"> </div>
+                        <div class="break10"></div>
+
+                        <div style="width: 201px !important; margin-left: 10px;" class="smallSelect {% if user_education_history_form.year_start.errors %}has-error{% endif %}">
+                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.year_start.label }}:</span>
+                            <!-- <div class="break10"></div> -->
+                            <div class="select-style" style="width: 190px !important;">
+                                {{ user_education_history_form.year_start }}
+                            </div>
+                            {{ user_education_history_form.year_start.errors }}
+                        </div>
+
+                        <div style="width: 201px !important;" class="smallSelect {% if user_education_history_form.year_end.errors %}has-error{% endif %}">
+                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.year_end.label }}:</span>
+                            <!-- <div class="break10"></div> -->
+                            <div class="select-style" style="width: 190px !important;">
+                                {{ user_education_history_form.year_end }}
+                            </div>
+                            {{ user_education_history_form.year_end.errors }}
+                        </div>
+
+                        <div class="clear"> </div>
+
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+
+            <div class="break10"></div>
+            <div class="break10"></div>
+
+            <div class="{% if user_education_form.partner_education_level_answer.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.partner_education_level_answer.label }}:</strong> &nbsp;</span>
+                <div class="select-style">
+                    {{ user_education_form.partner_education_level_answer }}
+                    {{ user_education_form.partner_education_level_answer.errors }}
+                </div>
+            </div>
+        
+            <div class="break10"></div>
+            <div class="break10"></div>
+
+            <div class="{% if user_education_form.regional_australia_study.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_form.regional_australia_study.label }}</span>
+                <div class="break10"></div>
+                &nbsp;&nbsp;&nbsp;
+                {% for radio in user_education_form.regional_australia_study %}
+                    {% if radio.choice_label != '---------' %}
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                    {% endif %}
+                {% endfor %}
+                {{ user_personal_form.regional_australia_study.errors }}
+            </div>
+
+            <input type="hidden" id="next" name="next" value="" />
+
+		</form>
+	</div>
+
+
+    <!--
+	<div class="opened-features">
+		<p>We have the <b>right tools</b> <br />for you!</p>
+		<a href="#"><span>Check Your english skills with our TOEFL proeficiency test</span></a>
+		<a href="#"><span>Check Your english skills with our TOEFL</span></a>
+		<a href="#"><span>Check Your english skillsour TOEFL proeficiency test</span></a>
+	</div>
+    -->
+
+	<div class="staticFooter">
+		<div>
+			<a href="javascript:void(0)" class="go-to-personal submit-form">{% trans "PERSONAL" %}</a>
+			<span class="leftArrow"> </span>
+			<a href="javascript:void(0)" class="go-to-language submit-form">{% trans "LANGUAGE" %}</a>
+			<span class="leftArrow"> </span>
+			<a href="javascript:void(0)" class="activeFooterLink go-to-education submit-form">{% trans "EDUCATION" %}</a>
+			<span class="leftArrow"> </span>
+			<a href="javascript:void(0)" class="go-to-work submit-form">{% trans "WORK" %}</a>
+		</div>
+		<a href="javascript:void(0)" class="nextBtn go-to-language submit-form">{% trans "NEXT" %} &gt;</a>
+	</div>
+
+{% endblock content %}

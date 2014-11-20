@@ -93,7 +93,7 @@
 		<div id="update" class="updateFix">
 			<h2>{% trans "Personal Details" %}</h2>
 			<p>{% trans "We need all this information to calculate your points." %}</p>
-			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save & Exit." %}</a>
+			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save and Exit" %}</a>
 		</div>
 
 		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
@@ -115,7 +115,7 @@
             {% endif %}
 
             <div class="{% if user_personal_form.birth_date.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.birth_date.label }}: &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.birth_date.label }}:</strong> &nbsp;</span>
                 <div>
                     {{ user_personal_form.birth_date }}
                 </div>
@@ -126,7 +126,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.gender.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.gender.label }}: &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.gender.label }}:</strong> &nbsp;</span>
                 {% for radio in user_personal_form.gender %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -140,7 +140,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.country.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.country.label }}: &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.country.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_personal_form.country }}
                     {{ user_personal_form.country.errors }}
@@ -151,7 +151,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.family_overseas.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.family_overseas.label }}</span>
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.family_overseas.label }}</strong></span>
                 <div class="break10"></div>
                 &nbsp;&nbsp;&nbsp;
                 {% for radio in user_personal_form.family_overseas %}
@@ -184,8 +184,8 @@
                                 <div class="break10"></div>
                                 <div class="select-style">
                                   {{ user_personal_family_form.country }}
-                                  {{ user_personal_family_form.country.errors }}
                                 </div>
+
                             </div>
 
                         </div>
@@ -198,9 +198,8 @@
 
             <div class="break10"></div>
 
-
             <div class="{% if user_personal_form.australian_regional_immigration.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_form.australian_regional_immigration.label }}</span>
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.australian_regional_immigration.label }}</strong></span>
                 <div class="break10"></div>
                 &nbsp;&nbsp;&nbsp;
                 {% for radio in user_personal_form.australian_regional_immigration %}

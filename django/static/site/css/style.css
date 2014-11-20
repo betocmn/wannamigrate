@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);*/
 body{
 	font-family: 'Open Sans', sans-serif;
 }
@@ -1166,7 +1166,7 @@ form .has-error input, form .has-error textarea, form .has-error select {
 }
 
 .addAnother{
-	background: url('../img/addAnotherBtn.png') top;
+	background: url('../img/addAnotherBtn.png') bottom;
 	width: 120px;
 	height: 26px;
 	line-height: 26px;
@@ -1179,7 +1179,7 @@ form .has-error input, form .has-error textarea, form .has-error select {
 	text-decoration: none;
 }
 .addAnother:hover{
-	background-position: bottom;
+	background-position: top;
 }
 .which-country{
 	position: relative;
@@ -1276,12 +1276,12 @@ form .has-error input, form .has-error textarea, form .has-error select {
 	float: left;
 }
 .smallInput input{
-	width: 120px !important;
+	width: 138px !important;
 }
 .smallSelect{
 	width: 120px !important;
 	float: left;
-	margin-left: 20px;
+	margin-left: 5px;
 	margin-top: 5px;
 }
 
