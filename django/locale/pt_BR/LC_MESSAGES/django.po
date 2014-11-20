@@ -3992,7 +3992,7 @@ msgstr ""
 
 #: templates/db_translations/core_country.html:163
 msgid "Germany"
-msgstr ""
+msgstr "Alemanha"
 
 #: templates/db_translations/core_country.html:164
 msgid "Gibraltar"
@@ -4368,7 +4368,7 @@ msgstr ""
 
 #: templates/db_translations/core_language.html:3
 msgid "Afar"
-msgstr ""
+msgstr "Atfar (Português)"
 
 #: templates/db_translations/core_language.html:4
 msgid "Afrikaans"

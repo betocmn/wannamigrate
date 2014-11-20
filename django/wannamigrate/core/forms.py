@@ -1,4 +1,6 @@
 from django import forms
+from wannamigrate.core.models import Country, Language
+from django.forms import ModelChoiceField
 
 class _BaseForm( object ):
     """
@@ -32,3 +34,20 @@ class BaseForm( _BaseForm, forms.Form ):
     Making the Base Form use our _BaseForm
     """
     pass
+
+
+
+class CountryChoiceField( ModelChoiceField ):
+    """
+    Custom Model for countries, to get translation
+    """
+
+    choices = Country.get_translated_tuple()
+
+
+class LanguageChoiceField( ModelChoiceField ):
+    """
+    Custom Model for languages, to get translation
+    """
+
+    choices = Language.get_translated_tuple()

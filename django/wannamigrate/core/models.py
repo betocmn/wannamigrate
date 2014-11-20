@@ -82,7 +82,25 @@ class Country( BaseModel ):
         default_permissions = []
 
     def __str__( self ):
+        """
+        String representation of this model
+        :return: String
+        """
         return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple():
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        countries = Country.objects.order_by( 'name' )
+        result = []
+        for country in countries:
+            result.append( ( country.id, _( country.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Country' ) )] + result  )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 100 )
@@ -145,6 +163,20 @@ class Language( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple():
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        languages = Language.objects.order_by( 'name' )
+        result = []
+        for language in languages:
+            result.append( ( language.id, _( language.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Language' ) )] + result  )
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 25 )

@@ -44,10 +44,10 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_PROFESSIONAL_YEAR_AU: { 'method': 'get_professional_year_au_points', 'type': 'education' },
         settings.ID_QUESTION_LIVE_REGIONAL_AU: { 'method': 'get_live_regional_au_points', 'type': 'personal' },
         settings.ID_QUESTION_COMMUNITY_LANGUAGE_AU: { 'method': 'get_community_language_au_points', 'type': 'language' },
-        settings.ID_QUESTION_PARNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work' },
-        settings.ID_QUESTION_PARNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language' },
-        settings.ID_QUESTION_PARNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language' },
-        settings.ID_QUESTION_PARNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
+        settings.ID_QUESTION_PARTNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work' },
+        settings.ID_QUESTION_PARTNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language' },
+        settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language' },
+        settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
     }
 
     def __init__( self, user_id, country_id ):
@@ -98,7 +98,7 @@ class ImmigrationCalculator( object ):
     def __get_points( self, value, type ):
         """
         Search the table 'core_countrypoints' by the value to localize
-        how many points it' worth.
+        how many points it's worth.
 
         type needs to be either:
             'id' - the search will be per answer_id
@@ -165,6 +165,8 @@ class ImmigrationCalculator( object ):
                 result['total'] += points
                 if type is not None:
                     result[type] += points
+
+        # @TODO do additional points here (community language, etc..)
 
         return result
 
