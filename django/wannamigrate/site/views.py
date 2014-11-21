@@ -21,11 +21,12 @@ from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
-    UserEducationForm, UserEducationHistoryForm
+    UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
+    UserWorkOfferForm, BaseUserWorkOfferFormSet
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
-    UserLanguage, UserLanguageProficiency
+    UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer
 )
 from wannamigrate.core.mailer import Mailer
 
@@ -344,7 +345,7 @@ def edit_personal( request ):
     :return String - HTML.
     """
 
-    activate( 'pt-br' )
+    #activate( 'pt-br' )
 
     # Initial Settings
     template_data = {}
@@ -408,8 +409,6 @@ def edit_language( request ):
     :return String - HTML.
     """
 
-    activate( 'pt-br' )
-
     # Initial Settings
     template_data = {}
 
@@ -467,8 +466,6 @@ def edit_education( request ):
     :param request:
     :return String - HTML.
     """
-
-    activate( 'pt-br' )
 
     # Initial Settings
     template_data = {}
@@ -528,5 +525,85 @@ def edit_work( request ):
     :return String - HTML.
     """
 
+    # Initial Settings
+    template_data = {}
+
+    # Set top bar css class to be fixed on top
+    template_data['top_bar_css_class'] = "fixTopBar"
+
+    # Identify UserWork object (if it exists)
+    user_work = get_object_or_false( UserWork, user = request.user )
+
+    # Instantiate UserWorkForm
+    if user_work:
+        user_work_form = UserWorkForm( request.POST or None, instance = user_work )
+    else:
+        user_work_form = UserWorkForm( request.POST or None, user = request.user )
+
+    # count if is there any work experiences added
+    user_work_experience = get_list_or_false( UserWorkExperience, user = request.user )
+    if user_work_experience:
+        extra_work_experience = 0
+    else:
+        extra_work_experience = 1
+
+    # Instantiate UserWorkExperience Formset
+    UserWorkExperienceInlineFormset = inlineformset_factory( User, UserWorkExperience, form = UserWorkExperienceForm, extra = extra_work_experience, can_delete = True )
+    user_work_experience_formset = UserWorkExperienceInlineFormset( request.POST or None, instance = request.user )
+
+    # Define if we start with 1 new open field for UserWorkOffer
+    if user_work and user_work.work_offer:
+        extra_work_offer = 0
+    else:
+        extra_work_offer = 1
+
+    # Instantiate UserWorkOffer Formset
+    UserWorkOfferInlineFormset = inlineformset_factory( User, UserWorkOffer, form = UserWorkOfferForm, extra = extra_work_offer, can_delete = True )
+    user_work_offer_formset = UserWorkOfferInlineFormset( request.POST or None, instance = request.user )
+
+    # Form was submitted so it tries to validate and save data
+    if user_work_form.is_valid():
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Saves UserWork
+            user_work = user_work_form.save()
+
+            # Saves UserWorkExperience Formset
+            if user_work_experience_formset.is_valid():
+                instances = user_work_experience_formset.save()
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
+            else:
+                transaction.set_rollback( True )
+
+            # Saves UserWorkExperience Formset
+            if not user_work.work_offer:
+                UserWorkOffer.objects.filter( user = request.user ).delete()
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
+
+            else:
+                if user_work_experience_formset.is_valid() and user_work_offer_formset.is_valid():
+                    user_work_experience_formset.save()
+                    user_work_offer_formset.save()
+                    return HttpResponseRedirect( request.POST.get( 'next' ) )
+                else:
+                    transaction.set_rollback( True )
+
+    # pass the forms to the template
+    template_data['user_work_form'] = user_work_form
+    template_data['user_work_experience_formset'] = user_work_experience_formset
+    template_data['user_work_offer_formset'] = user_work_offer_formset
+
     # Print Template
-    return HttpResponse( "Edit Work" )
+    return render( request, 'site/edit_work.html', template_data )
+
+
+def calculate_points( request ):
+    """
+    Heart of the system.  View that process all user data and calculate his points
+
+    :param request:
+    :return Redirect
+    """
+    return HttpResponse( 'Calculate Points Here' )

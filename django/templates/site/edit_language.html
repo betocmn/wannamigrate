@@ -31,6 +31,8 @@
                     $( '#next').val( '{% url 'site:edit_education' %}' );
                 } else if ( $( this ).hasClass( "go-to-work" ) ){
                     $( '#next').val( '{% url 'site:edit_work' %}' );
+                } else {
+                    $( '#next').val( '{% url 'site:calculate_points' %}' );
                 }
 
                 // submit form
@@ -166,6 +168,7 @@
     -->
 
 	<div class="staticFooter">
+        <a href="javascript:void(0)" class="previousBtn go-to-personal submit-form">&lt; {% trans "PREVIOUS" %}</a>
 		<div>
 			<a href="javascript:void(0)" class="go-to-personal submit-form">{% trans "PERSONAL" %}</a>
 			<span class="leftArrow"> </span>
@@ -175,7 +178,7 @@
 			<span class="leftArrow"> </span>
 			<a href="javascript:void(0)" class="go-to-work submit-form">{% trans "WORK" %}</a>
 		</div>
-		<a href="javascript:void(0)" class="nextBtn go-to-language submit-form">{% trans "NEXT" %} &gt;</a>
+		<a href="javascript:void(0)" class="nextBtn go-to-education submit-form">{% trans "NEXT" %} &gt;</a>
 	</div>
 
 {% endblock content %}

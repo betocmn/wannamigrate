@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField, ChoiceField, Select
+from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField, ChoiceField, Select, TypedChoiceField
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
@@ -7,7 +7,7 @@ from django.forms.models import BaseInlineFormSet
 from datetime import date
 from django.conf import settings
 from wannamigrate.core.mailer import Mailer
-from wannamigrate.core.util import get_object_or_false
+from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, LanguageChoiceField
 from wannamigrate.core.models import (
     Answer, AnswerCategory, Question, Language,
@@ -441,3 +441,126 @@ class UserEducationHistoryForm( BaseModelForm ):
     class Meta:
         model = UserEducationHistory
         fields = [ 'id', 'school', 'year_start', 'year_end', 'country', 'education_level_answer', 'user' ]
+
+
+#######################
+# USER WORK FORMS
+#######################
+class UserWorkForm( BaseModelForm ):
+    """
+    Form for USER WORK data
+    """
+
+    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_OCCUPATION ), empty_label = _( 'Select Occupation' ) )
+    partner_occupation_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her occupation" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_OCCUPATION ), empty_label = _( 'Select Occupation' ) )
+    partner_occupation_months = TypedChoiceField( required = False, label = _( "If you have a partner, what is his/her time of work experience" ), choices = get_months_duration_tuple(), empty_value = 0  )
+
+    class Meta:
+        model = UserWork
+        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'partner_occupation_answer', 'partner_occupation_months', 'work_offer' ]
+        widgets = {
+            'willing_to_invest': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'canadian_startup_letter': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'australian_professional_year': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'canadian_partner_work_study_experience': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'work_offer': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+        }
+
+    def __init__( self, *args, **kwargs ):
+        """
+        Injects user to the form
+
+        :return: Model Object
+        """
+        if 'user' in kwargs:
+            self.user = kwargs.pop( "user" )
+        super( UserWorkForm, self ).__init__( *args, **kwargs )
+
+    def save( self, commit = True ):
+        """
+        Set the request user before saving to the DB
+
+        :return: Model Object
+        """
+        user_work = super( UserWorkForm, self ).save( commit = False )
+        if hasattr( self, 'user' ):
+            user_work.user = self.user
+        if commit:
+            user_work.save()
+        return user_work
+
+
+class UserWorkExperienceForm( BaseModelForm ):
+    """
+    Form for USER WORK EXPERIENCE data (degrees of work)
+    """
+
+    country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    months = ChoiceField( required = True, label = _( "Duration" ), choices = get_months_duration_tuple() )
+
+    class Meta:
+        model = UserWorkExperience
+        fields = [ 'id', 'company', 'months', 'country', 'user' ]
+        
+        
+class UserWorkOfferForm( BaseModelForm ):
+    """
+    Form for USER WORK OFFER data (If user has job offers from other countries)
+    """
+
+    country = CountryChoiceField( required = True, label = _( "From Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+
+    class Meta:
+        model = UserWorkOffer
+        fields = [ 'id', 'country', 'user' ]
+
+
+class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
+    """
+    Formset for answers / country points
+    """
+
+    def clean( self ):
+        """
+        Checks that no two records have the same country.
+
+        :return: None
+        """
+        if any( self.errors ):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+        countries = []
+        for form in self.forms:
+            if form not in self.deleted_forms and 'country' in form.cleaned_data:
+                country = form.cleaned_data['country'].id
+                if country in countries:
+                    raise forms.ValidationError( _( "You must choose different countries on Work Offers." ) )
+                countries.append( country )
+
+    def save( self ):
+        """
+        After saving the forms, it search if a family member overseas
+        was entered. If yes, we need to update the field (boolean)
+        on the UserPersonal model.
+
+        :return: List of models
+        """
+        instances = super( BaseUserWorkOfferFormSet, self ).save()
+
+        if self.has_changed():
+
+            # iterate over forms submitted and check if a work offer was added
+            work_offer = False
+            for form in self.forms:
+                user = form.cleaned_data['user']
+                if form not in self.deleted_forms:
+                    if form.cleaned_data['country'].id is not None:
+                        work_offer = True
+                        break
+
+            # Update UserWork object
+            user_work = UserWork.objects.get( user = user )
+            user_work.work_offer = work_offer
+            user_work.save()
+
+        return instances

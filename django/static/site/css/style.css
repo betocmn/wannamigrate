@@ -1,4 +1,4 @@
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 body{
 	font-family: 'Open Sans', sans-serif;
 }
@@ -1239,6 +1239,22 @@ form .has-error input, form .has-error textarea, form .has-error select {
 	border-left: 1px solid #494949;
 }
 .nextBtn:hover{
+	background: #fccc00;
+}
+
+.previousBtn{
+	text-decoration: none;
+	color: #FFF;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	display: block;
+	line-height: 70px;
+	padding: 0 45px;
+	background: #363636;
+	border-left: 1px solid #494949;
+}
+.previousBtn:hover{
 	background: #fccc00;
 }
 

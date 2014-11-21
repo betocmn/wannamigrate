@@ -50,6 +50,8 @@
                     $( '#next').val( '{% url 'site:edit_education' %}' );
                 } else if ( $( this ).hasClass( "go-to-work" ) ){
                     $( '#next').val( '{% url 'site:edit_work' %}' );
+                } else {
+                    $( '#next').val( '{% url 'site:calculate_points' %}' );
                 }
 
                 // submit form

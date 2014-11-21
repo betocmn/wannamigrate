@@ -31,6 +31,8 @@
                     $( '#next').val( '{% url 'site:edit_education' %}' );
                 } else if ( $( this ).hasClass( "go-to-work" ) ){
                     $( '#next').val( '{% url 'site:edit_work' %}' );
+                } else {
+                    $( '#next').val( '{% url 'site:calculate_points' %}' );
                 }
 
                 // submit form
@@ -171,15 +173,15 @@
                 <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.partner_education_level_answer.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_education_form.partner_education_level_answer }}
-                    {{ user_education_form.partner_education_level_answer.errors }}
                 </div>
+                {{ user_education_form.partner_education_level_answer.errors }}
             </div>
         
             <div class="break10"></div>
             <div class="break10"></div>
 
             <div class="{% if user_education_form.regional_australia_study.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_form.regional_australia_study.label }}</span>
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.regional_australia_study.label }}</strong></span>
                 <div class="break10"></div>
                 &nbsp;&nbsp;&nbsp;
                 {% for radio in user_education_form.regional_australia_study %}
@@ -188,7 +190,7 @@
                         <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
                     {% endif %}
                 {% endfor %}
-                {{ user_personal_form.regional_australia_study.errors }}
+                {{ user_education_form.regional_australia_study.errors }}
             </div>
 
             <input type="hidden" id="next" name="next" value="" />
@@ -207,6 +209,7 @@
     -->
 
 	<div class="staticFooter">
+        <a href="javascript:void(0)" class="previousBtn go-to-language submit-form">&lt; {% trans "PREVIOUS" %}</a>
 		<div>
 			<a href="javascript:void(0)" class="go-to-personal submit-form">{% trans "PERSONAL" %}</a>
 			<span class="leftArrow"> </span>
@@ -216,7 +219,7 @@
 			<span class="leftArrow"> </span>
 			<a href="javascript:void(0)" class="go-to-work submit-form">{% trans "WORK" %}</a>
 		</div>
-		<a href="javascript:void(0)" class="nextBtn go-to-language submit-form">{% trans "NEXT" %} &gt;</a>
+		<a href="javascript:void(0)" class="nextBtn go-to-work submit-form">{% trans "NEXT" %} &gt;</a>
 	</div>
 
 {% endblock content %}

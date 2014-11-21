@@ -28,5 +28,6 @@ urlpatterns = patterns('',
     url( r'^edit_language/$', views.edit_language, name = 'edit_language' ),
     url( r'^edit_education/$', views.edit_education, name = 'edit_education' ),
     url( r'^edit_work/$', views.edit_work, name = 'edit_work' ),
+    url( r'^calculate_points/$', views.calculate_points, name = 'calculate_points' ),
 
 )

@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import _get_queryset
 from calendar import monthrange
 from datetime import date, datetime, timedelta
+from django.utils.translation import ugettext_lazy as _
 
 
 def calculate_age( birth_date ):
@@ -192,3 +193,38 @@ def get_list_or_false( klass, *args, **kwargs ):
     if not obj_list:
         return False
     return obj_list
+
+def get_( klass, *args, **kwargs ):
+    """
+    Uses filter() to return a list of objects, or False if
+    the list is empty.
+
+    klass may be a Model, Manager, or QuerySet object. All other passed
+    arguments and keyword arguments are used in the filter() query.
+    """
+    queryset = _get_queryset( klass )
+    obj_list = list( queryset.filter( *args, **kwargs ) )
+    if not obj_list:
+        return False
+    return obj_list
+
+def get_months_duration_tuple():
+    """
+    Returns a tuple of records with months/years for work duration
+    :return: String
+    """
+    result = []
+    for months in range( 6, 126, 6 ):
+        years = months / 12
+        if years.is_integer():
+            years = int( years )
+        if years < 1:
+            label = _( '6 months' )
+        elif years == 1:
+            label = _( '1 year' )
+        elif years == 10:
+            label = _( '10 years or more' )
+        else:
+            label = _( '%s years' ) % ( years )
+        result.append( ( months, label ) )
+    return tuple( [( '', _( 'Select Duration' ) )] + result  )

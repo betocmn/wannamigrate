@@ -451,13 +451,19 @@ class UserWork( BaseModel ):
         default_permissions = []
 
     # Model Attributes
+    BOOLEAN_CHOICES = (
+        ( True, _( 'Yes' ) ),
+        ( False, _( 'No' ) )
+    )
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ), blank = True, null = True )
-    partner_skills = models.BooleanField( _( "partner skills?" ), default = False )
-    willing_to_invest = models.BooleanField( _( "willing to invest?" ), default = False )
-    canadian_startup_letter = models.BooleanField( _( "startup letter from canada?" ), default = False )
-    australian_professional_year = models.BooleanField( _( "professional year course in australia?" ), default = False )
-    canadian_partner_work_study_experience = models.BooleanField( _( "has partner worked or studied in canada?" ), default = False )
+    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ), related_name = 'occupation_answer', blank = True, null = True )
+    partner_occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'partner occupation' ), related_name = 'partner_occupation_answer', blank = True, null = True )
+    partner_occupation_months = models.PositiveSmallIntegerField( _( "Experience" ), blank = True, null = True, default = 0 )
+    willing_to_invest = models.NullBooleanField( _( "are you willing to invest money on the country of destination" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    canadian_startup_letter = models.NullBooleanField( _( "do you have a startup recommendation letter approved by canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    australian_professional_year = models.NullBooleanField( _( "Did you complete a Professional Year Course in Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    canadian_partner_work_study_experience = models.NullBooleanField( _( "If you have a partner, has he/she worked or studied in Canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    work_offer = models.NullBooleanField( _( "Do you have a work offer overseas" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
 
 
 class UserWorkOffer( BaseModel ):
@@ -485,8 +491,6 @@ class UserWorkExperience( BaseModel ):
 
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     company = models.CharField( _( "company" ), max_length = 100 )
-    start_date = models.DateField( _( "start date" ) )
-    end_date = models.DateField( _( "end date" ) )
+    months = models.PositiveSmallIntegerField( _( "Duration of Employment" ) )
