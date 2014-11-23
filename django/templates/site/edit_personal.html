@@ -185,8 +185,10 @@
                                 <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_family_form.country.label }}?</span>
                                 <div class="break10"></div>
                                 <div class="select-style">
-                                  {{ user_personal_family_form.country }}
+                                    {{ user_personal_family_form.country }}
                                 </div>
+
+                                {{ user_personal_family_form.country.errors }}
 
                             </div>
 

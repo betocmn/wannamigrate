@@ -105,7 +105,7 @@
 
             {% csrf_token %}
 
-            {% if user_work_form.errors or user_work_experience_formset.errors %}
+            {% if user_work_form.errors or user_work_experience_formset.errors or user_work_offer_form.errors %}
                 <div class="alert alert-danger alert-dismissable">
                     <ul>
                         <li><strong>{% trans "Errors Found!" %}</strong></li>
@@ -113,6 +113,9 @@
                             <li>{{ error|escape }}</li>
                         {% endfor %}
                         {% for error in user_work_experience_formset.non_form_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                        {% for error in user_work_offer_formset.non_form_errors %}
                             <li>{{ error|escape }}</li>
                         {% endfor %}
                     </ul>
@@ -270,6 +273,8 @@
                                     {{ user_work_offer_form.country }}
                                 </div>
 
+                                {{ user_work_offer_form.country.errors }}
+
                             </div>
 
                         </div>
@@ -277,33 +282,11 @@
                     {% endfor %}
 
                 <div class="break10"></div>
+                <div class="break10"></div>
+                <div class="break10"></div>
 
             </div>
-            
-            <div class="break10"></div>
-			<div class="break10"></div>
 
-            <div class="{% if user_work_form.partner_occupation_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.partner_occupation_answer.label }}?</strong> &nbsp;</span>
-                <div class="select-style">
-                    {{ user_work_form.partner_occupation_answer }}
-                </div>
-                {{ user_work_form.partner_occupation_answer.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <div class="{% if user_work_form.partner_occupation_months.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.partner_occupation_months.label }}?</strong> &nbsp;</span>
-                <div class="select-style">
-                    {{ user_work_form.partner_occupation_months }}
-                </div>
-                {{ user_work_form.partner_occupation_months.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
 
             <div class="{% if user_work_form.canadian_partner_work_study_experience.errors %}has-error{% endif %}">
                 <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.canadian_partner_work_study_experience.label }}?</strong></span>
@@ -316,6 +299,22 @@
                     {% endif %}
                 {% endfor %}
                 {{ user_work_form.canadian_partner_work_study_experience.errors }}
+            </div>
+
+            <div class="break10"></div>
+            <div class="break10"></div>
+            
+            <div class="{% if user_work_form.partner_skills.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.partner_skills.label }}?</strong></span>
+                <div class="break10"></div>
+                &nbsp;&nbsp;&nbsp;
+                {% for radio in user_work_form.partner_skills %}
+                    {% if radio.choice_label != '---------' %}
+                        {{ radio.tag }}
+                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                    {% endif %}
+                {% endfor %}
+                {{ user_work_form.partner_skills.errors }}
             </div>
 
             <input type="hidden" id="next" name="next" value="" />

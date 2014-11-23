@@ -16,7 +16,10 @@ from django.db.models import ProtectedError
 from django.utils.translation import activate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from wannamigrate.core.util import get_object_or_false, get_list_or_false
+from django.conf import settings
+import math
+from wannamigrate.core.immigration_calculator import ImmigrationCalculator
+from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
@@ -26,7 +29,8 @@ from wannamigrate.site.forms import (
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
-    UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer
+    UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer,
+    Country, UserResult
 )
 from wannamigrate.core.mailer import Mailer
 
@@ -329,14 +333,52 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initial settings
+    template_data = {}
+    template_data['au_min_points'] = settings.MINIMUM_POINTS_AUSTRALIA
+    template_data['ca_min_points'] = settings.MINIMUM_POINTS_CANADA
+    template_data['nz_min_points'] = settings.MINIMUM_POINTS_NEW_ZEALAND
+    template_data['au_points'] = 0
+    template_data['ca_points'] = 0
+    template_data['nz_points'] = 0
+    template_data['au_percentage_css_class'] = ''
+    template_data['ca_percentage_css_class'] = ''
+    template_data['nz_percentage_css_class'] = ''
+
+
+    # Get User Results
+    try:
+        user_result = UserResult.objects.filter( user = request.user )
+    except UserPersonal.DoesNotExist:
+        user_result = False
+
+    # Pass total points per country to template
+    if user_result:
+        for item in user_result:
+            if item.country.id == settings.ID_COUNTRY_AUSTRALIA:
+                template_data['au_points'] = item.score_total
+            elif item.country.id == settings.ID_COUNTRY_CANADA:
+                template_data['ca_points'] = item.score_total
+            elif item.country.id == settings.ID_COUNTRY_NEW_ZEALAND:
+                template_data['nz_points'] = item.score_total
+
+    # Define the percentage CSS class to use around country flags for progress bar
+    au_percentage = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
+    ca_percentage = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
+    nz_percentage = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
+    template_data['au_percentage_css_class'] = get_country_points_css_class( au_percentage )
+    template_data['ca_percentage_css_class'] = get_country_points_css_class( ca_percentage )
+    template_data['nz_percentage_css_class'] = get_country_points_css_class( nz_percentage )
+
     # Print Template
-    return render( request, 'site/dashboard.html' )
+    return render( request, 'site/dashboard.html', template_data )
 
 
 
 #######################
 # EDIT USER INFORMATION VIEWS
 #######################
+@login_required
 def edit_personal( request ):
     """
     Form to edit PERSONAL user data
@@ -354,7 +396,10 @@ def edit_personal( request ):
     template_data['top_bar_css_class'] = "fixTopBar"
 
     # Identify UserPersonal object (if it exists)
-    user_personal = get_object_or_false( UserPersonal, user = request.user )
+    try:
+        user_personal = request.user.userpersonal
+    except UserPersonal.DoesNotExist:
+        user_personal = False
 
     # Instantiate UserPersonal Form
     if user_personal:
@@ -362,14 +407,8 @@ def edit_personal( request ):
     else:
         user_personal_form = UserPersonalForm( request.POST or None, user = request.user )
 
-    # Define if we start with 1 new open field for FamilyOverseas
-    if user_personal and user_personal.family_overseas:
-        extra = 0
-    else:
-        extra = 1
-
     # Instantiate UserPersonalFamily Formset
-    UserPersonalFamilyInlineFormset = inlineformset_factory( User, UserPersonalFamily, form = UserPersonalFamilyForm, formset = BaseUserPersonalFamilyFormSet, extra = extra, can_delete = True )
+    UserPersonalFamilyInlineFormset = inlineformset_factory( User, UserPersonalFamily, form = UserPersonalFamilyForm, formset = BaseUserPersonalFamilyFormSet, extra = 0, can_delete = True, validate_min = True, min_num = 1 )
     user_personal_family_formset = UserPersonalFamilyInlineFormset( request.POST or None, instance = request.user )
 
     # Form was submitted so it tries to validate and save data
@@ -401,6 +440,7 @@ def edit_personal( request ):
     return render( request, 'site/edit_personal.html', template_data )
 
 
+@login_required
 def edit_language( request ):
     """
     Form to edit LANGUAGE data from the user
@@ -416,7 +456,10 @@ def edit_language( request ):
     template_data['top_bar_css_class'] = "fixTopBar"
 
     # Identify UserPersonal object (if it exists)
-    user_language = get_object_or_false( UserLanguage, user = request.user )
+    try:
+        user_language = request.user.userlanguage
+    except UserLanguage.DoesNotExist:
+        user_language = False
 
     # Instantiate UserPersonal Form
     if user_language:
@@ -424,9 +467,15 @@ def edit_language( request ):
     else:
         user_language_form = UserLanguageForm( request.POST or None, user = request.user )
 
+    # search for language proficiency
+    try:
+        count = request.user.userlanguageproficiency_set.count()
+        user_language_proficiency_exists = True if count > 0 else False
+    except UserWorkExperience.DoesNotExist:
+        user_language_proficiency_exists = False
+
     # count if is there any languages added
-    user_language_proficiency = get_list_or_false( UserLanguageProficiency, user = request.user )
-    if user_language_proficiency:
+    if user_language_proficiency_exists:
         extra = 0
     else:
         extra = 1
@@ -459,6 +508,7 @@ def edit_language( request ):
     return render( request, 'site/edit_language.html', template_data )
 
 
+@login_required
 def edit_education( request ):
     """
     Form to edit LANGUAGE data from the user
@@ -474,7 +524,10 @@ def edit_education( request ):
     template_data['top_bar_css_class'] = "fixTopBar"
 
     # Identify UserEducation object (if it exists)
-    user_education = get_object_or_false( UserEducation, user = request.user )
+    try:
+        user_education = request.user.usereducation
+    except UserEducation.DoesNotExist:
+        user_education = False
 
     # Instantiate UserEducationForm
     if user_education:
@@ -482,9 +535,15 @@ def edit_education( request ):
     else:
         user_education_form = UserEducationForm( request.POST or None, user = request.user )
 
+    # search for education history
+    try:
+        count = request.user.usereducationhistory_set.count()
+        user_education_history_exists = True if count > 0 else False
+    except UserWorkExperience.DoesNotExist:
+        user_education_history_exists = False
+
     # count if is there any education degrees added
-    user_education_history = get_list_or_false( UserEducationHistory, user = request.user )
-    if user_education_history:
+    if user_education_history_exists:
         extra = 0
     else:
         extra = 1
@@ -517,6 +576,7 @@ def edit_education( request ):
     return render( request, 'site/edit_education.html', template_data )
 
 
+@login_required
 def edit_work( request ):
     """
     Form to edit WORK data from the user
@@ -532,7 +592,10 @@ def edit_work( request ):
     template_data['top_bar_css_class'] = "fixTopBar"
 
     # Identify UserWork object (if it exists)
-    user_work = get_object_or_false( UserWork, user = request.user )
+    try:
+        user_work = request.user.userwork
+    except UserWork.DoesNotExist:
+        user_work = False
 
     # Instantiate UserWorkForm
     if user_work:
@@ -540,9 +603,15 @@ def edit_work( request ):
     else:
         user_work_form = UserWorkForm( request.POST or None, user = request.user )
 
+    # search for education history
+    try:
+        count = request.user.userworkexperience_set.count()
+        user_work_experience_exists = True if count > 0 else False
+    except UserWorkExperience.DoesNotExist:
+        user_work_experience_exists = False
+
     # count if is there any work experiences added
-    user_work_experience = get_list_or_false( UserWorkExperience, user = request.user )
-    if user_work_experience:
+    if user_work_experience_exists:
         extra_work_experience = 0
     else:
         extra_work_experience = 1
@@ -551,16 +620,13 @@ def edit_work( request ):
     UserWorkExperienceInlineFormset = inlineformset_factory( User, UserWorkExperience, form = UserWorkExperienceForm, extra = extra_work_experience, can_delete = True )
     user_work_experience_formset = UserWorkExperienceInlineFormset( request.POST or None, instance = request.user )
 
-    # Define if we start with 1 new open field for UserWorkOffer
-    if user_work and user_work.work_offer:
-        extra_work_offer = 0
-    else:
-        extra_work_offer = 1
-
     # Instantiate UserWorkOffer Formset
-    UserWorkOfferInlineFormset = inlineformset_factory( User, UserWorkOffer, form = UserWorkOfferForm, extra = extra_work_offer, can_delete = True )
-    user_work_offer_formset = UserWorkOfferInlineFormset( request.POST or None, instance = request.user )
-
+    UserWorkOfferInlineFormset = inlineformset_factory(
+        User, UserWorkOffer, form = UserWorkOfferForm, formset = BaseUserWorkOfferFormSet,
+        extra = 0, can_delete = True, validate_min = True, min_num = 1
+    )
+    user_work_offer_formset = UserWorkOfferInlineFormset( request.POST or None, instance = request.user  )
+    
     # Form was submitted so it tries to validate and save data
     if user_work_form.is_valid():
 
@@ -572,23 +638,23 @@ def edit_work( request ):
 
             # Saves UserWorkExperience Formset
             if user_work_experience_formset.is_valid():
-                instances = user_work_experience_formset.save()
-                return HttpResponseRedirect( request.POST.get( 'next' ) )
+                user_work_experience_formset.save()
+
+                # Saves UserWorkOffer Formset
+                if not user_work.work_offer:
+                    UserWorkOffer.objects.filter( user = request.user ).delete()
+                    return HttpResponseRedirect( request.POST.get( 'next' ) )
+                else:
+                    if user_work_offer_formset.is_valid():
+                        user_work_offer_formset.save()
+                        return HttpResponseRedirect( request.POST.get( 'next' ) )
+                    else:
+                        transaction.set_rollback( True )
+
             else:
                 transaction.set_rollback( True )
 
-            # Saves UserWorkExperience Formset
-            if not user_work.work_offer:
-                UserWorkOffer.objects.filter( user = request.user ).delete()
-                return HttpResponseRedirect( request.POST.get( 'next' ) )
 
-            else:
-                if user_work_experience_formset.is_valid() and user_work_offer_formset.is_valid():
-                    user_work_experience_formset.save()
-                    user_work_offer_formset.save()
-                    return HttpResponseRedirect( request.POST.get( 'next' ) )
-                else:
-                    transaction.set_rollback( True )
 
     # pass the forms to the template
     template_data['user_work_form'] = user_work_form
@@ -599,11 +665,42 @@ def edit_work( request ):
     return render( request, 'site/edit_work.html', template_data )
 
 
+#######################
+# CALCULATE POINTS VIEWS
+#######################
+@login_required
 def calculate_points( request ):
     """
-    Heart of the system.  View that process all user data and calculate his points
+    Heart of the system.
+    It process all user data and calculate his points to all countries with
+    immigration support enabled
 
     :param request:
     :return Redirect
     """
-    return HttpResponse( 'Calculate Points Here' )
+
+    # First we get every country with immigration support enabled
+    countries = Country.objects.filter( immigration_enabled = True )
+    for country in countries:
+
+        # calculate points for this country
+        immigration_calculator = ImmigrationCalculator( request.user, country )
+        results = immigration_calculator.get_total_results()
+
+        # save results for this country
+        updated_values = {
+            'score_total': results['total'],
+            'score_personal': results['personal'],
+            'score_language': results['language'],
+            'score_education': results['education'],
+            'score_work': results['work'],
+        }
+
+        obj, created = UserResult.objects.update_or_create(
+            user = request.user, country = country, defaults = updated_values
+        )
+
+
+    # Redirect to Dashboard
+    return HttpResponseRedirect( reverse( "site:dashboard" ) )
+

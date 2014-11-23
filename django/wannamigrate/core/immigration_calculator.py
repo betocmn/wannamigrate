@@ -50,29 +50,64 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
     }
 
-    def __init__( self, user_id, country_id ):
+    def __init__( self, user, country ):
         """
         Constructor responsible to set user and country
 
-        :param user_id:
-        :param country_id:
+        :param user:
+        :param country:
         :return None:
         """
 
         # Instantiate user and country
-        self.user = User.objects.get( pk = user_id )
-        self.country = Country.objects.get( pk = country_id )
+        self.user = user
+        self.country = country
 
         # Instantiate all user related models
-        self.user_personal = get_object_or_false( UserPersonal, user = self.user )
-        self.user_personal_family = get_list_or_false( self.user.userpersonalfamily_set )
-        self.user_language = get_object_or_false( UserLanguage, user = self.user )
-        self.user_language_proficiency = get_list_or_false( self.user.userlanguageproficiency_set )
-        self.user_education = get_object_or_false( UserEducation, user = self.user )
-        self.user_education_history = get_list_or_false( self.user.usereducationhistory_set )
-        self.user_work = get_object_or_false( UserWork, user = self.user )
-        self.user_work_experience = get_list_or_false( self.user.userworkexperience_set )
-        self.user_work_offer = get_list_or_false( self.user.userworkoffer_set )
+        try:
+            self.user_personal = self.user.userpersonal
+        except UserPersonal.DoesNotExist:
+            self.user_personal = False
+
+        try:
+            self.user_personal_family = self.user.userpersonalfamily_set.all()
+        except UserPersonalFamily.DoesNotExist:
+            self.user_personal_family = False
+
+        try:
+            self.user_language = self.user.userlanguage
+        except UserLanguage.DoesNotExist:
+            self.user_language = False
+
+        try:
+            self.user_language_proficiency = self.user.userlanguageproficiency_set.all()
+        except UserLanguageProficiency.DoesNotExist:
+            self.user_language_proficiency = False
+
+        try:
+            self.user_education = self.user.usereducation
+        except UserEducation.DoesNotExist:
+            self.user_education = False
+
+        try:
+            self.user_education_history = self.user.usereducationhistory_set.all()
+        except UserEducationHistory.DoesNotExist:
+            self.user_education_history = False
+
+        try:
+            self.user_work = self.user.userwork
+        except UserWork.DoesNotExist:
+            self.user_work = False
+
+        try:
+            self.user_work_experience = self.user.userworkexperience_set.all()
+        except UserWorkExperience.DoesNotExist:
+            self.user_work_experience = False
+
+        try:
+            self.user_work_offer = self.user.userworkoffer_set.all()
+        except UserWorkOffer.DoesNotExist:
+            self.user_work_offer = False
 
         # Initialize all totals
         self.total_personal_points = 0
@@ -114,14 +149,14 @@ class ImmigrationCalculator( object ):
         question_id = self.__get_question_id( method_name )
 
         # search for question object
-        question = get_object_or_false( Question, pk = question_id )
-        if question:
+        #question = get_object_or_false( Question, pk = question_id )
+        if question_id:
 
-            # search for thew answer with the given paramaters
+            # search for thew answer with the given parameters
             if type == 'description':
-                answer = get_object_or_false( Answer, question = question, description = value )
+                answer = get_object_or_false( Answer, question_id = question_id, description = value )
             else:
-                answer = get_object_or_false( Answer, question = question, pk = value )
+                answer = get_object_or_false( Answer, question_id = question_id, pk = value )
             if answer:
 
                 # search for the points for the record with this age
@@ -132,7 +167,7 @@ class ImmigrationCalculator( object ):
         # If nothing was found, return 0 points
         return 0
 
-    def get_total_results( self, type = None ):
+    def get_total_results( self ):
         """
         Calculates the total points for the given user/country.
 
@@ -143,7 +178,6 @@ class ImmigrationCalculator( object ):
 
         'total', 'personal', 'language', 'education' and 'work'
 
-        :param String type:
         :return Mixed - Int or False on failure:
         """
 
@@ -158,15 +192,13 @@ class ImmigrationCalculator( object ):
 
         # Run trough every question
         for question_id, value in self.question_methods.items():
-            if type is None or value['type'] == type:
 
                 # call the appropriate method by its name to return the number of points
                 points = getattr( self, value['method'] )()
                 result['total'] += points
-                if type is not None:
-                    result[type] += points
+                result[value['type']] += points
 
-        # @TODO do additional points here (community language, etc..)
+        # @TODO do additional points here (specific addition rules for each country)
 
         return result
 
@@ -316,7 +348,7 @@ class ImmigrationCalculator( object ):
             if forced_value is not None:
                 value = forced_value
             else:
-                # search for a relative on the current country
+                # search for work offers in other countries
                 value = ""
                 for item in self.user_work_offer:
                     if item.country_id == self.country.id:
@@ -343,13 +375,11 @@ class ImmigrationCalculator( object ):
             if forced_value is not None:
                 value = forced_value
             else:
-                # search for a relative on the current country
+                # search for work experiences outside country of destination
                 years_of_experience = 0
                 for item in self.user_work_experience:
                     if item.country_id != self.country.id:
-                        # TODO - We need to check if date period are conflicting
-                        # TODO - Example: worked from 01/01/2013 to 01/01/2015 AND from 01/01/2014 to 01/01/2016
-                        years_of_experience += date_difference( item.start_date, item.end_date, 'years' )
+                        years_of_experience += ( item.months / 12 )
 
                 value = math.floor( years_of_experience )
 
@@ -373,13 +403,11 @@ class ImmigrationCalculator( object ):
             if forced_value is not None:
                 value = forced_value
             else:
-                # search for a relative on the current country
+                # search for work experiences on the current country
                 years_of_experience = 0
                 for item in self.user_work_experience:
                     if item.country_id == self.country.id:
-                        # TODO - We need to check if date period are conflicting
-                        # TODO - Example: worked from 01/01/2013 to 01/01/2015 AND from 01/01/2014 to 01/01/2016
-                        years_of_experience += date_difference( item.start_date, item.end_date, 'years' )
+                        years_of_experience += ( item.months / 12 )
 
                 value = math.floor( years_of_experience )
 

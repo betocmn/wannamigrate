@@ -34,20 +34,20 @@
 		<div id="title1">
 			<div>
 			<div class="titleNumber">1</div>
-			<div class="titleText" style="margin-top:5px;">Fill in the form below</div>
+			<div class="titleText" style="margin-top:5px;">{% trans "Edit your information" %}:</div>
 			</div>
 		</div>
 
 		<div class="formBtn">
 			<div class="formType formPersonal"></div>
 			<div class="formProgressOut">
-				<h3>Personal</h3>
+				<h3>{% trans "Personal" %}</h3>
 				<div class="progressTrack">
 					<div class="progressFill progressFillGreen progressFillSize95">
 
 					</div>
 				</div>
-				<p>COMPLETED</p>
+				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">97<span>%</span></div>
 			<a href="{% url 'site:edit_personal' %}" class="formEdit"></a>
@@ -65,7 +65,7 @@
 
 					</div>
 				</div>
-				<p>COMPLETED</p>
+				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">62<span>%</span></div>
 			<a href="{% url 'site:edit_language' %}" class="formEdit"></a>
@@ -83,7 +83,7 @@
 
 					</div>
 				</div>
-				<p>COMPLETED</p>
+				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">43<span>%</span></div>
 			<a href="{% url 'site:edit_education' %}" class="formEdit"></a>
@@ -101,7 +101,7 @@
 
 					</div>
 				</div>
-				<p>COMPLETED</p>
+				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">18<span>%</span></div>
 			<a href="{% url 'site:edit_work' %}" class="formEdit"></a>
@@ -112,66 +112,66 @@
 		<div id="title2">
 			<div>
 			<div class="titleNumber">2</div>
-			<div class="titleText" style="margin-top: -5px;">Check in which countries<br />you can get the work visa</div>
+			<div class="titleText" style="margin-top: 5px;">{% trans "Check your points per country" %}:</div>
 			</div>
 		</div>
 
 		<div class="countriesOuter selectAustralia">
-		<div class="countries">
-		<div class="circleProgressBar green72">
-			<div class="australiaProgressBar"></div>
-		</div>
-		<div class="countriesProgress">
-			<p>Australia</p>
-			<div class="textUnderLeft">11</div>
-			<div class="textUnderRight">
-				<p>POINTS</p>
-				<p>OF <span>45</span> POSSIBLE</p>
-			</div>
-			<div class="clear"> </div>
-		</div>
-		<div class="clear"> </div>
-		</div>
+            <div class="countries">
+            <div class="circleProgressBar {{ au_percentage_css_class }}">
+                <div class="australiaProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "Australia" %}</p>
+                <div class="textUnderLeft">{{ au_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "POINTS" %}</p>
+                    <p>{% trans "OF" %} <span>{{ au_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
 		</div>
 
 
 
 		<div class="countriesOuter selectCanada">
-		<div class="countries">
-		<div class="circleProgressBar yellow48">
-			<div class="canadaProgressBar"></div>
-		</div>
-		<div class="countriesProgress">
-			<p>Canada</p>
-			<div class="textUnderLeft">23</div>
-			<div class="textUnderRight">
-				<p>POINTS</p>
-				<p>OF <span>45</span> POSSIBLE</p>
-			</div>
-			<div class="clear"> </div>
-		</div>
-		<div class="clear"> </div>
-		</div>
+            <div class="countries">
+            <div class="circleProgressBar {{ ca_percentage_css_class }}">
+                <div class="canadaProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "Canada" %}</p>
+                <div class="textUnderLeft">{{ ca_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "REQUIRED" %}</p>
+                    <p>{% trans "OF" %} <span>{{ ca_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
 		</div>
 
 
 
 		<div class="countriesOuter selectJapan">
-		<div class="countries">
-		<div class="circleProgressBar orange12">
-			<div class="japanProgressBar"></div>
-		</div>
-		<div class="countriesProgress">
-			<p>New Zealand</p>
-			<div class="textUnderLeft">08</div>
-			<div class="textUnderRight">
-				<p>POINTS</p>
-				<p>OF <span>45</span> POSSIBLE</p>
-			</div>
-			<div class="clear"> </div>
-		</div>
-		<div class="clear"> </div>
-		</div>
+            <div class="countries">
+            <div class="circleProgressBar {{ nz_percentage_css_class }}">
+                <div class="japanProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "New Zealand" %}</p>
+                <div class="textUnderLeft">{{ nz_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "POINTS" %}</p>
+                    <p>{% trans "OF" %} <span>{{ nz_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
 		</div>
 
 
@@ -180,49 +180,48 @@
 		<div id="title3">
 			<div>
 			<div class="titleNumber">3</div>
-			<div class="titleText" style="margin-top:5px;">Get step-by-step guides</div>
+			<div class="titleText" style="margin-top:5px;">{% trans "Get help to migrate" %}:</div>
 			</div>
 		</div>
 
 		<div id="selectCountry">
-			<p>Select country aside</p>
+			<p>{% trans "Select Country" %}</p>
 			<!-- <p>aside</p> -->
 		</div>
 
 		<div class="australiaSelect">
-		<p class="lowPoints">
-			<img src="{% static "site/img/red-lock.png" %}" />
-			<br />
-			You still don’t have enough points<br />
-			to migrate to this country
-		</p>
-		<a href="my-situation-australia.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
-		<a href="visa-application-australia.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
-		<a href="moving-to-australia.html" class="stepGuideBtn movingBtn"><span>Moving to Australia</span></a>
+            <p class="lowPoints">
+                <img src="{% static "site/img/red-lock.png" %}" />
+                <br />
+                {% trans "You still don’t have enough points<br />to migrate to this country" %}
+            </p>
+            <a href="my-situation-australia.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="visa-application-australia.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="moving-to-australia.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Australia" %}</span></a>
 		</div>
 
 		<div class="canadaSelect">
-		<p class="lowPoints">
-			<img src="{% static "site/img/red-lock.png" %}" />
-			<br />
-			You still don’t have enough points<br />
-			to migrate to this country
-		</p>
-		<a href="my-situation-canada.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
-		<a href="visa-application-canada.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
-		<a href="moving-to-canada.html" class="stepGuideBtn movingBtn"><span>Moving to Canada</span></a>
+            <p class="lowPoints">
+                <img src="{% static "site/img/red-lock.png" %}" />
+                <br />
+                You still don’t have enough points<br />
+                to migrate to this country
+            </p>
+            <a href="my-situation-canada.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="visa-application-canada.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="moving-to-canada.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Canada" %}</span></a>
 		</div>
 
 		<div class="japanSelect">
-		<p class="lowPoints">
-			<img src="{% static "site/img/red-lock.png" %}" />
-			<br />
-			You still don’t have enough points<br />
-			to migrate to this country
-		</p>
-		<a href="my-situation-newzeeland.html" class="stepGuideBtn checkBtn"><span>Check my results</span></a>
-		<a href="visa-application-newzeeland.html" class="stepGuideBtn applyBtn"><span>Apply for the visa</span></a>
-		<a href="moving-to-newzeeland.html" class="stepGuideBtn movingBtn"><span>Moving to New Zealand</span></a>
+            <p class="lowPoints">
+                <img src="{% static "site/img/red-lock.png" %}" />
+                <br />
+                You still don’t have enough points<br />
+                to migrate to this country
+            </p>
+            <a href="my-situation-newzeeland.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="visa-application-newzeeland.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="moving-to-newzeeland.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to New Zealand" %}</span></a>
 		</div>
 
 

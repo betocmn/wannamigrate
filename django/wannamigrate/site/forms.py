@@ -219,17 +219,20 @@ class BaseUserPersonalFamilyFormSet( BaseInlineFormSet ):
 
             # iterate over forms submitted and check if a family overseas member was added
             family_overseas = False
+            user = False
             for form in self.forms:
-                user = form.cleaned_data['user']
-                if form not in self.deleted_forms:
-                    if form.cleaned_data['country'].id is not None:
-                        family_overseas = True
-                        break
+                if 'user' in form.cleaned_data:
+                    user = form.cleaned_data['user']
+                    if form not in self.deleted_forms:
+                        if form.cleaned_data['country'].id is not None:
+                            family_overseas = True
+                            break
 
             # Update UserLanguage object
-            user_personal = UserPersonal.objects.get( user = user )
-            user_personal.family_overseas = family_overseas
-            user_personal.save()
+            if user:
+                user_personal = UserPersonal.objects.get( user = user )
+                user_personal.family_overseas = family_overseas
+                user_personal.save()
 
         return instances
 
@@ -452,18 +455,17 @@ class UserWorkForm( BaseModelForm ):
     """
 
     occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_OCCUPATION ), empty_label = _( 'Select Occupation' ) )
-    partner_occupation_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her occupation" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_OCCUPATION ), empty_label = _( 'Select Occupation' ) )
-    partner_occupation_months = TypedChoiceField( required = False, label = _( "If you have a partner, what is his/her time of work experience" ), choices = get_months_duration_tuple(), empty_value = 0  )
 
     class Meta:
         model = UserWork
-        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'partner_occupation_answer', 'partner_occupation_months', 'work_offer' ]
+        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'partner_skills', 'work_offer' ]
         widgets = {
             'willing_to_invest': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'canadian_startup_letter': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'australian_professional_year': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'canadian_partner_work_study_experience': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'work_offer': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
+            'partner_skills': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
         }
 
     def __init__( self, *args, **kwargs ):
@@ -534,14 +536,14 @@ class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
             if form not in self.deleted_forms and 'country' in form.cleaned_data:
                 country = form.cleaned_data['country'].id
                 if country in countries:
-                    raise forms.ValidationError( _( "You must choose different countries on Work Offers." ) )
+                    raise forms.ValidationError( _( "You must choose different countries on work offers overseas." ) )
                 countries.append( country )
 
     def save( self ):
         """
-        After saving the forms, it search if a family member overseas
+        After saving the forms, it search if a work offer overseas
         was entered. If yes, we need to update the field (boolean)
-        on the UserPersonal model.
+        on the UserWork model.
 
         :return: List of models
         """
@@ -549,18 +551,21 @@ class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
 
         if self.has_changed():
 
-            # iterate over forms submitted and check if a work offer was added
+            # iterate over forms submitted and check if a work offer overseas was added
             work_offer = False
+            user = False
             for form in self.forms:
-                user = form.cleaned_data['user']
-                if form not in self.deleted_forms:
-                    if form.cleaned_data['country'].id is not None:
-                        work_offer = True
-                        break
+                if 'user' in form.cleaned_data:
+                    user = form.cleaned_data['user']
+                    if form not in self.deleted_forms:
+                        if form.cleaned_data['country'].id is not None:
+                            work_offer = True
+                            break
 
-            # Update UserWork object
-            user_work = UserWork.objects.get( user = user )
-            user_work.work_offer = work_offer
-            user_work.save()
+            # Update UserLanguage object
+            if user:
+                user_work = UserWork.objects.get( user = user )
+                user_work.work_offer = work_offer
+                user_work.save()
 
         return instances

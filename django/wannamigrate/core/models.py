@@ -12,19 +12,24 @@ class BaseModel( models.Model ):
     BASE MODEL - The father of all :)
     """
 
-    # META Options
-    class Meta:
-        abstract = True
-
     # Default timestamp fields to be used on all models
     created_date = models.DateTimeField( _( 'created date' ), auto_now_add = True, auto_now = False )
     modified_date = models.DateTimeField( _( 'modified date' ), auto_now = True, auto_now_add = False )
+
+    # META Options
+    class Meta:
+        abstract = True
 
 
 class Answer( BaseModel ):
     """
     Answer Model - These are possible answers for questions (immigration requirements)
     """
+
+    # Model Attributes
+    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
+    answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
+    description = models.CharField(  _( 'Answer' ), max_length = 255 )
 
     # META Options
     class Meta:
@@ -33,16 +38,15 @@ class Answer( BaseModel ):
     def __str__( self ):
         return '%s' % ( _( self.description ) )
 
-    # Model Attributes
-    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
-    description = models.CharField(  _( 'Answer' ), max_length = 255 )
-
 
 class AnswerCategory( BaseModel ):
     """
     Answer Category Model - Some answers are grouped into categories
     """
+
+    # Model Attributes
+    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
+    name = models.CharField(  _( 'Name' ), max_length = 100 )
 
     # META Options
     class Meta:
@@ -50,10 +54,6 @@ class AnswerCategory( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.name ) )
-
-    # Model Attributes
-    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    name = models.CharField(  _( 'Name' ), max_length = 100 )
 
 
 class Continent( BaseModel ):
@@ -61,6 +61,9 @@ class Continent( BaseModel ):
     Continent Model - ex: Oceania, Europe, etc.
     """
 
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 100 )
+
     # META Options
     class Meta:
         default_permissions = []
@@ -68,14 +71,17 @@ class Continent( BaseModel ):
     def __str__( self ):
         return '%s' % ( _( self.name ) )
 
-    # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 100 )
-
 
 class Country( BaseModel ):
     """
     Country Model - ex: Brazil, Australia, USA, etc.
     """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 100 )
+    continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
+    code = models.CharField( _( "code" ), max_length = 2 )
+    immigration_enabled = models.BooleanField( _( "immigration enabled" ), default = False )
 
     # META Options
     class Meta:
@@ -102,26 +108,20 @@ class Country( BaseModel ):
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Country' ) )] + result  )
 
-    # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 100 )
-    continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
-    code = models.CharField( _( "code" ), max_length = 2 )
-    immigration_enabled = models.BooleanField( _( "immigration enabled?" ), default = False )
-
 
 class CountryPoints( BaseModel ):
     """
     Country Points Model - Stores the total points for each answer in each country avaiblable
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     answer = models.ForeignKey( Answer, verbose_name = _( 'answer' ) )
     points = models.IntegerField( _( "points" ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
     @staticmethod
     def get_all_points_per_question( question_id ):
@@ -157,6 +157,10 @@ class Language( BaseModel ):
     Language Model - Ex: english, french, portuguese, etc.
     """
 
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 25 )
+    code = models.CharField( _( "code" ), max_length = 6 )
+
     # META Options
     class Meta:
         default_permissions = []
@@ -178,15 +182,15 @@ class Language( BaseModel ):
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Language' ) )] + result  )
 
-    # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 25 )
-    code = models.CharField( _( "code" ), max_length = 6 )
-
 
 class Question( BaseModel ):
     """
     Question Model - Question is a requirement asked for the immigration candidate
     """
+
+    # Model Attributes
+    description = models.CharField( _( "question" ), max_length = 255 )
+    help_text = models.TextField( _( "help text" ), null = True, blank = True )
 
     # META Options
     class Meta:
@@ -200,10 +204,6 @@ class Question( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.description ) )
-
-    # Model Attributes
-    description = models.CharField( _( "question" ), max_length = 255 )
-    help_text = models.TextField( _( "help text" ), null = True, blank = True )
 
 
 class UserManager( BaseUserManager ):
@@ -249,6 +249,13 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     User Model - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
     """
 
+    # Model Attributes
+    email = models.EmailField( _( "e-mail" ), max_length = 255, unique = True )
+    name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
+    is_active = models.BooleanField( _( "is active" ), default = True )
+    is_admin = models.BooleanField( _( "is admin" ), default = False )
+    results = models.ManyToManyField( Country, through = 'UserResult' )
+
     # META Options
     class Meta:
         default_permissions = []
@@ -262,12 +269,6 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
             ( "admin_delete_admin_user", "ADMIN: Can delete admin user" ),
             ( "admin_view_admin_user", "ADMIN: Can view admin users" )
         )
-
-    # Model Attributes
-    email = models.EmailField( _( "e-mail" ), max_length = 255, unique = True )
-    name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
-    is_active = models.BooleanField( _( "is active?" ), default = True )
-    is_admin = models.BooleanField( _( "is admin?" ), default = False )
 
     # Manager
     objects = UserManager()
@@ -298,28 +299,24 @@ class UserEducation( BaseModel ):
     User Education Model - Ex: Stores education related information
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     BOOLEAN_CHOICES = (
         ( True, _( 'Yes' ) ),
         ( False, _( 'No' ) )
     )
-    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     regional_australia_study = models.NullBooleanField( _( "studied in regional part of australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), blank = True, null = True )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserEducationHistory( BaseModel ):
     """
     User Education History Model - Ex: Stores each education achieved (ex: bachelors, in brazil, universidade UFMA, from 2003-2007
     """
-
-    # META Options
-    class Meta:
-        default_permissions = []
 
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
@@ -329,35 +326,40 @@ class UserEducationHistory( BaseModel ):
     year_start = models.CharField( _( "start year" ), max_length = 4 )
     year_end = models.CharField( _( "end year" ), max_length = 4 )
 
+    # META Options
+    class Meta:
+        default_permissions = []
+
 
 class UserLanguage( BaseModel ):
     """
     User Language Model - Ex: Stores language related information
     """
 
+    # Model Attributes
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    australian_community_language = models.BooleanField( _( "credentialled community language in australia" ), default = False )
+    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, blank = True, null = True  )
+
     # META Options
     class Meta:
         default_permissions = []
 
-    # Model Attributes
-    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    australian_community_language = models.BooleanField( _( "credentialled community language in australia?" ), default = False )
-    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, blank = True, null = True  )
-    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, blank = True, null = True  )
 
 class UserLanguageProficiency( BaseModel ):
     """
     User Language Proficiency Model - Ex: Stores each language and level the user can speak
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     language = models.ForeignKey( Language, verbose_name = _( 'language' ) )
     language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ), on_delete = models.PROTECT )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserLoginHistory( BaseModel ):
@@ -365,13 +367,13 @@ class UserLoginHistory( BaseModel ):
     User Login History - Ex: Records every time an user logs in to the system
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     is_logout = models.BooleanField( _( "is logout" ), default = False )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserPersonal( BaseModel ):
@@ -380,10 +382,6 @@ class UserPersonal( BaseModel ):
 
     Using this for image resize: https://github.com/codingjoe/django-stdimage
     """
-
-    # META Options
-    class Meta:
-        default_permissions = []
 
     # Model Attributes
     GENDERS = (
@@ -404,8 +402,12 @@ class UserPersonal( BaseModel ):
     })
     birth_date = models.DateField( _( "birth date" ), blank = True, null = True  )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
-    australian_regional_immigration = models.NullBooleanField( _( "Would you be willing to live in Regional Australia?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
-    family_overseas = models.NullBooleanField( _( "Any family members who are citizens in other countries?" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    australian_regional_immigration = models.NullBooleanField( _( "Would you be willing to live in Regional Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    family_overseas = models.NullBooleanField( _( "Any family members who are citizens in other countries" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserPersonalFamily( BaseModel ):
@@ -413,23 +415,19 @@ class UserPersonalFamily( BaseModel ):
     User Personal Family Model - Ex: Stores countries where the user has relatives as citizens
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserResult( BaseModel ):
     """
     User Restul Model - Stores the final result score of an user for each country available
     """
-
-    # META Options
-    class Meta:
-        default_permissions = []
 
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
@@ -440,30 +438,34 @@ class UserResult( BaseModel ):
     score_education = models.IntegerField( _( "score education" ))
     score_work = models.IntegerField( _( "score work" ))
 
+    # META Options
+    class Meta:
+        default_permissions = []
+        unique_together = ( "user", "country")
+
 
 class UserWork( BaseModel ):
     """
     User Work Model - Ex: Stores work related information
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     BOOLEAN_CHOICES = (
         ( True, _( 'Yes' ) ),
         ( False, _( 'No' ) )
     )
-    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ), related_name = 'occupation_answer', blank = True, null = True )
-    partner_occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'partner occupation' ), related_name = 'partner_occupation_answer', blank = True, null = True )
-    partner_occupation_months = models.PositiveSmallIntegerField( _( "Experience" ), blank = True, null = True, default = 0 )
+    partner_skills = models.NullBooleanField( _( "Do you have a partner with proved skills" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     willing_to_invest = models.NullBooleanField( _( "are you willing to invest money on the country of destination" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     canadian_startup_letter = models.NullBooleanField( _( "do you have a startup recommendation letter approved by canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     australian_professional_year = models.NullBooleanField( _( "Did you complete a Professional Year Course in Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     canadian_partner_work_study_experience = models.NullBooleanField( _( "If you have a partner, has he/she worked or studied in Canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     work_offer = models.NullBooleanField( _( "Do you have a work offer overseas" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserWorkOffer( BaseModel ):
@@ -471,13 +473,13 @@ class UserWorkOffer( BaseModel ):
     User Work Offer Model - Ex: Stores countries where the user has written job offers
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserWorkExperience( BaseModel ):
@@ -485,12 +487,12 @@ class UserWorkExperience( BaseModel ):
     User Work Experience Model - Ex: Stores each work experience
     """
 
-    # META Options
-    class Meta:
-        default_permissions = []
-
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
     company = models.CharField( _( "company" ), max_length = 100 )
     months = models.PositiveSmallIntegerField( _( "Duration of Employment" ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []

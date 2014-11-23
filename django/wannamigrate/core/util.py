@@ -7,6 +7,7 @@ from django.shortcuts import _get_queryset
 from calendar import monthrange
 from datetime import date, datetime, timedelta
 from django.utils.translation import ugettext_lazy as _
+from wannamigrate.core.models import UserPersonal
 
 
 def calculate_age( birth_date ):
@@ -146,22 +147,6 @@ def build_datatable_json( request, objects, info ):
     s.seek( 0 )
     return s.read()
 
-def get_object_or_false( klass, *args, **kwargs ):
-    """
-    Uses get() to return an object, or False if the object
-    does not exist.
-
-    klass may be a Model, Manager, or QuerySet object. All other passed
-    arguments and keyword arguments are used in the get() query.
-
-    Note: Like with get(), an MultipleObjectsReturned will be raised if more than one
-    object is found.
-    """
-    queryset = _get_queryset( klass )
-    try:
-        return queryset.get( *args, **kwargs )
-    except queryset.model.DoesNotExist:
-        return False
 
 def get_object_or_false( klass, *args, **kwargs ):
     """
@@ -174,11 +159,18 @@ def get_object_or_false( klass, *args, **kwargs ):
     Note: Like with get(), an MultipleObjectsReturned will be raised if more than one
     object is found.
     """
-    queryset = _get_queryset( klass )
-    try:
-        return queryset.get( *args, **kwargs )
-    except queryset.model.DoesNotExist:
-        return False
+    if 'no_query' in kwargs:
+        try:
+            return klass
+        except UserPersonal.DoesNotExist:
+            return False
+    else:
+        queryset = _get_queryset( klass )
+        try:
+            return queryset.get( *args, **kwargs )
+        except queryset.model.DoesNotExist:
+            return False
+
 
 def get_list_or_false( klass, *args, **kwargs ):
     """
@@ -194,19 +186,6 @@ def get_list_or_false( klass, *args, **kwargs ):
         return False
     return obj_list
 
-def get_( klass, *args, **kwargs ):
-    """
-    Uses filter() to return a list of objects, or False if
-    the list is empty.
-
-    klass may be a Model, Manager, or QuerySet object. All other passed
-    arguments and keyword arguments are used in the filter() query.
-    """
-    queryset = _get_queryset( klass )
-    obj_list = list( queryset.filter( *args, **kwargs ) )
-    if not obj_list:
-        return False
-    return obj_list
 
 def get_months_duration_tuple():
     """
@@ -228,3 +207,45 @@ def get_months_duration_tuple():
             label = _( '%s years' ) % ( years )
         result.append( ( months, label ) )
     return tuple( [( '', _( 'Select Duration' ) )] + result  )
+
+
+def get_country_points_css_class( percentage ):
+    """
+    Calculates the percentage of points a user has and return the approximate css class
+    :param: points
+    :param: css_class_color
+    :return: String
+    """
+
+    # If zero, return empty css class
+    if percentage == 0:
+        return ''
+
+    # These are the percentages defined by css classes in 'style.css'
+    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
+
+    # if it's 100% full
+    if percentage >= 100:
+        return 'green96'
+
+    # Define the color of the bar
+    if percentage <= 30:
+        color = 'orange'
+    elif percentage <= 70:
+        color = 'yellow'
+    else:
+        color = 'green'
+
+    # We will find the nearest number on the possible list to represent it
+    list_size = len( possible_percentages )
+    for count in range( 0, list_size ):
+        if percentage < possible_percentages[count]:
+            if count == 0:
+                return color + str( possible_percentages[count] )
+            else:
+                return color + str( possible_percentages[count-1] )
+        elif ( count + 1 ) == list_size:
+            return color + str( possible_percentages[count-1] )
+
+    return ''
+
