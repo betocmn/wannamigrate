@@ -10,7 +10,9 @@
     */
     function doLogin()
     {
-        InputHandler.lock();
+        if ( window.InputHandler !== undefined )
+            InputHandler.lock();
+        
         switch_to_login();
         $( "#overlay" ).show();
         $( "#dialog" ).fadeIn();
@@ -20,9 +22,11 @@
     * Shows the signup form.
     *
     */
-    function doSignup()
+    function doSignup( )
     {
-        InputHandler.lock();
+        if ( window.InputHandler !== undefined )
+            InputHandler.lock();
+        
         switch_to_signup();
         $( "#overlay" ).show();
         $( "#dialog" ).fadeIn();
@@ -34,7 +38,9 @@
     */
     function closeDialog()
     {
-        InputHandler.unlock();
+        if ( window.InputHandler !== undefined )
+            InputHandler.unlock();
+        
         $( "#dialog" ).fadeOut();
         $( "#overlay" ).hide();
     }

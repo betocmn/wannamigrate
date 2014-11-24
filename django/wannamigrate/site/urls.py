@@ -5,6 +5,7 @@ urlpatterns = patterns('',
    
     # Home and Login
     url( r'^$', views.home, name = 'home' ),
+    url( r'^older-browsers$', views.home_older_browsers, name = 'home_older_browsers' ),
     url( r'^login/$', views.login, name = 'login' ),
     url( r'^signup/$', views.signup, name = 'signup' ),
     url( r'^logout/$', views.logout, name = 'logout' ),

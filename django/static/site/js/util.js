@@ -409,3 +409,31 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     return s;
 }
 
+
+/** Checks if the user agent is mobile. */
+function isMobile()
+{
+    var userAgent = navigator.userAgent.toLowerCase();
+    if( userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i)!= -1 )
+        return true;
+}
+
+/** Checks if the browser supports CSS3 properties. */
+function noCSS3()
+{
+    var t,u,i,j,
+    css='textShadow,textStroke,boxShadow,borderRadius,borderImage,opacity'.split(','),
+    prefixes=',-webkit-,-moz-,-o-,-ms-,-khtml-'.split(','),
+    nPrefixes=prefixes.length,
+    el=document.createElement('i').style;
+    styles:for(i=0;t=css[i];i++) {
+        t=t.charAt(0).toUpperCase()+t.substr(1);
+        for(j=0;j<nPrefixes;j++) {
+          u=prefixes[j]+t;
+          if(el[u.charAt(0).toLowerCase()+u.substr(1)]!==undefined)
+            continue styles;
+        }
+        return false;
+    }
+    return true;
+}

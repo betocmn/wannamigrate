@@ -47,6 +47,13 @@
         <!-- INLINE JS -->
         <script type="text/javascript">
 
+
+            // Browser support check.            
+            if( isMobile() || noCSS3() )
+                window.location = "{% url 'site:home_older_browsers' %}";
+
+            
+
             // A flag indicating if the submenu is dropped down.
             var submenu_is_visible = false;
             
