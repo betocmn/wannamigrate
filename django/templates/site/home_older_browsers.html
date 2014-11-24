@@ -1,0 +1,284 @@
+{% load staticfiles %}
+{% load i18n %}
+<!doctype html>
+<htmL>
+
+    <head>
+
+        <!-- Meta -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
+        <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
+        <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+        <meta name="Robots" content="all">
+        <meta name="og:image" content="http://wannamigrate.com{% static "site/img/logo_social.png" %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+        <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+        
+        <link rel="stylesheet" type="text/css" href="{% static "site/css/font-awesome.min.css"%}">
+        <link rel="stylesheet" type="text/css" href="{% static "site/css/main_older_browsers.css" %}">
+
+        <!-- HTML5 shim for IE backwards compatibility -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="{% static 'site/js/jquery-2.1.1.min.js' %}"></script>
+
+        <!-- Utility Functions (JS) -->
+        <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+
+        <!-- JQuery UI -->
+        <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
+        <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
+
+
+        <!-- INLINE JS -->
+        <script type="text/javascript">
+            // A flag indicating if the submenu is dropped down.
+            var submenu_is_visible = false;
+
+            
+
+            $(document).ready(function($) {
+
+                // The y-pos of the page2 container.
+                var page2Y = $("#page2").offset().top - $("#menu").height();
+                
+                // Language dropdown
+                $( "#language-container li a" ).click( function( e ){
+                    
+                    if ( submenu_is_visible )
+                        $("#language-submenu").slideUp(); 
+                    else
+                        $("#language-submenu").slideDown();
+                    
+                    submenu_is_visible = !submenu_is_visible;
+                    e.preventDefault();
+                });
+
+
+                
+                $(window).scroll(function () {
+                    if ( $(window).scrollTop() > page2Y ) {
+                        if ( ! $( "#menu" ).hasClass( "translucid" ) )
+                            $("#menu").addClass( "translucid" );
+                    } else {
+                        if ( $( "#menu" ).hasClass( "translucid" ) )
+                            $("#menu").removeClass( "translucid" );
+                    }
+                });
+                        
+            });
+            
+        </script>
+    </head>
+
+
+    <body>
+        <div id="menu" class="gui">
+            <div id="menu-logo"></div>
+            <a href="javascript:doLogin(true);" id="login-button" class="bt bt-purple bold white 15pt">Entrar</a>
+            <ul id="language-container" class="language-ul">
+                <li>
+                    <a href="#">
+                        <i class="flag br"></i>
+                        <span class="country-name 14pt almost-white" href="#">Português</span>
+                        <span class="dropdown-button"></span>
+                    </a>
+                    <ul id="language-submenu" class="language-ul" style="display:none;">
+                        <li>
+                            <a href="#">
+                                <i class="flag us"></i>
+                                <span class="country-name 14pt almost-white" href="#">English</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="flag es"></i>
+                                <span class="country-name 14pt almost-white" href="#">Español</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="flag cn"></i>
+                                <span class="country-name 14pt almost-white" href="#">中國</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Page 1 -->
+        <div id="page1">
+            <div id="page1-content" class="fg">
+                <div id="page1-title" class="f84 light white">
+                    More em um <span class="bold">novo país.</span>
+                    <span class="bold">Mude</span> de vida.
+                </div>
+                <div id="page1-subtitle" class="f22 light white">
+                    Da <span class="bold">aplicação do visto</span> à hora da <span class="bold">mudança.</span>
+                </div>
+                <a id="p1-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">Comece agora.</span> É grátis!</a>
+                <a href="#page2" class="bt-more" class="gui"></a>
+            </div>
+        </div>
+
+
+        <!-- Page 2 -->
+        <div id="page2">
+            <div id="l1h" class="f30 light almost-black ">
+                Se você pudesse <span class="white bold">morar em qualquer lugar,</span> para onde iria<span class="white">?</span>
+            </div>
+            <ul id="r1ul" class="light dark-grey f18">
+                <li>
+                    <span class="f20 teal bold">Descubra países incríveis</span> que estão de portas abertas a novos profissionais.
+                </li>
+                <li>
+                    Mais de <span class="f20 teal bold">500,000 pessoas</span> obtem um visto para morar na <span class="teal bold">Austrália</span> e no <span class="teal bold">Canadá.</span>
+                </li>
+            </ul>
+            <a id="r1-signup" href="javascript:doSignup(true);" class="bt bt-blue f20"><span class="bold">Comece agora.</span> É grátis!</a>
+            <a href="#page3" class="bt-more page1" class="gui"></a>
+        </div>
+
+
+        <!-- Page 3 -->
+        <div id="page3">
+            <div class="feature-container">
+                <div class="feature full light purple f22">
+                    Uma <span class="bold">ferramenta gratuita</span> para gerenciar seu processo de imigração.
+                </div>
+            </div>
+            <div class="feature-container bg-soft-purple">
+                <div class="feature left bg-yellow dark-purple f20">
+                    <span class="feature-text">
+                        Descubra quais países precisam do <span class="bold">seu perfil</span>
+                    </span>
+                    <span id="feature0-icon" class="feature-icon"></span>
+                </div>
+            </div>
+            <div class="feature-container bg-soft-yellow">
+                <div class="feature right bg-purple white f20">
+                    <span id="feature1-icon" class="feature-icon"></span>
+                    <span class="feature-text">
+                        <span class="bold yellow">Construa</span> sua aplicação online
+                    </span>
+                </div>
+            </div>
+            <div class="feature-container bg-soft-purple">
+                <div class="feature left bg-yellow dark-purple f20">
+                    <span class="feature-text">
+                        Reveja suas habilidades de <span class="bold">linguagem</span></span>
+                    </span>
+                    <span id="feature2-icon" class="feature-icon"></span>
+                </div>
+            </div>
+            <div class="feature-container bg-soft-yellow">
+                <div class="feature right bg-purple white f20">
+                    <span id="feature3-icon" class="feature-icon"></span>
+                    <span class="feature-text">
+                        Receba alertas de <span class="bold yellow">emprego</span> de todo o mundo
+                    </span>
+                </div>
+            </div>
+            <div class="feature-container bg-soft-purple">
+                <div class="feature left bg-yellow dark-purple f20">
+                    <span class="feature-text">
+                       Aprenda <span class="bold">atalhos</span> para conseguir seu visto mais rápido.</span>
+                    </span>
+                    <span id="feature4-icon" class="feature-icon"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Page 4 -->
+        <div id="page4">
+            <div class="testimonial-container">
+                <div class="testimonial-image">
+                </div>
+                <div class="testimonial deep-purple">
+                    <p class="testimonial-text f16 light-italic">
+                        <span id="open-quote" class="quote"></span>
+                        Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                    </p>
+                    <p class="testimonial-separator"></p>
+                    <p class="testimonial-user f14 bold">Humberto Moreira</p>
+                    <p class="testimonial-user-job f12 light">Diretor de arte na Nova Zelandia</p>
+                </div>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial-image">
+                </div>
+                <div class="testimonial deep-purple">
+                    <p class="testimonial-text f16 light-italic">
+                        <span id="open-quote" class="quote"></span>
+                        Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                    </p>
+                    <p class="testimonial-separator"></p>
+                    <p class="testimonial-user f14 bold">Humberto Moreira</p>
+                    <p class="testimonial-user-job f12 light">Diretor de arte na Nova Zelandia</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <a id="r3-signup" href="javascript:doSignup(true);" class="bt bt-purple f20"><span class="bold">Comece agora.</span> É grátis!</a>
+            <a href="#page5" class="bt-more page3" class="gui"></a>
+        </div>
+
+
+        <!-- Page 5 -->
+        <div id="page5">
+            <div class="half-width">
+                <span id="l4-msg" class="p4-wrapper white f40 light">A maneira <span class="bold">mais fácil</span> de imigrar</span>
+            </div>
+            <div class="half-width">
+                <p id="r4-title" class="white f38 bold p4-wrapper">
+                    O que você está esperando?
+                </p>
+                <p id="r4-subtitle" class="p4-wrapper white f18 light">
+                    <span class="bold">Acesse gratuitamente</span> nossa plataforma e <span class="bold">realize seus sonhos</span> em um novo país.
+                </p>
+                <a id="r4-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">Comece agora.</span> É grátis!</a>
+            </div>
+        </div>
+        
+
+        <!-- Footer -->
+        <div id="footer">
+            <div class="half-width">
+                <div id="l4-logo" class="vcenter"></div>
+            </div>
+            <div class="half-width">
+                <div id="social">
+                    <a class="social-button f16" href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="social-button f16" href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="social-button f16" href="#">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </div>
+                <div id="backers-separator" class="f9 light grey">
+                    Apoiadores do projeto
+                </div>
+                <div id="backers-container">
+                    <a id="fapema" class="backer" href="#"></a>
+                    <a id="startupchile" class="backer" href="#"></a>
+                    <a id="finep" class="backer" href="#"></a>
+                </div>
+            </div>
+        </div>
+            <div id="overlay" style="display:none;"></div>
+            <div id="dialog" style="display:none;" class="popup vcenter">
+                {% include "site/popups/signup.html" %}
+            </div>
+
+    </body>
+
+</html>
