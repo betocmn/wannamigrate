@@ -52,28 +52,10 @@
             if( isMobile() || noCSS3() )
                 window.location = "{% url 'site:home_older_browsers' %}";
 
-            
-
-            // A flag indicating if the submenu is dropped down.
-            var submenu_is_visible = false;
-            
             $(document).ready(function(){
                 // Initializes the scene controller.
                 SceneController.init();
-
-
-                $( "#language-container li a" ).click( function( e ){
-                    
-                    if ( submenu_is_visible )
-                        $("#language-submenu").slideUp(); 
-                    else
-                        $("#language-submenu").slideDown();
-                    
-                    submenu_is_visible = !submenu_is_visible;
-                    e.preventDefault();
-                });
             });
-
             
         </script>
     </head>
@@ -84,35 +66,7 @@
         <div id="menu" class="gui">
             <div id="menu-logo"></div>
             <a href="javascript:doLogin();" id="login-button" class="bt bt-purple bold white 15pt">Entrar</a>
-            <ul id="language-container" class="language-ul">
-                <li>
-                    <a href="#">
-                        <i class="flag br"></i>
-                        <span class="country-name 14pt almost-white" href="#">Português</span>
-                        <span class="dropdown-button"></span>
-                    </a>
-                    <ul id="language-submenu" class="language-ul" style="display:none;">
-                        <li>
-                            <a href="#">
-                                <i class="flag us"></i>
-                                <span class="country-name 14pt almost-white" href="#">English</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="flag es"></i>
-                                <span class="country-name 14pt almost-white" href="#">Español</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="flag cn"></i>
-                                <span class="country-name 14pt almost-white" href="#">中國</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            {% include 'site/dropdowns/home_language_selector.html' %}
         </div>
         
 

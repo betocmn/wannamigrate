@@ -36,11 +36,11 @@ LOGIN_URL = 'admin:login'
 # INTERNATIONALIZATION AND LOCALIZATION
 #########################################
 LANGUAGES = (
-    ( 'en-us', _( 'English' ) ),
+    ( 'en', _( 'English' ) ),
     ( 'pt-br', _( 'Portuguese (BR)' ) ),
 )
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 

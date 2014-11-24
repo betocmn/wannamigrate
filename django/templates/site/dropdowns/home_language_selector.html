@@ -1,0 +1,41 @@
+{% load i18n %}
+<ul id="language-container" class="language-ul">
+    <li>
+        {% get_language_info for LANGUAGE_CODE as curr_lang %}
+        <a href="#">
+            <i class="flag {{ curr_lang.code }}"></i>
+            <span class="country-name 14pt almost-white" href="#">{{ curr_lang.name_local }} ({{ curr_lang.code }})</span>
+            <span class="dropdown-button"></span>
+        </a>
+        <ul id="language-submenu" class="language-ul" style="display:none;">
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            <li>
+                <a href="{% url 'site:setlang' language.code %}">
+                    <i class="flag {{ language.code }}"></i>
+                    <span class="country-name 14pt almost-white" href="#">{{ language.name_local }} ({{ language.code }})</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+<script>
+// A flag indicating if the submenu is dropped down.
+var submenu_is_visible = false;
+
+$(document).ready(function(){
+
+    $( "#language-container > li > a" ).click( function( e ){
+        
+        if ( submenu_is_visible )
+            $("#language-submenu").slideUp(); 
+        else
+            $("#language-submenu").slideDown();
+        
+        submenu_is_visible = !submenu_is_visible;
+        e.preventDefault();
+    });
+});
+
+</script>

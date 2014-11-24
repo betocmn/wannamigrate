@@ -5218,7 +5218,7 @@ msgstr ""
 
 #: wannamigrate/_settings/base.py:40
 msgid "Portuguese (BR)"
-msgstr ""
+msgstr "Português"
 
 #: wannamigrate/core/mailer.py:74
 msgid "Welcome to Wanna Migrate"

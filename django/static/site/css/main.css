@@ -136,12 +136,11 @@ body { width: 100%; height: 100%; overflow: hidden; font-family: "open_sans_regu
 #language-submenu { margin-top: 0.2em; }
 
 
-/** Flags classes */
-.br { background: url(../img/flags/Brazil.png) no-repeat center; } /* Brazil */
-.au { background: url(../img/flags/Australia.png) no-repeat center; } /* Australia */
-.us { background: url(../img/flags/USA.png) no-repeat center; } /* US English */
-.cn { background: url(../img/flags/China.png) no-repeat center; } /* Chinese */
-.es { background: url(../img/flags/Spain.png) no-repeat center; } /* Chinese */
+/** Flags classes. This classes should match with the django language codes. */
+.en { background: url(../img/flags/USA.png) no-repeat center; } /* US English */
+.pt-br { background: url(../img/flags/Brazil.png) no-repeat center; } /* Brazil */
+
+
 
 .bt { display: inline-block; text-decoration: none; width: auto; height: auto; text-align: center; border-radius: 0.25em; padding: 0.6em 1.5em; }
 .bt-purple { color:#ffffff; text-shadow: 0px -1px 1px rgba(0,0,0,0.4); background: -webkit-linear-gradient( #915bbb, #9f6fc1); /* For Safari 5.1 to 6.0 */ background: -o-linear-gradient( #915bbb, #9f6fc1); /* For Opera 11.1 to 12.0 */ background: -moz-linear-gradient( #915bbb, #9f6fc1); /* For Firefox 3.6 to 15 */ background: linear-gradient( #915bbb, #9f6fc1); /* Standard syntax */ box-shadow: 1px 2px 2px #8c5ab4; }

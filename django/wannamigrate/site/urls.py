@@ -36,4 +36,7 @@ urlpatterns = patterns('',
     url( r'^visa-application/(?P<country_name>[a-z_\-]+)/$', views.visa_application, name = 'visa_application' ),
     url( r'^moving/(?P<country_name>[a-z_\-]+)/$', views.moving, name = 'moving' ),
 
+    # Set language
+    url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),    
+
 )

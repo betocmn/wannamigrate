@@ -29,7 +29,7 @@ from wannamigrate.core.models import (
     Country, UserResult, UserStats
 )
 from wannamigrate.core.mailer import Mailer
-
+from django.utils import translation
 
 #######################
 # HOME-PAGE VIEWS
@@ -834,3 +834,25 @@ def moving( request, country_name ):
     """
 
     return HttpResponse( "Moving to " + country_name )
+
+
+#######################
+# INTERNATIONALIZATION VIEWS
+#######################
+def setlang( request, language_code ):
+    """
+    Language
+
+    :param request:
+    :param language_code: The code of the language to localize.
+    :return String - HTML.
+    """
+
+    translation.activate( language_code )
+    request.session[translation.LANGUAGE_SESSION_KEY] = language_code
+
+    return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+
+
+
