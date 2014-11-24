@@ -21,20 +21,20 @@ class ImmigrationCalculator( object ):
 
     - Australia: http://www.immi.gov.au/Visas/Pages/189.aspx
     - Canada: http://www.cic.gc.ca/english/immigrate/skilled/apply-factors.asp
-    - New Zealand: https://www.immigration.govt.nz/pointsindicator/
+    - New Zealand: http://www.immigration.govt.nz/migrant/stream/work/skilledmigrant/caniapply/points/default.htm and https://www.immigration.govt.nz/pointsindicator/
 
     """
 
     # Class variable to map which questions each country should evaluate
     question_methods = {
-        settings.ID_QUESTION_FAMILY_OVERSEAS: { 'method': 'get_family_overseas_points', 'type': 'personal' },
+        settings.ID_QUESTION_FAMILY_OVERSEAS: { 'method': 'get_family_overseas_points', 'type': 'personal', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_AGE: { 'method': 'get_age_points', 'type': 'personal' },
-        settings.ID_QUESTION_ENGLISH: { 'method': 'get_english_points', 'type': 'language' },
-        settings.ID_QUESTION_FRENCH: { 'method': 'get_french_points', 'type': 'language' },
+        settings.ID_QUESTION_ENGLISH: { 'method': 'get_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
+        settings.ID_QUESTION_FRENCH: { 'method': 'get_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
         settings.ID_QUESTION_EDUCATION_DEGREE: { 'method': 'get_education_degree_points', 'type': 'education' },
         settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
-        settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work' },
-        settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work' },
+        settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
+        settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience', settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_OCCUPATION: { 'method': 'get_occupation_points', 'type': 'work' },
         settings.ID_QUESTION_SKILLED_PARTNER: { 'method': 'get_skilled_partner_points', 'type': 'work' },
         settings.ID_QUESTION_INVEST: { 'method': 'get_invest_points', 'type': 'work' },
@@ -44,24 +44,36 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_PROFESSIONAL_YEAR_AU: { 'method': 'get_professional_year_au_points', 'type': 'education' },
         settings.ID_QUESTION_LIVE_REGIONAL_AU: { 'method': 'get_live_regional_au_points', 'type': 'personal' },
         settings.ID_QUESTION_COMMUNITY_LANGUAGE_AU: { 'method': 'get_community_language_au_points', 'type': 'language' },
-        settings.ID_QUESTION_PARTNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work' },
-        settings.ID_QUESTION_PARTNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language' },
-        settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language' },
+        settings.ID_QUESTION_PARTNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
+        settings.ID_QUESTION_PARTNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
+        settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
+        settings.ID_QUESTION_PAST_STUDY_COUNTRY_DESTINATION: { 'method': 'get_past_study_country_destination_points', 'type': 'education', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
+        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'education' },
     }
 
-    def __init__( self, user, country ):
+    # Class variable to map groups of question which have a maximum allowed number of points
+    country_groups_maximum_points = {
+        settings.ID_COUNTRY_AUSTRALIA: {
+            'experience': 20
+        },
+        settings.ID_COUNTRY_CANADA: {
+            'language': 28,
+            'bonus': 10
+        }
+    }
+
+    def __init__( self, user ):
         """
         Constructor responsible to set user and country
 
         :param user:
-        :param country:
         :return None:
         """
 
         # Instantiate user and country
         self.user = user
-        self.country = country
+        self.country = None
 
         # Instantiate all user related models
         try:
@@ -109,11 +121,6 @@ class ImmigrationCalculator( object ):
         except UserWorkOffer.DoesNotExist:
             self.user_work_offer = False
 
-        # Initialize all totals
-        self.total_personal_points = 0
-        self.total_language_points = 0
-        self.total_education_points = 0
-        self.total_work_points = 0
 
     def __get_question_id( self, method_name ):
         """
@@ -167,7 +174,7 @@ class ImmigrationCalculator( object ):
         # If nothing was found, return 0 points
         return 0
 
-    def get_total_results( self ):
+    def get_total_results( self, country ):
         """
         Calculates the total points for the given user/country.
 
@@ -178,8 +185,12 @@ class ImmigrationCalculator( object ):
 
         'total', 'personal', 'language', 'education' and 'work'
 
+        :param: country
         :return Mixed - Int or False on failure:
         """
+
+        # Instantiate country
+        self.country = country
 
         # Initialize totals
         result = {
@@ -189,16 +200,34 @@ class ImmigrationCalculator( object ):
             'education': 0,
             'work': 0,
         }
+        total_points_per_groups = {}
 
         # Run trough every question
-        for question_id, value in self.question_methods.items():
+        for question_id, item in self.question_methods.items():
 
                 # call the appropriate method by its name to return the number of points
-                points = getattr( self, value['method'] )()
-                result['total'] += points
-                result[value['type']] += points
+                points = getattr( self, item['method'] )()
 
-        # @TODO do additional points here (specific addition rules for each country)
+                # Check for maximum points per group
+                if 'groups' in item and self.country.id in item['groups'] and item['groups'][self.country.id] in self.country_groups_maximum_points[self.country.id]:
+
+                    # get values to use in calculation
+                    group = item['groups'][self.country.id]
+                    maximum_group_points = self.country_groups_maximum_points[self.country.id][group]
+                    if not group in total_points_per_groups:
+                        total_points_per_groups[group] = 0
+
+                    # If maximum is reached, we decrease points to the limit
+                    group_points = total_points_per_groups[group] + points
+                    if group_points > maximum_group_points:
+                        points = points - ( group_points - maximum_group_points )
+
+                    # add to the total of the group
+                    total_points_per_groups[group] += points
+
+                # Stores totals
+                result['total'] += points
+                result[item['type']] += points
 
         return result
 
@@ -320,7 +349,7 @@ class ImmigrationCalculator( object ):
             if forced_value is not None:
                 value = forced_value
             else:
-                # search for a relative on the current country
+                # search for education history
                 highest_points = 0
                 for item in self.user_education_history:
 
@@ -331,6 +360,33 @@ class ImmigrationCalculator( object ):
                         highest_points = current_points
 
                 points = highest_points
+
+        return points
+
+    def get_past_study_country_destination_points( self, forced_value = None ):
+        """
+        Points for past studies in country of destination
+
+        :param forced_value:
+        :return Int - Total of points:
+        """
+        points = 0
+        if ( self.user_education_history ):
+
+            # Use given value or search for it
+            if forced_value is not None:
+                value = forced_value
+            else:
+                # search for education history on current country
+                value = ""
+                for item in self.user_education_history:
+                    if item.country_id == self.country.id:
+                        value = "Yes"
+                        break
+
+            # search for how many points this answer is worth
+            if value == "Yes":
+                points = self.__get_points( value, 'description' )
 
         return points
 
@@ -407,6 +463,33 @@ class ImmigrationCalculator( object ):
                 years_of_experience = 0
                 for item in self.user_work_experience:
                     if item.country_id == self.country.id:
+                        years_of_experience += ( item.months / 12 )
+
+                value = math.floor( years_of_experience )
+
+            # search for how many points this answer is worth
+            if value > 0:
+                points = self.__get_points( value, 'description' )
+
+        return points
+
+    def get_work_experience_total_points( self, forced_value = None ):
+        """
+        Points for work experience gained anywhere (total)
+
+        :param forced_value:
+        :return Int - Total of points:
+        """
+        points = 0
+        if ( self.user_work_experience ):
+
+            # Use given value or search for it
+            if forced_value is not None:
+                value = forced_value
+            else:
+                # search for all work experiences
+                years_of_experience = 0
+                for item in self.user_work_experience:
                         years_of_experience += ( item.months / 12 )
 
                 value = math.floor( years_of_experience )

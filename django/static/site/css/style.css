@@ -496,7 +496,7 @@ body{
 .orange90{background: url('../img/round-progress/orange90.png') no-repeat; background-size: 100%;}
 .orange96{background: url('../img/round-progress/orange96.png') no-repeat; background-size: 100%;}
 
-.japanProgressBar{
+.newzealandProgressBar{
 	width: 80px;
 	height: 80px;
 	background: url('../img/newzeeland-disk.png') no-repeat center center;
@@ -600,7 +600,7 @@ body{
 
 .australiaSelect,
 .canadaSelect,
-.japanSelect{
+.newzealandSelect{
 	display: none;
 }
 

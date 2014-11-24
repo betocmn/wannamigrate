@@ -31,4 +31,9 @@ urlpatterns = patterns('',
     url( r'^edit_work/$', views.edit_work, name = 'edit_work' ),
     url( r'^calculate_points/$', views.calculate_points, name = 'calculate_points' ),
 
+    # Help Pages
+    url( r'^situation/(?P<country_name>[a-z_\-]+)/$', views.situation, name = 'situation' ),
+    url( r'^visa-application/(?P<country_name>[a-z_\-]+)/$', views.visa_application, name = 'visa_application' ),
+    url( r'^moving/(?P<country_name>[a-z_\-]+)/$', views.moving, name = 'moving' ),
+
 )

@@ -3,23 +3,19 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
-from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.forms.formsets import formset_factory
 from django.forms.models import inlineformset_factory
 from django.db import transaction
-from django.db.models import ProtectedError
 from django.utils.translation import activate
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from django.conf import settings
 import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
-from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class
+from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class, get_user_progress_css_class
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
@@ -30,7 +26,7 @@ from wannamigrate.site.forms import (
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
     UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer,
-    Country, UserResult
+    Country, UserResult, UserStats
 )
 from wannamigrate.core.mailer import Mailer
 
@@ -355,6 +351,14 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # If User edited data, but did not calculate points by clicking in save and exit
+    try:
+        user_stats = UserStats.objects.get( user = request.user )
+    except UserStats.DoesNotExist:
+        user_stats = False
+    if user_stats and user_stats.updating_now:
+        return HttpResponseRedirect( reverse( "site:calculate_points" ) )
+
     # Initial settings
     template_data = {}
     template_data['au_min_points'] = settings.MINIMUM_POINTS_AUSTRALIA
@@ -363,15 +367,15 @@ def dashboard( request ):
     template_data['au_points'] = 0
     template_data['ca_points'] = 0
     template_data['nz_points'] = 0
-    template_data['au_percentage_css_class'] = ''
-    template_data['ca_percentage_css_class'] = ''
-    template_data['nz_percentage_css_class'] = ''
+    template_data['personal_percentage'] = 0
+    template_data['language_percentage'] = 0
+    template_data['education_percentage'] = 0
+    template_data['work_percentage'] = 0
 
-
-    # Get User Results
+    # Get User Results per country
     try:
         user_result = UserResult.objects.filter( user = request.user )
-    except UserPersonal.DoesNotExist:
+    except UserResult.DoesNotExist:
         user_result = False
 
     # Pass total points per country to template
@@ -391,6 +395,19 @@ def dashboard( request ):
     template_data['au_percentage_css_class'] = get_country_points_css_class( au_percentage )
     template_data['ca_percentage_css_class'] = get_country_points_css_class( ca_percentage )
     template_data['nz_percentage_css_class'] = get_country_points_css_class( nz_percentage )
+
+    # pass user registration percentages to template
+    if user_stats:
+        template_data['personal_percentage'] = user_stats.percentage_personal
+        template_data['language_percentage'] = user_stats.percentage_language
+        template_data['education_percentage'] = user_stats.percentage_education
+        template_data['work_percentage'] = user_stats.percentage_work
+
+    # Define the percentage css class for progress bar on forms (personal, language, education and work)
+    template_data['personal_percentage_css_class'] = get_user_progress_css_class( template_data['personal_percentage'] )
+    template_data['language_percentage_css_class'] = get_user_progress_css_class( template_data['language_percentage'] )
+    template_data['education_percentage_css_class'] = get_user_progress_css_class( template_data['education_percentage'] )
+    template_data['work_percentage_css_class'] = get_user_progress_css_class( template_data['work_percentage'] )
 
     # Print Template
     return render( request, 'site/dashboard.html', template_data )
@@ -443,16 +460,28 @@ def edit_personal( request ):
             user_personal = user_personal_form.save()
 
             # Saves UserPersonalFamily Formset
+            success = False
             if not user_personal.family_overseas:
                 UserPersonalFamily.objects.filter( user = request.user ).delete()
-                return HttpResponseRedirect( request.POST.get( 'next' ) )
+                success = True
 
             else:
                 if user_personal_family_formset.is_valid():
                     instances = user_personal_family_formset.save()
-                    return HttpResponseRedirect( request.POST.get( 'next' ) )
+                    success = True
+
                 else:
                     transaction.set_rollback( True )
+
+            # If success, update stats and redirect
+            if success:
+                UserStats.objects.update_or_create(
+                    user = request.user, defaults = {
+                        'percentage_personal': user_personal.get_completed_percentage(),
+                        'updating_now': True
+                    }
+                )
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
 
     # pass the forms to the template
     template_data['user_personal_form'] = user_personal_form
@@ -516,11 +545,22 @@ def edit_language( request ):
             user_language = user_language_form.save()
 
             # Saves UserLanguageProficiency Formset
+            success = False
             if user_language_proficiency_formset.is_valid():
                 instances = user_language_proficiency_formset.save()
-                return HttpResponseRedirect( request.POST.get( 'next' ) )
+                success = True
             else:
                 transaction.set_rollback( True )
+
+            # If success, update stats and redirect
+            if success:
+                UserStats.objects.update_or_create(
+                    user = request.user, defaults = {
+                        'percentage_language': user_language.get_completed_percentage(),
+                        'updating_now': True
+                    }
+                )
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
 
     # pass the forms to the template
     template_data['user_language_form'] = user_language_form
@@ -584,11 +624,22 @@ def edit_education( request ):
             user_education = user_education_form.save()
 
             # Saves UserEducationHistory Formset
+            success = False
             if user_education_history_formset.is_valid():
                 instances = user_education_history_formset.save()
-                return HttpResponseRedirect( request.POST.get( 'next' ) )
+                success = True
             else:
                 transaction.set_rollback( True )
+
+            # If success, update stats and redirect
+            if success:
+                UserStats.objects.update_or_create(
+                    user = request.user, defaults = {
+                        'percentage_education': user_education.get_completed_percentage(),
+                        'updating_now': True
+                    }
+                )
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
 
     # pass the forms to the template
     template_data['user_education_form'] = user_education_form
@@ -659,22 +710,33 @@ def edit_work( request ):
             user_work = user_work_form.save()
 
             # Saves UserWorkExperience Formset
+            success = False
             if user_work_experience_formset.is_valid():
                 user_work_experience_formset.save()
 
                 # Saves UserWorkOffer Formset
                 if not user_work.work_offer:
                     UserWorkOffer.objects.filter( user = request.user ).delete()
-                    return HttpResponseRedirect( request.POST.get( 'next' ) )
+                    success = True
                 else:
                     if user_work_offer_formset.is_valid():
                         user_work_offer_formset.save()
-                        return HttpResponseRedirect( request.POST.get( 'next' ) )
+                        success = True
                     else:
                         transaction.set_rollback( True )
 
             else:
                 transaction.set_rollback( True )
+
+            # If success, update stats and redirect
+            if success:
+                UserStats.objects.update_or_create(
+                    user = request.user, defaults = {
+                        'percentage_work': user_work.get_completed_percentage(),
+                        'updating_now': True
+                    }
+                )
+                return HttpResponseRedirect( request.POST.get( 'next' ) )
 
 
 
@@ -701,13 +763,15 @@ def calculate_points( request ):
     :return Redirect
     """
 
+    # instantiate the calculator class
+    immigration_calculator = ImmigrationCalculator( request.user )
+
     # First we get every country with immigration support enabled
     countries = Country.objects.filter( immigration_enabled = True )
     for country in countries:
 
         # calculate points for this country
-        immigration_calculator = ImmigrationCalculator( request.user, country )
-        results = immigration_calculator.get_total_results()
+        results = immigration_calculator.get_total_results( country )
 
         # save results for this country
         updated_values = {
@@ -717,12 +781,56 @@ def calculate_points( request ):
             'score_education': results['education'],
             'score_work': results['work'],
         }
-
-        obj, created = UserResult.objects.update_or_create(
+        UserResult.objects.update_or_create(
             user = request.user, country = country, defaults = updated_values
         )
 
+    # Remove flag for 'updating_now'
+    UserStats.objects.update_or_create(
+        user = request.user, defaults = { 'updating_now': False }
+    )
 
     # Redirect to Dashboard
     return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
+
+#######################
+# MY SITUATION VIEWS
+#######################
+@login_required
+def situation( request, country_name ):
+    """
+    My Situation
+
+    :param request:
+    :param country_name:
+    :return String - HTML.
+    """
+
+    return HttpResponse( "My Situation " + country_name )
+
+
+@login_required
+def visa_application( request, country_name ):
+    """
+    Visa Application
+
+    :param request:
+    :param country_name:
+    :return String - HTML.
+    """
+
+    return HttpResponse( "Visa Application " + country_name )
+
+
+@login_required
+def moving( request, country_name ):
+    """
+    Moving
+
+    :param request:
+    :param country_name:
+    :return String - HTML.
+    """
+
+    return HttpResponse( "Moving to " + country_name )

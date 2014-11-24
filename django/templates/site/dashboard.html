@@ -43,13 +43,13 @@
 			<div class="formProgressOut">
 				<h3>{% trans "Personal" %}</h3>
 				<div class="progressTrack">
-					<div class="progressFill progressFillGreen progressFillSize95">
+					<div class="progressFill {{ personal_percentage_css_class }}">
 
 					</div>
 				</div>
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
-			<div class="formPercentage">97<span>%</span></div>
+			<div class="formPercentage">{{ personal_percentage }}<span>%</span></div>
 			<a href="{% url 'site:edit_personal' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
@@ -61,13 +61,13 @@
 			<div class="formProgressOut">
 				<h3>Language</h3>
 				<div class="progressTrack">
-					<div class="progressFill progressFillYellow progressFillSize60">
+					<div class="progressFill {{ language_percentage_css_class }}">
 
 					</div>
 				</div>
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
-			<div class="formPercentage">62<span>%</span></div>
+			<div class="formPercentage">{{ language_percentage }}<span>%</span></div>
 			<a href="{% url 'site:edit_language' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
@@ -79,13 +79,13 @@
 			<div class="formProgressOut">
 				<h3>Education</h3>
 				<div class="progressTrack">
-					<div class="progressFill progressFillOrange progressFillSize45">
+					<div class="progressFill {{ education_percentage_css_class }}">
 
 					</div>
 				</div>
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
-			<div class="formPercentage">43<span>%</span></div>
+			<div class="formPercentage">{{ education_percentage }}<span>%</span></div>
 			<a href="{% url 'site:edit_education' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
@@ -97,13 +97,13 @@
 			<div class="formProgressOut">
 				<h3>Work</h3>
 				<div class="progressTrack">
-					<div class="progressFill progressFillDarkOrange progressFillSize20">
+					<div class="progressFill {{ work_percentage_css_class }}">
 
 					</div>
 				</div>
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
-			<div class="formPercentage">18<span>%</span></div>
+			<div class="formPercentage">{{ work_percentage }}<span>%</span></div>
 			<a href="{% url 'site:edit_work' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
@@ -145,7 +145,7 @@
                 <p>{% trans "Canada" %}</p>
                 <div class="textUnderLeft">{{ ca_points }}</div>
                 <div class="textUnderRight">
-                    <p>{% trans "REQUIRED" %}</p>
+                    <p>{% trans "POINTS" %}</p>
                     <p>{% trans "OF" %} <span>{{ ca_min_points }}</span> {% trans "REQUIRED" %}</p>
                 </div>
                 <div class="clear"> </div>
@@ -156,10 +156,10 @@
 
 
 
-		<div class="countriesOuter selectJapan">
+		<div class="countriesOuter selectNewZealand">
             <div class="countries">
             <div class="circleProgressBar {{ nz_percentage_css_class }}">
-                <div class="japanProgressBar"></div>
+                <div class="newzealandProgressBar"></div>
             </div>
             <div class="countriesProgress">
                 <p>{% trans "New Zealand" %}</p>
@@ -191,37 +191,41 @@
 
 		<div class="australiaSelect">
             <p class="lowPoints">
-                <img src="{% static "site/img/red-lock.png" %}" />
-                <br />
-                {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% if au_points < au_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
             </p>
-            <a href="my-situation-australia.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="visa-application-australia.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
-            <a href="moving-to-australia.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Australia" %}</span></a>
+            <a href="{% url 'site:situation' 'australia' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'site:visa_application' 'australia' %}" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="{% url 'site:moving' 'australia' %}" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Australia" %}</span></a>
 		</div>
 
 		<div class="canadaSelect">
             <p class="lowPoints">
-                <img src="{% static "site/img/red-lock.png" %}" />
-                <br />
-                You still don’t have enough points<br />
-                to migrate to this country
+                {% if ca_points < ca_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
             </p>
-            <a href="my-situation-canada.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="visa-application-canada.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
-            <a href="moving-to-canada.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Canada" %}</span></a>
+            <a href="{% url 'site:situation' 'canada' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'site:visa_application' 'canada' %}" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="{% url 'site:moving' 'canada' %}" class="stepGuideBtn movingBtn"><span>{% trans "Moving to Canada" %}</span></a>
 		</div>
 
-		<div class="japanSelect">
+		<div class="newzealandSelect">
             <p class="lowPoints">
-                <img src="{% static "site/img/red-lock.png" %}" />
-                <br />
-                You still don’t have enough points<br />
-                to migrate to this country
+                {% if nz_points < nz_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
             </p>
-            <a href="my-situation-newzeeland.html" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="visa-application-newzeeland.html" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
-            <a href="moving-to-newzeeland.html" class="stepGuideBtn movingBtn"><span>{% trans "Moving to New Zealand" %}</span></a>
+            <a href="{% url 'site:situation' 'new-zealand' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'site:visa_application' 'new-zealand' %}" class="stepGuideBtn applyBtn"><span>{% trans "Apply for the visa" %}</span></a>
+            <a href="{% url 'site:moving' 'new-zealand' %}" class="stepGuideBtn movingBtn"><span>{% trans "Moving to New Zealand" %}</span></a>
 		</div>
 
 

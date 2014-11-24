@@ -69,6 +69,11 @@
             // include a <div class="select-style"> around all selects without this parent
             $( "select.force-style" ).wrap( "<div class='select-style' style='width: 120px; float: left; margin-right: 10px;'></div>" );
 
+            // font style for custom selects
+            $( 'select' ).on( 'change', function ( e ) {
+                $( this ).addClass( "selectChange" );
+            });
+
 			// JS for onload
 			{{ on_load|default:'' }}
 

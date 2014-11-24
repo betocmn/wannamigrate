@@ -35,8 +35,8 @@ $( window ).ready( function(){
 		$(this).addClass("whiteBg");
 		$(".column3").css("backgroundColor", "white");
 		$(".australiaSelect").css("display", "block");
-		$(".canadaSelect,.japanSelect").css("display", "none");
-		$(".selectCanada,.selectJapan").removeClass("whiteBg");
+		$(".canadaSelect,.newzealandSelect").css("display", "none");
+		$(".selectCanada,.selectNewZealand").removeClass("whiteBg");
 	});
 
 	$(".selectCanada").click(function(){
@@ -44,45 +44,17 @@ $( window ).ready( function(){
 		$(this).addClass("whiteBg");
 		$(".column3").css("backgroundColor", "white");
 		$(".canadaSelect").css("display", "block");
-		$(".australiaSelect,.japanSelect").css("display", "none");
-		$(".selectAustralia,.selectJapan").removeClass("whiteBg");
+		$(".australiaSelect,.newzealandSelect").css("display", "none");
+		$(".selectAustralia,.selectNewZealand").removeClass("whiteBg");
 	});
 
-	$(".selectJapan").click(function(){
+	$(".selectNewZealand").click(function(){
 		$("#selectCountry").css("display", "none");
 		$(this).addClass("whiteBg");
 		$(".column3").css("backgroundColor", "white");
-		$(".japanSelect").css("display", "block");
+		$(".newzealandSelect").css("display", "block");
 		$(".australiaSelect,.canadaSelect").css("display", "none");
 		$(".selectCanada,.selectAustralia").removeClass("whiteBg");
 	});
-
-	// $("select").onChange(function(){
-	// 	$("select option").css("color","#F00");
-	// });
-
 	
 });
-
-// var whichCountry = '
-// 	<div class="which-country">
-// 				<a href="javascript:void(0);" class="closeBtn"></a>
-// 			<span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;Which country?</span>
-// 			<div class="break10"></div>
-// 			<div class="select-style">
-// 			  <select>
-// 			    <option value="Brazil">Brazil</option>
-// 			  </select>
-// 			</div>
-				
-// 			</div>
-// 	';
-
-// 	$(".addAnother").click(function(){
-// 		// alert("append!");
-// 		$("#whichCountries").append("<div class='which-country'><a href='javascript:void(0);' class='closeBtn'></a><span style='font-size: 14px;color:#888888;display:block;'>&nbsp;&nbsp;&nbsp;Which country?</span><div class='break10'></div><div class='select-style'><select><option value='Brazil'>Brazil</option></select></div></div>");
-// // 		$("#whichCountries").append(whichCountry);
-// 	});
-// 	$(".closeBtn").click(function(){
-// 		alert("close!");
-// 	});

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
+import math
 
 class BaseModel( models.Model ):
     """
@@ -312,6 +313,32 @@ class UserEducation( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def get_completed_percentage( self ):
+        """
+        Check how many fields are filled on user_language tables and get the total percentage of completion
+
+        :return: Int
+        """
+
+        # Fields to check for values inserted by user
+        fields = [ 'regional_australia_study', 'partner_education_level_answer' ]
+
+        # Total is number of fileds + 1 for the UserEducationHistory table
+        total = len( fields ) + 1
+        completed = 0
+
+        # Check on user_language fields
+        for field in fields:
+            value = getattr( self, field )
+            if value is not None:
+                completed += 1
+
+        # Check if there is at least one record on user_language_proficiency
+        if self.user.usereducationhistory_set.count():
+            completed += 1
+
+        return math.floor( ( completed * 100 ) / total )
+
 
 class UserEducationHistory( BaseModel ):
     """
@@ -345,6 +372,32 @@ class UserLanguage( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+    def get_completed_percentage( self ):
+        """
+        Check how many fields are filled on user_language tables and get the total percentage of completion
+
+        :return: Int
+        """
+
+        # Fields to check for values inserted by user
+        fields = [ 'partner_english_level_answer', 'partner_french_level_answer' ]
+
+        # Total is number of fileds + 1 for the UserLanguageProficiency table
+        total = len( fields ) + 1
+        completed = 0
+
+        # Check on user_language fields
+        for field in fields:
+            value = getattr( self, field )
+            if value is not None:
+                completed += 1
+
+        # Check if there is at least one record on user_language_proficiency
+        if self.user.userlanguageproficiency_set.count():
+            completed += 1
+
+        return math.floor( ( completed * 100 ) / total )
 
 
 class UserLanguageProficiency( BaseModel ):
@@ -409,6 +462,25 @@ class UserPersonal( BaseModel ):
     class Meta:
         default_permissions = []
 
+    def get_completed_percentage( self ):
+        """
+        Check how many fields are filled on user_personal tables and get the total percentage of completion
+
+        :return: Int
+        """
+
+        fields = [ 'birth_date', 'gender', 'australian_regional_immigration', 'country', 'family_overseas' ]
+
+        total = len( fields )
+        completed = 0
+        for field in fields:
+            value = getattr( self, field )
+            if value is not None:
+                completed += 1
+
+        return math.floor( ( completed * 100 ) / total )
+
+
 
 class UserPersonalFamily( BaseModel ):
     """
@@ -444,6 +516,20 @@ class UserResult( BaseModel ):
         unique_together = ( "user", "country")
 
 
+class UserStats( BaseModel ):
+    """
+    User Stats Model - Stores the stats about each user (percentage completed, etc)
+    """
+
+    # Model Attributes
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    percentage_personal = models.IntegerField( _( "percentage personal" ), blank = True, null = True, default = 0 )
+    percentage_language = models.IntegerField( _( "percentage language" ), blank = True, null = True, default = 0 )
+    percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )
+    percentage_work = models.IntegerField( _( "percentage work" ), blank = True, null = True, default = 0 )
+    updating_now = models.BooleanField( _( 'updating now' ), default = False )
+
+
 class UserWork( BaseModel ):
     """
     User Work Model - Ex: Stores work related information
@@ -466,6 +552,32 @@ class UserWork( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+    def get_completed_percentage( self ):
+        """
+        Check how many fields are filled on user_work tables and get the total percentage of completion
+
+        :return: Int
+        """
+
+        # Fields to check for values inserted by user
+        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'work_offer', 'partner_skills' ]
+
+        # Total is number of fileds + 1 for the UserWorkExperience table
+        total = len( fields ) + 1
+        completed = 0
+
+        # Check on user_language fields
+        for field in fields:
+            value = getattr( self, field )
+            if value is not None:
+                completed += 1
+
+        # Check if there is at least one record on user_language_proficiency
+        if self.user.userworkexperience_set.count():
+            completed += 1
+
+        return math.floor( ( completed * 100 ) / total )
 
 
 class UserWorkOffer( BaseModel ):

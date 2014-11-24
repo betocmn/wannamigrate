@@ -49,6 +49,11 @@
                 deleteText: ''
             });
 
+            // font style for custom selects
+            $( 'select' ).on( 'change', function ( e ) {
+                $( this ).addClass( "selectChange" );
+            });
+
 			// JS for onload
 			{{ on_load|default:'' }}
 
