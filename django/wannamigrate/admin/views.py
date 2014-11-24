@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.forms.models import inlineformset_factory
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -13,6 +13,13 @@ from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, Gr
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
+
+
+#######################
+# Funcion to check user is admin
+#######################
+def admin_check( user ):
+    return user.is_admin
 
 
 #######################
@@ -56,6 +63,7 @@ def login_index( request ):
 
 
 @login_required
+@user_passes_test( admin_check )
 def login_logout( request ):
     """
     Action for logout
@@ -68,6 +76,7 @@ def login_logout( request ):
 
 
 @login_required
+@user_passes_test( admin_check )
 def login_my_account( request ):
     """
     Displays personal data from the logged user
@@ -84,6 +93,7 @@ def login_my_account( request ):
 
 
 @login_required
+@user_passes_test( admin_check )
 def login_edit_my_account( request ):
     """
     Edit personal data from the logged user
@@ -112,6 +122,7 @@ def login_edit_my_account( request ):
 
 
 @login_required
+@user_passes_test( admin_check )
 def home_index( request ):
     """
     Index Dashboard - After an user successfully logs in
@@ -127,6 +138,7 @@ def home_index( request ):
 #######################
 # ADMIN USERS
 #######################
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_admin_user' )
 def admin_user_list( request ):
     """
@@ -140,6 +152,7 @@ def admin_user_list( request ):
     return render( request, 'admin/admin_user/list.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_admin_user' )
 def admin_user_list_json( request ):
     """
@@ -166,6 +179,7 @@ def admin_user_list_json( request ):
     return HttpResponse( json )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_add_admin_user' )
 def admin_user_add( request ):
     """
@@ -204,6 +218,7 @@ def admin_user_add( request ):
     return render( request, 'admin/admin_user/add.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_admin_user' )
 def admin_user_details( request, user_id ):
     """
@@ -224,6 +239,7 @@ def admin_user_details( request, user_id ):
     return render( request, 'admin/admin_user/details.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_change_admin_user' )
 def admin_user_edit( request, user_id ):
     """
@@ -252,6 +268,7 @@ def admin_user_edit( request, user_id ):
     return render( request, 'admin/admin_user/edit.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_delete_admin_user' )
 def admin_user_delete( request, user_id ):
     """
@@ -277,6 +294,7 @@ def admin_user_delete( request, user_id ):
 #######################
 # GROUPS AND PERMISSIONS
 #######################
+@user_passes_test( admin_check )
 @permission_required( 'auth.view_group' )
 def group_list( request ):
     """
@@ -290,6 +308,7 @@ def group_list( request ):
     return render( request, 'admin/group/list.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'auth.view_group' )
 def group_list_json( request ):
     """
@@ -315,6 +334,7 @@ def group_list_json( request ):
     json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
+@user_passes_test( admin_check )
 @permission_required( 'auth.add_group' )
 def group_add( request ):
     """
@@ -345,6 +365,7 @@ def group_add( request ):
     return render( request, 'admin/group/add.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'auth.view_group' )
 def group_details( request, group_id ):
     """
@@ -365,6 +386,7 @@ def group_details( request, group_id ):
     return render( request, 'admin/group/details.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'auth.edit_group' )
 def group_edit( request, group_id ):
     """
@@ -398,6 +420,7 @@ def group_edit( request, group_id ):
     return render( request, 'admin/group/edit.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'auth.delete_group' )
 def group_delete( request, group_id ):
     """
@@ -424,6 +447,7 @@ def group_delete( request, group_id ):
 #######################
 # IMMIGRATION RULES (QUESTIONS, ANSWERS AND POINTS)
 #######################
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_immigration_rule' )
 def question_list( request ):
     """
@@ -437,6 +461,7 @@ def question_list( request ):
     return render( request, 'admin/question/list.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_immigration_rule' )
 def question_list_json( request ):
     """
@@ -461,6 +486,8 @@ def question_list_json( request ):
     json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
+
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_add_immigration_rule' )
 def question_add( request ):
     """
@@ -516,6 +543,7 @@ def question_add( request ):
     return render( request, 'admin/question/add.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_view_immigration_rule' )
 def question_details( request, question_id ):
     """
@@ -542,6 +570,7 @@ def question_details( request, question_id ):
     return render( request, 'admin/question/details.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_change_immigration_rule' )
 def question_edit( request, question_id ):
     """
@@ -605,6 +634,7 @@ def question_edit( request, question_id ):
     return render( request, 'admin/question/edit.html', context )
 
 
+@user_passes_test( admin_check )
 @permission_required( 'core.admin_delete_immigration_rule' )
 def question_delete( request, question_id ):
     """

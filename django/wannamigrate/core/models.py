@@ -83,6 +83,7 @@ class Country( BaseModel ):
     continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
     code = models.CharField( _( "code" ), max_length = 2 )
     immigration_enabled = models.BooleanField( _( "immigration enabled" ), default = False )
+    points = models.ManyToManyField( Answer, through = 'CountryPoints' )
 
     # META Options
     class Meta:
@@ -123,6 +124,7 @@ class CountryPoints( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+        unique_together = ( "answer", "country" )
 
     @staticmethod
     def get_all_points_per_question( question_id ):
@@ -513,7 +515,7 @@ class UserResult( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
-        unique_together = ( "user", "country")
+        unique_together = ( "user", "country" )
 
 
 class UserStats( BaseModel ):

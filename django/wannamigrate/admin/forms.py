@@ -170,11 +170,15 @@ class AnswerForm( BaseModelForm ):
         answer = super( AnswerForm, self ).save( commit = True )
         for form_element_name in self.cleaned_data:
             if 'points' in form_element_name:
-                country_points = CountryPoints()
-                country_points.answer_id = answer.id
-                country_points.country_id = form_element_name.split( '_' )[-1] # name is similar to 'points_3' where 3 is the country ID
-                country_points.points = int( self.cleaned_data[form_element_name] )
-                country_points.save()
+
+                # data to be saved
+                country_id = form_element_name.split( '_' )[-1] # name is similar to 'points_3' where 3 is the country ID
+                points = int( self.cleaned_data[form_element_name] )
+
+                # save (update or create)
+                CountryPoints.objects.update_or_create(
+                    answer_id = answer.id, country_id = country_id, defaults = { 'points': points }
+                )
 
         return answer
 
