@@ -63,9 +63,6 @@ def build_datatable_json( request, objects, info ):
     list_filter = info['fields_to_search']
     default_order_by = info['default_order_by']
 
-    # fields to select
-    #objects = objects.values( *list_display )
-
     # count total items:
     total_records = objects.count()
 
@@ -80,7 +77,10 @@ def build_datatable_json( request, objects, info ):
     order = dict( enumerate(list_display) )
     dirs = {'asc': '', 'desc': '-'}
     if request.method == 'GET' and 'sSortDir_0' in request.GET:
-        order_by = dirs[request.GET['sSortDir_0']] + order[int(request.GET['iSortCol_0'])]
+        field = order[int(request.GET['iSortCol_0'])]
+        if '.' in field:
+            field = field.replace( '.', '__' )
+        order_by = dirs[request.GET['sSortDir_0']] + field
     else:
         order_by = default_order_by
     objects = objects.order_by( order_by )
@@ -120,7 +120,12 @@ def build_datatable_json( request, objects, info ):
     for obj in objects:
         values = []
         for field in list_display:
-            values.append( getattr( obj, field ) )
+            if '.' in field:
+                split = field.split( '.' )
+                sub_obj = getattr( obj, split[0] )
+                values.append( getattr( sub_obj, split[1] ) )
+            else:
+                values.append( getattr( obj, field ) )
         buttons_html = base_buttons_html.replace( "#details_link#", reverse( 'admin:' + info['url_base_name'] + '_details', args = ( obj.id, ) ) )
         buttons_html = buttons_html.replace( "#edit_link#", reverse( 'admin:' + info['url_base_name'] + '_edit', args = ( obj.id, ) ) )
         buttons_html = buttons_html.replace( "#delete_link#", reverse( 'admin:' + info['url_base_name'] + '_delete', args = ( obj.id, ) ) )
@@ -219,14 +224,14 @@ def get_country_points_css_class( percentage ):
 
     # If zero, return empty css class
     if percentage == 0:
-        return 'orange6'
+        return ''
+
+    # These are the percentages defined by css classes in 'style.css'
+    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
 
     # if it's 100% full
     if percentage >= 100:
         return 'green96'
-
-    # These are the percentages defined by css classes in 'style.css'
-    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
 
     # Define the color of the bar
     if percentage <= 30:
@@ -257,9 +262,9 @@ def get_user_progress_css_class( percentage ):
     :return: String
     """
 
-    # If zero, return the minimum class
+    # If zero, return
     if percentage == 0:
-        return 'progressFillDarkOrange progressFillSize5'
+        return ''
 
     # if it's 100% full
     if percentage >= 100:

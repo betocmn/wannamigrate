@@ -1,10 +1,10 @@
 from django import forms
-from django.forms import TextInput, SelectMultiple, HiddenInput, Select
+from django.forms import TextInput, SelectMultiple, HiddenInput, Select, ModelMultipleChoiceField, ModelChoiceField
 from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from wannamigrate.core.models import Question, Answer, CountryPoints, Country
+from wannamigrate.core.models import Question, Answer, CountryPoints, Country, Occupation, OccupationCategory
 
 #######################
 # LOGIN / LOGOUT / MY ACCOUNT
@@ -200,4 +200,31 @@ class BaseAnswerFormSet( BaseInlineFormSet ):
         kwargs['countries'] = self.countries
         kwargs['points_per_country'] = self.points_per_country
         return super( BaseAnswerFormSet, self )._construct_form( *args, **kwargs )
-""
+
+
+#######################
+# OCCUPATIONS
+#######################
+class OccupationForm( BaseModelForm ):
+    """
+    Form for ADD and EDIT ADMIN USERS
+    """
+
+    countries = ModelMultipleChoiceField(
+        required = True, label = "Countries",
+        queryset = Country.objects.filter( immigration_enabled = True ).order_by( 'name' ),
+        widget = SelectMultiple( attrs = { 'class': 'form-control', 'style': 'height: 200px;' } )
+    )
+
+    occupation_category = ModelChoiceField(
+        required = False, label = "Category",
+        queryset = OccupationCategory.objects.order_by( 'name' ),
+        widget = Select( attrs = { 'class': 'form-control' } )
+    )
+
+    class Meta:
+        model = Occupation
+        fields = [ 'name', 'occupation_category', 'countries' ]
+        widgets = {
+            'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
+        }

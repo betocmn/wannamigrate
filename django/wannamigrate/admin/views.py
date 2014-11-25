@@ -9,7 +9,10 @@ from django.forms.models import inlineformset_factory
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.db.models import ProtectedError
-from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
+from wannamigrate.admin.forms import (
+    LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm,
+    BaseAnswerFormSet, OccupationForm
+)
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints, Occupation, OccupationCategory
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
@@ -683,19 +686,19 @@ def occupation_list_json( request ):
     """
 
     # Query data
-    #occupation = Occupation()
-    objects = Occupation.objects.all()
+    objects = Occupation.objects.select_related( 'occupation_category' ).all()
 
     # settings
     info = {
-        'fields_to_select': [ 'id', 'name' ],
-        'fields_to_search': [ 'id', 'name' ],
-        'default_order_by': 'name',
+        'fields_to_select': [ 'id', 'occupation_category.name', 'name' ],
+        'fields_to_search': [ 'id', 'name', 'occupation_category__name' ],
+        'default_order_by': 'occupation_category__name',
         'url_base_name': 'occupation',
     }
 
     #build json data and return it to the screen
     json = build_datatable_json( request, objects, info )
+
     return HttpResponse( json )
 
 @user_passes_test( admin_check )
@@ -803,5 +806,5 @@ def occupation_delete( request, occupation_id ):
     occupation.delete()
 
     # Redirect with success message
-    messages.success( request, 'occupation was successfully marked as INACTIVE.')
+    messages.success( request, 'occupation was successfully deleted.' )
     return HttpResponseRedirect( reverse( 'admin:admin_occupations' ) )
