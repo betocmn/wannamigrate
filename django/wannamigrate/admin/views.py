@@ -645,12 +645,11 @@ def question_delete( request, question_id ):
     :return: String
     """
     # Identify database record
-    user = get_object_or_404( get_user_model(), pk = question_id )
+    question = get_object_or_404( Question, pk = question_id )
 
-    # mark as INACTIVE
-    user.is_active = False
-    user.save()
+    # remove it
+    question.delete()
 
     # Redirect with success message
-    messages.success( request, 'User was successfully marked as INACTIVE.')
+    messages.success( request, 'Question was successfully deleted.')
     return HttpResponseRedirect( reverse( 'admin:immigration_rules' ) )

@@ -367,7 +367,6 @@ class UserLanguage( BaseModel ):
 
     # Model Attributes
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    australian_community_language = models.BooleanField( _( "credentialled community language in australia" ), default = False )
     partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, blank = True, null = True  )
     partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, blank = True, null = True  )
 
