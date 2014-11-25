@@ -85,6 +85,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Answer</th>
+                                                <th>Category</th>
                                                 {% for country in countries %}
                                                     <th>{{ country.name }}</th>
                                                 {% endfor %}
@@ -105,18 +106,25 @@
                                                         </div>
                                                     </td>
 
-                                                        {% for field in answer_form %}
-                                                            {% if 'points_' in field.name %}
-                                                                <td>
-                                                                    <div class="form-group {% if field.errors %}has-error{% endif %}">
-                                                                        {{ field }}
-                                                                        {{ field.errors }}
-                                                                    </div>
-                                                                    &nbsp;
-                                                                    Points
-                                                                </td>
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                    <td>
+                                                        <div class="form-group {% if answer_form.answer_category.errors %}has-error{% endif %}">
+                                                            {{ answer_form.answer_category }}
+                                                            {{ answer_form.answer_category.errors }}
+                                                        </div>
+                                                    </td>
+
+                                                    {% for field in answer_form %}
+                                                        {% if 'points_' in field.name %}
+                                                            <td>
+                                                                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                                                                    {{ field }}
+                                                                    {{ field.errors }}
+                                                                </div>
+                                                                &nbsp;
+                                                                Points
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </tr>
                                             {% endfor %}
 

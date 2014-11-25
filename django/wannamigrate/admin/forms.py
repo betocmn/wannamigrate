@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import TextInput, SelectMultiple, HiddenInput
+from django.forms import TextInput, SelectMultiple, HiddenInput, Select
 from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -138,9 +138,10 @@ class AnswerForm( BaseModelForm ):
 
     class Meta:
         model = Answer
-        fields = [ 'id', 'description', 'question' ]
+        fields = [ 'id', 'description', 'question', 'answer_category' ]
         widgets = {
-            'description': TextInput( attrs = { 'class': 'form-control' } ),
+            'answer_category': Select( attrs = { 'class': 'form-control', 'style': 'width: 280px;' } ),
+            'description': TextInput( attrs = { 'class': 'form-control', 'style': 'width: 280px;' } ),
             'question': HiddenInput(),
             'id': HiddenInput()
         }

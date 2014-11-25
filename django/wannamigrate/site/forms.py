@@ -250,7 +250,7 @@ class UserLanguageForm( BaseModelForm ):
 
     class Meta:
         model = UserLanguage
-        fields = [ 'australian_community_language', 'partner_english_level_answer', 'partner_french_level_answer' ]
+        fields = [ 'partner_english_level_answer', 'partner_french_level_answer' ]
 
     def __init__( self, *args, **kwargs ):
         """
@@ -358,34 +358,6 @@ class BaseUserLanguageProficiencyFormSet( BaseInlineFormSet ):
                 if language in languages:
                     raise forms.ValidationError( _( "You must choose different languages." ) )
                 languages.append( language )
-
-    def save( self ):
-        """
-        After saving the forms, it search if a language specific for
-        Australia was entered. If yes, we need to update the field (boolean)
-        on the UserLanguage model.
-
-        :return: List of models
-        """
-        instances = super( BaseUserLanguageProficiencyFormSet, self ).save()
-
-        if self.has_changed():
-
-            # iterate over forms submitted and check if language is on the australian list
-            australian_community_language = False
-            for form in self.forms:
-                user = form.cleaned_data['user']
-                if form not in self.deleted_forms:
-                    if form.cleaned_data['language'].id in settings.ID_AUSTRALIAN_COMMUNITY_LANGUAGES:
-                        australian_community_language = True
-                        break
-
-            # Update UserLanguage object
-            user_language = UserLanguage.objects.get( user = user )
-            user_language.australian_community_language = australian_community_language
-            user_language.save()
-
-        return instances
 
 
 #######################

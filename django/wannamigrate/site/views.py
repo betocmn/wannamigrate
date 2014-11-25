@@ -426,8 +426,6 @@ def edit_personal( request ):
     :return String - HTML.
     """
 
-    #activate( 'pt-br' )
-
     # Initial Settings
     template_data = {}
 

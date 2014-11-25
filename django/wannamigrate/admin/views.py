@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.db.models import ProtectedError
 from wannamigrate.admin.forms import LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm, BaseAnswerFormSet
-from wannamigrate.core.models import Question, Answer, Country, CountryPoints
+from wannamigrate.core.models import Question, Answer, Country, CountryPoints, Occupation, OccupationCategory
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
 
@@ -593,7 +593,7 @@ def question_edit( request, question_id ):
     question_form = QuestionForm( request.POST or None, instance = question )
 
     # Instantiate Answer Formset
-    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 0, can_delete = True )
+    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 0, can_delete = True, max_num = 2000 )
     answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
 
     # Form was submitted so it tries to validate question first
@@ -645,12 +645,163 @@ def question_delete( request, question_id ):
     :return: String
     """
     # Identify database record
-    user = get_object_or_404( get_user_model(), pk = question_id )
+    question = get_object_or_404( Question  , pk = question_id )
 
-    # mark as INACTIVE
-    user.is_active = False
-    user.save()
+    # remove it
+    question.delete()
 
     # Redirect with success message
-    messages.success( request, 'User was successfully marked as INACTIVE.')
+    messages.success( request, 'Question was successfully deleted.')
     return HttpResponseRedirect( reverse( 'admin:immigration_rules' ) )
+
+
+#######################
+# OCCUPATIONS
+#######################
+@user_passes_test( admin_check )
+@permission_required( 'auth.view_occupation' )
+def occupation_list( request ):
+    """
+    Lists all admin users with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    context = {}
+    return render( request, 'admin/occupation/list.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'auth.view_occupation' )
+def occupation_list_json( request ):
+    """
+    Generates JSON for the listing (required for the JS plugin www.datatables.net)
+
+    :param: request
+    :return: String
+    """
+
+    # Query data
+    #occupation = Occupation()
+    objects = Occupation.objects.all()
+
+    # settings
+    info = {
+        'fields_to_select': [ 'id', 'name' ],
+        'fields_to_search': [ 'id', 'name' ],
+        'default_order_by': 'name',
+        'url_base_name': 'occupation',
+    }
+
+    #build json data and return it to the screen
+    json = build_datatable_json( request, objects, info )
+    return HttpResponse( json )
+
+@user_passes_test( admin_check )
+@permission_required( 'auth.add_occupation' )
+def occupation_add( request ):
+    """
+    Add new Occupation
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+
+    # When form is submitted
+    if request.method == 'POST':
+
+        # Tries to validate form and save data
+        form = OccupationForm( request.POST )
+        if form.is_valid():
+            occupation = form.save()
+            messages.success( request, 'Occupation was successfully added.')
+            return HttpResponseRedirect( reverse( 'admin:occupation_details', args = ( occupation.id, ) ) )
+
+    else:
+        form = OccupationForm()
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:occupations' ) }
+
+    # Print Template
+    return render( request, 'admin/occupation/add.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'auth.view_occupation' )
+def occupation_details( request, occupation_id ):
+    """
+    View OCCUPATION page
+
+    :param: request
+    :param: occupation_id
+    :return: String
+    """
+
+    # Identify database record
+    occupation = get_object_or_404( Occupation, pk = occupation_id )
+
+    # Template data
+    context = { 'occupation': occupation }
+
+    # Print Template
+    return render( request, 'admin/occupation/details.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'auth.edit_occupation' )
+def occupation_edit( request, occupation_id ):
+    """
+    Edit Occupation data
+
+    :param: request
+    :param: occupation_id
+    :return: String
+    """
+
+    # Identify database record
+    occupation = get_object_or_404( Occupation, pk = occupation_id )
+
+    # When form is submitted
+    if request.method == 'POST':
+
+        # Tries to validate form and save data
+        form = OccupationForm( request.POST, instance = occupation )
+        if form.is_valid():
+            form.save()
+            messages.success( request, 'Occupation was successfully updated.')
+            return HttpResponseRedirect( reverse( 'admin:occupation_details', args = ( occupation_id, ) ) )
+
+    else:
+        form = OccupationForm( instance = occupation )
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:occupation_details', args = ( occupation_id, ) ) }
+
+    # Print Template
+    return render( request, 'admin/occupation/edit.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'auth.delete_occupation' )
+def occupation_delete( request, occupation_id ):
+    """
+    Delete Occupation action.
+
+    :param: request
+    :param: occupation_id
+    :return: String
+    """
+
+    # Identify database record
+    occupation = get_object_or_404( Occupation, pk = occupation_id )
+    return HttpResponse( 'Deleted' )
+
+    # delete
+    occupation.delete()
+
+    # Redirect with success message
+    messages.success( request, 'occupation was successfully marked as INACTIVE.')
+    return HttpResponseRedirect( reverse( 'admin:admin_occupations' ) )

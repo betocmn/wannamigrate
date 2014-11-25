@@ -31,6 +31,7 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_AGE: { 'method': 'get_age_points', 'type': 'personal' },
         settings.ID_QUESTION_ENGLISH: { 'method': 'get_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
         settings.ID_QUESTION_FRENCH: { 'method': 'get_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
+        settings.ID_QUESTION_LANGUAGE_LEVEL_OTHERS: { 'method': 'get_language_level_others_points', 'type': 'language' },
         settings.ID_QUESTION_EDUCATION_DEGREE: { 'method': 'get_education_degree_points', 'type': 'education' },
         settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
         settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
@@ -43,7 +44,6 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_STUDY_REGIONAL_AU: { 'method': 'get_study_regional_au_points', 'type': 'education' },
         settings.ID_QUESTION_PROFESSIONAL_YEAR_AU: { 'method': 'get_professional_year_au_points', 'type': 'education' },
         settings.ID_QUESTION_LIVE_REGIONAL_AU: { 'method': 'get_live_regional_au_points', 'type': 'personal' },
-        settings.ID_QUESTION_COMMUNITY_LANGUAGE_AU: { 'method': 'get_community_language_au_points', 'type': 'language' },
         settings.ID_QUESTION_PARTNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_PARTNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
@@ -125,7 +125,7 @@ class ImmigrationCalculator( object ):
     def __get_question_id( self, method_name ):
         """
         Search the 'question_methods' class variable to return the
-        ID (key) from the anwer, based on method_name
+        ID (key) from the answer, based on method_name
 
         :param method_name:
         :return Mixed - Int or False on failure:
@@ -332,6 +332,31 @@ class ImmigrationCalculator( object ):
             # search for how many points this answer is worth
             if value != "":
                 points = self.__get_points( value, 'id' )
+
+        return points
+
+    def get_language_level_others_points( self, forced_value = None ):
+        """
+        Points for skills with Australia community languages
+
+        :param forced_value:
+        :return Int - Total of points:
+        """
+        points = 0
+        if ( self.user_language_proficiency ):
+
+            # Use given value or search for it
+            if forced_value is not None:
+                value = forced_value
+            else:
+                # search for a relative on the current country
+                value = ""
+                for item in self.user_language_proficiency:
+                    if item.language_id in settings.ID_AUSTRALIAN_COMMUNITY_LANGUAGES:
+                        value = item.language_level_answer.id
+                        points = self.__get_points( value, 'id' )
+                        if points > 0:
+                            break
 
         return points
 
