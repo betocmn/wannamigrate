@@ -11,7 +11,7 @@
             {% get_language_info_list for LANGUAGES as languages %}
             {% for language in languages %}
             <li>
-                <a href="{% url 'site:setlang' language.code %}">
+                <a href="{% url 'site:setlang' language.code %}?next={{request.path}}">
                     <i class="flag {{ language.code }}"></i>
                     <span class="country-name 14pt almost-white" href="#">{{ language.name_local }} ({{ language.code }})</span>
                 </a>

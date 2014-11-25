@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, permission_required
@@ -841,17 +841,25 @@ def moving( request, country_name ):
 #######################
 def setlang( request, language_code ):
     """
-    Language
+    Changes the current language to the desired language defined by language_code parameter.
+    If you want to redirect the user to other page that isn't '/' provide a parameter named "next" in the GET request.
 
-    :param request:
+    :param request: Default request param.
     :param language_code: The code of the language to localize.
-    :return String - HTML.
+    :return Sets the desired language and redirects the user to '/' or to a next page defined via GET.
     """
+
+    # Checks if next paramters is set.
+    next = '/'
+    if request.GET[ "next" ]:
+        next = request.GET[ "next" ]
+
 
     translation.activate( language_code )
     request.session[translation.LANGUAGE_SESSION_KEY] = language_code
 
-    return HttpResponseRedirect( reverse( "site:dashboard" ) )
+    return redirect( next )
+
 
 
 
