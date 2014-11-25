@@ -79,7 +79,11 @@
                                                     <tr>
                                                         <td>{{ answer.description }}</td>
                                                         {% for country in countries %}
-                                                            <td>{{ points_per_country|get_key:country.id|get_key:answer.id }} Points</td>
+                                                            {% if country.id in points_per_country and answer.id in points_per_country|get_key:country.id %}
+                                                                <td>{{ points_per_country|get_key:country.id|get_key:answer.id }} Points</td>
+                                                            {% else %}
+                                                                <td>--</td>
+                                                            {% endif %}
                                                         {% endfor %}
                                                     </tr>
                                                 {% endfor %}

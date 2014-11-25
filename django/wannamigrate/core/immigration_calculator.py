@@ -125,7 +125,7 @@ class ImmigrationCalculator( object ):
     def __get_question_id( self, method_name ):
         """
         Search the 'question_methods' class variable to return the
-        ID (key) from the anwer, based on method_name
+        ID (key) from the answer, based on method_name
 
         :param method_name:
         :return Mixed - Int or False on failure:

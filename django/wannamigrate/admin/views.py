@@ -593,7 +593,7 @@ def question_edit( request, question_id ):
     question_form = QuestionForm( request.POST or None, instance = question )
 
     # Instantiate Answer Formset
-    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 0, can_delete = True )
+    AnswerInlineFormSet = inlineformset_factory( Question, Answer, formset = BaseAnswerFormSet, form = AnswerForm, extra = 0, can_delete = True, max_num = 2000 )
     answer_formset = AnswerInlineFormSet( request.POST or None, instance = question, countries = countries, points_per_country = points_per_country )
 
     # Form was submitted so it tries to validate question first
@@ -645,7 +645,7 @@ def question_delete( request, question_id ):
     :return: String
     """
     # Identify database record
-    question = get_object_or_404( Question, pk = question_id )
+    question = get_object_or_404( Question  , pk = question_id )
 
     # remove it
     question.delete()

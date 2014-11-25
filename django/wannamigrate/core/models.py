@@ -111,6 +111,21 @@ class Country( BaseModel ):
         return tuple( [( '', _( 'Select Country' ) )] + result  )
 
 
+class CountryOccupation( BaseModel ):
+    """
+    Country Occupations Model - Stores which occupations are in demand for each country
+    """
+
+    # Model Attributes
+    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+    occupation = models.ForeignKey( 'Occupation', verbose_name = _( 'occupation' ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+        unique_together = ( "occupation", "country" )
+
+
 class CountryPoints( BaseModel ):
     """
     Country Points Model - Stores the total points for each answer in each country avaiblable
@@ -184,6 +199,45 @@ class Language( BaseModel ):
             result.append( ( language.id, _( language.name ) ) )
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Language' ) )] + result  )
+
+
+class Occupation( BaseModel ):
+    """
+    Occupation Model - These are the possible occupations required in the countries of destination
+    """
+
+    # Model Attributes
+    occupation_category = models.ForeignKey( 'OccupationCategory', verbose_name = _( 'category' ) )
+    description = models.CharField(  _( 'Name' ), max_length = 180 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_occupation", "ADMIN: Can add occupation" ),
+            ( "admin_change_occupation", "ADMIN: Can change occupation" ),
+            ( "admin_delete_occupation", "ADMIN: Can delete occupation" ),
+            ( "admin_view_occupation", "ADMIN: Can view occupations" )
+        )
+
+    def __str__( self ):
+        return '%s' % ( _( self.description ) )
+
+
+class OccupationCategory( BaseModel ):
+    """
+    Answer Category Model - Some answers are grouped into categories
+    """
+
+    # Model Attributes
+    name = models.CharField(  _( 'Name' ), max_length = 100 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    def __str__( self ):
+        return '%s' % ( _( self.name ) )
 
 
 class Question( BaseModel ):
