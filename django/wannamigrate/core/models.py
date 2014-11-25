@@ -208,7 +208,7 @@ class Occupation( BaseModel ):
 
     # Model Attributes
     occupation_category = models.ForeignKey( 'OccupationCategory', verbose_name = _( 'category' ) )
-    description = models.CharField(  _( 'Name' ), max_length = 180 )
+    name = models.CharField(  _( 'Name' ), max_length = 180 )
 
     # META Options
     class Meta:

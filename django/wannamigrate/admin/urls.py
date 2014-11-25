@@ -33,5 +33,13 @@ urlpatterns = patterns('',
     url( r'^immigration_rules/details/(?P<question_id>\d+)$', views.question_details, name='immigration_rule_details' ),
     url( r'^immigration_rules/edit/(?P<question_id>\d+)$', views.question_edit, name='immigration_rule_edit' ),
     url( r'^immigration_rules/delete/(?P<question_id>\d+)$', views.question_delete, name='immigration_rule_delete' ),
+    
+    # Occupations
+    url( r'^occupations/$', views.occupation_list, name='occupations' ),
+    url( r'^occupations/json/$', views.occupation_list_json, name='occupation_json' ),
+    url( r'^occupations/add/$', views.occupation_add, name='occupation_add' ),
+    url( r'^occupations/details/(?P<occupation_id>\d+)$', views.occupation_details, name='occupation_details' ),
+    url( r'^occupations/edit/(?P<occupation_id>\d+)$', views.occupation_edit, name='occupation_edit' ),
+    url( r'^occupations/delete/(?P<occupation_id>\d+)$', views.occupation_delete, name='occupation_delete' ),
 
 )
