@@ -17,7 +17,7 @@ import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class, get_user_progress_css_class
 from wannamigrate.site.forms import (
-    ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
+    UserForm, ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
@@ -331,8 +331,26 @@ def account( request ):
     :param request:
     :return String - HTML from The dashboard page.
     """
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        user_form = UserForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in user_form.cleaned_data as required
+            # TODO: save the provided data.
+            # TODO: Remember to ignore e-mail edition.
+            # Render the account page with a success message.
+            return render( request, 'site/account.html', { 'user_form': user_form, 'success': "Changes saved." } )
 
-    return HttpResponse( "MY Account Page" )
+    # if a GET (or any other method) we'll create a form
+    # filled with user's information.
+    # fields: name, e-mail, preferred language and avatar.
+    # TODO: fill the user_form with the user's info.
+    else:
+        user_form = UserForm()
+
+    return render( request, 'site/account.html', { 'user_form': user_form } )
 
 
 

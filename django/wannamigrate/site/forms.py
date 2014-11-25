@@ -541,3 +541,16 @@ class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
                 user_work.save()
 
         return instances
+
+
+#######################
+# USER FORMS
+#######################
+class UserForm( BaseForm ):
+    """
+    Form for USER data
+    """
+    name = forms.CharField( required = True, label = _( "Account name" ), widget = forms.TextInput( attrs = { 'placeholder': _( "Ex: John Exampleman" ), 'class': 'input-text' } ) )
+    email = forms.EmailField( required = True, label = _( "Account e-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "ex: john@wannamigrate.com" ), 'class': 'input-text', 'disabled' : "disabled" } ) )
+    # TODO: Change preferred_language to a selectbox and fill it with language codes and values.
+    preferred_language = forms.CharField( required = True, label = _( "Preferred language" ), widget = forms.TextInput( attrs = { 'placeholder': _( "Your name" ), 'class': 'input-text', } ) )

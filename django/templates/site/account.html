@@ -6,66 +6,52 @@
 
     {{ block.super }}
 
-    <!-- JQuery UI -->
-    <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
-    <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
-
-    <!-- Bootstratp -->
-    <link rel="stylesheet" type="text/css" href="{% static 'site/js/bootstrap/css/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{% static "site/js/bootstrap/js/bootstrap.min.js" %}"></script>
-
-    <!-- INLINE JS -->
-    <script type="text/javascript">
-
-    </script>
-
 {% endblock head %}
 
 
 {% block content %}
+<div class="formBox fullWidth" style="margin-top:0;">
+        <div id="update" class="updateFix">
+            <h2>{% trans "My Account" %}</h2>
+            <p>{% trans "Edit your account settings." %}</p>
+        </div>
 
-    <div style="width: 800px;">
+        <form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
 
-        <h1>{% trans "My Account" %} </h1>
+            {% csrf_token %}
 
-        {% if finished %}
+            {% if user_form.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                    <ul>
+                        <li><strong>{% trans "Errors Found!" %}</strong></li>
+                        {% for error in user_form.errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
 
-            <div>
-                {% trans "You have successfully sent your message." %}
-                <br /><br />
-                <a href="{% url 'site:home' %}">{% trans "Click Here to go back" %}k</a>
+            <div class="{% if user_form.name.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_form.name.label }}:</strong> &nbsp;</span>
+                <div>
+                    {{ user_form.name }}
+                </div>
+                {{ user_form.name.errors }}
             </div>
 
-        {% else %}
+            <div class="clear break10"></div>
+            <div class="break10"></div>
 
+            <div class="{% if user_form.email.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_form.email.label }}:</strong> &nbsp;</span>
+                <div>
+                    {{ user_form.email }}
+                </div>
+                {{ user_form.email.errors }}
+            </div>
 
-            {% include "site/layouts/status.html" %}
-
-            <form method="post" action="">
-                {% csrf_token %}
-
-                <label class="" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-                {{ form.name }}
-                {{ form.name.errors }}
-
-                <br /><br />
-
-                <label class="" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-                {{ form.email }}
-                {{ form.email.errors }}
-
-                <br /><br />
-
-                <label class="" for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
-                {{ form.message }}
-                {{ form.message.errors }}
-
-                <input id="submit" type="submit" value="Submit" />
-
-            </form>
-
-        {% endif %}
-
+        </form>
     </div>
+
 
 {% endblock content %}
