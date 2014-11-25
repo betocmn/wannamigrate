@@ -111,21 +111,6 @@ class Country( BaseModel ):
         return tuple( [( '', _( 'Select Country' ) )] + result  )
 
 
-class CountryOccupation( BaseModel ):
-    """
-    Country Occupations Model - Stores which occupations are in demand for each country
-    """
-
-    # Model Attributes
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    occupation = models.ForeignKey( 'Occupation', verbose_name = _( 'occupation' ) )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-        unique_together = ( "occupation", "country" )
-
-
 class CountryPoints( BaseModel ):
     """
     Country Points Model - Stores the total points for each answer in each country avaiblable
@@ -209,6 +194,7 @@ class Occupation( BaseModel ):
     # Model Attributes
     occupation_category = models.ForeignKey( 'OccupationCategory', verbose_name = _( 'category' ) )
     name = models.CharField(  _( 'Name' ), max_length = 180 )
+    countries = models.ManyToManyField( Country )
 
     # META Options
     class Meta:
