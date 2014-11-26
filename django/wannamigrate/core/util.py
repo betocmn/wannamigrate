@@ -8,6 +8,7 @@ from calendar import monthrange
 from datetime import date, datetime, timedelta
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.models import UserPersonal
+from django.http import HttpResponse
 
 
 def calculate_age( birth_date ):
@@ -295,4 +296,48 @@ def get_user_progress_css_class( percentage ):
             return color + str( possible_percentages[count-1] )
 
     return ''
+
+
+
+
+
+###########################
+# DEBUGGING FUNCTIONS 
+###########################
+from django.db import models
+def dbg( var ):
+    """
+    Show all 'var' content.
+    :param: var The variable to be debugged.
+    """
+
+    # Predefined constants
+    NEWLINE =  "<br>"
+    TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+    
+    
+    # is an instance of a django model?
+    if isinstance( var, models.Model ):
+
+        # Get all members of the class excluding functions and __etc__.
+        members = [ attr for attr in dir(var) if not callable(attr) and not attr.startswith("__") ]
+
+        debug_str = "[ {0} ( {1} attributes ) ] :{2}".format( var.__class__.__name__, len( members ), NEWLINE )
+
+        for m in members:
+            debug_str += TAB + m + NEWLINE
+    
+    # is list, tuple, dict or set?
+    elif type( var ) in ( list, tuple, dict, set ):
+
+        debug_str = "[ {0} ( {1} attributes ) ] :{2}".format( var.__class__.__name__, len( var ), NEWLINE )
+
+        # Shows all key-values of var.
+        for k,v in var.items():
+            debug_str += "{0}[ {1} ] : {2}{3}".format( TAB, k, v, NEWLINE )
+    # is a primitive...
+    else:
+        debug_str += "({0}) {1}".format( type(var), str( var ) )
+
+    return HttpResponse( debug_str )
 

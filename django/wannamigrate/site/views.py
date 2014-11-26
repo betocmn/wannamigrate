@@ -15,13 +15,13 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
-from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class, get_user_progress_css_class
+from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class, get_user_progress_css_class, dbg
 from wannamigrate.site.forms import (
-    UserForm, ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
+    ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
-    UserWorkOfferForm, BaseUserWorkOfferFormSet
+    UserWorkOfferForm, BaseUserWorkOfferFormSet, MyAccountForm
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
@@ -324,12 +324,38 @@ def tour( request ):
 # MY ACCOUNT VIEWS
 #######################
 @login_required
-def account( request ):
+def account_view( request ):
     """
-    Displays "My Account" page
+    Displays "My Account" page with user's info.
+
+    :param request:
+    :return String - HTML from my account page.
+    """
+    
+    # Gets the user object.
+    user = request.user
+
+    #return dbg( 10 )
+    #return dbg( "lol" )
+    return dbg( { "test" : "foo" } )
+    #return dbg( user )
+
+
+
+
+    #return render( request, 'site/account.html', { 'user_form': user_form } )
+
+
+@login_required
+def account_edit( request ):
+    """
+    Edit "My Account" page.
 
     :param request:
     :return String - HTML from The dashboard page.
+    """
+    
+    pass
     """
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -342,15 +368,16 @@ def account( request ):
             # TODO: Remember to ignore e-mail edition.
             # Render the account page with a success message.
             return render( request, 'site/account.html', { 'user_form': user_form, 'success': "Changes saved." } )
-
+    
     # if a GET (or any other method) we'll create a form
     # filled with user's information.
     # fields: name, e-mail, preferred language and avatar.
     # TODO: fill the user_form with the user's info.
     else:
         user_form = UserForm()
+    """
 
-    return render( request, 'site/account.html', { 'user_form': user_form } )
+
 
 
 

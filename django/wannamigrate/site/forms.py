@@ -546,11 +546,47 @@ class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
 #######################
 # USER FORMS
 #######################
-class UserForm( BaseForm ):
+class MyAccountForm( BaseModelForm ):
     """
-    Form for USER data
+    Form for EDIT MY ACCOUNT
     """
-    name = forms.CharField( required = True, label = _( "Account name" ), widget = forms.TextInput( attrs = { 'placeholder': _( "Ex: John Exampleman" ), 'class': 'input-text' } ) )
-    email = forms.EmailField( required = True, label = _( "Account e-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "ex: john@wannamigrate.com" ), 'class': 'input-text', 'disabled' : "disabled" } ) )
-    # TODO: Change preferred_language to a selectbox and fill it with language codes and values.
-    preferred_language = forms.CharField( required = True, label = _( "Preferred language" ), widget = forms.TextInput( attrs = { 'placeholder': _( "Your name" ), 'class': 'input-text', } ) )
+
+    password = forms.CharField( required = False, label = "Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
+    confirm_password = forms.CharField( required = False, label = "Confirm Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
+
+    class Meta:
+        model = get_user_model()
+        fields = [ 'name', 'email' ]
+        widgets = {
+            'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
+            'email': TextInput( attrs = { 'class': 'form-control' } )
+        }
+
+    def save( self, commit = True ):
+        """
+        If passwords are set, they need to be set on a different way
+
+        :return: Dictionary
+        """
+        user = super( MyAccountForm, self ).save( commit = False )
+        password = self.cleaned_data["password"]
+        if password:
+            user.set_password( password )
+        if commit:
+            user.save()
+        return user
+
+    def clean( self ):
+        """
+        Extra validation for fields that depends on other fields
+
+        :return: Dictionary
+        """
+        cleaned_data = super( MyAccountForm, self ).clean()
+        password = cleaned_data.get( "password" )
+        confirm_password = cleaned_data.get( "confirm_password" )
+
+        if password != confirm_password:
+            raise forms.ValidationError( "Passwords do not match." )
+
+        return cleaned_data
