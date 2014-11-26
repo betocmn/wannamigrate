@@ -2,7 +2,7 @@ from wannamigrate.core.models import (
     Country, CountryPoints, Question, Answer, User, UserEducation,
     UserEducationHistory, UserLanguage, UserLanguageProficiency,
     UserPersonal, UserPersonalFamily, UserResult, UserWork,
-    UserWorkExperience, UserWorkOffer
+    UserWorkExperience, UserWorkOffer, Occupation
 )
 from wannamigrate.core.util import calculate_age, get_object_or_false, get_list_or_false, date_difference
 from django.conf import settings
@@ -36,6 +36,7 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
         settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
         settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience', settings.ID_COUNTRY_CANADA : 'bonus' } },
+        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'education' },
         settings.ID_QUESTION_SKILLED_PARTNER: { 'method': 'get_skilled_partner_points', 'type': 'work' },
         settings.ID_QUESTION_INVEST: { 'method': 'get_invest_points', 'type': 'work' },
         settings.ID_QUESTION_STARTUP_LETTER: { 'method': 'get_startup_letter_points', 'type': 'work' },
@@ -48,7 +49,6 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
         settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
         settings.ID_QUESTION_PAST_STUDY_COUNTRY_DESTINATION: { 'method': 'get_past_study_country_destination_points', 'type': 'education', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'education' },
     }
 
     # Class variable to map groups of question which have a maximum allowed number of points
@@ -443,13 +443,15 @@ class ImmigrationCalculator( object ):
 
     def get_work_experience_outside_points( self, forced_value = None ):
         """
-        Points for work experience gained outside country of destination
+        Points for work experience gained outside country of destination/
+
+        The occupation must be set and must be on the list of demand for the currenty country
 
         :param forced_value:
         :return Int - Total of points:
         """
         points = 0
-        if ( self.user_work_experience ):
+        if ( self.user_work_experience and self.user_work.occupation and self.country.id in self.user_work.occupation.countries ):
 
             # Use given value or search for it
             if forced_value is not None:
@@ -472,6 +474,8 @@ class ImmigrationCalculator( object ):
     def get_work_experience_inside_points( self, forced_value = None ):
         """
         Points for work experience gained at country of destination
+
+        The occupation must be set and must be on the list of demand for the currenty country
 
         :param forced_value:
         :return Int - Total of points:
@@ -500,6 +504,8 @@ class ImmigrationCalculator( object ):
     def get_work_experience_total_points( self, forced_value = None ):
         """
         Points for work experience gained anywhere (total)
+
+        The occupation must be set and must be on the list of demand for the currenty country
 
         :param forced_value:
         :return Int - Total of points:

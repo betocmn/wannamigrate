@@ -140,7 +140,7 @@ class AnswerForm( BaseModelForm ):
         model = Answer
         fields = [ 'id', 'description', 'question' ]
         widgets = {
-            'description': TextInput( attrs = { 'class': 'form-control', 'style': 'width: 280px;' } ),
+            'description': TextInput( attrs = { 'class': 'form-control' } ),
             'question': HiddenInput(),
             'id': HiddenInput()
         }
