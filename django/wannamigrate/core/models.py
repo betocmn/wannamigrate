@@ -29,7 +29,6 @@ class Answer( BaseModel ):
 
     # Model Attributes
     question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    answer_category = models.ForeignKey( 'AnswerCategory', blank = True, null = True, verbose_name = _( 'category' ) )
     description = models.CharField(  _( 'Answer' ), max_length = 255 )
 
     # META Options
@@ -38,23 +37,6 @@ class Answer( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.description ) )
-
-
-class AnswerCategory( BaseModel ):
-    """
-    Answer Category Model - Some answers are grouped into categories
-    """
-
-    # Model Attributes
-    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    name = models.CharField(  _( 'Name' ), max_length = 100 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
-    def __str__( self ):
-        return '%s' % ( _( self.name ) )
 
 
 class Continent( BaseModel ):
@@ -298,6 +280,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'UserResult' )
+    language = models.CharField( _( "Language" ), max_length = 6, null = True, default = 'en' )
 
     # META Options
     class Meta:

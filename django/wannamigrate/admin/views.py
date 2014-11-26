@@ -800,11 +800,10 @@ def occupation_delete( request, occupation_id ):
 
     # Identify database record
     occupation = get_object_or_404( Occupation, pk = occupation_id )
-    return HttpResponse( 'Deleted' )
 
     # delete
     occupation.delete()
 
     # Redirect with success message
     messages.success( request, 'occupation was successfully deleted.' )
-    return HttpResponseRedirect( reverse( 'admin:admin_occupations' ) )
+    return HttpResponseRedirect( reverse( 'admin:occupations' ) )
