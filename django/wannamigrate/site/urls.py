@@ -19,7 +19,8 @@ urlpatterns = patterns('',
     url( r'^contact/$', views.contact, name = 'contact' ),
 
     # My Account
-    url( r'^account_view/$', views.account_view, name = 'account' ),
+    url( r'^view_account/$', views.view_account, name = 'view_account' ),
+    url( r'^edit_account/$', views.edit_account, name = 'edit_account' ),
 
     # Dashboard
     url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),

@@ -1,0 +1,41 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+{% endblock head %}
+
+
+{% block content %}
+<div class="formBox fullWidth" style="margin-top:0;">
+    <div id="update" class="updateFix">
+        <h2>{% trans "My Account" %}</h2>
+        <p>{% trans "Your account settings." %}</p>
+    </div>
+
+    <div class="info-container">
+        <div class="block-row">
+            <h1>{% trans "E-mail and preferred language" %}</h1>
+        </div>
+        <div class="table-row">
+            <div class="label">{% trans "Name" %}</div>
+            <div class="content">{{ user.name }}</div>
+        </div>
+        <div class="table-row">
+            <div class="label">{% trans "E-mail" %}</div>
+            <div class="content">{{ user.email }}</div>
+        </div>
+        <div class="table-row">
+            <div class="label">{% trans "Preferred language" %}</div>
+            <div class="content">{{ user.preferred_language }}</div>
+        </div>
+    </div>
+
+        
+</div>
+
+
+{% endblock content %}

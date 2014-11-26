@@ -324,7 +324,7 @@ def tour( request ):
 # MY ACCOUNT VIEWS
 #######################
 @login_required
-def account_view( request ):
+def view_account( request ):
     """
     Displays "My Account" page with user's info.
 
@@ -335,24 +335,16 @@ def account_view( request ):
     # Gets the user object.
     user = request.user
 
-    #return dbg( 10 )
-    #return dbg( "lol" )
-    return dbg( { "test" : "foo" } )
-    #return dbg( user )
-
-
-
-
-    #return render( request, 'site/account.html', { 'user_form': user_form } )
+    return render( request, 'site/myaccount/view.html', { 'user': user } )
 
 
 @login_required
-def account_edit( request ):
+def edit_account( request ):
     """
     Edit "My Account" page.
 
     :param request:
-    :return String - HTML from The dashboard page.
+    :return String - HTML from Edit My Account page.
     """
     
     pass

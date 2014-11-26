@@ -550,9 +550,17 @@ class MyAccountForm( BaseModelForm ):
     """
     Form for EDIT MY ACCOUNT
     """
+    # Initializes form configurations
+    def __init__( self, *args, **kwargs ):
+        super( BaseModelForm, self ).__init__( *args, **kwargs )
+
+        #TODO: Put the language inside Meta class of the model.
+        self.fields['preferred_language'] = forms.ChoiceField( choices = get_available_languages() )
+
 
     password = forms.CharField( required = False, label = "Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
     confirm_password = forms.CharField( required = False, label = "Confirm Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
+
 
     class Meta:
         model = get_user_model()
