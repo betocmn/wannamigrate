@@ -85,7 +85,6 @@
                                         <thead>
                                             <tr>
                                                 <th>Answer</th>
-                                                <th>Category</th>
                                                 {% for country in countries %}
                                                     <th>{{ country.name }}</th>
                                                 {% endfor %}
@@ -103,13 +102,6 @@
                                                             {% if answer_form.instance.pk %}{{ answer_form.DELETE }}{% endif %}
                                                             {{ answer_form.description }}
                                                             {{ answer_form.description.errors }}
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="form-group {% if answer_form.answer_category.errors %}has-error{% endif %}">
-                                                            {{ answer_form.answer_category }}
-                                                            {{ answer_form.answer_category.errors }}
                                                         </div>
                                                     </td>
 

@@ -280,7 +280,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'UserResult' )
-    language = models.CharField( _( "Language" ), max_length = 6, null = True, default = 'en' )
+    preferred_language = models.CharField( _( "Language" ), max_length = 6, null = True, default = 'en' )
 
     # META Options
     class Meta:
@@ -565,7 +565,7 @@ class UserWork( BaseModel ):
         ( False, _( 'No' ) )
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    occupation_answer = models.ForeignKey( Answer, verbose_name = _( 'occupation' ), related_name = 'occupation_answer', blank = True, null = True )
+    occupation = models.ForeignKey( Occupation, verbose_name = _( 'occupation' ), blank = True, null = True )
     partner_skills = models.NullBooleanField( _( "Do you have a partner with proved skills" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     willing_to_invest = models.NullBooleanField( _( "are you willing to invest money on the country of destination" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     canadian_startup_letter = models.NullBooleanField( _( "do you have a startup recommendation letter approved by canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )

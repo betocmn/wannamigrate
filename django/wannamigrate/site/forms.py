@@ -12,7 +12,7 @@ from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField,
 from wannamigrate.core.models import (
     Answer, Question, Language,
     Country, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
-    UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily
+    UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily, Occupation, OccupationCategory
 )
 
 
@@ -426,7 +426,8 @@ class UserWorkForm( BaseModelForm ):
     Form for USER WORK data
     """
 
-    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Answer.objects.all(), empty_label = _( 'Select Occupation' ) )
+    occupation_answer_category = ModelChoiceField( required = False, label = _( "Category" ), queryset = OccupationCategory.objects.all(), empty_label = _( 'Select Area' ) )
+    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.order_by( 'name' ), empty_label = _( 'Select Occupation' ) )
 
     class Meta:
         model = UserWork
