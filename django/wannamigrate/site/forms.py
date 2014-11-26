@@ -426,12 +426,12 @@ class UserWorkForm( BaseModelForm ):
     Form for USER WORK data
     """
 
-    occupation_answer_category = ModelChoiceField( required = False, label = _( "Category" ), queryset = OccupationCategory.objects.all(), empty_label = _( 'Select Area' ) )
-    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.order_by( 'name' ), empty_label = _( 'Select Occupation' ) )
+    occupation_category = ModelChoiceField( required = False, label = _( "Category" ), queryset = OccupationCategory.objects.all(), empty_label = _( 'Select Area' ) )
+    occupation = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.order_by( 'name' ), empty_label = _( 'Select Occupation' ) )
 
     class Meta:
         model = UserWork
-        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'partner_skills', 'work_offer' ]
+        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation', 'partner_skills', 'work_offer' ]
         widgets = {
             'willing_to_invest': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'canadian_startup_letter': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
