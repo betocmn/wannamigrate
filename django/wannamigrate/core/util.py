@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.models import UserPersonal
 from django.http import HttpResponse
-
+from django.db import models
 
 def calculate_age( birth_date ):
     """
@@ -304,7 +304,6 @@ def get_user_progress_css_class( percentage ):
 ###########################
 # DEBUGGING FUNCTIONS 
 ###########################
-from django.db import models
 def dbg( var ):
     """
     Show all 'var' content.
