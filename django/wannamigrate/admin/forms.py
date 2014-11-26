@@ -138,9 +138,8 @@ class AnswerForm( BaseModelForm ):
 
     class Meta:
         model = Answer
-        fields = [ 'id', 'description', 'question', 'answer_category' ]
+        fields = [ 'id', 'description', 'question' ]
         widgets = {
-            'answer_category': Select( attrs = { 'class': 'form-control', 'style': 'width: 280px;' } ),
             'description': TextInput( attrs = { 'class': 'form-control', 'style': 'width: 280px;' } ),
             'question': HiddenInput(),
             'id': HiddenInput()

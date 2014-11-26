@@ -10,7 +10,7 @@ from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, LanguageChoiceField
 from wannamigrate.core.models import (
-    Answer, AnswerCategory, Question, Language,
+    Answer, Question, Language,
     Country, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
     UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily
 )
@@ -426,7 +426,7 @@ class UserWorkForm( BaseModelForm ):
     Form for USER WORK data
     """
 
-    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_OCCUPATION ), empty_label = _( 'Select Occupation' ) )
+    occupation_answer = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Answer.objects.all(), empty_label = _( 'Select Occupation' ) )
 
     class Meta:
         model = UserWork

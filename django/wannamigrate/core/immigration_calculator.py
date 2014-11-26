@@ -36,7 +36,6 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
         settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
         settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience', settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_OCCUPATION: { 'method': 'get_occupation_points', 'type': 'work' },
         settings.ID_QUESTION_SKILLED_PARTNER: { 'method': 'get_skilled_partner_points', 'type': 'work' },
         settings.ID_QUESTION_INVEST: { 'method': 'get_invest_points', 'type': 'work' },
         settings.ID_QUESTION_STARTUP_LETTER: { 'method': 'get_startup_letter_points', 'type': 'work' },
@@ -522,26 +521,6 @@ class ImmigrationCalculator( object ):
             # search for how many points this answer is worth
             if value > 0:
                 points = self.__get_points( value, 'description' )
-
-        return points
-
-    def get_occupation_points( self, forced_value = None ):
-        """
-        Points for professional occupation (engineer, doctor, architect, etc..)
-
-        :param forced_value:
-        :return Int - Total of points:
-        """
-        points = 0
-        if ( self.user_work ):
-
-            # Use given value or search for it
-            if forced_value is not None:
-                value = forced_value
-            else:
-                value = self.user_work.occupation_answer.id
-
-            points = self.__get_points( value, 'id' )
 
         return points
 
