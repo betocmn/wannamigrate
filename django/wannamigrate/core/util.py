@@ -217,11 +217,11 @@ def get_months_duration_tuple():
     return tuple( [( '', _( 'Select Duration' ) )] + result  )
 
 
-def get_country_points_css_class( percentage ):
+def get_dashboard_country_progress_css_class( percentage ):
     """
     Returns the css class for the approximate percentage for user country points
-    :param: points
-    :param: css_class_color
+
+    :param: percentage
     :return: String
     """
 
@@ -257,11 +257,12 @@ def get_country_points_css_class( percentage ):
 
     return ''
 
-def get_user_progress_css_class( percentage ):
+
+def get_dashboard_user_progress_css_class( percentage ):
     """
     Returns the css class for the approximate percentage for user registration data
-    :param: points
-    :param: css_class_color
+
+    :param: percentage
     :return: String
     """
 
@@ -285,6 +286,77 @@ def get_user_progress_css_class( percentage ):
         color = 'progressFillYellow progressFillSize'
     else:
         color = 'progressFillGreen progressFillSize'
+
+    # We will find the nearest number on the possible list to represent it
+    list_size = len( possible_percentages )
+    for count in range( 0, list_size ):
+        if percentage < possible_percentages[count]:
+            if count == 0:
+                return color + str( possible_percentages[count] )
+            else:
+                return color + str( possible_percentages[count-1] )
+        elif ( count + 1 ) == list_size:
+            return color + str( possible_percentages[count-1] )
+
+    return ''
+
+
+def get_internal_country_progress_css_class( percentage ):
+    """
+    Returns the css class for the approximate percentage for user country points
+
+    :param: percentage
+    :return: String
+    """
+
+    # If zero, return empty css class
+    if percentage == 0:
+        return 'bigGreen6'
+
+    # if it's 100% full
+    if percentage >= 100:
+        return 'bigGreen96'
+
+    # These are the percentages defined by css classes in 'style.css'
+    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
+
+    # Define the color of the bar
+    color = 'bigGreen'
+
+    # We will find the nearest number on the possible list to represent it
+    list_size = len( possible_percentages )
+    for count in range( 0, list_size ):
+        if percentage < possible_percentages[count]:
+            if count == 0:
+                return color + str( possible_percentages[count] )
+            else:
+                return color + str( possible_percentages[count-1] )
+        elif ( count + 1 ) == list_size:
+            return color + str( possible_percentages[count-1] )
+
+    return ''
+
+
+def get_internal_section_progress_css_class( percentage ):
+    """
+    Returns the css class for the approximate percentage of points per section (personal, language, etc)
+    :param: percentage
+    :return: String
+    """
+
+    # If zero, return the minimum class
+    if percentage == 0:
+        return 'progressFillSize5'
+
+    # if it's 100% full
+    if percentage >= 100:
+        return 'progressFillSize100'
+
+    # These are the percentages defined by css classes in 'style.css'
+    possible_percentages = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+
+    # Define the color of the bar
+    color = 'progressFillSize'
 
     # We will find the nearest number on the possible list to represent it
     list_size = len( possible_percentages )

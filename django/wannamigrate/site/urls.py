@@ -33,9 +33,9 @@ urlpatterns = patterns('',
     url( r'^calculate_points/$', views.calculate_points, name = 'calculate_points' ),
 
     # Help Pages
-    url( r'^situation/(?P<country_name>[a-z_\-]+)/$', views.situation, name = 'situation' ),
-    url( r'^visa-application/(?P<country_name>[a-z_\-]+)/$', views.visa_application, name = 'visa_application' ),
-    url( r'^moving/(?P<country_name>[a-z_\-]+)/$', views.moving, name = 'moving' ),
+    url( r'^(?P<country_name>[a-z_\-]+)/situation/$', views.situation, name = 'situation' ),
+    url( r'^(?P<country_name>[a-z_\-]+)/visa-application/$', views.visa_application, name = 'visa_application' ),
+    url( r'^(?P<country_name>[a-z_\-]+)/moving/$', views.moving, name = 'moving' ),
 
     # Set language
     url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),    
