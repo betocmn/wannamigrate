@@ -665,13 +665,19 @@ body{
 	color: #845996;
 }
 
-
 .movingStepsContainer{
 	margin: 20px auto;
 	width: 815px;
 	height: 400px;
 	/*background: #000;*/
 }
+
+.movingStepsContainer p.movingIntroduction {
+	font-size: 17px;
+	color: #555555;
+    margin-bottom: 25px;
+}
+
 .movingStepsNumber{
 	background: url('../img/stepBg.png');
 	width: 142px;
@@ -704,12 +710,24 @@ body{
 	color: #559008;
 	font-size: 20px;
 	margin-top: 20px;
+    margin-bottom: 10px;
 }
 .movingStepsContent p{
 	font-size: 16px;
 	color: #555555;
 	font-weight: 400;
 	padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.movingStepsContent p a{
+    font-size: 16px;
+    font-weight: 400;
+	color: #845996;
+}
+
+.movingStepsContent p a:hover{
+	color: #559008;
 }
 
 .doItYellow .movingStepsNumber{
