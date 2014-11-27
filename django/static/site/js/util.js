@@ -19,16 +19,61 @@ function load_ajax_dropdown( parent_id, child_id, parent_value, child_value, url
 		}
 		var parent_elem = $( "#" + parent_id );
 		var child_elem = $( '#' + child_id );
-		var ajax_url = url.replace( parent_id, parent_elem.val() );
+        var attr = {};
+        attr[parent_id] = parent_elem.val();
 		child_elem.before( '<div id="loader"><img src="'+img+'" alt="Loading" title="Loading" /></div>' );
-		$.get( ajax_url, function( data ) {
-			child_elem.html( data );
+		$.post( url, attr, function( data ) {
+            child_elem.html( data );
 			$( '#loader' ).slideUp( 200, function() {
 				$( this ).remove();
 			});
 			child_elem.val( child_value );
-		});	
+		});
 		
+
+}
+
+
+/**
+ * Get value of cookie by name
+ *
+ */
+function getCookie( name ) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+/**
+ * protecting the CSRF token from being sent to other domains using settings.crossDomain in jQuery 1.5.1 and newer
+ *
+ */
+function csrf_safe_method( method ) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+function csrf_ajax_setup(){
+
+    var csrftoken = getCookie( 'csrftoken' );
+
+    $.ajaxSetup({
+        beforeSend: function( xhr, settings ) {
+            if ( !csrf_safe_method( settings.type ) && !this.crossDomain ) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken );
+            }
+        }
+    });
 
 }
 

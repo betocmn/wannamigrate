@@ -385,7 +385,7 @@ def dbg( var ):
     # Predefined constants
     NEWLINE =  "<br>"
     TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-    
+
     
     # is an instance of a django model?
     if isinstance( var, models.Model ):

@@ -38,6 +38,9 @@
 		 */
 		$( document ).ready(function() {
 
+            // include CSRF protection on all ajax calls
+            csrf_ajax_setup();
+
             //Submit form when navigating through action links
             $( ".submit-form" ).click( function() {
 
@@ -57,7 +60,6 @@
                 // submit form
                 $( '#main_form').submit();
 
-
 			});
 
             // Load Formset for Work Experience
@@ -73,6 +75,17 @@
                 toggle_work_offer_container();
             });
             toggle_work_offer_container()
+
+            // Load occupations after category is selected
+			$( "#id_occupation_category" ).change( function() {
+				load_ajax_dropdown(
+                        'id_occupation_category', 'id_occupation', '', '',
+                        "{% url 'site:get_occupations_html' %}",
+                        "{% static "site/img/loading.gif" %}"
+                );
+
+			});
+
 
             // font style for custom selects
             $( 'select' ).on( 'change', function ( e ) {
@@ -129,9 +142,15 @@
         
             <div class="{% if user_work_form.occupation.errors %}has-error{% endif %}">
                 <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.occupation.label }}:</strong> &nbsp;</span>
-                <div class="select-style">
+                <div class="clear"></div>
+                <div class="select-style" style="float: left; margin-right: 10px;">
+                    {{ user_work_form.occupation_category }}
+                </div>
+                <div class="select-style" style="float: left;">
                     {{ user_work_form.occupation }}
                 </div>
+                <div class="clear"></div>
+                {{ user_work_form.occupation_category.errors }}
                 {{ user_work_form.occupation.errors }}
             </div>
         

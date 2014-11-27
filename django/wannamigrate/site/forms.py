@@ -7,7 +7,7 @@ from django.forms.models import BaseInlineFormSet
 from datetime import date
 from django.conf import settings
 from wannamigrate.core.mailer import Mailer
-from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple
+from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple, dbg
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, LanguageChoiceField
 from wannamigrate.core.models import (
     Answer, Question, Language,
@@ -427,7 +427,7 @@ class UserWorkForm( BaseModelForm ):
     """
 
     occupation_category = ModelChoiceField( required = False, label = _( "Category" ), queryset = OccupationCategory.objects.all(), empty_label = _( 'Select Area' ) )
-    occupation = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.order_by( 'name' ), empty_label = _( 'Select Occupation' ) )
+    occupation = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.none() )
 
     class Meta:
         model = UserWork
@@ -447,9 +447,15 @@ class UserWorkForm( BaseModelForm ):
 
         :return: Model Object
         """
+
         if 'user' in kwargs:
             self.user = kwargs.pop( "user" )
         super( UserWorkForm, self ).__init__( *args, **kwargs )
+        self.fields['occupation'] = forms.ModelChoiceField(
+            required = False, label = _( "What is your occupation" ),
+            queryset = Occupation.objects.filter()
+        )
+        self.fields['occupation'].queryset = Occupation.objects.filter( occupation_category = self._raw_value( 'occupation_category' ) )
 
     def save( self, commit = True ):
         """

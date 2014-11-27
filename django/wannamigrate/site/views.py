@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -29,7 +29,7 @@ from wannamigrate.site.forms import (
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
     UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer,
-    Country, UserResult, UserStats
+    Country, UserResult, UserStats, Occupation
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
@@ -790,6 +790,31 @@ def edit_work( request ):
 
     # Print Template
     return render( request, 'site/edit_work.html', template_data )
+
+
+def get_occupations_html( request ):
+    """
+    Return json dictionary of occupations filtered by category ID
+
+    :param request:
+    :return String JSON
+    """
+
+    result = ''
+
+    if request.is_ajax() and request.method == 'POST':
+
+        occupation_category_id = request.POST['id_occupation_category']
+
+        html = '<option value="">' + _( 'Select Occupation' ) + '</option>'
+        occupations = Occupation.objects.filter( occupation_category_id = occupation_category_id ).order_by( 'name' )
+        for occupation in occupations:
+            html += '<option value="' + str( occupation.id ) + '">' + str( occupation.name ) + '</option>'
+
+        result = html
+
+    return HttpResponse( result )
+
 
 
 #######################
