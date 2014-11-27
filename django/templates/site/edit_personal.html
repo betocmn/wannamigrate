@@ -158,7 +158,10 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.family_overseas.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.family_overseas.label }}</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.family_overseas.label }}</strong>
+                    
+                    &nbsp;<i class="hint fa fa-question-circle" title="{{ user_personal_form.family_overseas.label }}"></i>
+                </span>
                 <div class="break10"></div>
                 &nbsp;&nbsp;&nbsp;
                 {% for radio in user_personal_form.family_overseas %}

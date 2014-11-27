@@ -15,10 +15,14 @@
             <meta name="Robots" content="all">
             <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
             <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+            <link href="{% static 'site/css/font-awesome.min.css' %}" rel="stylesheet">
 
             <!-- Default CSS -->
             <link rel="stylesheet" type="text/css" href="{% static "site/css/reset.css" %}">
             <link rel="stylesheet" type="text/css" href="{% static "site/css/style.css" %}">
+            <!-- JQuery UI -->
+            <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
+        
 
             <!-- HTML5 shim for IE backwards compatibility -->
             <!--[if lt IE 9]>
@@ -44,6 +48,9 @@
             <!-- JQuery -->
             <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
 
+            <!-- JQuery UI -->
+            <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
+
             <!-- Utility Functions (JS) -->
             <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
 
@@ -56,6 +63,8 @@
                     $( ".userName" ).click(function(){
                         $( "#popup" ).toggleClass( "showIt" );
                     });
+
+                    $( document ).tooltip(); 
 
                 });
 
