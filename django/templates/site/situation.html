@@ -1,0 +1,119 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Dashboard Custom JS -->
+    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock head %}
+
+{% block content %}
+
+	<div class="column25"></div>
+	<div class="column25 {{ photo_column_css_class }}">
+		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
+	</div>
+	<div class="column75">
+		<a href="{% url 'site:situation' country_name %}" class="tab1 tab-active">{% trans "My situation" %}</a>
+		<a href="{% url 'site:visa_application' country_name %}" class="tab2">{% trans "Visa application" %}</a>
+		<a href="{% url 'site:moving' country_name %}" class="tab3">{% trans "Moving to "|add:country_name_as_label %}</a>
+		<div class="clear"> </div>
+
+
+		<div class="halfWidth">
+
+			<div class="countriesOuter bigProgress">
+                <div class="countries">
+                <div class="circleProgressBarBig {{ percentage_total_css_class }}">
+                    <div class="{{ country_map_css_class }}"></div>
+                </div>
+                <div class="clear"> </div>
+                <div class="countriesProgress" style="margin-left:100px;margin-top:20px;">
+                    <div class="textUnderLeft">{{ total_points }}</div>
+                    <div class="textUnderRight">
+                        <p>{% trans "POINTS" %}</p>
+                        <p>{% trans "OF" %} <span>{{ min_points }}</span> {% trans "REQUIRED" %}</p>
+                    </div>
+                    <div class="clear"> </div>
+                </div>
+                <div class="clear"> </div>
+                </div>
+                </div>
+
+                <div class="stats">
+
+                    <div class="clear"> </div>
+                    <div class="statsName">Personal</div>
+                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_personal_css_class }}"></div></div>
+                    <div class="statsPoints"><span><b>{{ personal_points }}</b> {% trans "POINTS" %}</span> ({% trans "of" %} {{ personal_max_points }})</div>
+                    <div class="clear" style="height:10px;"> </div>
+
+                    <div class="statsName">Language</div>
+                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_language_css_class }}"></div></div>
+                    <div class="statsPoints"><span><b>{{ language_points }}</b> {% trans "POINTS" %}</span> ({% trans "of" %} {{ language_max_points }})</div>
+                    <div class="clear" style="height:10px;"> </div>
+
+                    <div class="statsName">Education</div>
+                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_education_css_class }}"></div></div>
+                    <div class="statsPoints"><span><b>{{ education_points }}</b> {% trans "POINTS" %}</span> ({% trans "of" %} {{ education_max_points }})</div>
+                    <div class="clear" style="height:10px;"> </div>
+
+                    <div class="statsName">Work</div>
+                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_work_css_class }}"></div></div>
+                    <div class="statsPoints"><span><b>{{ work_points }}</b> {% trans "POINTS" %}</span> ({% trans "of" %} {{ work_max_points }})</div>
+                    <div class="clear"> </div>
+
+                    <div class="break10"></div>
+                    <div class="break10"></div>
+                    <div class="break10"></div>
+
+                </div>
+
+		</div>
+
+		<div class="halfWidth">
+
+            {% if total_points >= min_points %}
+			    <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{% trans "You have enough points" %}</div>
+            {% else %}
+                <div class="warning"><img src="{% static "site/img/lock.png" %}" /> &nbsp;&nbsp;{% trans "You still don’t have enough points" %}</div>
+            {% endif %}
+			<div class="smallLineBreak"></div>
+			<p class="hints">{% trans "HINTS" %}</p>
+
+        <!--
+			<div id="hints">
+				<div class="hintq">?</div>
+				<div class="hintp">Donec iaculis consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales enim pulvinar eget.</div>
+				<div class="clear" style="height:20px;"> </div>
+
+				<div class="hintq">?</div>
+				<div class="hintp">Nulla in auctor mauris, vitae elementum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+				<div class="clear" style="height:20px;"> </div>
+				
+				<div class="hintq">?</div>
+				<div class="hintp">Auctor mauris, vitae elementum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+				<div class="clear" style="height:20px;"> </div>
+
+				<ul>
+					<li>Auctor mauris, vitae elementum velit.</li>
+  					<li>Interdum et malesuada fames ac ante ipsum primis infaucibus.</li>
+				</ul>
+				
+			</div>
+		-->
+
+		</div>
+
+	</div>
+	
+{% endblock content %}

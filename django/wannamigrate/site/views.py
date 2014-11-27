@@ -16,7 +16,10 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
-from wannamigrate.core.util import get_object_or_false, get_list_or_false, get_country_points_css_class, get_user_progress_css_class, dbg
+from wannamigrate.core.util import (
+    get_object_or_false, get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class,
+    dbg, get_internal_country_progress_css_class, get_internal_section_progress_css_class
+)
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
@@ -472,9 +475,9 @@ def dashboard( request ):
     au_percentage = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
     ca_percentage = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
     nz_percentage = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
-    template_data['au_percentage_css_class'] = get_country_points_css_class( au_percentage )
-    template_data['ca_percentage_css_class'] = get_country_points_css_class( ca_percentage )
-    template_data['nz_percentage_css_class'] = get_country_points_css_class( nz_percentage )
+    template_data['au_percentage_css_class'] = get_dashboard_country_progress_css_class( au_percentage )
+    template_data['ca_percentage_css_class'] = get_dashboard_country_progress_css_class( ca_percentage )
+    template_data['nz_percentage_css_class'] = get_dashboard_country_progress_css_class( nz_percentage )
 
     # pass user registration percentages to template
     if user_stats:
@@ -484,10 +487,10 @@ def dashboard( request ):
         template_data['work_percentage'] = user_stats.percentage_work
 
     # Define the percentage css class for progress bar on forms (personal, language, education and work)
-    template_data['personal_percentage_css_class'] = get_user_progress_css_class( template_data['personal_percentage'] )
-    template_data['language_percentage_css_class'] = get_user_progress_css_class( template_data['language_percentage'] )
-    template_data['education_percentage_css_class'] = get_user_progress_css_class( template_data['education_percentage'] )
-    template_data['work_percentage_css_class'] = get_user_progress_css_class( template_data['work_percentage'] )
+    template_data['personal_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['personal_percentage'] )
+    template_data['language_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['language_percentage'] )
+    template_data['education_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['education_percentage'] )
+    template_data['work_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['work_percentage'] )
 
     # Print Template
     return render( request, 'site/dashboard.html', template_data )
@@ -885,7 +888,105 @@ def situation( request, country_name ):
     :return String - HTML.
     """
 
-    return HttpResponse( "My Situation " + country_name )
+    # Initial settings
+    template_data = {}
+    template_data['top_bar_css_class'] = "fixTopBar"
+    template_data['country_name'] = country_name
+    template_data['total_points'] = 0
+    template_data['personal_points'] = 0
+    template_data['language_points'] = 0
+    template_data['education_points'] = 0
+    template_data['work_points'] = 0
+
+    # Get Country and set options for it
+    if country_name == 'australia':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
+        template_data['country_flag_image_name'] = 'australia-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Australia' )
+        template_data['country_map_css_class'] = 'australiaMap'
+        template_data['photo_column_css_class'] = 'columnAustralia'
+        template_data['min_points'] = settings.MINIMUM_POINTS_AUSTRALIA
+        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_AUSTRALIA
+        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_AUSTRALIA
+        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_AUSTRALIA
+        template_data['work_max_points'] = settings.WORK_MAX_POINTS_AUSTRALIA
+
+    elif country_name == 'canada':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
+        template_data['country_flag_image_name'] = 'canada-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Canada' )
+        template_data['country_map_css_class'] = 'canadaMap'
+        template_data['photo_column_css_class'] = 'columnCanada'
+        template_data['min_points'] = settings.MINIMUM_POINTS_CANADA
+        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_CANADA
+        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_CANADA
+        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_CANADA
+        template_data['work_max_points'] = settings.WORK_MAX_POINTS_CANADA
+
+    elif country_name == 'new-zealand':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
+        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
+        template_data['country_name_as_label'] = _( 'New Zealand' )
+        template_data['country_map_css_class'] = 'newZealandMap'
+        template_data['photo_column_css_class'] = 'columnNewZealand'
+        template_data['min_points'] = settings.MINIMUM_POINTS_NEW_ZEALAND
+        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_NEW_ZEALAND
+        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_NEW_ZEALAND
+        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_NEW_ZEALAND
+        template_data['work_max_points'] = settings.WORK_MAX_POINTS_NEW_ZEALAND
+
+    else:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+
+    # Get User Results for this country
+    try:
+        user_result = UserResult.objects.get( user = request.user, country = country )
+    except UserResult.DoesNotExist:
+        user_result = False
+
+    # Pass total points per country to template
+    if user_result:
+        template_data['total_points'] = user_result.score_total
+        template_data['personal_points'] = user_result.score_personal
+        template_data['language_points'] = user_result.score_language
+        template_data['education_points'] = user_result.score_education
+        template_data['work_points'] = user_result.score_work
+
+    # Define the percentage CSS class to use around country flag for progress bar for total points
+    percentage_total = math.floor( ( 100 * template_data['total_points'] ) / template_data['min_points'] )
+    template_data['percentage_total_css_class'] = get_internal_country_progress_css_class( percentage_total )
+
+    # Define the percentage CSS class for PERSONAL points
+    if template_data['personal_points'] == 0 or template_data['personal_max_points'] == 0:
+        percentage_personal = 0
+    else:
+        percentage_personal = math.floor( ( 100 * template_data['personal_points'] ) / template_data['personal_max_points'] )
+    template_data['percentage_personal_css_class'] = get_internal_section_progress_css_class( percentage_personal )
+    
+    # Define the percentage CSS class for LANGUAGE points
+    if template_data['language_points'] == 0 or template_data['language_max_points'] == 0:
+        percentage_language = 0
+    else:
+        percentage_language = math.floor( ( 100 * template_data['language_points'] ) / template_data['language_max_points'] )
+    template_data['percentage_language_css_class'] = get_internal_section_progress_css_class( percentage_language )
+    
+    # Define the percentage CSS class for EDUCATION points
+    if template_data['education_points'] == 0 or template_data['education_max_points'] == 0:
+        percentage_education = 0
+    else:
+        percentage_education = math.floor( ( 100 * template_data['education_points'] ) / template_data['education_max_points'] )
+    template_data['percentage_education_css_class'] = get_internal_section_progress_css_class( percentage_education )
+    
+    # Define the percentage CSS class for WORK points
+    if template_data['work_points'] == 0 or template_data['work_max_points'] == 0:
+        percentage_work = 0
+    else:
+        percentage_work = math.floor( ( 100 * template_data['work_points'] ) / template_data['work_max_points'] )
+    template_data['percentage_work_css_class'] = get_internal_section_progress_css_class( percentage_work )
+
+    # Print Template
+    return render( request, 'site/situation.html', template_data )
 
 
 @login_required
@@ -898,7 +999,38 @@ def visa_application( request, country_name ):
     :return String - HTML.
     """
 
-    return HttpResponse( "Visa Application " + country_name )
+    # Initial settings
+    template_data = {}
+    template_data['top_bar_css_class'] = "fixTopBar"
+    template_data['country_name'] = country_name
+
+    # Get Country and set options for it
+    if country_name == 'australia':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
+        template_data['country_flag_image_name'] = 'australia-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Australia' )
+        template_data['country_map_css_class'] = 'australiaMap'
+        template_data['photo_column_css_class'] = 'columnAustralia'
+
+    elif country_name == 'canada':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
+        template_data['country_flag_image_name'] = 'canada-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Canada' )
+        template_data['country_map_css_class'] = 'canadaMap'
+        template_data['photo_column_css_class'] = 'columnCanada'
+
+    elif country_name == 'new-zealand':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
+        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
+        template_data['country_name_as_label'] = _( 'New Zealand' )
+        template_data['country_map_css_class'] = 'newZealandMap'
+        template_data['photo_column_css_class'] = 'columnNewZealand'
+
+    else:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Print Template
+    return render( request, 'site/visa_application.html', template_data )
 
 
 @login_required
@@ -911,7 +1043,38 @@ def moving( request, country_name ):
     :return String - HTML.
     """
 
-    return HttpResponse( "Moving to " + country_name )
+    # Initial settings
+    template_data = {}
+    template_data['top_bar_css_class'] = "fixTopBar"
+    template_data['country_name'] = country_name
+
+    # Get Country and set options for it
+    if country_name == 'australia':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
+        template_data['country_flag_image_name'] = 'australia-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Australia' )
+        template_data['country_map_css_class'] = 'australiaMap'
+        template_data['photo_column_css_class'] = 'columnAustralia'
+
+    elif country_name == 'canada':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
+        template_data['country_flag_image_name'] = 'canada-flag-small.png'
+        template_data['country_name_as_label'] = _( 'Canada' )
+        template_data['country_map_css_class'] = 'canadaMap'
+        template_data['photo_column_css_class'] = 'columnCanada'
+
+    elif country_name == 'new-zealand':
+        country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
+        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
+        template_data['country_name_as_label'] = _( 'New Zealand' )
+        template_data['country_map_css_class'] = 'newZealandMap'
+        template_data['photo_column_css_class'] = 'columnNewZealand'
+
+    else:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Print Template
+    return render( request, 'site/moving.html', template_data )
 
 
 #######################

@@ -1,0 +1,59 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Dashboard Custom JS -->
+    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock head %}
+
+{% block content %}
+
+	<div class="column25"></div>
+	<div class="column25 {{ photo_column_css_class }}">
+		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
+	</div>
+	<div class="column75">
+		<a href="{% url 'site:situation' country_name %}" class="tab1">{% trans "My situation" %}</a>
+		<a href="{% url 'site:visa_application' country_name %}" class="tab2">{% trans "Visa application" %}</a>
+		<a href="{% url 'site:moving' country_name %}" class="tab3 tab-active">{% trans "Moving to "|add:country_name_as_label %}</a>
+		<div class="clear"> </div>
+
+
+        <div class="movingStepsContainer">
+            <div class="movingStepsNumber">
+                {% trans "STEP" %} <span>1</span>
+            </div>
+            <div class="movingStepsContent">
+                <h3>&#149; Donec iaculis consequat arcu sed accumsa</h3>
+                <p>Consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales enim pulvinar eget. </p>
+                <h3>&#149; Laculis consequat arcu sed accumsa</h3>
+                <p>Donec iaculis consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales enim pulvinar eget. Donec iaculis consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales eget.</p>
+                <br />
+                <br />
+                <img src="{% static "site/img/globe.png" %}" />
+            </div>
+            <div class="clear" style="height:50px;"> </div>
+
+            <div class="movingStepsNumber">
+                STEP <span>2</span>
+            </div>
+            <div class="movingStepsContent">
+                <h3>&#149; Donec iaculis consequat arcu sed accumsa</h3>
+                <p>Consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales enim pulvinar eget. </p>
+
+            </div>
+        </div>
+
+	</div>
+	
+{% endblock content %}

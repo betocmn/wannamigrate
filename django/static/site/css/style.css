@@ -214,7 +214,7 @@ body{
 }
 .stepImg{
 	width: 499px;
-	height: 281px;
+	height: 265px;
 }
 .stepImg1{
 	background: url('../img/step1.jpg');
@@ -413,7 +413,7 @@ body{
 }
 
 #diagram-id-3{
-	background: url('../img/newzeeland-disk.png') no-repeat center center;
+	background: url('../img/newzealand-disk.png') no-repeat center center;
 	/*border:2px solid red;*/
 }
 
@@ -499,7 +499,7 @@ body{
 .newzealandProgressBar{
 	width: 80px;
 	height: 80px;
-	background: url('../img/newzeeland-disk.png') no-repeat center center;
+	background: url('../img/newzealand-disk.png') no-repeat center center;
 	background-size: 100%;
 }
 .countriesProgress{
@@ -544,11 +544,7 @@ body{
 	/*padding-top: 75px;
 	padding-bottom: 75px;*/
 }
-.countriesOuter:hover{
-	width: 100%;
-	/*background: #FFF;*/
-	cursor: pointer;
-}
+
 
 #selectCountry{
 	background: url('../img/select-country.png');
@@ -639,8 +635,8 @@ body{
 	position: fixed;
 	top: 70px;
 }
-.columnNewZeeland{
-	background: url("../img/newzeeland.jpg") no-repeat center center;
+.columnNewZealand{
+	background: url("../img/newzealand.jpg") no-repeat center center;
 	position: fixed;
 	top: 70px;
 }
@@ -766,10 +762,10 @@ body{
 	background: url('../img/map-canada.png') no-repeat;
 	background-size: 100%;
 }
-.newZeelandMap{
+.newZealandMap{
 	width: 256px;
 	height: 256px;
-	background: url('../img/map-newZeeland.png') no-repeat;
+	background: url('../img/map-newZealand.png') no-repeat;
 	background-size: 100%;
 }
 .bigProgress{
@@ -818,6 +814,19 @@ body{
 	line-height: 75px;
 	font-size: 22px;
 	color: #c60a20;
+	font-weight: 700;
+	background: #ebebeb;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.success{
+	width: 95%;
+	margin: 0 auto;
+	height: 75px;
+	line-height: 75px;
+	font-size: 22px;
+	color: #859C01;
 	font-weight: 700;
 	background: #ebebeb;
 	text-align: center;
