@@ -7,14 +7,15 @@ from django.forms.models import BaseInlineFormSet
 from datetime import date
 from django.conf import settings
 from wannamigrate.core.mailer import Mailer
-from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple
+from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple, dbg
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, LanguageChoiceField
 from wannamigrate.core.models import (
     Answer, Question, Language,
-    Country, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
+    Country, User, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
     UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily, Occupation, OccupationCategory
 )
-
+from wannamigrate._settings.base import LANGUAGES
+from django.contrib.auth.hashers import is_password_usable
 
 #######################
 # LOGIN FORMS
@@ -547,55 +548,73 @@ class BaseUserWorkOfferFormSet( BaseInlineFormSet ):
 #######################
 # USER FORMS
 #######################
-class MyAccountForm( BaseModelForm ):
+class EditAccountInfoForm( BaseModelForm ):
     """
-    Form for EDIT MY ACCOUNT
+    Form for EDIT MY ACCOUNT INFO
     """
-    # Initializes form configurations
+    # Initializes form values with user data.
     def __init__( self, *args, **kwargs ):
-        super( BaseModelForm, self ).__init__( *args, **kwargs )
+        super().__init__( *args, **kwargs )
+        if 'user' in kwargs:
+            self.user = kwargs.pop( "user" )
 
-        #TODO: Put the language inside Meta class of the model.
-        self.fields['preferred_language'] = forms.ChoiceField( choices = get_available_languages() )
-
-
-    password = forms.CharField( required = False, label = "Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
-    confirm_password = forms.CharField( required = False, label = "Confirm Password", widget = forms.PasswordInput( attrs = { 'class' : 'form-control'  } ) )
-
-
+    # The form data is from User model.
     class Meta:
         model = get_user_model()
-        fields = [ 'name', 'email' ]
+        fields = [ 'name', 'email', 'preferred_language' ]
         widgets = {
             'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
-            'email': TextInput( attrs = { 'class': 'form-control' } )
+            'email': TextInput( attrs = { 'class': 'form-control', 'disabled' : 'disabled' } ),
         }
 
-    def save( self, commit = True ):
-        """
-        If passwords are set, they need to be set on a different way
+class EditAccountPasswordForm( BaseForm ):
+    """
+    Form for EDIT MY ACCOUNT PASSWORD
+    """
+    # Initializes form values with user data.
+    def __init__( self, user,  *args, **kwargs ):
+        super( BaseForm, self ).__init__( *args, **kwargs )
 
-        :return: Dictionary
-        """
-        user = super( MyAccountForm, self ).save( commit = False )
-        password = self.cleaned_data["password"]
-        if password:
-            user.set_password( password )
-        if commit:
-            user.save()
-        return user
 
+        self.is_password_usable = False
+        self.user = user
+        self.is_password_usable = is_password_usable( self.user.password )
+       
+        # Creates an old password input dinamically
+        if self.is_password_usable:
+            self.fields['old_password'] = forms.CharField( required = True, label = _( "Old Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+
+        # Other form fields
+        self.fields['new_password'] = forms.CharField( required = True, label = _( "New Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+        self.fields['password_confirmation'] = forms.CharField( required = True, label = _( "Confirm New Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+
+
+    def save( self ):
+        
+        # Save user new password
+        self.user.set_password( self.cleaned_data.get( "new_password" ) )
+        return self.user.save()
+
+
+    # Extra validation
     def clean( self ):
-        """
-        Extra validation for fields that depends on other fields
+        cleaned_data = super( BaseForm, self ).clean()
+        
+        # Gets cleaned data.
+        new_password = cleaned_data[ 'new_password' ]
+        password_confirmation = cleaned_data[ 'password_confirmation' ]
 
-        :return: Dictionary
-        """
-        cleaned_data = super( MyAccountForm, self ).clean()
-        password = cleaned_data.get( "password" )
-        confirm_password = cleaned_data.get( "confirm_password" )
+        # Check if old password matches.
+        if self.is_password_usable:
+            old_password = cleaned_data[ 'old_password' ]
+            if not self.user.check_password( old_password ):
+                raise forms.ValidationError( _( "The old password does not match." ) )    
 
-        if password != confirm_password:
-            raise forms.ValidationError( "Passwords do not match." )
+        # Check if new password and password confirmation matches.
+        if new_password != password_confirmation:
+            raise forms.ValidationError( _( "The new password and confirmation does not match." ) )    
 
+        # Everything ok
         return cleaned_data
+
+    

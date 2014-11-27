@@ -15,10 +15,13 @@
 
 <!-- Page Header -->
 <div class="section-header">
-    <h1>{% trans "Personal details" %}</h1>
+    <h1>{% trans "My Account" %}</h1>
     <p>{% trans "Your account settings." %}</p>
 </div>
 
+<div class="cards-wrapper">
+    {% include "site/layouts/status.html" %}
+</div>
 <div class="cards-wrapper">
     <!-- Info card for Avatar -->
     <div class="info-card">
@@ -53,10 +56,17 @@
         </div>
         <div class="table-row">
             <div class="label">{% trans "Preferred language" %}</div>
-            <div class="content">{{ user.preferred_language }}</div>
+            {% get_language_info for user.preferred_language as lang %}
+            <div class="content">{{ lang.name_local }}</div>
+        </div>
+        <div class="table-row">
+            <div class="label">{% trans "Password" %}</div>
+            <div class="content">
+                <a href="{% url 'site:edit_account_password' %}">{% trans "Change password" %}...</a>
+            </div>
         </div>
         <div class="block-row text-right">
-            <a href="#" class="bt bt-default">Edit</a>
+            <a href="{% url 'site:edit_account_info' %}" class="bt bt-default">Edit</a>
         </div>
     </div>
 </div>

@@ -314,6 +314,7 @@ def dbg( var ):
     NEWLINE =  "<br>"
     TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
     
+    debug_str = ''
     
     # is an instance of a django model?
     if isinstance( var, models.Model ):
