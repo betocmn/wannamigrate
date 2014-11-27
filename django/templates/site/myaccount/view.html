@@ -6,17 +6,40 @@
 
     {{ block.super }}
 
+    <link href="{% static 'site/css/internal.css' %}" rel="stylesheet">
+
 {% endblock head %}
 
 
 {% block content %}
-<div class="formBox fullWidth" style="margin-top:0;">
-    <div id="update" class="updateFix">
-        <h2>{% trans "My Account" %}</h2>
-        <p>{% trans "Your account settings." %}</p>
+
+<!-- Page Header -->
+<div class="section-header">
+    <h1>{% trans "Personal details" %}</h1>
+    <p>{% trans "Your account settings." %}</p>
+</div>
+
+<div class="cards-wrapper">
+    <!-- Info card for Avatar -->
+    <div class="info-card">
+        <div class="block-row">
+            <h1>{% trans "Avatar" %}</h1>
+        </div>
+
+        <div class="block-row">
+            {% if user.userpersonal.avatar.medium.url %}
+                <img class="avatar" src="{{ user.userpersonal.avatar.medium.url }}" />
+            {% else %}
+                <img class="avatar" src="{% static 'site/img/no-avatar.png' %}" />
+            {% endif %}
+        </div>
+        <!--div class="block-row text-right">
+            <a href="#" class="bt bt-default">Edit</a>
+        </div-->
     </div>
 
-    <div class="info-container">
+    <!-- Info card for E-mail and Language settings -->
+    <div class="info-card">
         <div class="block-row">
             <h1>{% trans "E-mail and preferred language" %}</h1>
         </div>
@@ -32,9 +55,10 @@
             <div class="label">{% trans "Preferred language" %}</div>
             <div class="content">{{ user.preferred_language }}</div>
         </div>
+        <div class="block-row text-right">
+            <a href="#" class="bt bt-default">Edit</a>
+        </div>
     </div>
-
-        
 </div>
 
 

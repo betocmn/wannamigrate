@@ -1,0 +1,126 @@
+
+.section-header
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 5em;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.section-header > h1 
+{
+    color: #845996;
+    font-size: 1.6em;
+    font-weight: 700; 
+    margin: 20px 0 0 36px;
+}
+
+.section-header > p
+{
+    color: #888888;
+    font-size: 0.9em;
+    width:80%;
+    margin: 0px 0 0 36px;
+}
+
+.cards-wrapper
+{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.info-card
+{
+    
+    display: inline-block;
+    max-width: 460px;
+    padding: 10px 20px;
+    vertical-align: top;
+    width: 100%;
+
+    border-left: solid 2px #EEE;
+    border-bottom: solid 2px #EEE;
+    border-top: solid 1px #EEE;
+    border-right: solid 1px #EEE;
+    border-radius: 4px;
+    margin:1.5em 0 0 1em;
+}
+
+.info-card .block-row, .info-card .table-row
+{
+    width: 100%;
+    margin-bottom: 1.2em;
+}
+
+
+.info-card .block-row
+{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.block-row h1
+{
+    font-size: 1.3em;
+    font-weight: 300;
+    color: #845996;
+    text-align: left;
+}
+.block-row .avatar
+{
+    width: 300px;
+    height: 200px;
+}
+
+.info-card .table-row
+{
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+    table-layout: fixed;
+}
+.table-row .label, .table-row .content
+{
+    display: table-cell;
+    vertical-align: baseline;
+    word-wrap: break-word;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.table-row .label
+{
+    font-weight: bold;
+}
+
+
+.bt
+{
+    padding:0.4em 1em;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.bt-default
+{
+    background-color: white;
+    border: solid 1px #eee;
+    color: #666;
+    text-decoration: none !important;
+}
+.bt-default:hover
+{
+    border: solid 1px #999;
+}
+
+
+.text-right
+{
+    text-align: right !important;
+}

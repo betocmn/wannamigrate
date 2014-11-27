@@ -10,7 +10,7 @@ from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.forms.models import inlineformset_factory
 from django.db import transaction
-from django.utils.translation import activate
+from django.utils.translation import activate, get_language_info
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import math
@@ -334,6 +334,11 @@ def view_account( request ):
     
     # Gets the user object.
     user = request.user
+
+    # Edits the preferred language into a readable version.
+    preferred_language = get_language_info( user.preferred_language )
+
+    user.preferred_language = _( preferred_language['name_local'] ) + " (" + preferred_language['code'] + ")"
 
     return render( request, 'site/myaccount/view.html', { 'user': user } )
 
