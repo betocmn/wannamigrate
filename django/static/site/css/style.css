@@ -720,14 +720,14 @@ body{
     margin-bottom: 10px;
 }
 
-.movingStepsContent p a{
+.movingStepsContainer p a{
     font-size: 16px;
     font-weight: 400;
-	color: #845996;
+	color: #559008;
 }
 
 .movingStepsContent p a:hover{
-	color: #559008;
+	color: #845996;
 }
 
 .doItYellow .movingStepsNumber{
