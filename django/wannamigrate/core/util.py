@@ -18,6 +18,8 @@ def calculate_age( birth_date ):
     :param birth_date:
     :return Int:
     """
+    if not birth_date:
+        return 0
 
     today = date.today()
     return today.year - birth_date.year - ( ( today.month, today.day) < ( birth_date.month, birth_date.day ) )
@@ -225,14 +227,14 @@ def get_country_points_css_class( percentage ):
 
     # If zero, return empty css class
     if percentage == 0:
-        return ''
-
-    # These are the percentages defined by css classes in 'style.css'
-    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
+        return 'orange6'
 
     # if it's 100% full
     if percentage >= 100:
         return 'green96'
+
+    # These are the percentages defined by css classes in 'style.css'
+    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
 
     # Define the color of the bar
     if percentage <= 30:
@@ -263,9 +265,9 @@ def get_user_progress_css_class( percentage ):
     :return: String
     """
 
-    # If zero, return
+    # If zero, return the minimum class
     if percentage == 0:
-        return ''
+        return 'progressFillDarkOrange progressFillSize5'
 
     # if it's 100% full
     if percentage >= 100:
@@ -296,8 +298,6 @@ def get_user_progress_css_class( percentage ):
             return color + str( possible_percentages[count-1] )
 
     return ''
-
-
 
 
 

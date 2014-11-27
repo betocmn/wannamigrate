@@ -189,7 +189,7 @@ class Occupation( BaseModel ):
         )
 
     def __str__( self ):
-        return '%s' % ( _( self.description ) )
+        return '%s' % ( _( self.name ) )
 
 
 class OccupationCategory( BaseModel ):
@@ -585,7 +585,7 @@ class UserWork( BaseModel ):
         """
 
         # Fields to check for values inserted by user
-        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation_answer', 'work_offer', 'partner_skills' ]
+        fields = [ 'willing_to_invest', 'canadian_startup_letter', 'australian_professional_year', 'canadian_partner_work_study_experience', 'occupation', 'work_offer', 'partner_skills' ]
 
         # Total is number of fileds + 1 for the UserWorkExperience table
         total = len( fields ) + 1

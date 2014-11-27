@@ -451,23 +451,30 @@ class ImmigrationCalculator( object ):
         :return Int - Total of points:
         """
         points = 0
-        if ( self.user_work_experience and self.user_work.occupation and self.country.id in self.user_work.occupation.countries ):
+        if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
-            # Use given value or search for it
-            if forced_value is not None:
-                value = forced_value
-            else:
-                # search for work experiences outside country of destination
-                years_of_experience = 0
-                for item in self.user_work_experience:
-                    if item.country_id != self.country.id:
-                        years_of_experience += ( item.months / 12 )
+            # Check if occupation is in list of demand
+            try:
+                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
+            except UserEducation.DoesNotExist:
+                in_demand = False
 
-                value = math.floor( years_of_experience )
+            if in_demand:
+                # Use given value or search for it
+                if forced_value is not None:
+                    value = forced_value
+                else:
+                    # search for work experiences outside country of destination
+                    years_of_experience = 0
+                    for item in self.user_work_experience:
+                        if item.country_id != self.country.id:
+                            years_of_experience += ( item.months / 12 )
 
-            # search for how many points this answer is worth
-            if value > 0:
-                points = self.__get_points( value, 'description' )
+                    value = math.floor( years_of_experience )
+
+                # search for how many points this answer is worth
+                if value > 0:
+                    points = self.__get_points( value, 'description' )
 
         return points
 
@@ -481,23 +488,30 @@ class ImmigrationCalculator( object ):
         :return Int - Total of points:
         """
         points = 0
-        if ( self.user_work_experience ):
+        if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
-            # Use given value or search for it
-            if forced_value is not None:
-                value = forced_value
-            else:
-                # search for work experiences on the current country
-                years_of_experience = 0
-                for item in self.user_work_experience:
-                    if item.country_id == self.country.id:
-                        years_of_experience += ( item.months / 12 )
+            # Check if occupation is in list of demand
+            try:
+                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
+            except UserEducation.DoesNotExist:
+                in_demand = False
 
-                value = math.floor( years_of_experience )
+            if in_demand:
+                # Use given value or search for it
+                if forced_value is not None:
+                    value = forced_value
+                else:
+                    # search for work experiences on the current country
+                    years_of_experience = 0
+                    for item in self.user_work_experience:
+                        if item.country_id == self.country.id:
+                            years_of_experience += ( item.months / 12 )
 
-            # search for how many points this answer is worth
-            if value > 0:
-                points = self.__get_points( value, 'description' )
+                    value = math.floor( years_of_experience )
+
+                # search for how many points this answer is worth
+                if value > 0:
+                    points = self.__get_points( value, 'description' )
 
         return points
 
@@ -511,22 +525,30 @@ class ImmigrationCalculator( object ):
         :return Int - Total of points:
         """
         points = 0
-        if ( self.user_work_experience ):
+        if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
-            # Use given value or search for it
-            if forced_value is not None:
-                value = forced_value
-            else:
-                # search for all work experiences
-                years_of_experience = 0
-                for item in self.user_work_experience:
-                        years_of_experience += ( item.months / 12 )
+            # Check if occupation is in list of demand
+            try:
+                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
+            except UserEducation.DoesNotExist:
+                in_demand = False
 
-                value = math.floor( years_of_experience )
+            if in_demand:
 
-            # search for how many points this answer is worth
-            if value > 0:
-                points = self.__get_points( value, 'description' )
+                # Use given value or search for it
+                if forced_value is not None:
+                    value = forced_value
+                else:
+                    # search for all work experiences
+                    years_of_experience = 0
+                    for item in self.user_work_experience:
+                            years_of_experience += ( item.months / 12 )
+
+                    value = math.floor( years_of_experience )
+
+                # search for how many points this answer is worth
+                if value > 0:
+                    points = self.__get_points( value, 'description' )
 
         return points
 

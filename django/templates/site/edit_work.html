@@ -127,12 +127,12 @@
                 </div>
             {% endif %}
         
-            <div class="{% if user_work_form.occupation_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.occupation_answer.label }}:</strong> &nbsp;</span>
+            <div class="{% if user_work_form.occupation.errors %}has-error{% endif %}">
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.occupation.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
-                    {{ user_work_form.occupation_answer }}
+                    {{ user_work_form.occupation }}
                 </div>
-                {{ user_work_form.occupation_answer.errors }}
+                {{ user_work_form.occupation.errors }}
             </div>
         
             <div class="break10"></div>
