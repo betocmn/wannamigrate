@@ -1,4 +1,4 @@
-
+/** Internal pages header */
 .section-header
 {
     position: relative;
@@ -25,6 +25,11 @@
     margin: 0px 0 0 36px;
 }
 
+
+
+
+
+/** Viewing classes */
 .cards-wrapper
 {
     width: 80%;
@@ -32,6 +37,11 @@
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     text-align: center;
+}
+
+.cards-wrapper .alert 
+{
+    margin: 0 2em 0 2em;
 }
 
 .info-card
@@ -51,14 +61,7 @@
     margin:1.5em 0 0 1em;
 }
 
-.info-card .block-row, .info-card .table-row
-{
-    width: 100%;
-    margin-bottom: 1.2em;
-}
-
-
-.info-card .block-row
+.block-row
 {
     display: block;
     width: 100%;
@@ -77,7 +80,7 @@
     height: 200px;
 }
 
-.info-card .table-row
+.table-row
 {
     display: table;
     width: 100%;
@@ -93,20 +96,36 @@
     text-align: left;
 }
 
-.table-row .label
+.label
 {
     font-weight: bold;
 }
 
 
+
+
+
+/** Editing layouts **/
+.edit-container
+{
+    position: relative;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+
+
+/** Buttons classes */
 .bt
 {
     padding:0.4em 1em;
     border-radius: 3px;
     text-align: center;
     font-size: 0.9em;
+    cursor: pointer;
 }
-
 .bt-default
 {
     background-color: white;
@@ -118,9 +137,31 @@
 {
     border: solid 1px #999;
 }
+.bt-green
+{
+    background: url('../img/save.png') top;
+    color: #FFF;
+    text-decoration: none !important;
+    border: solid 1px #eee;
+}
+.bt-green:hover
+{
+    border: solid 1px #999;
+}
 
 
+
+
+/** Alignment classes */
 .text-right
 {
     text-align: right !important;
+}
+.text-center
+{
+    text-align: center !important;
+}
+.text-left
+{
+    text-align: left !important;
 }

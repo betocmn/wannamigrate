@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.urlresolvers import reverse
@@ -24,7 +25,7 @@ from wannamigrate.site.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
-    UserWorkOfferForm, BaseUserWorkOfferFormSet, MyAccountForm
+    UserWorkOfferForm, BaseUserWorkOfferFormSet, EditAccountInfoForm, EditAccountPasswordForm
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
@@ -338,45 +339,82 @@ def view_account( request ):
     # Gets the user object.
     user = request.user
 
-    # Edits the preferred language into a readable version.
-    preferred_language = get_language_info( user.preferred_language )
-
-    user.preferred_language = _( preferred_language['name_local'] ) + " (" + preferred_language['code'] + ")"
-
+    # Renders the page
     return render( request, 'site/myaccount/view.html', { 'user': user } )
 
 
 @login_required
-def edit_account( request ):
+def edit_account_info( request ):
     """
     Edit "My Account" page.
 
     :param request:
     :return String - HTML from Edit My Account page.
     """
-    
-    pass
-    """
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        user_form = UserForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in user_form.cleaned_data as required
-            # TODO: save the provided data.
-            # TODO: Remember to ignore e-mail edition.
-            # Render the account page with a success message.
-            return render( request, 'site/account.html', { 'user_form': user_form, 'success': "Changes saved." } )
-    
-    # if a GET (or any other method) we'll create a form
-    # filled with user's information.
-    # fields: name, e-mail, preferred language and avatar.
-    # TODO: fill the user_form with the user's info.
-    else:
-        user_form = UserForm()
-    """
 
+    # Form submitted via POST
+    if request.method == 'POST':
+
+        user = request.POST.copy()
+        user['email'] = request.user.email
+        
+        form = EditAccountInfoForm( user, instance = request.user )
+
+        # Is valid? Save..
+        if form.is_valid():
+            # Save
+            user = form.save()
+            
+            # Changes the active language
+            translation.activate( user.preferred_language )
+            request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+
+            messages.success( request, _('Data successfully updated.') )
+            return HttpResponseRedirect( reverse( 'site:view_account' ) )
+        # Form errors.
+        else:
+            return render( request, 'site/myaccount/edit_info.html', { 'form' : form } )
+
+    # GET or any other method. Reads the user's info from session
+    # and render the edit page.
+    else:
+        user = request.user
+        form = EditAccountInfoForm( instance = user )
+        return render( request, 'site/myaccount/edit_info.html', { 'form' : form } )
+
+@login_required
+def edit_account_avatar( request ):
+    pass
+
+@login_required
+def edit_account_password( request ):
+    """
+    Edit account's password page.
+
+    :param request:
+    :return String - HTML from Edit account's password page.
+    """
+    # Form submitted via POST
+    if request.method == 'POST':
+
+        form = EditAccountPasswordForm( request.user, request.POST )
+
+        # Is valid? Save..
+        if form.is_valid():
+            # TODO: Change the user's password
+            form.save()
+
+            messages.success( request, _('Data successfully updated.') )
+            return HttpResponseRedirect( reverse( 'site:view_account' ) )
+        # Form errors.
+        else:
+            return render( request, 'site/myaccount/edit_password.html', { 'form' : form } )
+
+    # GET or any other method. Reads the user's info from session
+    # and render the edit page.
+    else:
+        form = EditAccountPasswordForm( request.user )
+        return render( request, 'site/myaccount/edit_password.html', { 'form' : form } )
 
 
 

@@ -385,7 +385,8 @@ def dbg( var ):
     # Predefined constants
     NEWLINE =  "<br>"
     TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-
+    
+    debug_str = ''
     
     # is an instance of a django model?
     if isinstance( var, models.Model ):
@@ -411,4 +412,3 @@ def dbg( var ):
         debug_str += "({0}) {1}".format( type(var), str( var ) )
 
     return HttpResponse( debug_str )
-

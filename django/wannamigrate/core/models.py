@@ -7,6 +7,7 @@ from django.conf import settings
 from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
 import math
+from wannamigrate._settings.base import LANGUAGES
 
 class BaseModel( models.Model ):
     """
@@ -280,7 +281,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'UserResult' )
-    preferred_language = models.CharField( _( "Language" ), max_length = 6, null = True, default = 'en' )
+    preferred_language = models.CharField( _( "Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
 
     # META Options
     class Meta:
