@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 07:28+0000\n"
+"POT-Creation-Date: 2014-11-28 19:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2359,8 +2359,8 @@ msgid ""
 "is in BETA version and we are working around the<br />clock to have a full "
 "software solution to help future immigrants."
 msgstr ""
-"está na versão BETA e estamos trabalhando duro para ter <br /> uma solução completa "
-"para ajudar futuros imigrantes."
+"está na versão BETA e estamos trabalhando duro para ter <br /> uma solução "
+"completa para ajudar futuros imigrantes."
 
 #: templates/site/contact.html:62
 msgid ""
@@ -2372,7 +2372,7 @@ msgstr "Seu feedback é de extrema importância para nós."
 msgid "Edit your information"
 msgstr "Edite suas informações"
 
-#: templates/site/dashboard.html:44
+#: templates/site/dashboard.html:44 templates/site/situation.html:55
 msgid "Personal"
 msgstr "Pessoal"
 
@@ -2381,16 +2381,16 @@ msgstr "Pessoal"
 msgid "COMPLETED"
 msgstr "PREENCHIDO"
 
-#: templates/site/dashboard.html:62 wannamigrate/core/models.py:284
-#: wannamigrate/site/forms.py:285
+#: templates/site/dashboard.html:62 templates/site/situation.html:60
+#: wannamigrate/core/models.py:284 wannamigrate/site/forms.py:285
 msgid "Language"
-msgstr "Língua"
+msgstr "Línguas"
 
-#: templates/site/dashboard.html:80
+#: templates/site/dashboard.html:80 templates/site/situation.html:65
 msgid "Education"
 msgstr "Escolaridade"
 
-#: templates/site/dashboard.html:98
+#: templates/site/dashboard.html:98 templates/site/situation.html:70
 msgid "Work"
 msgstr "Trabalho"
 
@@ -2400,8 +2400,6 @@ msgstr "Veja seus pontos por país"
 
 #: templates/site/dashboard.html:128 templates/site/dashboard.html.py:148
 #: templates/site/dashboard.html:168 templates/site/situation.html:43
-#: templates/site/situation.html.py:57 templates/site/situation.html:62
-#: templates/site/situation.html.py:67 templates/site/situation.html:72
 msgid "POINTS"
 msgstr "PONTOS"
 
@@ -2413,7 +2411,7 @@ msgstr "DE"
 #: templates/site/dashboard.html:129 templates/site/dashboard.html.py:149
 #: templates/site/dashboard.html:169 templates/site/situation.html:44
 msgid "REQUIRED"
-msgstr "OBRIGATÓRIOS"
+msgstr "MÍNIMOS"
 
 #: templates/site/dashboard.html:183
 msgid "Get help to migrate"
@@ -2453,76 +2451,81 @@ msgstr "Mudando para o Canadá"
 msgid "Moving to New Zealand"
 msgstr "Mudando para a Nova Zelândia"
 
-#: templates/site/edit_education.html:79
+#: templates/site/edit_education.html:49 templates/site/edit_language.html:48
+#: templates/site/edit_personal.html:28 templates/site/edit_work.html:70
+msgid "add another"
+msgstr "adicionar outro"
+
+#: templates/site/edit_education.html:80
 msgid "Education Details"
 msgstr "Dados de Escolaridade"
 
-#: templates/site/edit_education.html:80 templates/site/edit_language.html:80
-#: templates/site/edit_personal.html:102 templates/site/edit_work.html:118
+#: templates/site/edit_education.html:81 templates/site/edit_language.html:81
+#: templates/site/edit_personal.html:103 templates/site/edit_work.html:119
 msgid "We need all this information to calculate your points."
 msgstr "Precisamos dessas informações para calcular seus pontos."
 
-#: templates/site/edit_education.html:81 templates/site/edit_language.html:81
-#: templates/site/edit_personal.html:103 templates/site/edit_work.html:119
+#: templates/site/edit_education.html:82 templates/site/edit_language.html:82
+#: templates/site/edit_personal.html:104 templates/site/edit_work.html:120
 msgid "Save and Exit"
 msgstr "Salvar e Sair"
 
-#: templates/site/edit_education.html:91 templates/site/edit_language.html:91
-#: templates/site/edit_personal.html:113 templates/site/edit_work.html:129
+#: templates/site/edit_education.html:92 templates/site/edit_language.html:92
+#: templates/site/edit_personal.html:114 templates/site/edit_work.html:130
 msgid "Errors Found!"
 msgstr "Erros Encontrados!"
 
-#: templates/site/edit_education.html:102
+#: templates/site/edit_education.html:103
 msgid "What are your education degrees?"
 msgstr "Quais diplomas de escolaridade você possui?"
 
-#: templates/site/edit_education.html:217
-#: templates/site/edit_language.html:176 templates/site/edit_work.html:364
+#: templates/site/edit_education.html:218
+#: templates/site/edit_language.html:177 templates/site/edit_work.html:365
 msgid "PREVIOUS"
 msgstr "ANTERIOR"
 
-#: templates/site/edit_education.html:219
-#: templates/site/edit_language.html:178 templates/site/edit_personal.html:242
-#: templates/site/edit_work.html:366
+#: templates/site/edit_education.html:220
+#: templates/site/edit_language.html:179 templates/site/edit_personal.html:243
+#: templates/site/edit_work.html:367
 msgid "PERSONAL"
 msgstr "PESSOAL"
 
-#: templates/site/edit_education.html:221
-#: templates/site/edit_language.html:180 templates/site/edit_personal.html:244
-#: templates/site/edit_work.html:368
+#: templates/site/edit_education.html:222
+#: templates/site/edit_language.html:181 templates/site/edit_personal.html:245
+#: templates/site/edit_work.html:369
 msgid "LANGUAGE"
 msgstr "LÍNGUAS"
 
-#: templates/site/edit_education.html:223
-#: templates/site/edit_language.html:182 templates/site/edit_personal.html:246
-#: templates/site/edit_work.html:370
+#: templates/site/edit_education.html:224
+#: templates/site/edit_language.html:183 templates/site/edit_personal.html:247
+#: templates/site/edit_work.html:371
 msgid "EDUCATION"
 msgstr "ESCOLARIDADE"
 
-#: templates/site/edit_education.html:225
-#: templates/site/edit_language.html:184 templates/site/edit_personal.html:248
-#: templates/site/edit_work.html:372
+#: templates/site/edit_education.html:226
+#: templates/site/edit_language.html:185 templates/site/edit_personal.html:249
+#: templates/site/edit_work.html:373
 msgid "WORK"
 msgstr "TRABALHO"
 
-#: templates/site/edit_education.html:227
-#: templates/site/edit_language.html:186 templates/site/edit_personal.html:250
+#: templates/site/edit_education.html:228
+#: templates/site/edit_language.html:187 templates/site/edit_personal.html:251
 msgid "NEXT"
 msgstr "PRÓXIMO"
 
-#: templates/site/edit_language.html:79
+#: templates/site/edit_language.html:80
 msgid "Language Details"
 msgstr "Dados de Línguas"
 
-#: templates/site/edit_language.html:102
+#: templates/site/edit_language.html:103
 msgid "What languages do you speak (including your native one)?"
 msgstr "Que línguas você fala (incluindo a sua nativa)?"
 
-#: templates/site/edit_personal.html:101
+#: templates/site/edit_personal.html:102
 msgid "Personal Details"
 msgstr "Dados Pessoais"
 
-#: templates/site/edit_personal.html:162
+#: templates/site/edit_personal.html:163
 msgid ""
 "If you have a close family member in either Australia, Canada or New "
 "Zealand, you can get extra points"
@@ -2530,15 +2533,15 @@ msgstr ""
 "Se você tiver um parente próximo na Austrália, Canadá ou Nova Zelândia, "
 "poderá receber pontos extras"
 
-#: templates/site/edit_work.html:117
+#: templates/site/edit_work.html:118
 msgid "Work Details"
 msgstr "Dados de Trabalho"
 
-#: templates/site/edit_work.html:160
+#: templates/site/edit_work.html:161
 msgid "Add below your work experiences"
 msgstr "Adicione abaixo suas experiências de trabalho"
 
-#: templates/site/edit_work.html:334
+#: templates/site/edit_work.html:335
 msgid ""
 "Proved Skills: Under 50 yeard old. Competent English. Same skilled "
 "occupation as you."
@@ -2546,7 +2549,7 @@ msgstr ""
 "Habilidades Comprovadas: Abaixo de 50 anos de idade. Inglês intermediário. "
 "Mesma profissão que a sua."
 
-#: templates/site/edit_work.html:374
+#: templates/site/edit_work.html:375
 msgid "FINISH"
 msgstr "FINALIZAR"
 
@@ -2565,16 +2568,15 @@ msgid ""
 "Live in a <span class=\"bold\">new country.</span> <span class=\"bold"
 "\">Change</span> your life."
 msgstr ""
-"More em um<span class=\"bold\">novo país.</span> <span class=\"bold\">Mude</"
+"More em um <span class=\"bold\">novo país.</span> <span class=\"bold\">Mude</"
 "span> de vida."
 
 #: templates/site/home.html:79 templates/site/home_older_browsers.html:77
 msgid ""
-"Discover an <span class=\"bold\">awesome country</span> and get help to "
-"<span class=\"bold\">move.</span>"
+"Choose a <span class=\"bold\">country</span>, obtain the <span class=\"bold"
+"\">visa</span> and <span class=\"bold\">move!</span>"
 msgstr ""
-"Descubra um <span class=\"bold\">país incrível</span> e receba ajuda <span "
-"class=\"bold\">para migrar.</span>"
+"Decida o <span class=\"bold\">país</span>, consiga o <span class=\"bold\">visto</span> e <span class=\"bold\">mude!</span>"
 
 #: templates/site/home.html:81 templates/site/home.html.py:144
 #: templates/site/home.html:208 templates/site/home.html.py:218
@@ -2607,9 +2609,8 @@ msgid ""
 "<span class=\"bold\">Wanna Migrate</span> is doing a superb job by assisting "
 "people to discover a new country to live and get the visa. I love it!"
 msgstr ""
-"<span class=\"bold\">Wanna Migrate</span> está fazendo um trabalho incrível "
-"ao auxiliar as pessoas a descobrirem um novo país para viver e conseguirem o "
-"visto. Curti demais!"
+"O <span class=\"bold\">Wanna Migrate</span> me ajudou a ver todas as possibilidades que eu tinha "
+"e a conseguir meu tão sonhado visto permanente da Austrália. "
 
 #: templates/site/home.html:114
 msgid "Creative Director in Australia"
@@ -2617,7 +2618,7 @@ msgstr "Web Designer na Austrália"
 
 #: templates/site/home.html:121 templates/site/home_older_browsers.html:193
 msgid "The <span class=\"bold\">easiest way</span> to immigrate."
-msgstr "A maneira<span class=\"bold\">mais fácil</span> de imigrar."
+msgstr "A maneira <span class=\"bold\">mais fácil</span> de imigrar."
 
 #: templates/site/home.html:138 templates/site/home_older_browsers.html:92
 msgid ""
@@ -2679,7 +2680,7 @@ msgid ""
 "I lived in 5 different countries and believe that everyone should have the "
 "chance to improve their lives in a new country, if they want."
 msgstr ""
-"Morei em 5 países diferentes e acredito que todos devem ter a chance de "
+"Morei em 5 países diferentes e acredito que todos deveriam ter a chance de "
 "melhorar suas vidas em um novo país, caso desejem."
 
 #: templates/site/home.html:205 templates/site/home_older_browsers.html:180
@@ -2903,12 +2904,6 @@ msgstr ""
 "\">Política de Privacidade</a> do Wanna Migrate"
 
 #: templates/site/popups/signup.html:241
-#, fuzzy
-#| msgid ""
-#| "If you click \"Log in with Facebook/Linkedin/Twitter\" and are not our "
-#| "user, you will be registered and you agree to Wanna Migrates <a class="
-#| "\"bold green\" href=\"#\">Terms and Conditions</a> and  <a class=\"bold "
-#| "green\" href=\"#\">Privacy Police</a>"
 msgid ""
 "By clicking on Sign up, you will be automatically accepting Wanna Migrates "
 "<a class=\"bold green\" href=\"#\">Terms and Conditions</a> and  <a class="
@@ -2934,6 +2929,11 @@ msgstr "Você atualizaou sua senha com sucesso"
 #: templates/site/reset_password.html:38
 msgid "Click Here to go back and login again"
 msgstr "Clique Aqui para voltar e efetuar login novamente"
+
+#: templates/site/situation.html:57 templates/site/situation.html.py:62
+#: templates/site/situation.html:67 templates/site/situation.html.py:72
+msgid "pts"
+msgstr "pts"
 
 #: templates/site/situation.html:57 templates/site/situation.html.py:62
 #: templates/site/situation.html:67 templates/site/situation.html.py:72
@@ -3235,14 +3235,17 @@ msgid ""
 "You will need the documents listed above and also Police Certificates and "
 "Translations of all document, if not in English or French."
 msgstr ""
+"Você precisrá de todos os documentos listados acima e também de certificados "
+"policiais e traduções de toda documentação, se não estive em Inglês ou "
+"Francês."
 
 #: templates/site/visa_application.html:151
 msgid "Then you need to fill out all the following forms:"
-msgstr ""
+msgstr "Em seguida você deverá preencher todos os forms a seguir:"
 
 #: templates/site/visa_application.html:162
 msgid "Pay the Fees"
-msgstr ""
+msgstr "Efetue o Pagamento das Taxas"
 
 #: templates/site/visa_application.html:163
 msgid ""
@@ -3250,35 +3253,44 @@ msgid ""
 "5620) and include it with your application to the CIO. On-line payments are "
 "not accepted by the CIO."
 msgstr ""
+"Preencha o formulário de pagamento das taxas - Aplicação para residência "
+"permanente (IMM 5620) e inclua na papelada da sua aplicação ao visto. "
+"Pagamentos online não serão aceitos."
 
 #: templates/site/visa_application.html:164
 msgid "to get the form."
-msgstr ""
+msgstr "para receber o formulário."
 
 #: templates/site/visa_application.html:173
 msgid "Send you application by mail"
-msgstr ""
+msgstr "Envie sua aplicação pelo correio"
 
 #: templates/site/visa_application.html:174
 msgid ""
 "Put the completed forms, supporting documents and fee payment in a 23 cm x "
 "30.5 cm (9″ x 12″) envelope and send your completed application."
 msgstr ""
+"Juntes os fomulários preenchidos, documentação solicitada e o pagamento das "
+"taxas em um envelope de  23 cm x 30,5 cm e envie."
 
 #: templates/site/visa_application.html:175
 msgid "to get the address."
-msgstr ""
+msgstr "para verificar o endereço."
 
 #: templates/site/visa_application.html:209
 msgid "Submit an Expression of Interest (EOI)"
-msgstr ""
+msgstr "Envie uma 'Expression of Interest' (EOI)"
 
 #: templates/site/visa_application.html:210
 msgid ""
-"On the EOI form you tell us about yourself, your family, your skills and "
-"your work experience. As you complete your EOI, you claim points. However, "
-"you do not have to provide evidence at this point."
+"On the EOI form you fill out information about yourself, your family, your "
+"skills and your work experience. As you complete your EOI, you claim points. "
+"However, you do not have to provide evidence at this point."
 msgstr ""
+"No formulário EOI você preenche informações sobre você, sua família, suas "
+"habilidades profissionais e sua experiência de trabalho. Assim que você "
+"finaliza o formulário você requisita seus pontos, apesar de não precisar "
+"comprovar nada neste momento."
 
 #: templates/site/visa_application.html:211
 msgid ""
@@ -3286,15 +3298,25 @@ msgid ""
 "EOI costs a fee of NZ$650. Online EOIs cost less because they require less "
 "processing than paper-based EOIs."
 msgstr ""
+"O envio do EOI de forma online custa 510.00 dólares neo-zelandeses. O envio "
+"do EOIimpresso custa 540 dólares new-zelandeses. A forma online custa menos "
+"por exigir menos processamento manual que a forma impressa."
 
 #: templates/site/visa_application.html:212
 msgid ""
 "If your EOI has a score of 100 points or more, it goes in the pool of EOIs. "
-"Every two weeks we automatically select EOIs with a points score of 140 or "
-"over from the pool. Then we select EOIs with a points score between 100 and "
-"139 which include points for a skilled job or job offer. If we still have "
-"spaces available, we use additional criteria to select lower-scoring EOIs."
+"Every two weeks they automatically select EOIs with a points score of 140 or "
+"over from the pool. Then they select EOIs with a points score between 100 "
+"and 139 which include points for a skilled job or job offer. If there are "
+"still have spaces available, they use additional criteria to select lower-"
+"scoring EOIs."
 msgstr ""
+"Se o seu EOI tiver uma pontuação de 100 pontos ou mais, você irá para uma "
+"fila de EOIs. A cada 2 semanas são selecionadas as EOIs com pontuações de "
+"140 ou mais desta fila. Em seguida são selecionadas EOIs com pontuações "
+"entre 100 e 139 que possuem pontos porprofissões qualificadas ou com uma "
+"proposta de trabalho. Se ainda assim sobrarem algumas vagas, serão "
+"utilizados critério adicionais para selecionar pontuações menores."
 
 #: templates/site/visa_application.html:213
 msgid ""
@@ -3302,14 +3324,16 @@ msgid ""
 "months, it will lapse and be withdrawn from the pool. Your EOI fee will not "
 "be refunded."
 msgstr ""
+"As EOIs tem validade de 6 meses.  Se sua EOI não for selecionada neste "
+"período, será cancelada  e as taxas não são reembolsáveis."
 
 #: templates/site/visa_application.html:214
 msgid "for online application."
-msgstr ""
+msgstr "para aplicação online"
 
 #: templates/site/visa_application.html:215
 msgid "for paper application."
-msgstr ""
+msgstr "para aplicação impressa"
 
 #: templates/site/visa_application.html:231
 msgid ""
@@ -3317,16 +3341,20 @@ msgid ""
 "you provided in your EOI is still up to date and correct. You also need to "
 "provide:"
 msgstr ""
+"Após receber um convite para aplicar ao visto, você terá que confirmar toda "
+"informação fornecida em sua EOI, além de:"
 
 #: templates/site/visa_application.html:232
 msgid "evidence to support the points you claimed in your EOI."
-msgstr ""
+msgstr "Comprovantes para os itens que lhe deram pontos em sua EOI."
 
 #: templates/site/visa_application.html:233
 msgid ""
 "proof that you and everyone else on your application meet all of our health, "
 "character and English language requirements."
 msgstr ""
+"Comprovações que você e todos os membros de sua aplicação atendem aos "
+"requisitos de saúde, antecedentes e língua estrangeira."
 
 #: templates/site/visa_application.html:234
 msgid ""
@@ -3335,6 +3363,10 @@ msgid ""
 "invited to apply for residence. Any applications received after four months "
 "will not be accepted.."
 msgstr ""
+"Em seguida você deverá enviar todos os documentos e comprovantes, juntamente "
+"com o formulário do visto e o pagamento.  Você deverá enviar sua aplicação "
+"em até 4 meses após o convite. Quaisquer aplicações recebidas depois dos 4 "
+"meses serão negadas."
 
 #: wannamigrate/_settings/base.py:40
 msgid "Portuguese (BR)"
@@ -3517,14 +3549,10 @@ msgid "score personal"
 msgstr "pontuação pessoal"
 
 #: wannamigrate/core/models.py:534
-#, fuzzy
-#| msgid "language"
 msgid "score language"
 msgstr "língua"
 
 #: wannamigrate/core/models.py:535
-#, fuzzy
-#| msgid "percentage education"
 msgid "score education"
 msgstr "porcentagem escolaridade"
 
@@ -3740,8 +3768,6 @@ msgid "New Password"
 msgstr "Senha Nova"
 
 #: wannamigrate/site/forms.py:596
-#, fuzzy
-#| msgid "Confirm Password"
 msgid "Confirm New Password"
 msgstr "Confime Senha"
 
