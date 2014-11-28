@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 21:40+0000\n"
+"POT-Creation-Date: 2014-11-28 23:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2607,15 +2607,15 @@ msgstr ""
 
 #: templates/site/home.html:113 templates/site/home_older_browsers.html:165
 msgid ""
-"<span class=\"bold\">Wanna Migrate</span> is doing a superb job by assisting "
-"people to discover a new country to live and get the visa. I love it!"
+"<span class=\"bold\">Wanna Migrate</span> helped me to understand all my "
+"possibilities and to obtain my long time dreamed visa to Australia."
 msgstr ""
 "O <span class=\"bold\">Wanna Migrate</span> me ajudou a ver todas as "
-"possibilidades que eu tinha e a conseguir meu tão sonhado visto permanente "
-"da Austrália. "
+"possibilidades que eu tinha e a conseguir meu tão sonhado visto "
+"permanente da Austrália. "
 
-#: templates/site/home.html:118
-msgid "Creative Director in Australia"
+#: templates/site/home.html:118 templates/site/home_older_browsers.html:170
+msgid "Web Designer in Australia"
 msgstr "Web Designer na Austrália"
 
 #: templates/site/home.html:125 templates/site/home_older_browsers.html:197
@@ -2704,10 +2704,6 @@ msgstr ""
 #: templates/site/home.html:237 templates/site/home_older_browsers.html:230
 msgid "Incubators / Supporters:"
 msgstr "Apoiadores do Projeto:"
-
-#: templates/site/home_older_browsers.html:170
-msgid "Web Designer in Australia"
-msgstr "Web Designer na Austrália"
 
 #: templates/site/layouts/email.html:5
 msgid "Email from Wanna Migrate"
@@ -3828,9 +3824,10 @@ msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
 "com.au/' target='blank'>NAATI</a>"
-msgstr "Você pode receber 5 pontos extras se conseguir ser reconhecido como um tradutor na "
-"sua língua nativa. Você terá que fazer uma prova na <a href='www.naati."
-"com.au/' target='blank'>NAATI</a>"
+msgstr ""
+"Você pode receber 5 pontos extras se conseguir ser reconhecido como um "
+"tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
+"naati.com.au/' target='blank'>NAATI</a>"
 
 #: wannamigrate/site/views.py:1010
 msgid ""
@@ -3838,25 +3835,27 @@ msgid ""
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
 "sponsor your visa.  It will be quicker and cheaper."
 msgstr ""
-"Se você receber uma proposta de trabalho de uma empresa da Austrália (<a href='http://www."
-"seek.com.au' target='blank'>Procure Emprego Aqui</a>), você deverá solicitar que seu empregador "
-"faça a requisição do seu visto patrocinado.  Será mais rápido e barato."
+"Se você receber uma proposta de trabalho de uma empresa da Austrália (<a "
+"href='http://www.seek.com.au' target='blank'>Procure Emprego Aqui</a>), você "
+"deverá solicitar que seu empregador faça a requisição do seu visto "
+"patrocinado.  Será mais rápido e barato."
 
 #: wannamigrate/site/views.py:1013
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
 msgstr ""
-"Você pode receber 5 pontos extras se tiver um parceiro/esposa (união estável) e "
-"ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
+"Você pode receber 5 pontos extras se tiver um parceiro/esposa (união "
+"estável) e ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que "
+"você."
 
 #: wannamigrate/site/views.py:1016
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
 msgstr ""
-"Se você tiver disponibilidade de viver em uma parte interiorana da Austrália no começo, "
-"será mais fácil conseguir o visto (mais detalhes em breve)."
+"Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
+"no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
 #: wannamigrate/site/views.py:1019 wannamigrate/site/views.py:1036
 #: wannamigrate/site/views.py:1050
@@ -3864,16 +3863,16 @@ msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
 msgstr ""
-"Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar para um "
-"visto de investidor."
+"Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
+"para um visto de investidor."
 
 #: wannamigrate/site/views.py:1024
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
 msgstr ""
-"Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) tenha "
-"um nível básico de inglês ou francês."
+"Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) "
+"tenha um nível básico de inglês ou francês."
 
 #: wannamigrate/site/views.py:1027
 msgid ""
@@ -3893,27 +3892,40 @@ msgid ""
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
 "a>)."
 msgstr ""
-"Você pode receber 15 pontos extras caso consiga uma proposta de trabalho de uma empresa "
-"do Canadá. (<a href='http://www.jobbank.gc.ca/' target='blank'>Procure por Emprego Aqui</"
-"a>)."
+"Você pode receber 15 pontos extras caso consiga uma proposta de trabalho de "
+"uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
+"target='blank'>Procure por Emprego Aqui</a>)."
 
 #: wannamigrate/site/views.py:1041
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
-msgstr "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
+msgstr ""
+"Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
 #: wannamigrate/site/views.py:1044
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
 msgstr ""
-"Você pode receber 20 pontos extras se seu parceiro/esposa (união estável) tiver uma profissão"
-"qualificada ou uma proposta de trabalho."
+"Você pode receber 20 pontos extras se seu parceiro/esposa (união estável) "
+"tiver uma profissãoqualificada ou uma proposta de trabalho."
 
 #: wannamigrate/site/views.py:1047
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."
 msgstr ""
-"Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de emprego) "
-"em uma parte interiorana da Nova Zelândia."
+"Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de "
+"emprego) em uma parte interiorana da Nova Zelândia."
+
+#~ msgid ""
+#~ "<span class=\"bold\">Wanna Migrate</span> is doing a superb job by "
+#~ "assisting people to discover a new country to live and get the visa. I "
+#~ "love it!"
+#~ msgstr ""
+#~ "O <span class=\"bold\">Wanna Migrate</span> me ajudou a ver todas as "
+#~ "possibilidades que eu tinha e a conseguir meu tão sonhado visto "
+#~ "permanente da Austrália. "
+
+#~ msgid "Creative Director in Australia"
+#~ msgstr "Web Designer na Austrália"
