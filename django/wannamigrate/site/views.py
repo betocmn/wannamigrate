@@ -1004,27 +1004,50 @@ def situation( request, country_name ):
         if country_name == 'australia':
 
             # Australia community language
-            template_data['hints'].append( "You can get 5 extra points if you can get recognized as a translator for your native language.  You will have to do a test with <a href='www.naati.com.au/' target='blank'>NAATI</a>" )
+            template_data['hints'].append( _( "You can get 5 extra points if you can get recognized as a translator for your native language.  You will have to do a test with <a href='www.naati.com.au/' target='blank'>NAATI</a>" ) )
 
             # work offer
-            template_data['hints'].append( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." )
+            template_data['hints'].append( _( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." ) )
 
             # skilled partner
-            template_data['hints'].append( "You can get 5 extra points if you have a partner/espouse (stable union) and he/she is under 50 years old and in the same occupation as you." )
-
-            # Investments
-            template_data['hints'].append( "If you have money/assets that you will take with you, you can apply for an investment visa." )
+            template_data['hints'].append( _( "You can get 5 extra points if you have a partner/espouse (stable union) and he/she is under 50 years old and in the same occupation as you." ) )
 
             # Regional Australia
-            template_data['hints'].append( "If you are willing to live in a regional part of Australia in the beginning, it's easier to get the visa (more details soon)." )
+            template_data['hints'].append( _( "If you are willing to live in a regional part of Australia in the beginning, it's easier to get the visa (more details soon)." ) )
+
+            # Investments
+            template_data['hints'].append( _( "If you have money/assets that you will take with you, you can apply for an investment visa." ) )
 
         elif country_name == 'canada':
 
-            # Australia community language
-            template_data['hints'].append( "You can get 5 extra points if you can get recognized as a translator for your native language.  You will have to do a test with <a href='www.naati.com.au/' target='blank'>NAATI</a>" )
+            # Partner Language Level
+            template_data['hints'].append( _( "You can get 5 extra points if your partner/spouse (stable union) has a basic level of english or french." ) )
+
+            # Past study
+            template_data['hints'].append( _( "You can get 5 extra points if you or your partner/espouse (stable union) complete any studies or have a past job in Canada." ) )
+
+            # Family Member
+            template_data['hints'].append( _( "You can get 5 extra points if you have a close family member in Canada." ) )
 
             # work offer
-            template_data['hints'].append( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." )
+            template_data['hints'].append( _( "You can get 15 extra points if you can get a job offer from an Canada Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</a>)." ) )
+
+            # Investments
+            template_data['hints'].append( _( "If you have money/assets that you will take with you, you can apply for an investment visa." ) )
+
+        elif country_name == 'new-zealand':
+
+            # Family Member
+            template_data['hints'].append( _( "You can get 10 extra points if you have a close family member in New-Zealand." ) )
+
+            # skilled partner
+            template_data['hints'].append( _( "You can get 20 extra points if you have a partner/espouse with a skilled occupation or job offer." ) )
+
+            # Work on Regional NEw Zealand
+            template_data['hints'].append( _( "You can get up to 30 extra points if you have worked (or job offer) on a regional part of New Zealand." ) )
+
+             # Investments
+            template_data['hints'].append( _( "If you have money/assets that you will take with you, you can apply for an investment visa." ) )
 
 
     # Print Template

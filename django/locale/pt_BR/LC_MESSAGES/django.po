@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 20:03+0000\n"
+"POT-Creation-Date: 2014-11-28 21:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1032,8 +1032,8 @@ msgid "American Samoa"
 msgstr ""
 
 #: templates/db_translations/core_country.html:118
-#: templates/site/dashboard.html:125 wannamigrate/site/views.py:930
-#: wannamigrate/site/views.py:1036 wannamigrate/site/views.py:1080
+#: templates/site/dashboard.html:125 wannamigrate/site/views.py:917
+#: wannamigrate/site/views.py:1076 wannamigrate/site/views.py:1120
 msgid "Australia"
 msgstr "Austrália"
 
@@ -1091,8 +1091,8 @@ msgid "New Caledonia"
 msgstr ""
 
 #: templates/db_translations/core_country.html:132
-#: templates/site/dashboard.html:165 wannamigrate/site/views.py:954
-#: wannamigrate/site/views.py:1050 wannamigrate/site/views.py:1094
+#: templates/site/dashboard.html:165 wannamigrate/site/views.py:941
+#: wannamigrate/site/views.py:1090 wannamigrate/site/views.py:1134
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -1386,8 +1386,8 @@ msgid "British Virgin Islands"
 msgstr ""
 
 #: templates/db_translations/core_country.html:205
-#: templates/site/dashboard.html:145 wannamigrate/site/views.py:942
-#: wannamigrate/site/views.py:1043 wannamigrate/site/views.py:1087
+#: templates/site/dashboard.html:145 wannamigrate/site/views.py:929
+#: wannamigrate/site/views.py:1083 wannamigrate/site/views.py:1127
 msgid "Canada"
 msgstr "Canadá"
 
@@ -2559,11 +2559,11 @@ msgstr "FINALIZAR"
 msgid "Live Abroad. Change your life."
 msgstr "More em um novo país. Mude de vida."
 
-#: templates/site/home.html:68 templates/site/home_older_browsers.html:66
+#: templates/site/home.html:72 templates/site/home_older_browsers.html:70
 msgid "Log In"
 msgstr "Entrar"
 
-#: templates/site/home.html:76 templates/site/home_older_browsers.html:74
+#: templates/site/home.html:80 templates/site/home_older_browsers.html:78
 msgid ""
 "Live in a <span class=\"bold\">new country.</span> <span class=\"bold"
 "\">Change</span> your life."
@@ -2571,7 +2571,7 @@ msgstr ""
 "More em um <span class=\"bold\">novo país.</span> <span class=\"bold\">Mude</"
 "span> de vida."
 
-#: templates/site/home.html:79 templates/site/home_older_browsers.html:77
+#: templates/site/home.html:83 templates/site/home_older_browsers.html:81
 msgid ""
 "Choose a <span class=\"bold\">country</span>, obtain the <span class=\"bold"
 "\">visa</span> and <span class=\"bold\">move!</span>"
@@ -2579,25 +2579,25 @@ msgstr ""
 "Decida o <span class=\"bold\">país</span>, consiga o <span class=\"bold"
 "\">visto</span> e <span class=\"bold\">mude!</span>"
 
-#: templates/site/home.html:81 templates/site/home.html.py:144
-#: templates/site/home.html:208 templates/site/home.html.py:218
-#: templates/site/home_older_browsers.html:79
-#: templates/site/home_older_browsers.html:98
-#: templates/site/home_older_browsers.html:184
-#: templates/site/home_older_browsers.html:203
+#: templates/site/home.html:85 templates/site/home.html.py:148
+#: templates/site/home.html:212 templates/site/home.html.py:222
+#: templates/site/home_older_browsers.html:83
+#: templates/site/home_older_browsers.html:102
+#: templates/site/home_older_browsers.html:188
+#: templates/site/home_older_browsers.html:207
 msgid "Start now."
 msgstr "Comece já."
 
-#: templates/site/home.html:81 templates/site/home.html.py:144
-#: templates/site/home.html:208 templates/site/home.html.py:218
-#: templates/site/home_older_browsers.html:79
-#: templates/site/home_older_browsers.html:98
-#: templates/site/home_older_browsers.html:184
-#: templates/site/home_older_browsers.html:203
+#: templates/site/home.html:85 templates/site/home.html.py:148
+#: templates/site/home.html:212 templates/site/home.html.py:222
+#: templates/site/home_older_browsers.html:83
+#: templates/site/home_older_browsers.html:102
+#: templates/site/home_older_browsers.html:188
+#: templates/site/home_older_browsers.html:207
 msgid "It's Free!"
 msgstr "É Gratuito!"
 
-#: templates/site/home.html:92 templates/site/home_older_browsers.html:88
+#: templates/site/home.html:96 templates/site/home_older_browsers.html:92
 msgid ""
 "If you could <span class=\"white bold\">live anywhere,</span> where would "
 "you go<span class=\"white\">?</span>"
@@ -2605,7 +2605,7 @@ msgstr ""
 "Se você pudesse <span class=\"white bold\">morar em qualquer lugar,</span> "
 "para onde iria<span class=\"white\">?</span>"
 
-#: templates/site/home.html:109 templates/site/home_older_browsers.html:161
+#: templates/site/home.html:113 templates/site/home_older_browsers.html:165
 msgid ""
 "<span class=\"bold\">Wanna Migrate</span> is doing a superb job by assisting "
 "people to discover a new country to live and get the visa. I love it!"
@@ -2614,15 +2614,15 @@ msgstr ""
 "possibilidades que eu tinha e a conseguir meu tão sonhado visto permanente "
 "da Austrália. "
 
-#: templates/site/home.html:114
+#: templates/site/home.html:118
 msgid "Creative Director in Australia"
 msgstr "Web Designer na Austrália"
 
-#: templates/site/home.html:121 templates/site/home_older_browsers.html:193
+#: templates/site/home.html:125 templates/site/home_older_browsers.html:197
 msgid "The <span class=\"bold\">easiest way</span> to immigrate."
 msgstr "A maneira <span class=\"bold\">mais fácil</span> de imigrar."
 
-#: templates/site/home.html:138 templates/site/home_older_browsers.html:92
+#: templates/site/home.html:142 templates/site/home_older_browsers.html:96
 msgid ""
 "<span class=\"f20 teal bold\">Discover awesome countries</span> with open "
 "doors for new professionals."
@@ -2630,7 +2630,7 @@ msgstr ""
 "<span class=\"f20 teal bold\">Descubra países incríveis</span> com portas "
 "abertas para novos profissionais."
 
-#: templates/site/home.html:141 templates/site/home_older_browsers.html:95
+#: templates/site/home.html:145 templates/site/home_older_browsers.html:99
 msgid ""
 "Around <span class=\"f20 teal bold\">500,000 people</span> obtain a visa to "
 "live in <span class=\"teal bold\">Australia</span> and <span class=\"teal "
@@ -2640,7 +2640,7 @@ msgstr ""
 "para viver na <span class=\"teal bold\">Austrália</span> e <span class="
 "\"teal bold\">Canadá</span> anualmente."
 
-#: templates/site/home.html:149 templates/site/home_older_browsers.html:107
+#: templates/site/home.html:153 templates/site/home_older_browsers.html:111
 msgid ""
 "A <span class=\"bold\">free tool</span> to manage your whole immigration "
 "process"
@@ -2648,7 +2648,7 @@ msgstr ""
 "Uma <span class=\"bold\">ferramenta gratuita</span> para gerenciar seu "
 "processo de imigração"
 
-#: templates/site/home.html:155 templates/site/home_older_browsers.html:113
+#: templates/site/home.html:159 templates/site/home_older_browsers.html:117
 msgid ""
 "Find out which countries need professionals <span class=\"bold\">like you</"
 "span>"
@@ -2656,28 +2656,28 @@ msgstr ""
 "Descubra quais países precisam de profissionais <span class=\"bold\">como "
 "você</span>"
 
-#: templates/site/home.html:164 templates/site/home_older_browsers.html:122
+#: templates/site/home.html:168 templates/site/home_older_browsers.html:126
 msgid "Get help with your <span class=\"bold yellow\">visa application</span>"
 msgstr ""
 "Receba ajuda com sua <span class=\"bold yellow\">aplicação ao visto</span>"
 
-#: templates/site/home.html:171 templates/site/home_older_browsers.html:129
+#: templates/site/home.html:175 templates/site/home_older_browsers.html:133
 msgid "Review your <span class=\"bold\">language skills</span>"
 msgstr ""
 "Reveja suas <span class=\"bold\">habilidades na língua estrangeira</span>"
 
-#: templates/site/home.html:180 templates/site/home_older_browsers.html:138
+#: templates/site/home.html:184 templates/site/home_older_browsers.html:142
 msgid ""
 "Get exposed to international <span class=\"bold yellow\">employers</span>"
 msgstr ""
 "Tenha contato com <span class=\"bold yellow\">empregadores internacionais</"
 "span>"
 
-#: templates/site/home.html:187 templates/site/home_older_browsers.html:145
+#: templates/site/home.html:191 templates/site/home_older_browsers.html:149
 msgid "Learn <span class=\"bold\">shortcuts</span> to obtain the visa"
 msgstr "Aprenda <span class=\"bold\">atalhos</span> para conseguir o visto"
 
-#: templates/site/home.html:200 templates/site/home_older_browsers.html:175
+#: templates/site/home.html:204 templates/site/home_older_browsers.html:179
 msgid ""
 "I lived in 5 different countries and believe that everyone should have the "
 "chance to improve their lives in a new country, if they want."
@@ -2685,15 +2685,15 @@ msgstr ""
 "Morei em 5 países diferentes e acredito que todos deveriam ter a chance de "
 "melhorar suas vidas em um novo país, caso desejem."
 
-#: templates/site/home.html:205 templates/site/home_older_browsers.html:180
+#: templates/site/home.html:209 templates/site/home_older_browsers.html:184
 msgid "CEO at Wanna Migrate"
 msgstr "CEO - Wanna Migrate"
 
-#: templates/site/home.html:213 templates/site/home_older_browsers.html:198
+#: templates/site/home.html:217 templates/site/home_older_browsers.html:202
 msgid "What are you waiting for?"
 msgstr "O que você está esperando?"
 
-#: templates/site/home.html:216 templates/site/home_older_browsers.html:201
+#: templates/site/home.html:220 templates/site/home_older_browsers.html:205
 msgid ""
 "Get <span class=\"bold\">free access</span> to our platform and <span class="
 "\"bold\">achieve your dreams</span> in a new country."
@@ -2701,11 +2701,11 @@ msgstr ""
 "<span class=\"bold\">Acesse gratuitamente</span> nossa plataforma e <span "
 "class=\"bold\">realize seus sonhos</span> em um novo país."
 
-#: templates/site/home.html:233 templates/site/home_older_browsers.html:226
+#: templates/site/home.html:237 templates/site/home_older_browsers.html:230
 msgid "Incubators / Supporters:"
 msgstr "Apoiadores do Projeto:"
 
-#: templates/site/home_older_browsers.html:166
+#: templates/site/home_older_browsers.html:170
 msgid "Web Designer in Australia"
 msgstr "Web Designer na Austrália"
 
@@ -2926,7 +2926,7 @@ msgstr "Formulário de Contato"
 
 #: templates/site/reset_password.html:34
 msgid "You have successfully updated your password."
-msgstr "Você atualizaou sua senha com sucesso"
+msgstr "Você atualizou sua senha com sucesso"
 
 #: templates/site/reset_password.html:38
 msgid "Click Here to go back and login again"
@@ -2942,23 +2942,25 @@ msgstr "pts"
 msgid "of"
 msgstr "de"
 
-#: templates/site/situation.html:86
+#: templates/site/situation.html:87
 msgid "You have enough points"
 msgstr "Você tem pontos suficientes"
 
-#: templates/site/situation.html:89 templates/site/situation.html.py:106
+#: templates/site/situation.html:90 templates/site/situation.html.py:108
 msgid "HINTS"
 msgstr "DICAS"
 
-#: templates/site/situation.html:92
+#: templates/site/situation.html:93
 msgid "<strong>Congratulations!</strong> You have enough points to get a visa."
-msgstr "<strong>Parabéns!</strong> Você tem pontos suficientes para conseguir o visto."
+msgstr ""
+"<strong>Parabéns!</strong> Você tem pontos suficientes para conseguir o "
+"visto."
 
-#: templates/site/situation.html:96
+#: templates/site/situation.html:97
 msgid "to see all steps for your visa application."
 msgstr "para ver todos passos para sua aplicação ao visto."
 
-#: templates/site/situation.html:103
+#: templates/site/situation.html:105
 msgid "You still don’t have enough points"
 msgstr "Pontos insuficientes"
 
@@ -3789,15 +3791,15 @@ msgstr "A senha antiga não está correta."
 msgid "The new password and confirmation does not match."
 msgstr "A nova senha e sua confirmação não conferem."
 
-#: wannamigrate/site/views.py:116 wannamigrate/site/views.py:119
+#: wannamigrate/site/views.py:103 wannamigrate/site/views.py:106
 msgid "Invalid Login. Please try again."
 msgstr "Login Inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:176
+#: wannamigrate/site/views.py:163
 msgid "There was an error while creating your user account."
 msgstr "Houve um erro ao criar sua conta."
 
-#: wannamigrate/site/views.py:186
+#: wannamigrate/site/views.py:173
 msgid ""
 "Invalid Information!<br />Make sure all fields are filled in and email and "
 "confirmation match."
@@ -3805,18 +3807,113 @@ msgstr ""
 "Dados incorretos!<br />Confirme que todos os campos estão preenchidos e "
 "email e confirmação conferem."
 
-#: wannamigrate/site/views.py:221
+#: wannamigrate/site/views.py:208
 msgid "No user found with this e-mail address."
 msgstr "Nenhum usuário com este email."
 
-#: wannamigrate/site/views.py:224
+#: wannamigrate/site/views.py:211
 msgid "Invalid e-mail address."
 msgstr "Endereço de email inválido."
 
-#: wannamigrate/site/views.py:372 wannamigrate/site/views.py:407
+#: wannamigrate/site/views.py:359 wannamigrate/site/views.py:394
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:847
+#: wannamigrate/site/views.py:834
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
+
+#: wannamigrate/site/views.py:1007
+msgid ""
+"You can get 5 extra points if you can get recognized as a translator for "
+"your native language.  You will have to do a test with <a href='www.naati."
+"com.au/' target='blank'>NAATI</a>"
+msgstr "Você pode receber 5 pontos extras se conseguir ser reconhecido como um tradutor na "
+"sua língua nativa. Você terá que fazer uma prova na <a href='www.naati."
+"com.au/' target='blank'>NAATI</a>"
+
+#: wannamigrate/site/views.py:1010
+msgid ""
+"If you can get a job offer from an Australia Employer (<a href='http://www."
+"seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
+"sponsor your visa.  It will be quicker and cheaper."
+msgstr ""
+"Se você receber uma proposta de trabalho de uma empresa da Austrália (<a href='http://www."
+"seek.com.au' target='blank'>Procure Emprego Aqui</a>), você deverá solicitar que seu empregador "
+"faça a requisição do seu visto patrocinado.  Será mais rápido e barato."
+
+#: wannamigrate/site/views.py:1013
+msgid ""
+"You can get 5 extra points if you have a partner/espouse (stable union) and "
+"he/she is under 50 years old and in the same occupation as you."
+msgstr ""
+"Você pode receber 5 pontos extras se tiver um parceiro/esposa (união estável) e "
+"ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
+
+#: wannamigrate/site/views.py:1016
+msgid ""
+"If you are willing to live in a regional part of Australia in the beginning, "
+"it's easier to get the visa (more details soon)."
+msgstr ""
+"Se você tiver disponibilidade de viver em uma parte interiorana da Austrália no começo, "
+"será mais fácil conseguir o visto (mais detalhes em breve)."
+
+#: wannamigrate/site/views.py:1019 wannamigrate/site/views.py:1036
+#: wannamigrate/site/views.py:1050
+msgid ""
+"If you have money/assets that you will take with you, you can apply for an "
+"investment visa."
+msgstr ""
+"Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar para um "
+"visto de investidor."
+
+#: wannamigrate/site/views.py:1024
+msgid ""
+"You can get 5 extra points if your partner/spouse (stable union) has a basic "
+"level of english or french."
+msgstr ""
+"Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) tenha "
+"um nível básico de inglês ou francês."
+
+#: wannamigrate/site/views.py:1027
+msgid ""
+"You can get 5 extra points if you or your partner/espouse (stable union) "
+"complete any studies or have a past job in Canada."
+msgstr ""
+"Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) "
+"tenha estudado ou trabalho no Canadá."
+
+#: wannamigrate/site/views.py:1030
+msgid "You can get 5 extra points if you have a close family member in Canada."
+msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
+
+#: wannamigrate/site/views.py:1033
+msgid ""
+"You can get 15 extra points if you can get a job offer from an Canada "
+"Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
+"a>)."
+msgstr ""
+"Você pode receber 15 pontos extras caso consiga uma proposta de trabalho de uma empresa "
+"do Canadá. (<a href='http://www.jobbank.gc.ca/' target='blank'>Procure por Emprego Aqui</"
+"a>)."
+
+#: wannamigrate/site/views.py:1041
+msgid ""
+"You can get 10 extra points if you have a close family member in New-Zealand."
+msgstr "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
+
+#: wannamigrate/site/views.py:1044
+msgid ""
+"You can get 20 extra points if you have a partner/espouse with a skilled "
+"occupation or job offer."
+msgstr ""
+"Você pode receber 20 pontos extras se seu parceiro/esposa (união estável) tiver uma profissão"
+"qualificada ou uma proposta de trabalho."
+
+#: wannamigrate/site/views.py:1047
+msgid ""
+"You can get up to 30 extra points if you have worked (or job offer) on a "
+"regional part of New Zealand."
+msgstr ""
+"Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de emprego) "
+"em uma parte interiorana da Nova Zelândia."
