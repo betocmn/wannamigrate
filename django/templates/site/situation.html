@@ -111,7 +111,7 @@
 
                         {% for hint in hints %}
                             <div class="hintq">!</div>
-                            <div class="hintp">{{ hint }}</div>
+                            <div class="hintp">{{ hint|safe }}</div>
                             <div class="clear" style="height:20px;"> </div>
                         {% endfor %}
 

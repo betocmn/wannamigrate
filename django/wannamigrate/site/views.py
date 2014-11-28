@@ -1003,11 +1003,29 @@ def situation( request, country_name ):
 
         if country_name == 'australia':
 
+            # Australia community language
+            template_data['hints'].append( "You can get 5 extra points if you can get recognized as a translator for your native language.  You will have to do a test with <a href='www.naati.com.au/' target='blank'>NAATI</a>" )
+
             # work offer
             template_data['hints'].append( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." )
 
             # skilled partner
             template_data['hints'].append( "You can get 5 extra points if you have a partner/espouse (stable union) and he/she is under 50 years old and in the same occupation as you." )
+
+            # Investments
+            template_data['hints'].append( "If you have money/assets that you will take with you, you can apply for an investment visa." )
+
+            # Regional Australia
+            template_data['hints'].append( "If you are willing to live in a regional part of Australia in the beginning, it's easier to get the visa (more details soon)." )
+
+        elif country_name == 'canada':
+
+            # Australia community language
+            template_data['hints'].append( "You can get 5 extra points if you can get recognized as a translator for your native language.  You will have to do a test with <a href='www.naati.com.au/' target='blank'>NAATI</a>" )
+
+            # work offer
+            template_data['hints'].append( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." )
+
 
     # Print Template
     return render( request, 'site/situation.html', template_data )

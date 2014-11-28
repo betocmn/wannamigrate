@@ -455,7 +455,7 @@ class UserWorkForm( BaseModelForm ):
         if self._raw_value( 'occupation_category' ) is not None:
             self.fields['occupation_category'].initial = self._raw_value( 'occupation_category' )
             self.fields['occupation'].queryset = Occupation.objects.filter( occupation_category = self._raw_value( 'occupation_category' ) )
-        elif self.instance and self.instance.occupation.occupation_category_id:
+        elif self.instance and self.instance.occupation and self.instance.occupation.occupation_category_id:
             self.fields['occupation_category'].initial = self.instance.occupation.occupation_category_id
             self.fields['occupation'].queryset = Occupation.objects.filter( occupation_category_id = self.instance.occupation.occupation_category_id )
 
