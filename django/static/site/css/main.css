@@ -200,7 +200,8 @@ body { width: 100%; height: 100%; overflow: hidden; font-family: "open_sans_regu
 /** Page 3 elements */
 .testimonial-container { position: absolute; top:25%; width: 100%; height: 40%; }
 .testimonial { float: left; position: relative; width: 65%; height: 100%; }
-.testimonial-image { float: left; position: relative; width: 35%; height: 100%; background: url(../img/testimonial_image.png) no-repeat right center; background-size: 54%; }
+.testimonial-image-1 { float: left; position: relative; width: 35%; height: 100%; background: url(../img/testimonial_image_1.png) no-repeat right center; background-size: 54%; }
+.testimonial-image-2 { float: left; position: relative; width: 35%; height: 100%; background: url(../img/testimonial_image_2.png) no-repeat right center; background-size: 54%; }
 .testimonial-text { width: 60%; text-align: justify; margin-top: 20%; padding-left: 8%; }
 .testimonial-separator { margin: 2% 0 2% 8%; width: 40%; height: 1px; background-color: #bd90df; }
 .testimonial-user{ margin: 0; padding: 0 0 0 8%; }
@@ -307,6 +308,9 @@ a.switcher { text-decoration: none; display: block; width: 100%; text-align: cen
     #r1ul > li:last-child { margin-top: 15%; }
     #backers-container { margin-top: 2%; }
 
+}
+
+
 
 /** 1366 - 1440 */
 @media screen and (min-width: 1366px) and (max-width: 1920px){
@@ -319,6 +323,3 @@ a.switcher { text-decoration: none; display: block; width: 100%; text-align: cen
     #backers-container { margin-top: 2%; }
 
 }
-
-
-

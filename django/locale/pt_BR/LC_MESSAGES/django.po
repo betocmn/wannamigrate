@@ -2315,7 +2315,7 @@ msgstr ""
 #: templates/emails/reset_password.html:9
 #: templates/site/reset_password.html:29
 msgid "Reset Password"
-msgstr ""
+msgstr "Recuperar Senha"
 
 #: templates/emails/reset_password.html:15 templates/emails/welcome.html:14
 msgid "Hello,"
@@ -2359,7 +2359,7 @@ msgid ""
 "is in BETA version and we are working around the<br />clock to have a full "
 "software solution to help future immigrants."
 msgstr ""
-"está na versão BETA e estamos trabalhando duro para ter <br />uma solução completa "
+"está na versão BETA e estamos trabalhando duro para ter <br /> uma solução completa "
 "para ajudar futuros imigrantes."
 
 #: templates/site/contact.html:62
