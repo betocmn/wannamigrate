@@ -513,8 +513,7 @@ body{
 	font-weight: 600;
 }
 .textUnderLeft{
-	width: 45px;
-	float: left;
+	display: inline;
 	font-size: 38px;
 	font-weight: 700;
 	color: #845996;
@@ -522,8 +521,7 @@ body{
 	top: -10px;
 }
 .textUnderRight{
-	width: 110px;
-	float: left;
+	display: inline-block;
 }
 .textUnderRight p:nth-child(1){
 	font-size: 16px;
