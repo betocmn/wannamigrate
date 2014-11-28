@@ -246,8 +246,8 @@ class UserLanguageForm( BaseModelForm ):
     Form for USER LANGUAGE data
     """
 
-    partner_english_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her ENGLISH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_ENGLISH ), empty_label = _( 'Select Level' ) )
-    partner_french_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her FRENCH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_FRENCH ), empty_label = _( 'Select Level' ) )
+    partner_english_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her ENGLISH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_ENGLISH ), empty_label = _( 'Select Level' ) )
+    partner_french_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her FRENCH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_FRENCH ), empty_label = _( 'Select Level' ) )
 
     class Meta:
         model = UserLanguage
@@ -369,7 +369,7 @@ class UserEducationForm( BaseModelForm ):
     Form for USER EDUCATION data
     """
 
-    partner_education_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner, what is his/her highest Degree" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE ), empty_label = _( 'Select Degree' ) )
+    partner_education_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her highest Degree" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE ), empty_label = _( 'Select Degree' ) )
 
     class Meta:
         model = UserEducation

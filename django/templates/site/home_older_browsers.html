@@ -9,11 +9,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
         <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
-        <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+        <meta name="Title" content="Wanna Migrate - {% trans "Live Abroad. Change your life." %}">
         <meta name="Robots" content="all">
         <meta name="og:image" content="http://wannamigrate.com{% static "site/img/logo_social.png" %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+        <title>Wanna Migrate - {% trans "Live Abroad. Change your life." %}</title>
         <link rel="shortcut icon" href="{% static "favicon.ico" %}">
         
         <link rel="stylesheet" type="text/css" href="{% static "site/css/font-awesome.min.css"%}">
@@ -63,7 +63,7 @@
     <body>
         <div id="menu" class="gui">
             <div id="menu-logo"></div>
-            <a href="javascript:doLogin(true);" id="login-button" class="bt bt-purple bold white 15pt">Entrar</a>
+            <a href="javascript:doLogin(true);" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
             {% include 'site/dropdowns/home_language_selector.html' %}
         </div>
 
@@ -71,13 +71,12 @@
         <div id="page1">
             <div id="page1-content" class="fg">
                 <div id="page1-title" class="f84 light white">
-                    More em um <span class="bold">novo país.</span>
-                    <span class="bold">Mude</span> de vida.
+                    {% trans 'Live in a <span class="bold">new country.</span> <span class="bold">Change</span> your life.' %}
                 </div>
                 <div id="page1-subtitle" class="f22 light white">
-                    Da <span class="bold">aplicação do visto</span> à hora da <span class="bold">mudança.</span>
+                    {% trans 'Discover an <span class="bold">awesome country</span> and get help to <span class="bold">move.</span>' %}
                 </div>
-                <a id="p1-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">Comece agora.</span> É grátis!</a>
+                <a id="p1-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
                 <a href="#page2" class="bt-more" class="gui"></a>
             </div>
         </div>
@@ -86,17 +85,17 @@
         <!-- Page 2 -->
         <div id="page2">
             <div id="l1h" class="f30 light almost-black ">
-                Se você pudesse <span class="white bold">morar em qualquer lugar,</span> para onde iria<span class="white">?</span>
+                {% trans 'If you could <span class="white bold">live anywhere,</span> where would you go<span class="white">?</span>' %}
             </div>
             <ul id="r1ul" class="light dark-grey f18">
                 <li>
-                    <span class="f20 teal bold">Descubra países incríveis</span> que estão de portas abertas a novos profissionais.
+                    {% trans '<span class="f20 teal bold">Discover awesome countries</span> with open doors for new professionals.' %}
                 </li>
                 <li>
-                    Mais de <span class="f20 teal bold">500,000 pessoas</span> obtem um visto para morar na <span class="teal bold">Austrália</span> e no <span class="teal bold">Canadá.</span>
+                    {% trans 'Around <span class="f20 teal bold">500,000 people</span> obtain a visa to live in <span class="teal bold">Australia</span> and <span class="teal bold">Canada</span> every year.' %}
                 </li>
             </ul>
-            <a id="r1-signup" href="javascript:doSignup(true);" class="bt bt-blue f20"><span class="bold">Comece agora.</span> É grátis!</a>
+            <a id="r1-signup" href="javascript:doSignup(true);" class="bt bt-blue f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
             <a href="#page3" class="bt-more page1" class="gui"></a>
         </div>
 
@@ -105,13 +104,13 @@
         <div id="page3">
             <div class="feature-container">
                 <div class="feature full light purple f22">
-                    Uma <span class="bold">ferramenta gratuita</span> para gerenciar seu processo de imigração.
+                    {% trans 'A <span class="bold">free tool</span> to manage your whole immigration process.' %}
                 </div>
             </div>
             <div class="feature-container bg-soft-purple">
                 <div class="feature left bg-yellow dark-purple f20">
                     <span class="feature-text">
-                        Descubra quais países precisam do <span class="bold">seu perfil</span>
+                        {% trans 'Find out which countries need professionals <span class="bold">like you!</span>' %}
                     </span>
                     <span id="feature0-icon" class="feature-icon"></span>
                 </div>
@@ -120,14 +119,14 @@
                 <div class="feature right bg-purple white f20">
                     <span id="feature1-icon" class="feature-icon"></span>
                     <span class="feature-text">
-                        <span class="bold yellow">Construa</span> sua aplicação online
+                        {% trans 'Get help with your <span class="bold yellow">visa application</span>' %}
                     </span>
                 </div>
             </div>
             <div class="feature-container bg-soft-purple">
                 <div class="feature left bg-yellow dark-purple f20">
                     <span class="feature-text">
-                        Reveja suas habilidades de <span class="bold">linguagem</span></span>
+                        {% trans 'Review your <span class="bold">language skills</span>' %}
                     </span>
                     <span id="feature2-icon" class="feature-icon"></span>
                 </div>
@@ -136,14 +135,14 @@
                 <div class="feature right bg-purple white f20">
                     <span id="feature3-icon" class="feature-icon"></span>
                     <span class="feature-text">
-                        Receba alertas de <span class="bold yellow">emprego</span> de todo o mundo
+                        {% trans 'Get exposed to international <span class="bold yellow">employers.</span>' %}
                     </span>
                 </div>
             </div>
             <div class="feature-container bg-soft-purple">
                 <div class="feature left bg-yellow dark-purple f20">
                     <span class="feature-text">
-                       Aprenda <span class="bold">atalhos</span> para conseguir seu visto mais rápido.</span>
+                       {% trans 'Learn <span class="bold">shortcuts</span> to obtain the visa.' %}
                     </span>
                     <span id="feature4-icon" class="feature-icon"></span>
                 </div>
@@ -159,11 +158,12 @@
                 <div class="testimonial deep-purple">
                     <p class="testimonial-text f16 light-italic">
                         <span id="open-quote" class="quote"></span>
-                        Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                        &nbsp;{% trans '<span class="bold">Wanna Migrate</span> is doing a superb job by assisting people to discover a new country to live and get the visa. I love it!' %}&nbsp;
+                        <span id="close-quote" class="quote"></span>
                     </p>
                     <p class="testimonial-separator"></p>
-                    <p class="testimonial-user f14 bold">Humberto Moreira</p>
-                    <p class="testimonial-user-job f12 light">Diretor de arte na Nova Zelandia</p>
+                    <p class="testimonial-user f14 bold">Gui Oliveira</p>
+                    <p class="testimonial-user-job f12 light">{% trans 'Creative Director in Australia' %}</p>
                 </div>
             </div>
             <div class="testimonial-container">
@@ -172,15 +172,16 @@
                 <div class="testimonial deep-purple">
                     <p class="testimonial-text f16 light-italic">
                         <span id="open-quote" class="quote"></span>
-                        Sempre achei que o processo de imigração era difícil, mas com o <span class="bold">Wanna Migrate</span> em menos de dois anos estava na Nova Zelândia.<span id="close-quote" class="quote"></span>
+                        &nbsp;{% trans 'I lived in 5 different countries and believe that everyone should have the chance to improve their lives in a new country, if they want.' %}&nbsp;
+                        <span id="close-quote" class="quote"></span>
                     </p>
                     <p class="testimonial-separator"></p>
                     <p class="testimonial-user f14 bold">Humberto Moreira</p>
-                    <p class="testimonial-user-job f12 light">Diretor de arte na Nova Zelandia</p>
+                    <p class="testimonial-user-job f12 light">{% trans 'CEO at Wanna Migrate' %}</p>
                 </div>
             </div>
             <div class="clear"></div>
-            <a id="r3-signup" href="javascript:doSignup(true);" class="bt bt-purple f20"><span class="bold">Comece agora.</span> É grátis!</a>
+            <a id="r3-signup" href="javascript:doSignup(true);" class="bt bt-purple f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
             <a href="#page5" class="bt-more page3" class="gui"></a>
         </div>
 
@@ -188,16 +189,18 @@
         <!-- Page 5 -->
         <div id="page5">
             <div class="half-width">
-                <span id="l4-msg" class="p4-wrapper white f40 light">A maneira <span class="bold">mais fácil</span> de imigrar</span>
+                <span id="l4-msg" class="p4-wrapper white f40 light">
+                    {% trans 'The <span class="bold">easiest way</span> to immigrate.' %}
+                </span>
             </div>
             <div class="half-width">
                 <p id="r4-title" class="white f38 bold p4-wrapper">
-                    O que você está esperando?
+                    {% trans 'What are you waiting for?' %}
                 </p>
                 <p id="r4-subtitle" class="p4-wrapper white f18 light">
-                    <span class="bold">Acesse gratuitamente</span> nossa plataforma e <span class="bold">realize seus sonhos</span> em um novo país.
+                    {% trans 'Get <span class="bold">free access</span> to our platform and <span class="bold">achieve your dreams</span> in a new country.' %}
                 </p>
-                <a id="r4-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">Comece agora.</span> É grátis!</a>
+                <a id="r4-signup" href="javascript:doSignup(true);" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
             </div>
         </div>
         
@@ -209,23 +212,23 @@
             </div>
             <div class="half-width">
                 <div id="social">
-                    <a class="social-button f16" href="#">
+                    <a class="social-button f16" href="http://www.facebook.com/wannamigrate" target="_blank">
                         <i class="fa fa-facebook"></i>
                     </a>
-                    <a class="social-button f16" href="#">
+                    <a class="social-button f16" href="http://www.twitter.com/wannamigrate" target="_blank">
                         <i class="fa fa-twitter"></i>
                     </a>
-                    <a class="social-button f16" href="#">
+                    <a class="social-button f16" href="http://www.instagram.com/wannamigrate" target="_blank">
                         <i class="fa fa-instagram"></i>
                     </a>
                 </div>
                 <div id="backers-separator" class="f9 light grey">
-                    Apoiadores do projeto
+                    {% trans "Incubators / Supporters:" %}
                 </div>
                 <div id="backers-container">
-                    <a id="fapema" class="backer" href="#"></a>
-                    <a id="startupchile" class="backer" href="#"></a>
-                    <a id="finep" class="backer" href="#"></a>
+                    <a id="fapema" class="backer" href="http://www.fapema.br/" target="_blank"></a>
+                    <a id="startupchile" class="backer" href="http://www.startupchile.org/" target="_blank"></a>
+                    <a id="finep" class="backer" href="http://www.finep.gov.br/" target="_blank"></a>
                 </div>
             </div>
         </div>

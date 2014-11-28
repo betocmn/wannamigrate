@@ -175,7 +175,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_education_form.partner_education_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.partner_education_level_answer.label }}:</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.partner_education_level_answer.label }}?</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_education_form.partner_education_level_answer }}
                 </div>
@@ -186,7 +186,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_education_form.regional_australia_study.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.regional_australia_study.label }}</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.regional_australia_study.label }}?</strong></span>
                 <div class="break10"></div>
                 &nbsp;&nbsp;&nbsp;
                 {% for radio in user_education_form.regional_australia_study %}

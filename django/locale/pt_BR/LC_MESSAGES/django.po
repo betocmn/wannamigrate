@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-12 19:18+0000\n"
+"POT-Creation-Date: 2014-11-28 04:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,211 +20,243 @@ msgstr ""
 
 #: templates/db_translations/core_answer.html:2
 #: templates/db_translations/core_answer.html:110
-#: templates/db_translations/core_answer.html:879
-#: templates/db_translations/core_answer.html:881
-#: templates/db_translations/core_answer.html:883
-#: templates/db_translations/core_answer.html:885
-#: templates/db_translations/core_answer.html:887
-#: templates/db_translations/core_answer.html:889
-#: templates/db_translations/core_answer.html:891
-#: templates/db_translations/core_answer.html:893
-#: templates/db_translations/core_answer.html:895
-#: wannamigrate/core/models.py:357
+#: templates/db_translations/core_answer.html:172
+#: templates/db_translations/core_answer.html:174
+#: templates/db_translations/core_answer.html:176
+#: templates/db_translations/core_answer.html:178
+#: templates/db_translations/core_answer.html:180
+#: templates/db_translations/core_answer.html:182
+#: templates/db_translations/core_answer.html:184
+#: templates/db_translations/core_answer.html:186
+#: templates/db_translations/core_answer.html:208
+#: wannamigrate/core/models.py:331 wannamigrate/core/models.py:470
+#: wannamigrate/core/models.py:565
 msgid "Yes"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:3
 #: templates/db_translations/core_answer.html:111
-#: templates/db_translations/core_answer.html:880
-#: templates/db_translations/core_answer.html:882
-#: templates/db_translations/core_answer.html:884
-#: templates/db_translations/core_answer.html:886
-#: templates/db_translations/core_answer.html:888
-#: templates/db_translations/core_answer.html:890
-#: templates/db_translations/core_answer.html:892
-#: templates/db_translations/core_answer.html:894
-#: templates/db_translations/core_answer.html:896
-#: wannamigrate/core/models.py:358
+#: templates/db_translations/core_answer.html:173
+#: templates/db_translations/core_answer.html:175
+#: templates/db_translations/core_answer.html:177
+#: templates/db_translations/core_answer.html:179
+#: templates/db_translations/core_answer.html:181
+#: templates/db_translations/core_answer.html:183
+#: templates/db_translations/core_answer.html:185
+#: templates/db_translations/core_answer.html:187
+#: templates/db_translations/core_answer.html:209
+#: wannamigrate/core/models.py:332 wannamigrate/core/models.py:471
+#: wannamigrate/core/models.py:566
 msgid "No"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:4
 #: templates/db_translations/core_answer.html:112
 #: templates/db_translations/core_answer.html:142
+#: templates/db_translations/core_answer.html:210
 msgid "1"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:5
 #: templates/db_translations/core_answer.html:113
 #: templates/db_translations/core_answer.html:143
+#: templates/db_translations/core_answer.html:211
 msgid "2"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:6
 #: templates/db_translations/core_answer.html:114
 #: templates/db_translations/core_answer.html:144
+#: templates/db_translations/core_answer.html:212
 msgid "3"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:7
 #: templates/db_translations/core_answer.html:115
 #: templates/db_translations/core_answer.html:145
+#: templates/db_translations/core_answer.html:213
 msgid "4"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:8
 #: templates/db_translations/core_answer.html:116
 #: templates/db_translations/core_answer.html:146
+#: templates/db_translations/core_answer.html:214
 msgid "5"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:9
 #: templates/db_translations/core_answer.html:117
 #: templates/db_translations/core_answer.html:147
+#: templates/db_translations/core_answer.html:215
 msgid "6"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:10
 #: templates/db_translations/core_answer.html:118
 #: templates/db_translations/core_answer.html:148
+#: templates/db_translations/core_answer.html:216
 msgid "7"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:11
 #: templates/db_translations/core_answer.html:119
 #: templates/db_translations/core_answer.html:149
+#: templates/db_translations/core_answer.html:217
 msgid "8"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:12
 #: templates/db_translations/core_answer.html:120
 #: templates/db_translations/core_answer.html:150
+#: templates/db_translations/core_answer.html:218
 msgid "9"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:13
 #: templates/db_translations/core_answer.html:121
 #: templates/db_translations/core_answer.html:151
+#: templates/db_translations/core_answer.html:219
 msgid "10"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:14
 #: templates/db_translations/core_answer.html:122
 #: templates/db_translations/core_answer.html:152
+#: templates/db_translations/core_answer.html:220
 msgid "11"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:15
 #: templates/db_translations/core_answer.html:123
 #: templates/db_translations/core_answer.html:153
+#: templates/db_translations/core_answer.html:221
 msgid "12"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:16
 #: templates/db_translations/core_answer.html:124
 #: templates/db_translations/core_answer.html:154
+#: templates/db_translations/core_answer.html:222
 msgid "13"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:17
 #: templates/db_translations/core_answer.html:125
 #: templates/db_translations/core_answer.html:155
+#: templates/db_translations/core_answer.html:223
 msgid "14"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:18
 #: templates/db_translations/core_answer.html:126
 #: templates/db_translations/core_answer.html:156
+#: templates/db_translations/core_answer.html:224
 msgid "15"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:19
 #: templates/db_translations/core_answer.html:127
 #: templates/db_translations/core_answer.html:157
+#: templates/db_translations/core_answer.html:225
 msgid "16"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:20
 #: templates/db_translations/core_answer.html:128
 #: templates/db_translations/core_answer.html:158
+#: templates/db_translations/core_answer.html:226
 msgid "17"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:21
 #: templates/db_translations/core_answer.html:129
 #: templates/db_translations/core_answer.html:159
+#: templates/db_translations/core_answer.html:227
 msgid "18"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:22
 #: templates/db_translations/core_answer.html:130
 #: templates/db_translations/core_answer.html:160
+#: templates/db_translations/core_answer.html:228
 msgid "19"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:23
 #: templates/db_translations/core_answer.html:131
 #: templates/db_translations/core_answer.html:161
+#: templates/db_translations/core_answer.html:229
 msgid "20"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:24
 #: templates/db_translations/core_answer.html:132
 #: templates/db_translations/core_answer.html:162
+#: templates/db_translations/core_answer.html:230
 msgid "21"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:25
 #: templates/db_translations/core_answer.html:133
 #: templates/db_translations/core_answer.html:163
+#: templates/db_translations/core_answer.html:231
 msgid "22"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:26
 #: templates/db_translations/core_answer.html:134
 #: templates/db_translations/core_answer.html:164
+#: templates/db_translations/core_answer.html:232
 msgid "23"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:27
 #: templates/db_translations/core_answer.html:135
 #: templates/db_translations/core_answer.html:165
+#: templates/db_translations/core_answer.html:233
 msgid "24"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:28
 #: templates/db_translations/core_answer.html:136
 #: templates/db_translations/core_answer.html:166
+#: templates/db_translations/core_answer.html:234
 msgid "25"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:29
 #: templates/db_translations/core_answer.html:137
 #: templates/db_translations/core_answer.html:167
+#: templates/db_translations/core_answer.html:235
 msgid "26"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:30
 #: templates/db_translations/core_answer.html:138
 #: templates/db_translations/core_answer.html:168
+#: templates/db_translations/core_answer.html:236
 msgid "27"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:31
 #: templates/db_translations/core_answer.html:139
 #: templates/db_translations/core_answer.html:169
+#: templates/db_translations/core_answer.html:237
 msgid "28"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:32
 #: templates/db_translations/core_answer.html:140
 #: templates/db_translations/core_answer.html:170
+#: templates/db_translations/core_answer.html:238
 msgid "29"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:33
 #: templates/db_translations/core_answer.html:141
 #: templates/db_translations/core_answer.html:171
+#: templates/db_translations/core_answer.html:239
 msgid "30"
 msgstr ""
 
@@ -471,2883 +503,74 @@ msgstr ""
 #: templates/db_translations/core_answer.html:94
 #: templates/db_translations/core_answer.html:98
 #: templates/db_translations/core_answer.html:102
-#: templates/db_translations/core_answer.html:897
-#: templates/db_translations/core_answer.html:901
-#: templates/db_translations/core_answer.html:905
+#: templates/db_translations/core_answer.html:188
+#: templates/db_translations/core_answer.html:192
+#: templates/db_translations/core_answer.html:196
+#: templates/db_translations/core_answer.html:204
 msgid "None"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:95
 #: templates/db_translations/core_answer.html:99
-#: templates/db_translations/core_answer.html:898
-#: templates/db_translations/core_answer.html:902
+#: templates/db_translations/core_answer.html:189
+#: templates/db_translations/core_answer.html:193
+#: templates/db_translations/core_answer.html:205
 msgid "Basic Proficiency"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:96
 #: templates/db_translations/core_answer.html:100
-#: templates/db_translations/core_answer.html:899
-#: templates/db_translations/core_answer.html:903
+#: templates/db_translations/core_answer.html:190
+#: templates/db_translations/core_answer.html:194
+#: templates/db_translations/core_answer.html:206
 msgid "Moderate Proficiency"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:97
 #: templates/db_translations/core_answer.html:101
-#: templates/db_translations/core_answer.html:900
-#: templates/db_translations/core_answer.html:904
+#: templates/db_translations/core_answer.html:191
+#: templates/db_translations/core_answer.html:195
+#: templates/db_translations/core_answer.html:207
 msgid "High Proficiency"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:103
-#: templates/db_translations/core_answer.html:906
+#: templates/db_translations/core_answer.html:197
 msgid "Primary Education"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:104
-#: templates/db_translations/core_answer.html:907
+#: templates/db_translations/core_answer.html:198
 msgid "Secondary Education - Lower"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:105
-#: templates/db_translations/core_answer.html:908
+#: templates/db_translations/core_answer.html:199
 msgid "Secondary Education - Upper (High-School)"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:106
-#: templates/db_translations/core_answer.html:909
+#: templates/db_translations/core_answer.html:200
 msgid "Post Secondary Education (Trades, associate, technical)"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:107
-#: templates/db_translations/core_answer.html:910
-msgid "Bachelors Level"
+msgid "Recognised by the Assessing Authority"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:108
-#: templates/db_translations/core_answer.html:911
-msgid "Masters Level"
+#: templates/db_translations/core_answer.html:201
+msgid "Bachelors Level"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:109
-#: templates/db_translations/core_answer.html:912
-msgid "Doctoral Level"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:172
-msgid "Accountant (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:173
-msgid "Financial Auditor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:174
-msgid "Management Accountant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:175
-msgid "Taxation Accountant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:176
-msgid "External Auditor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:177
-msgid "Internal Auditor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:178
-msgid "Actuary"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:179
-msgid "Financial and investment analysts"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:180
-msgid "Financial Managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:181
-msgid "Insurance, real estate and financial brokerage managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:182
-msgid "Financial Market Dealer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:183
-msgid "Other Financial Officers/Dealers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:184
-msgid "Supervisors, finance and insurance office workers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:185
-msgid "Financial Investment Adviser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:186
-msgid "Financial Investment Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:187
-msgid "Securities agents, investment dealers and brokers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:188
-msgid "Financial Institution Branch Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:189
-msgid "Land Economist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:190
-msgid "Economist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:191
-msgid "Valuer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:192
-msgid "Stockbroking Dealer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:193
-msgid "Antique Dealer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:194
-msgid "Insurance Broker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:195
-msgid "Business Broker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:196
-msgid "Insurance Agent"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:197
-msgid "Insurance Investigator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:198
-msgid "Insurance Loss Adjuster"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:199
-msgid "Insurance Risk Surveyor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:200
-msgid "Property Administrators"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:201
-msgid "Contract Administrator"
-msgstr ""
-
 #: templates/db_translations/core_answer.html:202
-msgid "Program or Project Administrator"
+msgid "Masters Level"
 msgstr ""
 
 #: templates/db_translations/core_answer.html:203
-msgid "Actor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:204
-msgid "Dancers and Other Entertainers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:205
-msgid "Librarian"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:206
-msgid "Library Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:207
-msgid "Gallery or Museum Curator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:208
-msgid "Gallery or Museum Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:209
-msgid "Conservation Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:210
-msgid "Conservator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:211
-msgid "Archivist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:212
-msgid "Author"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:213
-msgid "Copywriter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:214
-msgid "Journalists and Other Writers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:215
-msgid "Technical Writer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:216
-msgid "Signwriter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:217
-msgid "Film and Video Editor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:218
-msgid "Newspaper or Periodical Editor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:219
-msgid "Book or Script Editor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:220
-msgid "Print Journalist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:221
-msgid "Radio Journalist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:222
-msgid "Television Journalist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:223
-msgid "Translators, terminologists and interpreters"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:224
-msgid "Video Producer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:225
-msgid "Media Producer (excluding Video)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:226
-msgid "Director (Film, Television, Radio or Stage)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:227
-msgid "Director of Photography"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:228
-msgid "Dancer or Choreographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:229
-msgid "Composer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:230
-msgid "Musician (Instrumental)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:231
-msgid "Musical Instrument Maker or Repairer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:232
-msgid "Music Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:233
-msgid "Music Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:234
-msgid "Music Teacher (Private Tuition)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:235
-msgid "Singer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:236
-msgid "Painter (Visual Arts)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:237
-msgid "Sculptor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:238
-msgid "Visual Arts and Crafts Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:239
-msgid "Art Director (Film, Television or Stage)"
-msgstr ""
-
 #: templates/db_translations/core_answer.html:240
-msgid "Art Teacher (Private Tuition)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:241
-msgid "Artistic Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:242
-msgid "Arts Administrator or Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:243
-msgid "Community Arts Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:244
-msgid "Entertainer or Variety Artist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:245
-msgid "Potter or Ceramic Artist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:246
-msgid "Performing Arts Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:247
-msgid "Make Up Artist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:248
-msgid "Dance Teacher (Private Tuition)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:249
-msgid "Drama Teacher (Private Tuition)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:250
-msgid "Recreation Coordinator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:251
-msgid "Photographers Assistant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:252
-msgid "Photographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:253
-msgid "Camera Operator (Film, Television or Video)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:254
-msgid "Graphic Pre-press Trades Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:255
-msgid "Broadcast Transmitter Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:256
-msgid "Records Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:257
-msgid "Radio Communications Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:258
-msgid "Program Director (Television or Radio)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:259
-msgid "Radio Presenter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:260
-msgid "Radiocommunications Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:261
-msgid "Graphic Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:262
-msgid "Fashion Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:263
-msgid "Interior Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:264
-msgid "Jewellery Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:265
-msgid "Marine Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:266
-msgid "Multimedia Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:267
-msgid "Web Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:268
-msgid "Industrial Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:269
-msgid "Illustrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:270
-msgid "Interior Decorator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:271
-msgid "Operating Theatre Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:272
-msgid "Cinema or Theatre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:273
-msgid "Clothing Patternmaker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:274
-msgid "Gymnastics Coach or Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:275
-msgid "Horse Riding Coach or Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:276
-msgid "Other Sports Coach or Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:277
-msgid "Swimming Coach or Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:278
-msgid "Tennis Coach"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:279
-msgid "Sports Administrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:280
-#: templates/db_translations/core_answer.html:281
-msgid "Sports Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:282
-msgid "Sports Development Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:283
-msgid "Other Sports Official"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:284
-msgid "Snowsport Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:285
-msgid "Sports Umpire"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:286
-msgid "Sportspersons (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:287
-msgid "Fitness Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:288
-msgid "Horse Trainer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:289
-msgid "Jockey"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:290
-msgid "Diving Instructor (Open Water)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:291
-msgid "Audiologists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:292
-msgid "Licensed practical nurses"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:293
-msgid "Nursing co-ordinators and supervisors"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:294
-msgid "Registered nurses and registered psychiatric nurses"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:295
-msgid "Nurse Practitioner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:296
-msgid "Nursing Clinical Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:297
-msgid "Registered Nurse (Aged Care)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:298
-msgid "Registered Nurse (Child and Family Health)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:299
-msgid "Registered Nurse (Community Health)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:300
-msgid "Registered Nurse (Critical Care and Emergency)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:301
-msgid "Registered Nurse (Developmental Disability)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:302
-msgid "Registered Nurse (Disability and Rehabilitation)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:303
-msgid "Registered Nurse (Medical Practice)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:304
-msgid "Registered Nurse (Medical)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:305
-msgid "Registered Nurse (Mental Health)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:306
-msgid "Registered Nurse (Paediatrics)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:307
-msgid "Registered Nurse (Perioperative)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:308
-msgid "Registered Nurse (Surgical)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:309
-msgid "Registered Nurses (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:310
-msgid "Nurse Educator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:311
-msgid "Nurse Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:312
-msgid "Nurse Researcher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:313
-msgid "Enrolled Nurse"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:314
-msgid "Mothercraft Nurse"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:315
-msgid "General practitioners and family physicians"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:316
-msgid "Specialist physicians (General Medicine)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:317
-msgid "Specialist Physicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:318
-msgid "Medical Practitioners (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:319
-msgid "Traditional Chinese Medicine Practitioner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:320
-msgid "Traditional Maori Health Practitioner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:321
-msgid "Dentist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:322
-msgid "Dental Hygienist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:323
-msgid "Dental Prosthetist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:324
-msgid "Dental Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:325
-msgid "Dental Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:326
-msgid "Dental Therapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:327
-msgid "Veterinarian"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:328
-msgid "Veterinary Nurse"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:329
-msgid "Optometrist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:330
-msgid "Chiropractor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:331
-msgid ""
-"Inspectors in public and environmental health and occupational health and "
-"safety"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:332
-msgid "Hospital Pharmacist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:333
-msgid "Industrial Pharmacist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:334
-msgid "Retail Pharmacist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:335
-msgid "Pharmacy Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:336
-msgid "Dietitians"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:337
-msgid "Nutritionists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:338
-msgid "Speech Pathologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:339
-msgid "Speech Language Therapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:340
-msgid "Physiotherapists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:341
-msgid "Occupational Therapists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:342
-msgid ""
-"Respiratory therapists, clinical perfusionists and cardiopulmonary "
-"technologists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:343
-msgid "Complementary Health Therapists (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:344
-msgid "Psychotherapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:345
-msgid "Massage Therapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:346
-msgid "Diversional Therapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:347
-msgid "Medical Radiation Technologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:348
-msgid "Medical Sonographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:349
-msgid "Paramedical occupations"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:350
-msgid "Medical Administrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:351
-msgid "Medical Diagnostic Radiographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:352
-msgid "Medical Laboratory Scientist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:353
-msgid "Medical Oncologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:354
-msgid "Medical Radiation Therapist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:355
-msgid "Physicist (Medical Physicist only)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:356
-msgid "Medical Superintendent"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:357
-msgid "Resident Medical Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:358
-msgid "Medical Laboratory Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:359
-msgid "Medical Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:360
-msgid "Pathologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:361
-#: templates/db_translations/core_answer.html:363
-msgid "Clinical Haematologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:362
-msgid "Clinical Psychologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:364
-msgid "Clinical Coder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:365
-msgid "Cardiologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:366
-msgid "Cardiothoracic Surgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:367
-msgid "Radiation Oncologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:368
-msgid "Diagnostic and Interventional Radiologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:369
-msgid "Health Diagnostic and Promotion Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:370
-msgid "Dermatologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:371
-msgid "Neurosurgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:372
-msgid "Orthopaedic Surgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:373
-msgid "Paediatric Surgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:374
-msgid "Plastic and Reconstructive Surgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:375
-msgid "Surgeon (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:376
-msgid "Vascular Surgeon"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:377
-msgid "Paediatrician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:378
-msgid "Psychologists"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:379
-msgid "Educational Psychologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:380
-msgid "Organisational Psychologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:381
-msgid "Psychiatrist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:382
-msgid "Emergency Medicine Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:383
-msgid "Nuclear Medicine Technologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:384
-msgid "Renal Medicine Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:385
-msgid "Thoracic Medicine Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:386
-msgid "Endocrinologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:387
-msgid "Gastroenterologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:388
-msgid "Rheumatologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:389
-msgid "Neurologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:390
-msgid "Obstetrician and Gynaecologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:391
-msgid "Ophthalmologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:392
-msgid "Orthoptist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:393
-msgid "Orthotist or Prosthetist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:394
-msgid "Otorhinolaryngologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:395
-msgid "Rehabilitation Counsellor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:396
-msgid "Urologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:397
-msgid "Cardiac Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:398
-msgid "Exercise Physiologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:399
-msgid "Health Information Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:400
-msgid "Health Promotion Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:401
-msgid "Midwife"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:402
-msgid "Ambulance Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:403
-msgid "Ambulance Paramedic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:404
-msgid "Health Practice Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:405
-msgid "Lifeguard"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:406
-msgid "Primary Health Organisation Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:407
-msgid "Health and Welfare Services Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:408
-msgid "Aboriginal and Torres Strait Islander Health Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:409
-msgid "Kaiawhina (Hauora) (Maori Health Assistant)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:410
-msgid "Managers in health care"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:411
-msgid "Civil Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:412
-msgid "Aeronautical Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:413
-msgid "Agricultural Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:414
-msgid "Electrical and Electronics Engineering Technologists and Technicians"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:415
-msgid "Electrical Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:416
-msgid "Biomedical Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:417
-msgid "Chemical Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:418
-msgid "Civil Engineering Draftsperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:419
-msgid "Civil Engineering Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:420
-msgid "Mechanical Engineering Technologists and Technicians"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:421
-msgid "Mechanical engineers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:422
-msgid "Petroleum Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:423
-msgid "Electrical Engineering Draftsperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:424
-msgid "Electrical Engineering Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:425
-msgid "Electronics Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:426
-msgid "Engineering Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:427
-msgid "Engineering Technologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:428
-msgid "Environmental Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:429
-msgid "Geotechnical Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:430
-msgid "Industrial Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:431
-msgid "Materials Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:432
-msgid "Engineering Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:433
-msgid "Mining Engineer (Excluding Petroleum)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:434
-msgid "Production or Plant Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:435
-msgid "Ships Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:436
-msgid "Structural Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:437
-msgid "Telecommunications Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:438
-msgid "Telecommunications Field Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:439
-msgid "Telecommunications Network Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:440
-msgid "Transport Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:441
-msgid "Building and Engineering Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:442
-msgid "Electronic Engineering Draftsperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:443
-msgid "Electronic Engineering Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:444
-msgid "Mechanical Engineering Draftsperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:445
-msgid "Mechanical Engineering Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:446
-msgid "Computing professionals - Computer Network Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:447
-msgid "Computing professionals - Web Developer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:448
-msgid "Computing professionals - Computer Network and Systems Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:449
-msgid "Computing professionals - Analyst Programmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:450
-msgid "Computing professionals - Developer Programmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:451
-msgid ""
-"Computing professionals - Software and Applications Programmers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:452
-msgid "Computing professionals - Web Administrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:453
-msgid "Computing professionals - Software Engineer or Designer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:454
-msgid "Computing professionals - Software Tester"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:455
-msgid "Computing professionals - Information Systems Analysts and Consultants"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:456
-msgid "Computing professionals - ICT business Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:457
-msgid "Computing professionals - ICT Account Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:458
-msgid "Computing professionals - ICT Business Development Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:459
-msgid "Computing professionals - ICT Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:460
-msgid "Computing professionals - ICT Project Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:461
-msgid "Computing professionals - ICT Quality Assurance Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:462
-msgid "Computing professionals - ICT Sales Representative"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:463
-msgid "Computing professionals - ICT Security Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:464
-msgid "Computing professionals - ICT Support and Test Engineers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:465
-msgid "Computing professionals - ICT Support Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:466
-msgid "Computing professionals - ICT Systems Test Engineer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:467
-msgid "Computing professionals - ICT Trainer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:468
-msgid "Computing professionals - ICT Customer Support Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:469
-msgid "Computing professionals - ICT Support Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:470
-msgid "Computing professionals - Chief Information Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:471
-msgid "Computing professionals - Multimedia Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:472
-msgid "Computing professionals - Database Analysts and Administrators"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:473
-msgid "Computing professionals - Systems Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:474
-msgid "Computing professionals - Systems Administrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:475
-msgid "Computing professionals - Network Administrator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:476
-msgid "Computing professionals - Network Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:477
-msgid "Physicist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:478
-msgid "Biochemist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:479
-msgid "Chemist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:480
-msgid "Chemistry Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:481
-msgid "Agricultural Scientist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:482
-msgid "Geoscientists and Oceanographers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:483
-msgid "Other Spatial Scientist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:484
-msgid "Forest Scientist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:485
-msgid "Life Scientist (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:486
-msgid "Life Scientists (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:487
-msgid "Geophysicist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:488
-msgid "Natural and Physical Science Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:489
-msgid "Biotechnologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:490
-msgid "Marine Biologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:491
-msgid "Microbiologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:492
-msgid "Agricultural Consultant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:493
-msgid "Agricultural Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:494
-msgid "Geologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:495
-msgid "Hydrogeologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:496
-msgid "Architect"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:497
-msgid "Landscape Architect"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:498
-msgid "Naval Architect"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:499
-msgid "Architectural, Building and Surveying Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:500
-msgid "Architectural Draftsperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:501
-msgid "Urban and Regional Planner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:502
-msgid "Mathematician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:503
-msgid "Statistician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:504
-msgid "Earth Science Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:505
-msgid "Quantity Surveyor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:506
-msgid "Surveyor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:507
-msgid "Marine Surveyor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:508
-msgid "Construction estimators"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:509
-msgid "Construction Managers or Construction Project Managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:510
-msgid "Aeroplane Pilot"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:511
-msgid "Helicopter Pilot"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:512
-msgid "Flying Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:513
-msgid "Air Traffic Controller"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:514
-msgid "Building Inspector"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:515
-msgid "Building Associate"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:516
-msgid "Environmental Consultant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:517
-msgid "Environmental Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:518
-msgid "Environmental Research Scientist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:519
-msgid "Environmental Scientists (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:520
-msgid "Life Science Technicia"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:521
-msgid "Science Technicians (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:522
-msgid "Surveying or Spatial Science Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:523
-msgid "University Professor or lecturer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:524
-msgid "Early Childhood (Pre-primary School) Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:525
-msgid "Secondary SchoolTeacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:526
-msgid "Special Education Teachers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:527
-msgid "Special Needs Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:528
-msgid "Intermediate School Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:529
-msgid "Kaiako Kohanga Reo (Maori Language Nest Teacher)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:530
-msgid "Kaiako Kura Kaupapa Maori (Maori-medium Primary School Teacher)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:531
-msgid "Teacher of the Hearing Impaired"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:532
-msgid "Teacher of the Sight Impaired"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:533
-msgid "Polytechnic Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:534
-msgid "Pouako Kura Kaupapa Maori (Maori-medium Primary School Senior Teacher)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:535
-msgid "Primary School Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:536
-msgid "Private Tutors and Teachers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:537
-msgid "Secondary School Teacher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:538
-msgid "Teacher of English to Speakers of Other Languages"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:539
-msgid "School Principal"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:540
-msgid "School Laboratory Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:541
-msgid "University Tutor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:542
-msgid "Early Childhood (Pre-primary school) Assistants"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:543
-msgid "Education Adviser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:544
-msgid "Education Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:545
-msgid "Education Reviewer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:546
-msgid "Regional Education Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:547
-msgid "Judge"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:548
-msgid "Intellectual Property Lawyer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:549
-msgid "Law Clerk"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:550
-msgid "Judicial and Other Legal Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:551
-msgid "Legal Executive"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:552
-msgid "Legal Secretary"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:553
-msgid "Legislators (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:554
-msgid "Local Government Legislator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:555
-msgid "Magistrate"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:556
-msgid "Social Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:557
-msgid "Social Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:558
-msgid "Family Support Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:559
-msgid "Family and Marriage Counsellor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:560
-msgid "Student Counsellor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:561
-msgid "Careers Counsellor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:562
-msgid "Counsellors (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:563
-msgid "Drug and Alcohol Counsellor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:564
-msgid "Minister of Religion"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:565
-msgid "Parole or Probation Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:566
-msgid "Community Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:567
-msgid "Policy Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:568
-msgid "Policy and Planning Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:569
-msgid "Police Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:570
-msgid "Commissioned Police Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:571
-msgid "Commissioned Defence Force Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:572
-msgid "Commissioned Fire Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:573
-msgid "Disabilities Services Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:574
-msgid "Detective"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:575
-msgid "Defence Force Senior Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:576
-msgid "Electorate Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:577
-msgid "Intelligence Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:578
-msgid "Liaison Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:579
-msgid "Residential Care Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:580
-msgid "Court Collections Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:581
-msgid "Court Registry Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:582
-msgid "Clerk of Court"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:583
-msgid "Fire Fighter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:584
-msgid "Child Care Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:585
-msgid "Welfare Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:586
-msgid "Welfare Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:587
-msgid "Conveyancer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:588
-msgid "Barrister"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:589
-msgid "Solicitor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:590
-msgid "Forester"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:591
-msgid "Market Gardener"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:592
-msgid "Production Manager (Mining)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:593
-msgid "Production Manager (Forestry)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:594
-msgid "Crop Farmers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:595
-msgid "Field Crop Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:596
-msgid "Mixed Crop and Livestock Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:597
-msgid "Mixed Crop Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:598
-msgid "Dairy Cattle Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:599
-msgid "Deer Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:600
-msgid "Goat Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:601
-msgid "Livestock Farmers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:602
-msgid "Mixed Livestock Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:603
-msgid "Pig Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:604
-msgid "Poultry Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:605
-msgid "Sheep Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:606
-msgid "Aquaculture Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:607
-msgid "Beef Cattle Farmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:608
-msgid "Managers in natural resources production and fishing"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:609
-msgid "Master Fisher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:610
-msgid "Fisheries Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:611
-msgid "Botanist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:612
-msgid "Drainer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:613
-msgid "Cotton Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:614
-msgid "Fruit or Nut Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:615
-msgid "Grape Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:616
-msgid "Sugar Cane Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:617
-msgid "Turf Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:618
-msgid "Wine Maker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:619
-msgid "Sales and Marketing Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:620
-msgid "Sales Representative (Industrial Products)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:621
-msgid "Sales Representative (Medical and Pharmaceutical Products)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:622
-msgid "Technical Sales Representatives (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:623
-msgid "Real Estate Agency Licensee"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:624
-msgid "Real Estate Agent"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:625
-msgid "Real Estate Representative"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:626
-msgid "Accommodation and Hospitality Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:627
-msgid "Hospitality, Retail and Service Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:628
-msgid "Travel Agency Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:629
-msgid "Travel Attendants (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:630
-msgid "Customer Service Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:631
-msgid "Chef"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:632
-msgid "Cook"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:633
-msgid "Pastrycook"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:634
-msgid "Butcher or Smallgoods Maker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:635
-msgid "Meat Inspector"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:636
-msgid "Baker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:637
-msgid "Hairdresser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:638
-msgid "Hair or Beauty Salon Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:639
-msgid "Dressmaker or Tailor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:640
-msgid "Shoemaker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:641
-msgid "Jeweller"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:642
-msgid "Watch and Clock Maker and Repairer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:643
-msgid "Funeral Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:644
-msgid "Funeral Workers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:645
-msgid "Security Consultant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:646
-msgid "Pet Groomer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:647
-msgid "Animal Attendants and Trainers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:648
-#: templates/db_translations/core_answer.html:830
-msgid "Podiatrist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:649
-msgid "Supply and Distribution Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:650
-msgid "Wholesaler"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:651
-msgid "Amusement Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:652
-msgid "Cafe or Restaurant Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:653
-msgid "Bed and Breakfast Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:654
-msgid "Betting Agency Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:655
-msgid "Boarding Kennel or Cattery Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:656
-msgid "Caravan Park and Camping Ground Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:657
-msgid "Hotel or Motel Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:658
-msgid "Licensed Club Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:659
-msgid "Retail Manager (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:660
-msgid "Metal Fabricator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:661
-msgid "Metal Machinist (First Class)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:662
-msgid "Metallurgist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:663
-#: templates/db_translations/core_answer.html:668
-msgid "Sheetmetal Trades Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:664
-msgid "Metallurgical or Materials Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:665
-msgid "Metal Casting Trades Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:666
-msgid "Metal Fitters and Machinists (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:667
-msgid "Metal Polisher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:669
-msgid "Electrical Line Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:670
-msgid "Electrical Linesworker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:671
-msgid "Technical Cable Jointer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:672
-msgid "Printing Machinist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:673
-msgid "Wood Machinist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:674
-msgid "Wood Machinists and Other Wood Trades Workers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:675
-msgid "Toolmaker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:676
-msgid "Fitter-Welder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:677
-msgid "Pressure Welder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:678
-msgid "Welder (First Class)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:679
-msgid "Cabler (Data and Telecommunications)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:680
-msgid "Telecommunications Cable Jointer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:681
-msgid "Airconditioning and Mechanical Services Plumber"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:682
-msgid "Plumber (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:683
-msgid "Roof plumber"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:684
-msgid "Carpenter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:685
-msgid "Carpenter and Joiner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:686
-msgid "Bricklayer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:687
-msgid "Fibrous Plasterer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:688
-msgid "Solid Plasterer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:689
-msgid "Print Finisher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:690
-msgid "Floor Finisher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:691
-msgid "Furniture Finisher"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:692
-msgid "Glazier"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:693
-msgid "Vehicle Painter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:694
-msgid "Wall and Floor Tiler"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:695
-msgid "Airconditioning and Refrigeration Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:696
-msgid "Diesel Motor Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:697
-msgid "Lift Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:698
-msgid "Motor Mechanic (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:699
-msgid "Motorcycle Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:700
-msgid "Small Engine Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:701
-msgid "Aircraft Maintenance Engineer (Mechanical)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:702
-msgid "Aircraft Maintenance Engineer (Avionics)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:703
-msgid "Business Machine Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:704
-msgid "Optical Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:705
-msgid "Telecommunications Line Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:706
-#: templates/db_translations/core_answer.html:731
-msgid "Automotive Electrician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:707
-msgid "Air Transport Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:708
-#: templates/db_translations/core_answer.html:733
-msgid "Boat Builder and Repairer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:709
-msgid "Electrician (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:710
-msgid "Electrician (Special Class)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:711
-msgid "Electronic Equipment Trades Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:712
-msgid "Electronic Instrument Trades Worker (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:713
-msgid "Electronic Instrument Trades Worker (Special Class)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:714
-msgid "Fitter (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:715
-msgid "Fitter and Turner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:716
-msgid "Gasfitter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:717
-msgid "Joiner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:718
-msgid "Locksmith"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:719
-msgid "Painting trades workers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:720
-msgid "Ships Master"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:721
-msgid "Ships Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:722
-msgid "Shipwright"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:723
-msgid "Stonemason"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:724
-msgid "Manufacturer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:725
-msgid "Marine Transport Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:726
-msgid "Production Manager (Manufacturing)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:727
-msgid "Equipment Hire Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:728
-msgid "Fleet Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:729
-msgid "Transport Company Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:730
-msgid "Apparel Cutter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:732
-msgid "Blacksmith"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:734
-msgid "Cabinetmaker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:735
-msgid "Canvas Goods Fabricator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:736
-msgid "Chemical Plant Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:737
-msgid "Communications Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:738
-msgid "Drainlayer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:739
-msgid "Electroplater"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:740
-msgid "Farrier"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:741
-msgid "Fire Protection Equipment Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:742
-msgid "Gas or Petroleum Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:743
-msgid "Leather Goods Maker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:744
-msgid "Light Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:745
-msgid "Panelbeater"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:746
-msgid "Picture Framer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:747
-msgid "Plastics Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:748
-msgid "Power Generation Plant Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:749
-msgid "Precision Instrument Maker and Repairer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:750
-msgid "Roof Tiler"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:751
-msgid "Sail Maker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:752
-msgid "Saw Maker and Repairer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:753
-msgid "Screen Printer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:754
-msgid "Small Offset Printer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:755
-msgid "Sound Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:756
-msgid "Technicians and Trades Workers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:757
-msgid "Telecommunications Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:758
-msgid "Television Equipment Operator"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:759
-msgid "Textile, Clothing and Footwear Mechanic"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:760
-msgid "Upholsterer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:761
-msgid "Vehicle Body Builder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:762
-msgid "Vehicle Trimmer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:763
-msgid "Wood Turner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:764
-msgid "Arborist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:765
-msgid "Clothing Trades Workers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:766
-msgid "Florist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:767
-msgid "Gardener (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:768
-msgid "Greenkeeper"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:769
-msgid "Kennel Hand"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:770
-msgid "Landscape Gardener"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:771
-msgid "Nurseryperson"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:772
-msgid "Wool Classer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:773
-msgid "Advertising Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:774
-msgid "Advertising Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:775
-msgid "Home building and renovation managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:776
-msgid "Human resources managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:777
-msgid ""
-"Professional occupations in advertising, marketing and public relations "
-"(Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:778
-msgid "Purchasing managers"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:779
-msgid "Chief Executive or Managing Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:780
-msgid "Senior managers – financial, communications and other business services"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:781
-msgid "Senior managers – trade, broadcasting and other services (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:782
-msgid "Company Secretary"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:783
-msgid "Corporate General Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:784
-msgid "Corporate Services Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:785
-msgid "Corporate Treasurer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:786
-msgid "Futures Trader"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:787
-msgid "Project Builder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:788
-msgid "Human Resource Adviser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:789
-msgid "Human Resource Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:790
-msgid "Importer or Exporter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:791
-msgid "Information and Organisation Professionals (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:792
-msgid "Management Consultant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:793
-msgid "Market Research Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:794
-msgid "Marketing Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:795
-msgid "Organisation and Methods Analyst"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:796
-msgid "Procurement Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:797
-msgid "Public Relations Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:798
-msgid "Public Relations Professional"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:799
-msgid "Quality Assurance Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:800
-msgid "Recruitment Consultant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:801
-msgid "Research and Development Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:802
-msgid "Specialist Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:803
-msgid "Technical Director"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:804
-msgid "Training and Development Professional"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:805
-msgid "Call or Contact Centre Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:806
-msgid "Commodities Trader"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:807
-msgid "Conference and Event Organiser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:808
-msgid "Facilities Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:809
-msgid "Maintenance Planner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:810
-msgid "Office Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:811
-msgid "Post Office Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:812
-msgid "Practice Managers (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:813
-msgid "Railway Station Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:814
-msgid "Retirement Village Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:815
-msgid "Call or Contact Centre Team Leader"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:816
-msgid "Personal Assistant"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:817
-msgid "Retail Buyer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:818
-msgid "Secretary (General)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:819
-msgid "Trust Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:820
-msgid "Stage Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:821
-msgid "Television Presenter"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:822
-msgid "Dog or Horse Racing Official"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:823
-msgid "Footballer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:824
-msgid "Golfer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:825
-msgid "Acupuncturist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:826
-msgid "Anaesthetist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:827
-msgid "Environmental Health Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:828
-msgid "Intensive Care Specialist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:829
-msgid "Osteopath"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:831
-msgid "Naturopath"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:832
-msgid "Anaesthetic Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:833
-msgid "Quarantine Officer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:834
-msgid "First Aid Trainer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:835
-msgid "Phlebotomist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:836
-msgid "Industrial instrument technicians and mechanics"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:837
-msgid "Cartographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:838
-msgid "Food Technologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:839
-msgid "Laboratory Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:840
-msgid "Telecommunications Network Planner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:841
-msgid "Telecommunications Technical Officer or Technologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:842
-msgid "Meteorologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:843
-msgid "Patents Examiner"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:844
-msgid "Zoologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:845
-msgid "Hydrographer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:846
-msgid "Mine Deputy"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:847
-msgid "Archaeologist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:848
-msgid "Faculty Head"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:849
-msgid "Historian"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:850
-msgid "Migration Agent"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:851
-msgid "Member of Parliament"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:852
-msgid "Park Ranger"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:853
-msgid "Senior Non-commissioned Defence Force"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:854
-msgid "Tribunal Member"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:855
-msgid "Workplace Relations Adviser"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:856
-msgid "Youth Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:857
-msgid "Defence Force Member - Other Ranks"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:858
-msgid "Emergency Service Worker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:859
-msgid "Apiarist"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:860
-msgid "Horse Breeder"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:861
-msgid "Primary Products Inspectors (Others)"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:862
-msgid "Shearer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:863
-msgid "Stock and Station Agent"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:864
-msgid "Wool Buyer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:865
-msgid "Diver"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:866
-msgid "Auctioneer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:867
-msgid "Dispensing Optician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:868
-msgid "Dog Handler or Trainer"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:869
-msgid "Driving Instructor"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:870
-msgid "Hotel Service Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:871
-msgid "Property Manager"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:872
-msgid "Zookeeper"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:873
-msgid "Flower Grower"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:874
-msgid "Hardware Technician"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:875
-msgid "Plumbing Inspector"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:876
-msgid "Engineering Patternmaker"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:877
-msgid "Engraver"
-msgstr ""
-
-#: templates/db_translations/core_answer.html:878
-msgid "Flight Attendant"
+msgid "Doctoral Level"
 msgstr ""
 
 #: templates/db_translations/core_country.html:2
@@ -3809,6 +1032,8 @@ msgid "American Samoa"
 msgstr ""
 
 #: templates/db_translations/core_country.html:118
+#: templates/site/dashboard.html:125 wannamigrate/site/views.py:930
+#: wannamigrate/site/views.py:1036 wannamigrate/site/views.py:1080
 msgid "Australia"
 msgstr ""
 
@@ -3866,6 +1091,8 @@ msgid "New Caledonia"
 msgstr ""
 
 #: templates/db_translations/core_country.html:132
+#: templates/site/dashboard.html:165 wannamigrate/site/views.py:954
+#: wannamigrate/site/views.py:1050 wannamigrate/site/views.py:1094
 msgid "New Zealand"
 msgstr ""
 
@@ -4159,6 +1386,8 @@ msgid "British Virgin Islands"
 msgstr ""
 
 #: templates/db_translations/core_country.html:205
+#: templates/site/dashboard.html:145 wannamigrate/site/views.py:942
+#: wannamigrate/site/views.py:1043 wannamigrate/site/views.py:1087
 msgid "Canada"
 msgstr ""
 
@@ -5003,6 +2232,86 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
+#: templates/db_translations/core_language.html:164
+msgid "Assyrian"
+msgstr ""
+
+#: templates/db_translations/core_language.html:165
+msgid "Auslan"
+msgstr ""
+
+#: templates/db_translations/core_language.html:166
+msgid "Bangla"
+msgstr ""
+
+#: templates/db_translations/core_language.html:167
+msgid "Bosnian"
+msgstr ""
+
+#: templates/db_translations/core_language.html:168
+msgid "Cantonese"
+msgstr ""
+
+#: templates/db_translations/core_language.html:169
+msgid "Dari"
+msgstr ""
+
+#: templates/db_translations/core_language.html:170
+msgid "Dinka"
+msgstr ""
+
+#: templates/db_translations/core_language.html:171
+msgid "Filipino"
+msgstr ""
+
+#: templates/db_translations/core_language.html:172
+msgid "Hakka (Chinese)"
+msgstr ""
+
+#: templates/db_translations/core_language.html:173
+msgid "Hazaragi"
+msgstr ""
+
+#: templates/db_translations/core_language.html:174
+msgid "Khmer"
+msgstr ""
+
+#: templates/db_translations/core_language.html:175
+msgid "Lao"
+msgstr ""
+
+#: templates/db_translations/core_language.html:176
+msgid "Mandarin"
+msgstr ""
+
+#: templates/db_translations/core_language.html:177
+msgid "Nuer"
+msgstr ""
+
+#: templates/db_translations/core_language.html:178
+msgid "Oromo"
+msgstr ""
+
+#: templates/db_translations/core_language.html:179
+msgid "Persian"
+msgstr ""
+
+#: templates/db_translations/core_language.html:180
+msgid "Pushto"
+msgstr ""
+
+#: templates/db_translations/core_language.html:181
+msgid "Swahili"
+msgstr ""
+
+#: templates/db_translations/core_language.html:182
+msgid "Tetum"
+msgstr ""
+
+#: templates/db_translations/core_language.html:183
+msgid "Tongan"
+msgstr ""
+
 #: templates/emails/reset_password.html:9
 #: templates/site/reset_password.html:29
 msgid "Reset Password"
@@ -5032,20 +2341,12 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
-#: templates/site/account.html:29
-msgid "My Account"
-msgstr ""
-
-#: templates/site/account.html:34
-msgid "You have successfully sent your message."
-msgstr ""
-
-#: templates/site/account.html:36
-msgid "Click Here to go back"
-msgstr ""
-
 #: templates/site/contact.html:46
 msgid "Contact Us"
+msgstr ""
+
+#: templates/site/contact.html:51
+msgid "Thank You"
 msgstr ""
 
 #: templates/site/contact.html:52
@@ -5064,13 +2365,304 @@ msgid ""
 "the form below:"
 msgstr ""
 
+#: templates/site/dashboard.html:37
+msgid "Edit your information"
+msgstr ""
+
+#: templates/site/dashboard.html:44
+msgid "Personal"
+msgstr ""
+
+#: templates/site/dashboard.html:50 templates/site/dashboard.html.py:68
+#: templates/site/dashboard.html:86 templates/site/dashboard.html.py:104
+msgid "COMPLETED"
+msgstr ""
+
+#: templates/site/dashboard.html:115
+msgid "Check your points per country"
+msgstr ""
+
+#: templates/site/dashboard.html:128 templates/site/dashboard.html.py:148
+#: templates/site/dashboard.html:168 templates/site/situation.html:43
+#: templates/site/situation.html.py:57 templates/site/situation.html:62
+#: templates/site/situation.html.py:67 templates/site/situation.html:72
+msgid "POINTS"
+msgstr ""
+
+#: templates/site/dashboard.html:129 templates/site/dashboard.html.py:149
+#: templates/site/dashboard.html:169 templates/site/situation.html:44
+msgid "OF"
+msgstr ""
+
+#: templates/site/dashboard.html:129 templates/site/dashboard.html.py:149
+#: templates/site/dashboard.html:169 templates/site/situation.html:44
+msgid "REQUIRED"
+msgstr ""
+
+#: templates/site/dashboard.html:183
+msgid "Get help to migrate"
+msgstr ""
+
+#: templates/site/dashboard.html:188 wannamigrate/core/models.py:94
+#: wannamigrate/site/forms.py:139 wannamigrate/site/forms.py:180
+#: wannamigrate/site/forms.py:413 wannamigrate/site/forms.py:481
+#: wannamigrate/site/forms.py:494
+msgid "Select Country"
+msgstr ""
+
+#: templates/site/dashboard.html:197 templates/site/dashboard.html.py:210
+#: templates/site/dashboard.html:223
+msgid "You still don’t have enough points<br />to migrate to this country"
+msgstr ""
+
+#: templates/site/dashboard.html:200 templates/site/dashboard.html.py:213
+#: templates/site/dashboard.html:226
+msgid "Check my results"
+msgstr ""
+
+#: templates/site/dashboard.html:201 templates/site/dashboard.html.py:214
+#: templates/site/dashboard.html:227
+msgid "Apply for the visa"
+msgstr ""
+
+#: templates/site/dashboard.html:202
+msgid "Moving to Australia"
+msgstr ""
+
+#: templates/site/dashboard.html:215
+msgid "Moving to Canada"
+msgstr ""
+
+#: templates/site/dashboard.html:228
+msgid "Moving to New Zealand"
+msgstr ""
+
+#: templates/site/edit_education.html:79
+msgid "Education Details"
+msgstr ""
+
+#: templates/site/edit_education.html:80 templates/site/edit_language.html:80
+#: templates/site/edit_personal.html:102 templates/site/edit_work.html:118
+msgid "We need all this information to calculate your points."
+msgstr ""
+
+#: templates/site/edit_education.html:81 templates/site/edit_language.html:81
+#: templates/site/edit_personal.html:103 templates/site/edit_work.html:119
+msgid "Save and Exit"
+msgstr ""
+
+#: templates/site/edit_education.html:91 templates/site/edit_language.html:91
+#: templates/site/edit_personal.html:113 templates/site/edit_work.html:129
+msgid "Errors Found!"
+msgstr ""
+
+#: templates/site/edit_education.html:102
+msgid "What are your education degrees?"
+msgstr ""
+
+#: templates/site/edit_education.html:217
+#: templates/site/edit_language.html:176 templates/site/edit_work.html:364
+msgid "PREVIOUS"
+msgstr ""
+
+#: templates/site/edit_education.html:219
+#: templates/site/edit_language.html:178 templates/site/edit_personal.html:242
+#: templates/site/edit_work.html:366
+msgid "PERSONAL"
+msgstr ""
+
+#: templates/site/edit_education.html:221
+#: templates/site/edit_language.html:180 templates/site/edit_personal.html:244
+#: templates/site/edit_work.html:368
+msgid "LANGUAGE"
+msgstr ""
+
+#: templates/site/edit_education.html:223
+#: templates/site/edit_language.html:182 templates/site/edit_personal.html:246
+#: templates/site/edit_work.html:370
+msgid "EDUCATION"
+msgstr ""
+
+#: templates/site/edit_education.html:225
+#: templates/site/edit_language.html:184 templates/site/edit_personal.html:248
+#: templates/site/edit_work.html:372
+msgid "WORK"
+msgstr ""
+
+#: templates/site/edit_education.html:227
+#: templates/site/edit_language.html:186 templates/site/edit_personal.html:250
+msgid "NEXT"
+msgstr ""
+
+#: templates/site/edit_language.html:79
+msgid "Language Details"
+msgstr ""
+
+#: templates/site/edit_language.html:102
+msgid "What languages do you speak (including your native one)?"
+msgstr ""
+
+#: templates/site/edit_personal.html:101
+msgid "Personal Details"
+msgstr ""
+
+#: templates/site/edit_personal.html:162
+msgid ""
+"If you have a close family member in either Australia, Canada or New "
+"Zealand, you can get extra points"
+msgstr ""
+
+#: templates/site/edit_work.html:117
+msgid "Work Details"
+msgstr ""
+
+#: templates/site/edit_work.html:160
+msgid "Add below your work experiences"
+msgstr ""
+
+#: templates/site/edit_work.html:334
+msgid ""
+"Proved Skills: Under 50 yeard old. Competent English. Same skilled "
+"occupation as you."
+msgstr ""
+
+#: templates/site/edit_work.html:374
+msgid "FINISH"
+msgstr ""
+
+#: templates/site/home.html:12 templates/site/home.html.py:16
+#: templates/site/home_older_browsers.html:12
+#: templates/site/home_older_browsers.html:16
+msgid "Live Abroad. Change your life."
+msgstr ""
+
+#: templates/site/home.html:68 templates/site/home_older_browsers.html:66
+msgid "Log In"
+msgstr ""
+
+#: templates/site/home.html:76 templates/site/home_older_browsers.html:74
+msgid ""
+"Live in a <span class=\"bold\">new country.</span> <span class=\"bold"
+"\">Change</span> your life."
+msgstr ""
+
+#: templates/site/home.html:79 templates/site/home_older_browsers.html:77
+msgid ""
+"Discover an <span class=\"bold\">awesome country</span> and get help to "
+"<span class=\"bold\">move.</span>"
+msgstr ""
+
+#: templates/site/home.html:81 templates/site/home.html.py:144
+#: templates/site/home.html:208 templates/site/home.html.py:218
+#: templates/site/home_older_browsers.html:79
+#: templates/site/home_older_browsers.html:98
+#: templates/site/home_older_browsers.html:184
+#: templates/site/home_older_browsers.html:203
+msgid "Start now."
+msgstr ""
+
+#: templates/site/home.html:81 templates/site/home.html.py:144
+#: templates/site/home.html:208 templates/site/home.html.py:218
+#: templates/site/home_older_browsers.html:79
+#: templates/site/home_older_browsers.html:98
+#: templates/site/home_older_browsers.html:184
+#: templates/site/home_older_browsers.html:203
+msgid "It's Free!"
+msgstr ""
+
+#: templates/site/home.html:92 templates/site/home_older_browsers.html:88
+msgid ""
+"If you could <span class=\"white bold\">live anywhere,</span> where would "
+"you go<span class=\"white\">?</span>"
+msgstr ""
+
+#: templates/site/home.html:109 templates/site/home_older_browsers.html:161
+msgid ""
+"<span class=\"bold\">Wanna Migrate</span> is doing a superb job by assisting "
+"people to discover a new country to live and get the visa. I love it!"
+msgstr ""
+
+#: templates/site/home.html:114 templates/site/home_older_browsers.html:166
+msgid "Creative Director in Australia"
+msgstr ""
+
+#: templates/site/home.html:121 templates/site/home_older_browsers.html:193
+msgid "The <span class=\"bold\">easiest way</span> to immigrate."
+msgstr ""
+
+#: templates/site/home.html:138 templates/site/home_older_browsers.html:92
+msgid ""
+"<span class=\"f20 teal bold\">Discover awesome countries</span> with open "
+"doors for new professionals."
+msgstr ""
+
+#: templates/site/home.html:141 templates/site/home_older_browsers.html:95
+msgid ""
+"Around <span class=\"f20 teal bold\">500,000 people</span> obtain a visa to "
+"live in <span class=\"teal bold\">Australia</span> and <span class=\"teal "
+"bold\">Canada</span> every year."
+msgstr ""
+
+#: templates/site/home.html:149 templates/site/home_older_browsers.html:107
+msgid ""
+"A <span class=\"bold\">free tool</span> to manage your whole immigration "
+"process."
+msgstr ""
+
+#: templates/site/home.html:155 templates/site/home_older_browsers.html:113
+msgid ""
+"Find out which countries need professionals <span class=\"bold\">like you!</"
+"span>"
+msgstr ""
+
+#: templates/site/home.html:164 templates/site/home_older_browsers.html:122
+msgid "Get help with your <span class=\"bold yellow\">visa application</span>"
+msgstr ""
+
+#: templates/site/home.html:171 templates/site/home_older_browsers.html:129
+msgid "Review your <span class=\"bold\">language skills</span>"
+msgstr ""
+
+#: templates/site/home.html:180 templates/site/home_older_browsers.html:138
+msgid ""
+"Get exposed to international <span class=\"bold yellow\">employers.</span>"
+msgstr ""
+
+#: templates/site/home.html:187 templates/site/home_older_browsers.html:145
+msgid "Learn <span class=\"bold\">shortcuts</span> to obtain the visa."
+msgstr ""
+
+#: templates/site/home.html:200 templates/site/home_older_browsers.html:175
+msgid ""
+"I lived in 5 different countries and believe that everyone should have the "
+"chance to improve their lives in a new country, if they want."
+msgstr ""
+
+#: templates/site/home.html:205 templates/site/home_older_browsers.html:180
+msgid "CEO at Wanna Migrate"
+msgstr ""
+
+#: templates/site/home.html:213 templates/site/home_older_browsers.html:198
+msgid "What are you waiting for?"
+msgstr ""
+
+#: templates/site/home.html:216 templates/site/home_older_browsers.html:201
+msgid ""
+"Get <span class=\"bold\">free access</span> to our platform and <span class="
+"\"bold\">achieve your dreams</span> in a new country."
+msgstr ""
+
+#: templates/site/home.html:233 templates/site/home_older_browsers.html:226
+msgid "Incubators / Supporters:"
+msgstr ""
+
 #: templates/site/layouts/email.html:5
 msgid "Email from Wanna Migrate"
 msgstr ""
 
-#: templates/site/layouts/email.html:36 wannamigrate/site/forms.py:22
-#: wannamigrate/site/forms.py:30 wannamigrate/site/forms.py:76
-#: wannamigrate/site/forms.py:122
+#: templates/site/layouts/email.html:36 templates/site/myaccount/view.html:54
+#: wannamigrate/site/forms.py:27 wannamigrate/site/forms.py:35
+#: wannamigrate/site/forms.py:81 wannamigrate/site/forms.py:127
 msgid "E-mail"
 msgstr ""
 
@@ -5078,87 +2670,195 @@ msgstr ""
 msgid "Work Anywhere. Live Anywhere."
 msgstr ""
 
-#: templates/site/layouts/main.html:80
-msgid "HOW IT WORKS"
+#: templates/site/layouts/form.html:14
+msgid "Back"
 msgstr ""
 
-#: templates/site/layouts/main.html:81
-msgid "CONTACT US"
+#: templates/site/layouts/form.html:15
+msgid "Save"
 msgstr ""
 
 #: templates/site/layouts/main.html:85
+msgid "HOW IT WORKS"
+msgstr ""
+
+#: templates/site/layouts/main.html:86
+msgid "CONTACT US"
+msgstr ""
+
+#: templates/site/layouts/main.html:90
 msgid "My Profile"
 msgstr ""
 
-#: templates/site/popups/signup.html:52
+#: templates/site/moving.html:26 templates/site/situation.html:26
+#: templates/site/visa_application.html:26
+msgid "My situation"
+msgstr ""
+
+#: templates/site/moving.html:27 templates/site/situation.html:27
+#: templates/site/visa_application.html:27
+msgid "Visa application"
+msgstr ""
+
+#: templates/site/moving.html:28 templates/site/situation.html:28
+#: templates/site/visa_application.html:28
+msgid "Moving to "
+msgstr ""
+
+#: templates/site/moving.html:37
+msgid ""
+"Come back soon.  While you're reading this we're working to improve and "
+"complete this BETA version.  Thanks :)"
+msgstr ""
+
+#: templates/site/moving.html:46 templates/site/visa_application.html:44
+#: templates/site/visa_application.html:113
+#: templates/site/visa_application.html:189
+msgid "STEP"
+msgstr ""
+
+#: templates/site/myaccount/edit_info.html:18
+msgid "Edit account info"
+msgstr ""
+
+#: templates/site/myaccount/edit_info.html:19
+msgid "Edit your account settings."
+msgstr ""
+
+#: templates/site/myaccount/edit_password.html:18
+msgid "Edit account's password"
+msgstr ""
+
+#: templates/site/myaccount/edit_password.html:19
+msgid "Edit your password."
+msgstr ""
+
+#: templates/site/myaccount/view.html:18
+msgid "My Account"
+msgstr ""
+
+#: templates/site/myaccount/view.html:19
+msgid "Your account settings."
+msgstr ""
+
+#: templates/site/myaccount/view.html:29
+msgid "Avatar"
+msgstr ""
+
+#: templates/site/myaccount/view.html:47
+msgid "E-mail and preferred language"
+msgstr ""
+
+#: templates/site/myaccount/view.html:50 wannamigrate/core/models.py:179
+#: wannamigrate/core/models.py:202 wannamigrate/site/forms.py:126
+msgid "Name"
+msgstr ""
+
+#: templates/site/myaccount/view.html:58
+msgid "Preferred language"
+msgstr ""
+
+#: templates/site/myaccount/view.html:63 wannamigrate/site/forms.py:28
+#: wannamigrate/site/forms.py:43
+msgid "Password"
+msgstr ""
+
+#: templates/site/myaccount/view.html:65
+msgid "Change password"
+msgstr ""
+
+#: templates/site/popups/signup.html:58 templates/site/popups/signup.html:165
 msgid "Sign in"
 msgstr ""
 
-#: templates/site/popups/signup.html:64
+#: templates/site/popups/signup.html:70
 msgid "Sign up"
 msgstr ""
 
-#: templates/site/popups/signup.html:76
+#: templates/site/popups/signup.html:82
 msgid "Password recovery"
 msgstr ""
 
-#: templates/site/popups/signup.html:141
+#: templates/site/popups/signup.html:147
 msgid ""
 "We have successfully sent you an email with a link to reset your password."
 msgstr ""
 
-#: templates/site/popups/signup.html:175
+#: templates/site/popups/signup.html:181
 msgid "Login"
 msgstr ""
 
-#: templates/site/popups/signup.html:177
+#: templates/site/popups/signup.html:183
 msgid "Forgot your password?"
 msgstr ""
 
-#: templates/site/popups/signup.html:190
+#: templates/site/popups/signup.html:196
 msgid "Sign-Up"
 msgstr ""
 
-#: templates/site/popups/signup.html:197
+#: templates/site/popups/signup.html:203
 msgid "Alternatively, you can sign up using:"
 msgstr ""
 
-#: templates/site/popups/signup.html:199
+#: templates/site/popups/signup.html:205
 msgid "Login with Facebook"
 msgstr ""
 
-#: templates/site/popups/signup.html:200
+#: templates/site/popups/signup.html:206
 msgid "Login with Linkedin"
 msgstr ""
 
-#: templates/site/popups/signup.html:201
+#: templates/site/popups/signup.html:207
 msgid "Login with Google"
 msgstr ""
 
-#: templates/site/popups/signup.html:207
+#: templates/site/popups/signup.html:213
 msgid "Don't have an account? Sign-Up"
 msgstr ""
 
-#: templates/site/popups/signup.html:211
+#: templates/site/popups/signup.html:217
 msgid "Already registered?"
 msgstr ""
 
-#: templates/site/popups/signup.html:211
-msgid "Proceed to Login"
+#: templates/site/popups/signup.html:217
+msgid "Log in"
 msgstr ""
 
-#: templates/site/popups/signup.html:217
+#: templates/site/popups/signup.html:223
 msgid ""
 "Fill in your email address and you will receive a link to reset your "
 "password."
 msgstr ""
 
-#: templates/site/popups/signup.html:221
+#: templates/site/popups/signup.html:227
 msgid "Recover Password"
 msgstr ""
 
-#: templates/site/popups/signup.html:224
+#: templates/site/popups/signup.html:230
 msgid "Go Back"
+msgstr ""
+
+#: templates/site/popups/signup.html:236
+msgid ""
+"If you click \"Log in with Facebook/Linkedin/Twitter\" and are not our user, "
+"you will be registered and you agree to Wanna Migrates <a class=\"bold green"
+"\" href=\"#\">Terms and Conditions</a> and  <a class=\"bold green\" href=\"#"
+"\">Privacy Police</a>"
+msgstr ""
+
+#: templates/site/popups/signup.html:241
+msgid ""
+"By clicking on Sign up, you will be automatically accepting Wanna Migrates "
+"<a class=\"bold green\" href=\"#\">Terms and Conditions</a> and  <a class="
+"\"bold green\" href=\"#\">Privacy Police</a>"
+msgstr ""
+
+#: templates/site/popups/signup.html:246
+msgid "Still having problems? Please go to our"
+msgstr ""
+
+#: templates/site/popups/signup.html:246
+msgid "Contact Form"
 msgstr ""
 
 #: templates/site/reset_password.html:34
@@ -5169,51 +2869,365 @@ msgstr ""
 msgid "Click Here to go back and login again"
 msgstr ""
 
+#: templates/site/situation.html:57 templates/site/situation.html.py:62
+#: templates/site/situation.html:67 templates/site/situation.html.py:72
+msgid "of"
+msgstr ""
+
+#: templates/site/situation.html:86
+msgid "You have enough points"
+msgstr ""
+
+#: templates/site/situation.html:88
+msgid "You still don’t have enough points"
+msgstr ""
+
+#: templates/site/situation.html:91
+msgid "HINTS"
+msgstr ""
+
 #: templates/site/tour.html:20
 msgid "How it Works"
 msgstr ""
 
 #: templates/site/tour.html:23
 msgid ""
-"is the first immigration platform to allow the user<br />to discover awesome "
-"countries where he can get a visa to live and work."
+"can change your life by helping you<br />to move to a new awesome country!"
 msgstr ""
 
-#: templates/site/tour.html:26
-msgid ""
-"By using the Points-Based Immigration System, our software is able to "
-"match<br /> you with countries in need of people with your profile."
-msgstr ""
-
-#: templates/site/tour.html:29
+#: templates/site/tour.html:27
 msgid "IT WORKS LIKE THIS:"
 msgstr ""
 
-#: templates/site/tour.html:34
+#: templates/site/tour.html:32
 msgid ""
-"<span class=\"makePurple makeBold\">Fill out a form</span> with information "
-"about your personal and professional profile."
+"<span class=\"makePurple makeBold\">Edit Your Information:</span> Provide "
+"your data by filling out the forms."
 msgstr ""
 
-#: templates/site/tour.html:42
+#: templates/site/tour.html:40
 msgid ""
-"You can check your situation and see if you have <span class=\"makePurple "
-"makeBold\">achieved the minimum points for each country</span>.  If not, we "
-"will give you personalized hints to get more points."
+"<span class=\"makePurple makeBold\">Check Your Points Per Country:</span> "
+"You can see in what countries you get enought points to obtain a visa."
 msgstr ""
 
-#: templates/site/tour.html:50
+#: templates/site/tour.html:48
 msgid ""
-"You will see a list of countries where you can go and <span class="
-"\"makePurple makeBold\">all step-by-step information to apply for the visa</"
-"span>."
+"<span class=\"makePurple makeBold\">Get Help </span> to obtain the visa and "
+"move to your new country."
 msgstr ""
 
-#: templates/site/tour.html:58
+#: templates/site/visa_application.html:40
+#: templates/site/visa_application.html:109
+#: templates/site/visa_application.html:185
 msgid ""
-"After getting the visa <span class=\"makePurple makeBold\">we will still "
-"help you while you are moving</span>.  We will tell how to open bank "
-"accounts, find housing, etc..."
+"<strong>Follow the steps</strong> below to start your <strong>visa "
+"application</strong> for"
+msgstr ""
+
+#: templates/site/visa_application.html:48
+#: templates/site/visa_application.html:117
+#: templates/site/visa_application.html:193
+msgid "Get your passport ready"
+msgstr ""
+
+#: templates/site/visa_application.html:49
+#: templates/site/visa_application.html:118
+#: templates/site/visa_application.html:194
+msgid ""
+"If you still don't have a passport or need to renew it, you will have to do "
+"it before applying for the visa."
+msgstr ""
+
+#: templates/site/visa_application.html:50
+#: templates/site/visa_application.html:119
+#: templates/site/visa_application.html:195
+msgid ""
+"Passports are issued by specific government departments, such as the police, "
+"immigration dept., etc... This will vary from country to country."
+msgstr ""
+
+#: templates/site/visa_application.html:52
+msgid "Provide proofs that you have competent English skills"
+msgstr ""
+
+#: templates/site/visa_application.html:53
+msgid "You need to have one of the following:"
+msgstr ""
+
+#: templates/site/visa_application.html:54
+msgid "Score of at least 6 for each of the four test components."
+msgstr ""
+
+#: templates/site/visa_application.html:55
+msgid ""
+"Score of at least 'B' for each of the four test components (OET) or 12 for "
+"listening, 13 for reading, 21 for writing and 18 for speaking (TOEFL iBT)."
+msgstr ""
+
+#: templates/site/visa_application.html:56
+msgid "Score of at least 50 in each of the four test components."
+msgstr ""
+
+#: templates/site/visa_application.html:57
+msgid ""
+"Valid passport from the United Kingdom, the United States of America, "
+"Canada, New Zealand or the Republic of Ireland and you are a citizen of that "
+"country."
+msgstr ""
+
+#: templates/site/visa_application.html:59
+msgid "Get your occupation recognized by Australia"
+msgstr ""
+
+#: templates/site/visa_application.html:60
+msgid ""
+"You will have to apply for an Australian Skills Assessment from the relevant "
+"authority on your field of work."
+msgstr ""
+
+#: templates/site/visa_application.html:61
+msgid ""
+"In almost all cases, assessing bodies will require that you have post-"
+"secondary, such as university or trade, qualifications in order to receive a "
+"positive assessment of your skills."
+msgstr ""
+
+#: templates/site/visa_application.html:62
+msgid "(More details here soon)"
+msgstr ""
+
+#: templates/site/visa_application.html:76
+msgid "Submit an Expression of Interest"
+msgstr ""
+
+#: templates/site/visa_application.html:77
+msgid ""
+"In Australia you need to be invited to apply for the visa.  To be invited "
+"you need to have the minimum number of points required and then submit an "
+"expression of interest, which is an online form."
+msgstr ""
+
+#: templates/site/visa_application.html:78
+#: templates/site/visa_application.html:129
+#: templates/site/visa_application.html:135
+#: templates/site/visa_application.html:151
+#: templates/site/visa_application.html:164
+#: templates/site/visa_application.html:175
+#: templates/site/visa_application.html:214
+#: templates/site/visa_application.html:215
+msgid "Click Here"
+msgstr ""
+
+#: templates/site/visa_application.html:78
+msgid "to send your expression of interest."
+msgstr ""
+
+#: templates/site/visa_application.html:93
+#: templates/site/visa_application.html:230
+msgid "Send your Visa Application"
+msgstr ""
+
+#: templates/site/visa_application.html:94
+msgid ""
+"After you receive an invitation from the Governmenet of Australia you will "
+"be able to send your visa application."
+msgstr ""
+
+#: templates/site/visa_application.html:95
+msgid ""
+"Remember that after the invitation, you have only 60 days to apply and you "
+"will have to provide all the documentation, so make sure you have it all "
+"prepared even before you send your Expression of Interest:"
+msgstr ""
+
+#: templates/site/visa_application.html:96
+msgid "Proofs for English skills."
+msgstr ""
+
+#: templates/site/visa_application.html:97
+msgid "Skills Assessment for your occupation."
+msgstr ""
+
+#: templates/site/visa_application.html:98
+msgid "Proofs for education degrees"
+msgstr ""
+
+#: templates/site/visa_application.html:99
+msgid "Personal Identification Documentation (including Passport)"
+msgstr ""
+
+#: templates/site/visa_application.html:100
+msgid "Policy and Medical checks (certificates)"
+msgstr ""
+
+#: templates/site/visa_application.html:121
+msgid "Provide proofs for Minimum Language Requirement"
+msgstr ""
+
+#: templates/site/visa_application.html:122
+msgid ""
+"It can be for English or French. You will need to provide one of the "
+"following certificates:"
+msgstr ""
+
+#: templates/site/visa_application.html:123
+msgid "Score of at least 7 for each of the four test components."
+msgstr ""
+
+#: templates/site/visa_application.html:124
+msgid "Score of at least 6 for each of the four test components"
+msgstr ""
+
+#: templates/site/visa_application.html:125
+msgid ""
+"Score of: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 (Reading), "
+"310 – 348 (Writing)."
+msgstr ""
+
+#: templates/site/visa_application.html:127
+msgid "Provide proofs for Minimum Education Requirement"
+msgstr ""
+
+#: templates/site/visa_application.html:128
+msgid ""
+"If your degree was obtained outside Canada, you will need an Educational "
+"Credential Assessment (ECA) report issued by an organization designated by "
+"Citizenship and Immigration Canada. "
+msgstr ""
+
+#: templates/site/visa_application.html:129
+#: templates/site/visa_application.html:135
+msgid "to have your education assessed."
+msgstr ""
+
+#: templates/site/visa_application.html:131
+msgid "Provide proofs for Minimum Work Experience Requirements"
+msgstr ""
+
+#: templates/site/visa_application.html:132
+msgid "You will have to prove all of the following:"
+msgstr ""
+
+#: templates/site/visa_application.html:133
+msgid ""
+"You must have at least one year of continuous full-time (or the equivalent "
+"in continuous part-time) paid work experience in the primary occupation you "
+"specify in your application."
+msgstr ""
+
+#: templates/site/visa_application.html:134
+msgid "You must have had this experience within the last 10 years."
+msgstr ""
+
+#: templates/site/visa_application.html:149
+msgid "Fill Out The Application"
+msgstr ""
+
+#: templates/site/visa_application.html:150
+msgid ""
+"You will need the documents listed above and also Police Certificates and "
+"Translations of all document, if not in English or French."
+msgstr ""
+
+#: templates/site/visa_application.html:151
+msgid "Then you need to fill out all the following forms:"
+msgstr ""
+
+#: templates/site/visa_application.html:162
+msgid "Pay the Fees"
+msgstr ""
+
+#: templates/site/visa_application.html:163
+msgid ""
+"Complete the Fee Payment Form - Application for Permanent Residence (IMM "
+"5620) and include it with your application to the CIO. On-line payments are "
+"not accepted by the CIO."
+msgstr ""
+
+#: templates/site/visa_application.html:164
+msgid "to get the form."
+msgstr ""
+
+#: templates/site/visa_application.html:173
+msgid "Send you application by mail"
+msgstr ""
+
+#: templates/site/visa_application.html:174
+msgid ""
+"Put the completed forms, supporting documents and fee payment in a 23 cm x "
+"30.5 cm (9″ x 12″) envelope and send your completed application."
+msgstr ""
+
+#: templates/site/visa_application.html:175
+msgid "to get the address."
+msgstr ""
+
+#: templates/site/visa_application.html:209
+msgid "Submit an Expression of Interest (EOI)"
+msgstr ""
+
+#: templates/site/visa_application.html:210
+msgid ""
+"On the EOI form you tell us about yourself, your family, your skills and "
+"your work experience. As you complete your EOI, you claim points. However, "
+"you do not have to provide evidence at this point."
+msgstr ""
+
+#: templates/site/visa_application.html:211
+msgid ""
+"Submitting an online EOI costs a fee of NZ$510.00. Submitting a paper-based "
+"EOI costs a fee of NZ$650. Online EOIs cost less because they require less "
+"processing than paper-based EOIs."
+msgstr ""
+
+#: templates/site/visa_application.html:212
+msgid ""
+"If your EOI has a score of 100 points or more, it goes in the pool of EOIs. "
+"Every two weeks we automatically select EOIs with a points score of 140 or "
+"over from the pool. Then we select EOIs with a points score between 100 and "
+"139 which include points for a skilled job or job offer. If we still have "
+"spaces available, we use additional criteria to select lower-scoring EOIs."
+msgstr ""
+
+#: templates/site/visa_application.html:213
+msgid ""
+"EOIs are only valid for six months. If your EOI is not selected within six "
+"months, it will lapse and be withdrawn from the pool. Your EOI fee will not "
+"be refunded."
+msgstr ""
+
+#: templates/site/visa_application.html:214
+msgid "for online application."
+msgstr ""
+
+#: templates/site/visa_application.html:215
+msgid "for paper application."
+msgstr ""
+
+#: templates/site/visa_application.html:231
+msgid ""
+"After you receive an invitation to apply, you need to check the information "
+"you provided in your EOI is still up to date and correct. You also need to "
+"provide:"
+msgstr ""
+
+#: templates/site/visa_application.html:232
+msgid "evidence to support the points you claimed in your EOI."
+msgstr ""
+
+#: templates/site/visa_application.html:233
+msgid ""
+"proof that you and everyone else on your application meet all of our health, "
+"character and English language requirements."
+msgstr ""
+
+#: templates/site/visa_application.html:234
+msgid ""
+"You then need to send all documents and evidence, with your application form "
+"and a fee. You must make your application within four months of being "
+"invited to apply for residence. Any applications received after four months "
+"will not be accepted.."
 msgstr ""
 
 #: wannamigrate/_settings/base.py:40
@@ -5232,51 +3246,42 @@ msgstr ""
 msgid "Contact from site"
 msgstr ""
 
-#: wannamigrate/core/models.py:20
+#: wannamigrate/core/models.py:18
 msgid "created date"
 msgstr ""
 
-#: wannamigrate/core/models.py:21
+#: wannamigrate/core/models.py:19
 msgid "modified date"
 msgstr ""
 
-#: wannamigrate/core/models.py:37 wannamigrate/core/models.py:55
-#: wannamigrate/core/models.py:172
+#: wannamigrate/core/models.py:32 wannamigrate/core/models.py:218
 msgid "question"
 msgstr ""
 
-#: wannamigrate/core/models.py:38
-msgid "category"
-msgstr ""
-
-#: wannamigrate/core/models.py:39
+#: wannamigrate/core/models.py:33
 msgid "Answer"
 msgstr ""
 
-#: wannamigrate/core/models.py:56 wannamigrate/site/forms.py:121
-msgid "Name"
-msgstr ""
-
-#: wannamigrate/core/models.py:72 wannamigrate/core/models.py:88
-#: wannamigrate/core/models.py:149 wannamigrate/core/models.py:235
+#: wannamigrate/core/models.py:49 wannamigrate/core/models.py:65
+#: wannamigrate/core/models.py:147 wannamigrate/core/models.py:280
 msgid "name"
 msgstr ""
 
-#: wannamigrate/core/models.py:89
+#: wannamigrate/core/models.py:66
 msgid "continent"
 msgstr ""
 
-#: wannamigrate/core/models.py:90 wannamigrate/core/models.py:150
+#: wannamigrate/core/models.py:67 wannamigrate/core/models.py:148
 msgid "code"
 msgstr ""
 
-#: wannamigrate/core/models.py:91
-msgid "immigration enabled?"
+#: wannamigrate/core/models.py:68
+msgid "immigration enabled"
 msgstr ""
 
-#: wannamigrate/core/models.py:103 wannamigrate/core/models.py:289
-#: wannamigrate/core/models.py:385 wannamigrate/core/models.py:399
-#: wannamigrate/core/models.py:437 wannamigrate/core/models.py:452
+#: wannamigrate/core/models.py:103 wannamigrate/core/models.py:376
+#: wannamigrate/core/models.py:517 wannamigrate/core/models.py:531
+#: wannamigrate/core/models.py:615 wannamigrate/core/models.py:629
 msgid "country"
 msgstr ""
 
@@ -5288,249 +3293,381 @@ msgstr ""
 msgid "points"
 msgstr ""
 
-#: wannamigrate/core/models.py:173
+#: wannamigrate/core/models.py:169 wannamigrate/site/forms.py:285
+msgid "Select Language"
+msgstr ""
+
+#: wannamigrate/core/models.py:178
+msgid "category"
+msgstr ""
+
+#: wannamigrate/core/models.py:219
 msgid "help text"
 msgstr ""
 
-#: wannamigrate/core/models.py:234
+#: wannamigrate/core/models.py:279
 msgid "e-mail"
 msgstr ""
 
-#: wannamigrate/core/models.py:236
-msgid "is active?"
+#: wannamigrate/core/models.py:281
+msgid "is active"
 msgstr ""
 
-#: wannamigrate/core/models.py:237
-msgid "is admin?"
+#: wannamigrate/core/models.py:282
+msgid "is admin"
 msgstr ""
 
-#: wannamigrate/core/models.py:273 wannamigrate/core/models.py:288
-#: wannamigrate/core/models.py:306 wannamigrate/core/models.py:321
-#: wannamigrate/core/models.py:336 wannamigrate/core/models.py:361
-#: wannamigrate/core/models.py:384 wannamigrate/core/models.py:398
-#: wannamigrate/core/models.py:417 wannamigrate/core/models.py:436
-#: wannamigrate/core/models.py:450
+#: wannamigrate/core/models.py:284 wannamigrate/site/forms.py:285
+msgid "Language"
+msgstr ""
+
+#: wannamigrate/core/models.py:334 wannamigrate/core/models.py:375
+#: wannamigrate/core/models.py:393 wannamigrate/core/models.py:434
+#: wannamigrate/core/models.py:449 wannamigrate/core/models.py:474
+#: wannamigrate/core/models.py:516 wannamigrate/core/models.py:530
+#: wannamigrate/core/models.py:550 wannamigrate/core/models.py:568
+#: wannamigrate/core/models.py:614 wannamigrate/core/models.py:628
 msgid "user"
 msgstr ""
 
-#: wannamigrate/core/models.py:274
-msgid "studied in regional australia?"
+#: wannamigrate/core/models.py:335
+msgid "Did you complete any studies in a regional part of australia"
 msgstr ""
 
-#: wannamigrate/core/models.py:275
-msgid "partner education level"
+#: wannamigrate/core/models.py:336
+msgid "partner/spouse education level"
 msgstr ""
 
-#: wannamigrate/core/models.py:290
+#: wannamigrate/core/models.py:377
 msgid "education level"
 msgstr ""
 
-#: wannamigrate/core/models.py:291
-msgid "school"
+#: wannamigrate/core/models.py:378
+msgid "school/university"
 msgstr ""
 
-#: wannamigrate/core/models.py:292
+#: wannamigrate/core/models.py:379
 msgid "start year"
 msgstr ""
 
-#: wannamigrate/core/models.py:293
+#: wannamigrate/core/models.py:380
 msgid "end year"
 msgstr ""
 
-#: wannamigrate/core/models.py:307
-msgid "credentialled community language in australia?"
+#: wannamigrate/core/models.py:394
+msgid "partner/spouse english level"
 msgstr ""
 
-#: wannamigrate/core/models.py:308
-msgid "partner english level"
+#: wannamigrate/core/models.py:395
+msgid "partner/spouse french level"
 msgstr ""
 
-#: wannamigrate/core/models.py:309
-msgid "partner french level"
-msgstr ""
-
-#: wannamigrate/core/models.py:322
+#: wannamigrate/core/models.py:435
 msgid "language"
 msgstr ""
 
-#: wannamigrate/core/models.py:323
+#: wannamigrate/core/models.py:436
 msgid "language level"
 msgstr ""
 
-#: wannamigrate/core/models.py:337
+#: wannamigrate/core/models.py:450
 msgid "is logout"
 msgstr ""
 
-#: wannamigrate/core/models.py:353
+#: wannamigrate/core/models.py:466
 msgid "Female"
 msgstr ""
 
-#: wannamigrate/core/models.py:354
+#: wannamigrate/core/models.py:467
 msgid "Male"
 msgstr ""
 
-#: wannamigrate/core/models.py:362
+#: wannamigrate/core/models.py:475
 msgid "country of residence"
 msgstr ""
 
-#: wannamigrate/core/models.py:363
+#: wannamigrate/core/models.py:476
 msgid "avatar"
 msgstr ""
 
-#: wannamigrate/core/models.py:368
+#: wannamigrate/core/models.py:481
 msgid "birth date"
 msgstr "data de nascimento"
 
-#: wannamigrate/core/models.py:369
+#: wannamigrate/core/models.py:482
 msgid "gender"
 msgstr "sexo"
 
-#: wannamigrate/core/models.py:370
-msgid "Would you be willing to live in Regional Australia?"
+#: wannamigrate/core/models.py:483
+#, fuzzy
+#| msgid "Would you be willing to live in Regional Australia?"
+msgid "Would you be willing to live in Regional Australia"
 msgstr "Você aceitaria morar em uma parte interiorana da Austrália?"
 
-#: wannamigrate/core/models.py:371
-msgid "Any family members who are citizens in other countries?"
+#: wannamigrate/core/models.py:484
+msgid "Any family members who are citizens in other countries"
 msgstr ""
 
-#: wannamigrate/core/models.py:400
+#: wannamigrate/core/models.py:532
 msgid "total score"
 msgstr ""
 
-#: wannamigrate/core/models.py:401
+#: wannamigrate/core/models.py:533
 msgid "score personal"
 msgstr ""
 
-#: wannamigrate/core/models.py:402
+#: wannamigrate/core/models.py:534
 msgid "score language"
 msgstr ""
 
-#: wannamigrate/core/models.py:403
+#: wannamigrate/core/models.py:535
 msgid "score education"
 msgstr ""
 
-#: wannamigrate/core/models.py:404
+#: wannamigrate/core/models.py:536
 msgid "score work"
 msgstr ""
 
-#: wannamigrate/core/models.py:418 wannamigrate/core/models.py:451
+#: wannamigrate/core/models.py:551
+msgid "percentage personal"
+msgstr ""
+
+#: wannamigrate/core/models.py:552
+msgid "percentage language"
+msgstr ""
+
+#: wannamigrate/core/models.py:553
+msgid "percentage education"
+msgstr ""
+
+#: wannamigrate/core/models.py:554
+msgid "percentage work"
+msgstr ""
+
+#: wannamigrate/core/models.py:555
+msgid "updating now"
+msgstr ""
+
+#: wannamigrate/core/models.py:569
 msgid "occupation"
 msgstr ""
 
-#: wannamigrate/core/models.py:419
-msgid "partner skills?"
+#: wannamigrate/core/models.py:570
+msgid "Do you have a partner/spouse with proved skills"
 msgstr ""
 
-#: wannamigrate/core/models.py:420
-msgid "willing to invest?"
+#: wannamigrate/core/models.py:571
+msgid "are you willing to invest money on the country of destination"
 msgstr ""
 
-#: wannamigrate/core/models.py:421
-msgid "startup letter from canada?"
+#: wannamigrate/core/models.py:572
+msgid "do you have a startup recommendation letter approved by canada"
 msgstr ""
 
-#: wannamigrate/core/models.py:422
-msgid "professional year course in australia?"
+#: wannamigrate/core/models.py:573
+msgid "Did you complete a Professional Year Course in Australia"
 msgstr ""
 
-#: wannamigrate/core/models.py:423
-msgid "has partner worked or studied in canada?"
+#: wannamigrate/core/models.py:574
+msgid "If you have a partner/spouse, has he/she worked or studied in Canada"
 msgstr ""
 
-#: wannamigrate/core/models.py:453
+#: wannamigrate/core/models.py:575
+msgid "Do you have a work offer overseas"
+msgstr ""
+
+#: wannamigrate/core/models.py:630
 msgid "company"
 msgstr ""
 
-#: wannamigrate/core/models.py:454
-msgid "start date"
+#: wannamigrate/core/models.py:631
+msgid "Duration of Employment"
 msgstr ""
 
-#: wannamigrate/core/models.py:455
-msgid "end date"
+#: wannamigrate/core/util.py:209
+msgid "6 months"
 msgstr ""
 
-#: wannamigrate/site/forms.py:23 wannamigrate/site/forms.py:38
-msgid "Password"
+#: wannamigrate/core/util.py:211
+msgid "1 year"
 msgstr ""
 
-#: wannamigrate/site/forms.py:39
+#: wannamigrate/core/util.py:213
+msgid "10 years or more"
+msgstr ""
+
+#: wannamigrate/core/util.py:215
+#, python-format
+msgid "%s years"
+msgstr ""
+
+#: wannamigrate/core/util.py:217
+msgid "Select Duration"
+msgstr ""
+
+#: wannamigrate/site/forms.py:44
 msgid "Confirm Password"
 msgstr ""
 
-#: wannamigrate/site/forms.py:52
+#: wannamigrate/site/forms.py:57
 msgid "The two passwords do not match."
 msgstr ""
 
-#: wannamigrate/site/forms.py:67
+#: wannamigrate/site/forms.py:72
 msgid "E-Email Confirmation"
 msgstr ""
 
-#: wannamigrate/site/forms.py:68
+#: wannamigrate/site/forms.py:73
 msgid "Please confirm your e-mail address"
 msgstr ""
 
-#: wannamigrate/site/forms.py:69
+#: wannamigrate/site/forms.py:74
 msgid "Confirm E-mail"
 msgstr ""
 
-#: wannamigrate/site/forms.py:77
+#: wannamigrate/site/forms.py:82
 msgid "Password:"
 msgstr ""
 
-#: wannamigrate/site/forms.py:80
+#: wannamigrate/site/forms.py:85
 msgid "E-mail is required."
 msgstr ""
 
-#: wannamigrate/site/forms.py:81
+#: wannamigrate/site/forms.py:86
 msgid "Password is required"
 msgstr ""
 
-#: wannamigrate/site/forms.py:105
+#: wannamigrate/site/forms.py:110
 msgid "The two e-mails do not match."
 msgstr ""
 
-#: wannamigrate/site/forms.py:123
+#: wannamigrate/site/forms.py:128
 msgid "Message"
 msgstr ""
 
-#: wannamigrate/site/forms.py:134
+#: wannamigrate/site/forms.py:139
 msgid "Country of Residence"
 msgstr ""
 
-#: wannamigrate/site/forms.py:134 wannamigrate/site/forms.py:173
-msgid "Select Country"
-msgstr ""
-
-#: wannamigrate/site/forms.py:140
-msgid "DD/MM/YYYY"
-msgstr ""
-
-#: wannamigrate/site/forms.py:173
+#: wannamigrate/site/forms.py:180
 msgid "In Which Country"
 msgstr ""
 
-#: wannamigrate/site/forms.py:193
+#: wannamigrate/site/forms.py:206
 msgid "You must choose different countries on family overseas option."
 msgstr ""
 
-#: wannamigrate/site/views.py:85 wannamigrate/site/views.py:88
+#: wannamigrate/site/forms.py:249
+msgid "If you have a partner/spouse, what is his/her ENGLISH Level"
+msgstr ""
+
+#: wannamigrate/site/forms.py:249 wannamigrate/site/forms.py:250
+#: wannamigrate/site/forms.py:286 wannamigrate/site/forms.py:412
+msgid "Select Level"
+msgstr ""
+
+#: wannamigrate/site/forms.py:250
+msgid "If you have a partner/spouse, what is his/her FRENCH Level"
+msgstr ""
+
+#: wannamigrate/site/forms.py:286 wannamigrate/site/forms.py:412
+msgid "Level"
+msgstr ""
+
+#: wannamigrate/site/forms.py:360
+msgid "You must choose different languages."
+msgstr ""
+
+#: wannamigrate/site/forms.py:372
+msgid "If you have a partner/spouse, what is his/her highest Degree"
+msgstr ""
+
+#: wannamigrate/site/forms.py:372
+msgid "Select Degree"
+msgstr ""
+
+#: wannamigrate/site/forms.py:413 wannamigrate/site/forms.py:481
+msgid "Country"
+msgstr ""
+
+#: wannamigrate/site/forms.py:414
+msgid "Start Year"
+msgstr ""
+
+#: wannamigrate/site/forms.py:415
+msgid "End Year"
+msgstr ""
+
+#: wannamigrate/site/forms.py:430
+msgid "Category"
+msgstr ""
+
+#: wannamigrate/site/forms.py:430
+msgid "Select Area"
+msgstr ""
+
+#: wannamigrate/site/forms.py:431
+msgid "What is your occupation"
+msgstr ""
+
+#: wannamigrate/site/forms.py:482
+msgid "Duration"
+msgstr ""
+
+#: wannamigrate/site/forms.py:494
+msgid "From Which Country"
+msgstr ""
+
+#: wannamigrate/site/forms.py:520
+msgid "You must choose different countries on work offers overseas."
+msgstr ""
+
+#: wannamigrate/site/forms.py:592
+msgid "Old Password"
+msgstr ""
+
+#: wannamigrate/site/forms.py:595
+msgid "New Password"
+msgstr ""
+
+#: wannamigrate/site/forms.py:596
+msgid "Confirm New Password"
+msgstr ""
+
+#: wannamigrate/site/forms.py:618
+msgid "The old password does not match."
+msgstr ""
+
+#: wannamigrate/site/forms.py:622
+msgid "The new password and confirmation does not match."
+msgstr ""
+
+#: wannamigrate/site/views.py:116 wannamigrate/site/views.py:119
 msgid "Invalid Login. Please try again."
 msgstr ""
 
-#: wannamigrate/site/views.py:145
+#: wannamigrate/site/views.py:176
 msgid "There was an error while creating your user account."
 msgstr ""
 
-#: wannamigrate/site/views.py:155
+#: wannamigrate/site/views.py:186
 msgid ""
 "Invalid Information!<br />Make sure all fields are filled in and email and "
 "confirmation match."
 msgstr ""
 
-#: wannamigrate/site/views.py:190
+#: wannamigrate/site/views.py:221
 msgid "No user found with this e-mail address."
 msgstr ""
 
-#: wannamigrate/site/views.py:193
+#: wannamigrate/site/views.py:224
 msgid "Invalid e-mail address."
+msgstr ""
+
+#: wannamigrate/site/views.py:372 wannamigrate/site/views.py:407
+msgid "Data successfully updated."
+msgstr ""
+
+#: wannamigrate/site/views.py:847
+msgid "Select Occupation"
 msgstr ""

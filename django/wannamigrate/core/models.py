@@ -332,8 +332,8 @@ class UserEducation( BaseModel ):
         ( False, _( 'No' ) )
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    regional_australia_study = models.NullBooleanField( _( "studied in regional part of australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
-    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner education level' ), blank = True, null = True )
+    regional_australia_study = models.NullBooleanField( _( "Did you complete any studies in a regional part of australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner/spouse education level' ), blank = True, null = True )
 
     # META Options
     class Meta:
@@ -391,8 +391,8 @@ class UserLanguage( BaseModel ):
 
     # Model Attributes
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner english level' ), on_delete = models.PROTECT, blank = True, null = True  )
-    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner french level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner/spouse english level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner/spouse french level' ), on_delete = models.PROTECT, blank = True, null = True  )
 
     # META Options
     class Meta:
@@ -567,11 +567,11 @@ class UserWork( BaseModel ):
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     occupation = models.ForeignKey( Occupation, verbose_name = _( 'occupation' ), blank = True, null = True )
-    partner_skills = models.NullBooleanField( _( "Do you have a partner with proved skills" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    partner_skills = models.NullBooleanField( _( "Do you have a partner/spouse with proved skills" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     willing_to_invest = models.NullBooleanField( _( "are you willing to invest money on the country of destination" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     canadian_startup_letter = models.NullBooleanField( _( "do you have a startup recommendation letter approved by canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     australian_professional_year = models.NullBooleanField( _( "Did you complete a Professional Year Course in Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
-    canadian_partner_work_study_experience = models.NullBooleanField( _( "If you have a partner, has he/she worked or studied in Canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    canadian_partner_work_study_experience = models.NullBooleanField( _( "If you have a partner/spouse, has he/she worked or studied in Canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     work_offer = models.NullBooleanField( _( "Do you have a work offer overseas" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
 
     # META Options
