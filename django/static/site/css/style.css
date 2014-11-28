@@ -720,13 +720,13 @@ body{
     margin-bottom: 10px;
 }
 
-.movingStepsContainer p a{
+.movingStepsContainer p a, .halfWidth a{
     font-size: 16px;
     font-weight: 400;
 	color: #559008;
 }
 
-.movingStepsContent p a:hover{
+.movingStepsContent p a:hover, .halfWidth a:hover{
 	color: #845996;
 }
 
@@ -1239,7 +1239,7 @@ form .has-error input, form .has-error textarea, form .has-error select {
 	background: #111111;
 }
 .staticFooter > div{
-	width: 390px;
+	width: 395px;
 	height: 70px;
 	margin: 0 auto;
 }
