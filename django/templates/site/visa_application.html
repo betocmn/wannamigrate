@@ -38,7 +38,6 @@
 
                 <p class="movingIntroduction">
                     {% trans "<strong>Follow the steps</strong> below to start your <strong>visa application</strong> for" %} {{ country_name_as_label }}:
-
                 </p>
 
                 <div class="movingStepsNumber">
@@ -74,11 +73,34 @@
                 <div class="movingStepsContent">
 
                     <h3>&#149; {% trans "Submit an Expression of Interest" %}</h3>
-                    <p>{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
-                    <p>{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
+                    <p>{% trans "In Australia you need to be invited to apply for the visa.  To be invited you need to have the minimum number of points required and then submit an expression of interest, which is an online form." %}</p>
+                    <p><a href="https://skillselect.gov.au/SKILLSELECT/ExpressionOfInterest/PreReg/Start" target="_blank">{% trans "Click Here" %}</a> {% trans "to send your expression of interest." %}</p>
 
+                    <br />
+                    <br />
+                    <img src="{% static "site/img/australia-eoi-form.png" %}" />
 
                 </div>
+
+                <div class="clear" style="height:50px;"> </div>
+
+                <div class="movingStepsNumber">
+                    STEP <span>3</span>
+                </div>
+                <div class="movingStepsContent">
+
+                    <h3>&#149; {% trans "Send your Visa Application" %}</h3>
+                    <p>{% trans "After you receive an invitation from the Governmenet of Australia you will be able to send your visa application." %}</p>
+                    <p>{% trans "Remember that after the invitation, you have only 60 days to apply and you will have to provide all the documentation, so make sure you have it all prepared even before you send your Expression of Interest:" %}</p>
+                    <p>-{% trans "Proofs for English skills." %}</p>
+                    <p>-{% trans "Skills Assessment for your occupation." %}</p>
+                    <p>-{% trans "Proofs for education degrees" %}</p>
+                    <p>-{% trans "Personal Identification Documentation (including Passport)" %}</p>
+                    <p>-{% trans "Policy and Medical checks (certificates)" %}</p>
+
+                </div>
+
+                <div class="clear" style="height:100px;"> </div>
 
             {% elif country_name == 'canada' %}
 
@@ -87,6 +109,8 @@
 
 
             {% endif %}
+
+
 
 
 		</div>
