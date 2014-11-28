@@ -152,6 +152,7 @@
 
 
 
+
 /** Alignment classes */
 .text-right
 {
@@ -164,4 +165,57 @@
 .text-left
 {
     text-align: left !important;
+}
+
+
+
+
+
+/** Messages, alerts, etc */
+.errorlist { color: #AA0000; }
+
+
+
+
+
+
+
+/** Input classes **/
+input[type=text], input[type=password], select
+{
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 20px;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    font-weight: 700;
+    color: #845996;
+}
+@media screen and (max-width: 320px) {
+    input[type=text], input[type=password] { width: 300px !important; }
+}
+
+select
+{
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    font-style: italic;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff url("../img/dropdown-arrow1.png") no-repeat 96% 5px;
+}
+
+select:hover
+{
+    background: #fff url("../img/dropdown-arrow1.png") no-repeat 96% -28px;
 }
