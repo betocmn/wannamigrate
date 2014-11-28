@@ -5,3 +5,4 @@
 infra/.vagrant
 wiki/*
 django/wannamigrate/_settings/local.py
+django/upload/*
