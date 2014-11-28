@@ -997,6 +997,18 @@ def situation( request, country_name ):
         percentage_work = math.floor( ( 100 * template_data['work_points'] ) / template_data['work_max_points'] )
     template_data['percentage_work_css_class'] = get_internal_section_progress_css_class( percentage_work )
 
+    # If user does not have enough points, we build a list of hints for that country on how to get more points
+    template_data['hints'] = []
+    if template_data['total_points'] < template_data['min_points']:
+
+        if country_name == 'australia':
+
+            # work offer
+            template_data['hints'].append( "If you can get a job offer from an Australia Employer (<a href='http://www.seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to sponsor your visa.  It will be quicker and cheaper." )
+
+            # skilled partner
+            template_data['hints'].append( "You can get 5 extra points if you have a partner/espouse (stable union) and he/she is under 50 years old and in the same occupation as you." )
+
     # Print Template
     return render( request, 'site/situation.html', template_data )
 

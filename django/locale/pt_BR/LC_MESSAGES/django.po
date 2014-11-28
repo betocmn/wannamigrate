@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 19:25+0000\n"
+"POT-Creation-Date: 2014-11-28 20:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2576,7 +2576,8 @@ msgid ""
 "Choose a <span class=\"bold\">country</span>, obtain the <span class=\"bold"
 "\">visa</span> and <span class=\"bold\">move!</span>"
 msgstr ""
-"Decida o <span class=\"bold\">país</span>, consiga o <span class=\"bold\">visto</span> e <span class=\"bold\">mude!</span>"
+"Decida o <span class=\"bold\">país</span>, consiga o <span class=\"bold"
+"\">visto</span> e <span class=\"bold\">mude!</span>"
 
 #: templates/site/home.html:81 templates/site/home.html.py:144
 #: templates/site/home.html:208 templates/site/home.html.py:218
@@ -2609,8 +2610,9 @@ msgid ""
 "<span class=\"bold\">Wanna Migrate</span> is doing a superb job by assisting "
 "people to discover a new country to live and get the visa. I love it!"
 msgstr ""
-"O <span class=\"bold\">Wanna Migrate</span> me ajudou a ver todas as possibilidades que eu tinha "
-"e a conseguir meu tão sonhado visto permanente da Austrália. "
+"O <span class=\"bold\">Wanna Migrate</span> me ajudou a ver todas as "
+"possibilidades que eu tinha e a conseguir meu tão sonhado visto permanente "
+"da Austrália. "
 
 #: templates/site/home.html:114
 msgid "Creative Director in Australia"
@@ -2944,13 +2946,21 @@ msgstr "de"
 msgid "You have enough points"
 msgstr "Você tem pontos suficientes"
 
-#: templates/site/situation.html:88
-msgid "You still don’t have enough points"
-msgstr "Você ainda não tem pontos suficientes"
-
-#: templates/site/situation.html:91
+#: templates/site/situation.html:89 templates/site/situation.html.py:106
 msgid "HINTS"
 msgstr "DICAS"
+
+#: templates/site/situation.html:92
+msgid "<strong>Congratulations!</strong> You have enough points to get a visa."
+msgstr "<strong>Parabéns!</strong> Você tem pontos suficientes para conseguir o visto."
+
+#: templates/site/situation.html:96
+msgid "to see all steps for your visa application."
+msgstr "para ver todos passos para sua aplicação ao visto."
+
+#: templates/site/situation.html:103
+msgid "You still don’t have enough points"
+msgstr "Pontos insuficientes"
 
 #: templates/site/tour.html:20
 msgid "How it Works"

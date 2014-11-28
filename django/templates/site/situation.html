@@ -83,12 +83,43 @@
 		<div class="halfWidth">
 
             {% if total_points >= min_points %}
-			    <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{% trans "You have enough points" %}</div>
+
+                <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{% trans "You have enough points" %}</div>
+
+                <div class="smallLineBreak"></div>
+			    <p class="hints">{% trans "HINTS" %}</p>
+
+                <div id="hints">
+                    <div class="hintp">{% trans "<strong>Congratulations!</strong> You have enough points to get a visa." %}</div>
+                    <div class="hintp">&nbsp;</div>
+                    <div class="hintp">
+                        <a href="{% url 'site:visa_application' country_name %}">Click Here</a>
+                        {% trans "to see all steps for your visa application." %}
+                    </div>
+                    <div class="clear" style="height:20px;"> </div>
+
+                </div>
+
             {% else %}
+
                 <div class="warning"><img src="{% static "site/img/lock.png" %}" /> &nbsp;&nbsp;{% trans "You still don’t have enough points" %}</div>
+
+                <div class="smallLineBreak"></div>
+			    <p class="hints">{% trans "HINTS" %}</p>
+
+                    <div id="hints">
+
+                        {% for hint in hints %}
+                            <div class="hintq">!</div>
+                            <div class="hintp">{{ hint }}</div>
+                            <div class="clear" style="height:20px;"> </div>
+                        {% endfor %}
+
+                    </div>
+
             {% endif %}
-			<div class="smallLineBreak"></div>
-			<p class="hints">{% trans "HINTS" %}</p>
+
+
 
         <!--
 			<div id="hints">
