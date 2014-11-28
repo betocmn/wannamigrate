@@ -38,7 +38,7 @@ from django.utils import translation
 #######################
 # HOME-PAGE VIEWS
 #######################
-def home( request ):
+def home( request, static = None ):
     """
     Home-Page - Used as a provocative landing page to conquer new users
 
@@ -56,29 +56,16 @@ def home( request ):
 
 
     # Print Template
-    return render( request, 'site/home.html', template_data )
-
-
-def home_older_browsers( request ):
-    """
-    Home-Page - Used as a provocative landing page to conquer new users
-    (for browsers that doesn't support css3)
-
-    :param request:
-    :return String - The home page rendered:
-    """
-
-    # Initialize template data dictionary
-    template_data = {}
-
-    # Instantiate Forms
-    template_data['login_form'] = LoginForm()
-    template_data['signup_form'] = SignupForm()
-    template_data['recovery_form'] = PasswordRecoveryForm()
-
-
-    # Print Template
-    return render( request, 'site/home_older_browsers.html', template_data )
+    if static:
+        # Sets the css breakpoints to the template (From taller to smallest)
+        template_data[ 'breakpoint_prefix' ] = "static_max_"
+        template_data[ 'css_breakpoints' ] = [ "320" ]
+        return render( request, 'site/home_older_browsers.html', template_data )
+    else:
+        # Sets the css breakpoints to the template (From taller to smallest)
+        template_data[ 'breakpoint_prefix' ] = "max_"
+        template_data[ 'css_breakpoints' ] = [ "1920", "1366", "1280", "1024" ]
+        return render( request, 'site/home.html', template_data )
 
 
 #######################

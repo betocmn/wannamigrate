@@ -17,7 +17,11 @@
         <link rel="shortcut icon" href="{% static "favicon.ico" %}">
         
         <link rel="stylesheet" type="text/css" href="{% static "site/css/font-awesome.min.css"%}">
-        <link rel="stylesheet" type="text/css" href="{% static "site/css/main_older_browsers.css" %}">
+        {% for b in css_breakpoints %}
+        <link rel="stylesheet" type="text/css" href="{% static 'site/css/home/'|add:breakpoint_prefix|add:b|add:'.css' %}" media="(max-width: {{b}}px)">
+        {% endfor %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'site/css/home/static_max_320.css' %}" media="(min-width: 320px)">
 
         <!-- HTML5 shim for IE backwards compatibility -->
         <!--[if lt IE 9]>
