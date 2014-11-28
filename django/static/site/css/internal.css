@@ -105,6 +105,39 @@
 
 
 
+/** Exceptions pages */
+.info-container
+{
+    position: relative;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+.info-message
+{
+    display: inline-block;
+    text-align: left;
+}
+
+.info-message h2
+{
+    font-size: 1.5em;
+    color: #666;
+}
+
+.info-message h2 span.featured { color: #845996; font-size: 2em; }
+
+.info-message p
+{
+    max-width: 530px;
+    color: #888;
+}
+
+
+
+
 /** Editing layouts **/
 .edit-container
 {

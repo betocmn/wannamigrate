@@ -193,7 +193,7 @@ SceneController =
     SceneController.state = SceneControllerState.ON_SCENE_ENTER;
 
     console.log( "scene enter: " + SceneController.curr_page );
-    SceneController.appendURL();
+    //SceneController.appendURL();
     switch ( SceneController.curr_page )
     {
       case 0:

@@ -410,6 +410,19 @@ def edit_account_password( request ):
 # DASHBOARD VIEWS
 #######################
 @login_required
+def not_supported( request ):
+    """
+    Displays a page saying that the device is not supported.
+
+    :param request:
+    :return String - HTML from The not_supported page.
+    """
+    username_explode = request.user.name.split( ' ' )
+    first_name = username_explode[0]
+    return render( request, "site/not_supported.html", { "first_name" : first_name } )
+
+
+@login_required
 def dashboard( request ):
     """
     Process the dashboard page.
