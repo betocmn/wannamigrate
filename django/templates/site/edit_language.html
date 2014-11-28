@@ -45,6 +45,7 @@
             $( '#main_form div.which-country' ).formset({
                 prefix: '{{ user_language_proficiency_formset.prefix }}',
                 addCssClass: 'addAnother',
+                addText: '{% trans "add another" %}',
                 deleteCssClass: 'closeBtn',
                 deleteText: ''
             });
