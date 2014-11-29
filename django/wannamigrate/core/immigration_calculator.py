@@ -228,6 +228,16 @@ class ImmigrationCalculator( object ):
                 result['total'] += points
                 result[item['type']] += points
 
+        # If OCCUPATION is not in demand, we cannot allow to have enough points
+        in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
+        if in_demand == 0:
+            if self.country.id == settings.ID_COUNTRY_AUSTRALIA and result['total'] >= settings.MINIMUM_POINTS_AUSTRALIA:
+                result['total'] = int( settings.MINIMUM_POINTS_AUSTRALIA ) - 1
+            elif self.country.id == settings.ID_COUNTRY_CANADA and result['total'] >= settings.MINIMUM_POINTS_CANADA:
+                result['total'] = int( settings.MINIMUM_POINTS_CANADA ) - 1
+            elif self.country.id == settings.ID_COUNTRY_NEW_ZEALAND and result['total'] >= settings.MINIMUM_POINTS_NEW_ZEALAND:
+                result['total'] = int( settings.MINIMUM_POINTS_NEW_ZEALAND ) - 1
+
         return result
 
     def get_family_overseas_points( self, forced_value = None ):
