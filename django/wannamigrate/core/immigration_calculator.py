@@ -36,7 +36,7 @@ class ImmigrationCalculator( object ):
         settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
         settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
         settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience', settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'education' },
+        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'work' },
         settings.ID_QUESTION_SKILLED_PARTNER: { 'method': 'get_skilled_partner_points', 'type': 'work' },
         settings.ID_QUESTION_INVEST: { 'method': 'get_invest_points', 'type': 'work' },
         settings.ID_QUESTION_STARTUP_LETTER: { 'method': 'get_startup_letter_points', 'type': 'work' },
