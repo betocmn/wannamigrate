@@ -82,10 +82,13 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+
+                        {% if perms.core.admin_view_user %}
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa"></span></a>
+                            <a href="{% url 'admin:users' %}"><i class="fa fa-users fa-fw"></i> Users<span class="fa"></span></a>
 
                         </li>
+                        {% endif %}
                         <li>
                             <a href="#"><i class="fa fa-gears fa-fw"></i> System Settings<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

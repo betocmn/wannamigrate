@@ -11,7 +11,7 @@ from django.db import transaction
 from django.db.models import ProtectedError
 from wannamigrate.admin.forms import (
     LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm,
-    BaseAnswerFormSet, OccupationForm
+    BaseAnswerFormSet, OccupationForm, UserForm
 )
 from wannamigrate.core.models import Question, Answer, Country, CountryPoints, Occupation, OccupationCategory
 from wannamigrate.core.util import build_datatable_json
@@ -136,6 +136,162 @@ def home_index( request ):
 
     context = { 'user': request.user }
     return render( request, 'admin/home/index.html', context )
+
+
+#######################
+# USERS
+#######################
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_view_user' )
+def user_list( request ):
+    """
+    Lists all users with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    context = {}
+    return render( request, 'admin/user/list.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_view_user' )
+def user_list_json( request ):
+    """
+    Generates JSON for the listing (required for the JS plugin www.datatables.net)
+
+    :param: request
+    :return: String
+    """
+
+    # Query data
+    user = get_user_model()
+    objects = user.objects.filter( is_admin = False, is_superuser = False )
+
+    # settings
+    info = {
+        'fields_to_select': [ 'id', 'name', 'email' ],
+        'fields_to_search': [ 'id', 'name', 'email' ],
+        'default_order_by': 'id',
+        'url_base_name': 'user',
+    }
+
+    #build json data and return it to the screen
+    json = build_datatable_json( request, objects, info )
+    return HttpResponse( json )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_add_user' )
+def user_add( request ):
+    """
+    Add new  USER
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+
+    # Instantiate FORM
+    form = UserForm( request.POST or None )
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+
+        # Sets additional data
+        form.is_active = True
+        form.is_admin = False
+
+        # Saves User
+        user = form.save()
+        messages.success( request, 'User was successfully added.' )
+
+        # Sends Welcome Email to User
+        # TODO Change this to a celery/signal background task
+        Mailer.send_welcome_email( user )
+
+        # Redirect with success message
+        return HttpResponseRedirect( reverse( 'admin:user_details', args = ( user.id, ) ) )
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:users' ) }
+
+    # Print Template
+    return render( request, 'admin/user/add.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_view_user' )
+def user_details( request, user_id ):
+    """
+    View  USER page
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = user_id )
+
+    # Template data
+    context = { 'user': user }
+
+    # Print Template
+    return render( request, 'admin/user/details.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_change_user' )
+def user_edit( request, user_id ):
+    """
+    Edit  USER personal data
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = user_id )
+
+    # Instantiate FORM
+    form = UserForm( request.POST or None, instance = user )
+
+    # When form is submitted , it tries to validate and save data
+    if form.is_valid():
+        form.save()
+        messages.success( request, 'User was successfully updated.' )
+        return HttpResponseRedirect( reverse( 'admin:user_details', args = ( user_id, ) ) )
+
+    # Template data
+    context = { 'form': form, 'cancel_url': reverse( 'admin:user_details', args = ( user_id, ) ) }
+
+    # Print Template
+    return render( request, 'admin/user/edit.html', context )
+
+
+@user_passes_test( admin_check )
+@permission_required( 'core.admin_delete_user' )
+def user_delete( request, user_id ):
+    """
+    Delete  USER action.
+    In the case of users, we never delete them, we just put as 'INACTIVE'
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = user_id )
+
+    # mark as INACTIVE
+    user.is_active = False
+    user.save()
+
+    # Redirect with success message
+    messages.success( request, 'User was successfully marked as INACTIVE.')
+    return HttpResponseRedirect( reverse( 'admin:users' ) )
 
 
 #######################

@@ -62,6 +62,37 @@ class MyAccountForm( BaseModelForm ):
 
         return cleaned_data
 
+#######################
+# USERS
+#######################
+class UserForm( BaseModelForm ):
+    """
+    Form for ADD and EDIT USERS
+    """
+
+    class Meta:
+        model = get_user_model()
+        fields = [ 'name', 'email', 'is_active' ]
+        widgets = {
+            'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
+            'email': TextInput( attrs = { 'class': 'form-control' } )
+        }
+
+    def save( self, commit = True ):
+        """
+        Extra processing: Set additional default values for new users
+
+        :return: Dictionary
+        """
+        user = super( UserForm, self ).save( commit = False )
+        user.is_admin = True
+        if not user.password:
+            plain_password = get_user_model().objects.make_random_password()
+            user.set_password( plain_password )
+        if commit:
+            user.save()
+        return user
+
 
 #######################
 # ADMIN USERS
