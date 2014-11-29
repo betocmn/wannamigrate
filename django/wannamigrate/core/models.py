@@ -164,7 +164,7 @@ class Language( BaseModel ):
         languages = Language.objects.order_by( 'name' )
         result = []
         for language in languages:
-            result.append( ( language.id, _( language.name ) ) )
+            result.append( ( language.id, language.name ) )
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Language' ) )] + result  )
 

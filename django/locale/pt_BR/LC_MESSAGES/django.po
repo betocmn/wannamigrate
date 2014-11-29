@@ -3586,7 +3586,7 @@ msgstr "sexo"
 
 #: wannamigrate/core/models.py:483
 msgid "Would you be willing to live in Regional Australia"
-msgstr "Você aceitaria morar em uma parte interiorana da Austrália?"
+msgstr "Você aceitaria morar em uma parte interiorana da Austrália"
 
 #: wannamigrate/core/models.py:484
 msgid "Any family members who are citizens in other countries"
@@ -3646,7 +3646,7 @@ msgstr "Você pretende investir dinheiro no país de destino"
 
 #: wannamigrate/core/models.py:572
 msgid "do you have a startup recommendation letter approved by canada"
-msgstr "Você tem uma carta de recomendação aprovada pelo Canadá"
+msgstr "Você tem uma carta de recomendação de sua startup aprovada pelo Canadá"
 
 #: wannamigrate/core/models.py:573
 msgid "Did you complete a Professional Year Course in Australia"
