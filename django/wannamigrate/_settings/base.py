@@ -108,7 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 DEFAULT_FROM_EMAIL = 'Wanna Migrate <contact@wannamigrate.com>'
 
 # SMTP Config
-EMAIL_HOST = 'smtp.wannamigrate.com'
+EMAIL_HOST = 'smtpi.wannamigrate.com'
 EMAIL_HOST_USER = 'contact@wannamigrate.com'
 EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
