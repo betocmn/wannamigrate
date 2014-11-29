@@ -11,9 +11,9 @@
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
             <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
-            <meta name="Title" content="Wanna Migrate - Work Anywhere, Live Anywhere">
+            <meta name="Title" content="Wanna Migrate - {% trans "Live Abroad. Change your life." %}">
             <meta name="Robots" content="all">
-            <title>Wanna Migrate - Work Anywhere, Live Anywhere</title>
+            <title>Wanna Migrate - {% trans "Live Abroad. Change your life." %}</title>
             <link rel="shortcut icon" href="{% static "favicon.ico" %}">
             <link href="{% static 'site/css/font-awesome.min.css' %}" rel="stylesheet">
 
@@ -92,8 +92,8 @@
                     <span></span>
                 </a>
                 <div id="popup">
-                    <a href="{% url 'site:view_account' %}">My account</a>
-                    <a href="{% url 'site:logout' %}">Logout</a>
+                    <a href="{% url 'site:view_account' %}">{% trans "My account" %}</a>
+                    <a href="{% url 'site:logout' %}">{% trans "Logout" %}</a>
                 </div>
             </div>
         </div>

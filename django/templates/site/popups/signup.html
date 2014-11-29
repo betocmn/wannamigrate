@@ -106,7 +106,7 @@
         // Attach a submit handler to the Login Form
         $( ".ajax-submit" ).submit( function( event ) {
 
-            // TODO: SHOW LOADING..
+            // Clear Status
             clear_status();
 
             // Stop form from submitting normally
@@ -123,6 +123,11 @@
             if ( !validate_empty_fields( this, required_fields ) ) {
               return false;
             }
+
+            // show loading
+            var loading_img = '{% static "site/img/loading.gif" %}';
+            $( this ).before( '<div id="loader"><img src="'+loading_img+'" alt="Loading" title="Loading" /></div>' );
+            $( this).hide();
 
             // Get some values from elements on the page:
             var $form = $( this );
@@ -147,6 +152,8 @@
                     display_success_message( '{% trans "We have successfully sent you an email with a link to reset your password." %}' );
                 } else {
                     display_error_message( result, true );
+                    $form.show();
+                    $( "#loader" ).remove();
                 }
 
             }

@@ -407,7 +407,7 @@ class UserEducationHistoryForm( BaseModelForm ):
     Form for USER EDUCATION HISTORY data (degrees of education)
     """
 
-    YEARS = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year ) )
+    YEARS = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
 
     education_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_EDUCATION_DEGREE ), empty_label = _( 'Select Level' ) )
     country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
