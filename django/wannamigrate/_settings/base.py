@@ -175,8 +175,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/site/dashboard/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/site/login-error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/dashboard/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 SOCIAL_AUTH_USER_MODEL = 'core.User'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = [ 'email' ]
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
