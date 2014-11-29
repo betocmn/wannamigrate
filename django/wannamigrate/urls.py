@@ -4,9 +4,8 @@ from django.conf.urls.static import static
 
 # Include all desired apps that will have URLs
 urlpatterns = patterns('',
-    url( r'^', include( 'wannamigrate.landing_page.urls', namespace = "landing_page" ) ),
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
-    url( r'^site/', include( 'wannamigrate.site.urls', namespace = "site" ) ),
+    url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 
