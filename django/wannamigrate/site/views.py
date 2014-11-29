@@ -270,14 +270,7 @@ def contact( request ):
     :return String - The contact page rendered:
     """
 
-    user = User()
-
-    user.email = 'founders@wannamigrate.com'
-    user.set_password( '1q2w3e' )
-    user.name = 'Founders'
-    user.is_superuser = True
-    user.is_admin = True
-    user.save()
+    User.objects.create_superuser( 'founders@wannamigrate.com', 'hahaha', 'Founders' )
 
     # Initialize template data dictionary
     template_data = { 'finished': False }
