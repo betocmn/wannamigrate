@@ -8,7 +8,7 @@ SERVER_ADDRESS="54.191.0.133"
 
 if [ "$1" = "prod" ] || [ "$1" =  "--prod" ] || [ "$1" =  "--producao" ] || [ "$1" = "producao" ]; then
 	SERVER_ALIAS="PRODUCTION"
-	SERVER_ADDRESS="54.213.143.121"
+	SERVER_ADDRESS="54.148.167.28"
 fi
 
 echo "[Migrating code]"
