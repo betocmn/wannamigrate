@@ -140,11 +140,12 @@ def signup( request ):
 
         if form.is_valid():
 
+            name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
 
             # Create user
-            user = get_user_model().objects.create_user( email, name = '', password = password )
+            user = get_user_model().objects.create_user( email, name = name, password = password )
 
             if user is not None:
 

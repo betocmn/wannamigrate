@@ -116,7 +116,7 @@
             if ( this.id == 'login_form_email' ){
                 var required_fields = 'login_email,login_password';
             } else if ( this.id == 'signup_form_email' ){
-                var required_fields = 'signup_email,signup_email_confirmation,signup_password';
+                var required_fields = 'signup_name,signup_email,signup_email_confirmation,signup_password';
             } else {
                 var required_fields = 'recovery_email';
             }
@@ -126,7 +126,7 @@
 
             // show loading
             var loading_img = '{% static "site/img/loading.gif" %}';
-            $( this ).before( '<div id="loader"><img src="'+loading_img+'" alt="Loading" title="Loading" /></div>' );
+            $( this ).before( '<div id="loader" style="text-align:center;"><img src="'+loading_img+'" alt="Loading" title="Loading" /></div>' );
             $( this).hide();
 
             // Get some values from elements on the page:
@@ -140,6 +140,7 @@
             url: url,  // or just url: "/my-url/path/"
             data: {
                 csrfmiddlewaretoken: csrftoken,
+                name: $form.find( "input[name='name']" ).val(),
                 email: $form.find( "input[name='email']" ).val(),
                 email_confirmation: $form.find( "input[name='email_confirmation']" ).val(),
                 password: $form.find( "input[name='password']" ).val()
@@ -196,7 +197,7 @@
     <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
         {% csrf_token %}
         <div class="hidden ajax_spinner"></div>
-        
+        {{ signup_form.name }}
         {{ signup_form.email }}
         {{ signup_form.email_confirmation }}
         {{ signup_form.password }}

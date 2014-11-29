@@ -76,12 +76,14 @@ class SignupForm( BaseModelForm ):
 
     class Meta:
         model = get_user_model()
-        fields = [ 'email', 'password' ]
+        fields = [ 'name', 'email', 'password' ]
         widgets = {
+            'name': TextInput( attrs = { 'placeholder': _( 'Name' ), 'class': 'full', 'id': 'signup_name' } ),
             'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': 'full', 'id': 'signup_email' } ),
             'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': 'half', 'id': 'signup_password' } )
         }
         error_messages = {
+            'name': { 'required': _( 'Name is required.' ) },
             'email': { 'required': _( 'E-mail is required.' ) },
             'password': { 'required': _( 'Password is required' ) }
         }
@@ -93,7 +95,7 @@ class SignupForm( BaseModelForm ):
 
         :return: Dictionary
         """
-        user = get_user_model().objects.create_user( self.cleaned_data["email"], name = '', password = self.cleaned_data["password"] )
+        user = get_user_model().objects.create_user( self.cleaned_data["email"], name = self.cleaned_data["name"], password = self.cleaned_data["password"] )
         return user
 
     def clean( self ):
