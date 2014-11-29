@@ -11,7 +11,7 @@ from wannamigrate._settings.base import *
 # URLs
 #########################################
 BASE_URL = 'http://wwww.wannamigrate.com'
-BASE_URL_SECURE = 'https://wwww.wannamigrate.com'
+BASE_URL_SECURE = 'http://wwww.wannamigrate.com'
 EMAIL_LOGO_URL = 'http://www.wannamigrate.com/static/admin/img/logo.png'
 
 
