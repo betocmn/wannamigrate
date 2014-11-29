@@ -12,7 +12,7 @@ from wannamigrate._settings.base import *
 #########################################
 BASE_URL = 'http://wwww.wannamigrate.com'
 BASE_URL_SECURE = 'https://wwww.wannamigrate.com'
-EMAIL_LOGO_URL = 'http://www.wannamigrate.com/static/site/img/logo_wannamigrate.png'
+EMAIL_LOGO_URL = 'http://www.wannamigrate.com/static/admin/img/logo.png'
 
 
 #########################################
