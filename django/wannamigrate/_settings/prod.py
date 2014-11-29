@@ -27,9 +27,9 @@ TEMPLATE_DEBUG = False
 # ACCESS RESTRICTIONS
 #########################################
 ALLOWED_HOSTS = [
-    "localhost",
-    "ec2-54-148-167-28.us-west-2.compute.amazonaws.com",
-    "wannamigrate.com"
+    "54.148.167.28",
+    ".compute.amazonaws.com",
+    ".wannamigrate.com"
 ]
 
 INTERNAL_IPS = (
