@@ -32,29 +32,29 @@ $( window ).ready( function(){
 
 	$(".selectAustralia").click(function(){
 		$("#selectCountry").css("display", "none");
-		$(this).addClass("whiteBg");
-		$(".column3").css("backgroundColor", "white");
+		$(this).addClass("countrySelected");
+		$(".column3").css("backgroundColor", "#E7E7E7");
 		$(".australiaSelect").css("display", "block");
 		$(".canadaSelect,.newzealandSelect").css("display", "none");
-		$(".selectCanada,.selectNewZealand").removeClass("whiteBg");
+		$(".selectCanada,.selectNewZealand").removeClass("countrySelected");
 	});
 
 	$(".selectCanada").click(function(){
 		$("#selectCountry").css("display", "none");
-		$(this).addClass("whiteBg");
-		$(".column3").css("backgroundColor", "white");
+		$(this).addClass("countrySelected");
+		$(".column3").css("backgroundColor", "#E7E7E7");
 		$(".canadaSelect").css("display", "block");
 		$(".australiaSelect,.newzealandSelect").css("display", "none");
-		$(".selectAustralia,.selectNewZealand").removeClass("whiteBg");
+		$(".selectAustralia,.selectNewZealand").removeClass("countrySelected");
 	});
 
 	$(".selectNewZealand").click(function(){
 		$("#selectCountry").css("display", "none");
-		$(this).addClass("whiteBg");
-		$(".column3").css("backgroundColor", "white");
+		$(this).addClass("countrySelected");
+		$(".column3").css("backgroundColor", "#E7E7E7");
 		$(".newzealandSelect").css("display", "block");
 		$(".australiaSelect,.canadaSelect").css("display", "none");
-		$(".selectCanada,.selectAustralia").removeClass("whiteBg");
+		$(".selectCanada,.selectAustralia").removeClass("countrySelected");
 	});
 	
 });

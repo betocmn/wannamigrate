@@ -602,6 +602,10 @@ body{
 	background-color: #FFF;
 }
 
+.countrySelected {
+    background-color: #E7E7E7;
+}
+
 /*moving-to*/
 .column25{
 	width: 25%;
