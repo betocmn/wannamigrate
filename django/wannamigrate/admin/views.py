@@ -13,7 +13,10 @@ from wannamigrate.admin.forms import (
     LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm,
     BaseAnswerFormSet, OccupationForm, UserForm
 )
-from wannamigrate.core.models import Question, Answer, Country, CountryPoints, Occupation, OccupationCategory
+from wannamigrate.core.models import (
+    Question, Answer, Country, CountryPoints, Occupation, OccupationCategory,
+    UserResult, UserStats
+)
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
 
@@ -65,7 +68,7 @@ def login_index( request ):
     return render( request, 'admin/login/index.html', context )
 
 
-@login_required
+@login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_logout( request ):
     """
@@ -78,7 +81,7 @@ def login_logout( request ):
     return HttpResponseRedirect( reverse( 'admin:login' ) )
 
 
-@login_required
+@login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_my_account( request ):
     """
@@ -95,7 +98,7 @@ def login_my_account( request ):
     return render( request, 'admin/login/my_account.html', context )
 
 
-@login_required
+@login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_edit_my_account( request ):
     """
@@ -124,7 +127,7 @@ def login_edit_my_account( request ):
     return render( request, 'admin/login/edit_my_account.html', context )
 
 
-@login_required
+@login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def home_index( request ):
     """
@@ -141,8 +144,8 @@ def home_index( request ):
 #######################
 # USERS
 #######################
+@permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_user' )
 def user_list( request ):
     """
     Lists all users with pagination, order by, search, etc. using www.datatables.net
@@ -155,8 +158,8 @@ def user_list( request ):
     return render( request, 'admin/user/list.html', context )
 
 
+@permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_user' )
 def user_list_json( request ):
     """
     Generates JSON for the listing (required for the JS plugin www.datatables.net)
@@ -182,8 +185,8 @@ def user_list_json( request ):
     return HttpResponse( json )
 
 
+@permission_required( 'core.admin_add_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_add_user' )
 def user_add( request ):
     """
     Add new  USER
@@ -221,8 +224,8 @@ def user_add( request ):
     return render( request, 'admin/user/add.html', context )
 
 
+@permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_user' )
 def user_details( request, user_id ):
     """
     View  USER page
@@ -235,15 +238,27 @@ def user_details( request, user_id ):
     # Identify database record
     user = get_object_or_404( get_user_model(), pk = user_id )
 
+    # Get user results
+    try:
+        user_result = user.userresult_set.select_related( 'country__name' )
+    except UserResult.DoesNotExist:
+        user_result = False
+
+    # Get user registrion % (stats)
+    try:
+        user_stats = UserStats.objects.filter( user = user )
+    except UserStats.DoesNotExist:
+        user_stats = False
+
     # Template data
-    context = { 'user': user }
+    context = { 'user': user, 'user_result': user_result, 'user_stats': user_stats }
 
     # Print Template
     return render( request, 'admin/user/details.html', context )
 
 
+@permission_required( 'core.admin_change_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_change_user' )
 def user_edit( request, user_id ):
     """
     Edit  USER personal data
@@ -271,8 +286,8 @@ def user_edit( request, user_id ):
     return render( request, 'admin/user/edit.html', context )
 
 
+@permission_required( 'core.admin_delete_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_delete_user' )
 def user_delete( request, user_id ):
     """
     Delete  USER action.
@@ -297,8 +312,8 @@ def user_delete( request, user_id ):
 #######################
 # ADMIN USERS
 #######################
+@permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_admin_user' )
 def admin_user_list( request ):
     """
     Lists all admin users with pagination, order by, search, etc. using www.datatables.net
@@ -311,8 +326,8 @@ def admin_user_list( request ):
     return render( request, 'admin/admin_user/list.html', context )
 
 
+@permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_admin_user' )
 def admin_user_list_json( request ):
     """
     Generates JSON for the listing (required for the JS plugin www.datatables.net)
@@ -338,8 +353,8 @@ def admin_user_list_json( request ):
     return HttpResponse( json )
 
 
+@permission_required( 'core.admin_add_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_add_admin_user' )
 def admin_user_add( request ):
     """
     Add new Admin USER
@@ -377,8 +392,8 @@ def admin_user_add( request ):
     return render( request, 'admin/admin_user/add.html', context )
 
 
+@permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_admin_user' )
 def admin_user_details( request, user_id ):
     """
     View Admin USER page
@@ -398,8 +413,8 @@ def admin_user_details( request, user_id ):
     return render( request, 'admin/admin_user/details.html', context )
 
 
+@permission_required( 'core.admin_change_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_change_admin_user' )
 def admin_user_edit( request, user_id ):
     """
     Edit Admin USER personal data
@@ -427,8 +442,8 @@ def admin_user_edit( request, user_id ):
     return render( request, 'admin/admin_user/edit.html', context )
 
 
+@permission_required( 'core.admin_delete_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_delete_admin_user' )
 def admin_user_delete( request, user_id ):
     """
     Delete Admin USER action.
@@ -453,8 +468,8 @@ def admin_user_delete( request, user_id ):
 #######################
 # GROUPS AND PERMISSIONS
 #######################
+@permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_group' )
 def group_list( request ):
     """
     Lists all admin users with pagination, order by, search, etc. using www.datatables.net
@@ -467,8 +482,8 @@ def group_list( request ):
     return render( request, 'admin/group/list.html', context )
 
 
+@permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_group' )
 def group_list_json( request ):
     """
     Generates JSON for the listing (required for the JS plugin www.datatables.net)
@@ -493,8 +508,8 @@ def group_list_json( request ):
     json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
+@permission_required( 'auth.add_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.add_group' )
 def group_add( request ):
     """
     Add new Group
@@ -524,8 +539,8 @@ def group_add( request ):
     return render( request, 'admin/group/add.html', context )
 
 
+@permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_group' )
 def group_details( request, group_id ):
     """
     View GROUP page
@@ -545,8 +560,8 @@ def group_details( request, group_id ):
     return render( request, 'admin/group/details.html', context )
 
 
+@permission_required( 'auth.edit_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.edit_group' )
 def group_edit( request, group_id ):
     """
     Edit Group data
@@ -579,8 +594,8 @@ def group_edit( request, group_id ):
     return render( request, 'admin/group/edit.html', context )
 
 
+@permission_required( 'auth.delete_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.delete_group' )
 def group_delete( request, group_id ):
     """
     Delete Group action.
@@ -606,8 +621,8 @@ def group_delete( request, group_id ):
 #######################
 # IMMIGRATION RULES (QUESTIONS, ANSWERS AND POINTS)
 #######################
+@permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_immigration_rule' )
 def question_list( request ):
     """
     Lists all immigration rules (questions)
@@ -620,8 +635,8 @@ def question_list( request ):
     return render( request, 'admin/question/list.html', context )
 
 
+@permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_immigration_rule' )
 def question_list_json( request ):
     """
     Generates JSON for the listing (required for the JS plugin www.datatables.net)
@@ -646,8 +661,8 @@ def question_list_json( request ):
     return HttpResponse( json )
 
 
+@permission_required( 'core.admin_add_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_add_immigration_rule' )
 def question_add( request ):
     """
     Add new Immigration Rule (question, answers and points)
@@ -702,8 +717,8 @@ def question_add( request ):
     return render( request, 'admin/question/add.html', context )
 
 
+@permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_view_immigration_rule' )
 def question_details( request, question_id ):
     """
     View Immigration Rule page
@@ -729,8 +744,8 @@ def question_details( request, question_id ):
     return render( request, 'admin/question/details.html', context )
 
 
+@permission_required( 'core.admin_change_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_change_immigration_rule' )
 def question_edit( request, question_id ):
     """
     Edit Immigration Rule page
@@ -793,8 +808,8 @@ def question_edit( request, question_id ):
     return render( request, 'admin/question/edit.html', context )
 
 
+@permission_required( 'core.admin_delete_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'core.admin_delete_immigration_rule' )
 def question_delete( request, question_id ):
     """
     Delete Immigration Rule.
@@ -817,8 +832,8 @@ def question_delete( request, question_id ):
 #######################
 # OCCUPATIONS
 #######################
+@permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_occupation' )
 def occupation_list( request ):
     """
     Lists all admin users with pagination, order by, search, etc. using www.datatables.net
@@ -831,8 +846,8 @@ def occupation_list( request ):
     return render( request, 'admin/occupation/list.html', context )
 
 
+@permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_occupation' )
 def occupation_list_json( request ):
     """
     Generates JSON for the listing (required for the JS plugin www.datatables.net)
@@ -857,8 +872,8 @@ def occupation_list_json( request ):
 
     return HttpResponse( json )
 
+@permission_required( 'auth.add_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.add_occupation' )
 def occupation_add( request ):
     """
     Add new Occupation
@@ -888,8 +903,8 @@ def occupation_add( request ):
     return render( request, 'admin/occupation/add.html', context )
 
 
+@permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.view_occupation' )
 def occupation_details( request, occupation_id ):
     """
     View OCCUPATION page
@@ -909,8 +924,8 @@ def occupation_details( request, occupation_id ):
     return render( request, 'admin/occupation/details.html', context )
 
 
+@permission_required( 'auth.edit_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.edit_occupation' )
 def occupation_edit( request, occupation_id ):
     """
     Edit Occupation data
@@ -943,8 +958,8 @@ def occupation_edit( request, occupation_id ):
     return render( request, 'admin/occupation/edit.html', context )
 
 
+@permission_required( 'auth.delete_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-@permission_required( 'auth.delete_occupation' )
 def occupation_delete( request, occupation_id ):
     """
     Delete Occupation action.
