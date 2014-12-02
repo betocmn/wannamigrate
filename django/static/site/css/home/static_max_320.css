@@ -15,14 +15,14 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 	/** Menu elements */
 	#menu { position: fixed; width: 100%; height: 9.259259%; top:0; left:0;}
 	#menu.translucid { background-color: rgba(0,0,0,0.8); }
-	#menu-logo { position: relative; float:left; display: block; width: 30%; height: 100%; background: url(../../img/logo_wannamigrate.png) center no-repeat; background-size: contain; margin-top: 0; margin-left: 2.864583%; }
-	#login-button { position: relative; float: right;  margin: 2% 1.875% 0 0; }
+	#menu-logo { position: relative; float:left; display: block; width: 20%; height: 100%; background: url(../../img/logo_wannamigrate.png) center no-repeat; background-size: contain; margin-top: 0; margin-left: 2.864583%; }
+	#login-button { position: relative; float: right;  margin: 2% 5% 0 0; font-size: 0.6em; }
 
 
 
 
 	/** Language settings */
-	#language-container { float:right; width: 36.25%; height: 40%; margin-top: 3.666%; margin-right: 3%; }
+	#language-container { float:right; width: 45%; height: 40%; margin-top: 3.666%; margin-right: 3%; }
 	.language-ul { list-style: none; padding: 0;  }
 	.language-ul li { width: 100%; height: 100%; }
 	.language-ul li a { display: block; text-decoration: none; width: 100%; height: 100%; }
@@ -45,10 +45,10 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 1 elements */
-	#page1 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg1.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page1 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg1_500.png" ) no-repeat; background-size: cover; background-position: center; }
 	#page1-content { position: absolute; width: 100%; height: 100%; }
-	#page1-title { position: relative; width: 90%; text-align: center; margin-top: 38%; margin-left: 5%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); line-height: 1em; font-size: 4em !important; }
-	#page1-subtitle { position: relative; width: 74%; text-align: center; margin-left: 13%; margin-top: 3%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); }
+	#page1-title { position: relative; width: 90%; text-align: center; margin-top: 28%; margin-left: 5%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); line-height: 1em; font-size: 3em !important; }
+	#page1-subtitle { position: relative; width: 74%; text-align: center; margin-left: 13%; margin-top: 4%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); font-size: 1.6em; }
 	.page1-overlay { width:100%; height:100%; background: url( "../../img/diagonal_overlay.png" ) repeat; }
 	#p1-signup { position: relative; width: 70%; margin: 10% 0 0 15%; padding: 0.6em 0; }
 
@@ -56,7 +56,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 2 elements */
-	#page2 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg2.png" ) no-repeat; background-size: cover; background-position: 80%; }
+	#page2 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg2_500.png" ) no-repeat; background-size: cover; background-position: 80%; }
 	#l1h { position: absolute; text-align: right; width: 58%; top: 13%; font-size: 1.5em; right: 15%; }	
 	#l1h > span { color: black; }
 	#r1ul { position: absolute; right: 5%; list-style-type: none; width: 50%; top: 30%; font-size: 1.2em; }
@@ -98,7 +98,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/* Page 4 elements */
-	#page4 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg4.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page4 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg4_500.png" ) no-repeat; background-size: cover; background-position: center; }
 	.testimonial-container { position: relative; top:15%; width: 100%; height: 60%; float: left; }
 	.testimonial-container:first-child { display: none !important; }
 	.testimonial { position: relative; width: 80%; height: 100%; margin-left: 10%; }
@@ -119,7 +119,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 5 elements */
-	#page5 { position:relative; width: 100%; height: 78%; background: url( "../../img/bg5.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page5 { position:relative; width: 100%; height: 78%; background: url( "../../img/bg5_500.png" ) no-repeat; background-size: cover; background-position: center; }
 	.half-width { position: relative; width: 50%; height: 100%; float:left;}
 	#l4-msg { position: absolute; top: 40%; text-align: center; font-size: 2.5em; }
 	#r4-title { position: relative; margin-top:25%; text-align: center; font-size: 2.2em; }
@@ -159,7 +159,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 
-@media screen and (max-width: 899px) and ( min-width: 501px)
+@media screen and (max-width: 899px) and (min-width: 501px)
 {
 
 	body { font-size: 11px !important; }
@@ -203,7 +203,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 1 elements */
-	#page1 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg1.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page1 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg1_900.png" ) no-repeat; background-size: cover; background-position: center; }
 	#page1-content { position: absolute; width: 100%; height: 100%; }
 	#page1-title { position: relative; width: 90%; text-align: center; margin-top: 38%; margin-left: 5%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); line-height: 1em; font-size: 4em !important; }
 	#page1-subtitle { position: relative; width: 74%; text-align: center; margin-left: 13%; margin-top: 3%; text-shadow: 3px 3px 4px rgba(0,0,0,0.5); }
@@ -214,7 +214,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 2 elements */
-	#page2 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg2.png" ) no-repeat; background-size: cover; background-position: 100%; }
+	#page2 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg2_900.png" ) no-repeat; background-size: cover; background-position: 100%; }
 	#l1h { position: absolute; text-align: right; width: 58%; top: 13%; font-size: 1.5em; right: 15%; }	
 	#l1h > span { color: black; }
 	#r1ul { position: absolute; right: 5%; list-style-type: none; width: 50%; top: 30%; font-size: 1.2em; }
@@ -256,7 +256,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/* Page 4 elements */
-	#page4 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg4.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page4 { position:relative; width: 100%; height: 100%; background: url( "../../img/bg4_900.png" ) no-repeat; background-size: cover; background-position: center; }
 	.testimonial-container { position: relative; top:15%; width: 100%; height: 60%; float: left; }
 	.testimonial-container:first-child { display: none !important; }
 	.testimonial { position: relative; width: 80%; height: 100%; margin-left: 10%; }
@@ -277,7 +277,7 @@ html, body { width: 100%; height: 100%;  font-family: "Open Sans", sans-serif; f
 
 
 	/** Page 5 elements */
-	#page5 { position:relative; width: 100%; height: 78%; background: url( "../../img/bg5.png" ) no-repeat; background-size: cover; background-position: center; }
+	#page5 { position:relative; width: 100%; height: 78%; background: url( "../../img/bg5_900.png" ) no-repeat; background-size: cover; background-position: center; }
 	.half-width { position: relative; width: 50%; height: 100%; float:left;}
 	#l4-msg { position: absolute; top: 40%; text-align: center; font-size: 2.5em; }
 	#r4-title { position: relative; margin-top:25%; text-align: center; font-size: 2.2em; }
