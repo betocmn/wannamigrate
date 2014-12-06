@@ -51,12 +51,12 @@ def save_extra_data( backend, details, response, user = None, is_new = False, *a
                 full_name = details['fullname']
 
         # if we got a full name
-        if full_name:
+        if full_name is not None:
             user.name = full_name
             user.save()
 
         # If we got a profile image URL
-        if url:
+        if url is not None:
             avatar = urlopen( url )
             image_basename = slugify( user.name + " avatar" )
             image_name = '%s%s.jpg' % ( int( time.time() ), image_basename )

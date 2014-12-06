@@ -128,7 +128,7 @@ def login_edit_my_account( request ):
 
 
 @login_required( login_url = 'admin:login' )
-@user_passes_test( admin_check )
+@user_passes_test( admin_check, login_url = 'admin:login' )
 def home_index( request ):
     """
     Index Dashboard - After an user successfully logs in

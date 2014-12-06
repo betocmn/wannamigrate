@@ -118,7 +118,8 @@ def logout( request ):
     """
 
     # Executes auth Logout
-    auth_logout( request )
+    if request.user.is_authenticated():
+        auth_logout( request )
 
     # Redirect to home-page
     return HttpResponseRedirect( reverse( "site:home" ) )

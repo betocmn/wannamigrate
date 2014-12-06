@@ -85,7 +85,9 @@
                     <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
                     <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
                 </ul>
-                <img src="{{ user.userpersonal.avatar.thumbnail.url }}">
+                {% if user.userpersonal.avatar %}
+                    <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
+                {% endif %}
                 <a href="#" class="userName">
                     {% trans "My Profile" as default_name %}
                     {{ user.name|default_if_none:default_name|truncatechars:25 }}
