@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, getopt, os, subprocess
+import sys, getopt, os, subprocess, re
 
 
 ##############################
@@ -65,6 +65,14 @@ def h():
         {
             "name": "up",
             "description": "Send git changes to the remote server."
+        },
+        {
+            "name": "get_file",
+            "description": "Gets a file on the remote server."
+        },
+        {
+            "name": "put_file",
+            "description": "Puts a file on the remote server."
         },
     ]
 
@@ -146,6 +154,120 @@ def up( args ):
         print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Send git changes to Wanna Migrate's production instance." ) )
 
 
+
+def get_file( args ):
+    """
+        Gets a file or a folder from the remote server.
+        :args: A set of arguments including the server to run the command, the file and
+        recursive option.
+    """
+    # The usage regex.
+    usage_pattern = "(-[rR] )?(dev|prod) .+ .+"
+    cmd_str = " ".join( args )
+
+    # Check if the minimal number of arguments was passed.
+    if not re.match( usage_pattern, cmd_str ):
+        print( "usage: python {0} {1} [-r] (dev|prod) src dest ".format( __file__, get_file.__name__ ) )
+        print()
+        print( "Params explanation:")
+        print( "    {0}{1}".format( "-r".ljust( N_DEFAULT_HELP_SPACING ), "Optional param indicating to get the file recursively." ) )
+        print( "    {0}{1}".format( "dev".ljust( N_DEFAULT_HELP_SPACING ), "Send git changes to Wanna Migrate's development instance." ) )
+        print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Send git changes to Wanna Migrate's production instance." ) )
+        print( "    {0}{1}".format( "src".ljust( N_DEFAULT_HELP_SPACING ), "The path to the file on the remote machine." ) )
+        print( "    {0}{1}".format( "dest".ljust( N_DEFAULT_HELP_SPACING ), "The directory on your local machine to download the file." ) )
+    else:
+
+        # Server checking
+        if "prod" in args: 
+            server = "prod"
+        else:
+            server = "dev"
+
+        # The index of the source in the args
+        src_index = 1
+
+        # Starts command list with scp
+        cmdlist = [ "scp" ]
+        
+        # Recursively?
+        if "-r" in args:
+            cmdlist.append( "-r" )
+            src_index += 1
+
+        # Append -i to the commands
+        cmdlist.append( "-i" )
+
+        # Gets the src and dest from arguments
+        src = args[ src_index ]
+        dest = args[ src_index + 1 ]
+
+        # Adds command parameters
+        cmdlist.append( SERVERS[ server ][ "keypair" ] )
+        cmdlist.append( "ubuntu@{0}:{1} {2}".format( SERVERS[ server ][ "ip" ], src, dest ) )
+        
+        return run_cmd( cmdlist )
+
+
+def put_file( args ):
+    """
+        Puts a file or a folder from the remote server.
+        :args: A set of arguments including the server to run the command, the file and
+        recursive option.
+    """
+    # The usage regex.
+    usage_pattern = "(-[rR] )?(dev|prod) .+ .+ [.+]?"
+    cmd_str = " ".join( args )
+
+    # Check if the minimal number of arguments was passed.
+    if not re.match( usage_pattern, cmd_str ):
+        print( "usage: python {0} {1} [-r] (dev|prod) src dest filename".format( __file__, put_file.__name__ ) )
+        print()
+        print( "Params explanation:")
+        print( "    {0}{1}".format( "-r".ljust( N_DEFAULT_HELP_SPACING ), "Optional param indicating to get the file recursively." ) )
+        print( "    {0}{1}".format( "dev".ljust( N_DEFAULT_HELP_SPACING ), "Send git changes to Wanna Migrate's development instance." ) )
+        print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Send git changes to Wanna Migrate's production instance." ) )
+        print( "    {0}{1}".format( "src".ljust( N_DEFAULT_HELP_SPACING ), "The path to the file on your local machine." ) )
+        print( "    {0}{1}".format( "dest".ljust( N_DEFAULT_HELP_SPACING ), "The directory on your host machine to upload the file." ) )
+        print( "    {0}{1}".format( "filename".ljust( N_DEFAULT_HELP_SPACING ), "The name of the new file on the server. Should not be passed if uploading a directory (using -r)." ) )
+    else:
+
+        # Server checking
+        if "prod" in args: 
+            server = "prod"
+        else:
+            server = "dev"
+
+        # The index of the source in the args
+        src_index = 1
+
+        # Starts command list with scp
+        cmdlist = [ "scp" ]
+        
+        # Recursively?
+        if "-r" in args:
+            cmdlist.append( "-r" )
+            src_index += 1
+            filename = ''
+        else:
+            filename = args[ src_index + 2 ]
+
+        # Append -i to the commands
+        cmdlist.append( "-i" )
+
+        # Gets the src and dest from arguments
+        src = args[ src_index ]
+        dest = args[ src_index + 1 ]
+        
+
+
+        # Should I add a bar at the end of the dest to append the filename?
+        bar = '' if dest.endswith( '/' ) else '/'
+
+        # Adds command parameters
+        cmdlist.append( SERVERS[ server ][ "keypair" ] )
+        cmdlist.append( "{0} ubuntu@{1}:{2}{3}{4}".format( src, SERVERS[ server ][ "ip" ], dest, bar, filename ) )
+        
+        return run_cmd( cmdlist )
 
 
 
