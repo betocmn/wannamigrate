@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-29 04:08+0000\n"
+"POT-Creation-Date: 2014-12-07 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1032,8 +1032,8 @@ msgid "American Samoa"
 msgstr ""
 
 #: templates/db_translations/core_country.html:118
-#: templates/site/dashboard.html:132 wannamigrate/site/views.py:930
-#: wannamigrate/site/views.py:1089 wannamigrate/site/views.py:1133
+#: templates/site/dashboard.html:132 wannamigrate/site/views.py:932
+#: wannamigrate/site/views.py:1091 wannamigrate/site/views.py:1135
 msgid "Australia"
 msgstr "Austrália"
 
@@ -1091,8 +1091,8 @@ msgid "New Caledonia"
 msgstr ""
 
 #: templates/db_translations/core_country.html:132
-#: templates/site/dashboard.html:172 wannamigrate/site/views.py:954
-#: wannamigrate/site/views.py:1103 wannamigrate/site/views.py:1147
+#: templates/site/dashboard.html:172 wannamigrate/site/views.py:956
+#: wannamigrate/site/views.py:1105 wannamigrate/site/views.py:1149
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -1386,8 +1386,8 @@ msgid "British Virgin Islands"
 msgstr ""
 
 #: templates/db_translations/core_country.html:205
-#: templates/site/dashboard.html:152 wannamigrate/site/views.py:942
-#: wannamigrate/site/views.py:1096 wannamigrate/site/views.py:1140
+#: templates/site/dashboard.html:152 wannamigrate/site/views.py:944
+#: wannamigrate/site/views.py:1098 wannamigrate/site/views.py:1142
 msgid "Canada"
 msgstr "Canadá"
 
@@ -2381,7 +2381,7 @@ msgid "COMPLETED"
 msgstr "PREENCHIDO"
 
 #: templates/site/dashboard.html:69 templates/site/situation.html:60
-#: wannamigrate/core/models.py:284 wannamigrate/site/forms.py:285
+#: wannamigrate/core/models.py:284 wannamigrate/site/forms.py:287
 msgid "Language"
 msgstr "Línguas"
 
@@ -2417,9 +2417,9 @@ msgid "Get help to migrate"
 msgstr "Receba ajuda para migrar"
 
 #: templates/site/dashboard.html:195 wannamigrate/core/models.py:94
-#: wannamigrate/site/forms.py:139 wannamigrate/site/forms.py:180
-#: wannamigrate/site/forms.py:413 wannamigrate/site/forms.py:483
-#: wannamigrate/site/forms.py:496
+#: wannamigrate/site/forms.py:141 wannamigrate/site/forms.py:182
+#: wannamigrate/site/forms.py:415 wannamigrate/site/forms.py:485
+#: wannamigrate/site/forms.py:498
 msgid "Select Country"
 msgstr "Selecione País"
 
@@ -2479,31 +2479,31 @@ msgid "What are your education degrees?"
 msgstr "Quais diplomas de escolaridade você possui?"
 
 #: templates/site/edit_education.html:218
-#: templates/site/edit_language.html:177 templates/site/edit_work.html:365
+#: templates/site/edit_language.html:177 templates/site/edit_work.html:364
 msgid "PREVIOUS"
 msgstr "ANTERIOR"
 
 #: templates/site/edit_education.html:220
 #: templates/site/edit_language.html:179 templates/site/edit_personal.html:243
-#: templates/site/edit_work.html:367
+#: templates/site/edit_work.html:366
 msgid "PERSONAL"
 msgstr "PESSOAL"
 
 #: templates/site/edit_education.html:222
 #: templates/site/edit_language.html:181 templates/site/edit_personal.html:245
-#: templates/site/edit_work.html:369
+#: templates/site/edit_work.html:368
 msgid "LANGUAGE"
 msgstr "LÍNGUAS"
 
 #: templates/site/edit_education.html:224
 #: templates/site/edit_language.html:183 templates/site/edit_personal.html:247
-#: templates/site/edit_work.html:371
+#: templates/site/edit_work.html:370
 msgid "EDUCATION"
 msgstr "ESCOLARIDADE"
 
 #: templates/site/edit_education.html:226
 #: templates/site/edit_language.html:185 templates/site/edit_personal.html:249
-#: templates/site/edit_work.html:373
+#: templates/site/edit_work.html:372
 msgid "WORK"
 msgstr "TRABALHO"
 
@@ -2540,7 +2540,7 @@ msgstr "Dados de Trabalho"
 msgid "Add below your work experiences"
 msgstr "Adicione abaixo suas experiências de trabalho"
 
-#: templates/site/edit_work.html:335
+#: templates/site/edit_work.html:334
 msgid ""
 "Proved Skills: Under 50 yeard old. Competent English. Same skilled "
 "occupation as you."
@@ -2548,7 +2548,7 @@ msgstr ""
 "Habilidades Comprovadas: Abaixo de 50 anos de idade. Inglês intermediário. "
 "Mesma profissão que a sua."
 
-#: templates/site/edit_work.html:375
+#: templates/site/edit_work.html:374
 msgid "FINISH"
 msgstr "FINALIZAR"
 
@@ -2711,7 +2711,7 @@ msgstr "Email da empresa Wanna Migrate"
 
 #: templates/site/layouts/email.html:36 templates/site/myaccount/view.html:54
 #: wannamigrate/site/forms.py:27 wannamigrate/site/forms.py:35
-#: wannamigrate/site/forms.py:81 wannamigrate/site/forms.py:127
+#: wannamigrate/site/forms.py:82 wannamigrate/site/forms.py:129
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -2735,17 +2735,15 @@ msgstr "COMO FUNCIONA"
 msgid "CONTACT US"
 msgstr "CONTATO"
 
-#: templates/site/layouts/main.html:90
+#: templates/site/layouts/main.html:92
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/site/layouts/main.html:95
-#, fuzzy
-#| msgid "My Account"
+#: templates/site/layouts/main.html:97
 msgid "My account"
-msgstr "Minha Conta"
+msgstr "Minha conta"
 
-#: templates/site/layouts/main.html:96
+#: templates/site/layouts/main.html:98
 msgid "Logout"
 msgstr ""
 
@@ -2822,7 +2820,8 @@ msgid "E-mail and preferred language"
 msgstr "E-mail e língua de preferência"
 
 #: templates/site/myaccount/view.html:50 wannamigrate/core/models.py:179
-#: wannamigrate/core/models.py:202 wannamigrate/site/forms.py:126
+#: wannamigrate/core/models.py:202 wannamigrate/site/forms.py:81
+#: wannamigrate/site/forms.py:128
 msgid "Name"
 msgstr "Nome"
 
@@ -2850,7 +2849,7 @@ msgid ""
 "from the computer."
 msgstr ""
 
-#: templates/site/popups/signup.html:58 templates/site/popups/signup.html:172
+#: templates/site/popups/signup.html:58 templates/site/popups/signup.html:173
 msgid "Sign in"
 msgstr "Entrar"
 
@@ -2862,66 +2861,66 @@ msgstr "Cadastre-se"
 msgid "Password recovery"
 msgstr "Recuperação de Senha"
 
-#: templates/site/popups/signup.html:152
+#: templates/site/popups/signup.html:153
 msgid ""
 "We have successfully sent you an email with a link to reset your password."
 msgstr "Enviamos um email com um link para você criar uma nova senha."
 
-#: templates/site/popups/signup.html:188
+#: templates/site/popups/signup.html:189
 msgid "Login"
 msgstr "Login"
 
-#: templates/site/popups/signup.html:190
+#: templates/site/popups/signup.html:191
 msgid "Forgot your password?"
 msgstr "Esqueceu sua senha?"
 
-#: templates/site/popups/signup.html:203
+#: templates/site/popups/signup.html:204
 msgid "Sign-Up"
 msgstr "Cadastre-se"
 
-#: templates/site/popups/signup.html:210
+#: templates/site/popups/signup.html:211
 msgid "Alternatively, you can sign up using:"
 msgstr "Você também pode fazer login com:"
 
-#: templates/site/popups/signup.html:212
+#: templates/site/popups/signup.html:213
 msgid "Login with Facebook"
 msgstr "Login com Facebook"
 
-#: templates/site/popups/signup.html:213
+#: templates/site/popups/signup.html:214
 msgid "Login with Linkedin"
 msgstr "Login com Linkedin"
 
-#: templates/site/popups/signup.html:214
+#: templates/site/popups/signup.html:215
 msgid "Login with Google"
 msgstr "Login com Google"
 
-#: templates/site/popups/signup.html:220
+#: templates/site/popups/signup.html:221
 msgid "Don't have an account? Sign-Up"
 msgstr "Não tem cadastro? Cadastre-se"
 
-#: templates/site/popups/signup.html:224
+#: templates/site/popups/signup.html:225
 msgid "Already registered?"
 msgstr "Já é cadastrado?"
 
-#: templates/site/popups/signup.html:224
+#: templates/site/popups/signup.html:225
 msgid "Log in"
 msgstr "Login"
 
-#: templates/site/popups/signup.html:230
+#: templates/site/popups/signup.html:231
 msgid ""
 "Fill in your email address and you will receive a link to reset your "
 "password."
 msgstr "Preencha seu email e você receberá um link para criar uma nova senha"
 
-#: templates/site/popups/signup.html:234
+#: templates/site/popups/signup.html:235
 msgid "Recover Password"
 msgstr "Recuperação de Senha"
 
-#: templates/site/popups/signup.html:237
+#: templates/site/popups/signup.html:238
 msgid "Go Back"
 msgstr "Voltar"
 
-#: templates/site/popups/signup.html:243
+#: templates/site/popups/signup.html:244
 msgid ""
 "If you click \"Log in with Facebook/Linkedin/Twitter\" and are not our user, "
 "you will be registered and you agree to Wanna Migrates <a class=\"bold green"
@@ -2933,7 +2932,7 @@ msgstr ""
 "green\" href=\"#\">Termos de Uso</a> e <a class=\"bold green\" href=\"#"
 "\">Política de Privacidade</a> do Wanna Migrate"
 
-#: templates/site/popups/signup.html:248
+#: templates/site/popups/signup.html:249
 msgid ""
 "By clicking on Sign up, you will be automatically accepting Wanna Migrates "
 "<a class=\"bold green\" href=\"#\">Terms and Conditions</a> and  <a class="
@@ -2944,23 +2943,19 @@ msgstr ""
 "green\" href=\"#\">Termos de Uso</a> e <a class=\"bold green\" href=\"#"
 "\">Política de Privacidade</a> do Wanna Migrate"
 
-#: templates/site/popups/signup.html:253
+#: templates/site/popups/signup.html:254
 msgid "Still having problems? Please go to our"
 msgstr "Ainda tendo problemas? Por favor se dirija ao nosso"
 
-#: templates/site/popups/signup.html:253
+#: templates/site/popups/signup.html:254
 msgid "Contact Form"
 msgstr "Formulário de Contato"
 
 #: templates/site/reset_password.html:18
-#, fuzzy
-#| msgid "Password recovery"
 msgid "Password Recovery"
 msgstr "Recuperação de Senha"
 
 #: templates/site/reset_password.html:19
-#, fuzzy
-#| msgid "Recover Password"
 msgid "Recover your password"
 msgstr "Recuperação de Senha"
 
@@ -3483,7 +3478,7 @@ msgstr "resposta"
 msgid "points"
 msgstr "pontos"
 
-#: wannamigrate/core/models.py:169 wannamigrate/site/forms.py:285
+#: wannamigrate/core/models.py:169 wannamigrate/site/forms.py:287
 msgid "Select Language"
 msgstr "Selecione Língua"
 
@@ -3569,8 +3564,8 @@ msgid "Male"
 msgstr "Masculino"
 
 #: wannamigrate/core/models.py:475
-msgid "country of residence"
-msgstr "país de residência"
+msgid "country of citizenship"
+msgstr "país de cidadania"
 
 #: wannamigrate/core/models.py:476
 msgid "avatar"
@@ -3710,124 +3705,128 @@ msgstr "Por gentileza, confirme seu email"
 msgid "Confirm E-mail"
 msgstr "Confirme E-mail"
 
-#: wannamigrate/site/forms.py:82
+#: wannamigrate/site/forms.py:83
 msgid "Password:"
 msgstr "Senha:"
 
-#: wannamigrate/site/forms.py:85
+#: wannamigrate/site/forms.py:86
+msgid "Name is required."
+msgstr "Nome é obrigatório."
+
+#: wannamigrate/site/forms.py:87
 msgid "E-mail is required."
 msgstr "E-mail é obrigatório."
 
-#: wannamigrate/site/forms.py:86
+#: wannamigrate/site/forms.py:88
 msgid "Password is required"
 msgstr "Senha é obrigatória"
 
-#: wannamigrate/site/forms.py:110
+#: wannamigrate/site/forms.py:112
 msgid "The two e-mails do not match."
 msgstr "Os 2 emails não conferem."
 
-#: wannamigrate/site/forms.py:128
+#: wannamigrate/site/forms.py:130
 msgid "Message"
 msgstr "Mensagem"
 
-#: wannamigrate/site/forms.py:139
-msgid "Country of Residence"
-msgstr "País de Residência"
+#: wannamigrate/site/forms.py:141
+msgid "Country of Citizenship"
+msgstr "País de Cidadania"
 
-#: wannamigrate/site/forms.py:180
+#: wannamigrate/site/forms.py:182
 msgid "In Which Country"
 msgstr "Em Qual País"
 
-#: wannamigrate/site/forms.py:206
+#: wannamigrate/site/forms.py:208
 msgid "You must choose different countries on family overseas option."
 msgstr ""
 "Você não pode incluir países iguais na lista de parentes em outros países"
 
-#: wannamigrate/site/forms.py:249
+#: wannamigrate/site/forms.py:251
 msgid "If you have a partner/spouse, what is his/her ENGLISH Level"
 msgstr "Se você tem um(a) parceiro/esposa, qual o nível INGLÊS dele(a)?"
 
-#: wannamigrate/site/forms.py:249 wannamigrate/site/forms.py:250
-#: wannamigrate/site/forms.py:286 wannamigrate/site/forms.py:412
+#: wannamigrate/site/forms.py:251 wannamigrate/site/forms.py:252
+#: wannamigrate/site/forms.py:288 wannamigrate/site/forms.py:414
 msgid "Select Level"
 msgstr "Selecione Nível"
 
-#: wannamigrate/site/forms.py:250
+#: wannamigrate/site/forms.py:252
 msgid "If you have a partner/spouse, what is his/her FRENCH Level"
 msgstr "Se você tem um(a) parceiro/esposa, qual o nível FRANCÊS dele(a)?"
 
-#: wannamigrate/site/forms.py:286 wannamigrate/site/forms.py:412
+#: wannamigrate/site/forms.py:288 wannamigrate/site/forms.py:414
 msgid "Level"
 msgstr "Nível"
 
-#: wannamigrate/site/forms.py:360
+#: wannamigrate/site/forms.py:362
 msgid "You must choose different languages."
 msgstr "Você precisa escolher línguas diferentes."
 
-#: wannamigrate/site/forms.py:372
+#: wannamigrate/site/forms.py:374
 msgid "If you have a partner/spouse, what is his/her highest Degree"
 msgstr ""
 "Se você tem um(a) parceiro/esposa, qual o seu(ua) nível de escolaridade"
 
-#: wannamigrate/site/forms.py:372
+#: wannamigrate/site/forms.py:374
 msgid "Select Degree"
 msgstr "Selecione Nível"
 
-#: wannamigrate/site/forms.py:413 wannamigrate/site/forms.py:483
+#: wannamigrate/site/forms.py:415 wannamigrate/site/forms.py:485
 msgid "Country"
 msgstr "País"
 
-#: wannamigrate/site/forms.py:414
+#: wannamigrate/site/forms.py:416
 msgid "Start Year"
 msgstr "Ano de Início"
 
-#: wannamigrate/site/forms.py:415
+#: wannamigrate/site/forms.py:417
 msgid "End Year"
 msgstr "Ano de Término"
 
-#: wannamigrate/site/forms.py:430
+#: wannamigrate/site/forms.py:432
 msgid "Category"
 msgstr "Categoria"
 
-#: wannamigrate/site/forms.py:430
+#: wannamigrate/site/forms.py:432
 msgid "Select Area"
 msgstr "Seleciona Área"
 
-#: wannamigrate/site/forms.py:431
+#: wannamigrate/site/forms.py:433
 msgid "What is your occupation"
 msgstr "Qual a sua profissão"
 
-#: wannamigrate/site/forms.py:484
+#: wannamigrate/site/forms.py:486
 msgid "Duration"
 msgstr "Duração"
 
-#: wannamigrate/site/forms.py:496
+#: wannamigrate/site/forms.py:498
 msgid "From Which Country"
 msgstr "De Qual País"
 
-#: wannamigrate/site/forms.py:522
+#: wannamigrate/site/forms.py:524
 msgid "You must choose different countries on work offers overseas."
 msgstr ""
 "Você não pode escolher o mesmo país 2 vezes em propostas de trabalho no "
 "exterior"
 
-#: wannamigrate/site/forms.py:594
+#: wannamigrate/site/forms.py:596
 msgid "Old Password"
 msgstr "Senha Antiga"
 
-#: wannamigrate/site/forms.py:597
+#: wannamigrate/site/forms.py:599
 msgid "New Password"
 msgstr "Senha Nova"
 
-#: wannamigrate/site/forms.py:598
+#: wannamigrate/site/forms.py:600
 msgid "Confirm New Password"
 msgstr "Confime Senha"
 
-#: wannamigrate/site/forms.py:620
+#: wannamigrate/site/forms.py:622
 msgid "The old password does not match."
 msgstr "A senha antiga não está correta."
 
-#: wannamigrate/site/forms.py:624
+#: wannamigrate/site/forms.py:626
 msgid "The new password and confirmation does not match."
 msgstr "A nova senha e sua confirmação não conferem."
 
@@ -3835,11 +3834,11 @@ msgstr "A nova senha e sua confirmação não conferem."
 msgid "Invalid Login. Please try again."
 msgstr "Login Inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:163
+#: wannamigrate/site/views.py:165
 msgid "There was an error while creating your user account."
 msgstr "Houve um erro ao criar sua conta."
 
-#: wannamigrate/site/views.py:173
+#: wannamigrate/site/views.py:175
 msgid ""
 "Invalid Information!<br />Make sure all fields are filled in and email and "
 "confirmation match."
@@ -3847,23 +3846,23 @@ msgstr ""
 "Dados incorretos!<br />Confirme que todos os campos estão preenchidos e "
 "email e confirmação conferem."
 
-#: wannamigrate/site/views.py:208
+#: wannamigrate/site/views.py:210
 msgid "No user found with this e-mail address."
 msgstr "Nenhum usuário com este email."
 
-#: wannamigrate/site/views.py:211
+#: wannamigrate/site/views.py:213
 msgid "Invalid e-mail address."
 msgstr "Endereço de email inválido."
 
-#: wannamigrate/site/views.py:359 wannamigrate/site/views.py:394
+#: wannamigrate/site/views.py:361 wannamigrate/site/views.py:396
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:847
+#: wannamigrate/site/views.py:849
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
 
-#: wannamigrate/site/views.py:1020
+#: wannamigrate/site/views.py:1022
 msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
@@ -3873,7 +3872,7 @@ msgstr ""
 "tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
 "naati.com.au/' target='blank'>NAATI</a>"
 
-#: wannamigrate/site/views.py:1023
+#: wannamigrate/site/views.py:1025
 msgid ""
 "If you can get a job offer from an Australia Employer (<a href='http://www."
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
@@ -3884,7 +3883,7 @@ msgstr ""
 "deverá solicitar que seu empregador faça a requisição do seu visto "
 "patrocinado.  Será mais rápido e barato."
 
-#: wannamigrate/site/views.py:1026
+#: wannamigrate/site/views.py:1028
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
@@ -3893,7 +3892,7 @@ msgstr ""
 "estável) e ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que "
 "você."
 
-#: wannamigrate/site/views.py:1029
+#: wannamigrate/site/views.py:1031
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
@@ -3901,8 +3900,8 @@ msgstr ""
 "Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
 "no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
-#: wannamigrate/site/views.py:1032 wannamigrate/site/views.py:1049
-#: wannamigrate/site/views.py:1063
+#: wannamigrate/site/views.py:1034 wannamigrate/site/views.py:1051
+#: wannamigrate/site/views.py:1065
 msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
@@ -3910,7 +3909,7 @@ msgstr ""
 "Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
 "para um visto de investidor."
 
-#: wannamigrate/site/views.py:1037
+#: wannamigrate/site/views.py:1039
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
@@ -3918,7 +3917,7 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) "
 "tenha um nível básico de inglês ou francês."
 
-#: wannamigrate/site/views.py:1040
+#: wannamigrate/site/views.py:1042
 msgid ""
 "You can get 5 extra points if you or your partner/espouse (stable union) "
 "complete any studies or have a past job in Canada."
@@ -3926,11 +3925,11 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu parceiro/esposa (união estável) "
 "tenha estudado ou trabalho no Canadá."
 
-#: wannamigrate/site/views.py:1043
+#: wannamigrate/site/views.py:1045
 msgid "You can get 5 extra points if you have a close family member in Canada."
 msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
 
-#: wannamigrate/site/views.py:1046
+#: wannamigrate/site/views.py:1048
 msgid ""
 "You can get 15 extra points if you can get a job offer from an Canada "
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
@@ -3940,13 +3939,13 @@ msgstr ""
 "uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
 "target='blank'>Procure por Emprego Aqui</a>)."
 
-#: wannamigrate/site/views.py:1054
+#: wannamigrate/site/views.py:1056
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
 msgstr ""
 "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
-#: wannamigrate/site/views.py:1057
+#: wannamigrate/site/views.py:1059
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
@@ -3954,13 +3953,16 @@ msgstr ""
 "Você pode receber 20 pontos extras se seu parceiro/esposa (união estável) "
 "tiver uma profissãoqualificada ou uma proposta de trabalho."
 
-#: wannamigrate/site/views.py:1060
+#: wannamigrate/site/views.py:1062
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."
 msgstr ""
 "Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de "
 "emprego) em uma parte interiorana da Nova Zelândia."
+
+#~ msgid "Country of Residence"
+#~ msgstr "País de Residência"
 
 #~ msgid ""
 #~ "<span class=\"bold\">Wanna Migrate</span> is doing a superb job by "

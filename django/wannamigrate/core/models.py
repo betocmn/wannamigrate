@@ -472,7 +472,7 @@ class UserPersonal( BaseModel ):
     )
 
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    country = models.ForeignKey( Country, verbose_name = _( 'country of residence' ), blank = True, null = True )
+    country = models.ForeignKey( Country, verbose_name = _( 'country of citizenship' ), blank = True, null = True )
     avatar = StdImageField( _( "avatar" ), upload_to = settings.UPLOAD_USER_PICTURE_FOLDER, blank = True, null = True, variations = {
         'large': ( 600, 400 ),
         'thumbnail': ( 40, 40, True ),

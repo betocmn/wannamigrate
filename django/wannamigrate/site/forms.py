@@ -138,7 +138,7 @@ class UserPersonalForm( BaseModelForm ):
     Form for USER PERSONAL data
     """
 
-    country = CountryChoiceField( required = False, label = _( "Country of Residence" ), queryset = Country.objects.order_by( 'immigration_enabled' ), empty_label = _( 'Select Country' ) )
+    country = CountryChoiceField( required = False, label = _( "Country of Citizenship" ), queryset = Country.objects.order_by( 'immigration_enabled' ), empty_label = _( 'Select Country' ) )
 
     class Meta:
         model = UserPersonal
