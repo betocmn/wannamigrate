@@ -21,6 +21,13 @@ SERVERS = {
     },
 }
 
+# The default user and user group of each server.
+USER_GROUPS = {
+    "local" : "vagrant",
+    "dev" : "ubuntu",
+    "prod" : "ubuntu",
+}
+
 # Application's default folder
 APP_ROOT = "/wanna"
 SITE_ALIAS = "django"
@@ -42,267 +49,66 @@ APACHE_MODS_ENABLED_PATH = "/etc/apache2/mods-enabled"
 # Spaces between names and descripts to display help.
 N_DEFAULT_HELP_SPACING = 15
 
-# The commands to execute on remote to configure site app.
-CONFIGURE_SITE_COMMANDS = [
-    # Updates server's repositories
-    "echo \"--------------------------\"",
-    "echo \"APT-GET UPDATE AND PYTHON3\"",
-    "echo \"--------------------------\"",
-    "sudo apt-get update",
-    "sudo apt-get install python3-dev --yes",
-
-    # Pip
-    "echo \"--------------------------------------------\"",
-    "echo \"INSTALLING PIP WITH PYTHON 3\"",
-    "echo \"--------------------------------------------\"",
-    "cd ~/",
-    "sudo wget https://bootstrap.pypa.io/get-pip.py",
-    "sudo python3 get-pip.py",
-    
-    # Virtualenv
-    "echo \"--------------------------------------------\"",
-    "echo \"INSTALLING VIRTUALENV WITH PYTHON 3\"",
-    "echo \"--------------------------------------------\"",
-    "sudo pip install virtualenv",
-
-    # Git
-    "echo \"--------------------------------------------\"",
-    "echo \"INSTALLING GIT\"",
-    "echo \"--------------------------------------------\"",
-    "sudo apt-get install git --yes",
-    
-    # Apache2
-    "echo \"--------------------------\"",
-    "echo \"INSTALLING APACHE\"",
-    "echo \"--------------------------\"",
-    "sudo apt-get install apache2 --yes",
-    "echo \"### Instaling Python3 WSGI ###\"",
-    "sudo apt-get install libapache2-mod-wsgi-py3 --yes",
-    "echo \"### Instaling PHP and PHP-MYSQL Modules ###\"",
-    "sudo apt-get install libapache2-mod-php5 --yes",
-    "sudo apt-get install php5-mysql --yes",
-
-    # MySQL Tools
-    "echo \"--------------------------\"",
-    "echo \"INSTALLING MYSQL TOOLS\"",
-    "echo \"--------------------------\"",
-    "sudo apt-get install libmysqlclient-dev --yes",
-    "sudo apt-get install mysql-client --yes",
-
-    # Extra-tools
-    "echo \"--------------------------\"",
-    "echo \"INSTALLING EXTRA TOOLS\"",
-    "echo \"--------------------------\"",
-    "echo \"### Instaling gettext\"",
-    "sudo apt-get install gettext --yes",
-    "echo \"### Instaling libjpeg\"",
-    "sudo apt-get install libjpeg-dev --yes",
-
-    # Downloading Wanna Migrate code
-    "echo \"--------------------------------------------\"",
-    "echo \"DOWNLOADING WANNA MIGRATE CODE\"",
-    "echo \"--------------------------------------------\"",
-    "sudo mkdir {0}".format( APP_ROOT ),
-    "sudo chown ubuntu:ubuntu {0}".format( APP_ROOT ),
-    "cd {0}".format( APP_ROOT ),
-    "git clone {0} temp".format( WANNAMIGRATE_GIT ),
-    "shopt -s dotglob",
-    "mv temp/* {0}".format( APP_ROOT ),
-    "rm -R temp",
-    "rm -R infra",
-    "rm -R html",
-    
-
-    # Configuring the virtual enviroment
-    "echo \"--------------------------\"",
-    "echo \"CREATING THE VIRTUAL ENVIRONMENT\"",
-    "echo \"--------------------------\"",
-    "sudo mkdir {0}".format( VIRTUALENV_PATH ),
-    "sudo chown ubuntu:ubuntu {0}".format( VIRTUALENV_PATH ),
-    "virtualenv {0}".format( VIRTUALENV_PATH ),
-    "source {0}/bin/activate".format( VIRTUALENV_PATH ),
-    "pip install django",
-    "pip install https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz",
-    "pip install django-debug-toolbar",
-    "pip install python-social-auth",
-    "pip install pillow",
-    "pip install django-stdimage",
-    "deactivate",
-
-    # Removes the default configuration file
-    "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ),
-
-    # Configuring apache's mods-enabled file (Yeah, it should be 777)
-    "sudo touch {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
-    "sudo chmod 777 {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),    
-    """echo \"<IfModule mod_wsgi.c>
-       WSGIPythonPath {0}:{1}/lib/python3.4:{1}/lib/python3.4/site-packages
-    </IfModule>\" > {2}/{3}.conf""".format( DEFAULT_SITE_PATH, VIRTUALENV_PATH, APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
-
-    # Configuring apache's sites-enabled file
-    "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ),
-    "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ),    
-    """echo \"<VirtualHost *:80>
-        ServerName www.wannamigrate.com
-        DocumentRoot {0}
-
-        WSGIScriptAlias / {0}/wannamigrate/wsgi.py
-
-        Alias /robots.txt {0}/static/robots.txt
-        Alias /favicon.ico {0}/static/favicon.ico
-        Alias /static/ {0}/static/
-
-        <Directory {0}/wannamigrate/>
-                <Files wsgi.py>
-                    Require all granted
-                </Files>
-        </Directory>
-
-        <Directory {0}/static/>
-            Require all granted
-        </Directory>
-    </VirtualHost>\" > {1}/{2}.conf""".format( DEFAULT_SITE_PATH, APACHE_SITES_ENABLED_PATH, SITE_ALIAS ),
-    "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ),
-    
-    # Restarts server
-    "sudo service apache2 restart"
+# The packages that should be installed.
+INSTALL_PACKAGES = [ 
+    "python3-dev", "git", "apache2", "libapache2-mod-wsgi-py3", 
+    "libapache2-mod-php5", "php5-mysql", "libmysqlclient-dev", 
+    "mysql-client", "gettext", "libjpeg-dev" 
 ]
 
-# The commands to execute on remote to configure wiki app.
-CONFIGURE_WIKI_COMMANDS = [
-    "sudo mkdir {0}".format( APP_ROOT ),
-    "sudo chown ubuntu:ubuntu {0}".format( APP_ROOT ),
-    "cd {0}".format( APP_ROOT ),
-    "wget http://releases.wikimedia.org/mediawiki/1.23/mediawiki-1.23.2.tar.gz",
-    "tar -zxf mediawiki-1.23.2.tar.gz",
-    "rm mediawiki-1.23.2.tar.gz",
-    "mv mediawiki-1.23.2 {0}".format( WIKI_ALIAS ),
-    "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),
-    "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),    
-    """echo \"Listen 81
-    <VirtualHost *:81>
-        ServerName dev.wannamigrate.com
-        DocumentRoot {0}
-        <Directory {0}/>
-            Require all granted
-        </Directory>
-    </VirtualHost>\" > {1}/{2}.conf""".format( DEFAULT_WIKI_PATH, APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),
-    "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),    
-    "sudo service apache2 restart",
+# The packages that should be installed on virtualenv
+VIRTUALENV_PACKAGES = [ 
+    "django", 
+    "https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz", 
+    "django-debug-toolbar", 
+    "python-social-auth", 
+    "pillow", 
+    "django-stdimage",
 ]
+    
 
 
 
 
 
-####################################
-# Methods
-####################################
-# Please do not modify the code above if you don't know what you're doing.
-# This script was made to you just have to modify the configurations bellow.
-def init():
-    """
-        Parse the command line params and calls the desired method.
-        If the method is not encountered displays the help.
-    """
-    if len( sys.argv ) > 1:
-        # Tries to get the method to be called.
-        method = globals().get( sys.argv[1] )
-        # Gets the params
-        params = sys.argv[2:]
-
-        # If method exists
-        if method:
-            method( params )
-        # Else Displays help
-        else:
-            h()
-    # Displays help
-    else:
-        h()
 
 
 
-def h():
-    """
-        Displays info about the helper's methods.
-    """
-
-    # A big list of dictionaries mapping available methods names 
-    # and its respectives descriptions
-    METHODS_HELP = [
-        {
-            "name": "connect",
-            "description": "Connects via ssh to the remote server."
-        },
-        {
-            "name": "up",
-            "description": "Send git changes to the remote server."
-        },
-        {
-            "name": "get_file",
-            "description": "Get files from the remote server."
-        },
-        {
-            "name": "put_file",
-            "description": "Put files on the remote server."
-        },
-        {
-            "name": "install",
-            "description": "Installs an available app on the remote server."
-        },
-    ]
-
-    print( "usage: python {0} <command> [<params>]".format( __file__ ) )
-    print
-    print( "Available commands:" )
-
-    for help in METHODS_HELP:
-        print( "    {0}{1}".format( help[ "name" ].ljust( N_DEFAULT_HELP_SPACING ), help[ "description" ] ) )
 
 
-
+########################################################################
+# PUBLIC METHODS
+# If you want to add a new method, please follow the pattern existant
+# in other methods (Regex to check usage at beginning, method help if 
+# usage wont match, etc).
+########################################################################
 def connect( args ):
     """
         Connects to the specified server via ssh.
         :args: A string indicating the server to connect to.
     """
 
-    # Local
-    if "local" in args:
-        return cmd( "vagrant ssh" )
-    # Development
-    elif "dev" in args:
-        return cmd( "ssh -i {0} ubuntu@{1}".format( SERVERS[ "dev" ][ "keypair" ], SERVERS[ "dev" ][ "ip" ] ) )
-    # Production
-    elif "prod" in args:
-        return cmd( "ssh -i {0} ubuntu@{1}".format( SERVERS[ "prod" ][ "keypair" ], SERVERS[ "prod" ][ "ip" ] ) )
-    else:
+    # The usage regex.
+    usage_pattern = "(local|dev|prod)"
+    cmd_str = " ".join( args )
+
+    # Checks if the user typed the command correctly
+    if not re.match( usage_pattern, cmd_str ):
         print( "usage: python {0} {1} (local|dev|prod)".format( __file__, connect.__name__ ) )
         print
         print( "Params explanation:")
         print( "    {0}{1}".format( "local".ljust( N_DEFAULT_HELP_SPACING ), "Connects to your local vagrant instance." ) )
         print( "    {0}{1}".format( "dev".ljust( N_DEFAULT_HELP_SPACING ), "Connects to Wanna Migrate's development instance." ) )
         print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Connects to Wanna Migrate's production instance." ) )
+    else:
+        # Gets the server name
+        server = args[0]
 
-
-
-def cmd( commands, remote_commands = None ):
-    """
-        Internal function. Used to call command line methods and pass input to it.
-    """
-    
-    # Converts commands to string
-    if type( commands ) is list:
-        commands = " ".join( commands ) 
-
-    # Appends the commands that should be executed on host machine.
-    if remote_commands:
-        commands += " -t '" + " \n ".join( remote_commands ) + "'"
-
-    
-    # Calls the command
-    shell = subprocess.call( commands, shell = True )
+        # Connects to the server.
+        if server == "local":
+            return cmd( "vagrant ssh" )
+        else:
+            return cmd( "ssh -i {0} {1}@{2}".format( SERVERS[ server ][ "keypair" ], USER_GROUPS[ server ], SERVERS[ server ][ "ip" ] ) )
 
 
 
@@ -448,6 +254,7 @@ def install( args ):
         print( "    {0}{1}".format( "wiki".ljust( N_DEFAULT_HELP_SPACING ), "Configures the wiki." ) )
         print( "    {0}{1}".format( "--local-database".ljust( N_DEFAULT_HELP_SPACING ), "(Optional) Configures a MySQL Server on the remote." ) )
     else:
+        
         # Configuring the params and the commands to call.
         server = args[0]
 
@@ -457,17 +264,110 @@ def install( args ):
             commands = [ "ssh", "-i", SERVERS[ server ][ "keypair" ], "ubuntu@{0}".format( SERVERS[ server ][ "ip" ] ) ]
         
         # Configuring the remote commands.
-        remote_commands = None
+        remote_commands = []
         
+        # Configuring Wiki on remote. Fills remote_commands with wiki's configuration commands.
         if "wiki" in args:
-            remote_commands = CONFIGURE_WIKI_COMMANDS
+            remote_commands.append( "sudo mkdir -p {0}".format( APP_ROOT ) )
+            remote_commands.append( "sudo chown {1}:{1} {0}".format( APP_ROOT, USER_GROUPS[ server ] ) )
+            remote_commands.append( "cd {0}".format( APP_ROOT ) )
+            remote_commands.append( "wget http://releases.wikimedia.org/mediawiki/1.23/mediawiki-1.23.2.tar.gz" )
+            remote_commands.append( "tar -zxf mediawiki-1.23.2.tar.gz" )
+            remote_commands.append( "rm mediawiki-1.23.2.tar.gz" )
+            remote_commands.append( "mv mediawiki-1.23.2 {0}".format( WIKI_ALIAS ) )
+        
+        # Configuring Site on remote. Fills remote_commands with site's configuration commands.
         elif "site" in args:
-            remote_commands = CONFIGURE_SITE_COMMANDS
+            # Updates apt-get
+            remote_commands.append( "sudo apt-get update" )
+            
+            # Install packages
+            for package in INSTALL_PACKAGES:
+                remote_commands.append( "sudo apt-get install {0} --yes".format( package ) )
 
+            # Installing pip using python3 and virtualenv
+            remote_commands.append( "cd ~/" )
+            remote_commands.append( "wget https://bootstrap.pypa.io/get-pip.py" )
+            remote_commands.append( "sudo python3 get-pip.py" )
+            remote_commands.append( "sudo pip install virtualenv" )
+
+            # Creating folders structure
+            remote_commands.append( "sudo mkdir -p {0}".format( APP_ROOT ) )
+            remote_commands.append( "sudo chown {1}:{1} {0}".format( APP_ROOT, USER_GROUPS[ server ] ) )
+            remote_commands.append( "sudo mkdir -p {0}".format( VIRTUALENV_PATH ) )
+            remote_commands.append( "sudo chown {1}:{1} {0}".format( VIRTUALENV_PATH, USER_GROUPS[ server ] ) )
+
+            # Downloading Wanna Migrate's code.
+            if server != "local":
+                remote_commands.append( "cd {0}".format( APP_ROOT ) )
+                remote_commands.append( "git clone {0} temp".format( WANNAMIGRATE_GIT ) )
+                remote_commands.append( "shopt -s dotglob" )
+                remote_commands.append( "mv temp/* {0}".format( APP_ROOT ) )
+                remote_commands.append( "rm -R temp" )
+                remote_commands.append( "rm -R infra" )
+
+            # Installing and configuring virtualenv
+            remote_commands.append( "virtualenv {0}".format( VIRTUALENV_PATH ) )
+            remote_commands.append( "source {0}/bin/activate".format( VIRTUALENV_PATH ) )
+            for package in VIRTUALENV_PACKAGES:
+                remote_commands.append( "pip install {0}".format( package ) )
+            remote_commands.append( "deactivate" )
+
+            # Removes the apache's default configuration file
+            remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
+
+            # Creates the wsgi file on apache mods-enabled folder.
+            remote_commands.append( "sudo touch {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ) )
+            remote_commands.append( "sudo chmod 777 {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ) )
+            remote_commands.append( 
+                """echo \"<IfModule mod_wsgi.c>
+                    WSGIPythonPath {0}:{1}/lib/python3.4:{1}/lib/python3.4/site-packages
+                </IfModule>\" > {2}/{3}.conf""".format( DEFAULT_SITE_PATH, VIRTUALENV_PATH, APACHE_MODS_ENABLED_PATH, WSGI_ALIAS )
+            )
+
+
+        # Creates the conf file that contains the virtualhosts to site 
+        # and wiki on apache's sites-enabled folder.
+        remote_commands.append( "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+        remote_commands.append( "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+        remote_commands.append( 
+            """echo \"<VirtualHost *:80>
+                ServerName www.wannamigrate.com
+                DocumentRoot {0}
+
+                WSGIScriptAlias / {0}/wannamigrate/wsgi.py
+
+                Alias /robots.txt {0}/static/robots.txt
+                Alias /favicon.ico {0}/static/favicon.ico
+                Alias /static/ {0}/static/
+
+                <Directory {0}/wannamigrate/>
+                        <Files wsgi.py>
+                            Require all granted
+                        </Files>
+                </Directory>
+
+                <Directory {0}/static/>
+                    Require all granted
+                </Directory>
+            </VirtualHost>
+
+            Listen 81
+            <VirtualHost *:81>
+                ServerName wiki.wannamigrate.com
+                DocumentRoot {3}
+                <Directory {3}/>
+                    Require all granted
+                </Directory>
+            </VirtualHost>\" > {1}/{2}.conf""".format( DEFAULT_SITE_PATH, APACHE_SITES_ENABLED_PATH, SITE_ALIAS, DEFAULT_WIKI_PATH )
+        )
+        remote_commands.append( "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+
+        # Should install database locally?
         if "--local_database" in args:
             # Ask for root password
-            root_password = raw_input( "Please type the root's password for MySQL: " )
-            root_password_confirm = raw_input( "Please confirm the root's password for MySQL: " )
+            root_password = input( "Please type the root's password for MySQL: " )
+            root_password_confirm = input( "Please confirm the root's password for MySQL: " )
             # If they are different, return.
             if root_password != root_password_confirm:
                 print( "Error: Passwords do not match." )
@@ -479,8 +379,14 @@ def install( args ):
                 "sudo apt-get -y install mysql-server",
             ] )
         
+        # Restarts apache
+        remote_commands.append( "sudo service apache2 restart" )
+            
         # Call
-        cmd( commands, remote_commands )
+        if server == "local":
+            cmd( commands, remote_commands, vagrant = True )
+        else:
+            cmd( commands, remote_commands )
 
         print
         print( "Installation DONE. But you should configure some DATABASE settings manually." )
@@ -493,6 +399,98 @@ def install( args ):
             print( "1. Create the database \"wiki\".")
             print( "2. Create the user \"wiki\" granting all privilegies over \"wiki\" database.")
             print( "3. After that, you should access http://{0}:81/mw-config/index.php to configure wiki.".format( SERVERS[ server ][ "ip" ] ) )
+
+
+
+
+
+########################################################################
+# INTERNAL METHODS
+# Please do not modify the code above if you don't know what you're doing.
+# This script was made to you just modify the configurations bellow.
+########################################################################
+def init():
+    """
+        Parse the command line params and calls the desired method.
+        If the method is not encountered displays the help.
+    """
+    if len( sys.argv ) > 1:
+        # Tries to get the method to be called.
+        method = globals().get( sys.argv[1] )
+        # Gets the params
+        params = sys.argv[2:]
+
+        # If method exists
+        if method:
+            method( params )
+        # Else Displays help
+        else:
+            h()
+    # Displays help
+    else:
+        h()
+
+
+
+def h():
+    """
+        Displays info about the helper's methods.
+    """
+
+    # A big list of dictionaries mapping available methods names 
+    # and its respectives descriptions
+    METHODS_HELP = [
+        {
+            "name": "connect",
+            "description": "Connects via ssh to the remote server."
+        },
+        {
+            "name": "up",
+            "description": "Send git changes to the remote server."
+        },
+        {
+            "name": "get_file",
+            "description": "Get files from the remote server."
+        },
+        {
+            "name": "put_file",
+            "description": "Put files on the remote server."
+        },
+        {
+            "name": "install",
+            "description": "Installs an available app on the remote server."
+        },
+    ]
+
+    print( "usage: python {0} <command> [<params>]".format( __file__ ) )
+    print
+    print( "Available commands:" )
+
+    for help in METHODS_HELP:
+        print( "    {0}{1}".format( help[ "name" ].ljust( N_DEFAULT_HELP_SPACING ), help[ "description" ] ) )
+
+
+
+def cmd( commands, remote_commands = None, vagrant = False ):
+    """
+        Internal function. Used to call command line methods and pass input to it.
+    """
+    
+    # Converts commands to string
+    if type( commands ) is list:
+        commands = " ".join( commands ) 
+
+    # Appends the commands that should be executed on host machine.
+    if remote_commands:
+        if vagrant:
+            commands += " -c '"
+        else:
+            commands += " -t '"
+        commands += " \n ".join( remote_commands ) + "'"
+
+    
+    # Calls the command
+    shell = subprocess.call( commands, shell = True )
 
 
 
