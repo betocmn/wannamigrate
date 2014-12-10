@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, getopt, os, subprocess, re
+import sys, getopt, os, subprocess, re, time, datetime
 
 
 ##############################
@@ -9,7 +9,7 @@ import sys, getopt, os, subprocess, re
 SERVERS = {
     "local" : {
         "ip" : "localhost",
-        "keypair" : None,
+        "keypair" : "",
     },
     "dev" : {
         "ip" : "54.213.143.121",
@@ -66,12 +66,6 @@ VIRTUALENV_PACKAGES = [
     "django-stdimage",
 ]
     
-
-
-
-
-
-
 
 
 
@@ -252,7 +246,7 @@ def install( args ):
         print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Configures the desired feature into Wanna Migrate's production instance." ) )
         print( "    {0}{1}".format( "site".ljust( N_DEFAULT_HELP_SPACING ), "Configures the site." ) )
         print( "    {0}{1}".format( "wiki".ljust( N_DEFAULT_HELP_SPACING ), "Configures the wiki." ) )
-        print( "    {0}{1}".format( "--local-database".ljust( N_DEFAULT_HELP_SPACING ), "(Optional) Configures a MySQL Server on the remote." ) )
+        print( "    {0}{1}".format( "--local_database".ljust( N_DEFAULT_HELP_SPACING ), "(Optional) Configures a MySQL Server on the remote." ) )
     else:
         
         # Configuring the params and the commands to call.
