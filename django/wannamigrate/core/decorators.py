@@ -24,8 +24,7 @@ def restrict_internal_ips( view_func ):
         else:
             ip = request.META.get( 'REMOTE_ADDR' )
         if ip not in settings.INTERNAL_IPS:
-            return HttpResponse( ip )
-            #return HttpResponseRedirect( reverse( 'site:home' ) )
+            return HttpResponseRedirect( reverse( 'site:home' ) )
         return view_func( request, *args, **kwargs )
 
     return _wrapped_view
