@@ -1,7 +1,7 @@
 from functools import wraps
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import available_attrs
 
 
@@ -24,7 +24,8 @@ def restrict_internal_ips( view_func ):
         else:
             ip = request.META.get( 'REMOTE_ADDR' )
         if ip not in settings.INTERNAL_IPS:
-            return HttpResponseRedirect( reverse( 'site:home' ) )
+            return HttpResponse( ip )
+            #return HttpResponseRedirect( reverse( 'site:home' ) )
         return view_func( request, *args, **kwargs )
 
     return _wrapped_view

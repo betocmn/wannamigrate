@@ -23,10 +23,10 @@ from wannamigrate.core.decorators import restrict_internal_ips
 
 
 #######################
-# Funcion to check user is admin
+# Function to check user is admin
 #######################
 def admin_check( user ):
-    user.is_admin
+    return user.is_admin
 
 
 #######################
