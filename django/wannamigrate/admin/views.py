@@ -19,18 +19,20 @@ from wannamigrate.core.models import (
 )
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.core.decorators import restrict_internal_ips
 
 
 #######################
 # Funcion to check user is admin
 #######################
 def admin_check( user ):
-    return user.is_admin
+    user.is_admin
 
 
 #######################
 # LOGIN / LOGOUT / MY ACCOUNT
 #######################
+@restrict_internal_ips
 def login_index( request ):
     """
     Login Form
@@ -68,6 +70,7 @@ def login_index( request ):
     return render( request, 'admin/login/index.html', context )
 
 
+@restrict_internal_ips
 @login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_logout( request ):
@@ -81,6 +84,7 @@ def login_logout( request ):
     return HttpResponseRedirect( reverse( 'admin:login' ) )
 
 
+@restrict_internal_ips
 @login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_my_account( request ):
@@ -98,6 +102,7 @@ def login_my_account( request ):
     return render( request, 'admin/login/my_account.html', context )
 
 
+@restrict_internal_ips
 @login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def login_edit_my_account( request ):
@@ -127,6 +132,7 @@ def login_edit_my_account( request ):
     return render( request, 'admin/login/edit_my_account.html', context )
 
 
+@restrict_internal_ips
 @login_required( login_url = 'admin:login' )
 @user_passes_test( admin_check, login_url = 'admin:login' )
 def home_index( request ):
@@ -144,6 +150,7 @@ def home_index( request ):
 #######################
 # USERS
 #######################
+@restrict_internal_ips
 @permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_list( request ):
@@ -158,6 +165,7 @@ def user_list( request ):
     return render( request, 'admin/user/list.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_list_json( request ):
@@ -185,6 +193,7 @@ def user_list_json( request ):
     return HttpResponse( json )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_add_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_add( request ):
@@ -224,6 +233,7 @@ def user_add( request ):
     return render( request, 'admin/user/add.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_details( request, user_id ):
@@ -257,6 +267,7 @@ def user_details( request, user_id ):
     return render( request, 'admin/user/details.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_change_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_edit( request, user_id ):
@@ -286,6 +297,7 @@ def user_edit( request, user_id ):
     return render( request, 'admin/user/edit.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_delete_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def user_delete( request, user_id ):
@@ -312,6 +324,7 @@ def user_delete( request, user_id ):
 #######################
 # ADMIN USERS
 #######################
+@restrict_internal_ips
 @permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_list( request ):
@@ -326,6 +339,7 @@ def admin_user_list( request ):
     return render( request, 'admin/admin_user/list.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_list_json( request ):
@@ -353,6 +367,7 @@ def admin_user_list_json( request ):
     return HttpResponse( json )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_add_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_add( request ):
@@ -392,6 +407,7 @@ def admin_user_add( request ):
     return render( request, 'admin/admin_user/add.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_details( request, user_id ):
@@ -413,6 +429,7 @@ def admin_user_details( request, user_id ):
     return render( request, 'admin/admin_user/details.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_change_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_edit( request, user_id ):
@@ -442,6 +459,7 @@ def admin_user_edit( request, user_id ):
     return render( request, 'admin/admin_user/edit.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_delete_admin_user', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def admin_user_delete( request, user_id ):
@@ -468,6 +486,7 @@ def admin_user_delete( request, user_id ):
 #######################
 # GROUPS AND PERMISSIONS
 #######################
+@restrict_internal_ips
 @permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_list( request ):
@@ -482,6 +501,7 @@ def group_list( request ):
     return render( request, 'admin/group/list.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_list_json( request ):
@@ -508,6 +528,7 @@ def group_list_json( request ):
     json = build_datatable_json( request, objects, info )
     return HttpResponse( json )
 
+@restrict_internal_ips
 @permission_required( 'auth.add_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_add( request ):
@@ -539,6 +560,7 @@ def group_add( request ):
     return render( request, 'admin/group/add.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.view_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_details( request, group_id ):
@@ -560,6 +582,7 @@ def group_details( request, group_id ):
     return render( request, 'admin/group/details.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.edit_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_edit( request, group_id ):
@@ -594,6 +617,7 @@ def group_edit( request, group_id ):
     return render( request, 'admin/group/edit.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.delete_group', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def group_delete( request, group_id ):
@@ -621,6 +645,7 @@ def group_delete( request, group_id ):
 #######################
 # IMMIGRATION RULES (QUESTIONS, ANSWERS AND POINTS)
 #######################
+@restrict_internal_ips
 @permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_list( request ):
@@ -635,6 +660,7 @@ def question_list( request ):
     return render( request, 'admin/question/list.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_list_json( request ):
@@ -661,6 +687,7 @@ def question_list_json( request ):
     return HttpResponse( json )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_add_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_add( request ):
@@ -717,6 +744,7 @@ def question_add( request ):
     return render( request, 'admin/question/add.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_details( request, question_id ):
@@ -744,6 +772,7 @@ def question_details( request, question_id ):
     return render( request, 'admin/question/details.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_change_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_edit( request, question_id ):
@@ -808,6 +837,7 @@ def question_edit( request, question_id ):
     return render( request, 'admin/question/edit.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'core.admin_delete_immigration_rule', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def question_delete( request, question_id ):
@@ -832,6 +862,7 @@ def question_delete( request, question_id ):
 #######################
 # OCCUPATIONS
 #######################
+@restrict_internal_ips
 @permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_list( request ):
@@ -846,6 +877,7 @@ def occupation_list( request ):
     return render( request, 'admin/occupation/list.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_list_json( request ):
@@ -872,6 +904,7 @@ def occupation_list_json( request ):
 
     return HttpResponse( json )
 
+@restrict_internal_ips
 @permission_required( 'auth.add_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_add( request ):
@@ -903,6 +936,7 @@ def occupation_add( request ):
     return render( request, 'admin/occupation/add.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.view_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_details( request, occupation_id ):
@@ -924,6 +958,7 @@ def occupation_details( request, occupation_id ):
     return render( request, 'admin/occupation/details.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.edit_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_edit( request, occupation_id ):
@@ -958,6 +993,7 @@ def occupation_edit( request, occupation_id ):
     return render( request, 'admin/occupation/edit.html', context )
 
 
+@restrict_internal_ips
 @permission_required( 'auth.delete_occupation', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def occupation_delete( request, occupation_id ):
