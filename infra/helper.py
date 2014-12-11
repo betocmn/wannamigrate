@@ -130,8 +130,8 @@ def up( args ):
         # Configuring the remote commands.
         remote_commands = [ 
             "cd {0}".format( APP_ROOT ), 
-            "git fetch", 
-            "git checkout HEAD {0}".format( DEFAULT_SITE_PATH ),
+            "git pull", 
+            "rm -R infra",
             "source {0}/bin/activate".format( VIRTUALENV_PATH ),
             "python {0}/manage.py migrate".format( DEFAULT_SITE_PATH ),
             "deactivate"
