@@ -4,11 +4,30 @@ from django.template.defaultfilters import slugify
 from django.core.files.base import ContentFile
 from urllib.request import urlopen
 from urllib.error import HTTPError, URLError
+from django.contrib.auth import logout
 from PIL import Image
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.core.models import UserPersonal
 from wannamigrate.core.mailer import Mailer
 
+
+def social_user( backend, uid, user = None, *args, **kwargs ):
+    '''OVERRIDED: It will logout the current user
+    instead of raise an exception '''
+
+    provider = backend.name
+    social = backend.strategy.storage.user.get_social_auth( provider, uid )
+    if social:
+        if user and social.user != user:
+            logout(backend.strategy.request)
+            #msg = 'This {0} account is already in use.'.format(provider)
+            #raise AuthAlreadyAssociated(backend, msg)
+        elif not user:
+            user = social.user
+    return {'social': social,
+            'user': user,
+            'is_new': user is None,
+            'new_association': False}
 
 def save_extra_data( backend, details, response, user = None, is_new = False, *args, **kwargs ):
     """
