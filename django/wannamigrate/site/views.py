@@ -106,7 +106,8 @@ def login( request ):
             return HttpResponse( _( 'Invalid Login. Please try again.' ) ) # invalid login :(
 
     else:
-        raise Http404
+        template_data = []
+        return render( request, "site/login.html", template_data )
 
 
 def logout( request ):

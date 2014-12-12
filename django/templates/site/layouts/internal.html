@@ -1,0 +1,96 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        {% block head %}
+
+            <!-- Meta -->
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta name="description" content="Wanna Migrate is the first immigration platform that allows the user to identify countries where he is allowed to live and work.">
+            <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
+            <meta name="Title" content="Wanna Migrate - {% trans "Live Abroad. Change your life." %}">
+            <meta name="Robots" content="all">
+            <title>Wanna Migrate - {% trans "Live Abroad. Change your life." %}</title>
+            <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+            <!-- Font Awesome -->
+            <link href="{% static 'site/css/font-awesome.min.css' %}" rel="stylesheet">
+            <!-- General font configurations -->
+            <link href="{% static 'site/css/fonts.css' %}" rel="stylesheet">
+            <!-- JQuery UI -->
+            <link rel="stylesheet" type="text/css" href="{% static 'site/js/jquery-ui/jquery-ui.min.css' %}">
+            <!-- Internal CSS -->
+            <link href="{% static 'site/css/internal.css' %}" rel="stylesheet">
+
+            <!-- Google Analytics -->
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-7734790-20']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script');
+                    ga.type = 'text/javascript';
+                    ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+
+            <!-- JQuery -->
+            <script type="text/javascript" src="{% static 'site/js/jquery.js' %}"></script>
+            <!-- JQuery UI -->
+            <script type="text/javascript" src="{% static "site/js/jquery-ui/jquery-ui.min.js" %}"></script>
+            <!-- Utility Functions (JS) -->
+            <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+            <script type="text/javascript">
+                $( window ).ready(function(){
+                    
+                    // Top bar dropdown
+                    {% if user.is_authenticated %}    
+                        $( ".userName" ).click(function(){
+                            $( "#popup" ).toggleClass( "showIt" );
+                        });
+                    {% endif %}
+
+                    // Initializes Jquery UI Tooltips
+                    $( document ).tooltip(); 
+                });
+            </script>
+
+        {% endblock head %}
+
+    </head>
+
+
+    <body>
+        <div id="top_bar">
+            <a id="tob_bar_logo"></a>
+            <ul id="top_bar_menu">
+                <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
+                <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">
+                            {% if user.userpersonal.avatar %}
+                                <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
+                            {% endif %}
+                            {% trans "My Profile" as default_name %}
+                            {{ user.name|default_if_none:default_name|truncatechars:25 }}
+                        </a>
+                        <ul id="top_bar_submenu">
+                            <li><a href="{% url 'site:view_account' %}">{% trans "My account" %}</a></li>
+                            <li><a href="{% url 'site:logout' %}">{% trans "Logout" %}</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% block content %}{% endblock content %}
+
+    </body>
+
+</html>
