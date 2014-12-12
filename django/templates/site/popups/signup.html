@@ -241,12 +241,24 @@
 
 <!-- LOGIN FOOTER -->
 <div class="modal-footer login_item f10 grey regular">
-    {% trans 'If you click "Log in with Facebook/Linkedin/Twitter" and are not our user, you will be registered and you agree to Wanna Migrates <a class="bold green" href="#">Terms and Conditions</a> and  <a class="bold green" href="#">Privacy Police</a>' %}
+    {% url 'site:terms' as terms_url %}
+    {% url 'site:privacy' as privacy_url %}
+    {% blocktrans %}
+        If you click "Log in with Facebook/Linkedin/Twitter" and are not our user, you will be registered and accepting Wanna Migrate's
+        <a class="bold green" target="_blank" href="{{ terms_url }}">Terms and Conditions</a>
+        and  <a class="bold green" target="_blank" href="{{ privacy_url }}">Privacy Police</a>
+    {% endblocktrans %}
 </div>
 <!-- ./LOGIN FOOTER -->
 <!-- SIGNUP FOOTER -->
 <div class="modal-footer signup_item f10 grey regular">
-    {% trans 'By clicking on Sign up, you will be automatically accepting Wanna Migrates <a class="bold green" href="#">Terms and Conditions</a> and  <a class="bold green" href="#">Privacy Police</a>' %}
+    {% url 'site:terms' as terms_url %}
+    {% url 'site:privacy' as privacy_url %}
+    {% blocktrans %}
+        By clicking on Sign up, you will be automatically accepting Wanna Migrate's
+        <a class="bold green" target="_blank" href="{{ terms_url }}">Terms and Conditions</a>
+        and  <a class="bold green" target="_blank" href="{{ privacy_url }}">Privacy Police</a>
+    {% endblocktrans %}
 </div>
 <!-- ./SIGNUP FOOTER -->
 <!-- PASSWORD RECOVERY FOOTER -->

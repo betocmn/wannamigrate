@@ -314,6 +314,33 @@ def tour( request ):
 
 
 #######################
+# TERMS, CONDITIONS AND PRIVACY
+#######################
+def terms( request ):
+    """
+    Displays "Terms and Conditions" static page
+
+    :param request:
+    :return String - HTML from The dashboard page.
+    """
+
+    # Print Template
+    return render( request, 'site/terms.html' )
+
+def privacy( request ):
+    """
+    Displays "Privacy Policy" static page
+
+    :param request:
+    :return String - HTML from The dashboard page.
+    """
+
+    # Print Template
+    return render( request, 'site/privacy.html' )
+
+
+
+#######################
 # MY ACCOUNT VIEWS
 #######################
 @login_required

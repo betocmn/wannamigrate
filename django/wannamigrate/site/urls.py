@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     url( r'^recover_password/$', views.recover_password, name = 'recover_password' ),
     url( r'^reset_password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.reset_password, name = 'reset_password' ),
 
+    # Terms, Conditions and Privacy
+    url( r'^terms/$', views.terms, name = 'terms' ),
+    url( r'^privacy/$', views.privacy, name = 'privacy' ),
+
     # How it Works
     url( r'^tour/$', views.tour, name = 'tour' ),
 
