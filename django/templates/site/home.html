@@ -69,7 +69,11 @@
         <a href="javascript:SceneController.nextPage();" id="bt-more" class="gui"></a>
         <div id="menu" class="gui">
             <div id="menu-logo"></div>
-            <a href="javascript:doLogin();" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'site:dashboard' %}" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
+            {% else %}
+                <a href="javascript:doLogin();" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
+            {% endif %}
             {% include 'site/dropdowns/home_language_selector.html' %}
         </div>
         
