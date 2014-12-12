@@ -54,7 +54,6 @@ def home( request, static = None ):
     template_data['signup_form'] = SignupForm()
     template_data['recovery_form'] = PasswordRecoveryForm()
 
-
     # Print Template
     if static:
         # Sets the css breakpoints to the template (From taller to smallest)

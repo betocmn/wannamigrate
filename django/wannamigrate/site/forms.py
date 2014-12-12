@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput, PasswordInput, RadioSelect, ModelChoiceField, ChoiceField, Select, TypedChoiceField
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy, ugettext_lazy as _
 from django.forms.models import BaseInlineFormSet
 from datetime import date
 from django.conf import settings
@@ -284,7 +284,7 @@ class UserLanguageProficiencyForm( BaseModelForm ):
     Form for USER LANGUAGE PROFICIENCY data (levels of foreign languages)
     """
 
-    language = LanguageChoiceField( required = True, label = _( "Language" ), queryset = Language.objects.order_by( 'name' ), empty_label = _( 'Select Language' ) )
+    language = LanguageChoiceField( required = True, label = pgettext_lazy( "Singular", "Language" ), queryset = Language.objects.order_by( 'name' ), empty_label = _( 'Select Language' ) )
     language_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_LANGUAGE_LEVEL_OTHERS ), empty_label = _( 'Select Level' ) )
 
     class Meta:
@@ -409,12 +409,13 @@ class UserEducationHistoryForm( BaseModelForm ):
     Form for USER EDUCATION HISTORY data (degrees of education)
     """
 
-    YEARS = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
+    YEARS_START = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
+    YEARS_END = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 5 ) )
 
     education_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_EDUCATION_DEGREE ), empty_label = _( 'Select Level' ) )
     country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
-    year_start = ChoiceField( required = True, label = _( "Start Year" ), choices = YEARS )
-    year_end = ChoiceField( required = True, label = _( "End Year" ), choices = YEARS )
+    year_start = ChoiceField( required = True, label = _( "Start Year" ), choices = YEARS_START )
+    year_end = ChoiceField( required = True, label = _( "End Year" ), choices = YEARS_END )
 
     class Meta:
         model = UserEducationHistory

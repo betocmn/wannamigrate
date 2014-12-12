@@ -100,7 +100,7 @@
                 </div>
             {% endif %}
 
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{% trans "What are your education degrees?" %}</strong>&nbsp;</span>
+            <span style="font-size: 14px;color:#888888;"><strong>{% trans "What are your education degrees?" %}</strong>&nbsp;</span>
             <div class="break10"></div>
 
             {{ user_education_history_formset.management_form }}
@@ -115,14 +115,14 @@
 
 
                         <div style="width: 201px !important;">
-                            <label style="width: 190px !important;" class="smallInput {% if user_education_history_form.school.errors %}has-error{% endif %}">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.school.label }}:
+                            <label style="width: 190px !important;" class="smallInput {% if user_education_history_form.school.errors %}has-error{% endif %}">{{ user_education_history_form.school.label }}:
                                 {{ user_education_history_form.school }}
                                 {{ user_education_history_form.school.errors }}
                             </label>
                         </div>
 
                         <div style="width: 201px !important;" class="smallSelect {% if user_education_history_form.country.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.country.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_education_history_form.country.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_education_history_form.country }}
@@ -134,7 +134,7 @@
                         <div class="break10"></div>
 
                         <div style="width: 391px !important; margin-left: 10px;" class="{% if user_education_history_form.education_level_answer.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.education_level_answer.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_education_history_form.education_level_answer.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 370px !important;">
                                 {{ user_education_history_form.education_level_answer }}
@@ -146,7 +146,7 @@
                         <div class="break10"></div>
 
                         <div style="width: 201px !important; margin-left: 10px;" class="smallSelect {% if user_education_history_form.year_start.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.year_start.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_education_history_form.year_start.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_education_history_form.year_start }}
@@ -155,7 +155,7 @@
                         </div>
 
                         <div style="width: 201px !important;" class="smallSelect {% if user_education_history_form.year_end.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_education_history_form.year_end.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_education_history_form.year_end.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_education_history_form.year_end }}
@@ -176,7 +176,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_education_form.partner_education_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.partner_education_level_answer.label }}?</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_education_form.partner_education_level_answer.label }}?</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_education_form.partner_education_level_answer }}
                 </div>
@@ -187,9 +187,9 @@
             <div class="break10"></div>
 
             <div class="{% if user_education_form.regional_australia_study.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_education_form.regional_australia_study.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_education_form.regional_australia_study.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_education_form.regional_australia_study %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}

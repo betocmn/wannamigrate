@@ -100,7 +100,7 @@
                 </div>
             {% endif %}
 
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{% trans "What languages do you speak (including your native one)?" %}</strong>&nbsp;</span>
+            <span style="font-size: 14px;color:#888888;"><strong>{% trans "What languages do you speak (including your native one)?" %}</strong>&nbsp;</span>
             <div class="break10"></div>
 
             {{ user_language_proficiency_formset.management_form }}
@@ -112,7 +112,7 @@
                         {{ user_language_proficiency_form.id }}
                         {{ user_language_proficiency_form.DELETE }}
                         <div style="width: 201px !important;" class="smallSelect {% if user_language_proficiency_form.language.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_language_proficiency_form.language.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_language_proficiency_form.language.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_language_proficiency_form.language }}
@@ -120,7 +120,7 @@
                             {{ user_language_proficiency_form.language.errors }}
                         </div>
                         <div style="width: 201px !important;" class="smallSelect {% if user_language_proficiency_form.language_level_answer.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_language_proficiency_form.language_level_answer.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_language_proficiency_form.language_level_answer.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_language_proficiency_form.language_level_answer }}
@@ -139,7 +139,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_language_form.partner_english_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_language_form.partner_english_level_answer.label }}?</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_language_form.partner_english_level_answer.label }}?</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_language_form.partner_english_level_answer }}
                     {{ user_language_form.partner_english_level_answer.errors }}
@@ -150,7 +150,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_language_form.partner_french_level_answer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_language_form.partner_french_level_answer.label }}?</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_language_form.partner_french_level_answer.label }}?</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_language_form.partner_french_level_answer }}
                     {{ user_language_form.partner_french_level_answer.errors }}

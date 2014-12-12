@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load string_extras %}
 <!DOCTYPE HTML>
 <html>
 
@@ -81,22 +82,25 @@
         <div id="topBar" class="{{ top_bar_css_class|default_if_none:'' }}">
             <a href="{% url 'site:dashboard' %}" id="logo"></a>
             <div id="topMenu">
+
                 <ul id="topBarMenu">
+                    <li><a href="{% url 'site:dashboard' %}">{% trans "DASHBOARD" %}</a></li>
                     <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
                     <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
                 </ul>
+
                 {% if user.userpersonal.avatar %}
                     <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
                 {% endif %}
                 <a href="#" class="userName">
-                    {% trans "My Profile" as default_name %}
-                    {{ user.name|default_if_none:default_name|truncatechars:25 }}
+                    {{ user.name|truncate_smart:15|default:'My Profile' }}
                     <span></span>
                 </a>
                 <div id="popup">
                     <a href="{% url 'site:view_account' %}">{% trans "My account" %}</a>
                     <a href="{% url 'site:logout' %}">{% trans "Logout" %}</a>
                 </div>
+
             </div>
         </div>
 

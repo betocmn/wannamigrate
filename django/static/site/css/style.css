@@ -23,13 +23,14 @@ body{
 	margin-left: 60px;
 }
 #topMenu{
-	float: left;
+	float: right;
 	width: 560px;
-	position: absolute;
 	right: 10px;
+    position: absolute;
 }
 #topMenu #topBarMenu li{
-	display: inline;
+	float: left;
+    margin-right: 20px;
 
 }
 #topMenu #topBarMenu li a{
@@ -37,8 +38,6 @@ body{
 	color: #dfdfdf;
 	font-size: 14px;
 	line-height: 70px;
-	display: inline-block;
-	width: 140px;
 	font-weight: 700;
 }
 #topMenu #topBarMenu li a:hover{
@@ -1290,7 +1289,7 @@ form .has-error input, form .has-error textarea, form .has-error select {
 .updateFix{
 	position: fixed;
 	width: 100%;
-	z-index: 7;
+	z-index: 1;
 }
 .takeMeAwayFromTheTop130px{
 	top: 130px;

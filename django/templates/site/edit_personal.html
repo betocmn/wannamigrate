@@ -123,7 +123,7 @@
             {% endif %}
 
             <div class="{% if user_personal_form.birth_date.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.birth_date.label }}:</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_personal_form.birth_date.label }}:</strong> &nbsp;</span>
                 <div>
                     {{ user_personal_form.birth_date }}
                 </div>
@@ -134,7 +134,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.gender.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.gender.label }}:</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_personal_form.gender.label }}:</strong> &nbsp;</span>
                 {% for radio in user_personal_form.gender %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -148,7 +148,7 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.country.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.country.label }}:</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_personal_form.country.label }}:</strong> &nbsp;</span>
                 <div class="select-style">
                     {{ user_personal_form.country }}
                     {{ user_personal_form.country.errors }}
@@ -159,11 +159,11 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.family_overseas.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.family_overseas.label }}?</strong>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_personal_form.family_overseas.label }}?</strong>
                     &nbsp;<i class="hint fa fa-question-circle" title="{% trans "If you have a close family member in either Australia, Canada or New Zealand, you can get extra points" %}"></i>
                 </span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_personal_form.family_overseas %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -190,7 +190,7 @@
 
                                 {{ user_personal_family_form.id }}
                                 {{ user_personal_family_form.DELETE }}
-                                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_personal_family_form.country.label }}?</span>
+                                <span style="font-size: 14px;color:#888888;display:block;">{{ user_personal_family_form.country.label }}?</span>
                                 <div class="break10"></div>
                                 <div class="select-style">
                                     {{ user_personal_family_form.country }}
@@ -211,9 +211,9 @@
             <div class="break10"></div>
 
             <div class="{% if user_personal_form.australian_regional_immigration.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_personal_form.australian_regional_immigration.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_personal_form.australian_regional_immigration.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_personal_form.australian_regional_immigration %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}

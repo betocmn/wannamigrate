@@ -142,7 +142,7 @@
             {% endif %}
         
             <div class="{% if user_work_form.occupation.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.occupation.label }}?</strong> &nbsp;</span>
+                <span style="font-size: 14px;color:#888888;"><strong>{{ user_work_form.occupation.label }}?</strong> &nbsp;</span>
                 <div class="clear"></div>
                 <div class="select-style" style="float: left; margin-right: 10px;">
                     {{ user_work_form.occupation_category }}
@@ -158,7 +158,7 @@
             <div class="break10"></div>
             <div class="break10"></div>
 
-            <span style="font-size: 14px;color:#888888;">&nbsp;&nbsp;&nbsp;<strong>{% trans "Add below your work experiences" %}:</strong>&nbsp;</span>
+            <span style="font-size: 14px;color:#888888;"><strong>{% trans "Add below your work experiences" %}:</strong>&nbsp;</span>
             <div class="break10"></div>
 
             {{ user_work_experience_formset.management_form }}
@@ -173,14 +173,14 @@
 
 
                         <div style="width: 201px !important;">
-                            <label style="width: 190px !important;" class="smallInput {% if user_work_experience_form.company.errors %}has-error{% endif %}">&nbsp;&nbsp;&nbsp;{{ user_work_experience_form.company.label }}:
+                            <label style="width: 190px !important;" class="smallInput {% if user_work_experience_form.company.errors %}has-error{% endif %}">{{ user_work_experience_form.company.label }}:
                                 {{ user_work_experience_form.company }}
                                 {{ user_work_experience_form.company.errors }}
                             </label>
                         </div>
 
                         <div style="width: 201px !important;" class="smallSelect {% if user_work_experience_form.country.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_work_experience_form.country.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_experience_form.country.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_work_experience_form.country }}
@@ -192,7 +192,7 @@
                         <div class="break10"></div>
 
                         <div style="width: 201px !important; margin-left: 10px;" class="smallSelect {% if user_work_experience_form.months.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_work_experience_form.months.label }}:</span>
+                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_experience_form.months.label }}:</span>
                             <!-- <div class="break10"></div> -->
                             <div class="select-style" style="width: 190px !important;">
                                 {{ user_work_experience_form.months }}
@@ -214,9 +214,9 @@
             <div class="break10"></div>
 
             <div class="{% if user_work_form.willing_to_invest.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.willing_to_invest.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.willing_to_invest.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.willing_to_invest %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -230,9 +230,9 @@
             <div class="break10"></div>
 
             <div class="{% if user_work_form.canadian_startup_letter.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.canadian_startup_letter.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.canadian_startup_letter.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.canadian_startup_letter %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -246,9 +246,9 @@
             <div class="break10"></div>
 
             <div class="{% if user_work_form.australian_professional_year.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.australian_professional_year.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.australian_professional_year.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.australian_professional_year %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -262,9 +262,9 @@
             <div class="break10"></div>
         
             <div class="{% if user_work_form.work_offer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.work_offer.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.work_offer.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.work_offer %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -292,7 +292,7 @@
                                 {{ user_work_offer_form.id }}
                                 {{ user_work_offer_form.DELETE }}
 
-                                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;{{ user_work_offer_form.country.label }}?</span>
+                                <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_offer_form.country.label }}?</span>
                                 <div class="break10"></div>
                                 <div class="select-style">
                                     {{ user_work_offer_form.country }}
@@ -314,9 +314,9 @@
 
 
             <div class="{% if user_work_form.canadian_partner_work_study_experience.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">&nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.canadian_partner_work_study_experience.label }}?</strong></span>
+                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.canadian_partner_work_study_experience.label }}?</strong></span>
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.canadian_partner_work_study_experience %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}
@@ -331,11 +331,11 @@
             
             <div class="{% if user_work_form.partner_skills.errors %}has-error{% endif %}">
                 <span style="font-size: 14px;color:#888888;display:block;">
-                    &nbsp;&nbsp;&nbsp;<strong>{{ user_work_form.partner_skills.label }}?</strong>&nbsp;<i class="hint fa fa-question-circle" title="{% trans "Proved Skills: Under 50 yeard old. Competent English. Same skilled occupation as you." %}"></i>
+                   <strong>{{ user_work_form.partner_skills.label }}?</strong>&nbsp;<i class="hint fa fa-question-circle" title="{% trans "Proved Skills: Under 50 yeard old. Competent English. Same skilled occupation as you." %}"></i>
                 </span>
 
                 <div class="break10"></div>
-                &nbsp;&nbsp;&nbsp;
+
                 {% for radio in user_work_form.partner_skills %}
                     {% if radio.choice_label != '---------' %}
                         {{ radio.tag }}

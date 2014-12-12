@@ -17,6 +17,7 @@ function load_ajax_dropdown( parent_id, child_id, parent_value, child_value, url
 		if ( parent_value != '' ){
 			$( "#" + parent_id ).val( parent_value );
 		}
+
 		var parent_elem = $( "#" + parent_id );
 		var child_elem = $( '#' + child_id );
         var attr = {};

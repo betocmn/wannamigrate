@@ -332,7 +332,7 @@ class UserEducation( BaseModel ):
         ( False, _( 'No' ) )
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    regional_australia_study = models.NullBooleanField( _( "Did you complete any studies in a regional part of australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
+    regional_australia_study = models.NullBooleanField( _( "Did you complete any studies in a regional part of Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner/spouse education level' ), blank = True, null = True )
 
     # META Options

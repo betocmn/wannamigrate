@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load string_extras %}
 <!DOCTYPE HTML>
 <html>
 
@@ -69,6 +70,7 @@
         <div id="top_bar">
             <a id="tob_bar_logo"></a>
             <ul id="top_bar_menu">
+                <li><a href="{% url 'site:dashboard' %}">{% trans "DASHBOARD" %}</a></li>
                 <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
                 <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
                 {% if user.is_authenticated %}
@@ -77,8 +79,7 @@
                             {% if user.userpersonal.avatar %}
                                 <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
                             {% endif %}
-                            {% trans "My Profile" as default_name %}
-                            {{ user.name|default_if_none:default_name|truncatechars:25 }}
+                            {{ user.name|truncate_smart:15|default:'My Profile' }}
                         </a>
                         <ul id="top_bar_submenu">
                             <li><a href="{% url 'site:view_account' %}">{% trans "My account" %}</a></li>
