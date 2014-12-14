@@ -13,6 +13,7 @@
             <meta name="keywords" content="wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada">
             <meta name="Title" content="Wanna Migrate - {% trans "Live Abroad. Change your life." %}">
             <meta name="Robots" content="all">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>Wanna Migrate - {% trans "Live Abroad. Change your life." %}</title>
             <link rel="shortcut icon" href="{% static "favicon.ico" %}">
             <!-- Font Awesome -->
@@ -56,6 +57,11 @@
                         });
                     {% endif %}
 
+                    $( "#pull-menu" ).click(function(){
+
+                        $( "#top_bar_menu" ).toggle();
+                    });
+
                     // Initializes Jquery UI Tooltips
                     $( document ).tooltip(); 
                 });
@@ -68,26 +74,33 @@
 
     <body>
         <div id="top_bar">
-            <a id="tob_bar_logo"></a>
-            <ul id="top_bar_menu">
-                <li><a href="{% url 'site:dashboard' %}">{% trans "DASHBOARD" %}</a></li>
-                <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
-                <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <a href="#">
-                            {% if user.userpersonal.avatar %}
-                                <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
-                            {% endif %}
-                            {{ user.name|truncate_smart:15|default:'My Profile' }}
-                        </a>
-                        <ul id="top_bar_submenu">
-                            <li><a href="{% url 'site:view_account' %}">{% trans "My account" %}</a></li>
-                            <li><a href="{% url 'site:logout' %}">{% trans "Logout" %}</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
-            </ul>
+            <a id="top_bar_logo"></a>
+            <a href="#" id="pull-menu" class="mobile-only"><i class="fa fa-bars"></i></a> 
+            <nav id="top_bar_menu">
+                <ul class="">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'site:dashboard' %}">{% trans "DASHBOARD" %}</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'site:tour' %}">{% trans "HOW IT WORKS" %}</a></li>
+                    <li><a href="{% url 'site:contact' %}">{% trans "CONTACT US" %}</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="desktop-only">
+                            <a href="#">
+                                {% if user.userpersonal.avatar %}
+                                    <img src="{{ user.userpersonal.avatar.thumbnail.url }}" />
+                                {% endif %}
+                                {{ user.name|truncate_smart:15|default:'My Profile' }}
+                            </a>
+                            <ul id="top_bar_submenu">
+                                <li><a href="{% url 'site:view_account' %}">{% trans "My account" %}</a></li>
+                                <li><a href="{% url 'site:logout' %}">{% trans "Logout" %}</a></li>
+                            </ul>
+                        </li>
+                        <li class="mobile-only"><a href="{% url 'site:view_account' %}">{% trans "My account" %}</a></li>
+                        <li class="mobile-only"><a href="{% url 'site:logout' %}">{% trans "Logout" %}</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
 
         {% block content %}{% endblock content %}

@@ -5,6 +5,7 @@
 {% block head %}
 
     {{ block.super }}
+    <link href="{% static 'site/css/login.css' %}" rel="stylesheet">
 
 
 {% endblock head %}
@@ -13,20 +14,19 @@
 {% block content %}
 
 <!-- Page Header -->
-<div class="section-header">
-    <h1>{% trans "Login" %}</h1>
-    <p>{% trans "Join now to the World's largest immigration platform." %}</p>
-</div>
+<!--div class="section-header">
+    <h1 class="f18 bold">{% trans "Login" %}</h1>
+    <p class="f10 regular">{% trans "Join now to the World's largest immigration platform." %}</p>
+</div-->
 
 <div class="cards-wrapper">
     {% include "site/layouts/status.html" %}
 </div>
 <div class="cards-wrapper">
-    <!-- Info card for Avatar -->
+    
     <div class="login-card">
-        
+    	{% include "site/login/login_form.html" %}  
     </div>
 </div>
-
 
 {% endblock content %}

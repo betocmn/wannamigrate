@@ -1,0 +1,269 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!-- Custom js -->
+<script type="text/javascript">
+
+    /**
+    * Shows the login form.
+    *
+    */
+    function doLogin()
+    {
+        if ( window.InputHandler !== undefined )
+            InputHandler.lock();
+        
+        switch_to_login();
+        $( "#overlay" ).show();
+        $( "#dialog" ).fadeIn();
+    }
+    
+    /**
+    * Shows the signup form.
+    *
+    */
+    function doSignup( )
+    {
+        if ( window.InputHandler !== undefined )
+            InputHandler.lock();
+        
+        switch_to_signup();
+        $( "#overlay" ).show();
+        $( "#dialog" ).fadeIn();
+    }
+
+    /**
+    * Closes the dialog.
+    *
+    */
+    function closeDialog()
+    {
+        if ( window.InputHandler !== undefined )
+            InputHandler.unlock();
+        
+        $( "#dialog" ).fadeOut();
+        $( "#overlay" ).hide();
+    }
+
+    /**
+     * Displays the LOGIN form
+     *
+     */
+    function switch_to_login(){
+        clear_status();
+        $( ".password_recovery_item" ).hide();
+        $( ".signup_item" ).hide();
+        $( ".login_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Sign in" %}' );
+    }
+
+    /**
+     * Displays the SIGNUP form
+     *
+     */
+    function switch_to_signup(){
+        clear_status();
+        $( ".login_item" ).hide();
+        $( ".signup_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Sign up" %}' );
+    }
+
+    /**
+     * Displays the RECOVER PASSWORD form
+     *
+     */
+    function switch_to_password_recovery(){
+        clear_status();
+        $( ".login_item" ).hide();
+        $( ".password_recovery_item" ).fadeIn();
+        $( "#global_alert" ).hide();
+        $( ".modal-header" ).text( '{% trans "Password recovery" %}' );
+    }
+
+    /**
+    * Clears the status message
+    *
+    */
+    function clear_status(){
+      // Removes the error msg
+      $( "#global_alert_error_msg" ).html('');
+    }
+
+    /**
+     * Jquery On Load
+     *
+     */
+    $( document ).ready( function(){
+
+        // Defaults to login screen
+        switch_to_login();
+
+        // Closes the dialog if the overlay was clicked.
+        $( "#overlay" ).click( closeDialog );
+
+        // Attach a submit handler to the Login Form
+        $( ".ajax-submit" ).submit( function( event ) {
+
+            // Clear Status
+            clear_status();
+
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // JS FORM Validation (for required fields)
+            if ( this.id == 'login_form_email' ){
+                var required_fields = 'login_email,login_password';
+            } else if ( this.id == 'signup_form_email' ){
+                var required_fields = 'signup_name,signup_email,signup_email_confirmation,signup_password';
+            } else {
+                var required_fields = 'recovery_email';
+            }
+            if ( !validate_empty_fields( this, required_fields ) ) {
+              return false;
+            }
+
+            // show loading
+            var loading_img = '{% static "site/img/loading.gif" %}';
+            $( this ).before( '<div id="loader" style="text-align:center;"><img src="'+loading_img+'" alt="Loading" title="Loading" /></div>' );
+            $( this).hide();
+
+            // Get some values from elements on the page:
+            var $form = $( this );
+            var url = $form.attr( "action" );
+            //var csrftoken = getCookie('csrftoken');
+            var csrftoken = document.getElementsByName( 'csrfmiddlewaretoken' )[0].value;
+
+            $.ajax({
+            type: "POST",
+            url: url,  // or just url: "/my-url/path/"
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+                name: $form.find( "input[name='name']" ).val(),
+                email: $form.find( "input[name='email']" ).val(),
+                email_confirmation: $form.find( "input[name='email_confirmation']" ).val(),
+                password: $form.find( "input[name='password']" ).val()
+            },
+            success: function( result ) {
+                if ( result == "OK" ){
+                    window.location = "{% url 'site:dashboard' %}";
+                } else if ( result == 'EMAIL_SENT' ){
+                    switch_to_login();
+                    display_success_message( '{% trans "We have successfully sent you an email with a link to reset your password." %}' );
+                } else {
+                    display_error_message( result, true );
+                    $form.show();
+                    $( "#loader" ).remove();
+                }
+
+            }
+            //error: function(xhr, textStatus, errorThrown) {
+               // alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+            //}
+            });
+
+        });
+
+    });
+
+</script>
+
+<!-- HEADER --> 
+<div class="modal-header f18 bold purple regular text-center"> {% trans 'Sign in' %} </div>
+<!-- ./HEADER -->
+
+<!-- BODY -->
+<div class="modal-body">
+  <div id="result" class="f12 red">
+    {% include "site/layouts/status.html" %}
+  </div>
+
+    <!-- LOGIN -->
+    <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
+      {% csrf_token %}
+      <div class="hidden ajax_spinner"></div>
+      
+      {{ login_form.email }}
+      {{ login_form.password }}
+      <button id="login-submit" type="submit" class="submit f12">{% trans "Login" %}</button>
+      <a id="login-link-reset-password" class="login_item f10 green" href="javascript:switch_to_password_recovery();">
+        {% trans "Forgot your password?" %}
+      </a>
+    </form>
+    <!-- ./LOGIN -->
+
+    <!-- SIGNUP -->
+    <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
+        {% csrf_token %}
+        <div class="hidden ajax_spinner"></div>
+        {{ signup_form.name }}
+        {{ signup_form.email }}
+        {{ signup_form.email_confirmation }}
+        {{ signup_form.password }}
+        <button id="signup_button_submit" type="submit" class="submit f12">{% trans "Sign-Up" %}</button>
+      </form>
+      <!-- SIGNUP -->
+
+
+
+    <div id="login-social-container" class="login_item signup_item">
+      <div class="f14 regular dark-grey text-center">{% trans "Alternatively, you can sign up using:" %}</div>
+      <div id="social-login-buttons-container">
+        <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-login facebook f16"><i class="fa fa-facebook"></i></a>
+        <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-login linkedin f16"><i class="fa fa-linkedin"></i></a>
+        <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-login google f16"><i class="fa fa-google"></i></a>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+    <a id="login-switch-to-signup" class="switcher login_item f12" href="javascript:switch_to_signup();">
+        {% trans "Don't have an account? Sign-Up" %}
+    </a>
+    
+    <a id="login-switch-to-signup" class="switcher signup_item f12" href="javascript:switch_to_login();">
+        {% trans "Already registered?" %} <span class="bold"> {% trans "Log in" %} </span>
+    </a>
+
+
+    <!-- PASSWORD RECOVERY -->
+    <p class="primary password_recovery_item f12 grey">
+        {% trans "Fill in your email address and you will receive a link to reset your password." %}
+    </p>
+    <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
+      {{ recovery_form.email }}
+      <button id="password_recovery_submit" type="submit" class="submit half">{% trans "Recover Password" %}</button>
+    </form>
+
+    <a id="password_recovery_link_login" class="switcher f12 password_recovery_item" href="javascript:switch_to_login();">« {% trans "Go Back" %}</a>
+    <!-- ./PASSWORD RECOVERY -->
+</div>
+
+<!-- LOGIN FOOTER -->
+<div class="modal-footer login_item f10 grey regular">
+    {% url 'site:terms' as terms_url %}
+    {% url 'site:privacy' as privacy_url %}
+    {% blocktrans %}
+        If you click "Log in with Facebook/Linkedin/Twitter" and are not our user, you will be registered and accepting Wanna Migrate's
+        <a class="bold green" target="_blank" href="{{ terms_url }}">Terms and Conditions</a>
+        and  <a class="bold green" target="_blank" href="{{ privacy_url }}">Privacy Police</a>
+    {% endblocktrans %}
+</div>
+<!-- ./LOGIN FOOTER -->
+<!-- SIGNUP FOOTER -->
+<div class="modal-footer signup_item f10 grey regular">
+    {% url 'site:terms' as terms_url %}
+    {% url 'site:privacy' as privacy_url %}
+    {% blocktrans %}
+        By clicking on Sign up, you will be automatically accepting Wanna Migrate's
+        <a class="bold green" target="_blank" href="{{ terms_url }}">Terms and Conditions</a>
+        and  <a class="bold green" target="_blank" href="{{ privacy_url }}">Privacy Police</a>
+    {% endblocktrans %}
+</div>
+<!-- ./SIGNUP FOOTER -->
+<!-- PASSWORD RECOVERY FOOTER -->
+<div class="modal-footer password_recovery_item f10 grey regular">
+    {% trans 'Still having problems? Please go to our' %} <a class="bold green" href="{% url 'site:contact' %}">{% trans 'Contact Form' %}</a>
+</div>
+<!-- ./PASSWORD RECOVERY FOOTER -->
+</div>

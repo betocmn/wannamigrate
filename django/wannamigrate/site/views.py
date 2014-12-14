@@ -105,8 +105,12 @@ def login( request ):
             return HttpResponse( _( 'Invalid Login. Please try again.' ) ) # invalid login :(
 
     else:
-        template_data = []
-        return render( request, "site/login.html", template_data )
+        template_data = {}
+        # Instantiate Forms
+        template_data['login_form'] = LoginForm()
+        template_data['signup_form'] = SignupForm()
+        template_data['recovery_form'] = PasswordRecoveryForm()
+        return render( request, "site/login/login.html", template_data )
 
 
 def logout( request ):
