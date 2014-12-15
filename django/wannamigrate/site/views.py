@@ -252,7 +252,7 @@ def recover_password( request ):
                 Mailer.send_reset_password_email( user )
 
                 # Return success message to template
-                template_data['success'] = _( 'Password reset instructions was successfully sent to your e-mail.' )
+                template_data['success'] = _( 'Password reset instructions were successfully sent to your e-mail.' )
                 template_data['form'] = PasswordRecoveryForm() # Create an empty form to clean e-mail field
                 return render( request, "site/signin/container.html", template_data )
 
