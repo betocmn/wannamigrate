@@ -529,6 +529,7 @@ class UserResult( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+    #user_result_status = models.ForeignKey( 'UserResultStatus', verbose_name = _( 'result status' ) )
     score_total = models.IntegerField( _( "total score" ))
     score_personal = models.IntegerField( _( "score personal" ))
     score_language = models.IntegerField( _( "score language" ))
@@ -539,6 +540,22 @@ class UserResult( BaseModel ):
     class Meta:
         default_permissions = []
         unique_together = ( "user", "country" )
+
+
+class UserResultStatus( BaseModel ):
+    """
+    User Result Status Model
+    """
+
+    # Model Attributes
+    name = models.CharField(  _( 'Name' ), max_length = 100 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    def __str__( self ):
+        return '%s' % ( _( self.name ) )
 
 
 class UserStats( BaseModel ):
