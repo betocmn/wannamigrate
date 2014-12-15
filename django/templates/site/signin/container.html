@@ -5,7 +5,7 @@
 {% block head %}
 
     {{ block.super }}
-    <link href="{% static 'site/css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'site/css/signin.css' %}" rel="stylesheet">
 
 
 {% endblock head %}
@@ -20,12 +20,17 @@
 </div-->
 
 <div class="cards-wrapper">
-    {% include "site/layouts/status.html" %}
+    {% if error %}
+        <div class="alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert-success">{{ success }}</div>
+    {% endif %}
 </div>
 <div class="cards-wrapper">
     
-    <div class="login-card">
-    	{% include "site/login/login_form.html" %}  
+    <div class="signin-card">
+    	{% include form_template %}  
     </div>
 </div>
 

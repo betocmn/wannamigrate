@@ -72,14 +72,24 @@ def home( request, static = None ):
 #######################
 def login( request ):
     """
-    Ajax action to execute user login
+    Process user login.
 
     :param request:
     :return String - The html page rendered:
     """
 
-    # Only accepts AJAX Call
-    if request.is_ajax() and request.method == 'POST':
+    # Checks if the user is already authenticated.
+    if request.user.is_authenticated():
+        # Redirects the user to the dashboard
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+
+    template_data = {}
+    # Instantiates the forms on the template_data
+    template_data['form'] = LoginForm()
+    template_data['form_template'] = "site/signin/login_form.html"
+    # Form submitted?
+    if request.method == 'POST':
 
         # Create form
         form = LoginForm( request.POST )
@@ -91,26 +101,32 @@ def login( request ):
             user = authenticate( email = email, password = password )
 
             if user is not None and user.is_active:
-
                 # Login Successfully
                 auth_login( request, user )
-
-                # Return success to Ajax
-                return HttpResponse( 'OK' )
-
+                # Make sure the user goes to the dashboard
+                return HttpResponseRedirect( reverse( "site:dashboard" ) )
             else:
-                return HttpResponse( _( 'Invalid Login. Please try again.' ) ) # invalid login :(
+                template_data[ 'error' ] = _( "Invalid login. Please try again." )
+                template_data[ 'form' ] = form
+                return render( request, "site/signin/container.html", template_data )
 
         else:
-            return HttpResponse( _( 'Invalid Login. Please try again.' ) ) # invalid login :(
+            if form.non_field_errors:
+                msg = ''
+                for k, v in form.errors.items():
+                    msg += v
+                template_data['error'] = msg
+                template_data['form'] = form
+                return render( request, "site/signin/container.html", template_data )
+            
+            template_data[ 'error' ] = _( "Invalid login. Please try again." )
+            template_data[ 'form' ] = form
+            return render( request, "site/signin/container.html", template_data )
 
     else:
-        template_data = {}
         # Instantiate Forms
-        template_data['login_form'] = LoginForm()
-        template_data['signup_form'] = SignupForm()
-        template_data['recovery_form'] = PasswordRecoveryForm()
-        return render( request, "site/login/login.html", template_data )
+        template_data['form'] = LoginForm()
+        return render( request, "site/signin/container.html", template_data )
 
 
 def logout( request ):
@@ -131,14 +147,25 @@ def logout( request ):
 
 def signup( request ):
     """
-    Ajax action to create new user
+    Signup action. It creates a new user on the platform
 
     :param request:
     :return String - The html page rendered:
     """
 
-    # Only accepts AJAX Call
-    if request.is_ajax() and request.method == 'POST':
+    # Checks if the user is already authenticated.
+    if request.user.is_authenticated():
+        # Redirects the user to the dashboard
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+
+    template_data = {}
+    # Instantiates the forms on the template_data
+    template_data['form'] = SignupForm()
+    template_data['form_template'] = "site/signin/signup_form.html"
+
+    # Form submitted?
+    if request.method == 'POST':
 
         # Create form
         form = SignupForm( request.POST )
@@ -163,61 +190,83 @@ def signup( request ):
                 Mailer.send_welcome_email( user )
 
                 # Return success to Ajax
-                return HttpResponse( 'OK' )
+                return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
             else:
-                return HttpResponse( _( 'There was an error while creating your user account.' ) ) # user creation failed
+                template_data['error'] = _( 'There was an error while creating your user account.' )
+                template_data['form'] = form
+                return render( request, "site/signin/container.html", template_data )
 
         else:
 
             if form.non_field_errors:
                 msg = ''
                 for k, v in form.errors.items():
-                    msg += v + '<br />'
-                return HttpResponse( msg )
+                    msg += v
+                template_data['error'] = msg
+                template_data['form'] = form
+                return render( request, "site/signin/container.html", template_data )
 
-            return HttpResponse( _( 'Invalid Information!<br />Make sure all fields are filled in and email and confirmation match.' ) ) # user creation failed
+            template_data['error'] = _( 'Invalid Information! Make sure all fields are filled in and email and confirmation match.' )
+            return render( request, "site/signin/container.html", template_data )
 
     else:
-        raise Http404
+        return render( request, "site/signin/container.html", template_data )
 
 
 def recover_password( request ):
     """
-    Ajax action to send link to redefine password
+    Send a link to user redefine it password
 
     :param request:
     :return String - The html page rendered:
     """
+    # Checks if the user is already authenticated.
+    if request.user.is_authenticated():
+        # Redirects the user to the dashboard
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-    # Only accepts AJAX Call
-    if request.is_ajax() and request.method == 'POST':
+
+    template_data = {}
+    # Instantiates the forms on the template_data
+    template_data['form'] = PasswordRecoveryForm()
+    template_data['form_template'] = "site/signin/recover_password.html"
+
+
+    # Form submitted?
+    if request.method == 'POST':
 
         # Create form
         form = PasswordRecoveryForm( request.POST )
-
+        template_data['form'] = form
+        
         if form.is_valid():
 
             email = form.cleaned_data['email']
             user = get_object_or_false( get_user_model(), email = email )
 
-            if user is not None and user.is_active:
+            if user and user is not None and user.is_active:
 
                 # Send email with link to reset password
                 # TODO: Change this to a celery background event and use a try/exception block
                 Mailer.send_reset_password_email( user )
 
-                # Return success to Ajax
-                return HttpResponse( 'EMAIL_SENT' )
+                # Return success message to template
+                template_data['success'] = _( 'Password reset instructions was successfully sent to your e-mail.' )
+                template_data['form'] = PasswordRecoveryForm() # Create an empty form to clean e-mail field
+                return render( request, "site/signin/container.html", template_data )
 
             else:
-                return HttpResponse( _( 'No user found with this e-mail address.' ) )
+                # Return an error message to the template
+                template_data['error'] = _( 'No user found with this e-mail address.' )
+                return render( request, "site/signin/container.html", template_data )
 
         else:
-            return HttpResponse( _( 'Invalid e-mail address.' ) )
-
+            # Return an error message to the template
+            template_data['error'] = _( 'Invalid e-mail address.' )
+            return render( request, "site/signin/container.html", template_data )
     else:
-        raise Http404
+        return render( request, "site/signin/container.html", template_data )
 
 
 @sensitive_post_parameters()

@@ -69,11 +69,7 @@
         <a href="javascript:SceneController.nextPage();" id="bt-more" class="gui"></a>
         <div id="menu" class="gui">
             <div id="menu-logo"></div>
-            {% if user.is_authenticated %}
-                <a href="{% url 'site:dashboard' %}" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
-            {% else %}
-                <a href="javascript:doLogin();" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
-            {% endif %}
+                <a href="{% url 'site:login' %}" id="login-button" class="bt bt-purple bold white 15pt">{% trans "Log In" %}</a>
             {% include 'site/dropdowns/home_language_selector.html' %}
         </div>
         
@@ -86,7 +82,7 @@
             <div id="page0-subtitle" class="f22 light white">
                 {% trans 'Choose a <span class="bold">country</span>, obtain the <span class="bold">visa</span> and <span class="bold">move!</span>' %}
             </div>
-            <a id="p0-signup" href="javascript:doSignup();" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
+            <a id="p0-signup" href="{% url 'site:signup' %}" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
         </div>
         <!-- ./page0-content -->
 
@@ -149,7 +145,7 @@
                         {% trans 'Around <span class="f20 teal bold">500,000 people</span> obtain a visa to live in <span class="teal bold">Australia</span> and <span class="teal bold">Canada</span> every year.' %}
                     </li>
                 </ul>
-                <a id="r1-signup" href="javascript:doSignup();" class="bt bt-blue f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
+                <a id="r1-signup" href="{% url 'site:signup' %}" class="bt bt-blue f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
             </div>
             <div id="r2" class="section-item">
                 <div class="feature-container">
@@ -213,7 +209,7 @@
                         <p class="testimonial-user-job f12 light">{% trans 'CEO at Wanna Migrate' %}</p>
                     </div>
                 </div>
-                <a id="r3-signup" href="javascript:doSignup();" class="bt bt-purple f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
+                <a id="r3-signup" href="{% url 'site:signup' %}" class="bt bt-purple f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
             </div>
             <div id="r4" class="section-item">
                 <div class="page4-content">
@@ -223,7 +219,7 @@
                     <p id="r4-subtitle" class="p4-wrapper white f18 light">
                         {% trans 'Get <span class="bold">free access</span> to our platform and <span class="bold">achieve your dreams</span> in a new country.' %}
                     </p>
-                    <a id="r4-signup" href="javascript:doSignup();" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
+                    <a id="r4-signup" href="{% url 'site:signup' %}" class="bt bt-green f20"><span class="bold">{% trans 'Start now.' %}</span> {% trans "It's Free!" %}</a>
                 </div>
                 <div class="page4-footer">
                     <div id="social">

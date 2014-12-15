@@ -4,7 +4,7 @@
 /** Top bar */
 #top_bar { width: 100%; height: 65px; background: black; }
 #top_bar_logo { position: relative; float: left; display: block; margin-left: 30px; width: 174px; height: 100%; background: url("../img/logo1.jpg") no-repeat center; background-size: contain; }
-#top_bar_menu { position: relative; float: right; width: auto; height: 65px; line-height: 65px; margin-right: 30px; }
+#top_bar_menu { position: relative; float: right; width: auto; height: 65px; line-height: 65px; margin-right: 60px; }
 #top_bar_menu ul { list-style: none; }
 #top_bar_menu li { display: inline; float:left; margin-left: 20px; }
 #top_bar_menu li:first-child { margin-left: 0px; }

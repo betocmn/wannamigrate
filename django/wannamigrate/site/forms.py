@@ -24,8 +24,8 @@ class LoginForm( BaseForm ):
     """
     Form for LOGIN to DASHBOARD
     """
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': 'full', 'id': 'login-email' } ) )
-    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': 'half', 'id': 'login-password' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': 'full', 'id': 'login-email' } ), error_messages = { 'required': _( 'Please inform your e-mail.' ) }, )
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': 'half', 'id': 'login-password' } ), error_messages = { 'required': _( 'Please inform your password' ) } )
 
 
 class PasswordRecoveryForm( BaseForm ):

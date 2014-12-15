@@ -5,47 +5,6 @@
 <script type="text/javascript">
 
     /**
-    * Shows the login form.
-    *
-    */
-    function doLogin()
-    {
-        if ( window.InputHandler !== undefined )
-            InputHandler.lock();
-        
-        switch_to_login();
-        $( "#overlay" ).show();
-        $( "#dialog" ).fadeIn();
-    }
-    
-    /**
-    * Shows the signup form.
-    *
-    */
-    function doSignup( )
-    {
-        if ( window.InputHandler !== undefined )
-            InputHandler.lock();
-        
-        switch_to_signup();
-        $( "#overlay" ).show();
-        $( "#dialog" ).fadeIn();
-    }
-
-    /**
-    * Closes the dialog.
-    *
-    */
-    function closeDialog()
-    {
-        if ( window.InputHandler !== undefined )
-            InputHandler.unlock();
-        
-        $( "#dialog" ).fadeOut();
-        $( "#overlay" ).hide();
-    }
-
-    /**
      * Displays the LOGIN form
      *
      */
@@ -96,74 +55,8 @@
      *
      */
     $( document ).ready( function(){
-
         // Defaults to login screen
         switch_to_login();
-
-        // Closes the dialog if the overlay was clicked.
-        $( "#overlay" ).click( closeDialog );
-
-        // Attach a submit handler to the Login Form
-        $( ".ajax-submit" ).submit( function( event ) {
-
-            // Clear Status
-            clear_status();
-
-            // Stop form from submitting normally
-            event.preventDefault();
-
-            // JS FORM Validation (for required fields)
-            if ( this.id == 'login_form_email' ){
-                var required_fields = 'login_email,login_password';
-            } else if ( this.id == 'signup_form_email' ){
-                var required_fields = 'signup_name,signup_email,signup_email_confirmation,signup_password';
-            } else {
-                var required_fields = 'recovery_email';
-            }
-            if ( !validate_empty_fields( this, required_fields ) ) {
-              return false;
-            }
-
-            // show loading
-            var loading_img = '{% static "site/img/loading.gif" %}';
-            $( this ).before( '<div id="loader" style="text-align:center;"><img src="'+loading_img+'" alt="Loading" title="Loading" /></div>' );
-            $( this).hide();
-
-            // Get some values from elements on the page:
-            var $form = $( this );
-            var url = $form.attr( "action" );
-            //var csrftoken = getCookie('csrftoken');
-            var csrftoken = document.getElementsByName( 'csrfmiddlewaretoken' )[0].value;
-
-            $.ajax({
-            type: "POST",
-            url: url,  // or just url: "/my-url/path/"
-            data: {
-                csrfmiddlewaretoken: csrftoken,
-                name: $form.find( "input[name='name']" ).val(),
-                email: $form.find( "input[name='email']" ).val(),
-                email_confirmation: $form.find( "input[name='email_confirmation']" ).val(),
-                password: $form.find( "input[name='password']" ).val()
-            },
-            success: function( result ) {
-                if ( result == "OK" ){
-                    window.location = "{% url 'site:dashboard' %}";
-                } else if ( result == 'EMAIL_SENT' ){
-                    switch_to_login();
-                    display_success_message( '{% trans "We have successfully sent you an email with a link to reset your password." %}' );
-                } else {
-                    display_error_message( result, true );
-                    $form.show();
-                    $( "#loader" ).remove();
-                }
-
-            }
-            //error: function(xhr, textStatus, errorThrown) {
-               // alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
-            //}
-            });
-
-        });
 
     });
 
@@ -175,14 +68,9 @@
 
 <!-- BODY -->
 <div class="modal-body">
-  <div id="result" class="f12 red">
-    {% include "site/layouts/status.html" %}
-  </div>
-
     <!-- LOGIN -->
-    <form id="login_form_email" class="login_item ajax-submit" method="post" role="form" action="{% url 'site:login' %}">
+    <form id="login_form_email" class="login_item" method="post" role="form" action="{% url 'site:login' %}">
       {% csrf_token %}
-      <div class="hidden ajax_spinner"></div>
       
       {{ login_form.email }}
       {{ login_form.password }}
@@ -194,9 +82,8 @@
     <!-- ./LOGIN -->
 
     <!-- SIGNUP -->
-    <form id="signup_form_email" class="signup_item ajax-submit" method="post" role="form" action="{% url 'site:signup' %}">
+    <form id="signup_form_email" class="signup_item" method="post" role="form" action="{% url 'site:signup' %}">
         {% csrf_token %}
-        <div class="hidden ajax_spinner"></div>
         {{ signup_form.name }}
         {{ signup_form.email }}
         {{ signup_form.email_confirmation }}
@@ -230,7 +117,7 @@
     <p class="primary password_recovery_item f12 grey">
         {% trans "Fill in your email address and you will receive a link to reset your password." %}
     </p>
-    <form id="login_form_email" class="password_recovery_item ajax-submit" method="post" role="form" action="{% url 'site:recover_password' %}">
+    <form id="login_form_email" class="password_recovery_item" method="post" role="form" action="{% url 'site:recover_password' %}">
       {{ recovery_form.email }}
       <button id="password_recovery_submit" type="submit" class="submit half">{% trans "Recover Password" %}</button>
     </form>
