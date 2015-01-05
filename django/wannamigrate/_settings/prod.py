@@ -50,30 +50,3 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-
-
-#########################################
-# DJANGO APPS REQUIRED
-#########################################
-# Application definition
-DEFAULT_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles'
-)
-THIRD_PARTY_APPS = (
-    'social.apps.django_app.default',
-    'stdimage',
-)
-LOCAL_APPS = (
-    'wannamigrate.core',
-    'wannamigrate.admin',
-    'wannamigrate.landing_page',
-    'wannamigrate.site'
-)
-
-INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-

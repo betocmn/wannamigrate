@@ -9,17 +9,26 @@ import sys, getopt, os, subprocess, re, time, datetime
 SERVERS = {
     "local" : {
         "ip" : "localhost",
+        "url" : "localhost",
         "keypair" : "",
     },
     "dev" : {
         "ip" : "54.213.143.121",
+        "url" : "dev.wannamigrate.com",
         "keypair" : "dev.pem",
     },
     "prod" : {
         "ip" : "54.148.167.28",
+        "url" : "wannamigrate.com",
         "keypair" : "prod.pem",
     },
 }
+
+# Vagrant redirected ports
+VAGRANT_HTTP = 8080
+VAGRANT_HTTPS = 4443
+VAGRANT_WIKI = 8181
+
 
 # The default user and user group of each server.
 USER_GROUPS = {
@@ -36,11 +45,13 @@ WSGI_ALIAS = "wsgi"
 DEFAULT_SITE_PATH = APP_ROOT + '/' + SITE_ALIAS
 DEFAULT_WIKI_PATH = APP_ROOT + '/' + WIKI_ALIAS
 
+# Path to the virtualenv.
+VIRTUALENV_PATH = "/wannavenv"
+
 # Git repository
 WANNAMIGRATE_GIT = "https://github.com/humbertomn/wannamigrate.git"
 
-# Path to the virtualenv.
-VIRTUALENV_PATH = "/wannavenv"
+
 
 # Apache's configurations
 APACHE_SITES_ENABLED_PATH = "/etc/apache2/sites-enabled"
@@ -252,13 +263,30 @@ def install( args ):
         # Configuring the params and the commands to call.
         server = args[0]
 
+
+        # The command to generate the conf file for the specified app (site or wiki).
+        conf_file_generator_cmd = ""
+
+        # Remote commands
+        remote_commands = []
+
+        # Checking server...
         if server == "local":
             commands = [ "vagrant ssh" ]
+
+            # Fix for vagrant port-forwarding
+            http_port = ":{0}".format( VAGRANT_HTTP )
+            https_port = ":{0}".format( VAGRANT_HTTPS )
+            wiki_port = ":{0}".format( VAGRANT_WIKI )
+
         else:
             commands = [ "ssh", "-i", SERVERS[ server ][ "keypair" ], "ubuntu@{0}".format( SERVERS[ server ][ "ip" ] ) ]
+
+            # Empty values. Dev and Prod doesn't have port-forwarding.
+            http_port = ""
+            https_port = ""
+            wiki_port = ""
         
-        # Configuring the remote commands.
-        remote_commands = []
         
         # Configuring Wiki on remote. Fills remote_commands with wiki's configuration commands.
         if "wiki" in args:
@@ -269,6 +297,27 @@ def install( args ):
             remote_commands.append( "tar -zxf mediawiki-1.23.2.tar.gz" )
             remote_commands.append( "rm mediawiki-1.23.2.tar.gz" )
             remote_commands.append( "mv mediawiki-1.23.2 {0}".format( WIKI_ALIAS ) )
+
+            # Command to create the wiki's ".conf" file.
+            conf_file_generator_cmd = """echo \"Listen 81
+                <VirtualHost *:81>
+                    ServerName wiki.{0}
+                    DocumentRoot {1}
+                    <Directory {1}>
+                        Require all granted
+                    </Directory>
+                </VirtualHost>\" > {2}/{3}.conf""".format( 
+                    SERVERS[ server ][ "url" ], 
+                    DEFAULT_WIKI_PATH,
+                    APACHE_SITES_ENABLED_PATH,
+                    WIKI_ALIAS 
+                )
+
+            # Creates the conf file containing the virtualhosts for the wiki on apache sites-enabled folder.
+            remote_commands.append( "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ) )
+            remote_commands.append( "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ) )
+            remote_commands.append( conf_file_generator_cmd )
+            remote_commands.append( "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ) )
         
         # Configuring Site on remote. Fills remote_commands with site's configuration commands.
         elif "site" in args:
@@ -319,43 +368,51 @@ def install( args ):
                 </IfModule>\" > {2}/{3}.conf""".format( DEFAULT_SITE_PATH, VIRTUALENV_PATH, APACHE_MODS_ENABLED_PATH, WSGI_ALIAS )
             )
 
+            # Command to create the site's ".conf" file.
+            conf_file_generator_cmd = """echo \"<VirtualHost *:80>
+                    ServerName {0}
+                    Redirect permanent / https://{0}{1}/                    
+                </VirtualHost>
 
-        # Creates the conf file that contains the virtualhosts to site 
-        # and wiki on apache's sites-enabled folder.
-        remote_commands.append( "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
-        remote_commands.append( "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
-        remote_commands.append( 
-            """echo \"<VirtualHost *:80>
-                ServerName www.wannamigrate.com
-                DocumentRoot {0}
+                <VirtualHost _default_:443>
+                    ServerName {0}
+                    DocumentRoot {2}
 
-                WSGIScriptAlias / {0}/wannamigrate/wsgi.py
+                    SSLEngine on
+                    SSLCertificateFile /etc/apache2/ssl/wannamigrate.crt
+                    SSLCertificateKeyFile /etc/apache2/ssl/wannamigrate.key
 
-                Alias /robots.txt {0}/static/robots.txt
-                Alias /favicon.ico {0}/static/favicon.ico
-                Alias /static/ {0}/static/
+                    WSGIScriptAlias / {2}/wannamigrate/wsgi.py
 
-                <Directory {0}/wannamigrate/>
-                        <Files wsgi.py>
-                            Require all granted
-                        </Files>
-                </Directory>
+                    Alias /robots.txt {2}/static/robots.txt
+                    Alias /favicon.ico {2}/static/favicon.ico
+                    Alias /static/ {2}/static/
 
-                <Directory {0}/static/>
-                    Require all granted
-                </Directory>
-            </VirtualHost>
+                    <Directory {2}/wannamigrate/>
+                            <Files wsgi.py>
+                                Require all granted
+                            </Files>
+                    </Directory>
 
-            Listen 81
-            <VirtualHost *:81>
-                ServerName wiki.wannamigrate.com
-                DocumentRoot {3}
-                <Directory {3}/>
-                    Require all granted
-                </Directory>
-            </VirtualHost>\" > {1}/{2}.conf""".format( DEFAULT_SITE_PATH, APACHE_SITES_ENABLED_PATH, SITE_ALIAS, DEFAULT_WIKI_PATH )
-        )
-        remote_commands.append( "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+                    <Directory {2}/static/>
+                        Require all granted
+                    </Directory>
+                </VirtualHost>\" > {3}/{4}.conf""".format( 
+                    SERVERS[ server ][ "url" ], 
+                    https_port, 
+                    DEFAULT_SITE_PATH,
+                    APACHE_SITES_ENABLED_PATH,
+                    SITE_ALIAS 
+                )
+            
+            # Creates the conf file containing the virtualhosts for the site or wiki on apache sites-enabled folder.
+            remote_commands.append( "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+            remote_commands.append( "sudo chmod 777 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+            remote_commands.append( conf_file_generator_cmd )
+            remote_commands.append( "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, SITE_ALIAS ) )
+
+        
+
 
         # Should install database locally?
         if "--local_database" in args:
@@ -372,8 +429,14 @@ def install( args ):
                 "echo mysql-server mysql-server/root_password_again password {0} | sudo debconf-set-selections".format( root_password ),
                 "sudo apt-get -y install mysql-server",
             ] )
+
+
+        # Enabling mode rewrite on apache
+        remote_commands.append( "sudo a2enmod rewrite" )
+        # Enabling SSL on apache
+        remote_commands.append( "sudo a2enmod ssl" )
         
-        # Restarts apache
+        # Restarting apache
         remote_commands.append( "sudo service apache2 restart" )
             
         # Call
@@ -382,6 +445,7 @@ def install( args ):
         else:
             cmd( commands, remote_commands )
 
+        # Print ending hints
         print
         print( "Installation DONE. But you should configure some DATABASE settings manually." )
         print( "Please refer Wanna Migrate's Wiki to get extra help.")
