@@ -379,8 +379,10 @@ def install( args ):
                     DocumentRoot {2}
 
                     SSLEngine on
+                    SSLProtocol All -SSLv2 -SSLv3
                     SSLCertificateFile /etc/apache2/ssl/wannamigrate.crt
                     SSLCertificateKeyFile /etc/apache2/ssl/wannamigrate.key
+                    SSLCertificateChainFile /etc/apache2/ssl/wannamigrate.ca
 
                     WSGIScriptAlias / {2}/wannamigrate/wsgi.py
 
