@@ -30,7 +30,7 @@ from wannamigrate.site.forms import (
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
     UserLanguage, UserLanguageProficiency, UserWork, UserWorkExperience, UserWorkOffer,
-    Country, UserResult, UserStats, Occupation
+    Country, UserResult, UserStats, Occupation, UserResultStatus, CountryConfig
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
@@ -524,11 +524,19 @@ def dashboard( request ):
     if user_stats and user_stats.updating_now:
         return HttpResponseRedirect( reverse( "site:calculate_points" ) )
 
+    # Instantiate all country_config
+    country_config = CountryConfig.objects.all()
+    country_config_data = {}
+    for item in country_config:
+        if item.country_id not in country_config_data:
+            country_config_data[item.country_id] = {}
+        country_config_data[item.country_id] = item
+
     # Initial settings
     template_data = {}
-    template_data['au_min_points'] = settings.MINIMUM_POINTS_AUSTRALIA
-    template_data['ca_min_points'] = settings.MINIMUM_POINTS_CANADA
-    template_data['nz_min_points'] = settings.MINIMUM_POINTS_NEW_ZEALAND
+    template_data['au_min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
+    template_data['ca_min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
+    template_data['nz_min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
     template_data['au_points'] = 0
     template_data['ca_points'] = 0
     template_data['nz_points'] = 0
@@ -968,7 +976,9 @@ def calculate_points( request ):
             'score_language': results['language'],
             'score_education': results['education'],
             'score_work': results['work'],
+            'user_result_status': UserResultStatus.objects.get( pk = results['user_result_status_id'] ),
         }
+
         UserResult.objects.update_or_create(
             user = request.user, country = country, defaults = updated_values
         )
@@ -1005,6 +1015,14 @@ def situation( request, country_name ):
     template_data['education_points'] = 0
     template_data['work_points'] = 0
 
+    # Instantiate all country_config
+    country_config = CountryConfig.objects.all()
+    country_config_data = {}
+    for item in country_config:
+        if item.country_id not in country_config_data:
+            country_config_data[item.country_id] = {}
+        country_config_data[item.country_id] = item
+
     # Get Country and set options for it
     if country_name == 'australia':
         country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
@@ -1012,11 +1030,11 @@ def situation( request, country_name ):
         template_data['country_name_as_label'] = _( 'Australia' )
         template_data['country_map_css_class'] = 'australiaMap'
         template_data['photo_column_css_class'] = 'columnAustralia'
-        template_data['min_points'] = settings.MINIMUM_POINTS_AUSTRALIA
-        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_AUSTRALIA
-        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_AUSTRALIA
-        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_AUSTRALIA
-        template_data['work_max_points'] = settings.WORK_MAX_POINTS_AUSTRALIA
+        template_data['min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
+        template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_personal_points
+        template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_language_points
+        template_data['education_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_education_points
+        template_data['work_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_work_points
 
     elif country_name == 'canada':
         country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
@@ -1024,11 +1042,11 @@ def situation( request, country_name ):
         template_data['country_name_as_label'] = _( 'Canada' )
         template_data['country_map_css_class'] = 'canadaMap'
         template_data['photo_column_css_class'] = 'columnCanada'
-        template_data['min_points'] = settings.MINIMUM_POINTS_CANADA
-        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_CANADA
-        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_CANADA
-        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_CANADA
-        template_data['work_max_points'] = settings.WORK_MAX_POINTS_CANADA
+        template_data['min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
+        template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_personal_points
+        template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_language_points
+        template_data['education_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_education_points
+        template_data['work_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_work_points
 
     elif country_name == 'new-zealand':
         country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
@@ -1036,11 +1054,11 @@ def situation( request, country_name ):
         template_data['country_name_as_label'] = _( 'New Zealand' )
         template_data['country_map_css_class'] = 'newZealandMap'
         template_data['photo_column_css_class'] = 'columnNewZealand'
-        template_data['min_points'] = settings.MINIMUM_POINTS_NEW_ZEALAND
-        template_data['personal_max_points'] = settings.PERSONAL_MAX_POINTS_NEW_ZEALAND
-        template_data['language_max_points'] = settings.LANGUAGE_MAX_POINTS_NEW_ZEALAND
-        template_data['education_max_points'] = settings.EDUCATION_MAX_POINTS_NEW_ZEALAND
-        template_data['work_max_points'] = settings.WORK_MAX_POINTS_NEW_ZEALAND
+        template_data['min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
+        template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_personal_points
+        template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_language_points
+        template_data['education_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_education_points
+        template_data['work_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_work_points
 
     else:
         return HttpResponseRedirect( reverse( "site:dashboard" ) )

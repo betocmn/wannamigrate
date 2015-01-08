@@ -94,6 +94,24 @@ class Country( BaseModel ):
         return tuple( [( '', _( 'Select Country' ) )] + result  )
 
 
+class CountryConfig( BaseModel ):
+    """
+    Country Config Model - Stores maximum immigration points per country, etc.
+    """
+
+    country = models.OneToOneField( Country, verbose_name = _( 'country' ) )
+    pass_mark_points = models.IntegerField( _( "pass mark points" ), default = 0 )
+    max_personal_points = models.IntegerField( _( "max personal points" ), default = 0 )
+    max_language_points = models.IntegerField( _( "max language points" ), default = 0 )
+    max_education_points = models.IntegerField( _( "max education points" ), default = 0 )
+    max_work_points = models.IntegerField( _( "max education points" ), default = 0 )
+    max_total_points = models.IntegerField( _( "max total points" ), default = 0 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
 class CountryPoints( BaseModel ):
     """
     Country Points Model - Stores the total points for each answer in each country avaiblable
@@ -217,6 +235,8 @@ class Question( BaseModel ):
     # Model Attributes
     description = models.CharField( _( "question" ), max_length = 255 )
     help_text = models.TextField( _( "help text" ), null = True, blank = True )
+    method_name = models.CharField( _( "method name" ), max_length = 60 )
+    type = models.CharField( _( "type" ), max_length = 15 )
 
     # META Options
     class Meta:
@@ -230,6 +250,22 @@ class Question( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.description ) )
+
+
+class QuestionGroup( BaseModel ):
+    """
+    Question Group Model - some questions are grouped to have a maximum number of points allowed when combined (per country)
+    """
+
+    # Model Attributes
+    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
+    name = models.TextField( _( "name" ) )
+    max_points = models.IntegerField( _( "max points allowed" ), default = 0 )
+    questions = models.ManyToManyField( Question )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 class UserManager( BaseUserManager ):
@@ -529,7 +565,7 @@ class UserResult( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    #user_result_status = models.ForeignKey( 'UserResultStatus', verbose_name = _( 'result status' ) )
+    user_result_status = models.ForeignKey( 'UserResultStatus', verbose_name = _( 'result status' ) )
     score_total = models.IntegerField( _( "total score" ))
     score_personal = models.IntegerField( _( "score personal" ))
     score_language = models.IntegerField( _( "score language" ))

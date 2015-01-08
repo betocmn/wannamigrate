@@ -2,7 +2,8 @@ from wannamigrate.core.models import (
     Country, CountryPoints, Question, Answer, User, UserEducation,
     UserEducationHistory, UserLanguage, UserLanguageProficiency,
     UserPersonal, UserPersonalFamily, UserResult, UserWork,
-    UserWorkExperience, UserWorkOffer, Occupation
+    UserWorkExperience, UserWorkOffer, Occupation, QuestionGroup,
+    CountryConfig
 )
 from wannamigrate.core.util import calculate_age, get_object_or_false, get_list_or_false, date_difference
 from django.conf import settings
@@ -20,47 +21,10 @@ class ImmigrationCalculator( object ):
     Rules can be found here:
 
     - Australia: http://www.immi.gov.au/Visas/Pages/189.aspx
-    - Canada: http://www.cic.gc.ca/english/immigrate/skilled/apply-factors.asp
+    - Canada: http://www.cic.gc.ca/english/express-entry/criteria-crs.asp
     - New Zealand: http://www.immigration.govt.nz/migrant/stream/work/skilledmigrant/caniapply/points/default.htm and https://www.immigration.govt.nz/pointsindicator/
 
     """
-
-    # Class variable to map which questions each country should evaluate
-    question_methods = {
-        settings.ID_QUESTION_FAMILY_OVERSEAS: { 'method': 'get_family_overseas_points', 'type': 'personal', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_AGE: { 'method': 'get_age_points', 'type': 'personal' },
-        settings.ID_QUESTION_ENGLISH: { 'method': 'get_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
-        settings.ID_QUESTION_FRENCH: { 'method': 'get_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'language' } },
-        settings.ID_QUESTION_LANGUAGE_LEVEL_OTHERS: { 'method': 'get_language_level_others_points', 'type': 'language' },
-        settings.ID_QUESTION_EDUCATION_DEGREE: { 'method': 'get_education_degree_points', 'type': 'education' },
-        settings.ID_QUESTION_WORK_OFFER: { 'method': 'get_work_offer_points', 'type': 'work' },
-        settings.ID_QUESTION_WORK_EXPERIENCE_OUTSIDE: { 'method': 'get_work_experience_outside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience' } },
-        settings.ID_QUESTION_WORK_EXPERIENCE_INSIDE: { 'method': 'get_work_experience_inside_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_AUSTRALIA : 'experience', settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_WORK_EXPERIENCE_TOTAL: { 'method': 'get_work_experience_total_points', 'type': 'work' },
-        settings.ID_QUESTION_SKILLED_PARTNER: { 'method': 'get_skilled_partner_points', 'type': 'work' },
-        settings.ID_QUESTION_INVEST: { 'method': 'get_invest_points', 'type': 'work' },
-        settings.ID_QUESTION_STARTUP_LETTER: { 'method': 'get_startup_letter_points', 'type': 'work' },
-        settings.ID_QUESTION_US_CITIZEN: { 'method': 'get_us_citizen_points', 'type': 'personal' },
-        settings.ID_QUESTION_STUDY_REGIONAL_AU: { 'method': 'get_study_regional_au_points', 'type': 'education' },
-        settings.ID_QUESTION_PROFESSIONAL_YEAR_AU: { 'method': 'get_professional_year_au_points', 'type': 'education' },
-        settings.ID_QUESTION_LIVE_REGIONAL_AU: { 'method': 'get_live_regional_au_points', 'type': 'personal' },
-        settings.ID_QUESTION_PARTNER_WORKED_STUDIED_CA: { 'method': 'get_partner_worked_studied_ca_points', 'type': 'work', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_PARTNER_ENGLISH: { 'method': 'get_partner_english_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_PARTNER_FRENCH: { 'method': 'get_partner_french_points', 'type': 'language', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-        settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE: { 'method': 'get_partner_education_degree_points', 'type': 'education' },
-        settings.ID_QUESTION_PAST_STUDY_COUNTRY_DESTINATION: { 'method': 'get_past_study_country_destination_points', 'type': 'education', 'groups': { settings.ID_COUNTRY_CANADA : 'bonus' } },
-    }
-
-    # Class variable to map groups of question which have a maximum allowed number of points
-    country_groups_maximum_points = {
-        settings.ID_COUNTRY_AUSTRALIA: {
-            'experience': 20
-        },
-        settings.ID_COUNTRY_CANADA: {
-            'language': 28,
-            'bonus': 10
-        }
-    }
 
     def __init__( self, user ):
         """
@@ -73,6 +37,9 @@ class ImmigrationCalculator( object ):
         # Instantiate user and country
         self.user = user
         self.country = None
+
+        # Instantiate attribute to store if user's occupation is in demmand or not
+        self.occupation_in_demand = False
 
         # Instantiate all user related models
         try:
@@ -120,23 +87,31 @@ class ImmigrationCalculator( object ):
         except UserWorkOffer.DoesNotExist:
             self.user_work_offer = False
 
+        # Instantiate all questions
+        self.question = Question.objects.all()
 
-    def __get_question_id( self, method_name ):
-        """
-        Search the 'question_methods' class variable to return the
-        ID (key) from the answer, based on method_name
+        # Instantiate all questions_groups
+        question_groups = QuestionGroup.objects.all()
+        self.question_groups = {}
+        for question_group in question_groups:
+            if question_group.country_id not in self.question_groups:
+                self.question_groups[question_group.country_id] = {}
+            if question_group.id not in self.question_groups[question_group.country_id]:
+                self.question_groups[question_group.country_id][question_group.id] = {}
 
-        :param method_name:
-        :return Mixed - Int or False on failure:
-        """
+            self.question_groups[question_group.country_id][question_group.id]['name'] = question_group.name
+            self.question_groups[question_group.country_id][question_group.id]['max_points'] = question_group.max_points
+            self.question_groups[question_group.country_id][question_group.id]['questions'] = question_group.questions
+            
+        # Instantiate all country_config
+        country_config = CountryConfig.objects.all()
+        self.country_config = {}
+        for item in country_config:
+            if item.country_id not in self.country_config:
+                self.country_config[item.country_id] = {}
+            self.country_config[item.country_id]['pass_mark_points'] = item.pass_mark_points
 
-        # Now we search the dictionary to find the key (answer_id) that holds this method name
-        for question_id, value in self.question_methods.items():
-            if value['method'] == method_name:
-                return question_id
-        return False
-
-    def __get_points( self, value, type ):
+    def __get_points( self, value, type, question_id ):
         """
         Search the table 'core_countrypoints' by the value to localize
         how many points it's worth.
@@ -147,15 +122,14 @@ class ImmigrationCalculator( object ):
 
         :param value:
         :param type:
+        :param question_id:
         :return Int:
         """
 
         # Get question ID
         method_name = inspect.stack()[1][3] # This give us the name of the parent method calling this one
-        question_id = self.__get_question_id( method_name )
 
         # search for question object
-        #question = get_object_or_false( Question, pk = question_id )
         if question_id:
 
             # search for thew answer with the given parameters
@@ -191,6 +165,12 @@ class ImmigrationCalculator( object ):
         # Instantiate country
         self.country = country
 
+        # Check if occupation is in demand
+        if self.user_work and self.user_work.occupation:
+            in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
+            if in_demand > 0:
+                self.occupation_in_demand = True
+
         # Initialize totals
         result = {
             'total': 0,
@@ -198,53 +178,121 @@ class ImmigrationCalculator( object ):
             'language': 0,
             'education': 0,
             'work': 0,
+            'user_result_status_id': ''
         }
-        total_points_per_groups = {}
 
-        # Run trough every question
-        for question_id, item in self.question_methods.items():
+        # Get points for every question
+        question_points = {}
+        for question in self.question:
 
-                # call the appropriate method by its name to return the number of points
-                points = getattr( self, item['method'] )()
+            # call the appropriate method by its name to return the number of points
+            points = getattr( self, question.method_name )( question.id )
 
-                # Check for maximum points per group
-                if 'groups' in item and self.country.id in item['groups'] and item['groups'][self.country.id] in self.country_groups_maximum_points[self.country.id]:
+            # store points per question
+            question_points[question.id] = points
 
-                    # get values to use in calculation
-                    group = item['groups'][self.country.id]
-                    maximum_group_points = self.country_groups_maximum_points[self.country.id][group]
-                    if not group in total_points_per_groups:
-                        total_points_per_groups[group] = 0
+        # check maximum points per group (defined differently in each country)
+        if self.country.id in self.question_groups:
+            for key, question_group in self.question_groups[self.country.id].items():
 
-                    # If maximum is reached, we decrease points to the limit
-                    group_points = total_points_per_groups[group] + points
-                    if group_points > maximum_group_points:
-                        points = points - ( group_points - maximum_group_points )
+                # calculate total points obtained from questions of this group
+                group_points = 0
+                for question in question_group['questions'].all():
 
-                    # add to the total of the group
-                    total_points_per_groups[group] += points
+                    # sums up total of points for questions in this group
+                    group_points += question_points[question.id]
 
-                # Stores totals
-                result['total'] += points
-                result[item['type']] += points
+                    # If the maximum points are reached and passed we should subtract from this question points
+                    if group_points > question_group['max_points']:
+                        question_points[question.id] = question_points[question.id] - ( group_points - question_group['max_points'] )
 
-        # If OCCUPATION is not in demand, we cannot allow to have enough points
-        if self.user_work and self.user_work.occupation:
-            in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
-            if in_demand == 0:
-                if self.country.id == settings.ID_COUNTRY_AUSTRALIA and result['total'] >= settings.MINIMUM_POINTS_AUSTRALIA:
-                    result['total'] = int( settings.MINIMUM_POINTS_AUSTRALIA ) - 1
-                elif self.country.id == settings.ID_COUNTRY_CANADA and result['total'] >= settings.MINIMUM_POINTS_CANADA:
-                    result['total'] = int( settings.MINIMUM_POINTS_CANADA ) - 1
-                elif self.country.id == settings.ID_COUNTRY_NEW_ZEALAND and result['total'] >= settings.MINIMUM_POINTS_NEW_ZEALAND:
-                    result['total'] = int( settings.MINIMUM_POINTS_NEW_ZEALAND ) - 1
+        # build results by getting points per question
+        for question in self.question:
+            result['total'] += question_points[question.id]
+            result[question.type] += question_points[question.id]
 
+        # get status
+        result['user_result_status_id'] = self.get_user_result_status_id( result )
+
+        # return dictionary of results
         return result
 
-    def get_family_overseas_points( self, forced_value = None ):
+    def get_user_result_status_id( self, result ):
+        """
+        Get status for user_result table
+
+        :param: result
+        :return Int:
+        """
+
+        # starts with not enough points
+        user_result_status_id = settings.ID_RESULT_STATUS_DENIED_POINTS
+
+        # Check if user has enough points for each country
+        if result['total'] >= self.country_config[self.country.id]['pass_mark_points']:
+            user_result_status_id = settings.ID_RESULT_STATUS_ALLOWED
+
+        # If OCCUPATION is not in demand, we set status for this
+        if not self.occupation_in_demand:
+            user_result_status_id = settings.ID_RESULT_STATUS_DENIED_OCCUPATION
+
+        # get age to use in minimum requirements check
+        age = 0
+        if self.user_personal:
+            age = calculate_age( self.user_personal.birth_date )
+
+        # get language level to use in minimum requirements check
+        english_level_answer_id = 0
+        french_level_answer_id = 0
+        if self.user_language_proficiency:
+            for item in self.user_language_proficiency:
+                if item.language_id == settings.ID_LANGUAGE_ENGLISH:
+                    english_level_answer_id = item.language_level_answer.id
+                if item.language_id == settings.ID_LANGUAGE_FRENCH:
+                    french_level_answer_id = item.language_level_answer.id
+
+        # get total years of work experience
+        years_of_experience = 0
+        if self.user_work_experience and self.user_work and self.user_work.occupation is not None:
+            years = 0
+            for item in self.user_work_experience:
+                years += ( item.months / 12 )
+            years_of_experience = math.floor( years )
+
+        # Minimum requirements per country
+        if self.country.id == settings.ID_COUNTRY_AUSTRALIA:
+
+            # less than 50 years of age
+            if age >= 50:
+                user_result_status_id = settings.ID_RESULT_STATUS_DENIED_AGE
+
+            # at least 'competent' english
+            if english_level_answer_id < settings.ID_MINIMUM_ENGLISH_LEVEL:
+                user_result_status_id = settings.ID_RESULT_STATUS_DENIED_LANGUAGE
+
+        elif self.country.id == settings.ID_COUNTRY_NEW_ZEALAND:
+
+            # at least 'competent' english
+            if english_level_answer_id < settings.ID_MINIMUM_ENGLISH_LEVEL:
+                user_result_status_id = settings.ID_RESULT_STATUS_DENIED_LANGUAGE
+
+        elif self.country.id == settings.ID_COUNTRY_CANADA:
+
+            # at least 'competent' english or FRENCH
+            if english_level_answer_id < settings.ID_MINIMUM_ENGLISH_LEVEL and french_level_answer_id < settings.ID_MINIMUM_FRENCH_LEVEL:
+                user_result_status_id = settings.ID_RESULT_STATUS_DENIED_LANGUAGE
+
+            # at least one year of work experience
+            if years_of_experience < 1:
+                user_result_status_id = settings.ID_RESULT_STATUS_DENIED_WORK_EXPERIENCE
+
+        return user_result_status_id
+
+    def get_family_overseas_points( self, question_id, forced_value = None ):
         """
         Points if user has a close relative living abroad (in canada, australia...)
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -264,14 +312,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_age_points( self, forced_value = None ):
+    def get_age_points( self, question_id, forced_value = None ):
         """
         calculate how many points user will get by his age.
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -287,14 +336,15 @@ class ImmigrationCalculator( object ):
                 value = age
 
             # search for how many points this answer is worth
-            points = self.__get_points( value, 'description' )
+            points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_english_points( self, forced_value = None ):
+    def get_english_points( self, question_id, forced_value = None ):
         """
         Points for skills with the english language
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -314,14 +364,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value != "":
-                points = self.__get_points( value, 'id' )
+                points = self.__get_points( value, 'id', question_id )
 
         return points
 
-    def get_french_points( self, forced_value = None ):
+    def get_french_points( self, question_id, forced_value = None ):
         """
         Points for skills with the french language
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -341,14 +392,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value != "":
-                points = self.__get_points( value, 'id' )
+                points = self.__get_points( value, 'id', question_id )
 
         return points
 
-    def get_language_level_others_points( self, forced_value = None ):
+    def get_language_level_others_points( self, question_id, forced_value = None ):
         """
         Points for skills with Australia community languages
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -364,16 +416,17 @@ class ImmigrationCalculator( object ):
                 for item in self.user_language_proficiency:
                     if item.language_id in settings.ID_AUSTRALIAN_COMMUNITY_LANGUAGES:
                         value = item.language_level_answer.id
-                        points = self.__get_points( value, 'id' )
+                        points = self.__get_points( value, 'id', question_id )
                         if points > 0:
                             break
 
         return points
 
-    def get_education_degree_points( self, forced_value = None ):
+    def get_education_degree_points( self, question_id, forced_value = None ):
         """
         Points for the highest level of education (degree: bacherlor, masters, etc.)
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -390,7 +443,7 @@ class ImmigrationCalculator( object ):
 
                     # search for points (we will store only the highest points (highest degree of education)
                     value = item.education_level_answer.id
-                    current_points = self.__get_points( value, 'id' )
+                    current_points = self.__get_points( value, 'id', question_id )
                     if ( current_points > highest_points ):
                         highest_points = current_points
 
@@ -398,10 +451,11 @@ class ImmigrationCalculator( object ):
 
         return points
 
-    def get_past_study_country_destination_points( self, forced_value = None ):
+    def get_past_study_country_destination_points( self, question_id, forced_value = None ):
         """
         Points for past studies in country of destination
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -421,14 +475,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_work_offer_points( self, forced_value = None ):
+    def get_work_offer_points( self, question_id, forced_value = None ):
         """
         Points for users that have a job offer on country of destination
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -448,16 +503,17 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_work_experience_outside_points( self, forced_value = None ):
+    def get_work_experience_outside_points( self, question_id, forced_value = None ):
         """
         Points for work experience gained outside country of destination/
 
         The occupation must be set and must be on the list of demand for the currenty country
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -465,12 +521,7 @@ class ImmigrationCalculator( object ):
         if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
             # Check if occupation is in list of demand
-            try:
-                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
-            except UserWork.DoesNotExist:
-                in_demand = False
-
-            if in_demand:
+            if self.occupation_in_demand:
                 # Use given value or search for it
                 if forced_value is not None:
                     value = forced_value
@@ -485,16 +536,17 @@ class ImmigrationCalculator( object ):
 
                 # search for how many points this answer is worth
                 if value > 0:
-                    points = self.__get_points( value, 'description' )
+                    points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_work_experience_inside_points( self, forced_value = None ):
+    def get_work_experience_inside_points( self, question_id, forced_value = None ):
         """
         Points for work experience gained at country of destination
 
         The occupation must be set and must be on the list of demand for the currenty country
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -502,12 +554,7 @@ class ImmigrationCalculator( object ):
         if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
             # Check if occupation is in list of demand
-            try:
-                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
-            except UserWork.DoesNotExist:
-                in_demand = False
-
-            if in_demand:
+            if self.occupation_in_demand:
                 # Use given value or search for it
                 if forced_value is not None:
                     value = forced_value
@@ -522,16 +569,17 @@ class ImmigrationCalculator( object ):
 
                 # search for how many points this answer is worth
                 if value > 0:
-                    points = self.__get_points( value, 'description' )
+                    points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_work_experience_total_points( self, forced_value = None ):
+    def get_work_experience_total_points( self, question_id, forced_value = None ):
         """
         Points for work experience gained anywhere (total)
 
         The occupation must be set and must be on the list of demand for the currenty country
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -539,12 +587,7 @@ class ImmigrationCalculator( object ):
         if ( self.user_work_experience and self.user_work and self.user_work.occupation is not None ):
 
             # Check if occupation is in list of demand
-            try:
-                in_demand = self.user_work.occupation.countries.filter( id = self.country.id ).count()
-            except UserWork.DoesNotExist:
-                in_demand = False
-
-            if in_demand:
+            if self.occupation_in_demand:
 
                 # Use given value or search for it
                 if forced_value is not None:
@@ -559,19 +602,20 @@ class ImmigrationCalculator( object ):
 
                 # search for how many points this answer is worth
                 if value > 0:
-                    points = self.__get_points( value, 'description' )
+                    points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_skilled_partner_points( self, forced_value = None ):
+    def get_skilled_partner_points( self, question_id, forced_value = None ):
         """
         Points for users with partners who have a occupation in a skilled area
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
         points = 0
-        if ( self.user_work ):
+        if ( self.occupation_in_demand and self.user_work ):
 
             # Use given value or search for it
             if forced_value is not None:
@@ -584,14 +628,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_invest_points( self, forced_value = None ):
+    def get_invest_points( self, question_id, forced_value = None ):
         """
         Points for users who want to invest or open a business at country of destination
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -609,14 +654,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_startup_letter_points( self, forced_value = None ):
+    def get_startup_letter_points( self, question_id, forced_value = None ):
         """
         Points for users who have a letter by a startup venture fund authority in canada
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -634,14 +680,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_us_citizen_points( self, forced_value = None ):
+    def get_us_citizen_points( self, question_id, forced_value = None ):
         """
         Points for users who have US Citizenship
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -659,14 +706,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_study_regional_au_points( self, forced_value = None ):
+    def get_study_regional_au_points( self, question_id, forced_value = None ):
         """
         Points for users who have studied or worked in regional Australia
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -684,14 +732,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_professional_year_au_points( self, forced_value = None ):
+    def get_professional_year_au_points( self, question_id, forced_value = None ):
         """
         Points for users who have completed a PROFESIONAL YEAR COURSE in Australia
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -709,14 +758,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_live_regional_au_points( self, forced_value = None ):
+    def get_live_regional_au_points( self, question_id, forced_value = None ):
         """
         Points for users who are willing to live in regional Australia
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -734,15 +784,16 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_community_language_au_points( self, forced_value = None ):
+    def get_community_language_au_points( self, question_id, forced_value = None ):
         """
         Points for users who can be recognized by NAATI for interpreter/translator in one
         of Australian community languages
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -760,15 +811,16 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
 
-    def get_partner_worked_studied_ca_points( self, forced_value = None ):
+    def get_partner_worked_studied_ca_points( self, question_id, forced_value = None ):
         """
         Points for users who have a partner that worked or studied in Canada
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -786,14 +838,15 @@ class ImmigrationCalculator( object ):
 
             # search for how many points this answer is worth
             if value == "Yes":
-                points = self.__get_points( value, 'description' )
+                points = self.__get_points( value, 'description', question_id )
 
         return points
 
-    def get_partner_english_points( self, forced_value = None ):
+    def get_partner_english_points( self, question_id, forced_value = None ):
         """
         Points for users who have a partner with skill in English
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -807,14 +860,15 @@ class ImmigrationCalculator( object ):
                 value = self.user_language.partner_english_level_answer.id
 
             # search for how many points this answer is worth
-            points = self.__get_points( value, 'id' )
+            points = self.__get_points( value, 'id', question_id )
 
         return points
 
-    def get_partner_french_points( self, forced_value = None ):
+    def get_partner_french_points( self, question_id, forced_value = None ):
         """
         Points for users who have a partner with skill in French
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -828,14 +882,15 @@ class ImmigrationCalculator( object ):
                 value = self.user_language.partner_french_level_answer.id
 
             # search for how many points this answer is worth
-            points = self.__get_points( value, 'id' )
+            points = self.__get_points( value, 'id', question_id )
 
         return points
 
-    def get_partner_education_degree_points( self, forced_value = None ):
+    def get_partner_education_degree_points( self, question_id, forced_value = None ):
         """
         Points for users who have a partner with an education degree
 
+        :param question_id:
         :param forced_value:
         :return Int - Total of points:
         """
@@ -849,8 +904,6 @@ class ImmigrationCalculator( object ):
                 value = self.user_education.partner_education_level_answer.id
 
             # search for how many points this answer is worth
-            points = self.__get_points( value, 'id' )
+            points = self.__get_points( value, 'id', question_id )
 
         return points
-
-
