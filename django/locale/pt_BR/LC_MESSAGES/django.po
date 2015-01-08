@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 20:06+0000\n"
+"POT-Creation-Date: 2015-01-08 23:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr ""
 #: templates/db_translations/core_answer.html:893
 #: templates/db_translations/core_answer.html:895
 #: templates/db_translations/core_answer.html:916
-#: wannamigrate/core/models.py:331 wannamigrate/core/models.py:470
-#: wannamigrate/core/models.py:565
+#: wannamigrate/core/models.py:367 wannamigrate/core/models.py:506
+#: wannamigrate/core/models.py:618
 msgid "Yes"
 msgstr "Sim"
 
@@ -47,8 +47,8 @@ msgstr "Sim"
 #: templates/db_translations/core_answer.html:894
 #: templates/db_translations/core_answer.html:896
 #: templates/db_translations/core_answer.html:917
-#: wannamigrate/core/models.py:332 wannamigrate/core/models.py:471
-#: wannamigrate/core/models.py:566
+#: wannamigrate/core/models.py:368 wannamigrate/core/models.py:507
+#: wannamigrate/core/models.py:619
 msgid "No"
 msgstr "Não"
 
@@ -3850,8 +3850,8 @@ msgid "American Samoa"
 msgstr ""
 
 #: templates/db_translations/core_country.html:118
-#: templates/site/dashboard.html:132 wannamigrate/site/views.py:959
-#: wannamigrate/site/views.py:1118 wannamigrate/site/views.py:1162
+#: templates/site/dashboard.html:132 wannamigrate/site/views.py:1030
+#: wannamigrate/site/views.py:1192 wannamigrate/site/views.py:1236
 msgid "Australia"
 msgstr "Austrália"
 
@@ -3909,8 +3909,8 @@ msgid "New Caledonia"
 msgstr ""
 
 #: templates/db_translations/core_country.html:132
-#: templates/site/dashboard.html:172 wannamigrate/site/views.py:983
-#: wannamigrate/site/views.py:1132 wannamigrate/site/views.py:1176
+#: templates/site/dashboard.html:172 wannamigrate/site/views.py:1054
+#: wannamigrate/site/views.py:1206 wannamigrate/site/views.py:1250
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -4204,8 +4204,8 @@ msgid "British Virgin Islands"
 msgstr ""
 
 #: templates/db_translations/core_country.html:205
-#: templates/site/dashboard.html:152 wannamigrate/site/views.py:971
-#: wannamigrate/site/views.py:1125 wannamigrate/site/views.py:1169
+#: templates/site/dashboard.html:152 wannamigrate/site/views.py:1042
+#: wannamigrate/site/views.py:1199 wannamigrate/site/views.py:1243
 msgid "Canada"
 msgstr "Canadá"
 
@@ -4542,7 +4542,7 @@ msgid "Edo"
 msgstr ""
 
 #: templates/db_translations/core_language.html:35
-#: wannamigrate/_settings/base.py:39
+#: wannamigrate/_settings/base.py:51
 msgid "English"
 msgstr ""
 
@@ -5199,7 +5199,7 @@ msgid "COMPLETED"
 msgstr "PREENCHIDO"
 
 #: templates/site/dashboard.html:69 templates/site/situation.html:60
-#: wannamigrate/core/models.py:284
+#: wannamigrate/core/models.py:320
 msgid "Language"
 msgstr "Línguas"
 
@@ -5374,18 +5374,17 @@ msgstr "FINALIZAR"
 #: templates/site/home_older_browsers.html:12
 #: templates/site/home_older_browsers.html:16
 #: templates/site/layouts/internal.html:14
-#: templates/site/layouts/internal.html:16 templates/site/layouts/main.html:15
+#: templates/site/layouts/internal.html:17 templates/site/layouts/main.html:15
 #: templates/site/layouts/main.html:17
 msgid "Live Abroad. Change your life."
 msgstr "More em um novo país. Mude de vida."
 
-#: templates/site/home.html:73 templates/site/home.html.py:75
-#: templates/site/home_older_browsers.html:71
-#: templates/site/home_older_browsers.html:73
+#: templates/site/home.html:83 templates/site/home_older_browsers.html:81
+#: templates/site/home_older_browsers.html:83
 msgid "Log In"
 msgstr "Entrar"
 
-#: templates/site/home.html:84 templates/site/home_older_browsers.html:82
+#: templates/site/home.html:91 templates/site/home_older_browsers.html:92
 msgid ""
 "Live in a <span class=\"bold\">new country.</span> <span class=\"bold"
 "\">Change</span> your life."
@@ -5393,7 +5392,7 @@ msgstr ""
 "More em um <span class=\"bold\">novo país.</span> <span class=\"bold\">Mude</"
 "span> de vida."
 
-#: templates/site/home.html:87 templates/site/home_older_browsers.html:85
+#: templates/site/home.html:94 templates/site/home_older_browsers.html:95
 msgid ""
 "Choose a <span class=\"bold\">country</span>, obtain the <span class=\"bold"
 "\">visa</span> and <span class=\"bold\">move!</span>"
@@ -5401,25 +5400,25 @@ msgstr ""
 "Decida o <span class=\"bold\">país</span>, consiga o <span class=\"bold"
 "\">visto</span> e <span class=\"bold\">mude!</span>"
 
-#: templates/site/home.html:89 templates/site/home.html.py:152
-#: templates/site/home.html:216 templates/site/home.html.py:226
-#: templates/site/home_older_browsers.html:87
-#: templates/site/home_older_browsers.html:106
-#: templates/site/home_older_browsers.html:192
-#: templates/site/home_older_browsers.html:211
+#: templates/site/home.html:96 templates/site/home.html.py:159
+#: templates/site/home.html:223 templates/site/home.html.py:233
+#: templates/site/home_older_browsers.html:97
+#: templates/site/home_older_browsers.html:116
+#: templates/site/home_older_browsers.html:202
+#: templates/site/home_older_browsers.html:221
 msgid "Start now."
 msgstr "Comece já."
 
-#: templates/site/home.html:89 templates/site/home.html.py:152
-#: templates/site/home.html:216 templates/site/home.html.py:226
-#: templates/site/home_older_browsers.html:87
-#: templates/site/home_older_browsers.html:106
-#: templates/site/home_older_browsers.html:192
-#: templates/site/home_older_browsers.html:211
+#: templates/site/home.html:96 templates/site/home.html.py:159
+#: templates/site/home.html:223 templates/site/home.html.py:233
+#: templates/site/home_older_browsers.html:97
+#: templates/site/home_older_browsers.html:116
+#: templates/site/home_older_browsers.html:202
+#: templates/site/home_older_browsers.html:221
 msgid "It's Free!"
 msgstr "É Gratuito!"
 
-#: templates/site/home.html:100 templates/site/home_older_browsers.html:96
+#: templates/site/home.html:107 templates/site/home_older_browsers.html:106
 msgid ""
 "If you could <span class=\"white bold\">live anywhere,</span> where would "
 "you go<span class=\"white\">?</span>"
@@ -5427,7 +5426,7 @@ msgstr ""
 "Se você pudesse <span class=\"white bold\">morar em qualquer lugar,</span> "
 "para onde iria<span class=\"white\">?</span>"
 
-#: templates/site/home.html:117 templates/site/home_older_browsers.html:169
+#: templates/site/home.html:124 templates/site/home_older_browsers.html:179
 msgid ""
 "<span class=\"bold\">Wanna Migrate</span> helped me to understand all my "
 "possibilities and to obtain my long time dreamed visa to Australia."
@@ -5436,15 +5435,15 @@ msgstr ""
 "possibilidades que eu tinha e a conseguir meu tão sonhado visto permanente "
 "da Austrália. "
 
-#: templates/site/home.html:122 templates/site/home_older_browsers.html:174
+#: templates/site/home.html:129 templates/site/home_older_browsers.html:184
 msgid "Web Designer in Australia"
 msgstr "Web Designer na Austrália"
 
-#: templates/site/home.html:129 templates/site/home_older_browsers.html:201
+#: templates/site/home.html:136 templates/site/home_older_browsers.html:211
 msgid "The <span class=\"bold\">easiest way</span> to immigrate."
 msgstr "A maneira <span class=\"bold\">mais fácil</span> de imigrar."
 
-#: templates/site/home.html:146 templates/site/home_older_browsers.html:100
+#: templates/site/home.html:153 templates/site/home_older_browsers.html:110
 msgid ""
 "<span class=\"f20 teal bold\">Discover awesome countries</span> with open "
 "doors for new professionals."
@@ -5452,7 +5451,7 @@ msgstr ""
 "<span class=\"f20 teal bold\">Descubra países incríveis</span> com portas "
 "abertas para novos profissionais."
 
-#: templates/site/home.html:149 templates/site/home_older_browsers.html:103
+#: templates/site/home.html:156 templates/site/home_older_browsers.html:113
 msgid ""
 "Around <span class=\"f20 teal bold\">500,000 people</span> obtain a visa to "
 "live in <span class=\"teal bold\">Australia</span> and <span class=\"teal "
@@ -5462,7 +5461,7 @@ msgstr ""
 "para viver na <span class=\"teal bold\">Austrália</span> e <span class="
 "\"teal bold\">Canadá</span> anualmente."
 
-#: templates/site/home.html:157 templates/site/home_older_browsers.html:115
+#: templates/site/home.html:164 templates/site/home_older_browsers.html:125
 msgid ""
 "A <span class=\"bold\">free tool</span> to manage your whole immigration "
 "process"
@@ -5470,7 +5469,7 @@ msgstr ""
 "Uma <span class=\"bold\">ferramenta gratuita</span> para gerenciar seu "
 "processo de imigração"
 
-#: templates/site/home.html:163 templates/site/home_older_browsers.html:121
+#: templates/site/home.html:170 templates/site/home_older_browsers.html:131
 msgid ""
 "Find out which countries need professionals <span class=\"bold\">like you</"
 "span>"
@@ -5478,28 +5477,28 @@ msgstr ""
 "Descubra quais países precisam de profissionais <span class=\"bold\">como "
 "você</span>"
 
-#: templates/site/home.html:172 templates/site/home_older_browsers.html:130
+#: templates/site/home.html:179 templates/site/home_older_browsers.html:140
 msgid "Get help with your <span class=\"bold yellow\">visa application</span>"
 msgstr ""
 "Receba ajuda com sua <span class=\"bold yellow\">aplicação ao visto</span>"
 
-#: templates/site/home.html:179 templates/site/home_older_browsers.html:137
+#: templates/site/home.html:186 templates/site/home_older_browsers.html:147
 msgid "Review your <span class=\"bold\">language skills</span>"
 msgstr ""
 "Reveja suas <span class=\"bold\">habilidades na língua estrangeira</span>"
 
-#: templates/site/home.html:188 templates/site/home_older_browsers.html:146
+#: templates/site/home.html:195 templates/site/home_older_browsers.html:156
 msgid ""
 "Get exposed to international <span class=\"bold yellow\">employers</span>"
 msgstr ""
 "Tenha contato com <span class=\"bold yellow\">empregadores internacionais</"
 "span>"
 
-#: templates/site/home.html:195 templates/site/home_older_browsers.html:153
+#: templates/site/home.html:202 templates/site/home_older_browsers.html:163
 msgid "Learn <span class=\"bold\">shortcuts</span> to obtain the visa"
 msgstr "Aprenda <span class=\"bold\">atalhos</span> para conseguir o visto"
 
-#: templates/site/home.html:208 templates/site/home_older_browsers.html:183
+#: templates/site/home.html:215 templates/site/home_older_browsers.html:193
 msgid ""
 "I lived in 5 different countries and believe that everyone should have the "
 "chance to improve their lives in a new country, if they want."
@@ -5507,15 +5506,15 @@ msgstr ""
 "Morei em 5 países diferentes e acredito que todos deveriam ter a chance de "
 "melhorar suas vidas em um novo país, caso desejem."
 
-#: templates/site/home.html:213 templates/site/home_older_browsers.html:188
+#: templates/site/home.html:220 templates/site/home_older_browsers.html:198
 msgid "CEO at Wanna Migrate"
 msgstr "CEO - Wanna Migrate"
 
-#: templates/site/home.html:221 templates/site/home_older_browsers.html:206
+#: templates/site/home.html:228 templates/site/home_older_browsers.html:216
 msgid "What are you waiting for?"
 msgstr "O que você está esperando?"
 
-#: templates/site/home.html:224 templates/site/home_older_browsers.html:209
+#: templates/site/home.html:231 templates/site/home_older_browsers.html:219
 msgid ""
 "Get <span class=\"bold\">free access</span> to our platform and <span class="
 "\"bold\">achieve your dreams</span> in a new country."
@@ -5523,7 +5522,7 @@ msgstr ""
 "<span class=\"bold\">Acesse gratuitamente</span> nossa plataforma e <span "
 "class=\"bold\">realize seus sonhos</span> em um novo país."
 
-#: templates/site/home.html:241 templates/site/home_older_browsers.html:234
+#: templates/site/home.html:248 templates/site/home_older_browsers.html:244
 msgid "Incubators / Supporters:"
 msgstr "Apoiadores do Projeto:"
 
@@ -5549,34 +5548,26 @@ msgstr "Voltar"
 msgid "Save"
 msgstr "Salvar"
 
-#: templates/site/layouts/internal.html:73 templates/site/layouts/main.html:87
+#: templates/site/layouts/internal.html:77 templates/site/layouts/main.html:83
 msgid "DASHBOARD"
 msgstr "INÍCIO"
 
-#: templates/site/layouts/internal.html:74 templates/site/layouts/main.html:88
+#: templates/site/layouts/internal.html:79 templates/site/layouts/main.html:84
 msgid "HOW IT WORKS"
 msgstr "COMO FUNCIONA"
 
-#: templates/site/layouts/internal.html:75 templates/site/layouts/main.html:89
+#: templates/site/layouts/internal.html:80 templates/site/layouts/main.html:85
 msgid "CONTACT US"
 msgstr "CONTATO"
 
-#: templates/site/layouts/internal.html:85
-#: templates/site/layouts/main.html:100
+#: templates/site/layouts/internal.html:90
+#: templates/site/layouts/internal.html:94 templates/site/layouts/main.html:96
 msgid "My account"
 msgstr "Minha conta"
 
-#: templates/site/layouts/internal.html:86
-#: templates/site/layouts/main.html:101
+#: templates/site/layouts/internal.html:91
+#: templates/site/layouts/internal.html:95 templates/site/layouts/main.html:97
 msgid "Logout"
-msgstr ""
-
-#: templates/site/login.html:17 templates/site/popups/signup.html:189
-msgid "Login"
-msgstr "Login"
-
-#: templates/site/login.html:18
-msgid "Join now to the World's largest immigration platform."
 msgstr ""
 
 #: templates/site/moving.html:26 templates/site/situation.html:26
@@ -5651,9 +5642,9 @@ msgstr "Avatar"
 msgid "E-mail and preferred language"
 msgstr "E-mail e língua de preferência"
 
-#: templates/site/myaccount/view.html:50 wannamigrate/core/models.py:179
-#: wannamigrate/core/models.py:202 wannamigrate/site/forms.py:81
-#: wannamigrate/site/forms.py:128
+#: templates/site/myaccount/view.html:50 wannamigrate/core/models.py:197
+#: wannamigrate/core/models.py:220 wannamigrate/core/models.py:587
+#: wannamigrate/site/forms.py:81 wannamigrate/site/forms.py:128
 msgid "Name"
 msgstr "Nome"
 
@@ -5682,14 +5673,21 @@ msgid ""
 msgstr ""
 
 #: templates/site/popups/signup.html:58 templates/site/popups/signup.html:173
+#: templates/site/signin/login_form.html:4
+#: templates/site/signin/login_form2.html:17
+#: templates/site/signin/login_form2.html:66
 msgid "Sign in"
 msgstr "Entrar"
 
 #: templates/site/popups/signup.html:70
+#: templates/site/signin/login_form2.html:29
+#: templates/site/signin/signup_form.html:4
 msgid "Sign up"
 msgstr "Cadastre-se"
 
 #: templates/site/popups/signup.html:82
+#: templates/site/signin/login_form2.html:41
+#: templates/site/signin/recover_password.html:5
 msgid "Password recovery"
 msgstr "Recuperação de Senha"
 
@@ -5698,57 +5696,91 @@ msgid ""
 "We have successfully sent you an email with a link to reset your password."
 msgstr "Enviamos um email com um link para você criar uma nova senha."
 
+#: templates/site/popups/signup.html:189
+#: templates/site/signin/container.html:18
+#: templates/site/signin/login_form.html:13
+#: templates/site/signin/login_form2.html:77
+msgid "Login"
+msgstr "Login"
+
 #: templates/site/popups/signup.html:191
+#: templates/site/signin/login_form.html:15
+#: templates/site/signin/login_form2.html:79
 msgid "Forgot your password?"
 msgstr "Esqueceu sua senha?"
 
 #: templates/site/popups/signup.html:204
+#: templates/site/signin/login_form2.html:91
+#: templates/site/signin/signup_form.html:16
 msgid "Sign-Up"
 msgstr "Cadastre-se"
 
 #: templates/site/popups/signup.html:211
+#: templates/site/signin/login_form2.html:98
+#: templates/site/signin/social_login.html:5
 msgid "Alternatively, you can sign up using:"
 msgstr "Você também pode fazer login com:"
 
 #: templates/site/popups/signup.html:213
+#: templates/site/signin/login_form2.html:100
+#: templates/site/signin/social_login.html:8
 msgid "Login with Facebook"
 msgstr "Login com Facebook"
 
 #: templates/site/popups/signup.html:214
+#: templates/site/signin/login_form2.html:101
+#: templates/site/signin/social_login.html:11
 msgid "Login with Linkedin"
 msgstr "Login com Linkedin"
 
 #: templates/site/popups/signup.html:215
+#: templates/site/signin/login_form2.html:102
+#: templates/site/signin/social_login.html:14
 msgid "Login with Google"
 msgstr "Login com Google"
 
 #: templates/site/popups/signup.html:221
+#: templates/site/signin/login_form.html:25
+#: templates/site/signin/login_form2.html:108
 msgid "Don't have an account? Sign-Up"
 msgstr "Não tem cadastro? Cadastre-se"
 
 #: templates/site/popups/signup.html:225
+#: templates/site/signin/login_form2.html:112
+#: templates/site/signin/signup_form.html:25
 msgid "Already registered?"
 msgstr "Já é cadastrado?"
 
 #: templates/site/popups/signup.html:225
+#: templates/site/signin/login_form2.html:112
+#: templates/site/signin/signup_form.html:25
 msgid "Log in"
 msgstr "Login"
 
 #: templates/site/popups/signup.html:231
+#: templates/site/signin/login_form2.html:118
+#: templates/site/signin/recover_password.html:13
 msgid ""
 "Fill in your email address and you will receive a link to reset your "
 "password."
 msgstr "Preencha seu email e você receberá um link para criar uma nova senha"
 
 #: templates/site/popups/signup.html:235
+#: templates/site/signin/login_form2.html:122
+#: templates/site/signin/recover_password.html:18
 msgid "Recover Password"
 msgstr "Recuperação de Senha"
 
 #: templates/site/popups/signup.html:238
+#: templates/site/signin/login_form2.html:125
+#: templates/site/signin/recover_password.html:21
 msgid "Go Back"
 msgstr "Voltar"
 
 #: templates/site/popups/signup.html:246
+#: templates/site/signin/login_form.html:33
+#: templates/site/signin/login_form2.html:133
+#, python-format
 msgid ""
 "\n"
 "        If you click \"Log in with Facebook/Linkedin/Twitter\" and are not "
@@ -5769,6 +5801,8 @@ msgstr ""
 "    "
 
 #: templates/site/popups/signup.html:257
+#: templates/site/signin/login_form2.html:144
+#: templates/site/signin/signup_form.html:33
 #, python-format
 msgid ""
 "\n"
@@ -5790,10 +5824,14 @@ msgstr ""
 "    "
 
 #: templates/site/popups/signup.html:266
+#: templates/site/signin/login_form2.html:153
+#: templates/site/signin/recover_password.html:26
 msgid "Still having problems? Please go to our"
 msgstr "Ainda tendo problemas? Por favor se dirija ao nosso"
 
 #: templates/site/popups/signup.html:266
+#: templates/site/signin/login_form2.html:153
+#: templates/site/signin/recover_password.html:26
 msgid "Contact Form"
 msgstr "Formulário de Contato"
 
@@ -5812,6 +5850,10 @@ msgstr "Você atualizou sua senha com sucesso"
 #: templates/site/reset_password.html:27
 msgid "Click Here to go back and login again"
 msgstr "Clique Aqui para voltar e efetuar login novamente"
+
+#: templates/site/signin/container.html:19
+msgid "Join now to the World's largest immigration platform."
+msgstr ""
 
 #: templates/site/situation.html:57 templates/site/situation.html.py:62
 #: templates/site/situation.html:67 templates/site/situation.html.py:72
@@ -6261,7 +6303,7 @@ msgstr ""
 "em até 4 meses após o convite. Quaisquer aplicações recebidas depois dos 4 "
 "meses serão negadas."
 
-#: wannamigrate/_settings/base.py:40
+#: wannamigrate/_settings/base.py:52
 msgid "Portuguese (BR)"
 msgstr "Português"
 
@@ -6285,7 +6327,7 @@ msgstr "data de criação"
 msgid "modified date"
 msgstr "data de modificação"
 
-#: wannamigrate/core/models.py:32 wannamigrate/core/models.py:218
+#: wannamigrate/core/models.py:32 wannamigrate/core/models.py:236
 msgid "question"
 msgstr "pergunta"
 
@@ -6294,7 +6336,8 @@ msgid "Answer"
 msgstr "Resposta"
 
 #: wannamigrate/core/models.py:49 wannamigrate/core/models.py:65
-#: wannamigrate/core/models.py:147 wannamigrate/core/models.py:280
+#: wannamigrate/core/models.py:165 wannamigrate/core/models.py:262
+#: wannamigrate/core/models.py:316
 msgid "name"
 msgstr "nome"
 
@@ -6302,7 +6345,7 @@ msgstr "nome"
 msgid "continent"
 msgstr "continente"
 
-#: wannamigrate/core/models.py:67 wannamigrate/core/models.py:148
+#: wannamigrate/core/models.py:67 wannamigrate/core/models.py:166
 msgid "code"
 msgstr "código"
 
@@ -6310,205 +6353,242 @@ msgstr "código"
 msgid "immigration enabled"
 msgstr "imigração ativada"
 
-#: wannamigrate/core/models.py:103 wannamigrate/core/models.py:376
-#: wannamigrate/core/models.py:517 wannamigrate/core/models.py:531
-#: wannamigrate/core/models.py:615 wannamigrate/core/models.py:629
+#: wannamigrate/core/models.py:102 wannamigrate/core/models.py:121
+#: wannamigrate/core/models.py:261 wannamigrate/core/models.py:412
+#: wannamigrate/core/models.py:553 wannamigrate/core/models.py:567
+#: wannamigrate/core/models.py:668 wannamigrate/core/models.py:682
 msgid "country"
 msgstr "país"
 
+#: wannamigrate/core/models.py:103
+msgid "pass mark points"
+msgstr ""
+
 #: wannamigrate/core/models.py:104
+msgid "max personal points"
+msgstr ""
+
+#: wannamigrate/core/models.py:105
+msgid "max language points"
+msgstr ""
+
+#: wannamigrate/core/models.py:106 wannamigrate/core/models.py:107
+msgid "max education points"
+msgstr ""
+
+#: wannamigrate/core/models.py:108
+msgid "max total points"
+msgstr ""
+
+#: wannamigrate/core/models.py:122
 msgid "answer"
 msgstr "resposta"
 
-#: wannamigrate/core/models.py:105
+#: wannamigrate/core/models.py:123
 msgid "points"
 msgstr "pontos"
 
-#: wannamigrate/core/models.py:169 wannamigrate/site/forms.py:287
+#: wannamigrate/core/models.py:187 wannamigrate/site/forms.py:287
 msgid "Select Language"
 msgstr "Selecione Língua"
 
-#: wannamigrate/core/models.py:178
+#: wannamigrate/core/models.py:196
 msgid "category"
 msgstr "categoria"
 
-#: wannamigrate/core/models.py:219
+#: wannamigrate/core/models.py:237
 msgid "help text"
 msgstr "texto de ajuda"
 
-#: wannamigrate/core/models.py:279
+#: wannamigrate/core/models.py:238
+msgid "method name"
+msgstr ""
+
+#: wannamigrate/core/models.py:239
+msgid "type"
+msgstr ""
+
+#: wannamigrate/core/models.py:263
+msgid "max points allowed"
+msgstr ""
+
+#: wannamigrate/core/models.py:315
 msgid "e-mail"
 msgstr "e-mail"
 
-#: wannamigrate/core/models.py:281
+#: wannamigrate/core/models.py:317
 msgid "is active"
 msgstr "está ativo"
 
-#: wannamigrate/core/models.py:282
+#: wannamigrate/core/models.py:318
 msgid "is admin"
 msgstr "é admin"
 
-#: wannamigrate/core/models.py:334 wannamigrate/core/models.py:375
-#: wannamigrate/core/models.py:393 wannamigrate/core/models.py:434
-#: wannamigrate/core/models.py:449 wannamigrate/core/models.py:474
-#: wannamigrate/core/models.py:516 wannamigrate/core/models.py:530
-#: wannamigrate/core/models.py:550 wannamigrate/core/models.py:568
-#: wannamigrate/core/models.py:614 wannamigrate/core/models.py:628
+#: wannamigrate/core/models.py:370 wannamigrate/core/models.py:411
+#: wannamigrate/core/models.py:429 wannamigrate/core/models.py:470
+#: wannamigrate/core/models.py:485 wannamigrate/core/models.py:510
+#: wannamigrate/core/models.py:552 wannamigrate/core/models.py:566
+#: wannamigrate/core/models.py:603 wannamigrate/core/models.py:621
+#: wannamigrate/core/models.py:667 wannamigrate/core/models.py:681
 msgid "user"
 msgstr "usuário"
 
-#: wannamigrate/core/models.py:335
+#: wannamigrate/core/models.py:371
 msgid "Did you complete any studies in a regional part of Australia"
 msgstr "Você completou algum estudo em uma região interiorana da Austrália"
 
-#: wannamigrate/core/models.py:336
+#: wannamigrate/core/models.py:372
 msgid "partner/spouse education level"
 msgstr "escolaridade do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:377
+#: wannamigrate/core/models.py:413
 msgid "education level"
 msgstr "nível de escolaridade"
 
-#: wannamigrate/core/models.py:378
+#: wannamigrate/core/models.py:414
 msgid "school/university"
 msgstr "escola/universidade"
 
-#: wannamigrate/core/models.py:379
+#: wannamigrate/core/models.py:415
 msgid "start year"
 msgstr "ano de início"
 
-#: wannamigrate/core/models.py:380
+#: wannamigrate/core/models.py:416
 msgid "end year"
 msgstr "ano de término"
 
-#: wannamigrate/core/models.py:394
+#: wannamigrate/core/models.py:430
 msgid "partner/spouse english level"
 msgstr "nível de inglês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:395
+#: wannamigrate/core/models.py:431
 msgid "partner/spouse french level"
 msgstr "nível de francês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:435
+#: wannamigrate/core/models.py:471
 msgid "language"
 msgstr "língua"
 
-#: wannamigrate/core/models.py:436
+#: wannamigrate/core/models.py:472
 msgid "language level"
 msgstr "nível na língua"
 
-#: wannamigrate/core/models.py:450
+#: wannamigrate/core/models.py:486
 msgid "is logout"
 msgstr ""
 
-#: wannamigrate/core/models.py:466
+#: wannamigrate/core/models.py:502
 msgid "Female"
 msgstr "Feminino"
 
-#: wannamigrate/core/models.py:467
+#: wannamigrate/core/models.py:503
 msgid "Male"
 msgstr "Masculino"
 
-#: wannamigrate/core/models.py:475
+#: wannamigrate/core/models.py:511
 msgid "country of citizenship"
 msgstr "país de cidadania"
 
-#: wannamigrate/core/models.py:476
+#: wannamigrate/core/models.py:512
 msgid "avatar"
 msgstr "avatar"
 
-#: wannamigrate/core/models.py:481
+#: wannamigrate/core/models.py:517
 msgid "birth date"
 msgstr "data de nascimento"
 
-#: wannamigrate/core/models.py:482
+#: wannamigrate/core/models.py:518
 msgid "gender"
 msgstr "sexo"
 
-#: wannamigrate/core/models.py:483
+#: wannamigrate/core/models.py:519
 msgid "Would you be willing to live in Regional Australia"
 msgstr "Você aceitaria morar em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:484
+#: wannamigrate/core/models.py:520
 msgid "Any family members who are citizens in other countries"
 msgstr "Algum parente que é cidadão em outros países"
 
-#: wannamigrate/core/models.py:532
+#: wannamigrate/core/models.py:568
+msgid "result status"
+msgstr ""
+
+#: wannamigrate/core/models.py:569
 msgid "total score"
 msgstr "pontuação total"
 
-#: wannamigrate/core/models.py:533
+#: wannamigrate/core/models.py:570
 msgid "score personal"
 msgstr "pontuação pessoal"
 
-#: wannamigrate/core/models.py:534
+#: wannamigrate/core/models.py:571
 msgid "score language"
 msgstr "língua"
 
-#: wannamigrate/core/models.py:535
+#: wannamigrate/core/models.py:572
 msgid "score education"
 msgstr "porcentagem escolaridade"
 
-#: wannamigrate/core/models.py:536
+#: wannamigrate/core/models.py:573
 msgid "score work"
 msgstr "pontuação trabalho"
 
-#: wannamigrate/core/models.py:551
+#: wannamigrate/core/models.py:604
 msgid "percentage personal"
 msgstr "porcentagem pessoal"
 
-#: wannamigrate/core/models.py:552
+#: wannamigrate/core/models.py:605
 msgid "percentage language"
 msgstr "porcentagem línguas"
 
-#: wannamigrate/core/models.py:553
+#: wannamigrate/core/models.py:606
 msgid "percentage education"
 msgstr "porcentagem escolaridade"
 
-#: wannamigrate/core/models.py:554
+#: wannamigrate/core/models.py:607
 msgid "percentage work"
 msgstr "porcentagem trabalho"
 
-#: wannamigrate/core/models.py:555
+#: wannamigrate/core/models.py:608
 msgid "updating now"
 msgstr "atualizado agora"
 
-#: wannamigrate/core/models.py:569
+#: wannamigrate/core/models.py:622
 msgid "occupation"
 msgstr "profissão"
 
-#: wannamigrate/core/models.py:570
+#: wannamigrate/core/models.py:623
 msgid "Do you have a partner/spouse with proved skills"
 msgstr ""
 "Você tem um(a) esposo(a) (ou união estável) com Habilidades Comprovadas"
 
-#: wannamigrate/core/models.py:571
+#: wannamigrate/core/models.py:624
 msgid "are you willing to invest money on the country of destination"
 msgstr "Você pretende investir dinheiro no país de destino"
 
-#: wannamigrate/core/models.py:572
+#: wannamigrate/core/models.py:625
 msgid "do you have a startup recommendation letter approved by canada"
 msgstr "Você tem uma carta de recomendação de sua startup aprovada pelo Canadá"
 
-#: wannamigrate/core/models.py:573
+#: wannamigrate/core/models.py:626
 msgid "Did you complete a Professional Year Course in Australia"
 msgstr "Você fez um curso de 'Professional Year' na Austrália"
 
-#: wannamigrate/core/models.py:574
+#: wannamigrate/core/models.py:627
 msgid "If you have a partner/spouse, has he/she worked or studied in Canada"
 msgstr ""
 "Se você tem um(a) esposo(a) (ou união estável), ele(a) já trabalhou ou "
 "estudou no Canadá"
 
-#: wannamigrate/core/models.py:575
+#: wannamigrate/core/models.py:628
 msgid "Do you have a work offer overseas"
 msgstr "Você tem uma proposta de trabalho no exterior"
 
-#: wannamigrate/core/models.py:630
+#: wannamigrate/core/models.py:683
 msgid "company"
 msgstr "empresa"
 
-#: wannamigrate/core/models.py:631
+#: wannamigrate/core/models.py:684
 msgid "Duration of Employment"
 msgstr "Duração do Emprego"
 
@@ -6532,6 +6612,14 @@ msgstr "%s anos"
 #: wannamigrate/core/util.py:217
 msgid "Select Duration"
 msgstr "Selecione Duração"
+
+#: wannamigrate/site/forms.py:27
+msgid "Please inform your e-mail."
+msgstr "Por gentileza, confirme seu email"
+
+#: wannamigrate/site/forms.py:28
+msgid "Please inform your password"
+msgstr "Recuperação de Senha"
 
 #: wannamigrate/site/forms.py:44
 msgid "Confirm Password"
@@ -6686,39 +6774,43 @@ msgstr "A senha antiga não está correta."
 msgid "The new password and confirmation does not match."
 msgstr "A nova senha e sua confirmação não conferem."
 
-#: wannamigrate/site/views.py:102 wannamigrate/site/views.py:105
-msgid "Invalid Login. Please try again."
+#: wannamigrate/site/views.py:109 wannamigrate/site/views.py:122
+msgid "Invalid login. Please try again."
 msgstr "Login Inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:165
+#: wannamigrate/site/views.py:196
 msgid "There was an error while creating your user account."
 msgstr "Houve um erro ao criar sua conta."
 
-#: wannamigrate/site/views.py:175
+#: wannamigrate/site/views.py:210
 msgid ""
-"Invalid Information!<br />Make sure all fields are filled in and email and "
+"Invalid Information! Make sure all fields are filled in and email and "
 "confirmation match."
 msgstr ""
 "Dados incorretos!<br />Confirme que todos os campos estão preenchidos e "
 "email e confirmação conferem."
 
-#: wannamigrate/site/views.py:210
+#: wannamigrate/site/views.py:255
+msgid "Password reset instructions were successfully sent to your e-mail."
+msgstr ""
+
+#: wannamigrate/site/views.py:261
 msgid "No user found with this e-mail address."
 msgstr "Nenhum usuário com este email."
 
-#: wannamigrate/site/views.py:213
+#: wannamigrate/site/views.py:266
 msgid "Invalid e-mail address."
 msgstr "Endereço de email inválido."
 
-#: wannamigrate/site/views.py:388 wannamigrate/site/views.py:423
+#: wannamigrate/site/views.py:441 wannamigrate/site/views.py:476
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:876
+#: wannamigrate/site/views.py:937
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
 
-#: wannamigrate/site/views.py:1049
+#: wannamigrate/site/views.py:1120
 msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
@@ -6728,7 +6820,7 @@ msgstr ""
 "tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
 "naati.com.au/' target='blank'>NAATI</a>"
 
-#: wannamigrate/site/views.py:1052
+#: wannamigrate/site/views.py:1123
 msgid ""
 "If you can get a job offer from an Australia Employer (<a href='http://www."
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
@@ -6739,7 +6831,7 @@ msgstr ""
 "deverá solicitar que seu empregador faça a requisição do seu visto "
 "patrocinado.  Será mais rápido e barato."
 
-#: wannamigrate/site/views.py:1055
+#: wannamigrate/site/views.py:1126
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
@@ -6747,7 +6839,7 @@ msgstr ""
 "Você pode receber 5 pontos extras se tiver um esposo(a) (ou união estável) e "
 "ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
 
-#: wannamigrate/site/views.py:1058
+#: wannamigrate/site/views.py:1129
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
@@ -6755,8 +6847,8 @@ msgstr ""
 "Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
 "no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
-#: wannamigrate/site/views.py:1061 wannamigrate/site/views.py:1078
-#: wannamigrate/site/views.py:1092
+#: wannamigrate/site/views.py:1132 wannamigrate/site/views.py:1152
+#: wannamigrate/site/views.py:1166
 msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
@@ -6764,7 +6856,7 @@ msgstr ""
 "Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
 "para um visto de investidor."
 
-#: wannamigrate/site/views.py:1066
+#: wannamigrate/site/views.py:1137
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
@@ -6772,7 +6864,7 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha um nível básico de inglês ou francês."
 
-#: wannamigrate/site/views.py:1069
+#: wannamigrate/site/views.py:1140
 msgid ""
 "You can get 5 extra points if you or your partner/espouse (stable union) "
 "complete any studies or have a past job in Canada."
@@ -6780,11 +6872,11 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha estudado ou trabalho no Canadá."
 
-#: wannamigrate/site/views.py:1072
+#: wannamigrate/site/views.py:1143
 msgid "You can get 5 extra points if you have a close family member in Canada."
 msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
 
-#: wannamigrate/site/views.py:1075
+#: wannamigrate/site/views.py:1146
 msgid ""
 "You can get 15 extra points if you can get a job offer from an Canada "
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
@@ -6794,13 +6886,23 @@ msgstr ""
 "uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
 "target='blank'>Procure por Emprego Aqui</a>)."
 
-#: wannamigrate/site/views.py:1083
+#: wannamigrate/site/views.py:1149
+msgid ""
+"Each state of canada has its own additional immigration program, usually "
+"easier to get in. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
+"target='blank'>Check the Québec Immigration</a>)."
+msgstr ""
+"Cada estado do Canadá tem o seu próprio programa de imigração, que normalmente "
+"são mais facilitados. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
+"target='blank'>Confira a do estado de Québec</a>)."
+
+#: wannamigrate/site/views.py:1157
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
 msgstr ""
 "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
-#: wannamigrate/site/views.py:1086
+#: wannamigrate/site/views.py:1160
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
@@ -6808,7 +6910,7 @@ msgstr ""
 "Você pode receber 20 pontos extras se seu esposo(a) (ou união estável) tiver "
 "uma profissãoqualificada ou uma proposta de trabalho."
 
-#: wannamigrate/site/views.py:1089
+#: wannamigrate/site/views.py:1163
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."

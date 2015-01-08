@@ -1145,6 +1145,9 @@ def situation( request, country_name ):
             # work offer
             template_data['hints'].append( _( "You can get 15 extra points if you can get a job offer from an Canada Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</a>)." ) )
 
+            # Provincial visas
+            template_data['hints'].append( _( "Each state of canada has its own additional immigration program, usually easier to get in. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' target='blank'>Check the Québec Immigration</a>)." ))
+
             # Investments
             template_data['hints'].append( _( "If you have money/assets that you will take with you, you can apply for an investment visa." ) )
 
