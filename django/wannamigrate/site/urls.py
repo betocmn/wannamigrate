@@ -42,7 +42,7 @@ urlpatterns = patterns('',
     # Help Pages
     url( r'^(?P<country_name>[a-z_\-]+)/situation/$', views.situation, name = 'situation' ),
     url( r'^(?P<country_name>[a-z_\-]+)/visa-application/$', views.visa_application, name = 'visa_application' ),
-    url( r'^(?P<country_name>[a-z_\-]+)/moving/$', views.moving, name = 'moving' ),
+    url( r'^(?P<country_name>[a-z_\-]+)/professional-help/$', views.professional_help, name = 'professional_help' ),
 
     # Set language
     url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),    

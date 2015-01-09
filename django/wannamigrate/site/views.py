@@ -25,7 +25,8 @@ from wannamigrate.site.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
-    UserWorkOfferForm, BaseUserWorkOfferFormSet, EditAccountInfoForm, EditAccountPasswordForm
+    UserWorkOfferForm, BaseUserWorkOfferFormSet, EditAccountInfoForm, EditAccountPasswordForm,
+    ProfessionalHelpForm
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
@@ -1215,7 +1216,7 @@ def visa_application( request, country_name ):
 
 
 @login_required
-def moving( request, country_name ):
+def professional_help( request, country_name ):
     """
     Moving
 
@@ -1228,6 +1229,25 @@ def moving( request, country_name ):
     template_data = {}
     template_data['top_bar_css_class'] = "fixTopBar"
     template_data['country_name'] = country_name
+    template_data['finished'] = False
+
+    # Create form
+    form = ProfessionalHelpForm( request.POST or None )
+
+    # If the form has been submitted...
+    if form.is_valid():
+
+        email = request.user.email
+        name = request.user.name
+        message = form.cleaned_data[ 'message' ]
+
+        # Send Email with message
+        # TODO: Change this to a celery background event and use a try/exception block
+        send_result = Mailer.send_professional_help_email( email, name, message )
+        template_data['finished'] = True
+
+    # pass form to template
+    template_data['form'] = form
 
     # Get Country and set options for it
     if country_name == 'australia':
@@ -1255,7 +1275,7 @@ def moving( request, country_name ):
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # Print Template
-    return render( request, 'site/moving.html', template_data )
+    return render( request, 'site/professional_help.html', template_data )
 
 
 #######################

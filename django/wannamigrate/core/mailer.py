@@ -106,3 +106,16 @@ class Mailer( object ):
         template_data = { 'email': email, 'name': name, 'message': message }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
         return Mailer.send( _( 'Contact from site' ), body, settings.CONTACT_FORM_EMAIL )
+
+    @staticmethod
+    def send_professional_help_email( email, name, message ):
+        """
+        Sends  e-mail from site notifying an user needs professional help
+
+        :param: email
+        :param: name
+        :param: message
+        """
+        template_data = { 'email': email, 'name': name, 'message': message }
+        body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
+        return Mailer.send( _( 'Professional Help Requested' ), body, settings.CONTACT_FORM_EMAIL )

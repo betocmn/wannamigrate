@@ -138,7 +138,7 @@ body{
 #contactBox form textarea{
 	height: 200px;
 }
-#contactBox form input[type=submit]{
+#contactBox form input[type=submit], #professionalHelp form input[type=submit]{
 	border-radius: 5px;
     margin-top: 20px;
 	border: none;

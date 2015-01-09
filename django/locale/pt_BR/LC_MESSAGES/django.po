@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-08 23:12+0000\n"
+"POT-Creation-Date: 2015-01-09 00:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3850,8 +3850,8 @@ msgid "American Samoa"
 msgstr ""
 
 #: templates/db_translations/core_country.html:118
-#: templates/site/dashboard.html:132 wannamigrate/site/views.py:1030
-#: wannamigrate/site/views.py:1192 wannamigrate/site/views.py:1236
+#: templates/site/dashboard.html:132 wannamigrate/site/views.py:1031
+#: wannamigrate/site/views.py:1193 wannamigrate/site/views.py:1256
 msgid "Australia"
 msgstr "Austrália"
 
@@ -3909,8 +3909,8 @@ msgid "New Caledonia"
 msgstr ""
 
 #: templates/db_translations/core_country.html:132
-#: templates/site/dashboard.html:172 wannamigrate/site/views.py:1054
-#: wannamigrate/site/views.py:1206 wannamigrate/site/views.py:1250
+#: templates/site/dashboard.html:172 wannamigrate/site/views.py:1055
+#: wannamigrate/site/views.py:1207 wannamigrate/site/views.py:1270
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -4204,8 +4204,8 @@ msgid "British Virgin Islands"
 msgstr ""
 
 #: templates/db_translations/core_country.html:205
-#: templates/site/dashboard.html:152 wannamigrate/site/views.py:1042
-#: wannamigrate/site/views.py:1199 wannamigrate/site/views.py:1243
+#: templates/site/dashboard.html:152 wannamigrate/site/views.py:1043
+#: wannamigrate/site/views.py:1200 wannamigrate/site/views.py:1263
 msgid "Canada"
 msgstr "Canadá"
 
@@ -5253,20 +5253,14 @@ msgstr "Checar meus resultados"
 
 #: templates/site/dashboard.html:208 templates/site/dashboard.html.py:221
 #: templates/site/dashboard.html:234
-msgid "Apply for the visa"
-msgstr "Aplicar ao visto"
+msgid "Steps fo visa application"
+msgstr "Passo-a-passo pro visto"
 
-#: templates/site/dashboard.html:209
-msgid "Moving to Australia"
-msgstr "Mudando para a Austrália"
-
-#: templates/site/dashboard.html:222
-msgid "Moving to Canada"
-msgstr "Mudando para o Canadá"
-
-#: templates/site/dashboard.html:235
-msgid "Moving to New Zealand"
-msgstr "Mudando para a NZ"
+#: templates/site/dashboard.html:209 templates/site/dashboard.html.py:222
+#: templates/site/dashboard.html:235 templates/site/professional_help.html:44
+#: templates/site/situation.html:28 templates/site/visa_application.html:28
+msgid "Get professional help"
+msgstr "Contrate um especialista"
 
 #: templates/site/edit_education.html:49 templates/site/edit_language.html:48
 #: templates/site/edit_personal.html:28 templates/site/edit_work.html:70
@@ -5570,46 +5564,6 @@ msgstr "Minha conta"
 msgid "Logout"
 msgstr ""
 
-#: templates/site/moving.html:26 templates/site/situation.html:26
-#: templates/site/visa_application.html:26
-msgid "My situation"
-msgstr "Minha situação"
-
-#: templates/site/moving.html:27 templates/site/situation.html:27
-#: templates/site/visa_application.html:27
-msgid "Visa application"
-msgstr "Aplicação ao visto"
-
-#: templates/site/moving.html:28 templates/site/situation.html:28
-#: templates/site/visa_application.html:28
-msgid "Moving to "
-msgstr "Mudando para "
-
-#: templates/site/moving.html:37
-msgid ""
-"Come back soon.  While you're reading this we're working to improve and "
-"complete this BETA version.  Thanks :)"
-msgstr ""
-"Volte em breve.  Enquanto você está lendo, estamos trabalhando para melhorar "
-"e otimizar nossa versão BETA.  Obrigado :)"
-
-#: templates/site/moving.html:41
-msgid "Go back to dashboard"
-msgstr "Voltar para o painel"
-
-#: templates/site/moving.html:46 templates/site/visa_application.html:44
-#: templates/site/visa_application.html:72
-#: templates/site/visa_application.html:89
-#: templates/site/visa_application.html:113
-#: templates/site/visa_application.html:145
-#: templates/site/visa_application.html:158
-#: templates/site/visa_application.html:169
-#: templates/site/visa_application.html:189
-#: templates/site/visa_application.html:205
-#: templates/site/visa_application.html:226
-msgid "STEP"
-msgstr "PASSO"
-
 #: templates/site/myaccount/edit_info.html:18
 msgid "Edit account info"
 msgstr "Editar informações"
@@ -5835,6 +5789,54 @@ msgstr "Ainda tendo problemas? Por favor se dirija ao nosso"
 msgid "Contact Form"
 msgstr "Formulário de Contato"
 
+#: templates/site/professional_help.html:42 templates/site/situation.html:26
+#: templates/site/visa_application.html:26
+msgid "My situation"
+msgstr "Minha situação"
+
+#: templates/site/professional_help.html:43 templates/site/situation.html:27
+#: templates/site/visa_application.html:27
+msgid "Steps for visa application"
+msgstr "Passo-a-passo pro visto"
+
+#: templates/site/professional_help.html:55
+msgid ""
+"<strong>Thank You!</strong> We will send you some options of professionals."
+msgstr ""
+"<strong>Obrigado!</strong> Iremos lhe enviar algumas opções de profissionais."
+
+#: templates/site/professional_help.html:62
+msgid "<strong>Services that you can get help with:</strong>"
+msgstr "<strong>Serviços que você pode solicitar:</strong>"
+
+#: templates/site/professional_help.html:66
+msgid ""
+"<strong>Skype interview</strong> with an immigration professional "
+"(portuguese or english)"
+msgstr ""
+"<strong>Atendimento no Skype</strong> com um profissional credenciado "
+"(em português ou inglês)"
+
+#: templates/site/professional_help.html:67
+msgid "Assessment to determine best <strong>type of visa</strong>."
+msgstr "Consultoria para indicar o melhor <strong>tipo de visto pra você</strong>."
+
+#: templates/site/professional_help.html:68
+msgid "Full <strong>visa assessment</strong>."
+msgstr "<strong>Consultoria de visto completa</strong>."
+
+#: templates/site/professional_help.html:69
+msgid "<strong>File Review</strong> (before you send your application)"
+msgstr "<strong>Revisão de Documentos</strong> (antes de enviar sua aplicação)"
+
+#: templates/site/professional_help.html:70
+msgid "<strong>Translation</strong> of documents"
+msgstr "<strong>Tradução</strong> de documentos"
+
+#: templates/site/professional_help.html:101
+msgid "Go back to dashboard"
+msgstr "Voltar para o painel"
+
 #: templates/site/reset_password.html:18
 msgid "Password Recovery"
 msgstr "Recuperação de Senha"
@@ -5934,6 +5936,19 @@ msgid ""
 msgstr ""
 "<strong>Siga os passos</strong> abaixo para iniciar sua <strong>aplicação ao "
 "visto</strong> para"
+
+#: templates/site/visa_application.html:44
+#: templates/site/visa_application.html:72
+#: templates/site/visa_application.html:89
+#: templates/site/visa_application.html:113
+#: templates/site/visa_application.html:145
+#: templates/site/visa_application.html:158
+#: templates/site/visa_application.html:169
+#: templates/site/visa_application.html:189
+#: templates/site/visa_application.html:205
+#: templates/site/visa_application.html:226
+msgid "STEP"
+msgstr "PASSO"
 
 #: templates/site/visa_application.html:48
 #: templates/site/visa_application.html:117
@@ -6318,6 +6333,10 @@ msgstr "Recupere sua Senha"
 #: wannamigrate/core/mailer.py:108
 msgid "Contact from site"
 msgstr "Contato vindo do site"
+
+#: wannamigrate/core/mailer.py:121
+msgid "Professional Help Requested"
+msgstr ""
 
 #: wannamigrate/core/models.py:18
 msgid "created date"
@@ -6774,15 +6793,19 @@ msgstr "A senha antiga não está correta."
 msgid "The new password and confirmation does not match."
 msgstr "A nova senha e sua confirmação não conferem."
 
-#: wannamigrate/site/views.py:109 wannamigrate/site/views.py:122
+#: wannamigrate/site/forms.py:644
+msgid "Tell us the service you need"
+msgstr "Nos diga qual serviço você precisa"
+
+#: wannamigrate/site/views.py:110 wannamigrate/site/views.py:123
 msgid "Invalid login. Please try again."
 msgstr "Login Inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:196
+#: wannamigrate/site/views.py:197
 msgid "There was an error while creating your user account."
 msgstr "Houve um erro ao criar sua conta."
 
-#: wannamigrate/site/views.py:210
+#: wannamigrate/site/views.py:211
 msgid ""
 "Invalid Information! Make sure all fields are filled in and email and "
 "confirmation match."
@@ -6790,27 +6813,27 @@ msgstr ""
 "Dados incorretos!<br />Confirme que todos os campos estão preenchidos e "
 "email e confirmação conferem."
 
-#: wannamigrate/site/views.py:255
+#: wannamigrate/site/views.py:256
 msgid "Password reset instructions were successfully sent to your e-mail."
 msgstr ""
 
-#: wannamigrate/site/views.py:261
+#: wannamigrate/site/views.py:262
 msgid "No user found with this e-mail address."
 msgstr "Nenhum usuário com este email."
 
-#: wannamigrate/site/views.py:266
+#: wannamigrate/site/views.py:267
 msgid "Invalid e-mail address."
 msgstr "Endereço de email inválido."
 
-#: wannamigrate/site/views.py:441 wannamigrate/site/views.py:476
+#: wannamigrate/site/views.py:442 wannamigrate/site/views.py:477
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:937
+#: wannamigrate/site/views.py:938
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
 
-#: wannamigrate/site/views.py:1120
+#: wannamigrate/site/views.py:1121
 msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
@@ -6820,7 +6843,7 @@ msgstr ""
 "tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
 "naati.com.au/' target='blank'>NAATI</a>"
 
-#: wannamigrate/site/views.py:1123
+#: wannamigrate/site/views.py:1124
 msgid ""
 "If you can get a job offer from an Australia Employer (<a href='http://www."
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
@@ -6831,7 +6854,7 @@ msgstr ""
 "deverá solicitar que seu empregador faça a requisição do seu visto "
 "patrocinado.  Será mais rápido e barato."
 
-#: wannamigrate/site/views.py:1126
+#: wannamigrate/site/views.py:1127
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
@@ -6839,7 +6862,7 @@ msgstr ""
 "Você pode receber 5 pontos extras se tiver um esposo(a) (ou união estável) e "
 "ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
 
-#: wannamigrate/site/views.py:1129
+#: wannamigrate/site/views.py:1130
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
@@ -6847,8 +6870,8 @@ msgstr ""
 "Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
 "no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
-#: wannamigrate/site/views.py:1132 wannamigrate/site/views.py:1152
-#: wannamigrate/site/views.py:1166
+#: wannamigrate/site/views.py:1133 wannamigrate/site/views.py:1153
+#: wannamigrate/site/views.py:1167
 msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
@@ -6856,7 +6879,7 @@ msgstr ""
 "Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
 "para um visto de investidor."
 
-#: wannamigrate/site/views.py:1137
+#: wannamigrate/site/views.py:1138
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
@@ -6864,7 +6887,7 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha um nível básico de inglês ou francês."
 
-#: wannamigrate/site/views.py:1140
+#: wannamigrate/site/views.py:1141
 msgid ""
 "You can get 5 extra points if you or your partner/espouse (stable union) "
 "complete any studies or have a past job in Canada."
@@ -6872,11 +6895,11 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha estudado ou trabalho no Canadá."
 
-#: wannamigrate/site/views.py:1143
+#: wannamigrate/site/views.py:1144
 msgid "You can get 5 extra points if you have a close family member in Canada."
 msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
 
-#: wannamigrate/site/views.py:1146
+#: wannamigrate/site/views.py:1147
 msgid ""
 "You can get 15 extra points if you can get a job offer from an Canada "
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
@@ -6886,23 +6909,23 @@ msgstr ""
 "uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
 "target='blank'>Procure por Emprego Aqui</a>)."
 
-#: wannamigrate/site/views.py:1149
+#: wannamigrate/site/views.py:1150
 msgid ""
 "Each state of canada has its own additional immigration program, usually "
 "easier to get in. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
 "target='blank'>Check the Québec Immigration</a>)."
 msgstr ""
-"Cada estado do Canadá tem o seu próprio programa de imigração, que normalmente "
-"são mais facilitados. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
-"target='blank'>Confira a do estado de Québec</a>)."
+"Cada estado do Canadá tem o seu próprio programa de imigração, que "
+"normalmente são mais facilitados. (<a href='http://www.immigration-quebec."
+"gouv.qc.ca/en/' target='blank'>Confira a do estado de Québec</a>)."
 
-#: wannamigrate/site/views.py:1157
+#: wannamigrate/site/views.py:1158
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
 msgstr ""
 "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
-#: wannamigrate/site/views.py:1160
+#: wannamigrate/site/views.py:1161
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
@@ -6910,13 +6933,38 @@ msgstr ""
 "Você pode receber 20 pontos extras se seu esposo(a) (ou união estável) tiver "
 "uma profissãoqualificada ou uma proposta de trabalho."
 
-#: wannamigrate/site/views.py:1163
+#: wannamigrate/site/views.py:1164
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."
 msgstr ""
 "Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de "
 "emprego) em uma parte interiorana da Nova Zelândia."
+
+#~ msgid "Apply for the visa"
+#~ msgstr "Aplicar ao visto"
+
+#~ msgid "Moving to Australia"
+#~ msgstr "Mudando para a Austrália"
+
+#~ msgid "Moving to Canada"
+#~ msgstr "Mudando para o Canadá"
+
+#~ msgid "Moving to New Zealand"
+#~ msgstr "Mudando para a NZ"
+
+#~ msgid "Visa application"
+#~ msgstr "Aplicação ao visto"
+
+#~ msgid "Moving to "
+#~ msgstr "Mudando para "
+
+#~ msgid ""
+#~ "Come back soon.  While you're reading this we're working to improve and "
+#~ "complete this BETA version.  Thanks :)"
+#~ msgstr ""
+#~ "Volte em breve.  Enquanto você está lendo, estamos trabalhando para "
+#~ "melhorar e otimizar nossa versão BETA.  Obrigado :)"
 
 #~ msgid "My Profile"
 #~ msgstr "Meu Perfil"

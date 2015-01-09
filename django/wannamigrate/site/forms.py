@@ -629,4 +629,16 @@ class EditAccountPasswordForm( BaseForm ):
         # Everything ok
         return cleaned_data
 
-    
+
+
+#######################
+# PROFESSIONAL HELP FORMS
+#######################
+class ProfessionalHelpForm( BaseForm ):
+    """
+    Form to send an e-mail to wannamigrate's admin when someone clicks for professional help
+
+    Attributes:
+        message  CharField that grabs the message of the user.
+    """
+    message = forms.CharField( max_length = 150 ,required = True, label = _( "Tell us the service you need" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
