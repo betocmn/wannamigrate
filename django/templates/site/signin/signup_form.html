@@ -21,7 +21,7 @@
     {% include "site/signin/social_login.html" %}  
     <!-- ./LOGIN/SIGNUP VIA SOCIAL NETWORKS -->
     
-    <a id="login-switch-to-signup" class="switcher signup_item f12" href="{% url 'site:login' %}">
+    <a id="login-switch-to-signup" class="switcher signup_item f12 login-switcher" href="{% url 'site:login' %}">
         {% trans "Already registered?" %} <span class="bold"> {% trans "Log in" %} </span>
     </a>
 

@@ -50,11 +50,6 @@ def home( request, static = None ):
     # Initialize template data dictionary
     template_data = {}
 
-    # Instantiate Forms
-    template_data['login_form'] = LoginForm()
-    template_data['signup_form'] = SignupForm()
-    template_data['recovery_form'] = PasswordRecoveryForm()
-
     # Print Template
     if static:
         # Sets the css breakpoints to the template (From taller to smallest)
@@ -84,11 +79,11 @@ def login( request ):
         # Redirects the user to the dashboard
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-
-    template_data = {}
     # Instantiates the forms on the template_data
+    template_data = {}
     template_data['form'] = LoginForm()
     template_data['form_template'] = "site/signin/login_form.html"
+
     # Form submitted?
     if request.method == 'POST':
 
@@ -159,9 +154,8 @@ def signup( request ):
         # Redirects the user to the dashboard
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-
-    template_data = {}
     # Instantiates the forms on the template_data
+    template_data = {}
     template_data['form'] = SignupForm()
     template_data['form_template'] = "site/signin/signup_form.html"
 
@@ -222,17 +216,16 @@ def recover_password( request ):
     :param request:
     :return String - The html page rendered:
     """
+
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
         # Redirects the user to the dashboard
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-
-    template_data = {}
     # Instantiates the forms on the template_data
+    template_data = {}
     template_data['form'] = PasswordRecoveryForm()
     template_data['form_template'] = "site/signin/recover_password.html"
-
 
     # Form submitted?
     if request.method == 'POST':
