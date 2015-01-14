@@ -16,8 +16,10 @@ EMAIL_LOGO_URL = 'http://www.wannamigrate.com/static/admin/img/logo.png'
 
 
 #########################################
-# DEBUG SETTINGS
+# DEBUG AND ENVIRONMENT SETTINGS
 #########################################
+IS_PROD = True
+
 DEBUG = False
 
 TEMPLATE_DEBUG = False

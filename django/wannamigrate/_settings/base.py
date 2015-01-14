@@ -108,6 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    'wannamigrate.core.context_processors.add_prod_setting',
 )
 
 
@@ -247,7 +248,8 @@ LOCAL_APPS = (
     'wannamigrate.core',
     'wannamigrate.admin',
     'wannamigrate.landing_page',
-    'wannamigrate.site'
+    'wannamigrate.site',
+    'wannamigrate.qa',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

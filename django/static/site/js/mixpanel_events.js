@@ -68,5 +68,23 @@ $( document).ready(function(){
         });
     });
 
+    $( "div.selectAustralia" ).click( function() {
+        mixpanel.track( "Australia Clicked", {
+            "from": "Dashboard"
+        });
+    });
+
+    $( "div.selectCanada" ).click( function() {
+        mixpanel.track( "Canada Clicked", {
+            "from": "Dashboard"
+        });
+    });
+
+    $( "div.selectNewZealand" ).click( function() {
+        mixpanel.track( "New Zealand Clicked", {
+            "from": "Dashboard"
+        });
+    });
+
 
 });
