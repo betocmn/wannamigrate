@@ -14,8 +14,11 @@ from wannamigrate.admin.forms import (
     BaseAnswerFormSet, OccupationForm, UserForm
 )
 from wannamigrate.core.models import (
-    Question, Answer, Country, CountryPoints, Occupation, OccupationCategory,
-    UserResult, UserStats
+    Country, UserStats
+)
+from wannamigrate.points.models import (
+    Question, Answer, CountryPoints, Occupation,
+    UserResult, OccupationCategory
 )
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer

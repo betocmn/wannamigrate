@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
     url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
+    url( r'^', include( 'wannamigrate.points.urls', namespace = "points" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 

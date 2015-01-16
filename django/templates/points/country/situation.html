@@ -23,9 +23,9 @@
 		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
 	</div>
 	<div class="column75">
-		<a href="{% url 'site:situation' country_name %}" class="tab1 tab-active">{% trans "My situation" %}</a>
-		<a href="{% url 'site:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
-		<a href="{% url 'site:professional_help' country_name %}" class="tab3">{% trans "Get professional help" %}</a>
+		<a href="{% url 'points:situation' country_name %}" class="tab1 tab-active">{% trans "My situation" %}</a>
+		<a href="{% url 'points:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
+		<a href="{% url 'points:professional_help' country_name %}" class="tab3">{% trans "Get professional help" %}</a>
 		<div class="clear"> </div>
 
 
@@ -82,9 +82,9 @@
 
 		<div class="halfWidth">
 
-            {% if total_points >= min_points %}
+            {% if status_success %}
 
-                <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{% trans "You have enough points" %}</div>
+                <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{{ status_message }}</div>
 
                 <div class="smallLineBreak"></div>
 			    <p class="hints">{% trans "HINTS" %}</p>
@@ -93,7 +93,7 @@
                     <div class="hintp">{% trans "<strong>Congratulations!</strong> You have enough points to get a visa." %}</div>
                     <div class="hintp">&nbsp;</div>
                     <div class="hintp">
-                        <a href="{% url 'site:visa_application' country_name %}">Click Here</a>
+                        <a href="{% url 'points:visa_application' country_name %}">Click Here</a>
                         {% trans "to see all steps for your visa application." %}
                     </div>
                     <div class="clear" style="height:20px;"> </div>
@@ -102,7 +102,11 @@
 
             {% else %}
 
-                <div class="warning"><img src="{% static "site/img/lock.png" %}" /> &nbsp;&nbsp;{% trans "You still don’t have enough points" %}</div>
+                <div class="warning"><img src="{% static "site/img/lock.png" %}" /> &nbsp;&nbsp;{% trans "Requirements not met" %}</div>
+
+                <div class="clear"></div>
+                <br />
+                <p>{{ status_message }}</p>
 
                 <div class="smallLineBreak"></div>
 			    <p class="hints">{% trans "HINTS" %}</p>

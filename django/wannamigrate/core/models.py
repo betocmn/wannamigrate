@@ -23,23 +23,6 @@ class BaseModel( models.Model ):
         abstract = True
 
 
-class Answer( BaseModel ):
-    """
-    Answer Model - These are possible answers for questions (immigration requirements)
-    """
-
-    # Model Attributes
-    question = models.ForeignKey( 'Question', verbose_name = _( 'question' ) )
-    description = models.CharField(  _( 'Answer' ), max_length = 255 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
-    def __str__( self ):
-        return '%s' % ( _( self.description ) )
-
-
 class Continent( BaseModel ):
     """
     Continent Model - ex: Oceania, Europe, etc.
@@ -66,7 +49,7 @@ class Country( BaseModel ):
     continent = models.ForeignKey( 'Continent', verbose_name =  _( "continent" ) )
     code = models.CharField( _( "code" ), max_length = 2 )
     immigration_enabled = models.BooleanField( _( "immigration enabled" ), default = False )
-    points = models.ManyToManyField( Answer, through = 'CountryPoints' )
+    points = models.ManyToManyField( 'Country', through = 'points.CountryPoints' )
 
     # META Options
     class Meta:
@@ -92,68 +75,6 @@ class Country( BaseModel ):
             result.append( ( country.id, _( country.name ) ) )
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Country' ) )] + result  )
-
-
-class CountryConfig( BaseModel ):
-    """
-    Country Config Model - Stores maximum immigration points per country, etc.
-    """
-
-    country = models.OneToOneField( Country, verbose_name = _( 'country' ) )
-    pass_mark_points = models.IntegerField( _( "pass mark points" ), default = 0 )
-    max_personal_points = models.IntegerField( _( "max personal points" ), default = 0 )
-    max_language_points = models.IntegerField( _( "max language points" ), default = 0 )
-    max_education_points = models.IntegerField( _( "max education points" ), default = 0 )
-    max_work_points = models.IntegerField( _( "max education points" ), default = 0 )
-    max_total_points = models.IntegerField( _( "max total points" ), default = 0 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
-
-class CountryPoints( BaseModel ):
-    """
-    Country Points Model - Stores the total points for each answer in each country avaiblable
-    """
-
-    # Model Attributes
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    answer = models.ForeignKey( Answer, verbose_name = _( 'answer' ) )
-    points = models.IntegerField( _( "points" ) )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-        unique_together = ( "answer", "country" )
-
-    @staticmethod
-    def get_all_points_per_question( question_id ):
-        """
-        Get answers and points for every enabled country per question
-
-        :param: self
-        :param: question_id
-        :return: Dictionary
-        """
-
-        sql = """ SELECT core_countrypoints.id, core_answer.id as answer_id, core_countrypoints.points, core_countrypoints.country_id
-                  FROM core_answer
-                  INNER JOIN core_countrypoints ON core_answer.id = core_countrypoints.answer_id
-                  INNER JOIN core_country ON core_country.id = core_countrypoints.country_id
-                  INNER JOIN core_question ON core_answer.question_id = core_question.id
-                  WHERE core_country.immigration_enabled = 1 AND core_question.id = %s
-                  ORDER BY core_country.name ASC """
-
-        points = CountryPoints.objects.raw( sql, [question_id] )
-
-        points_per_country = {}
-        for point in points:
-            if not point.country_id in points_per_country:
-                points_per_country[point.country_id] = {}
-            points_per_country[point.country_id][point.answer_id] = point.points
-
-        return points_per_country
 
 
 class Language( BaseModel ):
@@ -185,87 +106,6 @@ class Language( BaseModel ):
             result.append( ( language.id, language.name ) )
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Language' ) )] + result  )
-
-
-class Occupation( BaseModel ):
-    """
-    Occupation Model - These are the possible occupations required in the countries of destination
-    """
-
-    # Model Attributes
-    occupation_category = models.ForeignKey( 'OccupationCategory', verbose_name = _( 'category' ) )
-    name = models.CharField(  _( 'Name' ), max_length = 180 )
-    countries = models.ManyToManyField( Country )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-        permissions = (
-            ( "admin_add_occupation", "ADMIN: Can add occupation" ),
-            ( "admin_change_occupation", "ADMIN: Can change occupation" ),
-            ( "admin_delete_occupation", "ADMIN: Can delete occupation" ),
-            ( "admin_view_occupation", "ADMIN: Can view occupations" )
-        )
-
-    def __str__( self ):
-        return '%s' % ( _( self.name ) )
-
-
-class OccupationCategory( BaseModel ):
-    """
-    Answer Category Model - Some answers are grouped into categories
-    """
-
-    # Model Attributes
-    name = models.CharField(  _( 'Name' ), max_length = 100 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
-    def __str__( self ):
-        return '%s' % ( _( self.name ) )
-
-
-class Question( BaseModel ):
-    """
-    Question Model - Question is a requirement asked for the immigration candidate
-    """
-
-    # Model Attributes
-    description = models.CharField( _( "question" ), max_length = 255 )
-    help_text = models.TextField( _( "help text" ), null = True, blank = True )
-    method_name = models.CharField( _( "method name" ), max_length = 60 )
-    type = models.CharField( _( "type" ), max_length = 15 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-        permissions = (
-            ( "admin_add_immigration_rule", "ADMIN: Can add immigration rule" ),
-            ( "admin_change_immigration_rule", "ADMIN: Can change immigration rule" ),
-            ( "admin_delete_immigration_rule", "ADMIN: Can delete immigration rule" ),
-            ( "admin_view_immigration_rule", "ADMIN: Can view immigration rules" )
-        )
-
-    def __str__( self ):
-        return '%s' % ( _( self.description ) )
-
-
-class QuestionGroup( BaseModel ):
-    """
-    Question Group Model - some questions are grouped to have a maximum number of points allowed when combined (per country)
-    """
-
-    # Model Attributes
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    name = models.TextField( _( "name" ) )
-    max_points = models.IntegerField( _( "max points allowed" ), default = 0 )
-    questions = models.ManyToManyField( Question )
-
-    # META Options
-    class Meta:
-        default_permissions = []
 
 
 class UserManager( BaseUserManager ):
@@ -316,7 +156,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
-    results = models.ManyToManyField( Country, through = 'UserResult' )
+    results = models.ManyToManyField( Country, through = 'points.UserResult' )
     preferred_language = models.CharField( _( "Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
 
     # META Options
@@ -369,7 +209,7 @@ class UserEducation( BaseModel ):
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     regional_australia_study = models.NullBooleanField( _( "Did you complete any studies in a regional part of Australia" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
-    partner_education_level_answer = models.ForeignKey( Answer, related_name = 'partner_education_level_answer', verbose_name = _( 'partner/spouse education level' ), blank = True, null = True )
+    partner_education_level_answer = models.ForeignKey( 'points.Answer', related_name = 'partner_education_level_answer', verbose_name = _( 'partner/spouse education level' ), blank = True, null = True )
 
     # META Options
     class Meta:
@@ -410,7 +250,7 @@ class UserEducationHistory( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    education_level_answer = models.ForeignKey( Answer, related_name = 'education_level', verbose_name = _( 'education level' ) )
+    education_level_answer = models.ForeignKey( 'points.Answer', related_name = 'education_level', verbose_name = _( 'education level' ) )
     school = models.CharField( _( "school/university" ), max_length = 100 )
     year_start = models.CharField( _( "start year" ), max_length = 4 )
     year_end = models.CharField( _( "end year" ), max_length = 4 )
@@ -427,8 +267,8 @@ class UserLanguage( BaseModel ):
 
     # Model Attributes
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    partner_english_level_answer = models.ForeignKey( Answer, related_name = 'partner_english_level_answer', verbose_name = _( 'partner/spouse english level' ), on_delete = models.PROTECT, blank = True, null = True  )
-    partner_french_level_answer = models.ForeignKey( Answer, related_name = 'partner_french_level_answer', verbose_name = _( 'partner/spouse french level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_english_level_answer = models.ForeignKey( 'points.Answer', related_name = 'partner_english_level_answer', verbose_name = _( 'partner/spouse english level' ), on_delete = models.PROTECT, blank = True, null = True  )
+    partner_french_level_answer = models.ForeignKey( 'points.Answer', related_name = 'partner_french_level_answer', verbose_name = _( 'partner/spouse french level' ), on_delete = models.PROTECT, blank = True, null = True  )
 
     # META Options
     class Meta:
@@ -469,7 +309,7 @@ class UserLanguageProficiency( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( User, verbose_name = _( 'user' ) )
     language = models.ForeignKey( Language, verbose_name = _( 'language' ) )
-    language_level_answer = models.ForeignKey( Answer, verbose_name = _( 'language level' ), on_delete = models.PROTECT )
+    language_level_answer = models.ForeignKey( 'points.Answer', verbose_name = _( 'language level' ), on_delete = models.PROTECT )
 
     # META Options
     class Meta:
@@ -557,43 +397,6 @@ class UserPersonalFamily( BaseModel ):
         default_permissions = []
 
 
-class UserResult( BaseModel ):
-    """
-    User Restul Model - Stores the final result score of an user for each country available
-    """
-
-    # Model Attributes
-    user = models.ForeignKey( User, verbose_name = _( 'user' ) )
-    country = models.ForeignKey( Country, verbose_name = _( 'country' ) )
-    user_result_status = models.ForeignKey( 'UserResultStatus', verbose_name = _( 'result status' ) )
-    score_total = models.IntegerField( _( "total score" ))
-    score_personal = models.IntegerField( _( "score personal" ))
-    score_language = models.IntegerField( _( "score language" ))
-    score_education = models.IntegerField( _( "score education" ))
-    score_work = models.IntegerField( _( "score work" ))
-
-    # META Options
-    class Meta:
-        default_permissions = []
-        unique_together = ( "user", "country" )
-
-
-class UserResultStatus( BaseModel ):
-    """
-    User Result Status Model
-    """
-
-    # Model Attributes
-    name = models.CharField(  _( 'Name' ), max_length = 100 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
-    def __str__( self ):
-        return '%s' % ( _( self.name ) )
-
-
 class UserStats( BaseModel ):
     """
     User Stats Model - Stores the stats about each user (percentage completed, etc)
@@ -619,7 +422,7 @@ class UserWork( BaseModel ):
         ( False, _( 'No' ) )
     )
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    occupation = models.ForeignKey( Occupation, verbose_name = _( 'occupation' ), blank = True, null = True )
+    occupation = models.ForeignKey( 'points.Occupation', verbose_name = _( 'occupation' ), blank = True, null = True )
     partner_skills = models.NullBooleanField( _( "Do you have a partner/spouse with proved skills" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     willing_to_invest = models.NullBooleanField( _( "are you willing to invest money on the country of destination" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )
     canadian_startup_letter = models.NullBooleanField( _( "do you have a startup recommendation letter approved by canada" ), choices = BOOLEAN_CHOICES, blank = True, null = True, default = None )

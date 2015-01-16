@@ -1,8 +1,11 @@
 from wannamigrate.core.models import (
-    Country, CountryPoints, Question, Answer, User, UserEducation,
+    Country, User, UserEducation,
     UserEducationHistory, UserLanguage, UserLanguageProficiency,
-    UserPersonal, UserPersonalFamily, UserResult, UserWork,
-    UserWorkExperience, UserWorkOffer, Occupation, QuestionGroup,
+    UserPersonal, UserPersonalFamily, UserWork,
+    UserWorkExperience, UserWorkOffer
+)
+from wannamigrate.points.models import (
+    Country, CountryPoints, Question, Answer, UserResult, Occupation, QuestionGroup,
     CountryConfig
 )
 from wannamigrate.core.util import calculate_age, get_object_or_false, get_list_or_false, date_difference

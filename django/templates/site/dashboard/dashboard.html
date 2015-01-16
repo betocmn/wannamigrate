@@ -57,7 +57,7 @@
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">{{ personal_percentage }}<span>%</span></div>
-			<a href="{% url 'site:edit_personal' %}" class="formEdit"></a>
+			<a href="{% url 'points:edit_personal' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
 
@@ -75,7 +75,7 @@
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">{{ language_percentage }}<span>%</span></div>
-			<a href="{% url 'site:edit_language' %}" class="formEdit"></a>
+			<a href="{% url 'points:edit_language' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
 
@@ -93,7 +93,7 @@
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">{{ education_percentage }}<span>%</span></div>
-			<a href="{% url 'site:edit_education' %}" class="formEdit"></a>
+			<a href="{% url 'points:edit_education' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
 
@@ -111,7 +111,7 @@
 				<p>{% trans "COMPLETED" %}</p>
 			</div>
 			<div class="formPercentage">{{ work_percentage }}<span>%</span></div>
-			<a href="{% url 'site:edit_work' %}" class="formEdit"></a>
+			<a href="{% url 'points:edit_work' %}" class="formEdit"></a>
 			<div class="clear"> </div>
 		</div>
 	</div>
@@ -204,9 +204,9 @@
                     {% trans "You still don’t have enough points<br />to migrate to this country" %}
                 {% endif %}
             </p>
-            <a href="{% url 'site:situation' 'australia' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="{% url 'site:visa_application' 'australia' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
-            <a href="{% url 'site:professional_help' 'australia' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+            <a href="{% url 'points:situation' 'australia' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'australia' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'australia' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
 		</div>
 
 		<div class="canadaSelect">
@@ -217,9 +217,9 @@
                     {% trans "You still don’t have enough points<br />to migrate to this country" %}
                 {% endif %}
             </p>
-            <a href="{% url 'site:situation' 'canada' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="{% url 'site:visa_application' 'canada' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
-            <a href="{% url 'site:professional_help' 'canada' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+            <a href="{% url 'points:situation' 'canada' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'canada' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'canada' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
 		</div>
 
 		<div class="newzealandSelect">
@@ -230,9 +230,9 @@
                     {% trans "You still don’t have enough points<br />to migrate to this country" %}
                 {% endif %}
             </p>
-            <a href="{% url 'site:situation' 'new-zealand' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
-            <a href="{% url 'site:visa_application' 'new-zealand' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
-            <a href="{% url 'site:professional_help' 'new-zealand' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+            <a href="{% url 'points:situation' 'new-zealand' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'new-zealand' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'new-zealand' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
 		</div>
 
 

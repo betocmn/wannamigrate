@@ -10,10 +10,14 @@ from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.util import get_object_or_false, get_months_duration_tuple, dbg
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, LanguageChoiceField
 from wannamigrate.core.models import (
-    Answer, Question, Language,
+    Language,
     Country, User, UserPersonal, UserLanguage, UserLanguageProficiency, UserEducation, UserEducationHistory,
-    UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily, Occupation, OccupationCategory
+    UserWork, UserWorkExperience, UserWorkOffer, UserPersonalFamily
 )
+from wannamigrate.points.models import (
+    Answer, Question, Occupation
+)
+from wannamigrate.points.models import OccupationCategory
 from wannamigrate._settings.base import LANGUAGES
 from django.contrib.auth.hashers import is_password_usable
 

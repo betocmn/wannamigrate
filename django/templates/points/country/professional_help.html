@@ -39,9 +39,9 @@
 		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
 	</div>
 	<div class="column75">
-		<a href="{% url 'site:situation' country_name %}" class="tab1">{% trans "My situation" %}</a>
-		<a href="{% url 'site:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
-		<a href="{% url 'site:professional_help' country_name %}" class="tab3 tab-active">{% trans "Get professional help" %}</a>
+		<a href="{% url 'points:situation' country_name %}" class="tab1">{% trans "My situation" %}</a>
+		<a href="{% url 'points:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
+		<a href="{% url 'points:professional_help' country_name %}" class="tab3 tab-active">{% trans "Get professional help" %}</a>
 		<div class="clear"> </div>
 
 

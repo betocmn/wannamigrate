@@ -44,15 +44,15 @@
 
                 // set next page by looking to the class name
                 if ( $( this ).hasClass( "go-to-personal" ) ){
-                    $( '#next').val( '{% url 'site:edit_personal' %}' );
+                    $( '#next').val( '{% url 'points:edit_personal' %}' );
                 } else if ( $( this ).hasClass( "go-to-language" ) ){
-                    $( '#next').val( '{% url 'site:edit_language' %}' );
+                    $( '#next').val( '{% url 'points:edit_language' %}' );
                 } else if ( $( this ).hasClass( "go-to-education" ) ){
-                    $( '#next').val( '{% url 'site:edit_education' %}' );
+                    $( '#next').val( '{% url 'points:edit_education' %}' );
                 } else if ( $( this ).hasClass( "go-to-work" ) ){
-                    $( '#next').val( '{% url 'site:edit_work' %}' );
+                    $( '#next').val( '{% url 'points:edit_work' %}' );
                 } else {
-                    $( '#next').val( '{% url 'site:calculate_points' %}' );
+                    $( '#next').val( '{% url 'points:calculate_points' %}' );
                 }
 
                 // submit form

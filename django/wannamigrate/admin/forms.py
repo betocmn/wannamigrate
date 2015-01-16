@@ -4,7 +4,8 @@ from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from wannamigrate.core.models import Question, Answer, CountryPoints, Country, Occupation, OccupationCategory
+from wannamigrate.core.models import Country
+from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
 
 #######################
 # LOGIN / LOGOUT / MY ACCOUNT
