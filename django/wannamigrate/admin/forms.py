@@ -1,3 +1,12 @@
+"""
+Admin FORMS
+
+Form definitions used by views/templates from the admin app
+"""
+
+##########################
+# Imports
+##########################
 from django import forms
 from django.forms import TextInput, SelectMultiple, HiddenInput, Select, ModelMultipleChoiceField, ModelChoiceField
 from django.forms.models import BaseInlineFormSet
@@ -6,6 +15,10 @@ from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.models import Country
 from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
+
+
+
+
 
 #######################
 # LOGIN / LOGOUT / MY ACCOUNT
@@ -16,6 +29,7 @@ class LoginForm( BaseForm ):
     """
     email = forms.EmailField( widget = forms.TextInput( attrs = { 'placeholder':'E-mail', 'class': 'form-control' } ) )
     password = forms.CharField( widget = forms.PasswordInput( attrs = { 'placeholder': 'Password', 'class': 'form-control' } ) )
+
 
 
 class MyAccountForm( BaseModelForm ):
@@ -34,6 +48,7 @@ class MyAccountForm( BaseModelForm ):
             'email': TextInput( attrs = { 'class': 'form-control' } )
         }
 
+
     def save( self, commit = True ):
         """
         If passwords are set, they need to be set on a different way
@@ -47,6 +62,7 @@ class MyAccountForm( BaseModelForm ):
         if commit:
             user.save()
         return user
+
 
     def clean( self ):
         """
@@ -62,6 +78,10 @@ class MyAccountForm( BaseModelForm ):
             raise forms.ValidationError( "Passwords do not match." )
 
         return cleaned_data
+
+
+
+
 
 #######################
 # USERS
@@ -93,6 +113,9 @@ class UserForm( BaseModelForm ):
         if commit:
             user.save()
         return user
+
+
+
 
 
 #######################
@@ -129,6 +152,9 @@ class AdminUserForm( BaseModelForm ):
         return user
 
 
+
+
+
 #######################
 # GROUPS AND PERMISSIONS
 #######################
@@ -146,6 +172,9 @@ class GroupForm( BaseModelForm ):
         }
 
 
+
+
+
 #######################
 # IMMIGRATION RULES (QUESTION, ANSWERS AND POINTS)
 #######################
@@ -161,6 +190,7 @@ class QuestionForm( BaseModelForm ):
             'description': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
             'help_text': TextInput( attrs = { 'class': 'form-control' } )
         }
+
 
 
 class AnswerForm( BaseModelForm ):
@@ -215,6 +245,7 @@ class AnswerForm( BaseModelForm ):
         return answer
 
 
+
 class BaseAnswerFormSet( BaseInlineFormSet ):
     """
     Formset for answers / country points
@@ -231,6 +262,9 @@ class BaseAnswerFormSet( BaseInlineFormSet ):
         kwargs['countries'] = self.countries
         kwargs['points_per_country'] = self.points_per_country
         return super( BaseAnswerFormSet, self )._construct_form( *args, **kwargs )
+
+
+
 
 
 #######################

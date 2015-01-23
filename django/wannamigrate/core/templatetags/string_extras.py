@@ -4,10 +4,25 @@
     To use the template methods defined here you should load this module
     on the desired template using: {% load dictionary_extras %}
 """
+##########################
+# Imports
+##########################
 from django import template
 
+
+
+
+##########################
+# Instantiate template register
+##########################
 register = template.Library()
 
+
+
+
+##########################
+# Function definitions
+##########################
 @register.filter( name = 'truncate_smart' )
 def truncate_smart( value, limit = 80 ):
     """
@@ -16,6 +31,10 @@ def truncate_smart( value, limit = 80 ):
     Usage:
         {{ string|truncatesmart }}
         {{ string|truncatesmart:50 }}
+
+    :param: value
+    :param: limit
+    :return: String
     """
 
     try:

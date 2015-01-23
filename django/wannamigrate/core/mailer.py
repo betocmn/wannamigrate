@@ -1,3 +1,15 @@
+"""
+Class responsible to send-out all system emails
+
+Usage:
+
+Mailer.send_welcome_email( user )
+
+"""
+
+##########################
+# Imports
+##########################
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
 from django.template import Context
@@ -9,6 +21,12 @@ from django.utils.encoding import force_bytes
 from django.utils.translation import ugettext as _
 
 
+
+
+
+##########################
+# Class definitions
+##########################
 class Mailer( object ):
 
     @staticmethod
@@ -43,6 +61,7 @@ class Mailer( object ):
 
         return email.send()
 
+
     @staticmethod
     def build_body_from_template( template_path, template_data = None ):
         """
@@ -61,6 +80,7 @@ class Mailer( object ):
         content = template.render( context )
         return content
 
+
     @staticmethod
     def send_welcome_email( user ):
         """
@@ -72,6 +92,7 @@ class Mailer( object ):
         template_data = { 'user': user }
         body = Mailer.build_body_from_template( 'emails/welcome.html', template_data )
         return Mailer.send( _( 'Welcome to Wanna Migrate' ), body, user.email )
+
 
     @staticmethod
     def send_reset_password_email( user ):
@@ -94,6 +115,7 @@ class Mailer( object ):
         body = Mailer.build_body_from_template( 'emails/reset_password.html', template_data )
         return Mailer.send( _( 'Reset your Password' ), body, user.email )
 
+
     @staticmethod
     def send_contact_email( email, name, message ):
         """
@@ -106,6 +128,7 @@ class Mailer( object ):
         template_data = { 'email': email, 'name': name, 'message': message }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
         return Mailer.send( _( 'Contact from site' ), body, settings.CONTACT_FORM_EMAIL )
+
 
     @staticmethod
     def send_professional_help_email( email, name, message ):

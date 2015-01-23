@@ -1,3 +1,13 @@
+"""
+Site Views
+
+These are the views that control logic flow for
+the templates on site app
+"""
+
+##########################
+# Imports
+##########################
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404
@@ -29,6 +39,9 @@ from wannamigrate.core.mailer import Mailer
 from django.utils import translation
 
 
+
+
+
 #######################
 # HOME-PAGE VIEWS
 #######################
@@ -36,8 +49,8 @@ def home( request, static = None ):
     """
     Home-Page - Used as a provocative landing page to conquer new users
 
-    :param request:
-    :return String - The contact page rendered:
+    :param: request
+    :return: String - The html page rendered
     """
 
     # Initialize template data dictionary
@@ -56,6 +69,9 @@ def home( request, static = None ):
         return render( request, 'site/home/home.html', template_data )
 
 
+
+
+
 #######################
 # LOGIN and SIGNUP VIEWS
 #######################
@@ -63,8 +79,8 @@ def login( request ):
     """
     Process user login.
 
-    :param request:
-    :return String - The html page rendered:
+    :param: request
+    :return: String - The html page rendered
     """
 
     # Checks if the user is already authenticated.
@@ -122,7 +138,7 @@ def logout( request ):
     """
     Process Logout
 
-    :param request:
+    :param: request
     :return HTTP Redirection:
     """
 
@@ -138,8 +154,8 @@ def signup( request ):
     """
     Signup action. It creates a new user on the platform
 
-    :param request:
-    :return String - The html page rendered:
+    :param: request
+    :return: String - The html page rendered
     """
 
     # Checks if the user is already authenticated.
@@ -206,8 +222,8 @@ def recover_password( request ):
     """
     Send a link to user redefine it password
 
-    :param request:
-    :return String - The html page rendered:
+    :param: request
+    :return: String - The html page rendered
     """
 
     # Checks if the user is already authenticated.
@@ -262,10 +278,10 @@ def reset_password( request, uidb64 = None, token = None ):
     """
     Page to set a new password after clicking on a link from email sent by 'recover password feature'
 
-    :param request:
-    :param uidb64:
-    :param token:
-    :return String - The html page rendered:
+    :param: request
+    :param: uidb64
+    :param: token
+    :return: String - The html page rendered
     """
 
     # Try to find user by the uid given
@@ -301,6 +317,8 @@ def reset_password( request, uidb64 = None, token = None ):
 
 
 
+
+
 #######################
 # CONTACT US VIEWS
 #######################
@@ -308,8 +326,8 @@ def contact( request ):
     """
     Displays the contact page with a form to send us a message by email.
 
-    :param request:
-    :return String - The contact page rendered:
+    :param: request
+    :return: String - The html page rendered
     """
 
     # Initialize template data dictionary
@@ -337,6 +355,9 @@ def contact( request ):
     return render( request, 'site/contact/contact.html', template_data )
 
 
+
+
+
 #######################
 # TOUR VIEWS
 #######################
@@ -344,12 +365,14 @@ def tour( request ):
     """
     Displays "how It Works" static page
 
-    :param request:
+    :param: request
     :return String - HTML from The dashboard page.
     """
 
     # Print Template
     return render( request, 'site/about/tour.html')
+
+
 
 
 
@@ -360,23 +383,26 @@ def terms( request ):
     """
     Displays "Terms and Conditions" static page
 
-    :param request:
+    :param: request
     :return String - HTML from The dashboard page.
     """
 
     # Print Template
     return render( request, 'site/terms/terms.html')
 
+
 def privacy( request ):
     """
     Displays "Privacy Policy" static page
 
-    :param request:
+    :param: request
     :return String - HTML from The dashboard page.
     """
 
     # Print Template
     return render( request, 'site/terms/privacy.html')
+
+
 
 
 
@@ -388,7 +414,7 @@ def view_account( request ):
     """
     Displays "My Account" page with user's info.
 
-    :param request:
+    :param: request
     :return String - HTML from my account page.
     """
     
@@ -404,7 +430,7 @@ def edit_account_info( request ):
     """
     Edit "My Account" page.
 
-    :param request:
+    :param: request
     :return String - HTML from Edit My Account page.
     """
 
@@ -438,16 +464,18 @@ def edit_account_info( request ):
         form = EditAccountInfoForm( instance = user )
         return render( request, 'site/myaccount/edit_info.html', { 'form' : form } )
 
+
 @login_required
 def edit_account_avatar( request ):
     pass
+
 
 @login_required
 def edit_account_password( request ):
     """
     Edit account's password page.
 
-    :param request:
+    :param: request
     :return String - HTML from Edit account's password page.
     """
     # Form submitted via POST
@@ -475,6 +503,7 @@ def edit_account_password( request ):
 
 
 
+
 #######################
 # DASHBOARD VIEWS
 #######################
@@ -483,7 +512,7 @@ def not_supported( request ):
     """
     Displays a page saying that the device is not supported.
 
-    :param request:
+    :param: request
     :return String - HTML from The not_supported page.
     """
     username_explode = request.user.name.split( ' ' )
@@ -499,7 +528,7 @@ def dashboard( request ):
     The dashboard is the main screen of the system,
     where the users can view its informations, progress, etc.
 
-    :param request:
+    :param: request
     :return String - HTML from The dashboard page.
     """
 
@@ -573,6 +602,9 @@ def dashboard( request ):
     return render( request, 'site/dashboard/dashboard.html', template_data )
 
 
+
+
+
 #######################
 # INTERNATIONALIZATION VIEWS
 #######################
@@ -581,7 +613,7 @@ def setlang( request, language_code ):
     Changes the current language to the desired language defined by language_code parameter.
     If you want to redirect the user to other page that isn't '/' provide a parameter named "next" in the GET request.
 
-    :param request: Default request param.
+    :param: request Default request param.
     :param language_code: The code of the language to localize.
     :return Sets the desired language and redirects the user to '/' or to a next page defined via GET.
     """

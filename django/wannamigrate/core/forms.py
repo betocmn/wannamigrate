@@ -1,7 +1,27 @@
+"""
+CORE FORMS
+
+Here you can include base forms that will be used as parents of application
+forms.
+
+Also you can create custom form fields or methods
+
+"""
+
+##########################
+# Imports
+##########################
 from django import forms
 from wannamigrate.core.models import Country, Language
 from django.forms import ModelChoiceField
 
+
+
+
+
+##########################
+# Class definitions
+##########################
 class _BaseForm( object ):
     """
     The BASE form.  All forms in the system should extend this class
@@ -22,11 +42,13 @@ class _BaseForm( object ):
         return ','.join( required_fields )
 
 
+
 class BaseModelForm( _BaseForm, forms.ModelForm ):
     """
     Making the Base Model Form use our _BaseForm
     """
     pass
+
 
 
 class BaseForm( _BaseForm, forms.Form ):
@@ -43,6 +65,7 @@ class CountryChoiceField( ModelChoiceField ):
     """
 
     choices = Country.get_translated_tuple()
+
 
 
 class LanguageChoiceField( ModelChoiceField ):

@@ -1,3 +1,12 @@
+"""
+Custom functions not elsewhere classified.
+
+We put here all functions that couldn't belong to any module or class.
+"""
+
+##########################
+# Imports
+##########################
 from functools import reduce
 from django.db.models import Q
 import json
@@ -11,6 +20,13 @@ from wannamigrate.core.models import UserPersonal
 from django.http import HttpResponse
 from django.db import models
 
+
+
+
+
+##########################
+# Function definitions
+##########################
 def calculate_age( birth_date ):
     """
     Calculates age based on birth date
@@ -370,6 +386,8 @@ def get_internal_section_progress_css_class( percentage ):
             return color + str( possible_percentages[count-1] )
 
     return ''
+
+
 
 
 

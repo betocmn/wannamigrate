@@ -1,3 +1,21 @@
+"""
+Custom decorators to be used by views (https://docs.djangoproject.com/en/1.7/topics/http/decorators/)
+
+You can create own functionalities that will be used before a function is processed.
+
+E.g. create a function "require_http_methods" to use like that on your views:
+
+@require_http_methods(["GET", "POST"])
+def my_view(request):
+    # I can assume now that only GET or POST requests make it this far
+    # ...
+    pass
+
+"""
+
+##########################
+# Imports
+##########################
 from functools import wraps
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -5,9 +23,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import available_attrs
 
 
-#def restrict_internal_ips( redirect_url = None ):
 
 
+
+##########################
+# Function definitions
+##########################
 def restrict_internal_ips( view_func ):
     """
     A view decorator which returns the provided view function,
@@ -30,8 +51,6 @@ def restrict_internal_ips( view_func ):
     return _wrapped_view
 
 
-
-# Decorator to ensure that the request is accessed over https
 def secure_required( view_func ):
     """Decorator that makes sure URL is accessed over https."""
     def _wrapped_view_func( request, *args, **kwargs ):

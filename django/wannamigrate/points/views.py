@@ -1,3 +1,13 @@
+"""
+Points Views
+
+These are the views that control logic flow for
+the templates on points app
+"""
+
+##########################
+# Imports
+##########################
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -11,7 +21,7 @@ from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 from wannamigrate.core.util import (
     get_internal_country_progress_css_class, get_internal_section_progress_css_class
 )
-from wannamigrate.site.forms import (
+from wannamigrate.points.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
@@ -28,6 +38,9 @@ from wannamigrate.points.models import (
 from wannamigrate.core.mailer import Mailer
 
 
+
+
+
 #######################
 # EDIT USER INFORMATION VIEWS
 #######################
@@ -36,8 +49,8 @@ def edit_personal( request ):
     """
     Form to edit PERSONAL user data
 
-    :param request:
-    :return String - HTML.
+    :param: request
+    :return: String - HTML.
     """
 
     # Initial Settings
@@ -108,8 +121,8 @@ def edit_language( request ):
     """
     Form to edit LANGUAGE data from the user
 
-    :param request:
-    :return String - HTML.
+    :param: request
+    :return: String - HTML
     """
 
     # Initial Settings
@@ -187,8 +200,8 @@ def edit_education( request ):
     """
     Form to edit LANGUAGE data from the user
 
-    :param request:
-    :return String - HTML.
+    :param: request
+    :return: String - HTML
     """
 
     # Initial Settings
@@ -266,8 +279,8 @@ def edit_work( request ):
     """
     Form to edit WORK data from the user
 
-    :param request:
-    :return String - HTML.
+    :param: request
+    :return: String - HTML
     """
 
     # Initial Settings
@@ -365,7 +378,7 @@ def get_occupations_html( request ):
     """
     Return json dictionary of occupations filtered by category ID
 
-    :param request:
+    :param: request
     :return String JSON
     """
 
@@ -386,6 +399,8 @@ def get_occupations_html( request ):
 
 
 
+
+
 #######################
 # CALCULATE POINTS VIEWS
 #######################
@@ -396,7 +411,7 @@ def calculate_points( request ):
     It process all user data and calculate his points to all countries with
     immigration support enabled
 
-    :param request:
+    :param: request
     :return Redirect
     """
 
@@ -433,17 +448,20 @@ def calculate_points( request ):
     return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
 
+
+
+
 #######################
-# MY SITUATION VIEWS
+# USER PER COUNTRY VIEWS
 #######################
 @login_required
 def situation( request, country_name ):
     """
     My Situation
 
-    :param request:
+    :param: request
     :param country_name:
-    :return String - HTML.
+    :return: String - HTML
     """
 
     # Initial settings
@@ -640,9 +658,9 @@ def visa_application( request, country_name ):
     """
     Visa Application
 
-    :param request:
+    :param: request
     :param country_name:
-    :return String - HTML.
+    :return: String - HTML
     """
 
     # Initial settings
@@ -684,9 +702,9 @@ def professional_help( request, country_name ):
     """
     Moving
 
-    :param request:
+    :param: request
     :param country_name:
-    :return String - HTML.
+    :return: String - HTML
     """
 
     # Initial settings

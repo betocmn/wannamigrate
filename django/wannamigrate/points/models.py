@@ -1,3 +1,12 @@
+"""
+Application model classes.
+
+These are the models used by our points calculation application
+"""
+
+##########################
+# Imports
+##########################
 from django.db import models
 from wannamigrate.core.models import (
     BaseModel, Country
@@ -5,6 +14,12 @@ from wannamigrate.core.models import (
 from django.utils.translation import ugettext_lazy as _
 
 
+
+
+
+##########################
+# Classes definitions
+##########################
 class Answer( BaseModel ):
     """
     Answer Model - These are possible answers for questions (immigration requirements)
@@ -20,6 +35,7 @@ class Answer( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.description ) )
+
 
 
 class CountryConfig( BaseModel ):
@@ -38,6 +54,7 @@ class CountryConfig( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
 
 
 class CountryPoints( BaseModel ):
@@ -84,6 +101,7 @@ class CountryPoints( BaseModel ):
         return points_per_country
 
 
+
 class Occupation( BaseModel ):
     """
     Occupation Model - These are the possible occupations required in the countries of destination
@@ -108,6 +126,7 @@ class Occupation( BaseModel ):
         return '%s' % ( _( self.name ) )
 
 
+
 class OccupationCategory( BaseModel ):
     """
     Answer Category Model - Some answers are grouped into categories
@@ -122,6 +141,7 @@ class OccupationCategory( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.name ) )
+
 
 
 class Question( BaseModel ):
@@ -149,6 +169,7 @@ class Question( BaseModel ):
         return '%s' % ( _( self.description ) )
 
 
+
 class QuestionGroup( BaseModel ):
     """
     Question Group Model - some questions are grouped to have a maximum number of points allowed when combined (per country)
@@ -163,6 +184,7 @@ class QuestionGroup( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
 
 
 class UserResult( BaseModel ):
@@ -184,6 +206,7 @@ class UserResult( BaseModel ):
     class Meta:
         default_permissions = []
         unique_together = ( "user", "country" )
+
 
 
 class UserResultStatus( BaseModel ):

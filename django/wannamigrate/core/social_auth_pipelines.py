@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+"""
+You can introduce your functions during the authentication, association and disconnection flows
+of a social connection (E.g. Facebook login, Linkedin login...)
+
+
+Documentation below:
+http://psa.matiasaguirre.net/docs/pipeline.html?highlight=pipeline
+"""
+
+##########################
+# Imports
+##########################
 import time
 from django.template.defaultfilters import slugify
 from django.core.files.base import ContentFile
@@ -10,6 +22,12 @@ from wannamigrate.core.models import UserPersonal
 from wannamigrate.core.mailer import Mailer
 
 
+
+
+
+##########################
+# Function definitions
+##########################
 def save_extra_data( backend, details, response, user = None, is_new = False, *args, **kwargs ):
     """
     Update user extra details using data from provider.

@@ -1,13 +1,29 @@
 """
-    Dictionary extras. This file defines methods to handle dictionaries.
+Dictionary extras. This file defines methods to handle dictionaries.
 
-    To use the template methods defined here you should load this module
-    on the desired template using: {% load dictionary_extras %}
+To use the template methods defined here you should load this module
+on the desired template using: {% load dictionary_extras %}
 """
+
+##########################
+# Imports
+##########################
 from django import template
 
+
+
+
+##########################
+# Instantiate template register
+##########################
 register = template.Library()
 
+
+
+
+##########################
+# Function definitions
+##########################
 @register.filter( name = 'get_key' )
 def get_key( dict, key ):
     """

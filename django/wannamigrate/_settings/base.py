@@ -8,8 +8,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+##########################
+# Imports
+##########################
 from django.utils.translation import ugettext_lazy as _
 import os
+
+
+
 
 
 #########################################
@@ -32,6 +38,8 @@ LOGIN_URL = 'site:home'
 
 
 
+
+
 #########################################
 # SSL
 #########################################
@@ -41,6 +49,8 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 os.environ['wsgi.url_scheme'] = 'https'
+
+
 
 
 
@@ -68,6 +78,8 @@ LOCALE_PATHS = (
 
 
 
+
+
 #########################################
 # PATHS FOR STATIC, UPLOAD and TEMPLATES
 #########################################
@@ -92,6 +104,8 @@ ROOT_URLCONF = 'wannamigrate.urls'
 
 
 
+
+
 #########################################
 # TEMPLATE SETTINGS
 #########################################
@@ -113,6 +127,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 
 
+
+
 #########################################
 # MIDDLEWARES
 #########################################
@@ -130,6 +146,9 @@ MIDDLEWARE_CLASSES = (
 )
 
 
+
+
+
 #########################################
 # EMAIL SETTINGS
 #########################################
@@ -145,6 +164,8 @@ EMAIL_PORT = 587
 
 # Email to reiceve contact form messages
 CONTACT_FORM_EMAIL = 'humberto@wannamigrate.com'
+
+
 
 
 
@@ -229,6 +250,8 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 
+
+
 #########################################
 # DJANGO APPS REQUIRED
 #########################################
@@ -252,6 +275,9 @@ LOCAL_APPS = (
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+
+
 
 
 #########################################

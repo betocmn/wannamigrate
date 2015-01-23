@@ -1,9 +1,28 @@
+"""
+This class will get Database content that
+needs to be translated and create an html template
+file with it.
+
+We do this so that django's translation system recognizes
+those strings for later translations.
+"""
+
+##########################
+# Imports
+##########################
 from django.core.management.base import BaseCommand, CommandError
 from wannamigrate.core.models import Country, Language, Answer
 from django.core.files import File
 from django.conf import settings
 import os
 
+
+
+
+
+##########################
+# Classes definitions
+##########################
 class Command( BaseCommand ):
 
     args = '<table_name table_name ...>'

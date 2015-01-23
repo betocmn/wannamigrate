@@ -1,3 +1,13 @@
+"""
+Admin Views
+
+These are the views that control logic flow for
+the templates on admin
+"""
+
+##########################
+# Imports
+##########################
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -25,6 +35,9 @@ from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.decorators import restrict_internal_ips
 
 
+
+
+
 #######################
 # Function to check user is admin
 #######################
@@ -32,16 +45,19 @@ def admin_check( user ):
     return user.is_admin
 
 
+
+
+
 #######################
-# LOGIN / LOGOUT / MY ACCOUNT
+# LOGIN / LOGOUT / MY ACCOUNT View
 #######################
 @restrict_internal_ips
 def login_index( request ):
     """
     Login Form
 
-    :param request:
-    :return String:
+    :param: request
+    :return: String
     """
 
     # When form is submitted
@@ -80,8 +96,8 @@ def login_logout( request ):
     """
     Action for logout
 
-    :param request:
-    :return String:
+    :param: request
+    :return: String
     """
     logout( request )
     return HttpResponseRedirect( reverse( 'admin:login' ) )
@@ -94,8 +110,8 @@ def login_my_account( request ):
     """
     Displays personal data from the logged user
 
-    :param request:
-    :return String:
+    :param: request
+    :return: String
     """
 
     # Template data
@@ -150,8 +166,11 @@ def home_index( request ):
     return render( request, 'admin/home/index.html', context )
 
 
+
+
+
 #######################
-# USERS
+# USERS VIEWS
 #######################
 @restrict_internal_ips
 @permission_required( 'core.admin_view_user', login_url = 'admin:login' )
@@ -324,8 +343,11 @@ def user_delete( request, user_id ):
     return HttpResponseRedirect( reverse( 'admin:users' ) )
 
 
+
+
+
 #######################
-# ADMIN USERS
+# ADMIN USERS VIEWS
 #######################
 @restrict_internal_ips
 @permission_required( 'core.admin_view_admin_user', login_url = 'admin:login' )
@@ -486,8 +508,11 @@ def admin_user_delete( request, user_id ):
     return HttpResponseRedirect( reverse( 'admin:admin_users' ) )
 
 
+
+
+
 #######################
-# GROUPS AND PERMISSIONS
+# GROUPS AND PERMISSIONS VIEWS
 #######################
 @restrict_internal_ips
 @permission_required( 'auth.view_group', login_url = 'admin:login' )
@@ -645,8 +670,11 @@ def group_delete( request, group_id ):
     return HttpResponseRedirect( reverse( 'admin:admin_groups' ) )
 
 
+
+
+
 #######################
-# IMMIGRATION RULES (QUESTIONS, ANSWERS AND POINTS)
+# IMMIGRATION RULES VIEWS (QUESTIONS, ANSWERS AND POINTS)
 #######################
 @restrict_internal_ips
 @permission_required( 'core.admin_view_immigration_rule', login_url = 'admin:login' )
@@ -862,8 +890,11 @@ def question_delete( request, question_id ):
     return HttpResponseRedirect( reverse( 'admin:immigration_rules' ) )
 
 
+
+
+
 #######################
-# OCCUPATIONS
+# OCCUPATIONS VIEWS
 #######################
 @restrict_internal_ips
 @permission_required( 'auth.view_occupation', login_url = 'admin:login' )
