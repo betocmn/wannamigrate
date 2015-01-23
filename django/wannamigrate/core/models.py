@@ -1,3 +1,12 @@
+"""
+Core model classes.
+
+These are the models shared by all apps
+"""
+
+##########################
+# Imports
+##########################
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group
@@ -9,6 +18,13 @@ from stdimage.utils import UploadToUUID
 import math
 from wannamigrate._settings.base import LANGUAGES
 
+
+
+
+
+##########################
+# Classes definitions
+##########################
 class BaseModel( models.Model ):
     """
     BASE MODEL - The father of all :)
@@ -21,6 +37,7 @@ class BaseModel( models.Model ):
     # META Options
     class Meta:
         abstract = True
+
 
 
 class Continent( BaseModel ):
@@ -37,6 +54,7 @@ class Continent( BaseModel ):
 
     def __str__( self ):
         return '%s' % ( _( self.name ) )
+
 
 
 class Country( BaseModel ):
@@ -77,6 +95,29 @@ class Country( BaseModel ):
         return tuple( [( '', _( 'Select Country' ) )] + result  )
 
 
+
+class Goal( BaseModel ):
+    """
+    Goal Model - Possible goals that user may have. E.g: "Move permanently to", "Study english in", "Visit..."
+    """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 100 )
+    is_active = models.BooleanField( _( "is active" ), default = True )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+    def __str__( self ):
+        """
+        String representation of this model
+        :return: String
+        """
+        return '%s' % ( _( self.name ) )
+
+
+
 class Language( BaseModel ):
     """
     Language Model - Ex: english, french, portuguese, etc.
@@ -108,6 +149,7 @@ class Language( BaseModel ):
         return tuple( [( '', _( 'Select Language' ) )] + result  )
 
 
+
 class UserManager( BaseUserManager ):
     """
     User Manager - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
@@ -116,7 +158,13 @@ class UserManager( BaseUserManager ):
     def create_user( self, email, name = None, password = None ):
         """
         Creates and saves a User with the given email, name and password.
+
+        :param: email
+        :param: name
+        :param: password
+        :return: User Object
         """
+
 
         if not email:
             raise ValueError( 'Users must have an email address' )
@@ -133,6 +181,11 @@ class UserManager( BaseUserManager ):
     def create_superuser( self, email, password, name = None ):
         """
         Creates and saves a superuser with the given email, name and password.
+
+        :param: email
+        :param: password
+        :param: name
+        :return: User Object
         """
 
         user = self.create_user(email,
@@ -144,6 +197,7 @@ class UserManager( BaseUserManager ):
         user.is_active = True
         user.save( using = self._db )
         return user
+
 
 
 class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
@@ -180,21 +234,27 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     USERNAME_FIELD = 'email'
 
     def get_full_name( self ):
+        """ Return the user's full name """
         # The user is identified by their email address
         return self.name if self.name else self.email
 
+
     def get_short_name( self ):
+        """ Return the user's short name """
         # The user is identified by their email address
         return self.email
+
 
     def __str__( self ):
         return self.email
 
+
     @property
     def is_staff( self ):
-        "Is the user a member of staff?"
+        """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
 
 
 class UserEducation( BaseModel ):
@@ -214,6 +274,7 @@ class UserEducation( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
 
     def get_completed_percentage( self ):
         """
@@ -242,6 +303,7 @@ class UserEducation( BaseModel ):
         return math.floor( ( completed * 100 ) / total )
 
 
+
 class UserEducationHistory( BaseModel ):
     """
     User Education History Model - Ex: Stores each education achieved (ex: bachelors, in brazil, universidade UFMA, from 2003-2007
@@ -258,6 +320,20 @@ class UserEducationHistory( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+
+class UserGoal( BaseModel ):
+    """
+    User Goal - Stores the immigration goal of an specific user (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'from_country' )
+    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'to_country' )
+    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )
+
 
 
 class UserLanguage( BaseModel ):
@@ -301,6 +377,7 @@ class UserLanguage( BaseModel ):
         return math.floor( ( completed * 100 ) / total )
 
 
+
 class UserLanguageProficiency( BaseModel ):
     """
     User Language Proficiency Model - Ex: Stores each language and level the user can speak
@@ -316,6 +393,7 @@ class UserLanguageProficiency( BaseModel ):
         default_permissions = []
 
 
+
 class UserLoginHistory( BaseModel ):
     """
     User Login History - Ex: Records every time an user logs in to the system
@@ -328,6 +406,7 @@ class UserLoginHistory( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
 
 
 class UserPersonal( BaseModel ):
@@ -397,6 +476,7 @@ class UserPersonalFamily( BaseModel ):
         default_permissions = []
 
 
+
 class UserStats( BaseModel ):
     """
     User Stats Model - Stores the stats about each user (percentage completed, etc)
@@ -409,6 +489,7 @@ class UserStats( BaseModel ):
     percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )
     percentage_work = models.IntegerField( _( "percentage work" ), blank = True, null = True, default = 0 )
     updating_now = models.BooleanField( _( 'updating now' ), default = False )
+
 
 
 class UserWork( BaseModel ):
@@ -461,6 +542,7 @@ class UserWork( BaseModel ):
         return math.floor( ( completed * 100 ) / total )
 
 
+
 class UserWorkOffer( BaseModel ):
     """
     User Work Offer Model - Ex: Stores countries where the user has written job offers
@@ -473,6 +555,7 @@ class UserWorkOffer( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
 
 
 class UserWorkExperience( BaseModel ):
