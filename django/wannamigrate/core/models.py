@@ -150,6 +150,23 @@ class Language( BaseModel ):
 
 
 
+class Message( BaseModel ):
+    """
+    Inbox Messages - Messages between users
+    """
+
+    # Model Attributes
+    from_user = models.ForeignKey( 'User', related_name = 'message_from_user', verbose_name = _( 'from user' ) )
+    to_user = models.ForeignKey( 'User', related_name = 'message_to_user', verbose_name = _( 'to user' ) )
+    content = models.TextField( _( "comment" ) )
+    is_read = models.BooleanField( _( "is read" ), default = False )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+
 class UserManager( BaseUserManager ):
     """
     User Manager - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
