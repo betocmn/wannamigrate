@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 
 
+
+
 #######################
 # ACTIONS
 #######################
@@ -58,7 +60,7 @@ def core_goals_values( apps, schema_editor ):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0075_goal_is_active'),
+        ('core', '0004_auto_20150126_2211'),
     ]
 
     operations = [

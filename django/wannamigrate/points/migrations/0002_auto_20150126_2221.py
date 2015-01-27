@@ -3,36 +3,18 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 
-
 #######################
 # OFFICIAL IMMIGRATION POINTS DATABASE RECORDS
 #######################
-def core_immigration_rules( apps, schema_editor ):
+def points_immigration_rules( apps, schema_editor ):
 
 
     # Get model to use (historical version)
-    Question = apps.get_model( "core", "Question" )
-    Answer = apps.get_model( "core", "Answer" )
-    CountryPoints = apps.get_model( "core", "CountryPoints" )
-    OccupationCategory = apps.get_model( "core", "OccupationCategory" )
-    Occupation = apps.get_model( "core", "Occupation" )
-
-    # Truncate some tables to start over
-    Question.objects.raw( 'TRUNCATE core_userworkoffer' )
-    Question.objects.raw( 'TRUNCATE core_userworkexperience' )
-    Question.objects.raw( 'TRUNCATE core_userwork' )
-    Question.objects.raw( 'TRUNCATE core_userpersonalfamily' )
-    Question.objects.raw( 'TRUNCATE core_userpersonal' )
-    Question.objects.raw( 'TRUNCATE core_userlanguageproficiency' )
-    Question.objects.raw( 'TRUNCATE core_userlanguage' )
-    Question.objects.raw( 'TRUNCATE core_usereducationhistory' )
-    Question.objects.raw( 'TRUNCATE core_usereducation' )
-    Question.objects.raw( 'TRUNCATE core_countrypoints' )
-    Question.objects.raw( 'TRUNCATE core_occupation_countries' )
-    Question.objects.raw( 'TRUNCATE core_occupation' )
-    Question.objects.raw( 'TRUNCATE core_occupationcategory' )
-    Question.objects.raw( 'TRUNCATE core_answer' )
-    Question.objects.raw( 'TRUNCATE core_question' )
+    Question = apps.get_model( "points", "Question" )
+    Answer = apps.get_model( "points", "Answer" )
+    CountryPoints = apps.get_model( "points", "CountryPoints" )
+    OccupationCategory = apps.get_model( "points", "OccupationCategory" )
+    Occupation = apps.get_model( "points", "Occupation" )
 
     #Questions
     question = Question()
@@ -16463,9 +16445,9 @@ def core_immigration_rules( apps, schema_editor ):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0046_auto_20141126_1943'),
+        ('points', '0001_initial'),
     ]
 
     operations = [
-        migrations.RunPython( core_immigration_rules ),
+        migrations.RunPython( points_immigration_rules ),
     ]
