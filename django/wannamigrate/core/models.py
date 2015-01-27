@@ -102,7 +102,7 @@ class Goal( BaseModel ):
     """
 
     # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 100 )
+    name = models.CharField( _( "name" ), max_length = 60 )
     is_active = models.BooleanField( _( "is active" ), default = True )
 
     # META Options
