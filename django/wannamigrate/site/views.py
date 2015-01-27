@@ -520,6 +520,16 @@ def not_supported( request ):
     return render( request, "site/home/not_supported.html", { "first_name" : first_name } )
 
 
+def maintenance( request ):
+    """
+    Displays a page saying that the device is not supported.
+
+    :param: request
+    :return String - HTML from The not_supported page.
+    """
+    return render( request, "site/home/maintenance.html" )
+
+
 @login_required
 def dashboard( request ):
     """
