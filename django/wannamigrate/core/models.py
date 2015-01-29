@@ -232,6 +232,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'points.UserResult' )
     preferred_language = models.CharField( _( "Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
+    preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, null = True, blank = True )
 
     # META Options
     class Meta:

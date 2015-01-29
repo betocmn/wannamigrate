@@ -64,7 +64,7 @@ N_DEFAULT_HELP_SPACING = 15
 INSTALL_PACKAGES = [ 
     "python3-dev", "git", "apache2", "libapache2-mod-wsgi-py3", 
     "libapache2-mod-php5", "php5-mysql", "libmysqlclient-dev", 
-    "mysql-client", "gettext", "libjpeg-dev" 
+    "mysql-client", "gettext", "libjpeg-dev"
 ]
 
 # The packages that should be installed on virtualenv
@@ -75,6 +75,7 @@ VIRTUALENV_PACKAGES = [
     "python-social-auth", 
     "pillow", 
     "django-stdimage",
+    "pytz",
 ]
     
 
