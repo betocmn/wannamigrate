@@ -106,7 +106,7 @@ class UserForm( BaseModelForm ):
         :return: Dictionary
         """
         user = super( UserForm, self ).save( commit = False )
-        user.is_admin = True
+        user.is_admin = False
         if not user.password:
             plain_password = get_user_model().objects.make_random_password()
             user.set_password( plain_password )
