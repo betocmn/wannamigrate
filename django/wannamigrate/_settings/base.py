@@ -352,3 +352,15 @@ ID_RESULT_STATUS_DENIED_WORK_EXPERIENCE = 6
 # Minimum language levels
 ID_MINIMUM_ENGLISH_LEVEL = 94
 ID_MINIMUM_FRENCH_LEVEL = 98
+
+
+
+
+
+#######################################
+# Questions and Answers constants
+#######################################
+QA_POST_TYPE_ANSWER_ID = 1
+QA_POST_TYPE_BLOGPOST_ID = 2
+QA_POST_TYPE_COMMENT_ID = 3
+QA_POST_TYPE_QUESTION_ID = 4
