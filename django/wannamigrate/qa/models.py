@@ -29,9 +29,9 @@ class Post( BaseModel ):
     # The type of this post.
     post_type = models.ForeignKey( "PostType" ) 
     # The title of this post (only apply to questions and blog posts)
-    title = models.CharField( max_length = 255 )
+    title = models.CharField( max_length = 255, default = "" )
     # The content of this post.
-    body = models.TextField()
+    body = models.TextField( default = "" )
     # Indicates if the post is anonymous or not.
     is_anonymous = models.BooleanField( default = False )
     # The number of visualizations of this post
@@ -63,9 +63,9 @@ class PostHistory( BaseModel ):
     # The post that originated this post history.
     original_post = models.ForeignKey( "Post" )
     # The title of this post (only apply to questions and blog posts)
-    title = models.CharField( max_length = 255 )
+    title = models.CharField( max_length = 255, default = "" )
     # The content of this post.
-    body = models.TextField()
+    body = models.TextField( default = "" )
     # The date of the last acitivity on this post (new answers, editions, etc)
     written_date = models.DateTimeField()
 
