@@ -105,19 +105,31 @@ class ModelingTest( TestCase ):
         # Creates a question
         q = Post( title = "How can I go to Canada?", owner = u1, post_type = pt_question, 
                     last_activity_date = datetime.now() )
+        q.save()
+
         q.readers.add( u2 )
         q.save()
 
         # Creates an answer to the question
-        a = Post( body = "You need to define what visa is more suitable for you and apply for it on the Canadian government site."
+        a = Post( body = "You need to define what visa is more suitable for you and apply for it on the Canadian government site.",
                     parent = q, owner = u2, post_type = pt_answer )
         a.save()
 
         # Creates an UPVOTE for the answer
         vt_upvote = VoteType( id = settings.QA_VOTE_TYPE_UPVOTE, name = "Upvote" )
+        vt_upvote.save()
+        
         v = Vote( post = a, user = u2, vote_type = vt_upvote )
+        v.save()
 
-        # Assertions.
+        # Checks if the user has an reading list element that is equals to the question
+        self.assertEqual( u2.reading_list.first().id, q.id )
+
+        # Checks if the answer has ONE upvote
+        self.assertEqual( Vote.objects.filter( post = a, vote_type = vt_upvote ).count(), 1 )
+
+
+        
 
 
 
