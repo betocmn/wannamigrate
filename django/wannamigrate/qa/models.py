@@ -37,13 +37,15 @@ class Post( BaseModel ):
     # The number of visualizations of this post
     views_count = models.PositiveIntegerField( default = 0 )
     # The date of the last acitivity on this post (new answers, editions, etc)
-    last_activity_date = models.DateTimeField()
+    last_activity_date = models.DateTimeField( null = True )
     # Users following this post
     followers = models.ManyToManyField( User, related_name = "following_posts" )
     # Users that added this post to their reading list.
     readers = models.ManyToManyField( User, related_name = "reading_list" )
     # The topics related to this post
     related_topics = models.ManyToManyField( "Topic", related_name = "related_posts" )
+
+
 
 class PostType( BaseModel ):
     """ 
@@ -90,6 +92,8 @@ class Vote( BaseModel ):
 
     # The post that this vote is related to.
     post = models.ForeignKey( "Post" )
+    # The user that voted.
+    user = models.ForeignKey( User )
     # The type of this vote.
     vote_type = models.ForeignKey( "VoteType" )
 
