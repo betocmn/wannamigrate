@@ -82,11 +82,11 @@ class CountryPoints( BaseModel ):
         :return: Dictionary
         """
 
-        sql = """ SELECT points_countrypoints.id, core_answer.id as answer_id, points_countrypoints.points, points_countrypoints.country_id
-                  FROM core_answer
-                  INNER JOIN points_countrypoints ON core_answer.id = points_countrypoints.answer_id
+        sql = """ SELECT points_countrypoints.id, points_answer.id as answer_id, points_countrypoints.points, points_countrypoints.country_id
+                  FROM points_answer
+                  INNER JOIN points_countrypoints ON points_answer.id = points_countrypoints.answer_id
                   INNER JOIN core_country ON core_country.id = points_countrypoints.country_id
-                  INNER JOIN points_question ON core_answer.question_id = points_question.id
+                  INNER JOIN points_question ON points_answer.question_id = points_question.id
                   WHERE core_country.immigration_enabled = 1 AND points_question.id = %s
                   ORDER BY core_country.name ASC """
 

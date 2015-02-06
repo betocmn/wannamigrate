@@ -39,12 +39,16 @@ def restrict_internal_ips( view_func ):
     @wraps( view_func, assigned = available_attrs( view_func ) )
     def _wrapped_view( request, *args, **kwargs ):
 
+        # Pre-process the IP address
         x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get( 'REMOTE_ADDR' )
-        if ip not in settings.INTERNAL_IPS:
+        
+        # If current IP is not in the internal ips list and I am on the
+        # production server, redirects the user to the home.
+        if ip not in settings.INTERNAL_IPS and settings.IS_PROD == True:
             return HttpResponseRedirect( reverse( 'site:home' ) )
         return view_func( request, *args, **kwargs )
 
