@@ -14,6 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
+
 ##########################
 # Classes definitions
 ##########################
@@ -45,6 +47,17 @@ class Post( BaseModel ):
     # The topics related to this post
     related_topics = models.ManyToManyField( "Topic", related_name = "related_posts" )
 
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "qa_admin_add_post", "[ADMIN] Can add post" ),
+            ( "qa_admin_edit_post", "[ADMIN] Can edit post" ),
+            ( "qa_admin_delete_post", "[ADMIN] Can delete post" ),
+            ( "qa_admin_view_post", "[ADMIN] Can view post" ),
+            ( "qa_admin_list_post", "[ADMIN] Can list posts" ),
+        )
+
 
 
 class PostType( BaseModel ):
@@ -54,6 +67,10 @@ class PostType( BaseModel ):
     
     # The name of the post type
     name = models.CharField( max_length = 50 )
+
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []    # Not listed
 
 
 
@@ -71,6 +88,18 @@ class PostHistory( BaseModel ):
     # The date of the last acitivity on this post (new answers, editions, etc)
     written_date = models.DateTimeField()
 
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "qa_admin_add_post_history", "[ADMIN] Can add post history" ),
+            ( "qa_admin_edit_post_history", "[ADMIN] Can edit post history" ),
+            ( "qa_admin_delete_post_history", "[ADMIN] Can delete post history" ),
+            ( "qa_admin_view_post_history", "[ADMIN] Can view post history" ),
+            ( "qa_admin_list_post_history", "[ADMIN] Can list post history" ),
+        )
+
+
 
 
 class Topic( BaseModel ):
@@ -82,6 +111,17 @@ class Topic( BaseModel ):
     name = models.CharField( max_length = 255 )
     # Users following this topic
     followers = models.ManyToManyField( User, related_name = "following_topics" )
+
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "qa_admin_add_topic", "[ADMIN] Can add topic" ),
+            ( "qa_admin_edit_topic", "[ADMIN] Can edit topic" ),
+            ( "qa_admin_delete_topic", "[ADMIN] Can delete topic" ),
+            ( "qa_admin_view_topic", "[ADMIN] Can view topic" ),
+            ( "qa_admin_list_topic", "[ADMIN] Can list topic" ),
+        )
 
 
 
@@ -97,6 +137,17 @@ class Vote( BaseModel ):
     # The type of this vote.
     vote_type = models.ForeignKey( "VoteType" )
 
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "qa_admin_add_vote", "[ADMIN] Can add vote" ),
+            ( "qa_admin_edit_vote", "[ADMIN] Can edit vote" ),
+            ( "qa_admin_delete_vote", "[ADMIN] Can delete vote" ),
+            ( "qa_admin_view_vote", "[ADMIN] Can view vote" ),
+            ( "qa_admin_list_vote", "[ADMIN] Can list vote" ),
+        )
+
 
 
 class VoteType( BaseModel ):
@@ -106,3 +157,7 @@ class VoteType( BaseModel ):
 
     # The name of this Vote Type
     name = models.CharField( max_length = 255 )
+
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []    # Not listed
