@@ -101,7 +101,6 @@ class PostHistory( BaseModel ):
 
 
 
-
 class Topic( BaseModel ):
     """
     Topic class. This class represents topics.
