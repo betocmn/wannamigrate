@@ -44,6 +44,16 @@ from django.contrib.gis.geoip import GeoIP
 
 
 #######################
+# Function to check user is admin
+#######################
+def admin_check( user ):
+    return user.is_admin
+
+
+
+
+
+#######################
 # HOME-PAGE VIEWS
 #######################
 def home( request ):
@@ -53,13 +63,13 @@ def home( request ):
     :param: request
     :return: String - The html page rendered
     """
-    
+
     # Initializes template data dictionary
     template_data = {}
 
     # Check if there's an active session, or if not, country from IP
     initial_data = {}
-    if 'visitor' in request.session:
+    if 'visitor' in request.session and 'from_country' in request.session['visitor']:
 
         initial_data['from_country'] = request.session['visitor']['from_country']
         initial_data['to_country'] = request.session['visitor']['to_country']
@@ -68,16 +78,8 @@ def home( request ):
     else:
 
         # Gets country code from IP address of user
-        x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = request.META.get( 'REMOTE_ADDR' )
-        geo_ip = GeoIP()
-        #result = geo_ip.country( ip ) # THIS IS THE CORRECT LINE
-        result = geo_ip.country( '191.189.150.101' ) # USING THIS JUST FOR TESTING PURPOSES
-        country_code = result['country_code']
-        initial_data['from_country'] = Country.objects.get( code = country_code )
+        if 'visitor' in request.session and 'country_code' in request.session['visitor'] and request.session['visitor']['country_code']:
+            initial_data['from_country'] = Country.objects.get( code = request.session['visitor']['country_code'] )
         initial_data['to_country'] = settings.ID_COUNTRY_CANADA
         initial_data['goal'] = 1
 
@@ -87,7 +89,7 @@ def home( request ):
     # If the form has been submitted and is valid...
     if form.is_valid():
 
-        if 'visitor' not in request.session:
+        if 'visitor' not in request.session or 'from_country' not in request.session['visitor']:
 
             # Saves in DB
             visitor_goal = form.save()
@@ -398,9 +400,9 @@ def contact( request ):
 
 
 #######################
-# TOUR VIEWS
+# HOW IT WORKS VIEW
 #######################
-def tour( request ):
+def how_it_works( request ):
     """
     Displays "how It Works" static page
 
@@ -409,6 +411,26 @@ def tour( request ):
     """
 
     # Print Template
+    return HttpResponse( "How It Works" )
+    return render( request, 'site/about/tour.html')
+
+
+
+
+
+#######################
+# SERVICE PROVIDERS VIEWS
+#######################
+def service_providers( request ):
+    """
+    Displays "I'm a Service Provider" page
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Print Template
+    return HttpResponse( "Service Providers" )
     return render( request, 'site/about/tour.html')
 
 
@@ -580,6 +602,8 @@ def dashboard( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
+
+    return HttpResponse( request.session[translation.LANGUAGE_SESSION_KEY] )
 
     # If User edited data, but did not calculate points by clicking in save and exit
     return HttpResponse( request.session['visitor']['from_country'] )

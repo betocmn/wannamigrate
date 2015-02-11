@@ -64,6 +64,11 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'en'
 
+# countries that speak Non-english languages supported by our LANGUAGES setting
+COUNTRIES_BY_LANGUAGE = {
+    'pt-br': [ 'br', 'pt', 'mz', 'ao', 'gw', 'mo', 'cv', 'st', 'tl' ]
+}
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -143,6 +148,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'wannamigrate.core.middleware.VisitorLocaleMiddleware',
 )
 
 

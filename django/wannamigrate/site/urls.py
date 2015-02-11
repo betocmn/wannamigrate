@@ -31,7 +31,10 @@ urlpatterns = patterns('',
     url( r'^privacy/$', views.privacy, name = 'privacy' ),
 
     # How it Works
-    url( r'^tour/$', views.tour, name = 'tour' ),
+    url( r'^how-it-works/$', views.how_it_works, name = 'how_it_works' ),
+
+    # Service providers
+    url( r'^service-providers/$', views.service_providers, name = 'service_providers' ),
 
     # Contact Us
     url( r'^contact/$', views.contact, name = 'contact' ),
