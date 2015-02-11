@@ -1,0 +1,149 @@
+// mixins
+replace(image = 'sprite.png', left = 0, top = 0, color = transparent, bgrepeat = no-repeat)
+    display block
+    border 0
+    background color url('../img/'image) bgrepeat left top
+    text-indent -9999px
+    overflow hidden
+
+bg(image = 'sprite.png', left = 0, top = 0, color = transparent, bgrepeat = no-repeat)
+    background color url('../img/'image) bgrepeat left top
+
+bgi(image = 'sprite.png')
+    background-image url('../img/'image)
+
+button()
+    display block
+    padding 13px 0
+    line-height 1
+    cursor pointer
+    box()
+    border 1px solid lighten(#4fc895, 20%)
+    border-radius(4px)
+    background-color #28b187
+    fontbd()
+    font-size 16px
+    font-style normal
+    font-weight normal
+    text-align center
+    text-decoration none
+    text-shadow 0 -1px 1px #3a7a1c
+    box-shadow 0 1px 1px 0 darken(#23a570, 10%)
+    color #ffffff
+    overflow hidden
+    linear-gradient darken(#28b188, 5%) #2cc092
+
+    &:hover
+      box-shadow 0 1px 1px 0 darken(#23a570, 50%)
+      linear-gradient darken(#9842b1, 20%) #9842b1
+      border-color #9842b1
+
+centerx(x = 0, pos = absolute)
+    position pos
+    left 50%
+    margin-left (@width / -2) + x
+
+triCenterX(x = 0)
+    position absolute
+    left 50%
+    margin-left x
+
+centery(y = 0)
+    position absolute
+    top 50%
+    margin-top (@height / -2) + y
+
+center(y = 0, x = 0)
+    position absolute
+    top 50%
+    left 50%
+    margin (@height / -2)+y 0 0 (@width / -2)+x
+
+size(width = 5px, height = 5px)
+    width width
+    height height
+
+square(squaresize = 5px)
+    size(squaresize, squaresize)
+
+box()
+    -moz-box-sizing border-box
+    -webkit-box-sizing border-box
+    box-sizing border-box
+
+bgsize(args)
+  -webkit-background-size args
+  background-size args
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -o-{prop} args
+  {prop} args
+
+animation()
+  vendor('animation', arguments)
+
+border-radius()
+  vendor('border-radius', arguments)
+
+// box(orient, pack, align)
+//   display -webkit-box
+//   display -moz-box
+//   display box
+//   vendor('box-orient', orient)
+//   vendor('box-pack', pack)
+//   vendor('box-align', align)
+//   vendor('box-lines', multiple)
+
+box_flex()
+  vendor('box-flex', arguments)
+
+box-sizing()
+   vendor('box-sizing', arguments)
+
+text-fill-color()
+  vendor('text-fill-color', arguments)
+
+transition()
+  vendor('transition', arguments)
+
+transform()
+  vendor('transform', arguments)
+
+background-clip()
+  vendor('background-clip', arguments)
+
+box-shadow()
+  -moz-box-shadow arguments
+  -webkit-box-shadow arguments
+  box-shadow arguments
+
+opacity(n)
+  -ms-filter \"unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + n * 100 + ')')\"
+  -khtml-opacity n
+  -moz-opacity n
+  opacity n
+
+linear-gradient(start_color, end_color, start = left top, end = left bottom)
+  mozstart = top if start = left top
+  background start_color
+  background -moz-linear-gradient(mozstart, start_color 0%, end_color 100%)
+  background -webkit-gradient(linear, start, end, color-stop(0%, start_color), color-stop(100%, end_color))
+  -webkit-background-origin padding-box
+
+
+fontrg()
+    font-family 'open_sansregular'
+
+fontsb()
+    font-family 'open_sanssemibold'
+
+fontbd()
+    font-family 'open_sansbold'
+
+fonteb()
+    font-family 'open_sansextrabold'
+
+fontlt()
+    font-family 'open_sanslight'

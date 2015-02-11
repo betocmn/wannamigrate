@@ -1,0 +1,642 @@
+@media screen and (max-width: 1366px)
+    .landing
+        header
+            nav
+                width 480px
+
+                li
+                    .nav-link
+                        font-size 14px
+
+        .content
+            .get-help
+                width 870px
+                centerx()
+
+                .title
+                    font-size 44px
+
+                form
+                    .field
+                        label
+                            font-size 14px
+
+                        .ddlabel
+                            font-size 14px
+
+                    .from,
+                    .to
+                        select
+                            width 190px
+
+                    .want
+                        select
+                            width 228px
+
+        footer
+            .nav-footer
+                width 350px
+
+                .nav-footer-link
+                    font-size 12px
+
+
+@media screen and (max-width: 768px)
+    html
+        &.fixed
+            position fixed
+            left 0
+            right 0
+            top 0
+
+        &.show-topics
+            .dashboard
+                #sticky-list
+                    display block
+
+            .content
+                &.home
+                    display none
+
+    .landing
+        header
+            display block
+            height 105px
+            padding 0 0 0 5%
+
+            .logo
+                size 70% 80%
+                padding-top 20px
+                background-size auto 25%
+                background-position 0 20px
+
+            .bt-nav
+                position relative
+                z-index 6
+                float right
+                display block
+                size 48px 48px
+                text-indent -9999px
+
+                &.clicked
+                    background-color #fff
+
+                    &:before
+                        background-position right 0
+
+                &:before
+                    content ''
+                    position absolute
+                    left 50%
+                    top 50%
+                    margin-left -9px
+                    margin-top -9px
+                    size 19px 18px
+                    replace('icon-mobile-nav.png')
+
+            nav
+                height 0
+                overflow hidden
+
+                &.open
+                    position absolute
+                    left 0
+                    top 48px
+                    z-index 5
+                    display block
+                    width 100%
+                    height 135px
+                    transition height .3s ease-in-out
+                    padding 20px 0
+                    background-color #fff
+
+                    li
+                        float none
+                        display block
+                        size 80% 45px
+                        padding 15px 10%
+                        margin 0 auto
+                        box()
+                        border-bottom 1px solid #ebebeb
+
+                        &:last-child
+                            border-bottom none
+
+                        .nav-link
+                            text-transform capitalize
+                            text-decoration none
+                            text-align center
+                            font-size 1em
+                            color #777
+
+                            &:focus
+                                color #ca3939
+
+                            &.bt-login
+                                margin-top 0
+
+        .content
+            .get-help
+                position relative
+                left 0
+                top 0
+                size 100% 530px
+                margin-left 0
+                margin-top 0
+
+                .title
+                    padding 0 45px 40px 45px
+                    font-size 28px
+                    line-height 38px
+
+                form
+                    size auto 420px
+                    padding 35px 15px
+
+                    fieldset
+                        float none
+
+                    .field
+                        float none
+                        size 290px 95px
+                        margin 0 auto
+
+                    .from,
+                    .want,
+                    .to
+                        select
+                            size 290px 45px
+
+                    .bt-help
+                        float none
+                        width 290px
+                        margin 20px auto 0
+
+        footer
+            display none
+            clear both
+            position relative
+
+            .nav-footer
+                display block
+                size 100% 20px
+                margin 0 auto 0
+
+    .dashboard
+        .wrapper
+            header
+                position relative
+                height 48px
+
+                .logo
+                    margin 13px 0 0 20px
+                    background-size 80% auto
+
+                .bt-nav
+                    position relative
+                    z-index 6
+                    float right
+                    display block
+                    size 48px 48px
+                    text-indent -9999px
+
+                    &.clicked
+                        background-color #fff
+
+                        &:before
+                            background-position right 0
+
+                    &:before
+                        content ''
+                        position absolute
+                        left 50%
+                        top 50%
+                        margin-left -9px
+                        margin-top -9px
+                        size 19px 18px
+                        replace('icon-mobile-nav.png')
+
+                nav
+                    height 0
+                    overflow hidden
+                    transition height .2s ease-in-out
+
+                    &.open
+                        position absolute
+                        left 0
+                        top 48px
+                        z-index 5
+                        display block
+                        width 100%
+                        background-color #f3f3f3
+
+                        li
+                            float none
+                            display block
+                            size 80% 45px
+                            padding 15px 10%
+                            margin 0 auto
+                            box()
+                            border-bottom 1px solid #ebebeb
+
+                            &:last-child
+                                border-bottom none
+
+                            .nav-link
+                                text-transform capitalize
+                                text-decoration none
+                                text-align center
+                                font-size 1em
+                                color #777
+
+                                &:focus
+                                    color #ca3939
+
+                                &.bt-login
+                                    margin-top 0
+
+                    ul
+                        padding 20px 0
+
+                        .nav-item
+                            text-align center
+
+                .interaction
+                    height 0
+                    padding 0
+
+                    .shadow
+                        display none
+                        position fixed
+                        top 0
+                        bottom 0
+                        left 0
+                        right 0
+                        width 100%
+                        height 100%
+                        background #000
+                        z-index 5
+                        opacity .8
+
+                    .search
+                        position absolute
+                        top 0
+                        left 0
+                        width 100%
+                        height 100%
+
+                        .bt-search
+                            right 58px
+                            bottom 0
+                            margin auto 0
+                            height 22px
+                            replace('icon-lupa-mobile.png')
+                            background-position center center
+                            outline none
+
+                        .search-input
+                            position absolute
+                            top 0
+                            bottom 0
+                            width 0
+                            margin auto 0
+                            right 58px
+                            transition width .2s ease-in-out
+
+                        .bt-back
+                            position absolute
+                            left 0
+                            top 0
+                            bottom 0
+                            width 15%
+                            height 100%
+                            replace('icon-seta-voltar.png')
+                            display none
+                            background-position center center
+                            background-color #55236a
+
+                        label,
+                        input
+                            display none
+
+                    .account
+                        display none
+
+                &.show-search
+                    .interaction
+                        .search
+                            input
+                                width 60%
+                                color #fff
+
+                            ::-webkit-input-placeholder
+                               color #fff
+
+                            :-moz-placeholder
+                               color #fff
+
+                            ::-moz-placeholder
+                               color #fff
+
+                            :-ms-input-placeholder
+                               color #fff
+
+            .situations
+                display none
+
+            .content
+                float left
+
+                &.home
+                    position relative
+                    width 100%
+                    overflow hidden
+
+                    .bt-alternator
+                        position absolute
+                        right 0
+                        display block
+                        width 15%
+                        height 85px
+                        background-color transparent
+                        z-index 9999
+
+                    .questions,
+                    .professionals
+                        margin 0
+                        width 100%
+                        background-color #fff
+
+                        .top
+                            position absolute
+                            width 15%
+                            padding 0
+                            height 85px
+                            box()
+                            background #dadada
+                            border-bottom 0
+                            margin 0
+                            transition all .2s ease-in-out
+
+                            .title
+                                width 15%
+                                float none
+                                margin 25px auto 0
+                                text-align center
+                                color transparent
+                                box()
+
+                                &:before
+                                    right 0
+                                    margin 0 auto
+                                    background-position center center
+                                    border 1px
+                                    border-radius 50%
+                                    transition all .2s
+
+                            .bt-add
+                                display none
+
+                        .bt-add-mobile
+                            display block
+                            margin 0 auto 25px
+                            width 90%
+                            
+                        .bt-view-more
+                            display none
+
+                        .content-questions,
+                        .content-professionals
+                            width 100%
+                            float left
+                            padding-bottom 75px
+                            transition all .2s
+
+                            .question,
+                            .professional
+                                width 90%
+                                margin 0 auto
+                                overflow hidden
+
+                                .share
+                                    bottom 0
+                                    background-position 0 0
+
+                                .box-options
+                                    display none
+
+                                    .shadow
+                                        display none
+                                        content ""
+                                        position fixed
+                                        top 0
+                                        bottom 0
+                                        left 0
+                                        right 0
+                                        margin auto
+                                        width 100%
+                                        height 100%
+                                        background #000
+                                        opacity .5
+                                        z-index 10
+
+                                    .box
+                                        position fixed
+                                        top 0
+                                        bottom 0
+                                        left 0
+                                        right 0
+                                        margin auto
+                                        max-width 290px
+                                        width 90%
+                                        height 98px
+                                        padding 6px
+                                        border 0
+                                        border-radius 5px
+                                        background #fff
+                                        z-index 10
+                                        text-align center
+
+                                        &:before
+                                            display none
+
+                                    &.show-box
+                                        display block
+
+                                        .shadow
+                                            display block
+
+                                .data
+                                    .data-list
+                                        .data-item
+                                            strong
+                                                color #999
+
+                            .professional
+                                &:first-child
+                                    border-top 0
+
+                                .data
+                                    padding 0 0 32px 0
+
+                                    .data-list
+                                        display block
+                                        width 100%
+
+                                        .data-item
+                                            width 32%
+                                            margin-right 0
+
+                                            &.data-item-viewers
+                                                margin-left 5px
+                                                text-align center
+
+                                            &.data-item-since
+                                                text-align right
+
+                                .bt-options
+                                    width 26px
+                                    right 4px
+
+                        &.show
+                            .top
+                                width 85%
+                                background #f1f1f1
+
+                                .title
+                                    position absolute
+                                    top 0
+                                    bottom 0
+                                    left 0
+                                    right 0
+                                    margin auto
+                                    padding 0 0 0 40px
+                                    width 170px
+                                    height 40px
+                                    line-height 40px
+                                    font-size 18px
+                                    color #68347e
+
+                                    &:before
+                                        right auto
+                                        left 0
+                                        border 1px solid #68347e
+
+                            .content-professionals
+                                right 0
+
+                            .content-questions
+                                left 0
+
+                    .professionals
+                        position absolute
+
+                        .top
+                            right 0
+
+                        .content-professionals
+                            position absolute
+                            top 85px
+                            overflow hidden
+                            background #fff
+                            right -100%
+
+                            .professional
+                                .data-professional
+                                    .name
+                                        line-height 14px
+                                        padding-bottom 10px
+
+                                    .rate
+                                        width 40%
+
+                                        .count
+                                            float right
+                                            font-size 12px
+                                            line-height 17px
+                                            color #68347e
+
+                                    .service
+                                        padding-bottom 10px !important
+
+                        &.show
+                            .top
+                                .title
+                                    width 220px
+
+                    .questions
+                        position absolute
+
+                        .top
+                            left 0
+
+                        .data
+                            height auto
+                            padding-bottom 25px
+
+                            .data-list
+                                .data-item
+                                    .data-link
+                                        strong
+                                            color #999
+
+                                    strong
+                                            color #999
+
+
+                                    .bt-follow
+                                        padding 0 12px
+                                        font-size 11px
+                                        width 115px
+
+                                        span
+                                            float right
+
+                                            &:before
+                                                top 0
+                                                bottom 0
+                                                margin auto 0
+
+                                    &:first-child
+                                        position absolute
+                                        left 0
+                                        bottom 10px
+
+                                    &:last-child
+                                        width 70px
+                                        line-height 15px
+                                        margin-top 8px
+
+                        .content-questions
+                            position absolute
+                            top 85px
+                            overflow hidden
+                            background #fff
+                            left -100%
+
+                &.hire,
+                &.hiring
+                    display none
+
+            footer
+                display none
+
+        .autocomplete-suggestions
+            top 48px !important
+            left 0 !important
+            width 100% !important
+            height 100%
+            padding-top 5%
+            max-height 100% !important
+            border none
+            background #4e4e4e
+            overflow auto
+
+@media screen and (max-width: 360px)
+    .landing
+        .content
+            .get-help
+                .title
+                    strong ~ strong
+                        clear left
+                        display inline-block

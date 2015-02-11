@@ -81,13 +81,18 @@ class Country( BaseModel ):
         return '%s' % ( _( self.name ) )
 
     @staticmethod
-    def get_translated_tuple():
+    def get_translated_tuple( filter_enabled = False ):
         """
         Returns a tuple of records ordered by name, after translation.
         It's used on dropdowns on forms
+
+        :param: Boolean filter_enabled
         :return: String
         """
-        countries = Country.objects.order_by( 'name' )
+        if filter_enabled:
+            countries = Country.objects.filter( immigration_enabled = True ).order_by( 'name' )
+        else:
+            countries = Country.objects.order_by( 'name' )
         result = []
         for country in countries:
             result.append( ( country.id, _( country.name ) ) )
@@ -115,6 +120,20 @@ class Goal( BaseModel ):
         :return: String
         """
         return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple():
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        goals = Goal.objects.order_by( 'name' )
+        result = []
+        for goal in goals:
+            result.append( ( goal.id, _( goal.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Goal' ) )] + result  )
 
 
 
@@ -593,3 +612,15 @@ class UserWorkExperience( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+
+class VisitorGoal( BaseModel ):
+    """
+    Visitor Goal - Stores the immigration goal of an specific visitor (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'visitor_from_country' )
+    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'visitor_to_country' )
+    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )

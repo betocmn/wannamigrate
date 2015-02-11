@@ -1,0 +1,33 @@
+/* Form errors */
+.inputError{
+	border: 2px solid #ed1c24 !important;
+}
+form .has-error li, form .has-error span {
+    color: #ed1c24;
+}
+
+form .has-error input, form .has-error textarea, form .has-error select, form .has-error div.borderRadius {
+    border: 2px solid #ed1c24 !important;
+}
+
+
+/* ALERTS (ERRORS, SUCCESS) */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}

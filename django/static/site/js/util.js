@@ -134,11 +134,9 @@ function confirm_multi_delete(){
  *
  */
 function hightlight_error_element( field_id ){
-	
+
 	$( "#" + field_id ).parent().addClass( 'has-error' );
-	/*if ( $( "#select-" + field_id ).length > 0 ){
-		$( "#select-" + field_id ).addClass( 'has-error' );
-	}*/
+	$( "#" + field_id ).parent().parent().addClass( 'has-error' );
 
 }
 
@@ -149,9 +147,8 @@ function hightlight_error_element( field_id ){
 function remove_hightlight_error_element( field_id, parent_nodes ){
 	
 	$( "#" + field_id ).parent().removeClass( 'has-error' );
-	/*if ( $( "#select-" + field_id ).length > 0 ){
-		$( "#select-" + field_id ).removeClass( 'has-error' );
-	}*/
+	$( "#" + field_id ).parent().parent().removeClass( 'has-error' );
+
 }
 
 
@@ -273,7 +270,8 @@ function validate_empty_fields( form, required, alert_message ){
 	}
 	
 	if ( error ){
-		display_error_message( alert_message, true );
+        if ( alert_message != 'none' )
+		    display_error_message( alert_message, true );
 		return false;
 	} else {
 		return true;

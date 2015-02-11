@@ -12,7 +12,7 @@ Also you can create custom form fields or methods
 # Imports
 ##########################
 from django import forms
-from wannamigrate.core.models import Country, Language
+from wannamigrate.core.models import Country, Language, Goal
 from django.forms import ModelChoiceField
 
 
@@ -59,12 +59,30 @@ class BaseForm( _BaseForm, forms.Form ):
 
 
 
+class GoalChoiceField( ModelChoiceField ):
+    """
+    Custom Model for actions, to get translation
+    """
+
+    choices = Goal.get_translated_tuple()
+
+
+
 class CountryChoiceField( ModelChoiceField ):
     """
     Custom Model for countries, to get translation
     """
 
     choices = Country.get_translated_tuple()
+
+
+
+class CountryImmigrationChoiceField( ModelChoiceField ):
+    """
+    Custom Model for countries, to get translation
+    """
+
+    choices = Country.get_translated_tuple( True )
 
 
 

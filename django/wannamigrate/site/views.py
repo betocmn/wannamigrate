@@ -10,7 +10,7 @@ the templates on site app
 ##########################
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -27,16 +27,17 @@ from wannamigrate.core.util import (
 )
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
-    EditAccountInfoForm, EditAccountPasswordForm
+    EditAccountInfoForm, EditAccountPasswordForm, VisitorGoalForm
 )
 from wannamigrate.core.models import (
-    UserStats
+    Country
 )
 from wannamigrate.points.models import (
     UserResult, CountryConfig
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
+from django.contrib.gis.geoip import GeoIP
 
 
 
@@ -45,28 +46,66 @@ from django.utils import translation
 #######################
 # HOME-PAGE VIEWS
 #######################
-def home( request, static = None ):
+def home( request ):
     """
     Home-Page - Used as a provocative landing page to conquer new users
 
     :param: request
     :return: String - The html page rendered
     """
-
-    # Initialize template data dictionary
+    
+    # Initializes template data dictionary
     template_data = {}
 
-    # Print Template
-    if static:
-        # Sets the css breakpoints to the template (From taller to smallest)
-        template_data[ 'breakpoint_prefix' ] = "static_max_"
-        template_data[ 'css_breakpoints' ] = [ "320" ]
-        return render( request, 'site/home/home_older_browsers.html', template_data )
+    # Check if there's an active session, or if not, country from IP
+    initial_data = {}
+    if 'visitor' in request.session:
+
+        initial_data['from_country'] = request.session['visitor']['from_country']
+        initial_data['to_country'] = request.session['visitor']['to_country']
+        initial_data['goal'] = request.session['visitor']['goal']
+
     else:
-        # Sets the css breakpoints to the template (From taller to smallest)
-        template_data[ 'breakpoint_prefix' ] = "max_"
-        template_data[ 'css_breakpoints' ] = [ "1920", "1366", "1280", "1024" ]
-        return render( request, 'site/home/home.html', template_data )
+
+        # Gets country code from IP address of user
+        x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get( 'REMOTE_ADDR' )
+        geo_ip = GeoIP()
+        #result = geo_ip.country( ip ) # THIS IS THE CORRECT LINE
+        result = geo_ip.country( '191.189.150.101' ) # USING THIS JUST FOR TESTING PURPOSES
+        country_code = result['country_code']
+        initial_data['from_country'] = Country.objects.get( code = country_code )
+        initial_data['to_country'] = settings.ID_COUNTRY_CANADA
+        initial_data['goal'] = 1
+
+    # Creates form
+    form = VisitorGoalForm( request.POST or None, initial = initial_data )
+
+    # If the form has been submitted and is valid...
+    if form.is_valid():
+
+        if 'visitor' not in request.session:
+
+            # Saves in DB
+            visitor_goal = form.save()
+
+            # Saves this information in the session
+            request.session['visitor'] = {}
+            request.session['visitor']['from_country'] = visitor_goal.from_country.id
+            request.session['visitor']['to_country'] = visitor_goal.to_country.id
+            request.session['visitor']['goal'] = visitor_goal.goal.id
+
+        # Redirects to dashboard
+        return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+
+    # passes form to template
+    template_data['form'] = form
+
+    # Prints Template
+    return render( request, 'site/home/home.html', template_data )
 
 
 
@@ -530,7 +569,7 @@ def maintenance( request ):
     return render( request, "site/home/maintenance.html" )
 
 
-@login_required
+
 def dashboard( request ):
     """
     Process the dashboard page.
@@ -543,73 +582,10 @@ def dashboard( request ):
     """
 
     # If User edited data, but did not calculate points by clicking in save and exit
-    try:
-        user_stats = UserStats.objects.get( user = request.user )
-    except UserStats.DoesNotExist:
-        user_stats = False
-    if user_stats and user_stats.updating_now:
-        return HttpResponseRedirect( reverse( "points:calculate_points" ) )
-
-    # Instantiate all country_config
-    country_config = CountryConfig.objects.all()
-    country_config_data = {}
-    for item in country_config:
-        if item.country_id not in country_config_data:
-            country_config_data[item.country_id] = {}
-        country_config_data[item.country_id] = item
-
-    # Initial settings
-    template_data = {}
-    template_data['au_min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
-    template_data['ca_min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
-    template_data['nz_min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
-    template_data['au_points'] = 0
-    template_data['ca_points'] = 0
-    template_data['nz_points'] = 0
-    template_data['personal_percentage'] = 0
-    template_data['language_percentage'] = 0
-    template_data['education_percentage'] = 0
-    template_data['work_percentage'] = 0
-
-    # Get User Results per country
-    try:
-        user_result = UserResult.objects.filter( user = request.user )
-    except UserResult.DoesNotExist:
-        user_result = False
-
-    # Pass total points per country to template
-    if user_result:
-        for item in user_result:
-            if item.country.id == settings.ID_COUNTRY_AUSTRALIA:
-                template_data['au_points'] = item.score_total
-            elif item.country.id == settings.ID_COUNTRY_CANADA:
-                template_data['ca_points'] = item.score_total
-            elif item.country.id == settings.ID_COUNTRY_NEW_ZEALAND:
-                template_data['nz_points'] = item.score_total
-
-    # Define the percentage CSS class to use around country flags for progress bar
-    au_percentage = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
-    ca_percentage = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
-    nz_percentage = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
-    template_data['au_percentage_css_class'] = get_dashboard_country_progress_css_class( au_percentage )
-    template_data['ca_percentage_css_class'] = get_dashboard_country_progress_css_class( ca_percentage )
-    template_data['nz_percentage_css_class'] = get_dashboard_country_progress_css_class( nz_percentage )
-
-    # pass user registration percentages to template
-    if user_stats:
-        template_data['personal_percentage'] = user_stats.percentage_personal
-        template_data['language_percentage'] = user_stats.percentage_language
-        template_data['education_percentage'] = user_stats.percentage_education
-        template_data['work_percentage'] = user_stats.percentage_work
-
-    # Define the percentage css class for progress bar on forms (personal, language, education and work)
-    template_data['personal_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['personal_percentage'] )
-    template_data['language_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['language_percentage'] )
-    template_data['education_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['education_percentage'] )
-    template_data['work_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['work_percentage'] )
+    return HttpResponse( request.session['visitor']['from_country'] )
 
     # Print Template
-    return render( request, 'site/dashboard/dashboard.html', template_data )
+    #return render( request, 'site/dashboard/dashboard.html', template_data )
 
 
 

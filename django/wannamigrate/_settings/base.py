@@ -272,11 +272,20 @@ LOCAL_APPS = (
     'wannamigrate.admin',
     'wannamigrate.site',
     'wannamigrate.points',
+    'wannamigrate.marketplace',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
+
+
+
+#########################################
+# GeoIP SETTINGS (https://docs.djangoproject.com/en/1.7/ref/contrib/gis/geoip/#std:setting-GEOIP_PATH)
+#########################################
+GEOIP_PATH = os.path.join( BASE_DIR, '..', 'wannamigrate', '_settings', 'geo_ip' )
+GEOIP_COUNTRY = 'GeoIP.dat'
 
 
 

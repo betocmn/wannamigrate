@@ -1,4 +1,4 @@
-{% extends "admin/layouts/main.html" %}
+{% extends "_layouts/admin.html" %}
 {% load staticfiles %}
 
 {% block head %}
@@ -38,7 +38,7 @@
                 
             </div>
             
-            {% include "admin/layouts/status.html" %}
+            {% include "admin/_common/status.html" %}
             
             <div class="row">
                 <div class="col-lg-12">
@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                 
-                                    {% include "admin/layouts/form.html" %}
+                                    {% include "admin/_common/form.html" %}
                                     
                                 </div>
 

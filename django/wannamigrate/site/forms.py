@@ -11,7 +11,8 @@ from django import forms
 from django.forms import TextInput, PasswordInput
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from wannamigrate.core.forms import BaseForm, BaseModelForm
+from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
+from wannamigrate.core.models import VisitorGoal, Country, Goal
 from django.contrib.auth.hashers import is_password_usable
 
 
@@ -60,6 +61,26 @@ class PasswordResetForm( BaseForm ):
             raise forms.ValidationError( _( "The two passwords do not match." ) )
 
         return cleaned_data
+
+
+
+
+
+#######################
+# VISITOR ACTION FORMS
+#######################
+class VisitorGoalForm( BaseModelForm ):
+    """
+    Form for visistor on landing-page
+    """
+
+    from_country = CountryChoiceField( queryset = Country.objects.all(), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country' } ) )
+    to_country = CountryImmigrationChoiceField( queryset = Country.objects.filter( immigration_enabled = True ), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country' } ) )
+    goal = GoalChoiceField( queryset = Goal.objects.filter( is_active = True ), empty_label = _( 'Select Goal' ), widget = forms.Select( attrs = { 'class': 'custom-select' } ) )
+
+    class Meta:
+        model = VisitorGoal
+        fields = [ 'from_country', 'goal', 'to_country' ]
 
 
 
