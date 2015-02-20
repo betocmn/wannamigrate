@@ -27,10 +27,10 @@ from wannamigrate.core.util import (
 )
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
-    EditAccountInfoForm, EditAccountPasswordForm, VisitorGoalForm
+    EditAccountInfoForm, EditAccountPasswordForm, SituationForm
 )
 from wannamigrate.core.models import (
-    Country
+    Country, UserSituation, Goal, Situation
 )
 from wannamigrate.points.models import (
     UserResult, CountryConfig
@@ -44,10 +44,89 @@ from django.contrib.gis.geoip import GeoIP
 
 
 #######################
-# Function to check user is admin
+# SITUATION FORM
 #######################
-def admin_check( user ):
-    return user.is_admin
+def get_situation_form( request ):
+    """
+    It checks if it's a visitor or a logged user to
+    return the correct situation form.
+
+    The situation form is the one on landing-page and on
+    top of every page, so it's used for many apps and views.
+
+    Situation: "I'm From Brazil and wanna study in Canada"
+
+    :param: request
+    :return Object - Form object
+    """
+
+    # initializes the dict that will store values to be selected on the form by default
+    initial_data = {}
+
+    # Checks if there's an active session from this visitor/users
+    if 'situation' in request.session and 'from_country' in request.session['situation']:
+        initial_data['from_country'] = request.session['situation']['from_country']
+        initial_data['to_country'] = request.session['situation']['to_country']
+        initial_data['goal'] = request.session['situation']['goal']
+
+    else:
+
+        # Defaults to country by IP and other default values
+        initial_data['to_country'] = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
+        initial_data['goal'] = Goal.objects.get( pk = 1 )
+        if 'situation' in request.session and 'country_code' in request.session['situation'] and request.session['situation']['country_code']:
+            initial_data['from_country'] = Country.objects.get( code = request.session['situation']['country_code'] )
+        else:
+            initial_data['from_country'] = Country.objects.get( pk = settings.ID_COUNTRY_BRAZIL )
+
+        # Makes sure sessions are set
+        request.session['situation']['from_country'] = initial_data['from_country']
+        request.session['situation']['goal'] = initial_data['goal']
+        request.session['situation']['to_country'] = initial_data['to_country']
+        try:
+            situation = Situation.objects.get(
+                from_country = initial_data['from_country'],
+                to_country = initial_data['to_country'],
+                goal = initial_data['goal']
+            )
+            request.session['situation']['total_users'] = situation.total_users
+        except Situation.DoesNotExist:
+            request.session['situation']['total_users'] = 0
+
+    # Returns filled form
+    if request.user.is_authenticated():
+        return SituationForm( request.POST or None, initial = initial_data, user = request.user )
+    else:
+        return SituationForm( request.POST or None, initial = initial_data )
+
+
+def change_situation( request ):
+    """
+    Action for the change situation form on the top of dashboard
+    and internal pages
+
+    :param: request
+    :return: Boolean
+    """
+
+    # Creates form
+    form = get_situation_form( request )
+
+    # If the form has been submitted and is valid...
+    if form.is_valid():
+
+        # Saves in DB
+        situation = form.save()
+
+        # Saves this information in the session
+        request.session['situation'] = {}
+        request.session['situation']['from_country'] = situation.from_country
+        request.session['situation']['to_country'] = situation.to_country
+        request.session['situation']['goal'] = situation.goal
+        request.session['situation']['total_users'] = situation.total_users
+
+    # Redirects to dashboard
+    return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
 
 
@@ -67,44 +146,8 @@ def home( request ):
     # Initializes template data dictionary
     template_data = {}
 
-    # Check if there's an active session, or if not, country from IP
-    initial_data = {}
-    if 'visitor' in request.session and 'from_country' in request.session['visitor']:
-
-        initial_data['from_country'] = request.session['visitor']['from_country']
-        initial_data['to_country'] = request.session['visitor']['to_country']
-        initial_data['goal'] = request.session['visitor']['goal']
-
-    else:
-
-        # Gets country code from IP address of user
-        if 'visitor' in request.session and 'country_code' in request.session['visitor'] and request.session['visitor']['country_code']:
-            initial_data['from_country'] = Country.objects.get( code = request.session['visitor']['country_code'] )
-        initial_data['to_country'] = settings.ID_COUNTRY_CANADA
-        initial_data['goal'] = 1
-
-    # Creates form
-    form = VisitorGoalForm( request.POST or None, initial = initial_data )
-
-    # If the form has been submitted and is valid...
-    if form.is_valid():
-
-        if 'visitor' not in request.session or 'from_country' not in request.session['visitor']:
-
-            # Saves in DB
-            visitor_goal = form.save()
-
-            # Saves this information in the session
-            request.session['visitor'] = {}
-            request.session['visitor']['from_country'] = visitor_goal.from_country.id
-            request.session['visitor']['to_country'] = visitor_goal.to_country.id
-            request.session['visitor']['goal'] = visitor_goal.goal.id
-
-        # Redirects to dashboard
-        return HttpResponseRedirect( reverse( 'site:dashboard' ) )
-
     # passes form to template
-    template_data['form'] = form
+    template_data['form'] = get_situation_form( request )
 
     # Prints Template
     return render( request, 'site/home/home.html', template_data )
@@ -127,8 +170,37 @@ def login( request ):
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
         # Redirects the user to the dashboard
+        return HttpResponse( request.user.email )
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
+
+    email = 'humberto@wannamigrate.com'
+    password = 'javascript3'
+    user = authenticate( email = email, password = password )
+
+    if user is not None and user.is_active:
+
+        # Logins Successfully
+        auth_login( request, user )
+
+        # creates situation session
+        try:
+            user_situation = user.usersituation
+        except UserSituation.DoesNotExist:
+            user_situation = False
+        if user_situation:
+            situation = user_situation.situation
+            request.session['situation']['from_country'] = situation.from_country
+            request.session['situation']['to_country'] = situation.to_country
+            request.session['situation']['goal'] = situation.goal
+            request.session['situation']['total_users'] = situation.total_users
+
+        # Make sure the user goes to the dashboard
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+    else:
+        return HttpResponse( 'Invalid Login' )
+
+    """
     # Instantiates the forms on the template_data
     template_data = {}
     template_data['form'] = LoginForm()
@@ -174,6 +246,7 @@ def login( request ):
         template_data['form'] = LoginForm()
         return render( request, "site/signin/container.html", template_data )
 
+    """
 
 def logout( request ):
     """
@@ -603,13 +676,14 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
-    return HttpResponse( request.session[translation.LANGUAGE_SESSION_KEY] )
+    # Initial template
+    template_data = {}
 
-    # If User edited data, but did not calculate points by clicking in save and exit
-    return HttpResponse( request.session['visitor']['from_country'] )
+    # instantiante form
+    template_data['situation_form'] = get_situation_form( request )
 
     # Print Template
-    #return render( request, 'site/dashboard/dashboard.html', template_data )
+    return render( request, 'site/dashboard/dashboard.html', template_data )
 
 
 

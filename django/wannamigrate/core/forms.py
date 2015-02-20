@@ -64,7 +64,7 @@ class GoalChoiceField( ModelChoiceField ):
     Custom Model for actions, to get translation
     """
 
-    choices = Goal.get_translated_tuple()
+    choices = Goal.get_translated_tuple( is_active = True )
 
 
 
@@ -82,7 +82,7 @@ class CountryImmigrationChoiceField( ModelChoiceField ):
     Custom Model for countries, to get translation
     """
 
-    choices = Country.get_translated_tuple( True )
+    choices = Country.get_translated_tuple( immigration_enabled = True )
 
 
 

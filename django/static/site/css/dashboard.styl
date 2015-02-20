@@ -47,6 +47,11 @@
             background-size 100% auto
             cursor pointer
 
+            a
+                display block
+                width 100%
+                height 100%
+
         .bt-nav
             display none
 
@@ -255,9 +260,13 @@
                     padding-left 0
                     &:before
                         display none
+
                 &.want
-                    padding-top 12px
-                    line-height 18px
+                    padding-top 0
+                    line-height 22px
+
+                    strong
+                        display block
 
                 &:before
                     content ''
@@ -271,7 +280,7 @@
 
                 .other-people
                     display block
-                    font-size 12px
+                    font-size 10px
                     color #777
 
 
@@ -282,10 +291,13 @@
             .from,
             .to
                 p
+                    // text-align center
+                    line-height 22px
+
                     .flag
                         content ""
                         position absolute
-                        left 55px
+                        left 0
                         top 0
                         bottom 0
                         margin auto
@@ -295,10 +307,20 @@
                     .country
                         padding-left 30px
 
+                    strong
+                        display block
+
             .from
                 p
                     .flag
-                        left 77px
+                        left 0
+                        top 20px
+
+            .to
+                p
+                    .flag
+                        left 30px
+                        top 20px
 
             .bt-change-situation
                 float right
@@ -318,7 +340,7 @@
 
             form
                 size auto 120px
-                padding 20px 25px
+                padding 20px 0
                 box()
 
                 fieldset
@@ -790,11 +812,19 @@
 
                 .top
                     margin-left 0
+                    background-color transparent
+
+                    .title
+                        padding-left 20px
+
+                        &:before
+                            left -30px
 
                 .professional
-                    size 100% 230px
+                    size 100% 180px
                     border-top 0
                     margin-left 0
+                    padding-bottom 15px
                     border-bottom 1px solid #e1e1e1
 
                     .identity
@@ -812,6 +842,9 @@
                         font-size 14px
                         color #888
 
+                    .data
+                        clear left
+
                     .bt-hire
                         position relative
                         float right
@@ -828,7 +861,7 @@
 
                     .tags
                         clear both
-                        size 100% 45px
+                        size 100% 25px
                         padding-top 20px
 
                         .tag
@@ -1228,8 +1261,8 @@
 
                 .top
                     height 40px
-                    padding-top 22px
-                    padding-bottom 10px
+                    padding-top 15px
+                    padding-bottom 20px
                     margin 0 0 0 30px
 
                     .title
@@ -1240,6 +1273,7 @@
                         box()
                         text-transform uppercase
                         fontbd()
+                        font-weight normal
                         font-size 20px
                         color #68347e
 
@@ -1249,9 +1283,10 @@
                             left 0
                             top 0
                             square 38px
-                            border-radius(50%)
-                            border 1px solid #68347e
                             replace('icon-professional-title.png')
+                            background-position center center
+                            border 1px solid #68347e
+                            border-radius 50%
 
                 .identity
                     padding 0 30px
@@ -1270,6 +1305,7 @@
                             line-height 18px
                             font-size 20px
                             fontbd()
+                            font-weight normal
                             color #68347e
 
                         .expert
@@ -1279,11 +1315,25 @@
                             font-size 15px
                             color #555
 
+                        .rate
+                            float left
+                            display block
+                            overflow hidden
+                            margin-top 8px
+                            width 115px
+
+                            .count
+                                float right
+                                margin-right 8px
+                                font-size 10px
+                                line-height 17px
+                                color #888
+
             .services
                 size 418px 40px
                 padding 30px
                 // box()
-                margin-top 22px
+                margin 22px 0 75px
                 background-color #f9f9f9
 
                 .title
@@ -1294,6 +1344,7 @@
                     box()
                     text-transform uppercase
                     fontbd()
+                    font-weight normal
                     font-size 20px
                     color #68347e
 
@@ -1306,9 +1357,216 @@
                         replace('icon-services-title.png')
 
                 .service
+                    position relative
                     float right
                     display block
+                    size 180px 50px
+                    padding 0 0 0 50px
+                    line-height 20px
+                    box()
+                    color #555
 
+                    &.skype
+                        &:before
+                            size 42px 34px
+
+                        .title-service
+                            padding-top 43px
+
+                    &.elegibility
+                        &:before
+                            size 42px 39px
+                            background-position 0 -103px
+
+                    &.visa
+                        &:before
+                            size 42px 31px
+                            background-position 0 -211px
+
+                    &.review
+                        &:before
+                            size 42px 42px
+                            background-position 0 -311px
+
+                        .title-service
+                            padding-top 43px
+
+                    &:before
+                        content ''
+                        position absolute
+                        left 0
+                        top 5px
+                        replace('icon-services.png')
+
+            .interactions
+                position relative
+                clear both
+                size 650px 450px
+                margin-bottom 50px
+                background-color #fafafa
+                border 1px solid #d7d7d7
+
+                .interaction-list
+                    position relative
+                    left -3px
+                    top -37px
+                    size 960px 35px
+                    margin 0 auto
+
+                    .interaction-item
+                        float left
+                        display block
+                        width 138px
+                        margin 0 2px 0
+                        text-align center
+
+                        .interaction-link
+                            display block
+                            height 35px
+                            line-height 35px
+                            text-decoration none
+                            border-left 1px solid #d7d7d7
+                            border-top 1px solid #d7d7d7
+                            border-right 1px solid #d7d7d7
+                            border-radius 5px 5px 0 0
+                            font-size 14px
+                            background-color #eaeaea
+                            color #888
+
+                            &.active
+                                position relative
+                                background-color #fafafa
+                                border-bottom 1px solid #fafafa
+                                color #68347e
+                                pointer-events none
+
+            .credit-card
+                clear left
+                padding 0 25px
+                box()
+
+                .field
+                    float left
+                    display block
+
+                label
+                    font-size 14px
+                    color #777
+
+                .address
+                    display block
+                    border-bottom 1px solid #d7d7d7
+
+                    strong
+                        fontsb()
+                        font-weight normal
+                        font-size 14px
+
+                    .field
+                        size 285px 50px
+                        line-height 40px
+
+                        input
+                            float left
+                            display block
+
+                        label
+                            padding-left 5px
+
+                .data
+
+                    .card-flags
+                        size 100% 50px
+                        margin 25px 0
+
+                        ul
+                            li
+                                float left
+                                size 70px 50px
+                                margin 0 5px 0
+                                border-radius(4px)
+                                border 1px solid #e1e1e1
+                                cursor pointer
+                                text-indent -9999px
+                                replace('flags-card.png')
+                                background-color #fff
+
+                                &:hover,
+                                &.active
+                                    border-color #9546ab
+
+                                &.visa
+                                    background-position 0 -2px
+
+                                &.mastercard
+                                    background-position -78px -2px
+
+                                &.diners
+                                    background-position -156px -2px
+
+                                &.american
+                                    background-position -235px -2px
+
+                    label
+                        display block
+                        padding 0 0 5px
+                        overflow hidden
+
+                    .field
+                        padding-bottom 23px
+
+                    .card-number
+                        input
+                            width 225px
+
+                    .name
+                        float right
+                        input
+                            width 350px
+
+                    .cpf
+                        margin-right 25px
+                        input
+                            width 225px
+
+                    .expiration-date
+                        width 122px
+
+                        .month
+                            float left
+                            margin-right 5px
+
+                            input
+                                width 45px
+                        .year
+                            input
+                                width 65px
+
+                    .security-code
+                        position relative
+                        float right
+
+                        &:after
+                            content ''
+                            position absolute
+                            right 5px
+                            top 22px
+                            size 47px 29px
+                            replace('icon-card-security.png')
+
+                        input
+                            width 220px
+
+                    .hire-purchase
+                        .dd
+                            border-color #d0b5db
+                        select
+                            width 225px
+
+                    .button
+                        float right
+                        width 150px
+                        margin 10px 0 0
 
     &.show-hire
         .content
@@ -1368,3 +1626,4 @@
             color #cacaca
 
 @import 'responsive'
+

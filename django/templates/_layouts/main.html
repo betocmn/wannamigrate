@@ -1,0 +1,250 @@
+{% load staticfiles %}
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        {% block head %}
+
+            {% include "_layouts/meta.html" %}
+
+            <!-- Css files -->
+            <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
+            <link rel="stylesheet" href="{% static "site/css/extra.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/dd.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/flags.css"%}" />
+
+        {% endblock head %}
+
+    </head>
+
+
+    <body class="dashboard">
+
+        <div class="wrapper">
+
+            <header>
+                <h1 class="logo"><a href="{% url 'site:dashboard' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
+                <a href="#" class="bt-nav">Menu</a>
+                <div class="interaction">
+                    <i class="shadow"></i>
+                    <nav class="nav-dashboard">
+                        <ul>
+                            <li class="nav-item"><a class="nav-link" data-link="question" href="#">{% trans "Questions" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" data-link="professionals" href="#">{% trans "Professionals" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{% trans "Extra Tools" %}</a></li>
+                        </ul>
+                    </nav>
+                    <form action="" class="search">
+                        <a class="bt-back"></a>
+                        <fieldset>
+                            <label for="search">Search</label>
+                            <input class="search-input" type="text" placeholder="{% trans "Search" %}">
+                            <button class="bt-search">{% trans "Search" %}</button>
+                        </fieldset>
+                    </form>
+                    <div class="account">
+                        <div class="thumb">
+                            <img src="{% static 'site/img/thumb-account.png' %}" alt="">
+                        </div>
+                        <a href="#" class="my-account">{% trans "Account" %}</a>
+                    </div>
+                </div>
+            </header>
+            <section id="sticky-list" class="topics">
+                <ul>
+                    <li>
+                        <strong>A</strong>
+                        <ul>
+                            <li>Amostra</li>
+                            <li>Ananindeua</li>
+                            <li>Avião branco do céu</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>B</strong>
+                        <ul>
+                            <li>Banana</li>
+                            <li>Bolacha</li>
+                            <li>Buchada</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            {% block situation %}
+                <section class="situations">
+                    <div class="situation">
+                        <div class="from field">
+                            <p>{% trans "I'm from" %} <i class="flag {{ request.session.situation.from_country.code.lower }}"></i> <strong class="country">{{ request.session.situation.from_country }}</strong></p>
+                        </div>
+                        <div class="want field">
+                            <p>{% trans "I wanna" %} <strong>{{ request.session.situation.goal }}</strong></p>
+                            {% if request.session.situation.total_users > 0 %}
+                                <span class="other-people">{% trans "And other" %} {{ request.session.situation.total_users }} {% trans "user(s)" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="to field">
+                            <p>{% trans "in" %} <i class="flag {{ request.session.situation.to_country.code.lower }}"></i><strong class="country">{{ request.session.situation.to_country }}</strong></p>
+                        </div>
+                        <a href="#" class="bt-change-situation button-transparent">{% trans "Change Situation" %}</a>
+                    </div>
+                    <div class="change-situation">
+                        <form action="{% url 'site:change_situation' %}" method="post" id="situation_form">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="from field {% if situation_form.from_country.errors %}has-error{% endif %}">
+                                    <label for="">{% trans "I'm from" %}</label>
+                                    {{ situation_form.from_country }}
+                                </div>
+                                <div class="want field {% if situation_form.goal.errors %}has-error{% endif %}">
+                                    <label for="">{% trans "I wanna" %}</label>
+                                    {{ situation_form.goal }}
+                                </div>
+                                <div class="to field {% if situation_form.to_country.errors %}has-error{% endif %}">
+                                    <label for="">{% trans "in" %}</label>
+                                    {{ situation_form.to_country }}
+                                </div>
+                            </fieldset>
+                            <input type="submit" name="situation_submit" class="button bt-change" value="{% trans "Change" %}" />
+                        </form>
+                    </div>
+                </section>
+            {% endblock situation %}
+
+            {% block content %}{% endblock content %}
+
+            <footer>
+                <a href="#" class="logo">Wanna Migrate</a>
+                <nav class="nav-footer">
+                    <ul>
+                        <li class="conditions"><a class="nav-footer-link" href="#">{% trans "Find a Professional" %}</a></li>
+                        <li class="privacy"><a class="nav-footer-link" href="#">{% trans "Questions &amp; Answers" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="#">{% trans "Extra Tools" %}</a></li>
+                    </ul>
+                </nav>
+                <p class="copyright">© WannaMigrate {% now "Y" %} {% trans "All Rights Reserved" %}</p>
+            </footer>
+
+        </div>
+
+    </body>
+
+    {% block scripts %}
+
+        <!-- JS Libraries -->
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.dd.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.stickysectionheaders.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.autocomplete.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.raty.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/libs/jquery.touchSwipe.js' %}"></script>
+
+        <!-- JS Custom Scripts -->
+        <script type="text/javascript" src="{% static 'site/js/countries.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
+
+        <!-- INLINE JS -->
+        <script type="text/javascript">
+
+
+            $( document ).ready( function() {
+
+                // set classes for country flags in the options
+                $( "select.custom-select.country option" ).each( function(){
+
+                    if ( $( this ).val() != "" ) {
+                        $( this ).attr( "data-image", "{% static 'site/img/msdropdown/icons/blank.gif' %}" );
+                        $( this ).attr( "data-imagecss", "flag " + COUNTRIES_PER_ID[$( this ).val()] );
+                        $( this ).attr( "data-title", $( this ).text() );
+                    }
+
+                });
+
+                // create custom dropdown for countries
+                $( ".custom-select" ).msDropdown();
+
+                // JS FORM Validation
+                $( "#situation_form" ).submit( function() {
+                    return validate_empty_fields( this, '{{ situation_form.get_required_fields }}', 'none' );
+                });
+
+                // Search listings
+                var currencies = [
+                    { value: 'Afghan afghani', data: 'AFN' },
+                    { value: 'Albanian lek', data: 'ALL' },
+                    { value: 'Algerian dinar', data: 'DZD' },
+                    { value: 'European euro', data: 'EUR' },
+                    { value: 'Angolan kwanza', data: 'AOA' },
+                    { value: 'East Caribbean dollar', data: 'XCD' }
+                ]
+                $('.search-input').autocomplete({
+                    lookup: currencies,
+                    showNoSuggestionNotice: true,
+                    noSuggestionNotice: '{% trans "No results found." %}',
+
+                    onSelect: function ( suggestion ) {
+                        $( 'html' ).addClass( 'show-topics' );
+                    }
+                });
+                $( '.search-input' ).keyup(function(){
+                    if ( !$( this ).val() ) {
+                        $( 'html' ).removeClass('fixed');
+                    }else{
+                        $( 'html' ).addClass('fixed');
+                    }
+                });
+                $( '#sticky-list' ).stickySectionHeaders({
+                  stickyClass     : 'sticky',
+                  headlineSelector: 'strong'
+                });
+
+            })
+
+        </script>
+
+    {% endblock scripts %}
+
+</html>

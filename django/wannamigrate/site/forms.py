@@ -12,8 +12,9 @@ from django.forms import TextInput, PasswordInput
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
-from wannamigrate.core.models import VisitorGoal, Country, Goal
+from wannamigrate.core.models import Situation, Country, Goal, UserSituation
 from django.contrib.auth.hashers import is_password_usable
+from django.db.models import F
 
 
 
@@ -67,11 +68,11 @@ class PasswordResetForm( BaseForm ):
 
 
 #######################
-# VISITOR ACTION FORMS
+# SITUATION FORMS
 #######################
-class VisitorGoalForm( BaseModelForm ):
+class SituationForm( BaseModelForm ):
     """
-    Form for visistor on landing-page
+    Form for visitors or logged users on landing-page and top of dashboard
     """
 
     from_country = CountryChoiceField( queryset = Country.objects.all(), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country' } ) )
@@ -79,8 +80,91 @@ class VisitorGoalForm( BaseModelForm ):
     goal = GoalChoiceField( queryset = Goal.objects.filter( is_active = True ), empty_label = _( 'Select Goal' ), widget = forms.Select( attrs = { 'class': 'custom-select' } ) )
 
     class Meta:
-        model = VisitorGoal
+        model = Situation
         fields = [ 'from_country', 'goal', 'to_country' ]
+
+
+    def __init__( self, *args, **kwargs ):
+        """
+        Injects user to the form
+
+        :return: Model Object
+        """
+        if 'user' in kwargs:
+            self.user = kwargs.pop( "user" )
+        super( SituationForm, self ).__init__( *args, **kwargs )
+
+
+    def save( self, commit = True ):
+        """
+        - Sets the request user before saving to the DB
+        - If combination of from_country/goal/to_country already exists, it just
+        increments the total visitors or users field, otherwise it inserts a new one.
+
+        :return: Model Object
+        """
+
+        # if it's a logged user
+        if hasattr( self, 'user' ):
+
+            # checks if user had a previous situation so we can decrement the number of users
+            try:
+                user_situation = UserSituation.objects.get( user = self.user )
+                situation = user_situation.situation
+                situation.total_users = F('total_users') - 1
+                situation.save()
+            except UserSituation.DoesNotExist:
+                pass
+
+            # searches for (or inserts) new situation
+            try:
+                situation = Situation.objects.get(
+                    from_country = self.cleaned_data["from_country"],
+                    to_country = self.cleaned_data["to_country"],
+                    goal = self.cleaned_data["goal"]
+                )
+                situation.total_users += 1
+                situation.save()
+            except Situation.DoesNotExist:
+                situation = Situation()
+                situation.from_country = self.cleaned_data["from_country"]
+                situation.to_country = self.cleaned_data["to_country"]
+                situation.goal = self.cleaned_data["goal"]
+                situation.total_visitors = 0
+                situation.total_users = 1
+                situation.save()
+
+            # saves user_situation
+            try:
+                user_situation = UserSituation.objects.get( user = self.user )
+                user_situation.situation = situation
+                user_situation.save()
+            except UserSituation.DoesNotExist:
+                user_situation = UserSituation()
+                user_situation.user = self.user
+                user_situation.situation = situation
+                user_situation.save()
+
+        # if it's a visitor
+        else:
+            try:
+                situation = Situation.objects.get(
+                    from_country = self.cleaned_data["from_country"],
+                    to_country = self.cleaned_data["to_country"],
+                    goal = self.cleaned_data["goal"]
+                )
+                situation.total_visitors = F('total_visitors') + 1
+                situation.save()
+            except Situation.DoesNotExist:
+                situation = Situation()
+                situation.from_country = self.cleaned_data["from_country"]
+                situation.to_country = self.cleaned_data["to_country"]
+                situation.goal = self.cleaned_data["goal"]
+                situation.total_visitors = 1
+                situation.total_users = 0
+                situation.save()
+
+        return situation
 
 
 

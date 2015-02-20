@@ -81,18 +81,14 @@ class Country( BaseModel ):
         return '%s' % ( _( self.name ) )
 
     @staticmethod
-    def get_translated_tuple( filter_enabled = False ):
+    def get_translated_tuple( **kwargs ):
         """
         Returns a tuple of records ordered by name, after translation.
         It's used on dropdowns on forms
 
-        :param: Boolean filter_enabled
         :return: String
         """
-        if filter_enabled:
-            countries = Country.objects.filter( immigration_enabled = True ).order_by( 'name' )
-        else:
-            countries = Country.objects.order_by( 'name' )
+        countries = Country.objects.filter( **kwargs ).order_by( 'name' )
         result = []
         for country in countries:
             result.append( ( country.id, _( country.name ) ) )
@@ -122,18 +118,20 @@ class Goal( BaseModel ):
         return '%s' % ( _( self.name ) )
 
     @staticmethod
-    def get_translated_tuple():
+    def get_translated_tuple( **kwargs ):
         """
         Returns a tuple of records ordered by name, after translation.
         It's used on dropdowns on forms
         :return: String
         """
-        goals = Goal.objects.order_by( 'name' )
+        goals = Goal.objects.filter( **kwargs ).order_by( 'name' )
         result = []
         for goal in goals:
             result.append( ( goal.id, _( goal.name ) ) )
         result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Goal' ) )] + result  )
+
+
 
 
 
@@ -183,6 +181,20 @@ class Message( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+
+class Situation( BaseModel ):
+    """
+    Situation - Stores a migration situation (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'visitor_from_country' )
+    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'visitor_to_country' )
+    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )
+    total_users = models.IntegerField( _( "total users" ), default = 1 )
+    total_visitors = models.IntegerField( _( "total visitors" ), default = 1 )
 
 
 
@@ -363,19 +375,6 @@ class UserEducationHistory( BaseModel ):
 
 
 
-class UserGoal( BaseModel ):
-    """
-    User Goal - Stores the immigration goal of an specific user (e.g. "I'm From Brazil and want to study english in Canada")
-    """
-
-    # Model Attributes
-    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'from_country' )
-    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'to_country' )
-    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )
-
-
-
 class UserLanguage( BaseModel ):
     """
     User Language Model - Ex: Stores language related information
@@ -517,6 +516,17 @@ class UserPersonalFamily( BaseModel ):
 
 
 
+class UserSituation( BaseModel ):
+    """
+    User Situation - Stores the immigration situation of an specific user (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    situation = models.ForeignKey( 'Situation', verbose_name =  _( "situation" ) )
+
+
+
 class UserStats( BaseModel ):
     """
     User Stats Model - Stores the stats about each user (percentage completed, etc)
@@ -612,15 +622,3 @@ class UserWorkExperience( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
-
-
-
-class VisitorGoal( BaseModel ):
-    """
-    Visitor Goal - Stores the immigration goal of an specific visitor (e.g. "I'm From Brazil and want to study english in Canada")
-    """
-
-    # Model Attributes
-    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'visitor_from_country' )
-    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'visitor_to_country' )
-    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )

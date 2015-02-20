@@ -166,9 +166,10 @@ function transitionSections(nextSection) {
 
 var from,
     to;
-    
+
 function addFlagSituations() {
 
+    /*
     from = $('.from.field ul .selected').find('.flag').attr('class');
     to = $('.to.field ul .selected').find('.flag').attr('class');
 
@@ -186,7 +187,7 @@ function addFlagSituations() {
         $scope.situation.country.to.text(textTo);
 
     }
-
+    */
 }
 
 if (isMobile.any768()) {
@@ -299,8 +300,9 @@ $scope.shadow.click(function(event) {
 });
 
 $('.bt-change').click(function(event) {
-    event.preventDefault();
+    /*event.preventDefault();
     addFlagSituations();
+    */
 });
 
 $('.bt-change-situation').click(function(event) {
@@ -308,12 +310,12 @@ $('.bt-change-situation').click(function(event) {
 
     setTimeout(function() {
         $('.situation .from .flag').removeClass(from);
-        $('.situation .to .flag').removeClass(to);     
+        $('.situation .to .flag').removeClass(to);
     }, 300);
 });
 
 $scope.logo.click(function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     transitionSections('home');
 });
 
@@ -345,9 +347,9 @@ $scope.interactions.interactionLink.click(function(event) {
 
 // Situation
 $('.bt-change').click(function(event) {
-    event.preventDefault();
+    /*event.preventDefault();
     $('.change-situation').fadeOut();
-    $('.situation').fadeIn();
+    $('.situation').fadeIn();*/
 });
 
 $('.bt-change-situation').click(function(event) {

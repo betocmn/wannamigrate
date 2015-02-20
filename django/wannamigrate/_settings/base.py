@@ -148,7 +148,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
-    'wannamigrate.core.middleware.VisitorLocaleMiddleware',
+    'wannamigrate.core.middleware.SituationLocaleMiddleware',
 )
 
 
@@ -300,6 +300,7 @@ GEOIP_COUNTRY = 'GeoIP.dat'
 #########################################
 
 # Database IDs for countries with immigration enabled
+ID_COUNTRY_BRAZIL = 242
 ID_COUNTRY_AUSTRALIA = 117
 ID_COUNTRY_NEW_ZEALAND = 131
 ID_COUNTRY_CANADA = 204

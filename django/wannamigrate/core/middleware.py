@@ -22,12 +22,12 @@ from django.contrib.gis.geoip import GeoIP
 ##########################
 # Class definitions
 ##########################
-class VisitorLocaleMiddleware( object ):
+class SituationLocaleMiddleware( object ):
 
     def process_request( self, request ):
 
         # if this is a guest visitor's first visit
-        if not request.user.is_authenticated() and 'visitor' not in request.session:
+        if not request.user.is_authenticated() and 'situation' not in request.session:
 
             # Gets country code from IP address of user
             x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
@@ -36,13 +36,14 @@ class VisitorLocaleMiddleware( object ):
             else:
                 ip = request.META.get( 'REMOTE_ADDR' )
             geo_ip = GeoIP()
-            #result = geo_ip.country( ip ) # THIS IS THE CORRECT LINE
-            result = geo_ip.country( '191.189.150.101' ) # USING THIS JUST FOR TESTING PURPOSES
+            result = geo_ip.country( ip )
+            if not settings.IS_PROD:
+                result = geo_ip.country( '191.189.150.101' )
             country_code = result['country_code']
 
             # stores country_code in session to be used on views
-            request.session['visitor'] = {}
-            request.session['visitor']['country_code'] = country_code
+            request.session['situation'] = {}
+            request.session['situation']['country_code'] = country_code
 
             # sets language
             lower_country_code = country_code.lower()

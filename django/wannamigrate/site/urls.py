@@ -48,6 +48,9 @@ urlpatterns = patterns('',
     # Dashboard
     url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),
 
+    # Change Situation
+    url( r'^change-situation/$', views.change_situation, name = 'change_situation' ),
+
     # Set language
     url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),    
 
