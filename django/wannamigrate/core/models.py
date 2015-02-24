@@ -81,13 +81,14 @@ class Country( BaseModel ):
         return '%s' % ( _( self.name ) )
 
     @staticmethod
-    def get_translated_tuple():
+    def get_translated_tuple( **kwargs ):
         """
         Returns a tuple of records ordered by name, after translation.
         It's used on dropdowns on forms
+
         :return: String
         """
-        countries = Country.objects.order_by( 'name' )
+        countries = Country.objects.filter( **kwargs ).order_by( 'name' )
         result = []
         for country in countries:
             result.append( ( country.id, _( country.name ) ) )
@@ -115,6 +116,22 @@ class Goal( BaseModel ):
         :return: String
         """
         return '%s' % ( _( self.name ) )
+
+    @staticmethod
+    def get_translated_tuple( **kwargs ):
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+        :return: String
+        """
+        goals = Goal.objects.filter( **kwargs ).order_by( 'name' )
+        result = []
+        for goal in goals:
+            result.append( ( goal.id, _( goal.name ) ) )
+        result = sorted( result, key = lambda x: x[1] )
+        return tuple( [( '', _( 'Select Goal' ) )] + result  )
+
+
 
 
 
@@ -164,6 +181,20 @@ class Message( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+
+class Situation( BaseModel ):
+    """
+    Situation - Stores a migration situation (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'visitor_from_country' )
+    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'visitor_to_country' )
+    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )
+    total_users = models.IntegerField( _( "total users" ), default = 1 )
+    total_visitors = models.IntegerField( _( "total visitors" ), default = 1 )
 
 
 
@@ -344,19 +375,6 @@ class UserEducationHistory( BaseModel ):
 
 
 
-class UserGoal( BaseModel ):
-    """
-    User Goal - Stores the immigration goal of an specific user (e.g. "I'm From Brazil and want to study english in Canada")
-    """
-
-    # Model Attributes
-    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
-    from_country = models.ForeignKey( 'Country', verbose_name =  _( "from country" ), related_name = 'from_country' )
-    to_country = models.ForeignKey( 'Country', verbose_name =  _( "to country" ), related_name = 'to_country' )
-    goal = models.ForeignKey( 'Goal', verbose_name =  _( "goal" ) )
-
-
-
 class UserLanguage( BaseModel ):
     """
     User Language Model - Ex: Stores language related information
@@ -498,6 +516,17 @@ class UserPersonalFamily( BaseModel ):
 
 
 
+class UserSituation( BaseModel ):
+    """
+    User Situation - Stores the immigration situation of an specific user (e.g. "I'm From Brazil and want to study english in Canada")
+    """
+
+    # Model Attributes
+    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    situation = models.ForeignKey( 'Situation', verbose_name =  _( "situation" ) )
+
+
+
 class UserStats( BaseModel ):
     """
     User Stats Model - Stores the stats about each user (percentage completed, etc)
@@ -510,6 +539,11 @@ class UserStats( BaseModel ):
     percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )
     percentage_work = models.IntegerField( _( "percentage work" ), blank = True, null = True, default = 0 )
     updating_now = models.BooleanField( _( 'updating now' ), default = False )
+    total_answers = models.IntegerField( _( "total answers" ), blank = True, null = True, default = 0 )
+    total_questions = models.IntegerField( _( "total questions" ), blank = True, null = True, default = 0 )
+    total_profile_views = models.IntegerField( _( "total profile views" ), blank = True, null = True, default = 0 )
+    total_contracts = models.IntegerField( _( "total contracts" ), blank = True, null = True, default = 0 )
+    total_reviews = models.IntegerField( _( "total reviews" ), blank = True, null = True, default = 0 )
 
 
 
