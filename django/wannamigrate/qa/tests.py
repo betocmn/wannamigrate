@@ -69,6 +69,10 @@ class ModelingTest( TestCase ):
         result = Post.objects.filter( post_type = settings.QA_POST_TYPE_BLOGPOST_ID, parent__isnull = False )
         self.assertEqual( len( result ), 0 )
 
+        # A blogpost can not be anonymous
+        result = Post.objects.filter( post_type = settings.QA_POST_TYPE_BLOGPOST_ID, is_anonymous = True )
+        self.assertEqual( len( result ), 0 )
+
         # A comment should not have a title
         result = Post.objects.filter( post_type = settings.QA_POST_TYPE_COMMENT_ID ).exclude( title = "" )
         self.assertEqual( len( result ), 0 )

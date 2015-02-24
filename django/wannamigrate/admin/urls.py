@@ -65,4 +65,12 @@ urlpatterns = patterns('',
     url( r'^occupations/edit/(?P<occupation_id>\d+)$', views.occupation_edit, name='occupation_edit' ),
     url( r'^occupations/delete/(?P<occupation_id>\d+)$', views.occupation_delete, name='occupation_delete' ),
 
+    # Questions and Answers
+    url( r'^qa/posts$', views.qa_list_post, name = "qa_list_post" ),
+    url( r'^qa/post/add$', views.qa_add_post, name = "qa_add_post" ),
+    url( r'^qa/post/view/(?P<post_id>\d+)$', views.qa_view_post, name = "qa_view_post" ),
+    url( r'^qa/post/edit/(?P<post_id>\d+)$', views.qa_edit_post, name = "qa_edit_post" ),
+    url( r'^qa/post/delete/(?P<post_id>\d+)$', views.qa_delete_post, name = "qa_delete_post" ),
+
+
 )

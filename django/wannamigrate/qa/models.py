@@ -58,6 +58,9 @@ class Post( BaseModel ):
             ( "admin_list_post", "[ADMIN] Can list posts" ),
         )
 
+    def __str__( self ):
+        return self.title if len( self.title ) else self.body
+
 
 
 class PostType( BaseModel ):
@@ -85,7 +88,7 @@ class PostHistory( BaseModel ):
     title = models.CharField( max_length = 255, default = "", blank = True )
     # The content of this post.
     body = models.TextField( default = "", blank = True )
-    # The date of the last acitivity on this post (new answers, editions, etc)
+    # The date when the post was created
     written_date = models.DateTimeField()
 
     # META Options: Sets the possible permissions required by this model.

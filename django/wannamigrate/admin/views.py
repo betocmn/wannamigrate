@@ -21,7 +21,7 @@ from django.db import transaction
 from django.db.models import ProtectedError
 from wannamigrate.admin.forms import (
     LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm,
-    BaseAnswerFormSet, OccupationForm, UserForm
+    BaseAnswerFormSet, OccupationForm, UserForm, PostForm
 )
 from wannamigrate.core.models import (
     Country, UserStats
@@ -33,9 +33,12 @@ from wannamigrate.points.models import (
 from wannamigrate.core.util import build_datatable_json
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.decorators import restrict_internal_ips
-
-
-
+from wannamigrate.qa.models import (
+    Post, PostType, PostHistory, Topic
+)
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
+from django.utils import timezone
 
 
 #######################
@@ -1048,3 +1051,130 @@ def occupation_delete( request, occupation_id ):
     # Redirect with success message
     messages.success( request, 'occupation was successfully deleted.' )
     return HttpResponseRedirect( reverse( 'admin:occupations' ) )
+
+
+
+
+
+#################################
+# Q&A VIEWS
+#################################
+@restrict_internal_ips
+@permission_required( 'qa.admin_list_post', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def qa_list_post( request ):
+    """
+    Lists Questions and BlogPosts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    posts = Post.objects.all()
+    paginator = Paginator( posts, settings.DEFAULT_LISTING_ITEMS_PER_PAGE ) 
+
+    # Checks if the page number was passed.
+    page = request.GET.get( 'page' )
+    try:
+        posts = paginator.page( page )
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        posts = paginator.page( 1 )
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        posts = paginator.page( paginator.num_pages )
+
+    return render( request, "admin/qa/post/list.html", { "posts": posts } )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_add_post', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def qa_add_post( request ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    # Instantiate FORM
+    form = PostForm( request.POST or None )
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+
+        # Sets the last_activity_date field and saves the post.
+        post = form.save()
+
+        messages.success( request, 'Post successfully created.' )
+
+        # Redirect with success message
+        return HttpResponseRedirect( reverse( 'admin:qa_view_post', args = ( post.id, ) ) )
+
+    # Template data
+    context = { 
+        'form': form, 
+        'cancel_url': reverse( 'admin:qa_list_post' ),
+        'topics' : Topic.objects.values( "id", "name" ),
+    }
+
+    return render( request, 'admin/qa/post/add.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_view_post', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def qa_view_post( request, post_id ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    context = {
+        'post' : Post.objects.get( id = post_id ),
+        'answers' : Post.objects.filter( parent__id = post_id, post_type__id = settings.QA_POST_TYPE_ANSWER_ID ),
+        'post_history' : PostHistory.objects.filter( original_post__id = post_id )
+    }
+    
+    return render( request, 'admin/qa/post/view.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_edit_post', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def qa_edit_post( request, post_id ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    context = {}
+    
+    return HttpResponse( "editing post {0}".format( post_id ) )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_delete_post', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def qa_delete_post( request, post_id ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    # TODO: Object or None
+    post = get_object_or_404( Post, pk = post_id )
+    if post:
+        post.delete()
+        messages.success( request, "Post( id = {0}) successfully deleted.".format( post_id ) )
+    else:
+        messages.error( request, "Post( id = {0}) not found.".format( post_id ) )
+    
+    return HttpResponseRedirect( reverse( "admin:qa_list_post" ) )

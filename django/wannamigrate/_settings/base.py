@@ -370,3 +370,12 @@ QA_POST_TYPE_QUESTION_ID = 4
 QA_VOTE_TYPE_UPVOTE = 1
 QA_VOTE_TYPE_DOWNVOTE = 2
 QA_VOTE_TYPE_REPORT = 3
+
+
+
+
+
+###########################
+# Global constants
+###########################
+DEFAULT_LISTING_ITEMS_PER_PAGE = 15
