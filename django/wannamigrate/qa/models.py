@@ -51,6 +51,7 @@ class Post( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
+<<<<<<< HEAD
             ( "admin_add_post", "[ADMIN] Can add post" ),
             ( "admin_edit_post", "[ADMIN] Can edit post" ),
             ( "admin_delete_post", "[ADMIN] Can delete post" ),
@@ -61,6 +62,15 @@ class Post( BaseModel ):
     def __str__( self ):
         return self.title if len( self.title ) else self.body
 
+=======
+            ( "qa_admin_add_post", "[ADMIN] Can add post" ),
+            ( "qa_admin_edit_post", "[ADMIN] Can edit post" ),
+            ( "qa_admin_delete_post", "[ADMIN] Can delete post" ),
+            ( "qa_admin_view_post", "[ADMIN] Can view post" ),
+            ( "qa_admin_list_post", "[ADMIN] Can list posts" ),
+        )
+
+>>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
 
 
 class PostType( BaseModel ):
@@ -95,11 +105,19 @@ class PostHistory( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
+<<<<<<< HEAD
             ( "admin_add_post_history", "[ADMIN] Can add post history" ),
             ( "admin_edit_post_history", "[ADMIN] Can edit post history" ),
             ( "admin_delete_post_history", "[ADMIN] Can delete post history" ),
             ( "admin_view_post_history", "[ADMIN] Can view post history" ),
             ( "admin_list_post_history", "[ADMIN] Can list post history" ),
+=======
+            ( "qa_admin_add_post_history", "[ADMIN] Can add post history" ),
+            ( "qa_admin_edit_post_history", "[ADMIN] Can edit post history" ),
+            ( "qa_admin_delete_post_history", "[ADMIN] Can delete post history" ),
+            ( "qa_admin_view_post_history", "[ADMIN] Can view post history" ),
+            ( "qa_admin_list_post_history", "[ADMIN] Can list post history" ),
+>>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -118,11 +136,19 @@ class Topic( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
+<<<<<<< HEAD
             ( "admin_add_topic", "[ADMIN] Can add topic" ),
             ( "admin_edit_topic", "[ADMIN] Can edit topic" ),
             ( "admin_delete_topic", "[ADMIN] Can delete topic" ),
             ( "admin_view_topic", "[ADMIN] Can view topic" ),
             ( "admin_list_topic", "[ADMIN] Can list topic" ),
+=======
+            ( "qa_admin_add_topic", "[ADMIN] Can add topic" ),
+            ( "qa_admin_edit_topic", "[ADMIN] Can edit topic" ),
+            ( "qa_admin_delete_topic", "[ADMIN] Can delete topic" ),
+            ( "qa_admin_view_topic", "[ADMIN] Can view topic" ),
+            ( "qa_admin_list_topic", "[ADMIN] Can list topic" ),
+>>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -143,11 +169,19 @@ class Vote( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
+<<<<<<< HEAD
             ( "admin_add_vote", "[ADMIN] Can add vote" ),
             ( "admin_edit_vote", "[ADMIN] Can edit vote" ),
             ( "admin_delete_vote", "[ADMIN] Can delete vote" ),
             ( "admin_view_vote", "[ADMIN] Can view vote" ),
             ( "admin_list_vote", "[ADMIN] Can list vote" ),
+=======
+            ( "qa_admin_add_vote", "[ADMIN] Can add vote" ),
+            ( "qa_admin_edit_vote", "[ADMIN] Can edit vote" ),
+            ( "qa_admin_delete_vote", "[ADMIN] Can delete vote" ),
+            ( "qa_admin_view_vote", "[ADMIN] Can view vote" ),
+            ( "qa_admin_list_vote", "[ADMIN] Can list vote" ),
+>>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -162,4 +196,8 @@ class VoteType( BaseModel ):
 
     # META Options: Sets the possible permissions required by this model.
     class Meta:
+<<<<<<< HEAD
         default_permissions = []    # Not listed
+=======
+        default_permissions = []    # Not listed
+>>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
