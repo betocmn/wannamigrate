@@ -14,7 +14,7 @@
 
             <div class="row">            
                 <div class="col-lg-12">
-                    <h1 class="page-header">Post details</h1>
+                    <h1 class="page-header">{{ post.post_type.name }} details</h1>
                 </div>
             </div>
             
@@ -37,11 +37,6 @@
                                         <dt>Owner:</dt>
                                         <dd>
                                             <a href="{% url 'admin:admin_user_details' post.owner.id %}">{{ post.owner.email }}</a>
-                                        </dd>
-
-                                        <dt>Parent:</dt>
-                                        <dd>
-                                            <a href="{% url 'admin:qa_view_post' post.id %}">{{ post.parent }}</a>
                                         </dd>
 
                                         <dt>Type:</dt>
@@ -111,7 +106,7 @@
                         <div class="panel panel-default">
 
                             <div class="panel-heading">
-                                Answer ID# {{ history.id }}
+                                Post History ID# {{ history.id }}
                             </div>
                                                     
                             <div class="panel-body">
@@ -121,27 +116,14 @@
                                         <dl class="dl-horizontal">
                                             
                                             <dt>Title:</dt>
-                                            <dd>{{ history.title }}</dd>
+                                            <dd>{{ history.title|str_or_dash }}</dd>
 
                                             <dt>Body:</dt>
-                                            <dd>{{ history.body }}</dd>
+                                            <dd>{{ history.body|str_or_dash }}</dd>
 
-                                            <dt>Is Anonymous?</dt>
-                                            <dd>
-                                                {% if history.is_anonymous %} 
-                                                    Yes
-                                                {% else %}
-                                                    No
-                                                {% endif %}
-                                            </dd>
+                                            <dt>Written in:</dt>
+                                            <dd>{{ history.written_date }}</dd>
                                         </dl>
-                                        
-                                        <div class="text-center buttons">
-                                            <a href="{% url 'admin:qa_list_post' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
-                                            <a href="{% url 'admin:qa_edit_post' post.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
-                                            <a href="#" onclick="confirm_delete( '{% url 'admin:qa_delete_post' post.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
-                                        </div>
-                                        
                                     </div>
 
                                 </div>

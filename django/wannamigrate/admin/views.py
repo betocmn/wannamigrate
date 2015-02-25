@@ -21,7 +21,8 @@ from django.db import transaction
 from django.db.models import ProtectedError
 from wannamigrate.admin.forms import (
     LoginForm, MyAccountForm, AdminUserForm, GroupForm, QuestionForm, AnswerForm,
-    BaseAnswerFormSet, OccupationForm, UserForm, PostForm
+    BaseAnswerFormSet, OccupationForm, UserForm, 
+    PostForm, EditPostForm
 )
 from wannamigrate.core.models import (
     Country, UserStats
@@ -1070,7 +1071,7 @@ def qa_list_post( request ):
     :return: String
     """
 
-    posts = Post.objects.all()
+    posts = Post.objects.filter( post_type_id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID,settings.QA_POST_TYPE_QUESTION_ID ] )
     paginator = Paginator( posts, settings.DEFAULT_LISTING_ITEMS_PER_PAGE ) 
 
     # Checks if the page number was passed.
@@ -1103,12 +1104,9 @@ def qa_add_post( request ):
 
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
-
-        # Sets the last_activity_date field and saves the post.
+        # Saves the post
         post = form.save()
-
         messages.success( request, 'Post successfully created.' )
-
         # Redirect with success message
         return HttpResponseRedirect( reverse( 'admin:qa_view_post', args = ( post.id, ) ) )
 
@@ -1147,15 +1145,36 @@ def qa_view_post( request, post_id ):
 @user_passes_test( admin_check )
 def qa_edit_post( request, post_id ):
     """
-    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+    Edit a post. It should create an entry on the PostHistory and edit the content of the given post.
 
     :param: request
     :return: String
     """
-
-    context = {}
+    # Gets the information about the post being edited
+    post_to_edit = Post.objects.get( pk = post_id )
     
-    return HttpResponse( "editing post {0}".format( post_id ) )
+    # Fill up the form with post data
+    form = EditPostForm( instance = post_to_edit )
+    
+    # if data submitted, fill form
+    if request.POST:
+        form = EditPostForm( request.POST, instance = post_to_edit )
+
+        # If form was submitted, it tries to validate and save data
+        if form.is_valid():
+            post = form.save()
+            messages.success( request, 'Post successfully updated.' )
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'admin:qa_view_post', args = ( post.id, ) ) )
+    
+
+    context = {
+        'form' : form,
+        'post_type' : post_to_edit.post_type.name,
+        'cancel_url': reverse( 'admin:qa_list_post' ),
+    }
+    
+    return render( request, 'admin/qa/post/edit.html', context )
 
 
 @restrict_internal_ips

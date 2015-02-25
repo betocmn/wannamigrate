@@ -19,6 +19,7 @@ from wannamigrate.qa.models import Post, PostType, Topic, PostHistory
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.db import transaction
 
 
 #######################
@@ -327,69 +328,21 @@ class PostForm( BaseModelForm ):
         self.fields[ "owner" ].widget.attrs['id'] = "owner_id"
 
 
-
-    def clean( self ):
-        """ Cleans form data """
-        cleaned_data = super( PostForm, self ).clean()
-
-        # Gets form stuffs
-        parent = cleaned_data.get( "parent" )
-        post_type = cleaned_data.get( "post_type" )
-        title = cleaned_data.get( "title" )
-        body = cleaned_data.get( "body" )
-        is_anonymous = cleaned_data.get( "is_anonymous" )
-        related_topics = cleaned_data.get( "related_topics" )
-
-        # Post extra-validation
-        if post_type.id == settings.QA_POST_TYPE_ANSWER_ID:
-
-            # An answer should have a body.
-            if len( body ) == 0:
-                self.add_error( "body", _( "You should provide a body to your answer." ) )
-
-            if parent is None or parent.post_type.id != settings.QA_POST_TYPE_QUESTION_ID:
-                self.add_error( "parent", _( "You should provide a QUESTION parent to your answer." ) )
-        
-        elif post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
-            # A question should have a title.
-            if len( title ) == 0:
-                self.add_error( "title", _( "You should provide a title to your question." ) )
-        
-        elif post_type.id == settings.QA_POST_TYPE_BLOGPOST_ID:
-            # A blog post shoud have a title and a body.
-            if len( title ) == 0:
-                self.add_error( "title", _( "You should provide a title to your post." ) )
-            if len( body ) == 0:
-                self.add_error( "body", _( "You should provide a body to your post." ) )
-            if is_anonymous:
-                self.add_error( "is_anonymous", _( "A Blog Post can not be anonymous." ) )
-        
-        elif post_type.id == settings.QA_POST_TYPE_COMMENT_ID:
-            # A comment should have a body
-            if len( body ) == 0:
-                self.add_error( "body", _( "You should provide a body to your comment." ) )
-            # A comment should have a parent.
-            if parent is None:
-                self.add_error( "parent", _( "You should provide a parent to your comment." ) )
-        
-        else:
-            # Nothing valid was received on the form. Invalidate the post type field.
-            self.add_error( "post_type", _( "Please provide a valid post type." ) )
-
-        # Return cleaned data
-        return cleaned_data
-        
-
     def save( self, commit = True ):
-        instance = super( PostForm, self ).save( commit = False )
-        instance.last_activity_date = timezone.now()
-        
-        if commit:
-            instance.save()
-            for topic in self.cleaned_data['related_topics']:
-                instance.related_topics.add( topic )
+        """
+            Saves the post info taking care of add the related topics to it. 
+            :param: commit Indicates wether to save the model or not
+        """
+        with transaction.atomic():
+            instance = super( PostForm, self ).save( commit = False )
+            instance.last_activity_date = timezone.now()
+            
+            if commit:
+                instance.save()
+                for topic in self.cleaned_data['related_topics']:
+                    instance.related_topics.add( topic )
 
-        return instance
+            return instance
 
 
 
@@ -405,43 +358,36 @@ class EditPostForm( BaseModelForm ):
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
-        super( PostForm, self ).__init__( *args, **kwargs )
+        super( EditPostForm, self ).__init__( *args, **kwargs )
 
         # Overrides the choices to the related_topics field.
         self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
         self.fields[ "related_topics" ].required = True
 
-"""
-    def clean( self ):
-        cleaned_data = super( PostForm, self ).clean()
-
-        # Gets form stuffs
-        title = cleaned_data.get( "title" )
-        body = cleaned_data.get( "body" )
-        is_anonymous = cleaned_data.get( "is_anonymous" )
-        related_topics = cleaned_data.get( "related_topics" )
-
-        # return cleaned data
-        return cleaned_data
-"""     
 
     def save( self, commit = True ):
-        instance = super( EditPostForm, self )
+        with transaction.atomic():
+            instance = super( EditPostForm, self ).save( commit = False )
+            previous_data = Post.objects.get( pk = instance.id )
 
-        # Creates a post history with previous data
-        history = PostHistory()
-        history.original_post_id = instance.id
-        history.title = instance.title
-        history.body = instance.body
-        history.written_date = instance.modified_date
-        history.save()
+            if commit:
 
-        instance.last_activity_date = timezone.now()
-        
-        if commit:
-            instance.save()
-            instance.related_topics.clear()
-            for topic in self.cleaned_data['related_topics']:
-                instance.related_topics.add( topic )
+                # Verifies if the title or body changed to create a post history.
+                if previous_data.title != instance.title or previous_data.body != instance.body:
+                    # Creates a post history with previous data
+                    history = PostHistory()
+                    history.original_post_id = previous_data.id
+                    history.title = previous_data.title
+                    history.body = previous_data.body
+                    # As a PostHistory will always be created when the post be edited(modified),
+                    # the modified date represents the date of creation of the post edition.
+                    history.written_date = previous_data.modified_date
+                    history.save()
+                
+                instance.last_activity_date = timezone.now()
+                instance.save()
+                instance.related_topics.clear()
+                for topic in self.cleaned_data['related_topics']:
+                    instance.related_topics.add( topic )
 
-        return instance
+            return instance

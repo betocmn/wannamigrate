@@ -11,8 +11,8 @@ from django.db import models
 from wannamigrate.core.models import BaseModel
 from wannamigrate.core.models import User
 from django.utils.translation import ugettext_lazy as _
-
-
+from django.conf import settings
+from django.core.exceptions import ValidationError
 
 
 
@@ -51,7 +51,6 @@ class Post( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
-<<<<<<< HEAD
             ( "admin_add_post", "[ADMIN] Can add post" ),
             ( "admin_edit_post", "[ADMIN] Can edit post" ),
             ( "admin_delete_post", "[ADMIN] Can delete post" ),
@@ -62,15 +61,47 @@ class Post( BaseModel ):
     def __str__( self ):
         return self.title if len( self.title ) else self.body
 
-=======
-            ( "qa_admin_add_post", "[ADMIN] Can add post" ),
-            ( "qa_admin_edit_post", "[ADMIN] Can edit post" ),
-            ( "qa_admin_delete_post", "[ADMIN] Can delete post" ),
-            ( "qa_admin_view_post", "[ADMIN] Can view post" ),
-            ( "qa_admin_list_post", "[ADMIN] Can list posts" ),
-        )
+    def clean( self ):
+        errors = {}
 
->>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
+        # Post extra-validation
+        if self.post_type.id == settings.QA_POST_TYPE_ANSWER_ID:
+
+            # An answer should have a body.
+            if len( self.body ) == 0:
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
+
+            if self.parent is None or self.parent.post_type.id != settings.QA_POST_TYPE_QUESTION_ID:
+                errorserrors.setdefault( "parent", [] ).append( _( "You should provide a QUESTION parent to your answer." ) )
+        
+        elif self.post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
+            # A question should have a title.
+            if len( self.title ) == 0:
+                errors.setdefault( "title", [] ).append( _( "You should provide a title to your question." ) )
+        
+        elif self.post_type.id == settings.QA_POST_TYPE_BLOGPOST_ID:
+            # A blog post shoud have a title and a body.
+            if len( self.title ) == 0:
+                errors.setdefault( "title", [] ).append( _( "You should provide a title to your post." ) )
+            if len( self.body ) == 0:
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your post." ) )
+            if self.is_anonymous:
+                errors.setdefault( "is_anonymous", [] ).append( _( "A Blog Post can not be anonymous." ) )
+        
+        elif self.post_type.id == settings.QA_POST_TYPE_COMMENT_ID:
+            # A comment should have a body
+            if len( self.body ) == 0:
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your comment." ) )
+            # A comment should have a parent.
+            if self.parent is None:
+                errors.setdefault( "parent", [] ).append( _( "You should provide a parent to your comment." ) )
+
+        else:
+            # Nothing valid was received on the form. Invalidate the post type field.
+            errors.setdefault( "post_type", [] ).append( _( "Please provide a valid post type." ) )
+
+        if len( errors ) > 0:
+            raise ValidationError( errors )
 
 
 class PostType( BaseModel ):
@@ -105,19 +136,11 @@ class PostHistory( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
-<<<<<<< HEAD
             ( "admin_add_post_history", "[ADMIN] Can add post history" ),
             ( "admin_edit_post_history", "[ADMIN] Can edit post history" ),
             ( "admin_delete_post_history", "[ADMIN] Can delete post history" ),
             ( "admin_view_post_history", "[ADMIN] Can view post history" ),
             ( "admin_list_post_history", "[ADMIN] Can list post history" ),
-=======
-            ( "qa_admin_add_post_history", "[ADMIN] Can add post history" ),
-            ( "qa_admin_edit_post_history", "[ADMIN] Can edit post history" ),
-            ( "qa_admin_delete_post_history", "[ADMIN] Can delete post history" ),
-            ( "qa_admin_view_post_history", "[ADMIN] Can view post history" ),
-            ( "qa_admin_list_post_history", "[ADMIN] Can list post history" ),
->>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -136,19 +159,11 @@ class Topic( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
-<<<<<<< HEAD
             ( "admin_add_topic", "[ADMIN] Can add topic" ),
             ( "admin_edit_topic", "[ADMIN] Can edit topic" ),
             ( "admin_delete_topic", "[ADMIN] Can delete topic" ),
             ( "admin_view_topic", "[ADMIN] Can view topic" ),
             ( "admin_list_topic", "[ADMIN] Can list topic" ),
-=======
-            ( "qa_admin_add_topic", "[ADMIN] Can add topic" ),
-            ( "qa_admin_edit_topic", "[ADMIN] Can edit topic" ),
-            ( "qa_admin_delete_topic", "[ADMIN] Can delete topic" ),
-            ( "qa_admin_view_topic", "[ADMIN] Can view topic" ),
-            ( "qa_admin_list_topic", "[ADMIN] Can list topic" ),
->>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -169,19 +184,11 @@ class Vote( BaseModel ):
     class Meta:
         default_permissions = []
         permissions = (
-<<<<<<< HEAD
             ( "admin_add_vote", "[ADMIN] Can add vote" ),
             ( "admin_edit_vote", "[ADMIN] Can edit vote" ),
             ( "admin_delete_vote", "[ADMIN] Can delete vote" ),
             ( "admin_view_vote", "[ADMIN] Can view vote" ),
             ( "admin_list_vote", "[ADMIN] Can list vote" ),
-=======
-            ( "qa_admin_add_vote", "[ADMIN] Can add vote" ),
-            ( "qa_admin_edit_vote", "[ADMIN] Can edit vote" ),
-            ( "qa_admin_delete_vote", "[ADMIN] Can delete vote" ),
-            ( "qa_admin_view_vote", "[ADMIN] Can view vote" ),
-            ( "qa_admin_list_vote", "[ADMIN] Can list vote" ),
->>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
         )
 
 
@@ -196,8 +203,4 @@ class VoteType( BaseModel ):
 
     # META Options: Sets the possible permissions required by this model.
     class Meta:
-<<<<<<< HEAD
         default_permissions = []    # Not listed
-=======
-        default_permissions = []    # Not listed
->>>>>>> ef2dd8818d5c30f7754dcd1ccbc8e149f96884bc
