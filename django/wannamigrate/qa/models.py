@@ -72,7 +72,7 @@ class Post( BaseModel ):
                 errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
 
             if self.parent is None or self.parent.post_type.id != settings.QA_POST_TYPE_QUESTION_ID:
-                errorserrors.setdefault( "parent", [] ).append( _( "You should provide a QUESTION parent to your answer." ) )
+                errors.setdefault( "parent", [] ).append( _( "You should provide a QUESTION parent to your answer." ) )
         
         elif self.post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
             # A question should have a title.

@@ -303,9 +303,9 @@ class OccupationForm( BaseModelForm ):
 ###################################
 # Q&A Forms
 ###################################
-class PostForm( BaseModelForm ):
+class AddPostForm( BaseModelForm ):
     """
-    Form to create post on admin.
+    Form to create a Question or a BlogPost.
     """
     
     class Meta:
@@ -315,7 +315,7 @@ class PostForm( BaseModelForm ):
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
-        super( PostForm, self ).__init__( *args, **kwargs )
+        super( AddPostForm, self ).__init__( *args, **kwargs )
 
         # Overrides the choices to the post_type field.
         self.fields[ "post_type" ].choices = PostType.objects.filter( id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ] ).values_list( "id", "name" )
@@ -334,7 +334,7 @@ class PostForm( BaseModelForm ):
             :param: commit Indicates wether to save the model or not
         """
         with transaction.atomic():
-            instance = super( PostForm, self ).save( commit = False )
+            instance = super( AddPostForm, self ).save( commit = False )
             instance.last_activity_date = timezone.now()
             
             if commit:
@@ -343,6 +343,46 @@ class PostForm( BaseModelForm ):
                     instance.related_topics.add( topic )
 
             return instance
+
+
+
+class AddAnswerForm( BaseModelForm ):
+    """
+        Form to create an Answer or a Comment.
+    """
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Post
+        fields = [ "owner", "body", "is_anonymous", "parent", "post_type" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+
+        # Removes the parent param from kwargs.
+        parent = kwargs.pop( "parent" )
+
+        # Defines which post_type I should use according to parent's type.
+        if parent.post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
+            post_type = PostType.objects.get( pk = settings.QA_POST_TYPE_ANSWER_ID )
+        elif parent.post_type.id in [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_ANSWER_ID ]:
+            post_type = PostType.objects.get( pk = settings.QA_POST_TYPE_COMMENT_ID )
+        else:
+            raise ValidationError( "Cannot add an answer to a comment." )
+
+        
+        # Initialize data
+        super( AddAnswerForm, self ).__init__( *args, **kwargs )
+
+        # Sets the parent field to a hidden input and sets its value.
+        self.fields[ "parent" ].widget = forms.HiddenInput()
+        self.fields[ "parent" ].initial = parent
+
+        # Sets the post_type field to a hidden input and sets its value.
+        self.fields[ "post_type" ].widget = forms.HiddenInput()
+        self.fields[ "post_type" ].initial = post_type
+
+        # Sets the ID of the owner field widget.
+        self.fields[ "owner" ].widget.attrs['id'] = "owner_id"
 
 
 

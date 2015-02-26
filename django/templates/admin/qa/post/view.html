@@ -79,6 +79,7 @@
                                         <a href="{% url 'admin:qa_list_post' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
                                         <a href="{% url 'admin:qa_edit_post' post.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
                                         <a href="#" onclick="confirm_delete( '{% url 'admin:qa_delete_post' post.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                        <a href="{% url 'admin:qa_add_answer' post.id %}" class="btn btn-success"><i class="fa fa-plus"></i>Answer</a>
                                     </div>
                                     
                                 </div>
@@ -137,6 +138,60 @@
                 </div>
             {% empty %}
                 The post has no history of edition.
+            {% endfor %}
+
+            <!-- Answers -->
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Answers / Comments</h1>
+                </div>
+            </div>
+
+            {% for answer in answers %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                {{ answer.post_type.name }} ID# {{ answer.id }}
+                            </div>
+                                                    
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <dl class="dl-horizontal">
+                                            <dt>Owner:</dt>
+                                            <dd>
+                                                <a href="{% url 'admin:admin_user_details' answer.owner.id %}">{{ answer.owner.email }}</a>
+                                            </dd>
+                                            
+                                            <dt>Is Anonymous?</dt>
+                                            <dd>
+                                                {{ answer.is_anonymous|yes_or_no }}
+                                            </dd>
+                                            <dt>Body:</dt>
+                                            <dd>{{ answer.body|str_or_dash }}</dd>
+
+                                            <dt>Written in:</dt>
+                                            <dd>{{ answer.created_date }}</dd>
+                                        </dl>
+                                        <div class="text-center buttons">
+                                            <a href="{% url 'admin:qa_edit_post' answer.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+                                            <a href="#" onclick="confirm_delete( '{% url 'admin:qa_delete_post' answer.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            {% empty %}
+                The post has no answers/comments.
             {% endfor %}
 
 {% endblock content %}

@@ -16,11 +16,15 @@
             
                 <div class="col-lg-12">
                     <h1 class="page-header">
+                        {% if not reported %}
                         Posts
                         <a href="{% url 'admin:qa_add_post' %}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
                             Add New
                         </a>
+                        {% else %}
+                            Reported content
+                        {% endif %}
                     </h1>
                     
                 </div>
@@ -79,6 +83,10 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="5">(Empty)</td>
+                                        </tr>
                                         {% endfor %}
                                     </tbody>
                                     
