@@ -431,3 +431,15 @@ class EditPostForm( BaseModelForm ):
                     instance.related_topics.add( topic )
 
             return instance
+
+
+# Topics
+class AddTopicForm( BaseModelForm ):
+    """
+    Form to create or edit a Topic.
+    """
+    
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Topic
+        fields = [ "name" ]

@@ -57,11 +57,17 @@
 
                                         <dt>Related topics: </dt>
                                         <dd>
-                                            {% for topic in post.related_topics.all %}
-                                                [{{ topic.name }}] 
-                                            {% empty %}
-                                                -
-                                            {% endfor %}
+                                            {% with related_topics=post.related_topics.all %}
+                                                {% if related_topics %}
+                                                    {% for topic in post.related_topics.all %}
+                                                        <a href="{% url 'admin:qa_view_topic' topic.id %}">
+                                                            [{{ topic.name }}] 
+                                                        </a>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            {% endwith %}
                                         </dd>
 
                                         <dt>Views count:</dt>
