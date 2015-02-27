@@ -471,6 +471,7 @@ class UserPersonal( BaseModel ):
         'large': ( 600, 400 ),
         'thumbnail': ( 40, 40, True ),
         'medium': ( 300, 200 ),
+        'size100x100': ( 100, 100, True ),
     })
     birth_date = models.DateField( _( "birth date" ), blank = True, null = True  )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
@@ -539,6 +540,11 @@ class UserStats( BaseModel ):
     percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )
     percentage_work = models.IntegerField( _( "percentage work" ), blank = True, null = True, default = 0 )
     updating_now = models.BooleanField( _( 'updating now' ), default = False )
+    total_answers = models.IntegerField( _( "total answers" ), blank = True, null = True, default = 0 )
+    total_questions = models.IntegerField( _( "total questions" ), blank = True, null = True, default = 0 )
+    total_profile_views = models.IntegerField( _( "total profile views" ), blank = True, null = True, default = 0 )
+    total_contracts = models.IntegerField( _( "total contracts" ), blank = True, null = True, default = 0 )
+    total_reviews = models.IntegerField( _( "total reviews" ), blank = True, null = True, default = 0 )
 
 
 

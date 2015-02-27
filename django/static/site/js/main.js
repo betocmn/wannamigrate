@@ -1,371 +1,354 @@
-var isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    iPhone: function() {
-        return navigator.userAgent.match(/iPhone/i);
-    },
-    iPad: function() {
-        return navigator.userAgent.match(/iPad/i);
-    },
-    iPod: function() {
-        return navigator.userAgent.match(/iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    },
-    any768: function() {
-        return (window.innerWidth <= 768 || isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    }
-};
+$(function() {
+    'use strict'
 
-// bg
-var cropImage = 0;
-var timeoutId = null;
-var index = null;
-
-// new height
-var newHeight = 0;
-var newWidth = 0;
-
-function imagesResize(options){
-    resizing = true;
-
-    // window.resize delay
-    clearTimeout( timeoutId );
-    timeoutId = setTimeout(function() {
-        resizing = false;
-        index = null;
-    }, 400);
-
-    var iWidth = options.width;
-    var iHeight = options.height;
-
-    var wWidth = window.innerWidth;
-    var wHeight = window.innerHeight;
-
-    var arBrowser = wWidth/wHeight;
-    var arImage = iWidth/iHeight;
-
-    var arWidth = iWidth/wWidth;
-    var arHeight = iHeight/wHeight;
-
-    if ( arBrowser>1 ) {
-        if (arHeight < arWidth) {
-            newHeight = wHeight;
-            newWidth = (wHeight*arImage);
-        } else {
-           newHeight = (wWidth/arImage);
-           newWidth = wWidth;
+    // A JS library that detects mobile devices.
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        iPhone: function() {
+            return navigator.userAgent.match(/iPhone/i);
+        },
+        iPad: function() {
+            return navigator.userAgent.match(/iPad/i);
+        },
+        iPod: function() {
+            return navigator.userAgent.match(/iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        },
+        any768: function() {
+            return (window.innerWidth <= 768 || isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
-    } else {
-        if (arHeight < arWidth) {
-            newHeight = wHeight;
-            newWidth = (wHeight*arImage);
-        } else {
-           newHeight = (wWidth/arImage);
-           newWidth = wWidth;
-        }
-    }
+    };
 
-    cropTop = ( wHeight - newHeight )/2;
-    cropLeft = ( wWidth - newWidth )/2;
+    // $scope is an object that references the elements in the implementation of the DOM structure.
+    var $scope = {
+        html : $('html'),
+        header : $('header'),
+        logo : $('.logo'),
+        shadow : $('.shadow'),
+        btMyAccount : $('.my-account.options'),
 
-    $(options.element).css({ height: newHeight, width: newWidth, marginTop: cropTop, marginLeft: cropLeft});
-}
-
-var $scope = {
-    btAlternador : $('.bt-alternator'),
-    contentHome : $('.content.home'),
-    logo : $('.logo'),
-    header : $('header'),
-    btNav : $('.bt-nav'),
-    nav : $('nav'),
-    navLink : $('.nav-dashboard .nav-link'),
-    btLogin : $('.bt-login'),
-    html : $('html'),
-    dashboard : $('.dashboard'),
-    contentDashboard : $('.dashboard .content'),
-    shadow : $('.interaction .shadow'),
-    contentHire : $('.content.hire'),
-    contentHiring : $('.content.hiring'),
-
-    situation : {
-        flag : {
-            from: $('.situation .from .flag'),
-            to: $('.situation .to .flag')
+        nav: {
+            this: $('.nav'),
+            navLink: $('.nav-link'),
+            btNav: $('.bt-nav')
         },
 
-        country : {
-            from : $('.situation .from .country'),
-            to : $('.situation .to .country'),
+        contents: {
+            home: $('.content.home')
+        },
+
+        tabs: {
+            btAlternador: $('.bt-alternator'),
+            tabQuestions: {
+                this: $('.home-questions'),
+                content: $('.content-questions')
+            },
+            tabProfessionals: {
+                this: $('.home-professionals'),
+                content: $('.content-professionals')
+            }
+        },
+
+        search: {
+            btSearch: $('.bt-search'),
+            input: $('.search-input'),
+            btBack: $('.search .bt-back')
+        },
+
+        boxOptions: {
+            this : $('.box-options '),
+            btCancel :  $('.bt-cancel'),
+            btOptions :  $('.bt-options')
+        },
+
+        changeSituation: {
+            btChange: $('.bt-change'),
+            btChangeSituation: $('.bt-change-situation'),
+            flag : {
+                from: $('.from-flag'),
+                to: $('.to-flag')
+            },
+
+            country : {
+                from : $('.from-country'),
+                to : $('.to-country'),
+            }
+        },
+
+        situations: {
+            situation: $('.situation'),
+            changeSituation: $('.change-situation')
         }
-    },
-
-    interactions : {
-        this : $('.hiring .interactions'),
-        interactionLink : $('.hiring .interaction-link'),
-        interaction : $('.hiring .interaction')
-    },
-
-    boxOptions : {
-        this : $('.box-options '),
-        btCancel :  $('.bt-cancel'),
-        btOptions :  $('.bt-options'),
-        shadow :  $('.box-options .shadow')
-    },
-
-    contentSearch : {
-        btSearch : $('.search .bt-search'),
-        input : $('.search input'),
-        btBack : $('.search .bt-back')
-    },
-
-    sectionProfessionals : {
-        this : $('.home .professionals'),
-        professional : $('.professional'),
-        content : $('.content-professionals')
-    },
-
-    sectionQuestions : {
-        this : $('.home .questions'),
-        content : $('.content-questions')
-    }
-}
-
-function ajusteAlturaAlternador(section, desconto) {
-    var $sectionCurrent = {
-        current : $(section)
     }
 
-    currentInnerHeight = $sectionCurrent.current.innerHeight();
-    $scope.contentHome.innerHeight(currentInnerHeight + desconto);
-}
+    // attributes
+    // ---------
+    var alternateTab,
+        alternateShadow,
+        from,
+        to,
+        textFrom,
+        textTo
 
-function transitionSections(nextSection) {
-    $scope.contentDashboard.each(function(index, el) {
-        if ($(el).hasClass(nextSection)) {
-            $(this).fadeIn();
-        }else{
-            $(this).fadeOut();
+    var dashboard = {
+
+        // Methods
+        // ---------
+
+        // Method that runs only on the mobile version
+        mobile: function(){
+            alternateTab = false;
+            alternateShadow = false;
+            dashboard.tabsDashboard.init();
+            dashboard.search.init();
+        },
+
+        shadow: function(){
+            if (!alternateShadow) {
+                $scope.shadow.fadeIn();
+                alternateShadow = true;
+            }else{
+                $scope.shadow.fadeOut(300);
+                alternateShadow = false;
+            }
+        },
+
+        slickNav: function(btNavCurrent){
+            btNavCurrent.toggleClass('clicked');
+            $scope.nav.this.toggleClass('open');
+        },
+
+        events: function(){
+            // Event of Slick menu in the responsive version
+            $scope.nav.btNav.click(function(event) {
+                event.preventDefault();
+                dashboard.shadow();
+                dashboard.slickNav($(this));
+            });
+
+            $scope.shadow.click(function(event) {
+                event.preventDefault();
+                $scope.shadow.fadeOut(300);
+                $scope.nav.this.removeClass('open');
+                $scope.nav.btNav.removeClass('clicked');
+                $scope.boxOptions.this.removeClass('show-box');
+                alternateShadow = false;
+            });
+
+            $(window).load(function() {
+                dashboard.changeSituation.changeFlags();
+            });
+        },
+
+        init: function() {
+            dashboard.events();
+            dashboard.boxOptions.init();
+            dashboard.changeSituation.init();
+
+            // Check if the current resolution is equal to 768px.
+            if (isMobile.any768()){
+                dashboard.mobile();
+
+                $(window).load(function() {
+                    dashboard.tabsDashboard.getDimensionsTabs($scope.tabs.tabQuestions.content, 0);
+                });
+            }
         }
-    });
-}
-
-var from,
-    to;
-
-function addFlagSituations() {
-
-    /*
-    from = $('.from.field ul .selected').find('.flag').attr('class');
-    to = $('.to.field ul .selected').find('.flag').attr('class');
-
-    if ( from && to ){
-
-        from = from.split(' ')[1];
-        to = to.split(' ')[1];
-
-        textFrom = $('.from.field ul .selected').find('.ddlabel').text();
-        textTo = $('.to.field ul .selected').find('.ddlabel').text();
-
-        $scope.situation.flag.from.addClass(from);
-        $scope.situation.flag.to.addClass(to);
-        $scope.situation.country.from.text(textFrom);
-        $scope.situation.country.to.text(textTo);
-
-    }
-    */
-}
-
-if (isMobile.any768()) {
-    var currentInnerHeight,
-        testAlternador = false
-
-    $scope.contentSearch.btSearch.click(function(event) {
-        event.preventDefault();
-        $scope.logo.fadeOut(200);
-
-        setTimeout(function() {
-            $scope.contentSearch.input.fadeIn();
-            $scope.contentSearch.input.focus();
-            $scope.contentSearch.btBack.fadeIn();
-            $scope.header.addClass('show-search');
-        }, 250);
-    });
-
-    $scope.contentSearch.btBack.click(function(event) {
-        event.preventDefault();
-        $scope.contentSearch.input.fadeOut();
-        $scope.contentSearch.btBack.fadeOut();
-        $scope.contentSearch.input.val('');
-
-        setTimeout(function(){
-            $scope.header.removeClass('show-search');
-            $scope.logo.fadeIn(200);
-            $scope.html.removeClass('fixed');
-            $scope.html.removeClass('show-topics');
-        }, 250);
-    });
-
-    $scope.boxOptions.shadow.click(function(event) {
-        event.preventDefault();
-        $scope.boxOptions.this.removeClass('show-box');
-    });
-}
-
-$(window).load(function() {
-    imagesResize({
-        element: '.img',
-        width: 1920,
-        height: 1080
-    });
-
-    addFlagSituations();
-
-    ajusteAlturaAlternador($scope.sectionQuestions.content, 0);
-});
-
-$(window).resize(function(){
-    imagesResize({
-        element: '.img',
-        width: 1920,
-        height: 1080
-    });
-
-    if (!testAlternador) {
-        ajusteAlturaAlternador($scope.sectionQuestions.content, 0);
-    }else{
-        ajusteAlturaAlternador($scope.sectionProfessionals.content, 50);
-    }
-});
-
-$scope.btAlternador.click(function(event) {
-    event.preventDefault();
-    $scope.contentHome.find('section').removeClass('show');
-    if (!testAlternador) {
-        $scope.sectionProfessionals.this.addClass('show');
-        ajusteAlturaAlternador($scope.sectionProfessionals.content, 50);
-
-        $(this).css('left', '0');
-        testAlternador = true;
-    }else{
-        $scope.sectionQuestions.this.addClass('show');
-        ajusteAlturaAlternador($scope.sectionQuestions.content, 0);
-
-        $(this).css('left', 'auto');
-        testAlternador = false;
-    }
-});
-
-// nav Mobile
-var testNavOpen = false;
-
-$scope.btNav.click(function(event) {
-    $(this).toggleClass('clicked');
-
-    if (!testNavOpen) {
-        $scope.nav.addClass('open');
-        $scope.shadow.fadeIn();
-        $scope.nav.height(175);
-        $scope.html.addClass('fixed');
-        testNavOpen = true;
-    }else{
-        $scope.nav.height(0);
-        $scope.html.removeClass('fixed');
-        $scope.shadow.fadeOut(300);
-        setTimeout(function() {
-            $scope.nav.removeClass('open');
-        }, 300);
-        testNavOpen = false;
     }
 
-    $scope.btLogin.removeClass('button');
-});
+    dashboard.tabsDashboard = {
+        // Methods
+        // ---------
 
-$scope.shadow.click(function(event) {
-    $scope.btNav.trigger('click');
-});
+        // Method that captures the tab height that is active
+        getDimensionsTabs: function($tabCurrent, desconto) {
+            var currentInnerHeight = $tabCurrent.innerHeight();
+            $scope.contents.home.innerHeight(currentInnerHeight + desconto);
+        },
 
-$('.bt-change').click(function(event) {
-    /*event.preventDefault();
-    addFlagSituations();
-    */
-});
+        events: function(){
+            $scope.tabs.btAlternador.click(function(event) {
+                event.preventDefault();
+                /*
+                    The transition between tabs in the mobile version is powered from the tap in
+                    btAlternador element, it is checked whether the event was fired earlier, if so, the
+                    tabQuestion is displayed, otherwise the tabProfessional will be displayed.
+                */
 
-$('.bt-change-situation').click(function(event) {
-    event.preventDefault();
+                // Hides all visivels tabs, for passing only be shown the tab clicked
+                $scope.contents.home.find('section').removeClass('show');
 
-    setTimeout(function() {
-        $('.situation .from .flag').removeClass(from);
-        $('.situation .to .flag').removeClass(to);
-    }, 300);
-});
+                // Checks if the event has been triggered.
+                if (!alternateTab) {
+                    // The Professionals tab is displayed.
+                    $scope.tabs.tabProfessionals.this.addClass('show');
 
-$scope.logo.click(function(event) {
-    // event.preventDefault();
-    transitionSections('home');
-});
+                    // Assigns to the current tab a new height
+                    dashboard.tabsDashboard.getDimensionsTabs($scope.tabs.tabProfessionals.content, 50);
 
-$scope.navLink.click(function(event) {
-    event.preventDefault();
-    var currentSection = $(this).attr('data-link');
-    if (currentSection === 'professionals') {
-        transitionSections('hire');
-    };
-});
+                    $(this).css('left', '0');
 
-$scope.sectionProfessionals.professional.click(function(event) {
-    event.preventDefault();
-    transitionSections('hiring');
-});
+                    // Assigns true to the next tap, is switched to the tabQuestion.
+                    alternateTab = true;
+                }else{
+                    // The Questions tab is displayed.
+                    $scope.tabs.tabQuestions.this.addClass('show');
 
-$scope.interactions.interactionLink.click(function(event) {
-    event.preventDefault();
-    // $scope.interactions.in.addClass('active');
-    $scope.interactions.interactionLink.removeClass('active');
-    $(this).addClass('active');
+                    // Assigns to the current tab a new height
+                    dashboard.tabsDashboard.getDimensionsTabs($scope.tabs.tabQuestions.content, 0);
 
-    var interactionName = $(this).attr('class').split(' ')[1];
-    var currentInteraction = "." + interactionName.replace('bt-', '');
+                    $(this).css('left', 'auto');
 
-    $scope.interactions.interaction.fadeOut();
-    $scope.interactions.this.find(currentInteraction).fadeIn();
-});
+                    // Assigns true to the next tap, is switched to the tabProfessional.
+                    alternateTab = false;
+                }
+            });
+        },
 
-// Situation
-$('.bt-change').click(function(event) {
-    /*event.preventDefault();
-    $('.change-situation').fadeOut();
-    $('.situation').fadeIn();*/
-});
+        init: function() {
+            this.events();
+        }
+    }
 
-$('.bt-change-situation').click(function(event) {
-    event.preventDefault();
-    $('.situation').fadeOut();
-    $('.change-situation').fadeIn();
-});
+    dashboard.search = {
 
-//Options (Share, Report, Cancel)
-$scope.boxOptions.btOptions.click(function(event) {
-    event.preventDefault();
-    var currentBox = $(this).closest('div');
-    currentBox.find('.box-options').toggleClass('show-box');
-});
+        // Methods
+        // ---------
 
-$scope.boxOptions.btCancel.click(function(event) {
-    event.preventDefault();
-    $scope.boxOptions.this.removeClass('show-box');
+        showSearch: function(){
+            $scope.logo.fadeOut(200);
+
+            setTimeout(function() {
+                $scope.search.input.fadeIn();
+                $scope.search.input.focus();
+                $scope.search.btBack.fadeIn();
+                $scope.header.addClass('show-search');
+            }, 250);
+        },
+
+        hideSearch: function(){
+            $scope.search.input.fadeOut();
+            $scope.search.btBack.fadeOut();
+            $scope.search.input.val('');
+
+            setTimeout(function(){
+                $scope.header.removeClass('show-search');
+                $scope.logo.fadeIn(200);
+                $scope.html.removeClass('fixed');
+                $scope.html.removeClass('show-topics');
+            }, 250);
+        },
+
+        events: function(){
+            $scope.search.btSearch.click(function(event) {
+                event.preventDefault();
+                dashboard.search.showSearch();
+            });
+
+            $scope.search.btBack.click(function(event) {
+                event.preventDefault();
+                dashboard.search.hideSearch();
+            });
+        },
+
+        init: function(){
+            dashboard.search.events();
+        }
+    }
+
+    dashboard.boxOptions = {
+        // Methods
+        // ---------
+
+        showBox: function(currentBox){
+            // dashboard.boxOptions.hideBox();
+            currentBox.closest('.category').find('.box-options').toggleClass('show-box');
+            dashboard.shadow();
+        },
+
+        hideBox: function(){
+            dashboard.shadow();
+            $scope.boxOptions.this.removeClass('show-box');
+        },
+
+        events: function(){
+            $scope.boxOptions.btOptions.click(function(event) {
+                event.preventDefault();
+                dashboard.boxOptions.showBox($(this));
+            });
+
+            $scope.btMyAccount.click(function(event) {
+                event.preventDefault();
+                dashboard.boxOptions.showBox($(this));
+            });
+
+            $scope.boxOptions.btCancel.click(function(event) {
+                event.preventDefault();
+                dashboard.boxOptions.hideBox();
+            });
+        },
+
+        init: function(){
+            dashboard.boxOptions.events();
+        }
+    }
+
+    dashboard.changeSituation = {
+        // Methods
+        // ---------
+
+        changeFlags: function(){
+            from = $('.from .selected').find('.flag').attr('class');
+            to = $('.to .selected').find('.flag').attr('class');
+
+            if ( from && to ){
+
+                from = from.split(' ')[1];
+                to = to.split(' ')[1];
+
+                textFrom = $('.from .selected').find('.ddlabel').text();
+                textTo = $('.to .selected').find('.ddlabel').text();
+
+                $scope.changeSituation.flag.from.addClass(from);
+                $scope.changeSituation.flag.to.addClass(to);
+                $scope.changeSituation.country.from.text(textFrom);
+                $scope.changeSituation.country.to.text(textTo);
+            }
+        },
+
+        events: function(){
+            $scope.changeSituation.btChangeSituation.click(function(event) {
+                event.preventDefault();
+                $scope.situations.situation.fadeOut();
+                $scope.situations.changeSituation.fadeIn();
+
+                setTimeout(function() {
+                    $scope.changeSituation.flag.from.removeClass(from);
+                    $scope.changeSituation.flag.to.removeClass(to);
+                }, 300);
+            });
+        },
+
+        init: function(){
+            dashboard.changeSituation.events();
+        }
+    }
+
+    dashboard.init();
 });
