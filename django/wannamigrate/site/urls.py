@@ -52,9 +52,5 @@ urlpatterns = patterns('',
     url( r'^change-situation/$', views.change_situation, name = 'change_situation' ),
 
     # Set language
-    url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),    
-
-    # Exceptions
-    url( r'^not_supported/$', views.not_supported, name = 'not_supported' ),
-
+    url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),
 )
