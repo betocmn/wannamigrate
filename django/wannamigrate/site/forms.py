@@ -114,7 +114,7 @@ class SituationForm( BaseModelForm ):
                 situation.total_users = F('total_users') - 1
                 situation.save()
             except UserSituation.DoesNotExist:
-                user_situation = False
+                pass
 
             # searches for (or inserts) new situation
             try:

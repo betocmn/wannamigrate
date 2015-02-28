@@ -6,14 +6,14 @@
 
     <div class="content home">
         <a class="bt-alternator"></a>
-        <section class="questions home-questions show">
+        <section class="questions show">
             <div class="top">
                 <h2 class="title">{% trans "Questions" %}</h2>
                 <a href="#" class="bt-add button">{% trans "Add Question" %}</a>
             </div>
 
             <div class="content-questions">
-                <div class="question category">
+                <div class="question">
                     <div class="tags">
                         <ul class="tags-list">
                             <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
@@ -35,6 +35,7 @@
                         </ul>
                     </div>
                     <div class="box-options">
+                        <i class="shadow"></i>
                         <ul class="box">
                             <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
                             <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
@@ -43,7 +44,7 @@
                     </div>
                     <a href="#" class="bt-options">{% trans "Options" %}</a>
                 </div>
-                <div class="question category">
+                <div class="question">
                     <div class="tags">
                         <ul class="tags-list">
                             <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
@@ -65,6 +66,7 @@
                         </ul>
                     </div>
                     <div class="box-options">
+                        <i class="shadow"></i>
                         <ul class="box">
                             <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
                             <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
@@ -73,7 +75,7 @@
                     </div>
                     <a href="#" class="bt-options">{% trans "Options" %}</a>
                 </div>
-                <div class="question category">
+                <div class="question">
                     <div class="tags">
                         <ul class="tags-list">
                             <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
@@ -95,6 +97,7 @@
                         </ul>
                     </div>
                     <div class="box-options">
+                        <i class="shadow"></i>
                         <ul class="box">
                             <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
                             <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
@@ -103,7 +106,7 @@
                     </div>
                     <a href="#" class="bt-options">{% trans "Options" %}</a>
                 </div>
-                <div class="question category">
+                <div class="question">
                     <div class="tags">
                         <ul class="tags-list">
                             <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
@@ -125,6 +128,7 @@
                         </ul>
                     </div>
                     <div class="box-options">
+                        <i class="shadow"></i>
                         <ul class="box">
                             <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
                             <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
@@ -137,57 +141,111 @@
                 <a href="#" class="bt-add-mobile button">{% trans "Add Question" %}</a>
             </div>
         </section>
-        <section class="professionals home-professionals">
+        <section class="professionals">
             <div class="top">
                 <h2 class="title">Professionals</h2>
             </div>
             <div class="content-professionals">
-
-                {% for provider in providers.all %}
-                    <div class="professional category">
-                        <div class="thumb">
-                            <a class="contract" href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}">
-                                {% if provider.user.userpersonal.avatar %}
-                                    <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
-                                {% else %}
-                                    <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
-                                {% endif %}
-                            </a>
+                <div class="professional">
+                    <div class="thumb">
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="" />
+                    </div>
+                    <div class="data-professional">
+                        <strong class="name">Humberto Martins</strong>
+                        <p class="expert">Canadian Immigration Especialist</p>
+                        <div id="default" class="rate">
+                            <span class="count">(900)</span>
                         </div>
-                        <div class="data-professional">
-                            <a class="contract" href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}">
-                                <strong class="name">{{ provider.display_name }}</strong>
-                                <p class="expert">{{ provider.headline }}</p>
-                            </a>
-                            <div class="rate" data-score="{{ provider.review_score }}">
-                                <span class="count">({{ provider.user.userstats.total_reviews }})</span>
-                            </div>
-                            <div class="service">
-                                <p class="truncate-line">
-                                    {% for service_type in provider.service_types.all %}
-                                        {% ifchanged %}{{ service_type.service_type_category.name }} -{% endifchanged %}
-                                    {% endfor %}
-                                </p>
-                            </div>
-                            <div class="data">
-                                <ul class="data-list">
-                                    <li class="data-item data-item-answers"><a href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers }}</strong> {% trans "answers" %}</a></li>
-                                    <li class="data-item data-item-viewers"><a href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views }}</strong> {% trans "views" %}</a></li>
-                                    <li class="data-item data-item-since">{% trans "Joined" %} <strong>{{ provider.user.created_date|date:"M Y"|lower }}</strong></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="bt-options">{% trans "Options" %}</a>
-                            <div class="box-options">
-                                <ul class="box">
-                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                                </ul>
-                            </div>
+                        <div class="service">
+                            <p>Visa Elegibility, Skype interview and <a class="more-services" href="#">More 4</a></p>
+                        </div>
+                        <div class="data">
+                            <ul class="data-list">
+                                <li class="data-item data-item-answers"><a href="#" class="data-link answers"><strong>88</strong> answers</a></li>
+                                <li class="data-item data-item-viewers"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                                <li class="data-item data-item-since">Since <strong>Jan 15</strong></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="bt-options">Options</a>
+                    </div>
+                </div>
+                <div class="professional">
+                    <div class="thumb">
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="" />
+                    </div>
+                    <div class="data-professional">
+                        <strong class="name">Humberto Martins</strong>
+                        <p class="expert">Canadian Immigration Especialist</p>
+                        <div class="rate">
+                            <span class="count">(900)</span>
+                        </div>
+                        <div class="service">
+                            <p>Visa Elegibility, Skype interview and <a class="more-services" href="#">More 4</a></p>
                         </div>
                     </div>
-                {% endfor %}
-
+                    <div class="data">
+                        <ul class="data-list">
+                            <li class="data-item data-item-answers"><a href="#" class="data-link answers"><strong>88</strong> answers</a></li>
+                            <li class="data-item data-item-viewers"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                            <li class="data-item data-item-since">Since <strong>Jan 15</strong></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="bt-options">Options</a>
+                    <div class="box-options">
+                        <i class="shadow"></i>
+                        <ul class="box">
+                            <li><a class="bt-share" href="#">Share</a></li>
+                            <li><a class="bt-report" href="#">Report</a></li>
+                            <li><a class="bt-cancel" href="#">Cancel</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="professional">
+                    <div class="thumb">
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="" />
+                    </div>
+                    <div class="data-professional">
+                        <strong class="name">Humberto Martins</strong>
+                        <p class="expert">Canadian Immigration Especialist</p>
+                        <div class="rate">
+                            <span class="count">(900)</span>
+                        </div>
+                        <div class="service">
+                            <p>Visa Elegibility, Skype interview and <a class="more-services" href="#">More 4</a></p>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <ul class="data-list">
+                            <li class="data-item data-item-answers"><a href="#" class="data-link answers"><strong>88</strong> answers</a></li>
+                            <li class="data-item data-item-viewers"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                            <li class="data-item data-item-since">Since <strong>Jan 15</strong></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="bt-options">Options</a>
+                </div>
+                <div class="professional">
+                    <div class="thumb">
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="" />
+                    </div>
+                    <div class="data-professional">
+                        <strong class="name">Humberto Martins</strong>
+                        <p class="expert">Canadian Immigration Especialist</p>
+                        <div class="rate">
+                            <span class="count">(900)</span>
+                        </div>
+                        <div class="service">
+                            <p>Visa Elegibility, Skype interview and <a class="more-services" href="#">More 4</a></p>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <ul class="data-list">
+                            <li class="data-item data-item-answers"><a href="#" class="data-link answers"><strong>88</strong> answers</a></li>
+                            <li class="data-item data-item-viewers"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                            <li class="data-item data-item-since">Since <strong>Jan 15</strong></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="bt-options">Options</a>
+                </div>
             </div>
             <a href="#" class="bt-view-more button-transparent">View More</a>
         </section>
@@ -200,36 +258,17 @@
 
     {{ block.super }}
 
-    <!-- JS REQUIRED BY THIS PAGE -->
-    <script type="text/javascript" src="{% static 'site/js/libs/trunk8.js' %}"></script>
-
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
 
-            // Create country dropdowns
             $( ".custom-select" ).msDropdown();
 
-            // Create review stars of professional
             $( '.rate' ).raty({
                 starOff : '{% static 'site/img/star-off.png' %}',
-                starOn  : '{% static 'site/img/star-on.png' %}',
-                readOnly: true,
-                score: function() {
-                    return $( this ).attr( 'data-score' );
-                }
+                starOn  : '{% static 'site/img/star-on.png' %}'
             });
-
-            // create read more or less on long texts
-            $( '.truncate-line' ).trunk8({
-                fill: '&hellip; <a class="more-services read-more" href="#">{% trans "see more" %}</a>'
-            });
-            $( '.read-more' ).on( 'click', function() {
-              $( this ).parent().trunk8('revert');
-              return false;
-            });
-
 
         });
 
