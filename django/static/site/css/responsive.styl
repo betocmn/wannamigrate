@@ -40,7 +40,6 @@
                 .nav-footer-link
                     font-size 12px
 
-
 @media screen and (max-width: 768px)
     html
         &.fixed
@@ -69,72 +68,7 @@
                 padding-top 20px
                 background-size auto 25%
                 background-position 0 20px
-
-            .bt-nav
-                position relative
-                z-index 6
-                float right
-                display block
-                size 48px 48px
-                text-indent -9999px
-
-                &.clicked
-                    background-color #fff
-
-                    &:before
-                        background-position right 0
-
-                &:before
-                    content ''
-                    position absolute
-                    left 50%
-                    top 50%
-                    margin-left -9px
-                    margin-top -9px
-                    size 19px 18px
-                    replace('icon-mobile-nav.png')
-
-            nav
-                height 0
-                overflow hidden
-
-                &.open
-                    position absolute
-                    left 0
-                    top 48px
-                    z-index 5
-                    display block
-                    width 100%
-                    height 135px
-                    transition height .3s ease-in-out
-                    padding 20px 0
-                    background-color #fff
-
-                    li
-                        float none
-                        display block
-                        size 80% 45px
-                        padding 15px 10%
-                        margin 0 auto
-                        box()
-                        border-bottom 1px solid #ebebeb
-
-                        &:last-child
-                            border-bottom none
-
-                        .nav-link
-                            text-transform capitalize
-                            text-decoration none
-                            text-align center
-                            font-size 1em
-                            color #777
-
-                            &:focus
-                                color #ca3939
-
-                            &.bt-login
-                                margin-top 0
-
+                    
         .content
             .get-help
                 position relative
@@ -192,91 +126,16 @@
                     margin 13px 0 0 20px
                     background-size 80% auto
 
-                .bt-nav
-                    position relative
-                    z-index 6
-                    float right
-                    display block
-                    size 48px 48px
-                    text-indent -9999px
-
-                    &.clicked
-                        background-color #fff
-
-                        &:before
-                            background-position right 0
-
-                    &:before
-                        content ''
-                        position absolute
-                        left 50%
-                        top 50%
-                        margin-left -9px
-                        margin-top -9px
-                        size 19px 18px
-                        replace('icon-mobile-nav.png')
-
-                nav
-                    height 0
-                    overflow hidden
-                    transition height .2s ease-in-out
-
-                    &.open
-                        position absolute
-                        left 0
-                        top 48px
-                        z-index 5
-                        display block
-                        width 100%
-                        background-color #f3f3f3
-
-                        li
-                            float none
-                            display block
-                            size 80% 45px
-                            padding 15px 10%
-                            margin 0 auto
-                            box()
-                            border-bottom 1px solid #ebebeb
-
-                            &:last-child
-                                border-bottom none
-
-                            .nav-link
-                                text-transform capitalize
-                                text-decoration none
-                                text-align center
-                                font-size 1em
-                                color #777
-
-                                &:focus
-                                    color #ca3939
-
-                                &.bt-login
-                                    margin-top 0
-
+                .nav
+                    background-color #f3f3f3 !important
+                
                     ul
-                        padding 20px 0
-
                         .nav-item
                             text-align center
 
                 .interaction
                     height 0
                     padding 0
-
-                    .shadow
-                        display none
-                        position fixed
-                        top 0
-                        bottom 0
-                        left 0
-                        right 0
-                        width 100%
-                        height 100%
-                        background #000
-                        z-index 5
-                        opacity .8
 
                     .search
                         position absolute
@@ -325,7 +184,7 @@
                 &.show-search
                     .interaction
                         .search
-                            input
+                            .search-input
                                 width 60%
                                 color #fff
 
@@ -425,21 +284,6 @@
                                 .box-options
                                     display none
 
-                                    .shadow
-                                        display none
-                                        content ""
-                                        position fixed
-                                        top 0
-                                        bottom 0
-                                        left 0
-                                        right 0
-                                        margin auto
-                                        width 100%
-                                        height 100%
-                                        background #000
-                                        opacity .5
-                                        z-index 10
-
                                     .box
                                         position fixed
                                         top 0
@@ -462,9 +306,6 @@
 
                                     &.show-box
                                         display block
-
-                                        .shadow
-                                            display block
 
                                 .data
                                     .data-list
@@ -631,6 +472,103 @@
             border none
             background #4e4e4e
             overflow auto
+            
+    .landing,
+    .dashboard
+        .wrapper
+            .shadow
+                display none
+                position fixed
+                top 0
+                bottom 0
+                left 0
+                right 0
+                width 100%
+                height 100%
+                background #000
+                z-index 5
+                opacity .8
+                
+            header
+                .bt-nav
+                    position relative
+                    z-index 1
+                    float right
+                    display block
+                    size 48px 48px
+                    text-indent -9999px
+
+                    &.clicked
+                        z-index 6
+                        background-color #fff
+
+                        &:before
+                            background-position right 0
+
+                    &:before
+                        content ''
+                        position absolute
+                        left 50%
+                        top 50%
+                        margin-left -9px
+                        margin-top -9px
+                        size 19px 18px
+                        replace('icon-mobile-nav.png')
+                        
+                .nav
+                    position absolute
+                    left 0
+                    top 48px
+                    z-index 5
+                    width 100%
+                    height 0
+                    overflow hidden
+                    background-color #fff
+                    box()
+                    padding 0
+                    transition height .3s ease-in-out
+                    
+                    ul
+                        padding 20px 0
+                        
+                    li
+                        float none
+                        display block
+                        size 80% 45px
+                        padding 15px 10%
+                        margin 0 auto
+                        box()
+                        border-bottom 1px solid #ebebeb
+
+                        &:last-child
+                            border-bottom none
+
+                        .nav-link
+                            text-transform capitalize
+                            text-decoration none
+                            text-align center
+                            font-size 1em
+                            color #777
+
+                            &:focus
+                                color #ca3939
+                   
+                            &.bt-login
+                                display block
+                                height auto
+                                padding 0
+                                margin-top 0
+                                border 0
+                                border-radius 0
+                                background-color transparent
+                                text-shadow none
+                                box-shadow none
+                                overflow inherit
+                                background transparent
+                                fontrg()
+
+                    &.open
+                        height 175px
 
 @media screen and (max-width: 360px)
     .landing

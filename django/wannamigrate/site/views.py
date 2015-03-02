@@ -32,8 +32,8 @@ from wannamigrate.site.forms import (
 from wannamigrate.core.models import (
     Country, UserSituation, Goal, Situation
 )
-from wannamigrate.points.models import (
-    UserResult, CountryConfig
+from wannamigrate.marketplace.models import (
+    Provider
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
@@ -183,11 +183,13 @@ def login( request ):
         # Logins Successfully
         auth_login( request, user )
 
-        # creates situation session
+        # Checks if situation already exists
         try:
             user_situation = user.usersituation
         except UserSituation.DoesNotExist:
             user_situation = False
+
+        # Update situation on session and DB
         if user_situation:
             situation = user_situation.situation
             request.session['situation']['from_country'] = situation.from_country
@@ -641,30 +643,6 @@ def edit_account_password( request ):
 #######################
 # DASHBOARD VIEWS
 #######################
-@login_required
-def not_supported( request ):
-    """
-    Displays a page saying that the device is not supported.
-
-    :param: request
-    :return String - HTML from The not_supported page.
-    """
-    username_explode = request.user.name.split( ' ' )
-    first_name = username_explode[0]
-    return render( request, "site/home/not_supported.html", { "first_name" : first_name } )
-
-
-def maintenance( request ):
-    """
-    Displays a page saying that the device is not supported.
-
-    :param: request
-    :return String - HTML from The not_supported page.
-    """
-    return render( request, "site/home/maintenance.html" )
-
-
-
 def dashboard( request ):
     """
     Process the dashboard page.
@@ -679,11 +657,23 @@ def dashboard( request ):
     # Initial template
     template_data = {}
 
-    # instantiante form
+    # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
+
+    # Gets Service Providers
+    template_data['providers'] = Provider.get_listing( 204, 0, 5 )
 
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
+
+    # Print SQL Queries
+    """
+    from django.db import connection
+    queries_text = ''
+    for query in connection.queries:
+        queries_text += '<br /><br /><br />' + str( query['sql'] )
+    return HttpResponse( queries_text )
+    """
 
 
 
