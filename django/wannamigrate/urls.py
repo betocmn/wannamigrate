@@ -23,7 +23,6 @@ urlpatterns = patterns('',
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
     url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
     url( r'^', include( 'wannamigrate.points.urls', namespace = "points" ) ),
-    url( r'^', include( 'wannamigrate.marketplace.urls', namespace = "marketplace" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 
@@ -35,4 +34,7 @@ urlpatterns = patterns('',
 # URLs USED BY DEBUG BAR
 ##########################
 if settings.DEBUG:
-    pass
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url( r'^__debug__/', include( debug_toolbar.urls ) ),
+    )

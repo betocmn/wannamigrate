@@ -8,7 +8,6 @@ Models used by our marketplace app, such as Service, Order, etc..
 # Imports
 ##########################
 from django.db import models
-from django.db.models import Prefetch, Count
 from wannamigrate.core.models import (
     BaseModel, Country
 )
@@ -83,7 +82,6 @@ class Provider( BaseModel ):
 
     # Model Attributes
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
-    review_score = models.DecimalField( _( "discount" ), max_digits = 5, decimal_places = 2, default = 0 )
     regulator = models.ForeignKey( 'Regulator', verbose_name = _( 'regulator' ) )
     display_name = models.CharField( _( "name" ), max_length = 80 )
     headline = models.CharField( _( "headline" ), max_length = 150 )
@@ -100,47 +98,6 @@ class Provider( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
-
-    # Class Methods
-    @staticmethod
-    def get_listing( country_id, limit_from, limit_to  ):
-        """
-        Query used to search for service providers sorted
-        by relevance.  The relevance is calculated with
-        the following:
-
-        1- Support for the destination country (Required)
-        2- Higher review Average Score
-        3- Higher number of contracts
-        4- Higher number of answers
-        5- Most recent last login date
-
-        :param: country_id
-        :param: limit_from
-        :param: limit_to
-        :return: Objects
-        """
-
-        providers = Provider.objects.select_related(
-            'user', 'user__userpersonal', 'user__userstats'
-        ).prefetch_related(
-            Prefetch(
-                'service_types',
-                queryset = ServiceType.objects
-                    .select_related( 'service_type_category' )
-                    .only( 'service_type_category', 'name' )
-                    .order_by( 'service_type_category__name' )
-            )
-        ).filter(
-            countries = country_id,
-        ).only(
-            'id', 'display_name', 'user', 'headline', 'review_score'
-        ).order_by(
-            '-user__userstats__total_reviews', '-user__userstats__total_contracts',
-            '-user__userstats__total_answers', '-user__last_login'
-        )[limit_from:limit_to]
-
-        return providers
 
 
 
@@ -264,25 +221,9 @@ class ServiceType( BaseModel ):
     """
 
     # Model Attributes
-    service_type_category = models.ForeignKey( 'ServiceTypeCategory', verbose_name = _( 'category' ) )
     name = models.CharField( _( "name" ), max_length = 60 )
     description = models.TextField( _( "description" ) )
 
     # META Options
     class Meta:
         default_permissions = []
-
-
-
-class ServiceTypeCategory( BaseModel ):
-    """
-    Service Type Category - A parent group for service types. ("Immigration Consultancy", "Translation", "Headhunting", etc..)
-    """
-
-    # Model Attributes
-    name = models.CharField( _( "name" ), max_length = 40 )
-
-    # META Options
-    class Meta:
-        default_permissions = []
-
