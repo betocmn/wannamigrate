@@ -61,11 +61,7 @@
                                         {% for post in posts %}
                                             <tr>
                                                 <td>{{ post.id }}</td>
-                                                {% if post.title %}
-                                                    <td>{{ post.title }}</td>
-                                                {% else %}
-                                                    <td>{{ post.body }}</td>
-                                                {% endif %}
+                                                <td>{{ post.title }}</td>
                                                 <td>{{ post.post_type.name }}</td>
                                                 <td>{{ post.is_anonymous|yes_or_no }}</td>
                                                 <td>
@@ -77,6 +73,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu left" role="menu">
                                                             <li><a href="{% url 'admin:qa_view_post' post.id %}" class=""><i class="fa fa-search"></i>View Details</a></li>
+                                                            <li><a href="{% url 'admin:qa_add_answer' post.id %}" class=""><i class="fa fa-plus"></i>Add Answer</a></li>
                                                             <li><a href="{% url 'admin:qa_edit_post' post.id %}" class=""><i class="fa fa-edit"></i>Edit Data</a></li>
                                                             <li><a href="#" onclick="javascript: confirm_delete( '{% url 'admin:qa_delete_post' post.id %}'); "><i class="fa fa-trash-o"></i>Remove</a></li>
                                                         </ul>

@@ -6,6 +6,7 @@
     {{ block.super }}
 
     <link href="{% static 'admin/js/jquery-ui/css/ui-lightness/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{% static 'site/css/wm_editor.css' %}" rel="stylesheet">
 
     <style>
         /** Topics autocomplete css */
@@ -42,6 +43,7 @@
     <script src="{% static 'admin/js/jquery-ui/js/jquery-ui.js' %}"></script>
     <script src="{% static 'admin/js/custom-combobox.js' %}"></script>
     <script src="{% static 'admin/js/autotopics.js' %}"></script>
+    <script src="{% static 'site/js/wm_editor.js' %}"></script>
 
     <script type="text/javascript">
 
@@ -60,6 +62,8 @@
             });
 
             $("#{{ form.related_topics.id_for_label }}").autotopics();
+
+            $("#{{ form.body.id_for_label }}").wm_editor();
 
         });
         

@@ -46,9 +46,11 @@
                                         <dd>{{ post.title|str_or_dash }}</dd>
 
                                         <dt>Body:</dt>
-                                        <dd>
-                                            {{ post.body|str_or_dash }}
-                                        </dd>
+                                        {% autoescape off %}
+                                            <dd>
+                                                {{ post.body|str_or_dash }}
+                                            </dd>
+                                        {% endautoescape %}
 
                                         <dt>Is Anonymous?</dt>
                                         <dd>
@@ -176,7 +178,9 @@
                                                 {{ answer.is_anonymous|yes_or_no }}
                                             </dd>
                                             <dt>Body:</dt>
-                                            <dd>{{ answer.body|str_or_dash }}</dd>
+                                            {% autoescape off %}
+                                                <dd>{{ answer.body|str_or_dash }}</dd>
+                                            {% endautoescape %}
 
                                             <dt>Written in:</dt>
                                             <dd>{{ answer.created_date }}</dd>
