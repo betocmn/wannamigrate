@@ -57,7 +57,12 @@
                     var lnk = prompt('Write the URL here','');
                     // TODO: check if a valid URL was given.
                     if( lnk && lnk != '' )
+                    {
+                        if ( ! lnk.startsWith( "http://" ) && ! lnk.startsWith( "https://" ) )
+                            lnk = "http://" + lnk;
+                        
                         wm_editor_format( 'createlink', lnk );
+                    }
                 },
                 fa_icon_classes: "fa fa-link",
             },

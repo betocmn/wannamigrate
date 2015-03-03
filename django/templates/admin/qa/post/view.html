@@ -128,7 +128,9 @@
                                             <dd>{{ history.title|str_or_dash }}</dd>
 
                                             <dt>Body:</dt>
-                                            <dd>{{ history.body|str_or_dash }}</dd>
+                                            {% autoescape off %}
+                                                <dd>{{ history.body|str_or_dash }}</dd>
+                                            {% endautoescape %}
 
                                             <dt>Written in:</dt>
                                             <dd>{{ history.written_date }}</dd>
