@@ -13,6 +13,7 @@ from wannamigrate.core.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from wannamigrate.qa.wm_editor import WMEditorParser
 
 
 
@@ -63,16 +64,28 @@ class Post( BaseModel ):
 
     def clean( self ):
         errors = {}
+        
 
         # Post extra-validation
         if self.post_type.id == settings.QA_POST_TYPE_ANSWER_ID:
-
-            # An answer should have a body.
-            if len( self.body ) == 0:
-                errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
-
+            # Checks if a valid parent was provided
             if self.parent is None or self.parent.post_type.id != settings.QA_POST_TYPE_QUESTION_ID:
                 errors.setdefault( "parent", [] ).append( _( "You should provide a QUESTION parent to your answer." ) )
+
+            # Instantiates the parser and feed with body content.
+            wm_editor = WMEditorParser( convert_charrefs = True )    
+            wm_editor.feed( self.body )
+            wm_editor.close()
+
+            # Clean the body content
+            self.body = wm_editor.cleaned_data()    
+
+            # Checks if a valid body was provided
+            if not wm_editor.is_valid():
+                errors.setdefault( "body", [] ).append( _( "Invalid markup. Try again." ) )
+                
+            if wm_editor.is_empty():
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
         
         elif self.post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
             # A question should have a title.
@@ -83,18 +96,44 @@ class Post( BaseModel ):
             # A blog post shoud have a title and a body.
             if len( self.title ) == 0:
                 errors.setdefault( "title", [] ).append( _( "You should provide a title to your post." ) )
-            if len( self.body ) == 0:
-                errors.setdefault( "body", [] ).append( _( "You should provide a body to your post." ) )
             if self.is_anonymous:
                 errors.setdefault( "is_anonymous", [] ).append( _( "A Blog Post can not be anonymous." ) )
+
+            # Instantiates the parser and feed with body content.
+            wm_editor = WMEditorParser( convert_charrefs = True )    
+            wm_editor.feed( self.body )
+            wm_editor.close()
+
+            # Clean the body content
+            self.body = wm_editor.cleaned_data()    
+
+            # Checks if a valid body was provided
+            if not wm_editor.is_valid():
+                errors.setdefault( "body", [] ).append( _( "Invalid markup. Try again." ) )
+                
+            if wm_editor.is_empty():
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
+            
         
         elif self.post_type.id == settings.QA_POST_TYPE_COMMENT_ID:
-            # A comment should have a body
-            if len( self.body ) == 0:
-                errors.setdefault( "body", [] ).append( _( "You should provide a body to your comment." ) )
             # A comment should have a parent.
             if self.parent is None:
                 errors.setdefault( "parent", [] ).append( _( "You should provide a parent to your comment." ) )
+
+            # Instantiates the parser and feed with body content.
+            wm_editor = WMEditorParser( convert_charrefs = True )    
+            wm_editor.feed( self.body )
+            wm_editor.close()
+
+            # Clean the body content
+            self.body = wm_editor.cleaned_data()    
+
+            # Checks if a valid body was provided
+            if not wm_editor.is_valid():
+                errors.setdefault( "body", [] ).append( _( "Invalid markup. Try again." ) )
+                
+            if wm_editor.is_empty():
+                errors.setdefault( "body", [] ).append( _( "You should provide a body to your answer." ) )
 
         else:
             # Nothing valid was received on the form. Invalidate the post type field.
@@ -102,6 +141,7 @@ class Post( BaseModel ):
 
         if len( errors ) > 0:
             raise ValidationError( errors )
+
 
 
 class PostType( BaseModel ):

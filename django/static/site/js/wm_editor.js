@@ -11,49 +11,50 @@
             "heading" : 
             {
                 title: "Heading",
-                onclick: function() { wm_editor_format( 'formatblock', 'h1' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'formatblock', 'h1' );  },
                 fa_icon_classes: "fa fa-header",
             },
             "bold" : 
             {
                 title: "Bold",
-                onclick: function() { wm_editor_format( 'bold' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'bold' );  },
                 fa_icon_classes: "fa fa-bold",
             },
             "italic" : 
             {
                 title: "Italic",
-                onclick: function() { wm_editor_format( 'italic' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'italic' );  },
                 fa_icon_classes: "fa fa-italic",
             },
             "underline" : 
             {
                 title: "Underline",
-                onclick: function() { wm_editor_format( 'underline' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'underline' );  },
                 fa_icon_classes: "fa fa-underline",
             },
             "ol" : 
             {
                 title: "Numbered list",
-                onclick: function() { wm_editor_format( 'insertorderedlist' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'insertorderedlist' );  },
                 fa_icon_classes: "fa fa-list-ol",
             },
             "ul" : 
             {
                 title: "Dotted list",
-                onclick: function() { wm_editor_format( 'insertunorderedlist' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'insertunorderedlist' );  },
                 fa_icon_classes: "fa fa-list-ul",
             },
             "quote" : 
             {
                 title: "Quote",
-                onclick: function() { wm_editor_format( 'formatblock', 'blockquote' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'formatblock', 'blockquote' );  },
                 fa_icon_classes: "fa fa-quote-left",
             },
             "link" : 
             {
                 title: "Link to ...",
-                onclick: function() { 
+                onclick: function( e ) {
+                    e.preventDefault(); 
                     var lnk = prompt('Write the URL here','');
                     // TODO: check if a valid URL was given.
                     if( lnk && lnk != '' )
@@ -69,7 +70,7 @@
             "remove_format" : 
             {
                 title: "Remove formatting",
-                onclick: function() { wm_editor_format( 'removeFormat' );  },
+                onclick: function( e ) { e.preventDefault(); wm_editor_format( 'removeFormat' );  },
                 fa_icon_classes: "fa fa-ban",
             },
 

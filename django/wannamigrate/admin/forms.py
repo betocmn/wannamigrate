@@ -328,6 +328,15 @@ class AddPostForm( BaseModelForm ):
         self.fields[ "owner" ].widget.attrs['id'] = "owner_id"
 
 
+#    def clean( self, *args, **kwargs ):
+#        super( AddPostForm, self ).clean( *args, **kwargs )
+#        self.cleaned_data[ "body" ] = clean_HTML( self.cleaned_data[ "body" ] )
+#        return self.cleaned_data
+
+
+        
+
+
     def save( self, commit = True ):
         """
             Saves the post info taking care of add the related topics to it. 
