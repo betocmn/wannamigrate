@@ -138,7 +138,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # MIDDLEWARES
 #########################################
 MIDDLEWARE_CLASSES = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -278,11 +277,8 @@ LOCAL_APPS = (
     'wannamigrate.admin',
     'wannamigrate.site',
     'wannamigrate.points',
-<<<<<<< HEAD
     'wannamigrate.marketplace',
-=======
     'wannamigrate.qa',
->>>>>>> origin/qa
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -296,6 +292,8 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 #########################################
 GEOIP_PATH = os.path.join( BASE_DIR, '..', 'wannamigrate', '_settings', 'geo_ip' )
 GEOIP_COUNTRY = 'GeoIP.dat'
+
+
 
 
 

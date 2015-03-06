@@ -193,6 +193,7 @@ def login( request ):
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
         else:
             messages.error( request, _( 'Invalid login. Please try again.' ) )
+            messages.error( request, _( 'Invalid login. Please try again.' ) )
 
     # passes form to template Forms
     template_data['form'] = form
