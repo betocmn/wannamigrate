@@ -1,8 +1,8 @@
 """
-    Dictionary extras. This file defines methods to handle dictionaries.
+    String extras. This file defines methods to handle dictionaries.
 
     To use the template methods defined here you should load this module
-    on the desired template using: {% load dictionary_extras %}
+    on the desired template using: {% load string_extras %}
 """
 ##########################
 # Imports
@@ -59,3 +59,21 @@ def truncate_smart( value, limit = 80 ):
 
     # Join the words and return
     return ' '.join( words )
+
+
+@register.filter( name = 'str_or_dash' )
+def str_or_dash( value ):
+    """ Returns a string or a dash if the string is empty.
+        :param: value The string to be tested.
+        :return: value if value is not empty or "-".
+    """
+    return value if len( value ) > 0 else "-"
+
+@register.filter( name = 'yes_or_no' )
+def yes_or_no( value ):
+    """ Returns a string representation of a boolean. True becomes the 
+        string "Yes" and False becomes "No".
+        :param: value The boolean value to be converted.
+        :return: Yes if value is True, No otherwise.
+    """
+    return "Yes" if value else "No"

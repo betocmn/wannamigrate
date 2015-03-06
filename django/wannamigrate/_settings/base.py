@@ -278,7 +278,11 @@ LOCAL_APPS = (
     'wannamigrate.admin',
     'wannamigrate.site',
     'wannamigrate.points',
+<<<<<<< HEAD
     'wannamigrate.marketplace',
+=======
+    'wannamigrate.qa',
+>>>>>>> origin/qa
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -367,3 +371,30 @@ ID_RESULT_STATUS_DENIED_WORK_EXPERIENCE = 6
 # Minimum language levels
 ID_MINIMUM_ENGLISH_LEVEL = 94
 ID_MINIMUM_FRENCH_LEVEL = 98
+
+
+
+
+
+#######################################
+# Questions and Answers constants
+#######################################
+# IDs for post types
+QA_POST_TYPE_ANSWER_ID = 1
+QA_POST_TYPE_BLOGPOST_ID = 2
+QA_POST_TYPE_COMMENT_ID = 3
+QA_POST_TYPE_QUESTION_ID = 4
+
+# IDs for vote types
+QA_VOTE_TYPE_UPVOTE_ID = 1
+QA_VOTE_TYPE_DOWNVOTE_ID = 2
+QA_VOTE_TYPE_REPORT_ID = 3
+
+
+
+
+
+###########################
+# Global constants
+###########################
+DEFAULT_LISTING_ITEMS_PER_PAGE = 15

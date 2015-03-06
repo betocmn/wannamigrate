@@ -1,0 +1,216 @@
+{% extends "admin/layouts/main.html" %}
+{% load string_extras %}
+{% load staticfiles %}
+{% block head %}
+    {{ block.super }}
+    <script type="text/javascript">
+        /** JQuery onload */
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock head %}
+
+{% block content %}
+
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">{{ post.post_type.name }} details</h1>
+                </div>
+            </div>
+            
+            {% include "admin/layouts/status.html" %}
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            Post ID# {{ post.id }} - {{ post.post_type.name }}
+                        </div>
+                                                
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                
+                                    <dl class="dl-horizontal">
+                                        
+                                        <dt>Owner:</dt>
+                                        <dd>
+                                            <a href="{% url 'admin:admin_user_details' post.owner.id %}">{{ post.owner.email }}</a>
+                                        </dd>
+
+                                        <dt>Type:</dt>
+                                        <dd>{{ post.post_type.name }}</dd>
+
+                                        <dt>Title:</dt>
+                                        <dd>{{ post.title|str_or_dash }}</dd>
+
+                                        <dt>Body:</dt>
+                                        {% autoescape off %}
+                                            <dd>
+                                                {{ post.body|str_or_dash }}
+                                            </dd>
+                                        {% endautoescape %}
+
+                                        <dt>Is Anonymous?</dt>
+                                        <dd>
+                                            {{ post.is_anonymous|yes_or_no }}
+                                        </dd>
+
+                                        <dt>Related topics: </dt>
+                                        <dd>
+                                            {% with related_topics=post.related_topics.all %}
+                                                {% if related_topics %}
+                                                    {% for topic in post.related_topics.all %}
+                                                        <a href="{% url 'admin:qa_view_topic' topic.id %}">
+                                                            [{{ topic.name }}] 
+                                                        </a>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            {% endwith %}
+                                        </dd>
+
+                                        <dt>Views count:</dt>
+                                        <dd>
+                                            {{ post.views_count }}
+                                        </dd>
+
+                                        <dt>Last activity date:</dt>
+                                        <dd>
+                                            {{ post.last_activity_date }}                                            
+                                        </dd>
+                                    </dl>
+                                    
+                                    <div class="text-center buttons">
+                                        <a href="{% url 'admin:qa_list_post' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+                                        <a href="{% url 'admin:qa_edit_post' post.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+                                        <a href="#" onclick="confirm_delete( '{% url 'admin:qa_delete_post' post.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                        <a href="{% url 'admin:qa_add_answer' post.id %}" class="btn btn-success"><i class="fa fa-plus"></i>Answer</a>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                   
+                    </div>
+                    
+                </div>
+            
+            </div>
+
+            <!-- History -->
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">History</h1>
+                </div>
+            </div>
+
+            {% for history in post_history %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                Post History ID# {{ history.id }}
+                            </div>
+                                                    
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    
+                                        <dl class="dl-horizontal">
+                                            
+                                            <dt>Title:</dt>
+                                            <dd>{{ history.title|str_or_dash }}</dd>
+
+                                            <dt>Body:</dt>
+                                            {% autoescape off %}
+                                                <dd>{{ history.body|str_or_dash }}</dd>
+                                            {% endautoescape %}
+
+                                            <dt>Written in:</dt>
+                                            <dd>{{ history.written_date }}</dd>
+                                        </dl>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            {% empty %}
+                The post has no history of edition.
+            {% endfor %}
+
+            <!-- Answers -->
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Answers / Comments</h1>
+                </div>
+            </div>
+
+            {% for answer in answers %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                {{ answer.post_type.name }} ID# {{ answer.id }}
+                            </div>
+                                                    
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <dl class="dl-horizontal">
+                                            <dt>Owner:</dt>
+                                            <dd>
+                                                <a href="{% url 'admin:admin_user_details' answer.owner.id %}">{{ answer.owner.email }}</a>
+                                            </dd>
+                                            
+                                            <dt>Is Anonymous?</dt>
+                                            <dd>
+                                                {{ answer.is_anonymous|yes_or_no }}
+                                            </dd>
+                                            <dt>Body:</dt>
+                                            {% autoescape off %}
+                                                <dd>{{ answer.body|str_or_dash }}</dd>
+                                            {% endautoescape %}
+
+                                            <dt>Written in:</dt>
+                                            <dd>{{ answer.created_date }}</dd>
+                                        </dl>
+                                        <div class="text-center buttons">
+                                            <a href="{% url 'admin:qa_edit_post' answer.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+                                            <a href="#" onclick="confirm_delete( '{% url 'admin:qa_delete_post' answer.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            {% empty %}
+                The post has no answers/comments.
+            {% endfor %}
+
+{% endblock content %}
+
+
+
+
+
+
+

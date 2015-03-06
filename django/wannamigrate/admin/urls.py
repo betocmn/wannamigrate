@@ -65,4 +65,28 @@ urlpatterns = patterns('',
     url( r'^occupations/edit/(?P<occupation_id>\d+)$', views.occupation_edit, name='occupation_edit' ),
     url( r'^occupations/delete/(?P<occupation_id>\d+)$', views.occupation_delete, name='occupation_delete' ),
 
+
+
+
+
+    #########################
+    # Questions and Answers
+    #########################
+    # Posts
+    url( r'^qa/posts$', views.qa_list_post, name = "qa_list_post" ),
+    url( r'^qa/posts/reported$', views.qa_list_post, { "reported" : True }, name = "qa_list_reported_post" ),
+    url( r'^qa/posts/add$', views.qa_add_post, name = "qa_add_post" ),
+    url( r'^qa/posts/answer/(?P<parent_id>\d+)$', views.qa_add_answer, name = "qa_add_answer" ),
+    url( r'^qa/posts/view/(?P<post_id>\d+)$', views.qa_view_post, name = "qa_view_post" ),
+    url( r'^qa/posts/edit/(?P<post_id>\d+)$', views.qa_edit_post, name = "qa_edit_post" ),
+    url( r'^qa/posts/delete/(?P<post_id>\d+)$', views.qa_delete_post, name = "qa_delete_post" ),
+    
+    # Topics
+    url( r'^qa/topics$', views.qa_list_topic, name = "qa_list_topic" ),
+    url( r'^qa/topics/add$', views.qa_add_topic, name = "qa_add_topic" ),
+    url( r'^qa/topics/view/(?P<topic_id>\d+)$', views.qa_view_topic, name = "qa_view_topic" ),
+    url( r'^qa/topics/edit/(?P<topic_id>\d+)$', views.qa_edit_topic, name = "qa_edit_topic" ),
+    url( r'^qa/topics/delete/(?P<topic_id>\d+)$', views.qa_delete_topic, name = "qa_delete_topic" ),
+
+
 )

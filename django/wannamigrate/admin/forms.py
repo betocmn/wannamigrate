@@ -15,9 +15,11 @@ from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.models import Country
 from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
-
-
-
+from wannamigrate.qa.models import Post, PostType, Topic, PostHistory
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
+from django.db import transaction
 
 
 #######################
@@ -293,3 +295,160 @@ class OccupationForm( BaseModelForm ):
         widgets = {
             'name': TextInput( attrs = { 'class': 'form-control', 'autofocus': 'true' } ),
         }
+
+
+
+
+
+###################################
+# Q&A Forms
+###################################
+class AddPostForm( BaseModelForm ):
+    """
+    Form to create a Question or a BlogPost.
+    """
+    
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Post
+        fields = [ "post_type", "owner", "title", "body", "is_anonymous", "related_topics" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        super( AddPostForm, self ).__init__( *args, **kwargs )
+
+        # Overrides the choices to the post_type field.
+        self.fields[ "post_type" ].choices = PostType.objects.filter( id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ] ).values_list( "id", "name" )
+
+        # Overrides the choices to the related_topics field.
+        self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
+        self.fields[ "related_topics" ].required = True
+
+        # Overrides the id of the widget for the owner
+        self.fields[ "owner" ].widget.attrs['id'] = "owner_id"
+
+
+#    def clean( self, *args, **kwargs ):
+#        super( AddPostForm, self ).clean( *args, **kwargs )
+#        self.cleaned_data[ "body" ] = clean_HTML( self.cleaned_data[ "body" ] )
+#        return self.cleaned_data
+
+
+        
+
+
+    def save( self, commit = True ):
+        """
+            Saves the post info taking care of add the related topics to it. 
+            :param: commit Indicates wether to save the model or not
+        """
+        with transaction.atomic():
+            instance = super( AddPostForm, self ).save( commit = False )
+            instance.last_activity_date = timezone.now()
+            
+            if commit:
+                instance.save()
+                for topic in self.cleaned_data['related_topics']:
+                    instance.related_topics.add( topic )
+
+            return instance
+
+
+
+class AddAnswerForm( BaseModelForm ):
+    """
+        Form to create an Answer or a Comment.
+    """
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Post
+        fields = [ "owner", "body", "is_anonymous", "parent", "post_type" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+
+        # Removes the parent param from kwargs.
+        parent = kwargs.pop( "parent" )
+
+        # Defines which post_type I should use according to parent's type.
+        if parent.post_type.id == settings.QA_POST_TYPE_QUESTION_ID:
+            post_type = PostType.objects.get( pk = settings.QA_POST_TYPE_ANSWER_ID )
+        elif parent.post_type.id in [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_ANSWER_ID ]:
+            post_type = PostType.objects.get( pk = settings.QA_POST_TYPE_COMMENT_ID )
+        else:
+            raise ValidationError( "Cannot add an answer to a comment." )
+
+        
+        # Initialize data
+        super( AddAnswerForm, self ).__init__( *args, **kwargs )
+
+        # Sets the parent field to a hidden input and sets its value.
+        self.fields[ "parent" ].widget = forms.HiddenInput()
+        self.fields[ "parent" ].initial = parent
+
+        # Sets the post_type field to a hidden input and sets its value.
+        self.fields[ "post_type" ].widget = forms.HiddenInput()
+        self.fields[ "post_type" ].initial = post_type
+
+        # Sets the ID of the owner field widget.
+        self.fields[ "owner" ].widget.attrs['id'] = "owner_id"
+
+
+
+class EditPostForm( BaseModelForm ):
+    """
+    Form to edit qa post on admin.
+    """
+    
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Post
+        fields = [ "title", "body", "is_anonymous", "related_topics" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        super( EditPostForm, self ).__init__( *args, **kwargs )
+
+        # Overrides the choices to the related_topics field.
+        self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
+        self.fields[ "related_topics" ].required = True
+
+
+    def save( self, commit = True ):
+        with transaction.atomic():
+            instance = super( EditPostForm, self ).save( commit = False )
+            previous_data = Post.objects.get( pk = instance.id )
+
+            if commit:
+
+                # Verifies if the title or body changed to create a post history.
+                if previous_data.title != instance.title or previous_data.body != instance.body:
+                    # Creates a post history with previous data
+                    history = PostHistory()
+                    history.original_post_id = previous_data.id
+                    history.title = previous_data.title
+                    history.body = previous_data.body
+                    # As a PostHistory will always be created when the post be edited(modified),
+                    # the modified date represents the date of creation of the post edition.
+                    history.written_date = previous_data.modified_date
+                    history.save()
+                
+                instance.last_activity_date = timezone.now()
+                instance.save()
+                instance.related_topics.clear()
+                for topic in self.cleaned_data['related_topics']:
+                    instance.related_topics.add( topic )
+
+            return instance
+
+
+# Topics
+class AddTopicForm( BaseModelForm ):
+    """
+    Form to create or edit a Topic.
+    """
+    
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Topic
+        fields = [ "name" ]
