@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 from django.conf import settings
 import pytz
 from django.utils import timezone, translation
-from django.contrib.gis.geoip import GeoIP
 
 
 
@@ -28,6 +27,14 @@ class SituationLocaleMiddleware( object ):
 
         # if this is a guest visitor's first visit
         if not request.user.is_authenticated() and 'situation' not in request.session:
+
+            request.session['situation'] = {}
+            request.session['situation']['country_code'] = 'br'
+
+            #TODO - When we install the geoIP library, just uncommnet the code below and erase the above
+
+            """
+            from django.contrib.gis.geoip import GeoIP
 
             # Gets country code from IP address of user
             x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
@@ -59,3 +66,4 @@ class SituationLocaleMiddleware( object ):
                 request.session['django_timezone'] = timezone_name
             else:
                 timezone.deactivate()
+            """

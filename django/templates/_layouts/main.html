@@ -26,7 +26,7 @@
         <div class="wrapper">
 
             <header>
-                <h1 class="logo"><a href="{% url 'site:dashboard' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
+                <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
                 <a href="#" class="bt-nav">Menu</a>
                 <div class="interaction">
                     <nav class="nav nav-dashboard">
@@ -47,7 +47,7 @@
                     <div class="account category">
 
                         {% if user.is_authenticated %}
-                            <a href="#" class="my-account">
+                            <a href="#" class="my-account options">
                                 {% if user.userpersonal.avatar %}
                                     <div class="thumb">
                                         <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="user photo" />
@@ -60,11 +60,11 @@
                                     <li><a class="bt-settings" href="#">My Settings</a></li>
                                     <li><a class="bt-contracts" href="#">My Contracts</a></li>
                                     <li><a class="bt-pricing" href="#">Configure Pricing</a></li>
-                                    <li><a class="bt-logout" href="#">Logout</a></li>
+                                    <li><a class="bt-logout" href="{% url 'site:logout' %}">Logout</a></li>
                                 </ul>
                             </div>
                         {% else %}
-                            <a href="{% url 'site:login' %}" class="my-account"><span>Login</span></a>
+                            <a href="{% url 'site:login' %}" class="my-account login"><span>Login</span></a>
                         {% endif %}
                     </div>
                 </div>

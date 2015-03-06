@@ -27,8 +27,8 @@ class LoginForm( BaseForm ):
     """
     Form for LOGIN to DASHBOARD
     """
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': 'full', 'id': 'login-email' } ), error_messages = { 'required': _( 'Please inform your e-mail.' ) }, )
-    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': 'half', 'id': 'login-password' } ), error_messages = { 'required': _( 'Please inform your password' ) } )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': ( "E-mail" ), 'class': 'full' } ) )
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password" ), 'class': 'half' } ) )
 
 
 
@@ -36,7 +36,7 @@ class PasswordRecoveryForm( BaseForm ):
     """
     Form for RECOVER PASSWORD
     """
-    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class': 'full', 'id': 'recovery_email' } ) )
+    email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'placeholder': _( "E-mail" ), 'class': 'full' } ) )
 
 
 
@@ -45,8 +45,8 @@ class PasswordResetForm( BaseForm ):
     Form to set a new password
 
     """
-    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
-    password_confirmation = forms.CharField( required = True, label = _( "Confirm Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+    password = forms.CharField( required = True, label = _( "Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "New Password" ), 'class' : 'full'  } ) )
+    password_confirmation = forms.CharField( required = True, label = _( "Confirm Password" ), widget = forms.PasswordInput( attrs = { 'placeholder': _( "Password Confirmation" ), 'class' : 'full'  } ) )
 
     def clean( self ):
         """
@@ -189,9 +189,9 @@ class SignupForm( BaseModelForm ):
         model = get_user_model()
         fields = [ 'name', 'email', 'password' ]
         widgets = {
-            'name': TextInput( attrs = { 'placeholder': _( 'Name' ), 'class': 'full', 'id': 'signup_name' } ),
-            'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': 'full', 'id': 'signup_email' } ),
-            'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': 'half', 'id': 'signup_password' } )
+            'name': TextInput( attrs = { 'placeholder': _( 'Name' ), 'class': 'full' } ),
+            'email': TextInput( attrs = { 'placeholder': _( 'E-mail' ), 'class': 'full' } ),
+            'password': PasswordInput( attrs = { 'placeholder': _( 'Password:' ), 'class': 'half' } )
         }
         error_messages = {
             'name': { 'required': _( 'Name is required.' ) },

@@ -10,6 +10,7 @@
         <!-- Css files -->
         <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
         <link rel="stylesheet" href="{% static "site/css/extra.css"%}" />
+        <link rel="stylesheet" href="{% static "site/css/login.css"%}" />
         <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/dd.css"%}" />
         <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/flags.css"%}" />
 
@@ -25,11 +26,11 @@
             <header>
                 <h1 class="logo"><a href="index.html" title="Wanna Migrate">Wanna Migrate</a></h1>
                 <a href="#" class="bt-nav">Menu</a>
-                <nav class="nav-login">
+                <nav class="nav nav-login">
                     <ul>
                         <li><a class="nav-link" href="{%  url 'site:how_it_works' %}">{% trans "How it works?" %}</a></li>
                         <li><a class="nav-link" href="{%  url 'site:service_providers' %}">{% trans "I'm a service provider" %}</a></li>
-                        <li><a class="nav-link button bt-login" href="#" title="Login">{% trans "Login" %}</a></li>
+                        <li><a class="nav-link button bt-login" href="{%  url 'site:login' %}" title="Login">{% trans "Login" %}</a></li>
                     </ul>
                 </nav>
             </header>

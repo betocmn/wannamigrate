@@ -36,8 +36,8 @@ from wannamigrate.marketplace.models import (
     Provider
 )
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.site.views import get_situation_form
 from django.utils import translation
-from django.contrib.gis.geoip import GeoIP
 
 
 
@@ -46,7 +46,7 @@ from django.contrib.gis.geoip import GeoIP
 #######################
 # VIEW PROFESSIONAL
 #######################
-
+@login_required
 def view_professional( request, user_id, name ):
     """
     View detais of a professional
@@ -64,6 +64,53 @@ def view_professional( request, user_id, name ):
 
     # Prints Template
     return render( request, 'site/home/home.html', template_data )
+
+
+
+
+
+#######################
+# LISTS PROFESSIONALS
+#######################
+@login_required
+def list_professionals( request ):
+    """
+    Listing of professionals
+
+    :param: request
+    :return: String - The html page rendered
+    """
+
+    # Initial template
+    template_data = {}
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
+    # If situation is defined, we load questions and professionals related to it
+    if 'situation' in request.session and 'from_country' in request.session['situation']:
+
+        from_country = request.session['situation']['from_country']
+        to_country = request.session['situation']['to_country']
+        goal = request.session['situation']['goal']
+
+        # Gets 5 most related service providers
+        template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
+
+        # Gets 5 most related questions
+        #TODO go, Marcio!
+
+    # Print Template
+    return render( request, 'marketplace/professionals/list.html', template_data )
+
+    """
+    # Print SQL Queries
+    from django.db import connection
+    queries_text = ''
+    for query in connection.queries:
+        queries_text += '<br /><br /><br />' + str( query['sql'] )
+    return HttpResponse( queries_text )
+    """
 
 
 

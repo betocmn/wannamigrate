@@ -355,8 +355,6 @@
                         top 0
                         bottom 0
                         margin auto
-                        width 16px
-                        height 11px
 
                     .country
                         padding-left 30px
@@ -690,6 +688,10 @@
                     .contract
                         text-decoration none
 
+                        &:hover
+                            .name
+                                text-decoration underline
+
                     .name
                         display block
                         line-height 12px
@@ -794,11 +796,6 @@
                     &:hover
                         background-position -49px bottom
 
-                &:hover
-                    cursor pointer
-                    .name
-                        text-decoration underline
-
             .bt-view-more
                 width 324px
                 margin 45px auto 75px
@@ -897,6 +894,14 @@
 
                     .data
                         clear left
+
+                    .link-hiring
+                        text-decoration none
+                        color #888
+
+                    .name
+                        .link-hiring
+                            color #555
 
                     .bt-hire
                         position relative

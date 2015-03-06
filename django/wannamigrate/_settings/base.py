@@ -34,7 +34,7 @@ WSGI_APPLICATION = 'wannamigrate.wsgi.application'
 AUTH_USER_MODEL = 'core.User'
 
 # Login URL
-LOGIN_URL = 'site:home'
+LOGIN_URL = 'site:login'
 
 
 

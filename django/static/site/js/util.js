@@ -230,10 +230,10 @@ function validate_empty_fields( form, required, alert_message ){
 
 	// intial settings
 	var error = false;
-	
+
 	// if we have a form and list of required fields
 	if ( form && required ){
-		
+
 		// set variables
 		var elem = form.elements;
 		var form_size = form.elements.length;
@@ -260,7 +260,7 @@ function validate_empty_fields( form, required, alert_message ){
 						hightlight_error_element( elem[i].id );
 						
 					} else { // if it's not empty we put original style
-						
+
 						remove_hightlight_error_element( elem[i].id );
 	
 					}	

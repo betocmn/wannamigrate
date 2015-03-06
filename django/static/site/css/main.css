@@ -1140,8 +1140,6 @@ select {
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 16px;
-  height: 11px;
 }
 .dashboard .situations .situation .from p .country,
 .dashboard .situations .situation .to p .country {
@@ -1547,6 +1545,9 @@ select {
 .dashboard .content .professionals .professional .data-professional .contract {
   text-decoration: none;
 }
+.dashboard .content .professionals .professional .data-professional .contract:hover .name {
+  text-decoration: underline;
+}
 .dashboard .content .professionals .professional .data-professional .name {
   display: block;
   line-height: 12px;
@@ -1665,12 +1666,6 @@ select {
 }
 .dashboard .content .professionals .professional .bt-options:hover {
   background-position: -49px bottom;
-}
-.dashboard .content .professionals .professional:hover {
-  cursor: pointer;
-}
-.dashboard .content .professionals .professional:hover .name {
-  text-decoration: underline;
 }
 .dashboard .content .professionals .bt-view-more {
   width: 324px;
@@ -1795,6 +1790,13 @@ select {
 }
 .dashboard .content.hire .professionals .professional .data {
   clear: left;
+}
+.dashboard .content.hire .professionals .professional .link-hiring {
+  text-decoration: none;
+  color: #888;
+}
+.dashboard .content.hire .professionals .professional .name .link-hiring {
+  color: #555;
 }
 .dashboard .content.hire .professionals .professional .bt-hire {
   position: relative;

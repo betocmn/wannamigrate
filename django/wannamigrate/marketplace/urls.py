@@ -21,4 +21,7 @@ urlpatterns = patterns('',
     # View professional details
     url( r'^professional/(?P<user_id>\d+)/(?P<name>[a-z_\-]+)$', views.view_professional, name='view_professional' ),
 
+    # List professionals
+    url( r'^professionals/$', views.list_professionals, name='list_professionals' ),
+
 )

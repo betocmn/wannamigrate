@@ -1,0 +1,110 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "site/css/font-awesome.css" %}" />
+    <link rel="stylesheet" href="{% static "site/css/login.css" %}" />
+
+{% endblock head %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <div class="content" style="width: 100%">
+
+        <div id="login-container">
+
+            <div class="signin-card">
+
+                <!-- HEADER -->
+                <h2 class="login-header title"> {% trans 'Login' %} </h2>
+                <!-- ./HEADER -->
+
+                <!-- BODY -->
+                <div class="login-body">
+
+                    {% include "site/_common/status.html" %}
+
+                    <form id="login_form_email" class="" method="post" role="form" action="{% url 'site:login' %}">
+                      {% csrf_token %}
+                      {{ form.email }} {{ form.email.errors }}
+                      {{ form.password }} {{ form.password.errors }}
+                      <button id="login-submit" type="submit" class="button bt-login">{% trans "Login" %}</button>
+                      <a id="login-link-reset-password" class="f10 green" href="{% url 'site:recover_password' %}">
+                        {% trans "Forgot your password?" %}
+                      </a>
+                    </form>
+
+                    <div id="login-social-container" class="login_item signup_item">
+                        <div class="f14 regular dark-grey text-center">
+                            {% trans "Alternatively, you can login using:" %}
+                        </div>
+                        <div id="social-login-buttons-container">
+                            <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-login facebook f16">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-login linkedin f16">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-login google f16">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                    <a class="switcher f12 signup-switcher" href="{% url 'site:signup' %}">
+                        {% trans "Don't have an account? Sign-Up" %}
+                    </a>
+
+                </div>
+
+                <!-- LOGIN FOOTER -->
+                <div class="login-footer f10 grey regular">
+                    {% url 'site:terms' as terms_url %}
+                    {% url 'site:privacy' as privacy_url %}
+                    {% blocktrans %}
+                        If you click "Log in with Facebook/Linkedin/Twitter" and are not our user, you will be registered and accepting Wanna Migrate's
+                        <a class="bold green" target="_blank" href="{{ terms_url }}">Terms and Conditions</a>
+                        and  <a class="bold green" target="_blank" href="{{ privacy_url }}">Privacy Police</a>.
+                    {% endblocktrans %}
+                </div>
+                <!-- ./LOGIN FOOTER -->
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // JS FORM Validation
+            $( "#login_form_email" ).submit( function() {
+                return validate_empty_fields( this, 'id_email,id_password' );
+            });
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

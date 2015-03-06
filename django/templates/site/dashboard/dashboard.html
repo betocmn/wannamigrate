@@ -5,148 +5,154 @@
 {% block content %}
 
     <div class="content home">
-        <a class="bt-alternator"></a>
-        <section class="questions home-questions show">
-            <div class="top">
-                <h2 class="title">{% trans "Questions" %}</h2>
-                <a href="#" class="bt-add button">{% trans "Add Question" %}</a>
-            </div>
 
-            <div class="content-questions">
-                <div class="question category">
-                    <div class="tags">
-                        <ul class="tags-list">
-                            <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                            <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                        </ul>
-                    </div>
-                    <div class="data-question">
-                        <a href="#">
-                            <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                            <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                        </a>
-                    </div>
-                    <div class="data">
-                        <ul class="data-list">
-                            <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                            <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                            <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                            <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                        </ul>
-                    </div>
-                    <div class="box-options">
-                        <ul class="box">
-                            <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                            <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                            <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                        </ul>
-                    </div>
-                    <a href="#" class="bt-options">{% trans "Options" %}</a>
+        {% if 'situation' in request.session and 'from_country' in request.session.situation %}
+
+            <a class="bt-alternator"></a>
+            <section class="questions home-questions show">
+                <div class="top">
+                    <h2 class="title">{% trans "Questions" %}</h2>
+                    <a href="#" class="bt-add button">{% trans "Add Question" %}</a>
                 </div>
-                <div class="question category">
-                    <div class="tags">
-                        <ul class="tags-list">
-                            <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                            <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                        </ul>
+
+                <div class="content-questions">
+                    <div class="question category">
+                        <div class="tags">
+                            <ul class="tags-list">
+                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
+                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
+                            </ul>
+                        </div>
+                        <div class="data-question">
+                            <a href="#">
+                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                            </a>
+                        </div>
+                        <div class="data">
+                            <ul class="data-list">
+                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
+                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
+                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
+                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
+                            </ul>
+                        </div>
+                        <div class="box-options">
+                            <ul class="box">
+                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="bt-options">{% trans "Options" %}</a>
                     </div>
-                    <div class="data-question">
-                        <a href="#">
-                            <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                            <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                        </a>
+                    <div class="question category">
+                        <div class="tags">
+                            <ul class="tags-list">
+                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
+                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
+                            </ul>
+                        </div>
+                        <div class="data-question">
+                            <a href="#">
+                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                            </a>
+                        </div>
+                        <div class="data">
+                            <ul class="data-list">
+                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
+                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
+                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
+                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
+                            </ul>
+                        </div>
+                        <div class="box-options">
+                            <ul class="box">
+                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="bt-options">{% trans "Options" %}</a>
                     </div>
-                    <div class="data">
-                        <ul class="data-list">
-                            <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                            <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                            <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                            <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                        </ul>
+                    <div class="question category">
+                        <div class="tags">
+                            <ul class="tags-list">
+                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
+                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
+                            </ul>
+                        </div>
+                        <div class="data-question">
+                            <a href="#">
+                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                            </a>
+                        </div>
+                        <div class="data">
+                            <ul class="data-list">
+                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
+                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
+                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
+                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
+                            </ul>
+                        </div>
+                        <div class="box-options">
+                            <ul class="box">
+                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="bt-options">{% trans "Options" %}</a>
                     </div>
-                    <div class="box-options">
-                        <ul class="box">
-                            <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                            <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                            <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                        </ul>
+                    <div class="question category">
+                        <div class="tags">
+                            <ul class="tags-list">
+                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
+                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
+                            </ul>
+                        </div>
+                        <div class="data-question">
+                            <a href="#">
+                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                            </a>
+                        </div>
+                        <div class="data">
+                            <ul class="data-list">
+                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
+                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
+                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
+                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
+                            </ul>
+                        </div>
+                        <div class="box-options">
+                            <ul class="box">
+                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="bt-options">{% trans "Options" %}</a>
                     </div>
-                    <a href="#" class="bt-options">{% trans "Options" %}</a>
+                    <a href="#" class="bt-view-more button-transparent">{% trans "View More" %}</a>
+                    <a href="#" class="bt-add-mobile button">{% trans "Add Question" %}</a>
                 </div>
-                <div class="question category">
-                    <div class="tags">
-                        <ul class="tags-list">
-                            <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                            <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                        </ul>
-                    </div>
-                    <div class="data-question">
-                        <a href="#">
-                            <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                            <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                        </a>
-                    </div>
-                    <div class="data">
-                        <ul class="data-list">
-                            <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                            <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                            <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                            <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                        </ul>
-                    </div>
-                    <div class="box-options">
-                        <ul class="box">
-                            <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                            <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                            <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                        </ul>
-                    </div>
-                    <a href="#" class="bt-options">{% trans "Options" %}</a>
-                </div>
-                <div class="question category">
-                    <div class="tags">
-                        <ul class="tags-list">
-                            <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                            <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                        </ul>
-                    </div>
-                    <div class="data-question">
-                        <a href="#">
-                            <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                            <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                        </a>
-                    </div>
-                    <div class="data">
-                        <ul class="data-list">
-                            <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                            <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                            <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                            <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                        </ul>
-                    </div>
-                    <div class="box-options">
-                        <ul class="box">
-                            <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                            <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                            <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                        </ul>
-                    </div>
-                    <a href="#" class="bt-options">{% trans "Options" %}</a>
-                </div>
-                <a href="#" class="bt-view-more button-transparent">{% trans "View More" %}</a>
-                <a href="#" class="bt-add-mobile button">{% trans "Add Question" %}</a>
-            </div>
-        </section>
-        <section class="professionals home-professionals">
+            </section>
+            <section class="professionals home-professionals">
             <div class="top">
                 <h2 class="title">Professionals</h2>
             </div>
             <div class="content-professionals">
 
                 {% for provider in providers.all %}
+
+                    {% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify as view_professional_url %}
+
                     <div class="professional category">
                         <div class="thumb">
-                            <a class="contract" href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}">
+                            <a class="contract" href="{{ view_professional_url }}">
                                 {% if provider.user.userpersonal.avatar %}
                                     <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
                                 {% else %}
@@ -155,7 +161,7 @@
                             </a>
                         </div>
                         <div class="data-professional">
-                            <a class="contract" href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}">
+                            <a class="contract" href="{{ view_professional_url }}">
                                 <strong class="name">{{ provider.display_name }}</strong>
                                 <p class="expert">{{ provider.headline }}</p>
                             </a>
@@ -171,26 +177,29 @@
                             </div>
                             <div class="data">
                                 <ul class="data-list">
-                                    <li class="data-item data-item-answers"><a href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers }}</strong> {% trans "answers" %}</a></li>
-                                    <li class="data-item data-item-viewers"><a href="{% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify %}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views }}</strong> {% trans "views" %}</a></li>
+                                    <li class="data-item data-item-answers"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers }}</strong> {% trans "answers" %}</a></li>
+                                    <li class="data-item data-item-viewers"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views }}</strong> {% trans "views" %}</a></li>
                                     <li class="data-item data-item-since">{% trans "Joined" %} <strong>{{ provider.user.created_date|date:"M Y"|lower }}</strong></li>
                                 </ul>
                             </div>
                             <a href="#" class="bt-options">{% trans "Options" %}</a>
                             <div class="box-options">
                                 <ul class="box">
-                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                                    <li><a class="bt-share" href="{{ view_professional_url }}">{% trans "View" %}</a></li>
+                                    <li><a class="bt-report" href="#">{% trans "Share" %}</a></li>
+                                    <li><a class="bt-cancel" href="#">{% trans "Report" %}</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                 {% endfor %}
 
             </div>
-            <a href="#" class="bt-view-more button-transparent">View More</a>
+            <a href="{% url 'marketplace:list_professionals' %}" class="bt-view-more button-transparent">View More</a>
         </section>
+
+        {% endif %}
     </div>
 
 {% endblock content %}

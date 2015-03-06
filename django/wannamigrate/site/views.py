@@ -37,7 +37,6 @@ from wannamigrate.marketplace.models import (
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
-from django.contrib.gis.geoip import GeoIP
 
 
 
@@ -143,6 +142,10 @@ def home( request ):
     :return: String - The html page rendered
     """
 
+     # Checks if the user is already authenticated.
+    if request.user.is_authenticated():
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
     # Initializes template data dictionary
     template_data = {}
 
@@ -169,86 +172,34 @@ def login( request ):
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
-        # Redirects the user to the dashboard
-        return HttpResponse( request.user.email )
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-
-    email = 'humberto@wannamigrate.com'
-    password = 'javascript3'
-    user = authenticate( email = email, password = password )
-
-    if user is not None and user.is_active:
-
-        # Logins Successfully
-        auth_login( request, user )
-
-        # Checks if situation already exists
-        try:
-            user_situation = user.usersituation
-        except UserSituation.DoesNotExist:
-            user_situation = False
-
-        # Update situation on session and DB
-        if user_situation:
-            situation = user_situation.situation
-            request.session['situation']['from_country'] = situation.from_country
-            request.session['situation']['to_country'] = situation.to_country
-            request.session['situation']['goal'] = situation.goal
-            request.session['situation']['total_users'] = situation.total_users
-
-        # Make sure the user goes to the dashboard
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
-    else:
-        return HttpResponse( 'Invalid Login' )
-
-    """
-    # Instantiates the forms on the template_data
+    # Initializes template data dictionary
     template_data = {}
-    template_data['form'] = LoginForm()
-    template_data['form_template'] = "site/signin/login_form.html"
 
-    # Form submitted?
-    if request.method == 'POST':
+    # Instantiates the form
+    form = LoginForm( request.POST or None )
 
-        # Create form
-        form = LoginForm( request.POST )
+    # if Form was submitted and is valid
+    if form.is_valid():
 
-        if form.is_valid():
-
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = authenticate( email = email, password = password )
-
-            if user is not None and user.is_active:
-                # Login Successfully
-                auth_login( request, user )
-                # Make sure the user goes to the dashboard
-                return HttpResponseRedirect( reverse( "site:dashboard" ) )
-            else:
-                template_data[ 'error' ] = _( "Invalid login. Please try again." )
-                template_data[ 'form' ] = form
-                return render( request, "site/signin/container.html", template_data )
-
+        # Authenticates user
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+        user = authenticate( email = email, password = password )
+        if user is not None and user.is_active:
+            # Login Successfully
+            auth_login( request, user )
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
         else:
-            if form.non_field_errors:
-                msg = ''
-                for k, v in form.errors.items():
-                    msg += v
-                template_data['error'] = msg
-                template_data['form'] = form
-                return render( request, "site/signin/container.html", template_data )
-            
-            template_data[ 'error' ] = _( "Invalid login. Please try again." )
-            template_data[ 'form' ] = form
-            return render( request, "site/signin/container.html", template_data )
+            messages.error( request, _( 'Invalid login. Please try again.' ) )
 
-    else:
-        # Instantiate Forms
-        template_data['form'] = LoginForm()
-        return render( request, "site/signin/container.html", template_data )
+    # passes form to template Forms
+    template_data['form'] = form
 
-    """
+    # Prints Template
+    return render( request, "site/login/login.html", template_data )
+
 
 def logout( request ):
     """
@@ -276,62 +227,42 @@ def signup( request ):
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
-        # Redirects the user to the dashboard
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-    # Instantiates the forms on the template_data
+    # Initializes template data dictionary
     template_data = {}
-    template_data['form'] = SignupForm()
-    template_data['form_template'] = "site/signin/signup_form.html"
 
-    # Form submitted?
-    if request.method == 'POST':
+    # Instantiates the form
+    form = SignupForm( request.POST or None )
 
-        # Create form
-        form = SignupForm( request.POST )
+    # if form was submitted and is valid
+    if form.is_valid():
 
-        if form.is_valid():
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
 
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        # Creates user
+        user = get_user_model().objects.create_user( email, name = name, password = password )
 
-            # Create user
-            user = get_user_model().objects.create_user( email, name = name, password = password )
+        if user is not None:
 
-            if user is not None:
+            # Login user
+            user = authenticate( email = email, password = password )
+            auth_login( request, user )
 
-                # Login user
-                user = authenticate( email = email, password = password )
-                auth_login( request, user )
+            # Sends Welcome Email to User
+            # TODO Change this to a celery/signal background task
+            Mailer.send_welcome_email( user )
 
-                # Sends Welcome Email to User
-                # TODO Change this to a celery/signal background task
-                Mailer.send_welcome_email( user )
+            # Redirect to dashboard
+            return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
-                # Return success to Ajax
-                return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+    # passes form to template Forms
+    template_data['form'] = form
 
-            else:
-                template_data['error'] = _( 'There was an error while creating your user account.' )
-                template_data['form'] = form
-                return render( request, "site/signin/container.html", template_data )
-
-        else:
-
-            if form.non_field_errors:
-                msg = ''
-                for k, v in form.errors.items():
-                    msg += v
-                template_data['error'] = msg
-                template_data['form'] = form
-                return render( request, "site/signin/container.html", template_data )
-
-            template_data['error'] = _( 'Invalid Information! Make sure all fields are filled in and email and confirmation match.' )
-            return render( request, "site/signin/container.html", template_data )
-
-    else:
-        return render( request, "site/signin/container.html", template_data )
+    # Prints Template
+    return render( request, "site/login/signup.html", template_data )
 
 
 def recover_password( request ):
@@ -344,48 +275,34 @@ def recover_password( request ):
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
-        # Redirects the user to the dashboard
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-    # Instantiates the forms on the template_data
+    # Initializes template data dictionary
     template_data = {}
-    template_data['form'] = PasswordRecoveryForm()
-    template_data['form_template'] = "site/signin/recover_password.html"
 
-    # Form submitted?
-    if request.method == 'POST':
+    # Instantiates the form
+    form = PasswordRecoveryForm( request.POST or None )
 
-        # Create form
-        form = PasswordRecoveryForm( request.POST )
-        template_data['form'] = form
-        
-        if form.is_valid():
+    # if form was submitted and is valid
+    if form.is_valid():
 
-            email = form.cleaned_data['email']
-            user = get_object_or_false( get_user_model(), email = email )
+        email = form.cleaned_data['email']
+        user = get_object_or_false( get_user_model(), email = email )
 
-            if user and user is not None and user.is_active:
+        if user and user.is_active:
 
-                # Send email with link to reset password
-                # TODO: Change this to a celery background event and use a try/exception block
-                Mailer.send_reset_password_email( user )
+            # Send email with link to reset password
+            # TODO: Change this to a celery background event and use a try/exception block
+            #Mailer.send_reset_password_email( user )
 
-                # Return success message to template
-                template_data['success'] = _( 'Password reset instructions were successfully sent to your e-mail.' )
-                template_data['form'] = PasswordRecoveryForm() # Create an empty form to clean e-mail field
-                return render( request, "site/signin/container.html", template_data )
+            # Return success message to template
+            messages.success( request, _( 'Password reset instructions were successfully sent to your e-mail.' ) )
 
-            else:
-                # Return an error message to the template
-                template_data['error'] = _( 'No user found with this e-mail address.' )
-                return render( request, "site/signin/container.html", template_data )
+    # passes form to template Forms
+    template_data['form'] = form
 
-        else:
-            # Return an error message to the template
-            template_data['error'] = _( 'Invalid e-mail address.' )
-            return render( request, "site/signin/container.html", template_data )
-    else:
-        return render( request, "site/signin/container.html", template_data )
+    # Prints Template
+    return render( request, "site/login/recover_password.html", template_data )
 
 
 @sensitive_post_parameters()
@@ -423,13 +340,13 @@ def reset_password( request, uidb64 = None, token = None ):
         user.save()
 
         # mark in the template that it was successfully finished
-        template_data['finished'] = True
+        messages.success( request, _( 'Password successfully updated.' ) )
 
     # Pass form to template
     template_data['form'] = form
 
     # Print Template
-    return render( request, 'site/signin/reset_password.html', template_data )
+    return render( request, 'site/login/reset_password.html', template_data )
 
 
 
@@ -660,14 +577,24 @@ def dashboard( request ):
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
-    # Gets Service Providers
-    template_data['providers'] = Provider.get_listing( 204, 0, 5 )
+    # If situation is defined, we load questions and professionals related to it
+    if 'situation' in request.session and 'from_country' in request.session['situation']:
+
+        from_country = request.session['situation']['from_country']
+        to_country = request.session['situation']['to_country']
+        goal = request.session['situation']['goal']
+
+        # Gets 5 most related service providers
+        template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
+
+        # Gets 5 most related questions
+        #TODO go, Marcio!
 
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
 
-    # Print SQL Queries
     """
+    # Print SQL Queries
     from django.db import connection
     queries_text = ''
     for query in connection.queries:
