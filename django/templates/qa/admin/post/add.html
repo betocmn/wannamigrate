@@ -1,0 +1,160 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <link href="{% static 'common/jquery-ui/css/ui-lightness/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
+
+    <style>
+        /** Topics autocomplete css */
+        .topic { margin-right: 10px; }
+        .bt-remove-topic 
+        {
+            cursor: pointer;
+            color: #0000AA;
+        }
+        .bt-remove-topic:hover{ color: #0099CC !important; }
+        
+        /** Owner autocomplete css */
+        .custom-combobox 
+        {
+            position: relative;
+            display: inline-block;
+        }
+        .custom-combobox-toggle
+        {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+        .custom-combobox-input, input, option
+        {
+            margin: 0;
+            padding: 5px 10px;
+        }
+    </style>
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+    <script src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'common/custom-combobox/js/custom-combobox.js' %}"></script>
+    <script src="{% static 'common/auto-topics/js/autotopics.js' %}"></script>
+    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            // Jquery Formset
+            $( '#main_form tbody tr' ).formset();
+
+            // JS FORM Validation
+			$( "#main_form" ).submit( function() {
+				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+			});
+
+            // JS for onload
+            {{ on_load|default:'' }}
+
+            // Owner autocomplete
+            $("#{{ form.owner.id_for_label }}").combobox();
+            $("#toggle").click(function() {
+                $("#{{ form.owner.id_for_label }}").toggle();
+            });
+
+            $("#{{ form.related_topics.id_for_label }}").autotopics();
+
+            $("#{{ form.body.id_for_label }}").wm_editor();
+
+
+        });
+        
+    </script>
+    
+{% endblock head %}
+
+
+{% block content %}
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add New Post</h1>
+                </div>
+            </div>
+            
+            {% include "admin/_common/status.html" %}
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading">
+                            Post Details
+                        </div>
+                        
+                        <div class="panel-body">
+                            <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!-- PostType -->
+                                        <div class="form-group {% if form.post_type.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.post_type.id_for_label }}">{{ form.post_type.label }}</label>
+                                            {{ form.post_type }}
+                                            {{ form.post_type.errors }}
+                                        </div>
+                                        <!-- Owner -->
+                                        <div class="form-group {% if form.owner.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.owner.id_for_label }}">{{ form.owner.label }}</label>
+                                            {{ form.owner }}
+                                            {{ form.owner.errors }}
+                                        </div>
+                                        <!-- Title -->
+                                        <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                                            {{ form.title }}
+                                            {{ form.title.errors }}
+                                        </div>
+                                        <!-- Body -->
+                                        <div class="form-group {% if form.body.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
+                                            {{ form.body }}
+                                            {{ form.body.errors }}
+                                        </div>
+                                        <!-- Anonymous -->
+                                        <div class="form-group {% if form.is_anonymous.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.is_anonymous.id_for_label }}">{{ form.is_anonymous.label }}</label>
+                                            {{ form.is_anonymous }}
+                                            {{ form.is_anonymous.errors }}
+                                        </div>
+                                        <!-- Topics -->
+                                        <div class="form-group {% if form.related_topics.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.related_topics.id_for_label }}">{{ form.related_topics.label }}</label>
+                                            {{ form.related_topics }}
+                                            {{ form.related_topics.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center buttons">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                                    <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+                                </div>
+
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock content %}
+
+
+
+
+
+
+

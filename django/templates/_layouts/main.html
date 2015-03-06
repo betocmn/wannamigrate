@@ -13,8 +13,8 @@
             <!-- Css files -->
             <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
             <link rel="stylesheet" href="{% static "site/css/extra.css"%}" />
-            <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/dd.css"%}" />
-            <link rel="stylesheet" type="text/css" href="{% static "site/css/msdropdown/flags.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/dd.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/flags.css"%}" />
 
         {% endblock head %}
 
@@ -191,12 +191,12 @@
     {% block scripts %}
 
         <!-- JS Libraries -->
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.js' %}"></script>
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.dd.js' %}"></script>
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.stickysectionheaders.js' %}"></script>
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.autocomplete.js' %}"></script>
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.raty.js' %}"></script>
-        <script type="text/javascript" src="{% static 'site/js/libs/jquery.touchSwipe.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-dd/js/jquery.dd.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-sticksectionheaders/js/jquery.stickysectionheaders.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-autocomplete/js/jquery.autocomplete.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-raty/js/jquery.raty.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-touchswipe/js/jquery.touchSwipe.js' %}"></script>
 
         <!-- JS Custom Scripts -->
         <script type="text/javascript" src="{% static 'site/js/countries.js' %}"></script>

@@ -14,9 +14,9 @@
                 </div>
 
                 {% for provider in providers.all %}
-                    
+
                     {% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify as view_professional_url %}
-                    
+
                     <div class="professional category">
                         <div class="identity">
                             <div class="thumb">
@@ -78,15 +78,12 @@
     {{ block.super }}
 
     <!-- JS REQUIRED BY THIS PAGE -->
-    <script type="text/javascript" src="{% static 'site/js/libs/trunk8.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
-
-            // Create country dropdowns
-            $( ".custom-select" ).msDropdown();
 
             // Create review stars of professional
             $( '.rate' ).raty({

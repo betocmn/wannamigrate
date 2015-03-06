@@ -145,9 +145,9 @@ def build_datatable_json( request, objects, info ):
                 values.append( getattr( sub_obj, split[1] ) )
             else:
                 values.append( getattr( obj, field ) )
-        buttons_html = base_buttons_html.replace( "#details_link#", reverse( 'admin:' + info['url_base_name'] + '_details', args = ( obj.id, ) ) )
-        buttons_html = buttons_html.replace( "#edit_link#", reverse( 'admin:' + info['url_base_name'] + '_edit', args = ( obj.id, ) ) )
-        buttons_html = buttons_html.replace( "#delete_link#", reverse( 'admin:' + info['url_base_name'] + '_delete', args = ( obj.id, ) ) )
+        buttons_html = base_buttons_html.replace( "#details_link#", reverse( info['namespace'] + info['url_base_name'] + '_details', args = ( obj.id, ) ) )
+        buttons_html = buttons_html.replace( "#edit_link#", reverse( info['namespace'] + info['url_base_name'] + '_edit', args = ( obj.id, ) ) )
+        buttons_html = buttons_html.replace( "#delete_link#", reverse( info['namespace'] + info['url_base_name'] + '_delete', args = ( obj.id, ) ) )
         values.append( buttons_html )
         data.append( values )
 

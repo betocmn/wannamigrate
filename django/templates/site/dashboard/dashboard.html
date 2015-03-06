@@ -12,7 +12,7 @@
             <section class="questions home-questions show">
                 <div class="top">
                     <h2 class="title">{% trans "Questions" %}</h2>
-                    <a href="#" class="bt-add button">{% trans "Add Question" %}</a>
+                    <a href="{% url 'admin:qa:list_post' %}" class="bt-add button">{% trans "Add Question" %}</a>
                 </div>
 
                 <div class="content-questions">
@@ -210,15 +210,12 @@
     {{ block.super }}
 
     <!-- JS REQUIRED BY THIS PAGE -->
-    <script type="text/javascript" src="{% static 'site/js/libs/trunk8.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
-
-            // Create country dropdowns
-            $( ".custom-select" ).msDropdown();
 
             // Create review stars of professional
             $( '.rate' ).raty({

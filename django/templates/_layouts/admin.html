@@ -14,15 +14,15 @@
 
             <!-- CSS -->
             <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
-            <link href="{% static 'admin/css/bootstrap.css' %}" rel="stylesheet">
-            <link href="{% static 'admin/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+            <link href="{% static 'common/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+            <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
             <link href="{% static 'admin/css/sb-admin.css' %}" rel="stylesheet">
             <link href="{% static 'admin/css/style.css' %}" rel="stylesheet">
 
             <!-- JAVASCRIPT -->
-            <script src="{% static 'admin/js/jquery.js' %}"></script>
-            <script src="{% static 'admin/js/bootstrap.js' %}"></script>
-            <script src="{% static 'admin/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+            <script src="{% static 'common/jquery/js/jquery.js' %}"></script>
+            <script src="{% static 'common/bootstrap/js/bootstrap.js' %}"></script>
+            <script src="{% static 'common/metis-menu/js/jquery.metisMenu.js' %}"></script>
             <script src="{% static 'admin/js/sb-admin.js' %}"></script>
             <script src="{% static 'admin/js/util.js' %}"></script>
 
@@ -83,58 +83,61 @@
                             <!-- /input-group -->
                         </li>
 
-                        {% if perms.core.admin_view_user %}
                         <li>
-                            <a href="{% url 'admin:users' %}"><i class="fa fa-users fa-fw"></i> Users<span class="fa"></span></a>
-
+                            <a href="#"><i class="fa fa-cog fa-fw"></i> Core<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                {% if perms.core.admin_view_user %}
+                                    <li>
+                                        <a href="{% url 'admin:core:users' %}">Users<span class="fa"></span></a>
+                                    </li>
+                                {% endif %}
+                                {% if perms.core.admin_view_admin_user %}
+                                    <li>
+                                        <a href="{% url 'admin:core:admin_users' %}">Admin Users</a>
+                                    </li>
+                                {% endif %}
+                                {% if perms.auth.add_group or perms.auth.change_group or perms.auth.delete_group  %}
+                                    <li>
+                                        <a href="{% url 'admin:core:groups' %}">Groups and Permissions</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </li>
-                        {% endif %}
-
 
                         <li>
-                            <a href="#"><i class="fa fa-question-circle"></i> Q&A<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Q&A<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{% url 'admin:qa_list_post' %}">Posts</a>
+                                    <a href="{% url 'admin:qa:list_post' %}">Posts</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'admin:qa_list_topic' %}">Topics</a>
+                                    <a href="{% url 'admin:qa:list_topic' %}">Topics</a>
                                 </li>
                                 <li>
                                     <a href="#">Communities</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'admin:qa_list_reported_post' %}">Reported content</a>
+                                    <a href="{% url 'admin:qa:list_reported_post' %}">Reported content</a>
                                 </li>
                             </ul>
                         </li>
 
-
                         <li>
-                            <a href="#"><i class="fa fa-gears fa-fw"></i> System Settings<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-calculator fa-fw"></i> Immigration Points<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 {% if perms.core.admin_view_immigration_rule %}
                                     <li>
-                                        <a href="{% url 'admin:immigration_rules' %}">Immigration Rules</a>
+                                        <a href="{% url 'admin:points:immigration_rules' %}">Immigration Rules</a>
                                     </li>
                                 {% endif %}
                                 {% if perms.core.admin_view_occupation %}
                                     <li>
-                                        <a href="{% url 'admin:occupations' %}">Occupations in Demand</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.core.admin_view_admin_user %}
-                                    <li>
-                                        <a href="{% url 'admin:admin_users' %}">Admin Users</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.auth.add_group or perms.auth.change_group or perms.auth.delete_group  %}
-                                    <li>
-                                        <a href="{% url 'admin:groups' %}">Groups and Permissions</a>
+                                        <a href="{% url 'admin:points:occupations' %}">Occupations in Demand</a>
                                     </li>
                                 {% endif %}
                             </ul>
                         </li>
+
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -149,18 +152,6 @@
                                 </li>
                                 <li>
                                     <a href="#">English Test Results</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-cubes fa-fw"></i> Extra Tools<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">English Tests</a>
-                                </li>
-                                <li>
-                                    <a href="#">Job Alerts</a>
                                 </li>
                             </ul>
                         </li>

@@ -17,9 +17,11 @@ from wannamigrate.core.models import Country
 from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
 from wannamigrate.qa.models import Post, PostType, Topic, PostHistory
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.db import transaction
+
+
+
 
 
 #######################
