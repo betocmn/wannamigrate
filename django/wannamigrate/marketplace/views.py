@@ -44,7 +44,7 @@ from django.utils import translation
 
 
 #######################
-# VIEW PROFESSIONAL
+# VIEWS PROFESSIONAL
 #######################
 @login_required
 def view_professional( request, user_id, name ):
@@ -55,15 +55,29 @@ def view_professional( request, user_id, name ):
     :return: String - The html page rendered
     """
 
-    return HttpResponse( 'View Professional Details :)' + user_id + ' - ' + name )
+    # Identify database record
+    provider = get_object_or_404( Provider, user_id = user_id )
+
     # Initializes template data dictionary
     template_data = {}
 
     # passes form to template
     template_data['form'] = get_situation_form( request )
 
+    # passes service provider to template
+    template_data['provider'] = provider
+
     # Prints Template
-    return render( request, 'site/home/home.html', template_data )
+    return render( request, 'marketplace/professionals/view.html', template_data )
+
+    """
+    # Print SQL Queries
+    from django.db import connection
+    queries_text = ''
+    for query in connection.queries:
+        queries_text += '<br /><br /><br />' + str( query['sql'] )
+    return HttpResponse( queries_text )
+    """
 
 
 
@@ -87,7 +101,7 @@ def list_professionals( request ):
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
-    # If situation is defined, we load questions and professionals related to it
+    # If situation is defined, we load professionals related to it
     if 'situation' in request.session and 'from_country' in request.session['situation']:
 
         from_country = request.session['situation']['from_country']
@@ -97,20 +111,8 @@ def list_professionals( request ):
         # Gets 5 most related service providers
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
 
-        # Gets 5 most related questions
-        #TODO go, Marcio!
-
     # Print Template
     return render( request, 'marketplace/professionals/list.html', template_data )
-
-    """
-    # Print SQL Queries
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str( query['sql'] )
-    return HttpResponse( queries_text )
-    """
 
 
 

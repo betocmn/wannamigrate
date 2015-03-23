@@ -4790,6 +4790,193 @@ select {
   padding: 58px 0 0 0;
   overflow: hidden;
 }
+.content.myaccount .title {
+  display: block;
+  padding: 0 0 50px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #68347e;
+}
+.content.myaccount .interactions {
+  position: relative;
+  clear: both;
+  width: 99%;
+  height: auto;
+  padding-bottom: 50px;
+  margin-top: 30px;
+  background-color: #fafafa;
+  border: 1px solid #d7d7d7;
+}
+.content.myaccount .interactions .interaction-list {
+  position: relative;
+  left: -1px;
+  top: -37px;
+  width: 960px;
+  height: 35px;
+  margin: 0 auto;
+}
+.content.myaccount .interactions .interaction-list .interaction-item {
+  float: left;
+  display: block;
+  width: 138px;
+  margin: 0 2px 0;
+  text-align: center;
+}
+.content.myaccount .interactions .interaction-list .interaction-item:first-child {
+  margin-left: 0;
+}
+.content.myaccount .interactions .interaction-list .interaction-item .interaction-link {
+  display: block;
+  height: 35px;
+  line-height: 35px;
+  text-decoration: none;
+  border-left: 1px solid #d7d7d7;
+  border-top: 1px solid #d7d7d7;
+  border-right: 1px solid #d7d7d7;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  font-size: 14px;
+  background-color: #eaeaea;
+  color: #888;
+}
+.content.myaccount .interactions .interaction-list .interaction-item .interaction-link.active {
+  position: relative;
+  background-color: #fafafa;
+  border-bottom: 1px solid #fafafa;
+  color: #68347e;
+  pointer-events: none;
+}
+.content.myaccount .interactions .my-profile {
+  padding: 0 25px;
+}
+.content.myaccount .interactions .my-profile .bt-edit {
+  float: right;
+  width: 170px;
+}
+.content.myaccount .interactions .my-profile .identity {
+  clear: left;
+  width: 100%;
+  height: 150px;
+  padding: 45px 0 0;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile .identity .thumb {
+  float: left;
+  width: 125px;
+  height: 125px;
+}
+.content.myaccount .interactions .my-profile .identity .thumb span {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 14px;
+  color: #888;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile .identity .thumb img {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+.content.myaccount .interactions .my-profile .identity .data {
+  padding: 22px 0 0;
+}
+.content.myaccount .interactions .my-profile .identity .data span {
+  display: block;
+  padding: 0 0 7px;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile .identity .data strong {
+  display: block;
+  padding: 0 0 20px;
+  font-weight: normal;
+  font-family: 'open_sanssemibold';
+  font-size: 16px;
+  color: #555;
+}
+.content.myaccount .interactions .my-profile .summary {
+  width: 100%;
+  height: 150px;
+  font-size: 14px;
+  color: #555;
+}
+.content.myaccount .interactions .my-profile .summary span {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile .summary .text {
+  display: block;
+  width: 800px;
+  line-height: 22px;
+  font-family: 'open_sanssemibold';
+  padding: 0 0 0 20px;
+}
+.content.myaccount .interactions .my-profile .services {
+  padding: 0 0 0 0;
+}
+.content.myaccount .interactions .my-profile .services .title {
+  padding-bottom: 20px;
+}
+.content.myaccount .interactions .my-profile .services .subtitle {
+  margin-left: -20px;
+}
+.content.myaccount .interactions .my-profile .services span {
+  display: block;
+  padding: 0 0 15px;
+}
+.content.myaccount .interactions .my-profile .services .supported-countries {
+  padding: 0 0 0 0;
+}
+.content.myaccount .interactions .my-profile .services .supported-countries p {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px 0 20px;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  font-size: 16px;
+  color: #777;
+}
+.content.myaccount .interactions .my-profile .services .supported-countries p:last-child {
+  padding: 0 0 0 20px;
+  border-left: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .my-profile .services .supported-services {
+  margin: 30px 0 5px;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul {
+  padding: 0 0 0 20px;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul li {
+  display: block;
+  width: 445px;
+  height: 50px;
+  line-height: 50px;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  border-top: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul li:last-child {
+  border-bottom: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul li strong {
+  float: left;
+  display: inline-block;
+  font-weight: normal;
+  color: #777;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul li span {
+  float: right;
+  display: inline-block;
+  padding-bottom: 0;
+  color: #555;
+}
 .content.extra-tools {
   width: 965px;
   margin: 0 auto 58px;
