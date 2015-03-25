@@ -15,7 +15,7 @@
 
                 {% for provider in providers.all %}
 
-                    {% url 'marketplace:view_professional' provider.user_id provider.display_name|slugify as view_professional_url %}
+                    {% url 'marketplace:profile' provider.user_id provider.display_name|slugify as view_professional_url %}
 
                     <div class="professional category">
                         <div class="identity">

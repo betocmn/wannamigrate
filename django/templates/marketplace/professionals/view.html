@@ -8,24 +8,21 @@
         <div class="professional">
             <div class="identity">
                 <div class="thumb">
-                    <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="">
+                    {% if provider.user.userpersonal.avatar %}
+                        <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
+                    {% else %}
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
+                    {% endif %}
                 </div>
                 <div class="data-professional">
-                    <strong class="name">Humberto Martins</strong>
-                    <p class="expert">Canadian Immigration Especialist</p>
-                    <div class="rate">
-                        <span class="count">(900)</span>
+                    <strong class="name">{{ provider.display_name }}</strong>
+                    <p class="expert">{{ provider.headline }}</p>
+                    <div class="rate" data-score="{{ provider.review_score }}">
+                        <span class="count">({{ provider.user.userstats.total_reviews }})</span>
                     </div>
                 </div>
                 <div class="description">
-                    <p>Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Vivamus odio nisl, feugiat ut pretium ut, vehicula nec mi.</p>
-                    <p>Vivamus odio nisl, feugiat ut pretium ut, vehicula nec mi.</p>
-                    <ul>
-                        <li>• Fusce aliquam dolor et purus suscipit faucibus</li>
-                        <li>• Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus</li>
-                        <li>• Nunc volutpat id erat vitae pulvinar</li>
-                    </ul>
-                    <p>Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. </p>
+                    {{ provider.description|linebreaks }}
                 </div>
             </div>
             <div class="services">
@@ -33,69 +30,46 @@
                     <h2 class="title">Services</h2>
                 </div>
                 <ul class="services-list">
-                    <li class="service-item skype">
-                        <strong class="title-service">Skype service</strong>
-                        <span class="price">$100</span>
-                        <a href="hire.html" class="bt-hire button">Hire</a>
-                    </li>
-                    <li class="service-item elegibility">
-                        <strong class="title-service">Elegibility Assessment</strong>
-                        <span class="price">$100</span>
-                        <a href="hire.html" class="bt-hire button">Hire</a>
-                    </li>
-                    <li class="service-item visa">
-                        <strong class="title-service">Full Visa Consultancy</strong>
-                        <span class="price">$100</span>
-                        <a href="hire.html" class="bt-hire button">Hire</a>
-                    </li>
-                    <li class="service-item review">
-                        <strong class="title-service">File Review</strong>
-                        <span class="price">$100</span>
-                        <a href="hire.html" class="bt-hire button">Hire</a>
-                    </li>
+
+                    {% for provider_service_type in provider_service_types %}
+                        <li class="service-item {{ provider_service_type.service_type.icon_css_class }}">
+                            <strong class="title-service">{{ provider_service_type.service_type.name }}</strong>
+                            <span class="price">${{ provider_service_type.price }}</span>
+                            <a href="{% url 'marketplace:payment' provider.user_id provider_service_type.service_type_id %}" class="bt-hire button">Hire</a>
+                        </li>
+                    {% endfor %}
+
                 </ul>
             </div>
         </div>
         <section class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-reviews active">Reviews (100)</a>
+                    <a href="#" class="interaction-link bt-reviews active">Reviews ({{ provider.user.userstats.total_reviews }})</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-answers">Answers (26)</a>
+                    <a href="#" class="interaction-link bt-answers">Answers ({{ provider.user.userstats.total_answers }})</a>
                 </li>
             </ul>
             <div class="interaction reviews">
+
+                {% for review in reviews %}
                 <div class="review">
                     <div class="thumb">
-                        <img src="{% static 'site/img/thumb-review-author.png' %}" alt="">
+                        {% if review.from_user.userpersonal.avatar %}
+                            <img src="{{ review.from_user.userpersonal.avatar.thumbnail.url }}" alt="review user" />
+                        {% else %}
+                            <img src="{% static 'site/img/thumb-review-author.png' %}" alt="review user" />
+                        {% endif %}
                     </div>
                     <div class="box">
-                        <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Aliquam erat volutpat. In eu vulputate erat.</p>
-                        <span class="author">humberto martins</span>
-                        <span class="posted">Jan 22, 2015</span>
+                        <p class="text">{{ review.comment }}</p>
+                        <span class="author">{{ review.from_user.name }}</span>
+                        <span class="posted">{{ review.created_date|date:"M d, Y" }}</span>
                     </div>
                 </div>
-                <div class="review">
-                    <div class="thumb">
-                        <img src="{% static 'site/img/thumb-review-author.png' %}" alt="">
-                    </div>
-                    <div class="box">
-                        <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Aliquam erat volutpat. In eu vulputate erat.</p>
-                        <span class="author">humberto martins</span>
-                        <span class="posted">Jan 22, 2015</span>
-                    </div>
-                </div>
-                <div class="review">
-                    <div class="thumb">
-                        <img src="{% static 'site/img/thumb-review-author.png' %}" alt="">
-                    </div>
-                    <div class="box">
-                        <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Aliquam erat volutpat. In eu vulputate erat.</p>
-                        <span class="author">humberto martins</span>
-                        <span class="posted">Jan 22, 2015</span>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
             <div class="interaction answers">
                 <form action="" class="search">
@@ -103,7 +77,7 @@
                     <fieldset>
                         <label for="search">Search</label>
                         <input class="search-input" type="text" placeholder="Search Answers">
-                        <input submit="submit" class="bt-search" value=""></input>
+                        <input submit="submit" class="bt-search" value="" />
                     </fieldset>
                 </form>
                 <h2 class="title-answers">What is a step-by-step guide do migrate to Canada?</h2>

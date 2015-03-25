@@ -135,8 +135,7 @@ function confirm_multi_delete(){
  */
 function hightlight_error_element( field_id ){
 
-	$( "#" + field_id ).parent().addClass( 'has-error' );
-	$( "#" + field_id ).parent().parent().addClass( 'has-error' );
+	$( "#" + field_id ).closest( ".error-element" ).addClass( 'has-error' );
 
 }
 
@@ -145,9 +144,8 @@ function hightlight_error_element( field_id ){
 *
 */
 function remove_hightlight_error_element( field_id, parent_nodes ){
-	
-	$( "#" + field_id ).parent().removeClass( 'has-error' );
-	$( "#" + field_id ).parent().parent().removeClass( 'has-error' );
+
+    $( "#" + field_id ).closest( ".error-element" ).removeClass( 'has-error' );
 
 }
 
@@ -245,6 +243,7 @@ function validate_empty_fields( form, required, alert_message ){
 		}
 		
 		// loop through all form elements
+        var first_empty_element = false
 		for ( i = 0; i < form_size; i++ ){
 			
 			// if id is set and element is in the required array
@@ -254,15 +253,18 @@ function validate_empty_fields( form, required, alert_message ){
 				if ( elem[i].type == 'text' || elem[i].type == 'password' || elem[i].type == 'select-one' || elem[i].type == 'textarea' ){
 					
 					// validate field
-					if ( elem[i].value == ""){	// if it's empty we need to hightlight element as error
+					if ( elem[i].value == "" ){	// if it's empty we need to hightlight element as error
 						
 						error = true;
+                        if ( !first_empty_element ){
+                            first_empty_element = elem[i];
+                        }
 						hightlight_error_element( elem[i].id );
 						
 					} else { // if it's not empty we put original style
 
 						remove_hightlight_error_element( elem[i].id );
-	
+
 					}	
 				} 
 			}	
@@ -270,8 +272,10 @@ function validate_empty_fields( form, required, alert_message ){
 	}
 	
 	if ( error ){
-        if ( alert_message != 'none' )
-		    display_error_message( alert_message, true );
+        if ( alert_message != 'none' ) {
+            display_error_message( alert_message, true );
+            first_empty_element.focus();
+        }
 		return false;
 	} else {
 		return true;

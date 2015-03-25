@@ -142,3 +142,35 @@ class Mailer( object ):
         template_data = { 'email': email, 'name': name, 'message': message }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
         return Mailer.send( _( 'Professional Help Requested' ), body, settings.CONTACT_FORM_EMAIL )
+
+
+    @staticmethod
+    def send_order_confirmation( email, provider_service_type, order ):
+        """
+        Sends order confirmation to user
+
+        :param: user
+        """
+        
+        # Defines order message accordingly to status
+        message = ''
+        if order.order_status_id == 1:
+            message = "Your payment was received and will be processed soon."
+        elif order.order_status_id == 2:
+            message = "Your payment was approved."
+        elif order.order_status_id == 3:
+            message = "Your payment was denied."
+        elif order.order_status_id == 4:
+            message = "Your payment was cancelled."
+        elif order.order_status_id == 5:
+            message = "Your payment was refunded."
+
+        template_data = {
+            'provider_service_type': provider_service_type,
+            'order': order,
+            'service_type': provider_service_type.service_type,
+            'provider': provider_service_type.provider,
+            'message': message
+        }
+        body = Mailer.build_body_from_template( 'emails/order_confirmation.html', template_data )
+        return Mailer.send( _( 'Your Order Details' ), body, email )

@@ -190,13 +190,15 @@ def login( request ):
         if user is not None and user.is_active:
             # Login Successfully
             auth_login( request, user )
+            if 'next' in request.GET:
+                return HttpResponseRedirect( request.GET.get( 'next' ) )
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
         else:
-            messages.error( request, _( 'Invalid login. Please try again.' ) )
             messages.error( request, _( 'Invalid login. Please try again.' ) )
 
     # passes form to template Forms
     template_data['form'] = form
+    template_data['next'] = request.GET.get( 'next' )
 
     # Prints Template
     return render( request, "site/login/login.html", template_data )

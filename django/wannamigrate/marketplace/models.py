@@ -74,6 +74,30 @@ class OrderStatus( BaseModel ):
     class Meta:
         default_permissions = []
 
+    # Class Methods
+    @staticmethod
+    def get_status_from_payment_result( result_code ):
+        """
+        Return the correct order_status accordingly to the
+        payment result code
+
+        :param: result_code
+        :return: Int
+        """
+
+        if result_code == 1:
+            order_status_id = 1 # Awaiting Payment
+        elif result_code == 2:
+            order_status_id = 2 # Approved
+        elif result_code == 3:
+            order_status_id = 3 # Payment Denied
+        elif result_code == 4:
+            order_status_id = 4 # Cancelled
+        elif result_code == 5:
+            order_status_id = 5 # Refunded
+
+        return order_status_id
+
 
 
 class Provider( BaseModel ):
@@ -143,6 +167,30 @@ class Provider( BaseModel ):
         return providers
 
 
+    @staticmethod
+    def get_profile( user_id ):
+        """
+        Query used to get all the details from a service provider
+
+        :param: user_id
+        :return: Object
+        """
+
+        try:
+            provider = Provider.objects.select_related(
+                'user', 'user__userpersonal', 'user__userstats'
+            ).filter(
+                user_id = user_id,
+            ).only(
+                'id', 'display_name', 'user', 'headline', 'review_score', 'user__userstats__total_reviews', 'user__userstats__total_questions',
+                'user__userstats__total_answers', 'user__userstats__total_contracts'
+            )[0:1].get()
+        except Provider.DoesNotExist:
+            return False
+
+        return provider
+
+
 
 class Provider_ServiceTypes( BaseModel ):
     """
@@ -152,12 +200,37 @@ class Provider_ServiceTypes( BaseModel ):
     # Model Attributes
     service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ) )
     provider = models.ForeignKey( 'Provider', verbose_name = _( 'provider' ) )
+    price = models.DecimalField( _( "price" ), max_digits = 5, decimal_places = 2 )
     is_top = models.BooleanField( _( "is top service" ), default = False )
 
     # META Options
     class Meta:
         default_permissions = []
         unique_together = ( "service_type", "provider" )
+
+    # Class Methods
+    @staticmethod
+    def get_listing( provider_id ):
+        """
+        Query used to search for service types a provider supports
+
+        :param: provider_id
+        :return: Objects
+        """
+
+        service_types = Provider_ServiceTypes.objects.select_related(
+            'service_type'
+        ).filter(
+            provider_id = provider_id,
+            service_type__is_active = True
+        ).only(
+            'id', 'service_type_id', 'price', 'service_type__name', 'service_type__description',
+            'service_type__icon_css_class'
+        ).order_by(
+            'service_type__service_type_category_id', 'service_type__name'
+        )
+
+        return service_types
 
 
 
@@ -207,6 +280,27 @@ class Review( BaseModel ):
     class Meta:
         default_permissions = []
 
+    # Class Methods
+    @staticmethod
+    def get_listing( to_user_id  ):
+        """
+        Query used to search for reviews listings
+
+        :param: to_user_id
+        :return: Objects
+        """
+
+        reviews = Review.objects.select_related(
+            'from_user', 'from_user__userpersonal'
+        ).filter(
+            to_user_id = to_user_id,
+        ).only(
+            'id', 'score', 'comment', 'created_date', 'from_user'
+        ).order_by(
+            '-created_date'
+        )
+
+        return reviews
 
 
 class Service( BaseModel ):
@@ -256,6 +350,24 @@ class ServiceStatus( BaseModel ):
     class Meta:
         default_permissions = []
 
+    # Class Methods
+    @staticmethod
+    def get_status_from_payment_result( result_code ):
+        """
+        Return the correct order_status accordingly to the
+        payment result code
+
+        :param: result_code
+        :return: Int
+        """
+
+        if result_code == 2:
+            service_status_id = 2 # started
+        else:
+            service_status_id = 1 # waiting payment
+
+        return service_status_id
+
 
 
 class ServiceType( BaseModel ):
@@ -267,6 +379,8 @@ class ServiceType( BaseModel ):
     service_type_category = models.ForeignKey( 'ServiceTypeCategory', verbose_name = _( 'category' ) )
     name = models.CharField( _( "name" ), max_length = 60 )
     description = models.TextField( _( "description" ) )
+    is_active = models.BooleanField( _( "is active" ), default = True )
+    icon_css_class = models.CharField( _( "name" ), max_length = 30, default = 'review' )
 
     # META Options
     class Meta:

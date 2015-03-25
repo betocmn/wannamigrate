@@ -1,0 +1,38 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="content payment">
+        <div class="confirmation">
+            <div class="top">
+                <h2 class="title">Your order was received</h2>
+            </div>
+            <div class="message">
+                <p class="{{ message_css_class }}">{{ message_text|safe }}</p>
+                <p>You will receive an email confirmation with your order information and confirmation.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

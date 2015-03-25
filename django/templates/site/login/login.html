@@ -31,10 +31,10 @@
 
                     {% include "site/_common/status.html" %}
 
-                    <form id="login_form_email" class="" method="post" role="form" action="{% url 'site:login' %}">
+                    <form id="login_form_email" class="" method="post" role="form" action="{% url 'site:login' %}{% if next %}?next={{next}}{% endif %}">
                       {% csrf_token %}
-                      {{ form.email }} {{ form.email.errors }}
-                      {{ form.password }} {{ form.password.errors }}
+                      <div class="error-element inline">{{ form.email }}</div> {{ form.email.errors }}
+                      <div class="error-element inline">{{ form.password }}</div> {{ form.password.errors }}
                       <button id="login-submit" type="submit" class="button bt-login">{% trans "Login" %}</button>
                       <a id="login-link-reset-password" class="f10 green" href="{% url 'site:recover_password' %}">
                         {% trans "Forgot your password?" %}
