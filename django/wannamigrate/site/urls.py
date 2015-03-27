@@ -39,6 +39,9 @@ urlpatterns = patterns('',
     # Contact Us
     url( r'^contact/$', views.contact, name = 'contact' ),
 
+    # Tools
+    url( r'^tools/$', views.tools, name = 'tools' ),
+
     # My Account
     url( r'^view_account/$', views.view_account, name = 'view_account' ),
     url( r'^edit_account_info/$', views.edit_account_info, name = 'edit_account_info' ),
