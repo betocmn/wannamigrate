@@ -32,7 +32,7 @@
                     <nav class="nav nav-dashboard">
                         <ul>
                             <li class="nav-item"><a class="nav-link" data-link="question" href="#">{% trans "Questions" %}</a></li>
-                            <li class="nav-item"><a class="nav-link" data-link="professionals" href="#">{% trans "Professionals" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">{% trans "Extra Tools" %}</a></li>
                         </ul>
                     </nav>
@@ -176,7 +176,7 @@
                 <a href="#" class="logo">Wanna Migrate</a>
                 <nav class="nav-footer">
                     <ul>
-                        <li class="conditions"><a class="nav-footer-link" href="#">{% trans "Find a Professional" %}</a></li>
+                        <li class="conditions"><a class="nav-footer-link" href="{% url 'marketplace:professionals' %}">{% trans "Find a Professional" %}</a></li>
                         <li class="privacy"><a class="nav-footer-link" href="#">{% trans "Questions &amp; Answers" %}</a></li>
                         <li class="contact"><a class="nav-footer-link" href="#">{% trans "Extra Tools" %}</a></li>
                     </ul>

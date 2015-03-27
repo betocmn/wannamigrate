@@ -1,0 +1,174 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="content payment">
+        <div class="professional">
+            <div class="top">
+                <h2 class="title">Hiring Professional</h2>
+            </div>
+            <div class="identity">
+                <div class="thumb">
+                    {% if provider.user.userpersonal.avatar %}
+                        <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
+                    {% else %}
+                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
+                    {% endif %}
+                </div>
+                <div class="data-professional">
+                    <strong class="name">{{ provider.display_name }}</strong>
+                    <p class="expert">{{ provider.headline }}</p>
+                    <div class="rate" data-score="{{ provider.review_score }}">
+                        <span class="count">({{ provider.user.userstats.total_reviews }})</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="services">
+            <h2 class="title">Service</h2>
+            <strong class="service {{ service_type.icon_css_class }}">{{ service_type.name }}</strong>
+        </div>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-card active">Credit Card</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-paypal">Paypal</a>
+                </li>
+                <!--
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-billet">Boleto</a>
+                </li>
+                -->
+            </ul>
+            <div class="credit-card">
+
+                {% include "site/_common/status.html" %}
+
+                <form id="payment_form" method="post" action="">
+                    {% csrf_token %}
+                    <!--
+                    <fieldset class="address">
+                        <strong>Endereço de cobrança:</strong>
+                        <div class="same field">
+                            <input type="radio">
+                            <label for="same">Usar o mesmo endereço cadastrado</label>
+                        </div>
+                        <div class="other field">
+                            <input type="radio">
+                            <label for="same">Usar outro endereço</label>
+                        </div>
+                    </fieldset>
+                    -->
+                    <fieldset class="data">
+                        <div class="card-flags">
+                            <ul>
+                                <li class="visa active">Visa</li>
+                                <li class="mastercard">Mastercard</li>
+                                <li class="diners">Diners Club</li>
+                                <li class="american">American Express</li>
+                            </ul>
+                        </div>
+                        <div class="card-number field error-element">
+                            <label for="id_credit_card_number">Card Number</label>
+                            {{ form.credit_card_number }} {{ form.credit_card_number.errors }}
+                        </div>
+                        <div class="name field error-element">
+                            <label for="id_credit_card_name">Cardholder Name</label>
+                            {{ form.credit_card_name}} {{ form.credit_card_name.errors }}
+                        </div>
+                        <div class="cpf field error-element">
+                            <label for="id_postal_code">Postal Code</label>
+                            {{ form.postal_code }} {{ form.postal_code.errors }}
+                        </div>
+                        <div class="expiration-date field error-element">
+                            <label for="expiration-date">Expiry Date</label>
+                            <div class="month error-element">
+                                {{ form.credit_card_expiry_month }} {{ form.credit_card_expiry_month.errors }}
+                            </div>
+                            <div class="year error-element">
+                                {{ form.credit_card_expiry_year }} {{ form.credit_card_expiry_year.errors }}
+                            </div>
+                        </div>
+                        <div class="security-code field error-element">
+                            <label for="id_credit_card_cvv">Security Code (CVV)</label>
+                            {{ form.credit_card_cvv }} {{ form.credit_card_cvv.errors }}
+                        </div>
+                        <!--
+                        <div class="hire-purchase field">
+                            <label for="hire-purchase">Número de parcelas</label>
+                            <select name="" id="" class="custom-select">
+                                <option value="1x">1x de R$ 90,00 sem juros</option>
+                                <option value="2x">2x de R$ 45,00 sem juros</option>
+                            </select>
+                        </div>
+                        -->
+                        <input class="bt-pay button" value="Pay Now" type="submit" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // Create review stars of professional
+            $( '.rate' ).raty({
+                starOff : '{% static 'site/img/star-off.png' %}',
+                starOn  : '{% static 'site/img/star-on.png' %}',
+                readOnly: true,
+                score: function() {
+                    return $( this ).attr( 'data-score' );
+                }
+            });
+
+            // JS FORM Validation
+            $( "#payment_form" ).submit( function() {
+                return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+            });
+
+            /*
+            var  $scope = {
+                interactions : {
+                    this : $('.hiring .interactions'),
+                    interactionLink : $('.hiring .interaction-link'),
+                    interaction : $('.hiring .interaction')
+                }
+            }
+
+            $scope.interactions.interactionLink.click(function(event) {
+                event.preventDefault();
+                // $scope.interactions.in.addClass('active');
+                $scope.interactions.interactionLink.removeClass('active');
+                $(this).addClass('active');
+
+                var interactionName = $(this).attr('class').split(' ')[1];
+                var currentInteraction = "." + interactionName.replace('bt-', '');
+
+                $scope.interactions.interaction.fadeOut();
+                $scope.interactions.this.find(currentInteraction).fadeIn();
+            });
+
+            */
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

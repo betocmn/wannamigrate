@@ -4851,6 +4851,7 @@ select {
   pointer-events: none;
 }
 .content.myaccount .interactions .my-profile {
+  display: block;
   padding: 0 25px;
 }
 .content.myaccount .interactions .my-profile .bt-edit {
@@ -4921,10 +4922,11 @@ select {
   padding: 0 0 0 0;
 }
 .content.myaccount .interactions .my-profile .services .title {
+  text-transform: capitalize;
   padding-bottom: 20px;
 }
 .content.myaccount .interactions .my-profile .services .subtitle {
-  margin-left: -20px;
+  font-size: 14px;
 }
 .content.myaccount .interactions .my-profile .services span {
   display: block;
@@ -4966,16 +4968,411 @@ select {
   border-bottom: 1px solid #e1e1e1;
 }
 .content.myaccount .interactions .my-profile .services .supported-services ul li strong {
+  position: relative;
   float: left;
   display: inline-block;
   font-weight: normal;
   color: #777;
+}
+.content.myaccount .interactions .my-profile .services .supported-services ul li strong:after {
+  content: '';
+  position: absolute;
+  right: -35px;
+  top: 12px;
+  width: 26px;
+  height: 26px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-question-mark.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
 }
 .content.myaccount .interactions .my-profile .services .supported-services ul li span {
   float: right;
   display: inline-block;
   padding-bottom: 0;
   color: #555;
+}
+.content.myaccount .interactions .my-contracts {
+  display: none;
+  padding: 0 25px;
+}
+.content.myaccount .interactions .my-contracts .title {
+  clear: left;
+  display: block;
+  padding-bottom: 35px;
+  text-transform: none;
+}
+.content.myaccount .interactions .my-contracts table {
+  width: 100%;
+}
+.content.myaccount .interactions .my-contracts table tr.service {
+  width: 25%;
+}
+.content.myaccount .interactions .my-contracts table tr.professional {
+  width: 42%;
+}
+.content.myaccount .interactions .my-contracts table tr.date {
+  width: 9%;
+}
+.content.myaccount .interactions .my-contracts table tr.total {
+  width: 9%;
+}
+.content.myaccount .interactions .my-contracts table tr.status {
+  width: 11%;
+  text-align: center;
+}
+.content.myaccount .interactions .my-contracts table tr th {
+  padding: 0 0 5px 10px;
+  font-family: 'open_sanssemibold';
+  font-size: 12px;
+  color: #777;
+  text-align: left;
+}
+.content.myaccount .interactions .my-contracts table tr td {
+  height: 40px;
+  padding: 0 0 0 10px;
+  line-height: 35px;
+  font-size: 14px;
+  border: 4px solid #f9f9f9;
+  background-color: #fff;
+  color: #777;
+}
+.content.myaccount .interactions .my-contracts table tr td.service {
+  line-height: 16px;
+}
+.content.myaccount .interactions .my-contracts table tr td.status {
+  font-family: 'open_sanssemibold';
+}
+.content.myaccount .interactions .my-contracts table tr td.status.paid {
+  color: #179217;
+}
+.content.myaccount .interactions .my-contracts table tr td.status.waiting {
+  line-height: 16px;
+  color: #ff8400;
+}
+.content.myaccount .interactions .inbox {
+  display: none;
+  position: relative;
+  height: 800px;
+  padding: 0 20px 0 38px;
+}
+.content.myaccount .interactions .inbox .title {
+  display: none;
+}
+.content.myaccount .interactions .inbox .box-menu {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 150px;
+}
+.content.myaccount .interactions .inbox .box-menu .box-item {
+  display: block;
+  width: 150px;
+  height: 50px;
+}
+.content.myaccount .interactions .inbox .box-menu .box-item .box-link {
+  display: block;
+  width: 150px;
+  height: 50px;
+  padding: 0 0 0 35px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 50px;
+  font-size: 14px;
+  font-family: 'open_sanssemibold';
+  color: #888;
+  text-decoration: none;
+}
+.content.myaccount .interactions .inbox .box-menu .box-item .box-link.active {
+  font-family: 'open_sansbold';
+  background-color: #fff;
+  color: #68347e;
+  border-right: 6px solid #ffc600;
+}
+.content.myaccount .interactions .inbox .box-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 930px;
+  height: 80px;
+  overflow: hidden;
+}
+.content.myaccount .interactions .inbox .box-top .bt-newmessage {
+  clear: left;
+  width: 170px;
+  margin: 0 0 0 30px;
+  font-size: 14px;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu {
+  float: right;
+  width: 212px;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li {
+  display: block;
+  float: left;
+  height: 15px;
+  line-height: 15px;
+  padding: 0 10px;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li.garbage {
+  border-left: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li.check-all {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  padding-right: 0;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li.check-all input {
+  position: relative;
+  top: -2px;
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li a {
+  display: block;
+  font-size: 12px;
+  font-family: 'open_sansregular';
+  color: #68347e;
+  text-decoration: none;
+}
+.content.myaccount .interactions .inbox .box-top .messages-menu li a:hover {
+  text-decoration: underline;
+}
+.content.myaccount .interactions .inbox .box-messages {
+  float: right;
+  width: 785px;
+  margin: 77px 0 0 0;
+}
+.content.myaccount .interactions .inbox .box-messages table {
+  width: 785px;
+  border-left: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .inbox .box-messages table tr {
+  display: block;
+  height: 50px;
+  padding: 0 0 0 35px;
+  line-height: 50px;
+  border-top: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .inbox .box-messages table tr.not-read {
+  font-size: 14px;
+  font-family: 'open_sansbold';
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-messages table tr.not-read td.date,
+.content.myaccount .interactions .inbox .box-messages table tr.not-read td.time {
+  font-size: 12px;
+  color: #555;
+}
+.content.myaccount .interactions .inbox .box-messages table tr.read {
+  font-size: 14px;
+  font-family: 'open_sansregular';
+  color: #555;
+}
+.content.myaccount .interactions .inbox .box-messages table tr.read td.date,
+.content.myaccount .interactions .inbox .box-messages table tr.read td.time {
+  font-size: 12px;
+  color: #555;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td {
+  position: relative;
+  overflow: hidden;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td .message-link {
+  text-decoration: none;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td .message-link:hover {
+  text-decoration: underline;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td span input {
+  position: relative;
+  top: 7px;
+  display: block;
+  width: 15px;
+  height: 15px;
+  line-height: 50px;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td.author {
+  width: 150px;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td.message-title {
+  width: 440px;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td.date {
+  width: 68px;
+}
+.content.myaccount .interactions .inbox .box-messages table tr td.time {
+  width: 48px;
+}
+.content.myaccount .interactions .inbox .box-dialogue {
+  display: none;
+  float: right;
+  width: 785px;
+  margin: 77px 0 0 0;
+}
+.content.myaccount .interactions .inbox .box-dialogue .message-title {
+  display: block;
+  height: 50px;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .inbox .box-dialogue .message-title .message {
+  float: left;
+  display: block;
+  width: 530px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 0 0 60px;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-dialogue .message-title .bt-answer {
+  float: right;
+  width: 105px;
+  height: 30px;
+  line-height: 30px;
+  margin: 9px 0 0 0;
+  font-family: 'open_sansbold';
+  font-size: 12px;
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer {
+  display: none;
+  float: right;
+  width: 715px;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer label {
+  display: none;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer textarea {
+  display: block;
+  width: 715px;
+  padding: 15px 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 15px;
+  border: 1px solid #d0b5db;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  resize: none;
+  background-color: #fff;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer .bt-send {
+  float: left;
+  display: block;
+  width: 110px;
+  margin: 6px 0 0 0;
+  font-size: 14px;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer .bt-discard {
+  float: right;
+  width: 16px;
+  height: 21px;
+  margin: 10px 0 0 0;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-trash.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.myaccount .interactions .inbox .box-dialogue .answer .bt-discard:hover {
+  background-position: 0 bottom;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues {
+  width: 100%;
+  height: auto;
+  padding-top: 15px;
+  border-left: 1px solid #e1e1e1;
+  overflow: hidden;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue {
+  position: relative;
+  float: right;
+  width: 715px;
+  padding: 15px 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue.recent .when {
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue.odd {
+  background-color: #f1f1f1;
+  border: transparent;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue.odd .when {
+  text-transform: uppercase;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue.even {
+  background-color: #fff;
+  border: transparent;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .dialogue.even .when {
+  text-transform: uppercase;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .thumb {
+  position: absolute;
+  left: -40px;
+  top: 0;
+  width: 40px;
+  height: 52px;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .thumb img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 12px 0 0;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .text {
+  display: block;
+  padding: 0 0 20px;
+  line-height: 22px;
+  font-family: 'open_sansregular';
+  font-size: 14px;
+  color: #555;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .author {
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #888;
+}
+.content.myaccount .interactions .inbox .box-dialogue .dialogues .when {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  display: block;
+  font-size: 10px;
+  color: #acacac;
 }
 .content.extra-tools {
   width: 965px;

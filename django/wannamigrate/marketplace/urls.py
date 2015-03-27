@@ -19,9 +19,16 @@ from wannamigrate.marketplace import views
 urlpatterns = patterns('',
 
     # View professional details
-    url( r'^professional/(?P<user_id>\d+)/(?P<name>[a-z_\-]+)$', views.view_professional, name='view_professional' ),
+    url( r'^(?P<user_id>\d+)/(?P<name>[a-z_\-]+)$', views.profile, name = 'profile' ),
 
     # List professionals
-    url( r'^professionals/$', views.list_professionals, name='list_professionals' ),
+    url( r'^professionals/$', views.professionals, name = 'professionals' ),
+
+    # Payment Page
+    url( r'^payment/(?P<user_id>\d+)/(?P<service_type_id>\d+)$', views.payment, name = 'payment' ),
+
+    # Order Confirmation Page
+    url( r'^confirmation/(?P<order_id>\d+)$', views.confirmation, name = 'confirmation' ),
+
 
 )

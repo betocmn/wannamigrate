@@ -182,7 +182,7 @@ class SignupForm( BaseModelForm ):
         required = True,
         label = _( "E-Email Confirmation" ),
         error_messages = { 'required': _( 'Please confirm your e-mail address' ) },
-        widget = forms.TextInput( attrs = { 'placeholder': _( 'Confirm E-mail' ), 'class': 'full', 'id': 'signup_email_confirmation' } )
+        widget = forms.TextInput( attrs = { 'placeholder': _( 'Confirm E-mail' ), 'class': 'full' } )
     )
 
     class Meta:

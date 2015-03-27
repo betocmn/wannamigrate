@@ -33,10 +33,10 @@
 
                     <form id="signup_form_email" class="signup_item" method="post" role="form" action="{% url 'site:signup' %}">
                         {% csrf_token %}
-                        {{ form.name }} {{ form.name.errors }}
-                        {{ form.email }} {{ form.email.errors }}
-                        {{ form.email_confirmation }} {{ form.email_confirmation.errors }}
-                        {{ form.password }} {{ form.password.errors }}
+                        <div class="error-element inline">{{ form.name }}</div> {{ form.name.errors }}
+                        <div class="error-element inline">{{ form.email }}</div> {{ form.email.errors }}
+                        <div class="error-element inline">{{ form.email_confirmation }}</div> {{ form.email_confirmation.errors }}
+                        <div class="error-element inline">{{ form.password }}</div> {{ form.password.errors }}
                         <button id="signup_button_submit" type="submit" class="button bt-login">{% trans "Sign-Up" %}</button>
                     </form>
 
@@ -97,7 +97,7 @@
 
             // JS FORM Validation
             $( "#signup_form_email" ).submit( function() {
-                return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+                return validate_empty_fields( this, 'id_name,id_email,id_email_confirmation,id_password' );
             });
 
         });

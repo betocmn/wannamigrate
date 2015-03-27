@@ -10,6 +10,10 @@ form .has-error input, form .has-error textarea, form .has-error select, form .h
     border: 2px solid #ed1c24 !important;
 }
 
+form .inline {
+    display: inline;
+}
+
 
 /* ALERTS (ERRORS, SUCCESS) */
 .alert {
@@ -58,3 +62,89 @@ form .has-error input, form .has-error textarea, form .has-error select, form .h
 }
 
 
+
+/* Payment Confirmation Page */
+.dashboard .content.payment {
+  padding-top: 35px;
+}
+.dashboard .content.payment .confirmation {
+  width: 478px;
+  height: 200px;
+  background-color: #f9f9f9;
+  margin-bottom: 40px;
+}
+.dashboard .content.payment .confirmation .top {
+  height: 40px;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  margin: 0 0 0 30px;
+}
+.dashboard .content.payment .confirmation .top .title {
+  position: relative;
+  float: left;
+  display: block;
+  padding: 8px 0 0 48px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 20px;
+  color: #68347e;
+}
+.dashboard .content.payment .confirmation .top .title:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 38px;
+  height: 38px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-services-title.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: center center;
+  border: 1px solid #68347e;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.dashboard .content.payment .confirmation .message {
+  padding: 0 30px;
+}
+
+.dashboard .content.payment .confirmation .message {
+    width: 100%;
+    display: block;
+    line-height: 18px;
+    font-size: 20px;
+    font-family: 'open_sans_light';
+    font-weight: normal;
+    color: #68347e;
+}
+
+.dashboard .content.payment .confirmation .message p {
+  display: block;
+  padding: 10px 0 10px;
+  line-height: 18px;
+  font-size: 15px;
+  color: #555;
+}
+
+.dashboard .content.payment .confirmation .message p span {
+  font-weight: bold;
+}
+
+.dashboard .content.payment .confirmation .message p.approved span {
+  color: #3c763d;
+}
+
+.dashboard .content.payment .confirmation .message p.denied span {
+  color: #a94442;
+}
