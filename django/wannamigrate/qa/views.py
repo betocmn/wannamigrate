@@ -21,13 +21,31 @@ from wannamigrate.qa.forms import (
 from wannamigrate.qa.models import(
     Post, Topic
 )
+from django.conf import settings
+
 
 ##########################
 # Methods
 ##########################
-def list_posts( request ):
+def list_posts( request, post_type_id = None ):
+    """
+        Handles the process of adding a question.
+    :param request:
+    :return: A template rendered
+    """
+    template_data = {}
 
-    return HttpResponse( 'test' )
+    # Sets the selected filter to the template.
+    if post_type_id == settings.QA_POST_TYPE_BLOGPOST_ID:
+        template_data[ "filter_blogposts" ] = True
+    elif post_type_id == settings.QA_POST_TYPE_QUESTION_ID:
+        template_data[ "filter_questions" ] = True
+    else:
+        template_data[ "filter_knowledge" ] = True
+
+    # Print Template
+    return render( request, 'qa/posts/list.html', template_data )
+
 
 
 @login_required

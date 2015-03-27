@@ -1,0 +1,208 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+    <div class="content social">
+        <section class="sidebar">
+            <!-- <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a> -->
+            <div class="sidebar-default">
+                <div class="itens knowledge-base">
+                    <h3 class="title">knowledge Base</h3>
+                    <ul>
+                        <li class="item {% if filter_knowledge %} active {% endif %}">
+                            <a href="{% url "qa:list_posts" %}">All</a>
+                        </li>
+                        <li class="item {% if filter_questions %} active {% endif %}">
+                            <a href="{% url "qa:list_questions" %}">Questions & answers</a>
+                        </li>
+                        <li class="item {% if filter_blogposts %} active {% endif %}">
+                            <a href="{% url "qa:list_blogposts" %}">Post</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="itens personal">
+                    <h3 class="title">Personal</h3>
+                    <ul>
+                        <li class="item">
+                            <a href="#">Topics <span class="count">(0)</span></a>
+                        </li>
+                        <li class="item">
+                            <a href="#">Answers <span class="count">(0)</span></a>
+                        </li>
+                        <li class="item">
+                            <a href="#">Reading list <span class="count">(0)</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="itens social">
+                    <h3 class="title">Social</h3>
+                    <ul>
+                        <li class="item">
+                            <a href="#">Following <span class="count">(0)</span></a>
+                        </li>
+                        <li class="item">
+                            <a href="#">Followers <span class="count">(0)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="question-postList">
+                {% if filter_blogposts %}
+                    <a class="button bt-addQuestion">Write a post</a>
+                {% elif filter_questions or filter_knowledge %}
+                    <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
+                {% endif %}
+                <div class="conten-postList">
+                    <div class="question">
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
+                                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
+                                </ul>
+                            </div>
+                            <div class="data-question">
+                                <a href="#">
+                                    <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                                </a>
+                            </div>
+                            <div class="data">
+                                <ul class="data-list">
+                                    <ul class="list-viewers">
+                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>88</strong> answers</a></li>
+                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                                        <li class="data-item">Last activite in <strong>Jan 15</strong></li>
+                                    </ul>
+                                    <ul class="list-bt">
+                                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
+                                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
+                                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
+                                    </ul>
+                                </ul>
+                            </div>
+                            <div class="box-options">
+                                <i class="shadow"></i>
+                                <ul class="box">
+                                    <li><a href="#" class="bt-share" >Share</a></li>
+                                    <li><a href="#" class="bt-report" >Report</a></li>
+                                    <li><a href="#" class="bt-cancel" >Cancel</a></li>
+                                </ul>
+                            </div>
+                            <a href="#" class="bt-options">Options</a>
+                    </div>
+                    <div class="answers">
+                        <form class="form-comment">
+                            <div class="user">
+                                <i class="thumb">
+                                    <img src="img/thumb-account.png" alt="">
+                                </i>
+                            </div>
+                            <input type="text" class="text-coments" placeholder="Add a comment"></input>
+                            <input type="submit" class="button bt-comment" value="Comment">
+                        </form>
+                        <div class="answer">
+                            <i class="thumb">
+                                <img src="img/thumb-account.png" alt="">
+                            </i>
+                            <div class="post">
+                                <div class="user">
+                                    <span class="name">Humberto Martins</span>
+                                    <span class="info">Designer at humbertolandia.com</span>
+                                </div>
+
+                                <span class="text-post">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="answer active">
+                            <i class="thumb">
+                                <img src="img/thumb-account.png" alt="">
+                            </i>
+                            <div class="post">
+                                <div class="user">
+                                    <span class="name">Humberto Martins</span>
+                                    <span class="info">Designer at humbertolandia.com</span>
+                                </div>
+
+                                <span class="text-post">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question">
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
+                                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
+                                </ul>
+                            </div>
+                            <div class="data-question">
+                                <a href="#">
+                                    <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                                    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                                </a>
+                            </div>
+                            <div class="data">
+                                <ul class="data-list">
+                                    <ul class="list-viewers">
+                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>88</strong> answers</a></li>
+                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
+                                        <li class="data-item">Last activite in <strong>Jan 15</strong></li>
+                                    </ul>
+                                    <ul class="list-bt">
+                                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
+                                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
+                                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
+                                    </ul>
+                                </ul>
+                            </div>
+                            <div class="box-options">
+                                <i class="shadow"></i>
+                                <ul class="box">
+                                    <li><a href="#" class="bt-share" >Share</a></li>
+                                    <li><a href="#" class="bt-report" >Report</a></li>
+                                    <li><a href="#" class="bt-cancel" >Cancel</a></li>
+                                </ul>
+                            </div>
+                            <a href="#" class="bt-options">Options</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}
