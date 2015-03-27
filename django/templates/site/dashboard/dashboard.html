@@ -1,6 +1,7 @@
 {% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load string_extras %}
 
 {% block content %}
 
@@ -12,131 +13,47 @@
             <section class="questions home-questions show">
                 <div class="top">
                     <h2 class="title">{% trans "Questions" %}</h2>
-                    <a href="{% url 'admin:qa:list_post' %}" class="bt-add button">{% trans "Add Question" %}</a>
+                    <a href="{% url 'qa:add_question' %}" class="bt-add button">{% trans "Add Question" %}</a>
                 </div>
 
                 <div class="content-questions">
-                    <div class="question category">
-                        <div class="tags">
-                            <ul class="tags-list">
-                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                            </ul>
+                    {% for post in posts %}
+                        <div class="question category">
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    {% for topic in post.related_topics.all %}
+                                        <li class="tag"><a href="#" class="tag-link active">{{ topic.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="data-question">
+                                <a href="#">
+                                    <h3 class="title-question">{{ post.title }}</h3>
+                                    <p class="answer">{{ post.body|striptags|truncate_smart:250 }} (...)</p>
+                                </a>
+                            </div>
+                            <div class="data">
+                                <ul class="data-list">
+                                    <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>{{ post.followers_count }}</span></a></li>
+                                    <li class="data-item"><a href="#" class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</a></li>
+                                    <li class="data-item"><a href="#" class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</a></li>
+                                    <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
+                                </ul>
+                            </div>
+                            <div class="box-options">
+                                <ul class="box">
+                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                                </ul>
+                            </div>
+                            <a href="#" class="bt-options">{% trans "Options" %}</a>
                         </div>
-                        <div class="data-question">
-                            <a href="#">
-                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                            </a>
-                        </div>
-                        <div class="data">
-                            <ul class="data-list">
-                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                            </ul>
-                        </div>
-                        <div class="box-options">
-                            <ul class="box">
-                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="bt-options">{% trans "Options" %}</a>
-                    </div>
-                    <div class="question category">
-                        <div class="tags">
-                            <ul class="tags-list">
-                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                            </ul>
-                        </div>
-                        <div class="data-question">
-                            <a href="#">
-                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                            </a>
-                        </div>
-                        <div class="data">
-                            <ul class="data-list">
-                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                            </ul>
-                        </div>
-                        <div class="box-options">
-                            <ul class="box">
-                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="bt-options">{% trans "Options" %}</a>
-                    </div>
-                    <div class="question category">
-                        <div class="tags">
-                            <ul class="tags-list">
-                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                            </ul>
-                        </div>
-                        <div class="data-question">
-                            <a href="#">
-                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                            </a>
-                        </div>
-                        <div class="data">
-                            <ul class="data-list">
-                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                            </ul>
-                        </div>
-                        <div class="box-options">
-                            <ul class="box">
-                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="bt-options">{% trans "Options" %}</a>
-                    </div>
-                    <div class="question category">
-                        <div class="tags">
-                            <ul class="tags-list">
-                                <li class="tag"><a href="#" class="tag-link active">Brazil</a></li>
-                                <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
-                            </ul>
-                        </div>
-                        <div class="data-question">
-                            <a href="#">
-                                <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                            </a>
-                        </div>
-                        <div class="data">
-                            <ul class="data-list">
-                                <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>898</span></a></li>
-                                <li class="data-item"><a href="#" class="data-link answers"><strong>88</strong> {% trans "answers" %}</a></li>
-                                <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> {% trans "viewers" %}</a></li>
-                                <li class="data-item">{% trans "Last activite in" %} <strong>Jan 15</strong></li>
-                            </ul>
-                        </div>
-                        <div class="box-options">
-                            <ul class="box">
-                                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="bt-options">{% trans "Options" %}</a>
-                    </div>
-                    <a href="#" class="bt-view-more button-transparent">{% trans "View More" %}</a>
+                    {% empty %}
+                        <p>{% trans "No questions found" %}</p>
+                    {% endfor %}
+
+                    <a href="#" id="bt-view-more-posts" class="bt-view-more button-transparent">{% trans "View More" %}</a>
                     <a href="#" class="bt-add-mobile button">{% trans "Add Question" %}</a>
                 </div>
             </section>
@@ -234,6 +151,136 @@
             $( '.read-more' ).on( 'click', function() {
               $( this ).parent().trunk8('revert');
               return false;
+            });
+
+            // Load more posts
+            var LOAD_POSTS_BASE_URL = "{% url "site:load_posts" %}";
+            var RESULTS_PER_PAGE = {{ posts_results_per_page }};
+            var posts_page = 0;
+            $( "#bt-view-more-posts" ).on( "click", function( e ){
+
+                request_url = LOAD_POSTS_BASE_URL + "?results_per_page=" + RESULTS_PER_PAGE  + "&page=" + posts_page;
+
+                $.get( request_url, function( result ) {
+                    var posts = $.parseJSON( result );
+
+                    for ( var i = 0; i < posts.length; i++ )
+                    {
+                        var current_post = posts[i];
+
+                        console.log( current_post );
+
+                        ////////////////////
+                        // TAGS
+                        //////////////////////
+                        var tags_list = $( "<ul/>" ).attr( "class", "tags-list" );
+                        for ( var j = 0; j < current_post.fields.related_topics.length; j++ )
+                        {
+                            // Gets the name of the topic.
+                            current_topic_name = current_post.fields.related_topics[j];
+
+                            // Creates a list item for the topics and appends it to tags_list
+                            tags_list.append(
+                                $( "<li/>" ).attr( "class", "tag" ).append(
+                                    $( "<a/>" ).attr( "class", "tag-link active" ).text( current_topic_name )
+                                )
+                            );
+                        }
+                        // Adds the tags list to the tags container div
+                        var tags_container = $( "<div/>" ).attr( "class", "tags" ).append( tags_list );
+
+
+                        //////////////////////////////
+                        // QUESTION DATA
+                        //////////////////////////////
+                        var data_question = $( "<div/>" ).attr( "class", "data-question" ).append(
+                            $( "<a/>" ).append(
+                                // Post title
+                                $( "<h3/>" ).attr( "class", "title-question" ).text( current_post.fields.title )
+                            ).append(
+                                // Post body
+                                $( "<p/>" ).attr( "class", "answer" ).html( current_post.fields.body )
+                            )
+                        );
+
+
+                        ///////////////////////////////
+                        // EXTRA INFO DATA
+                        //////////////////////////////
+                        var data = $( "<div/>" ).attr( "class", "data" ).append(
+                            $( "<ul/>" ).attr( "class", "data-list" ).append(
+                                // Followers counter
+                                $( "<li/>" ).attr( "class", "data-item" ).append(
+                                    $( "<a/>" ).attr( "class", "data-link bt-follow" ).attr( "href", "#" ).text( "{% trans "Follow" %}" ).append(
+                                        $( "<span/>" ).text( current_post.fields.followers_count )
+                                    )
+                                )
+                            ).append(
+                                // Answers counter
+                                $( "<li/>" ).attr( "class", "data-item" ).append(
+                                    $( "<a/>" ).attr( "class", "data-link answers" ).append(
+                                        $( "<strong/>" ).text( current_post.fields.answers_count  + " " ) )
+                                    .append( "{% trans "answers" %}" )
+                                )
+                            ).append(
+                                // Viewers counter
+                                $( "<li/>" ).attr( "class", "data-item" ).append(
+                                    $( "<a/>" ).attr( "class", "data-link viewers" ).append(
+                                        $( "<strong/>" ).text( current_post.fields.views_count + " " ) )
+                                    .append( "{% trans "viewers" %}" )
+                                )
+                            ).append(
+                                // Last activity date
+                                $( "<li/>" ).attr( "class", "data-item" )
+                                .append( "{% trans "Last activity in" %} " )
+                                .append(
+                                    $( "<strong/>" ).text( "MAR 30" )
+                                )
+                            )
+                        );
+
+
+                        /////////////////////////
+                        // BOX OPTIONS
+                        /////////////////////////
+                        var box_options = $( "<div/>" ).attr( "class", "box-options" );
+                        box_options.append(
+                            $( "<ul/>" ).attr( "class", "box" ).append(
+                                $( "<li/>" ).append( $( "<a/>" ).attr( "class", "bt-share" ).attr( "href", "#" ).val( "{% trans "Share" %}" ) )
+                            )
+                            .append(
+                                $( "<li/>" ).append( $( "<a/>" ).attr( "class", "bt-report" ).attr( "href", "#" ).val( "{% trans "Report" %}" ) )
+                            )
+                            .append(
+                                $( "<li/>" ).append( $( "<a/>" ).attr( "class", "bt-cancel" ).attr( "href", "#" ).val( "{% trans "Cancel" %}" ) )
+                            )
+                        );
+
+
+
+
+                        var question_container = $( "<div/>" ).attr( "class", "question category" )
+                            .append( tags_container )
+                            .append( data_question )
+                            .append( data )
+                            .append( box_options );
+
+                        // Options button.
+                        question_container.append( $( "<a/>" ).attr( "href", "#" ).attr( "class", "bt-options" ).val( "{% trans "Options" %}" ) );
+
+                        question_container.insertBefore( "#bt-view-more-posts" );
+
+                    }
+
+
+
+                    posts_page++;
+
+
+                });
+
+
+                e.preventDefault();
             });
 
 

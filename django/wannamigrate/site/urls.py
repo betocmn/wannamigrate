@@ -53,4 +53,9 @@ urlpatterns = patterns('',
 
     # Set language
     url( r'^setlang/(?P<language_code>[a-z_\-]+)/$', views.setlang, name = 'setlang' ),
+
+    # AJAX - List more posts
+    url( r'^load/posts/', views.load_posts, name = "load_posts" ),
+    #url( r'^load/posts/(?P<results_per_page>\d+)/(?P<page>\d+)/', views.load_posts, name = "load_posts" ),
+
 )

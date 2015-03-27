@@ -36,7 +36,7 @@
                                         
                                         <dt>Owner:</dt>
                                         <dd>
-                                            <a href="{% url 'admin:qa:admin_user_details' post.owner.id %}">{{ post.owner.email }}</a>
+                                            <a href="{% url 'admin:core:admin_user_details' post.owner.id %}">{{ post.owner.email }}</a>
                                         </dd>
 
                                         <dt>Type:</dt>
@@ -75,6 +75,14 @@
                                         <dt>Views count:</dt>
                                         <dd>
                                             {{ post.views_count }}
+                                        </dd>
+                                        <dt>Followers count:</dt>
+                                        <dd>
+                                            {{ post.followers_count }}
+                                        </dd>
+                                        <dt>Answers count:</dt>
+                                        <dd>
+                                            {{ post.answers_count }}
                                         </dd>
 
                                         <dt>Last activity date:</dt>
@@ -172,7 +180,7 @@
                                         <dl class="dl-horizontal">
                                             <dt>Owner:</dt>
                                             <dd>
-                                                <a href="{% url 'admin:qa:admin_user_details' answer.owner.id %}">{{ answer.owner.email }}</a>
+                                                <a href="{% url 'admin:core:admin_user_details' answer.owner.id %}">{{ answer.owner.email }}</a>
                                             </dd>
                                             
                                             <dt>Is Anonymous?</dt>

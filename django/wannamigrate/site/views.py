@@ -10,7 +10,7 @@ the templates on site app
 ##########################
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -35,9 +35,12 @@ from wannamigrate.core.models import (
 from wannamigrate.marketplace.models import (
     Provider
 )
+from wannamigrate.qa.models import(
+    Post, Topic
+)
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
-
+from django.core import serializers
 
 
 
@@ -588,8 +591,16 @@ def dashboard( request ):
         # Gets 5 most related service providers
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
 
-        # Gets 5 most related questions
-        #TODO go, Marcio!
+        # Fills the topics related to user's situation
+        related_topics = []
+        related_topics.extend( from_country.related_topics.values() )
+        related_topics.extend( to_country.related_topics.values() )
+        related_topics.extend( goal.related_topics.values() )
+
+        posts_results_per_page = 2
+        # Gets 5 most related questions (page 0 by default)
+        template_data['posts'] = Post.get_ranked( related_topics, posts_results_per_page )
+        template_data[ "posts_results_per_page" ] = posts_results_per_page
 
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
@@ -635,3 +646,40 @@ def setlang( request, language_code ):
 
 
 
+
+
+#########################
+# AJAX / DYNAMIC VIEWS
+#########################
+def load_posts( request ):
+    """
+    Dynamically loads the next results of the listing method of a model and returns a JSON
+    representation of the objects.
+
+    :param: request Default request param.
+    :return JSON containing the results of calling the given method.
+    """
+
+    # Gets extra filters
+    related_topics = []
+
+    # If situation is defined, we load questions and professionals related to it
+    if 'situation' in request.session and 'from_country' in request.session['situation']:
+
+        from_country = request.session['situation']['from_country']
+        to_country = request.session['situation']['to_country']
+        goal = request.session['situation']['goal']
+
+        # Fills the topics related to user's situation
+        related_topics.extend( from_country.related_topics.values() )
+        related_topics.extend( to_country.related_topics.values() )
+        related_topics.extend( goal.related_topics.values() )
+
+
+    # Gets pagination parameters
+    results_per_page = int( request.GET[ "results_per_page" ] ) or 0
+    page = int( request.GET[ "page" ] ) or 0
+
+    result = serializers.serialize( "json", Post.get_ranked( related_topics, results_per_page, page ) )
+
+    return JsonResponse( result, safe = False )

@@ -8,6 +8,10 @@
         {
             opts : [],  // the topics options for the autocomplete.
             element_name : this.attr( "name" ),
+            element_id : this.attr( "id" ),
+            target : ".topics-container",
+            wrapper : "span",
+            wrapper_class : "topic",
         };
 
         var selected_topics = [];
@@ -88,18 +92,25 @@
 
             // Creates a span element which contains the graphical information about the topic 
             // and a hidden input containing the topic_id.
-            var span = $( "<span/>" ).attr( "class", "topic" ).attr( "id", "topic-id-" + topic_id );
+            $( settings.target ).append(
+                $( "<" + settings.wrapper + "/>" ).attr( "class", settings.wrapper_class ).attr( "id", "topic-id-" + topic_id )
+                .append(
+                    $( "<a/>" ).attr( "class", "tag-link" ).attr( "href", "#" ).text( topic_label )
+                    .click(function( e ){
+                        on_remove_topic( topic_id )
+                        e.preventDefault();
+                    })
+                    .hover(function(){
+                        $(this).toggleClass( "country" )
+                    })
+                )
+                .append(
+                    // Hidden input
+                    $( "<input/>" ).attr( "type", "hidden" ).attr( "name", settings.element_name ).attr( "value", topic_id )
+                )
+            );
 
-            var bt_remove = $( "<i/>" ).attr( "class", "fa fa-times bt-remove-topic" );
-            bt_remove.click( function(){
-                on_remove_topic( topic_id );
-            });
-
-            var hidden = $( "<input/>" ).attr( "type", "hidden" ).attr( "name", settings.element_name ).attr( "value", topic_id );
-            
-            span.append( topic_label ).append( " " ).append( bt_remove ).append( hidden );
-
-            $( ".topics-container").append( span );
+            // Clears input data
             $( "#topic-input" ).val( "" );
         }
 

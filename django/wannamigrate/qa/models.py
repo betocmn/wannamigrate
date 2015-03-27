@@ -8,12 +8,14 @@ Questions and Answers model classes.
 # Imports
 ####################
 from django.db import models
-from wannamigrate.core.models import BaseModel
-from wannamigrate.core.models import User
+from wannamigrate.core.models import (
+    BaseModel, User, Country, Goal
+)
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from wannamigrate.qa.wm_editor import WMEditorParser
+import math
 
 
 
@@ -39,6 +41,10 @@ class Post( BaseModel ):
     is_anonymous = models.BooleanField( default = False )
     # The number of visualizations of this post
     views_count = models.PositiveIntegerField( default = 0 )
+    # The number of answers to this post
+    answers_count = models.PositiveIntegerField( default = 0 )
+    # The number of visualizations of this post
+    followers_count = models.PositiveIntegerField( default = 0 )
     # The date of the last acitivity on this post (new answers, editions, etc)
     last_activity_date = models.DateTimeField( null = True )
     # Users following this post
@@ -59,6 +65,7 @@ class Post( BaseModel ):
             ( "admin_list_post", "[ADMIN] Can list posts" ),
         )
 
+    # Class methods
     def __str__( self ):
         return self.title if len( self.title ) else self.body
 
@@ -142,6 +149,39 @@ class Post( BaseModel ):
         if len( errors ) > 0:
             raise ValidationError( errors )
 
+    # Static Methods
+    @staticmethod
+    def get_ranked( related_topics, results_per_step, step = 0 ):
+        """
+        Query used to search for posts sorted
+        by relevance.  The relevance is calculated with
+        the following:
+
+        1- Related topics
+        :param: args A list of named arguments to extract for ranking.
+        :return: Post objects
+        """
+
+        limit_from = step * results_per_step
+        limit_to = step * results_per_step + results_per_step
+
+
+
+        posts = Post.objects.filter(
+            post_type__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ],
+        ).only(
+            'title', 'body', 'views_count', 'answers_count', 'followers_count', 'readers', 'last_activity_date'
+        ).order_by(
+            'last_activity_date'
+        )
+
+        # If related topics was passed, filter by interest.
+        if len( related_topics ):
+            posts.filter( related_topics__in = related_topics )
+
+
+        return posts[limit_from:limit_to]
+
 
 
 class PostType( BaseModel ):
@@ -194,6 +234,10 @@ class Topic( BaseModel ):
     name = models.CharField( max_length = 255 )
     # Users following this topic
     followers = models.ManyToManyField( User, related_name = "following_topics" )
+    # The countries related to this topic
+    related_countries = models.ManyToManyField( Country, related_name = "related_topics" )
+    # The goals related to this topic
+    related_goals = models.ManyToManyField( Goal, related_name = "related_topics" )
 
     # META Options: Sets the possible permissions required by this model.
     class Meta:

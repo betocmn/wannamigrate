@@ -17,6 +17,7 @@ from wannamigrate.qa.models import (
     Post, PostType, PostHistory, Topic, Vote
 )
 from wannamigrate.admin.views import admin_check
+from django.db import transaction
 
 
 
@@ -119,11 +120,17 @@ def add_answer( request, parent_id ):
 
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
-        # Saves the post
-        post = form.save()
-        messages.success( request, '{0} successfully created.'.format( post.post_type.name ) )
-        # Redirect with success message
-        return HttpResponseRedirect( reverse( 'admin:qa:view_post', args = ( parent_id, ) ) )
+        with transaction.atomic():
+            # Saves the answer
+            post = form.save()
+
+            # Updates the answers count for the parent post.
+            post.parent.answers_count += 1
+            post.parent.save()
+
+            messages.success( request, '{0} successfully created.'.format( post.post_type.name ) )
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'admin:qa:view_post', args = ( parent_id, ) ) )
 
     # Template data
     context = {
@@ -206,8 +213,14 @@ def delete_post( request, post_id ):
 
     post = Post.objects.filter( pk = post_id )
     if post.exists():
-        post.delete()
-        messages.success( request, "Post(id = {0}) successfully deleted.".format( post_id ) )
+        with transaction.atomic():
+            post = post.get()
+            if post.post_type.id == settings.QA_POST_TYPE_ANSWER_ID:
+                post.parent.answers_count -= 1
+                post.parent.save()
+
+            post.delete()
+            messages.success( request, "Post(id = {0}) successfully deleted.".format( post_id ) )
     else:
         messages.error( request, "Post(id = {0}) not found.".format( post_id ) )
 

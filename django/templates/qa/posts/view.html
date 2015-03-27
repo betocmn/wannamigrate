@@ -1,0 +1,175 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+<div class="content social">
+    <section class="sidebar">
+        <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a>
+        <div class="sidebar-questionView">
+            <div class="itens post-topics">
+                <h3 class="title">Post Topics</h3>
+                <ul class="tags">
+                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
+                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
+                    <!-- <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li> -->
+                </ul>
+            </div>
+            <div class="itens post-stats">
+                <h3 class="title">Post Stats</h3>
+                <ul>
+                    <li class="item views">
+                        <a href="#">Views <span class="count">(250)</span></a>
+                    </li>
+                    <li class="item answers">
+                        <a href="#">Answers <span class="count">(12)</span></a>
+                    </li>
+                    <li class="item followers">
+                        <a href="#">Followers <span class="count">(23)</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="itens post-share">
+                <h3 class="title">Share</h3>
+                <ul>
+                    <li class="item twitter">
+                        <a href="#">Twitter</a>
+                    </li>
+                    <li class="item facebook">
+                        <a href="#">Facebook</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="question-postView">
+            <div class="question">
+                <div class="data-question">
+                    <a href="#" class="link-question">
+                        <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
+                        <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                    </a>
+                    <a class="data-item">Written in <strong>Jan 15</strong></a>
+                </div>
+                <div class="data">
+                    <ul class="data-list">
+                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
+                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
+                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
+                    </ul>
+                </div>
+                <div class="box-options">
+                    <i class="shadow"></i>
+                    <ul class="box">
+                        <li><a href="#" class="bt-share">Share</a></li>
+                        <li><a href="#" class="bt-report">Report</a></li>
+                        <li><a href="#" class="bt-cancel">Cancel</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="bt-options">Options</a>
+            </div>
+
+            <div class="answers">
+                <form class="form-comment">
+                    <div class="user">
+                        <i class="thumb">
+                            <img src="img/thumb-account.png" alt="">
+                        </i>
+                    </div>
+                    <input type="text" class="text-coments" placeholder="Add a comment"></input>
+                    <input type="submit" class="button bt-comment" value="Comment">
+                </form>
+                <div class="answer">
+                    <i class="thumb">
+                        <img src="img/thumb-account.png" alt="">
+                    </i>
+                    <div class="post">
+                        <div class="user">
+                            <span class="name">Humberto Martins</span>
+                            <span class="info">Designer at humbertolandia.com</span>
+                        </div>
+
+                        <span class="text-post">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </span>
+                    </div>
+                </div>
+                <div class="answer active">
+                    <i class="thumb">
+                        <img src="img/thumb-account.png" alt="">
+                    </i>
+                    <div class="post">
+                        <div class="user">
+                            <span class="name">Humberto Martins</span>
+                            <span class="info">Designer at humbertolandia.com</span>
+                        </div>
+
+                        <span class="text-post">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="aside">
+        <div class="related-content">
+            <h3 class="title">Related Content</h3>
+            <ul>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+            </ul>
+        </div>
+        <div class="related-professionals">
+            <h3 class="title">Related Professionals</h3>
+            <ul>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+        });
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}
