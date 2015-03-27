@@ -453,8 +453,14 @@ def tools( request ):
     :return String - HTML
     """
 
+    # Initial template
+    template_data = {}
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
     # Print Template
-    return render( request, 'site/tools/tools.html')
+    return render( request, 'site/tools/tools.html', template_data )
 
 
 
