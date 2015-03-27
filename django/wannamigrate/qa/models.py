@@ -151,7 +151,7 @@ class Post( BaseModel ):
 
     # Static Methods
     @staticmethod
-    def get_ranked( related_topics, results_per_step, step = 0 ):
+    def get_ranked( related_countries, related_goals, results_per_step, step = 0 ):
         """
         Query used to search for posts sorted
         by relevance.  The relevance is calculated with
@@ -170,17 +170,22 @@ class Post( BaseModel ):
         posts = Post.objects.filter(
             post_type__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ],
         ).only(
-            'title', 'body', 'views_count', 'answers_count', 'followers_count', 'readers', 'last_activity_date'
-        ).order_by(
-            'last_activity_date'
+            'title', 'body', 'views_count', 'answers_count', 'followers_count', 'readers', 'last_activity_date',
+        ).select_related(
+            "post"
+        ).prefetch_related(
+            "related_topics", "related_topics__related_countries", "related_topics__related_goals"
+        ).filter(
+            related_topics__related_countries__in = related_countries,
+            related_topics__related_goals__in = related_goals
         )
 
         # If related topics was passed, filter by interest.
-        if len( related_topics ):
-            posts.filter( related_topics__in = related_topics )
+        #if len( related_topics ):
+        #    posts.filter( related_topics__in = related_topics )
 
 
-        return posts[limit_from:limit_to]
+        return posts.order_by( 'last_activity_date' )[limit_from:limit_to]
 
 
 

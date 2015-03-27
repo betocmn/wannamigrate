@@ -625,14 +625,12 @@ def dashboard( request ):
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
 
         # Fills the topics related to user's situation
-        related_topics = []
-        related_topics.extend( from_country.related_topics.values() )
-        related_topics.extend( to_country.related_topics.values() )
-        related_topics.extend( goal.related_topics.values() )
+        related_countries = [ from_country, to_country ]
+        related_goals = [ goal ]
 
         posts_results_per_page = 2
         # Gets 5 most related questions (page 0 by default)
-        template_data['posts'] = Post.get_ranked( related_topics, posts_results_per_page )
+        template_data['posts'] = Post.get_ranked( related_countries, related_goals, posts_results_per_page )
         template_data[ "posts_results_per_page" ] = posts_results_per_page
 
     # Print Template
