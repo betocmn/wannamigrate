@@ -57,25 +57,28 @@
                     <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
                 {% endif %}
                 <div class="conten-postList">
-                    <div class="question">
+                    {% for post in posts %}
+
+                        <div class="question">
                             <div class="tags">
                                 <ul class="tags-list">
-                                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
-                                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
+                                    {% for topic in post.related_topics.all %}
+                                        <li class="tag"><a href="#" class="tag-link active">{{ topic.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="data-question">
-                                <a href="#">
-                                    <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
+                                <a href="{% url "qa:view_post" post.id %}">
+                                    <h3 class="title-question">{{ post.title }}</h3>
+                                    <p class="answer">{{ post.body|striptags|truncate_smart:250 }} (...)</p>
                                 </a>
                             </div>
                             <div class="data">
                                 <ul class="data-list">
                                     <ul class="list-viewers">
-                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>88</strong> answers</a></li>
-                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
-                                        <li class="data-item">Last activite in <strong>Jan 15</strong></li>
+                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</a></li>
+                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</a></li>
+                                        <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
                                     </ul>
                                     <ul class="list-bt">
                                         <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
@@ -87,14 +90,17 @@
                             <div class="box-options">
                                 <i class="shadow"></i>
                                 <ul class="box">
-                                    <li><a href="#" class="bt-share" >Share</a></li>
-                                    <li><a href="#" class="bt-report" >Report</a></li>
-                                    <li><a href="#" class="bt-cancel" >Cancel</a></li>
+                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
+                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
+                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
                                 </ul>
                             </div>
-                            <a href="#" class="bt-options">Options</a>
-                    </div>
-                    <div class="answers">
+                            <a href="#" class="bt-options">{% trans "Options" %}</a>
+                        </div>
+                    {% empty %}
+                        <p>{% trans "No questions found" %}</p>
+                    {% endfor %}
+                    <!--div class="answers">
                         <form class="form-comment">
                             <div class="user">
                                 <i class="thumb">
@@ -140,44 +146,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="question">
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
-                                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
-                                </ul>
-                            </div>
-                            <div class="data-question">
-                                <a href="#">
-                                    <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                                    <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                                </a>
-                            </div>
-                            <div class="data">
-                                <ul class="data-list">
-                                    <ul class="list-viewers">
-                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>88</strong> answers</a></li>
-                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>550</strong> viewers</a></li>
-                                        <li class="data-item">Last activite in <strong>Jan 15</strong></li>
-                                    </ul>
-                                    <ul class="list-bt">
-                                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
-                                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
-                                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
-                                    </ul>
-                                </ul>
-                            </div>
-                            <div class="box-options">
-                                <i class="shadow"></i>
-                                <ul class="box">
-                                    <li><a href="#" class="bt-share" >Share</a></li>
-                                    <li><a href="#" class="bt-report" >Report</a></li>
-                                    <li><a href="#" class="bt-cancel" >Cancel</a></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="bt-options">Options</a>
-                    </div>
+                    </div-->
                 </div>
             </div>
         </section>

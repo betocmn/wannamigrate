@@ -43,6 +43,16 @@ def list_posts( request, post_type_id = None ):
     else:
         template_data[ "filter_knowledge" ] = True
 
+    # TODO: trocar este metodo por getRanked.
+    posts = Post.objects
+    if ( post_type_id ):
+        posts.filter( post_type__id = post_type_id )
+    template_data[ "posts" ] = posts.all()
+
+
+
+
+
     # Print Template
     return render( request, 'qa/posts/list.html', template_data )
 

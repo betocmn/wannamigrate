@@ -31,7 +31,7 @@
                 <div class="interaction">
                     <nav class="nav nav-dashboard">
                         <ul>
-                            <li class="nav-item"><a class="nav-link" data-link="question" href="#">{% trans "Questions" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Questions" %}</a></li>
                             <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
                         </ul>
