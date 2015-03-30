@@ -44,12 +44,12 @@ def list_posts( request, post_type_id = None ):
         template_data[ "filter_knowledge" ] = True
 
     # TODO: trocar este metodo por getRanked.
-    posts = Post.objects
-    if ( post_type_id ):
-        posts.filter( post_type__id = post_type_id )
-    template_data[ "posts" ] = posts.all()
+    if post_type_id:
+        posts = Post.get_ranked( post_type_id = post_type_id , results_per_step = 10, step = 0 )
+    else:
+        posts = Post.get_ranked( results_per_step = 10, step = 0 )
 
-
+    template_data[ "posts" ] = posts
 
 
 

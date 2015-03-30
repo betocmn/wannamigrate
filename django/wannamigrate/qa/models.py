@@ -151,7 +151,7 @@ class Post( BaseModel ):
 
     # Static Methods
     @staticmethod
-    def get_ranked( related_countries, related_goals, results_per_step, step = 0 ):
+    def get_ranked( *args, **kwargs ):
         """
         Query used to search for posts sorted
         by relevance.  The relevance is calculated with
@@ -162,30 +162,43 @@ class Post( BaseModel ):
         :return: Post objects
         """
 
+        # Extracts arguments
+        post_type_id = kwargs.get( "post_type_id", None )
+        related_countries = kwargs.get( "related_countries", None )
+        related_goals = kwargs.get( "related_goals", None )
+        results_per_step = kwargs.get( "results_per_step", 5 )
+        step = kwargs.pop( "step", 0 )
+
+
         limit_from = step * results_per_step
         limit_to = step * results_per_step + results_per_step
 
 
 
-        posts = Post.objects.filter(
-            post_type__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ],
+        posts = Post.objects.select_related(
+            "post", "related_topics"
         ).only(
             'title', 'body', 'views_count', 'answers_count', 'followers_count', 'readers', 'last_activity_date',
-        ).select_related(
-            "post"
-        ).prefetch_related(
-            "related_topics", "related_topics__related_countries", "related_topics__related_goals"
-        ).filter(
-            related_topics__related_countries__in = related_countries,
-            related_topics__related_goals__in = related_goals
         )
 
-        # If related topics was passed, filter by interest.
-        #if len( related_topics ):
-        #    posts.filter( related_topics__in = related_topics )
+        if ( related_countries and related_goals ):
+            posts = posts.prefetch_related(
+                "related_topics__related_countries", "related_topics__related_goals"
+            ).filter(
+                related_topics__related_countries__in = related_countries,
+                related_topics__related_goals__in = related_goals,
+            )
 
+        if ( post_type_id ):
+            posts = posts.filter(
+                post_type__id = post_type_id
+            )
+        else:
+            posts = posts.filter(
+                post_type__id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ],
+            )
 
-        return posts.order_by( 'last_activity_date' )[limit_from:limit_to]
+        return posts.order_by( '-last_activity_date' )[limit_from:limit_to]
 
 
 

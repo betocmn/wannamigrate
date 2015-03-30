@@ -628,9 +628,9 @@ def dashboard( request ):
         related_countries = [ from_country, to_country ]
         related_goals = [ goal ]
 
-        posts_results_per_page = 2
+        posts_results_per_page = 5
         # Gets 5 most related questions (page 0 by default)
-        template_data['posts'] = Post.get_ranked( related_countries, related_goals, posts_results_per_page )
+        template_data['posts'] = Post.get_ranked( related_countries = related_countries, related_goals = related_goals, results_per_step = posts_results_per_page )
         template_data[ "posts_results_per_page" ] = posts_results_per_page
 
     # Print Template
