@@ -1,0 +1,108 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">My Account</h2>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile active">My profile</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">My contracts</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-inbox">Inbox <span class="counter"></span>(0)</a>
+                </li>
+            </ul>
+            <div class="my-profile">
+
+
+                {% include "site/_common/status.html" %}
+
+                <a href="{% url 'site:edit_account' %}" class="bt-edit button">Edit Information</a>
+
+                <div class="identity">
+                    <div class="thumb">
+                        <span>Profile photo</span>
+                        {% if user.userpersonal.avatar %}
+                            <img src="{{ user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
+                        {% else %}
+                            <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
+                        {% endif %}
+                    </div>
+                    <div class="data">
+                        <span>Full Name</span>
+                        <strong class="name">{{ user.name }}</strong>
+                        <span>E-mail</span>
+                        <strong class="email">{{ user.email }}</strong>
+                    </div>
+                </div>
+
+                <div class="language extra-field">
+                    <span>Language</span>
+                    <p class="text">{{ user.preferred_language }}</p>
+                </div>
+
+                {% if provider %}
+                    <div class="display-name extra-field">
+                        <span>Display Name</span>
+                        <p class="text">{{ provider.display_name }}</p>
+                    </div>
+                    <div class="headline extra-field">
+                        <span>Headline</span>
+                        <p class="text">{{ provider.headline }}</p>
+                    </div>
+                    <div class="summary">
+                        <span>Summary</span>
+                        <p class="text">{{ provider.description|truncatechars:380 }}</p>
+                    </div>
+                    <div class="services">
+                        <h2 class="title">Services Setup</h2>
+                        <div class="supported-countries">
+                            <span class="subtitle">Supported countries:</span>
+                            {% for country in provider.countries.all %}
+                                <p><i class="flag {{ country.code|lower }}"></i><strong class="country">{{ country.name }}</strong></p>
+                            {% endfor %}
+                        </div>
+                        <div class="supported-services">
+                            <span class="subtitle">Supported Services:</span>
+                            <ul>
+                                {% for provider_service_type in provider_service_types %}
+                                    <li class="services-list">
+                                        <strong>{{ provider_service_type.service_type.name }}</strong><span>${{ provider_service_type.price }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

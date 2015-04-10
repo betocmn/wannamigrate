@@ -140,6 +140,13 @@
                 return validate_empty_fields( this, '{{ form.get_required_fields }}' );
             });
 
+            // Credit Card Selection
+            $('.card-flags li').click(function(event) {
+                event.preventDefault()
+                $('.card-flags li').removeClass('active');
+                $(this).addClass('active');
+            });
+
             /*
             var  $scope = {
                 interactions : {

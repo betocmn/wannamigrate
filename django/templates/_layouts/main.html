@@ -57,9 +57,9 @@
                             </a>
                             <div class="box-options box-account">
                                 <ul class="box">
-                                    <li><a class="bt-settings" href="#">My Settings</a></li>
-                                    <li><a class="bt-contracts" href="#">My Contracts</a></li>
-                                    <li><a class="bt-pricing" href="#">Configure Pricing</a></li>
+                                    <li><a class="bt-settings" href="{% url 'site:account' %}">My Account</a></li>
+                                    <li><a class="bt-contracts" href="{% url 'site:contracts' %}">My Contracts</a></li>
+                                    <li><a class="bt-pricing" href="#">My Messages</a></li>
                                     <li><a class="bt-logout" href="{% url 'site:logout' %}">Logout</a></li>
                                 </ul>
                             </div>
@@ -220,8 +220,8 @@
 
                 });
 
-                // create custom dropdown for countries
-                $( ".custom-select" ).msDropdown();
+                // create custom dropdown for situatino countries
+                $( "div.change-situation .custom-select" ).msDropdown();
 
                 // JS FORM Validation
                 $( "#situation_form" ).submit( function() {

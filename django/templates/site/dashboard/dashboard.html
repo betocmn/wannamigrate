@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
                             <div class="data-question">
-                                <a href="#">
+                                <a href="{% url 'qa:view_post' post.id %}">
                                     <h3 class="title-question">{{ post.title }}</h3>
                                     <p class="answer">{{ post.body|striptags|truncate_smart:250 }} (...)</p>
                                 </a>

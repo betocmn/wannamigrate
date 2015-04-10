@@ -13,8 +13,25 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
 from wannamigrate.marketplace.models import (
-    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus
+    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType
 )
+from django.forms import ModelChoiceField
+
+
+
+
+
+#######################
+# CUSTOM FORM FIELD CLASSES
+#######################
+class ServiceTypeChoiceField( ModelChoiceField ):
+    """
+    Custom Model for service types, to get translation
+    """
+
+    choices = ServiceType.get_translated_tuple()
+
+
 
 
 
@@ -44,8 +61,8 @@ class PaymentForm( BaseForm ):
         # inserts service
         service = Service()
         service.service_price = order_info['provider_service_type'].price
-        service.from_user = order_info['from_user']
-        service.to_user = order_info['to_user']
+        service.user = order_info['user']
+        service.provider = order_info['provider']
         service.service_type = order_info['service_type']
         service.service_status_id = ServiceStatus.get_status_from_payment_result( order_info['payment_api_result']['result'] )
         service.save()
@@ -54,7 +71,7 @@ class PaymentForm( BaseForm ):
         service_history = ServiceHistory()
         service_history.service_id = service.id
         service_history.service_status_id = service.service_status_id
-        service_history.user_id = service.from_user_id
+        service_history.user_id = service.user_id
         service_history.save()
 
         # inserts details on order table
@@ -67,7 +84,7 @@ class PaymentForm( BaseForm ):
         order.external_code = order_info['payment_api_result']['external_code']
         order.order_status_id = OrderStatus.get_status_from_payment_result( order_info['payment_api_result']['result'] )
         order.service = service
-        order.user = order_info['from_user']
+        order.user = order_info['user']
         order.save()
 
         # inserts first order_history

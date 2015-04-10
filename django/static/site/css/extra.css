@@ -15,6 +15,22 @@ form .inline {
 }
 
 
+/* SELECT */
+select.default-select {
+    border: 1px solid #d0b5db;
+    background-color: #FFF;
+    width: 350px;
+    height: 50px;
+}
+
+
+/** Messages, alerts, etc */
+form .errorlist {
+    color: #ed1c24;
+}
+
+
+
 /* ALERTS (ERRORS, SUCCESS) */
 .alert {
     padding: 15px;
@@ -35,6 +51,7 @@ form .inline {
     border-color: #d6e9c6;
     color: #3c763d;
 }
+
 
 
 /* MODAL */
@@ -147,4 +164,52 @@ form .inline {
 
 .dashboard .content.payment .confirmation .message p.denied span {
   color: #a94442;
+}
+
+
+
+/* Edit My Account */
+.content.myaccount .interactions .my-profile-edit {
+  display: block;
+  padding: 0 25px;
+}
+
+.content.myaccount .interactions .my-profile-edit .services .remove {
+  font-size: 12px;
+  color: #68347e;
+  text-decoration: none;
+}
+.content.myaccount .interactions .my-profile-edit .services .remove:hover {
+  text-decoration: underline;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input {
+  width: 75px;
+  display: inline;
+  border: 1px solid #d0b5db;
+  background-color: #FFF;
+}
+
+.content.myaccount .interactions .my-profile .services .supported-countries p {
+  padding: 0 20px 0 20px;
+  border-right: 1px solid #e1e1e1;
+}
+
+.content.myaccount .interactions .my-profile .services .supported-countries p:last-child {
+  border: none;
+}
+
+#upload-container{
+    text-decoration: underline;
+    font-family: 'open_sansbold';
+    font-size: 12px;
+    margin-left: 27px;
+}
+
+
+
+
+/* My Contracts */
+.content.myaccount .interactions .my-contracts {
+  display: block;
+  padding: 0 25px;
 }

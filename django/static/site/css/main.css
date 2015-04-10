@@ -1231,6 +1231,7 @@ select {
 }
 .dashboard .content {
   width: 960px;
+  min-height: 622px;
   margin: 0 auto;
 }
 .dashboard .content .bt-alternator {
@@ -1550,7 +1551,7 @@ select {
 }
 .dashboard .content .professionals .professional .data-professional .name {
   display: block;
-  line-height: 12px;
+  line-height: 20px;
   font-size: 16px;
   font-family: 'open_sansbold';
   font-weight: normal;
@@ -1796,6 +1797,7 @@ select {
   color: #888;
 }
 .dashboard .content.hire .professionals .professional .name .link-hiring {
+  line-height: 20px;
   color: #555;
 }
 .dashboard .content.hire .professionals .professional .bt-hire {
@@ -2561,13 +2563,9 @@ select {
   cursor: pointer;
   text-indent: -9999px;
   display: block;
-  border: 0;
   background: transparent url("../img/flags-card.png") no-repeat 0 0;
-  text-indent: -9999px;
-  overflow: hidden;
   background-color: #fff;
 }
-.dashboard .content.payment .credit-card .data .card-flags ul li:hover,
 .dashboard .content.payment .credit-card .data .card-flags ul li.active {
   border-color: #9546ab;
 }
@@ -4851,7 +4849,6 @@ select {
   pointer-events: none;
 }
 .content.myaccount .interactions .my-profile {
-  display: block;
   padding: 0 25px;
 }
 .content.myaccount .interactions .my-profile .bt-edit {
@@ -4898,6 +4895,25 @@ select {
   font-family: 'open_sanssemibold';
   font-size: 16px;
   color: #555;
+}
+.content.myaccount .interactions .my-profile .extra-field {
+  display: block;
+  padding: 0 0 15px;
+  font-size: 14px;
+  color: #555;
+}
+.content.myaccount .interactions .my-profile .extra-field span {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile .extra-field .text {
+  display: block;
+  width: 800px;
+  line-height: 22px;
+  font-family: 'open_sanssemibold';
+  padding: 0 0 0 20px;
 }
 .content.myaccount .interactions .my-profile .summary {
   width: 100%;
@@ -4993,6 +5009,279 @@ select {
   padding-bottom: 0;
   color: #555;
 }
+.content.myaccount .interactions .my-profile-edit {
+  display: none;
+  padding: 0 25px;
+}
+.content.myaccount .interactions .my-profile-edit .bt-save {
+  float: right;
+  width: 170px;
+}
+.content.myaccount .interactions .my-profile-edit .identity {
+  clear: left;
+  width: 100%;
+  height: 150px;
+  padding: 45px 0 0;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile-edit .identity .thumb {
+  float: left;
+  width: 125px;
+  height: 125px;
+}
+.content.myaccount .interactions .my-profile-edit .identity .thumb span {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 14px;
+  color: #888;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile-edit .identity .thumb img {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data {
+  padding: 0;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data span {
+  display: block;
+  padding: 0 0 7px;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data strong {
+  display: block;
+  padding: 0 0 20px;
+  font-weight: normal;
+  font-family: 'open_sanssemibold';
+  font-size: 16px;
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data .field {
+  display: block;
+  padding: 0 0 20px;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data .field label {
+  display: block;
+  padding: 0 0 5px 0;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .identity .data .field input {
+  width: 40%;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .extra-field {
+  display: block;
+  padding: 0 0 20px;
+}
+.content.myaccount .interactions .my-profile-edit .extra-field label {
+  display: block;
+  padding: 0 0 5px 0;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .extra-field input {
+  width: 40%;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .extra-field .dd {
+  width: 200px !important;
+}
+.content.myaccount .interactions .my-profile-edit .summary {
+  width: 100%;
+  height: auto;
+  font-size: 14px;
+  color: #888;
+  font-size: 14px;
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .summary textarea {
+  display: block;
+  width: 54%;
+  padding: 10px 10px;
+  resize: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #d0b5db;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.content.myaccount .interactions .my-profile-edit .summary span {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .my-profile-edit .summary .text {
+  display: block;
+  width: 800px;
+  line-height: 22px;
+  font-family: 'open_sanssemibold';
+  padding: 0 0 0 20px;
+}
+.content.myaccount .interactions .my-profile-edit .services {
+  padding: 35px 0 0 0;
+}
+.content.myaccount .interactions .my-profile-edit .services .title {
+  text-transform: capitalize;
+  padding-bottom: 20px;
+}
+.content.myaccount .interactions .my-profile-edit .services .subtitle {
+  font-size: 14px;
+}
+.content.myaccount .interactions .my-profile-edit .services .add-another {
+  display: block;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #68347e;
+  text-decoration: none;
+}
+.content.myaccount .interactions .my-profile-edit .services .add-another:hover {
+  text-decoration: underline;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries {
+  padding: 0 0 0 0;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries .field {
+  position: relative;
+  display: block;
+  margin: 10px 0 0;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries .field:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 12px;
+  height: 12px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-delete-select.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries .custom-select {
+  width: 215px;
+  height: 45px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries p {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px 0 20px;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  font-size: 16px;
+  color: #777;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-countries p:last-child {
+  padding: 0 0 0 20px;
+  border-left: 1px solid #e1e1e1;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services {
+  margin: 30px 0 5px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services span {
+  display: block;
+  padding: 0 0 15px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services .custom-select {
+  width: 350px;
+  height: 50px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul {
+  padding: 0 0 0 0;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list {
+  position: relative;
+  display: block;
+  width: 535px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 0 0 0;
+  margin: 0 0 15px;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list .dd {
+  float: left;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input {
+  position: relative;
+  width: 70px;
+  height: 50px;
+  line-height: 50px;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'open_sansbold';
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input::-webkit-input-placeholder {
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input:-moz-placeholder {
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input::-moz-placeholder {
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input:-ms-input-placeholder {
+  color: #555;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list input:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 26px;
+  height: 26px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-question-mark.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list .ddlabel {
+  padding: 0 0 0 20px;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list strong {
+  position: relative;
+  float: left;
+  display: inline-block;
+  font-weight: normal;
+  color: #777;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list strong:after {
+  content: '';
+  position: absolute;
+  right: -35px;
+  top: 12px;
+  width: 26px;
+  height: 26px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-question-mark.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.myaccount .interactions .my-profile-edit .services .supported-services ul .services-list span {
+  display: inline-block;
+  padding-bottom: 0;
+  color: #555;
+}
 .content.myaccount .interactions .my-contracts {
   display: none;
   padding: 0 25px;
@@ -5062,9 +5351,10 @@ select {
 }
 .content.myaccount .interactions .inbox .box-menu {
   position: absolute;
-  top: 80px;
+  top: 79px;
   left: 0;
   width: 150px;
+  border-top: 1px solid #e1e1e1;
 }
 .content.myaccount .interactions .inbox .box-menu .box-item {
   display: block;
@@ -5145,6 +5435,106 @@ select {
 }
 .content.myaccount .interactions .inbox .box-top .messages-menu li a:hover {
   text-decoration: underline;
+}
+.content.myaccount .interactions .inbox .box-top .newmessage-top {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 80px;
+}
+.content.myaccount .interactions .inbox .box-top .newmessage-top .newmessage-title {
+  position: absolute;
+  left: 30px;
+  top: 15px;
+  display: block;
+  text-transform: uppercase;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-top .newmessage-top .bt-cancel {
+  position: absolute;
+  right: 0;
+  top: 15px;
+  width: 105px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+}
+.content.myaccount .interactions .inbox .box-newmessage {
+  display: none;
+  float: right;
+  width: 80%;
+  margin: 77px 0 0 0;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset {
+  display: block;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field {
+  display: block;
+  padding: 0 0 15px;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field.file {
+  position: relative;
+  width: 105px;
+  height: 20px;
+  cursor: pointer;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field.file p {
+  position: relative;
+  display: block;
+  width: 105px;
+  height: 20px;
+  font-size: 14px;
+  color: #68347e;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field.file p input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 105px;
+  height: 20px;
+  cursor: pointer;
+  -ms-filter: " progid:DXImageTransform.Microsoft.Alpha(Opacity=0) ";
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field label {
+  display: block;
+  padding: 0 0 5px 0;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field input,
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field textarea {
+  width: 70%;
+  font-size: 14px;
+  color: #888;
+}
+.content.myaccount .interactions .inbox .box-newmessage form fieldset .field textarea {
+  display: block;
+  padding: 10px 10px;
+  resize: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #d0b5db;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.content.myaccount .interactions .inbox .box-newmessage form .bt-send {
+  width: 105px;
+  margin: 20px 0 0;
+  font-size: 14px;
 }
 .content.myaccount .interactions .inbox .box-messages {
   float: right;

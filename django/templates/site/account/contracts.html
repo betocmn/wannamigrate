@@ -1,0 +1,99 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">My Account</h2>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">My profile</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts active">My contracts</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-inbox">Inbox <span class="counter"></span>(0)</a>
+                </li>
+            </ul>
+            <div class="my-contracts">
+
+                {% if user_services %}
+                    <h2 class="title">Services received</h2>
+                    <table>
+                        <tr>
+                            <th class="service">Service</th>
+                            <th class="professional">Company/Professional</th>
+                            <th class="date">Date</th>
+                            <th class="total">Total</th>
+                            <th class="status">Status</th>
+                        </tr>
+
+                        {% for service in user_services %}
+                            <tr>
+                                <td class="service">{{ service.service_type.name }}</td>
+                                <td class="professional">{{ service.provider.display_name }}</td>
+                                <td class="date">{{ service.created_date|date:"d M Y"|lower }}</td>
+                                <td class="total">R$ {{ service.service_price }}</td>
+                                <td class="status {% if service.service_status_id == 2 or service.service_status_id == 3 %}paid{% else %}waiting{% endif %}">{{ service.service_status.name }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                {% endif %}
+
+                {% if provider_services %}
+                    <h2 class="title">Services provided</h2>
+                    <table>
+                        <tr>
+                            <th class="service">Service</th>
+                            <th class="professional">User</th>
+                            <th class="date">Date</th>
+                            <th class="total">Total</th>
+                            <th class="status">Status</th>
+                        </tr>
+
+                        {% for service in provider_services %}
+                            <tr>
+                                <td class="service">{{ service.service_type.name }}</td>
+                                <td class="professional">{{ service.user.name }}</td>
+                                <td class="date">{{ service.created_date|date:"d M Y"|lower }}</td>
+                                <td class="total">R$ {{ service.service_price }}</td>
+                                <td class="status {% if service.service_status_id == 2 or service.service_status_id == 3 %}paid{% else %}waiting{% endif %}">{{ service.service_status.name }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}
