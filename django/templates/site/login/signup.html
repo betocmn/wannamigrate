@@ -33,6 +33,7 @@
 
                     <form id="signup_form_email" class="signup_item" method="post" role="form" action="{% url 'site:signup' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="type" value="{{ type }}" />
                         <div class="error-element inline">{{ form.name }}</div> {{ form.name.errors }}
                         <div class="error-element inline">{{ form.email }}</div> {{ form.email.errors }}
                         <div class="error-element inline">{{ form.email_confirmation }}</div> {{ form.email_confirmation.errors }}

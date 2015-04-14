@@ -5856,6 +5856,1103 @@ select {
   font-size: 14px;
   color: #888;
 }
+.choose header {
+  background-color: #000 !important;
+}
+.content.choose-destiny {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
+.content.choose-destiny .title {
+  display: none;
+}
+.content.choose-destiny .steps {
+  width: 100%;
+}
+.content.choose-destiny .steps .step {
+  float: left;
+  width: 33.33%;
+}
+.content.choose-destiny .steps .step .top {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  text-align: center;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 20px;
+  color: #fff;
+}
+.content.choose-destiny .steps .step .top:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 35px;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  text-align: center;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.content.choose-destiny .steps .step .top:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.content.choose-destiny .steps .step .top .subtitle {
+  position: relative;
+}
+.content.choose-destiny .steps .step .item {
+  width: 100%;
+  height: 220px;
+}
+.content.choose-destiny .steps .step .item:hover {
+  background-color: #fff;
+}
+.content.choose-destiny .steps .step .item .progress {
+  float: left;
+  width: 250px;
+  margin: 75px 25% 0;
+}
+.content.choose-destiny .steps .step .item .progress .type {
+  font-family: 'open_sanssemibold';
+  font-size: 1.6em;
+  font-weight: normal;
+  color: #555;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track {
+  float: left;
+  width: 140px;
+  height: 16px;
+  border-bottom: 2px solid #e1e1e1;
+  margin: 15px 0 6px;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill {
+  height: 16px;
+  background: transparent url("../img/progress-bar-pattern.png") no-repeat 0 0;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-green {
+  background-color: #2fc81f;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-yellow {
+  background-color: #e4ff00;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-orange {
+  background-color: #ffc000;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-red {
+  background-color: #ff7200;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-size-100 {
+  width: 100%;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-size-75 {
+  width: 75%;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-size-50 {
+  width: 50%;
+}
+.content.choose-destiny .steps .step .item .progress .progress-track .progress-fill.progress-fill-size-25 {
+  width: 25%;
+}
+.content.choose-destiny .steps .step .item .progress p {
+  clear: left;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #777;
+}
+.content.choose-destiny .steps .step .item .information-field {
+  position: relative;
+  display: block;
+  width: 400px;
+  height: 220px;
+  margin: 0 auto;
+}
+.content.choose-destiny .steps .step .item .information-field .porcentage {
+  float: right;
+  display: block;
+  width: 80px;
+  padding: 7px 0 0;
+  font-weight: normal;
+  font-size: 27px;
+  font-family: 'open_sansbold';
+  color: #845996;
+}
+.content.choose-destiny .steps .step .item .information-field .bt-edit {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  width: 32px;
+  height: 32px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-edit.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  border: 1px solid #959595;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+.content.choose-destiny .steps .step .item .information-field .bt-edit:hover {
+  border-color: #845996;
+}
+.content.choose-destiny .steps .step .item .information-field.personal:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 75px;
+  width: 82px;
+  height: 80px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.choose-destiny .steps .step .item .information-field.language:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 75px;
+  width: 72px;
+  height: 73px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -90px 0;
+}
+.content.choose-destiny .steps .step .item .information-field.education:before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 75px;
+  width: 95px;
+  height: 70px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -178px 0;
+}
+.content.choose-destiny .steps .step .item .information-field.work:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 75px;
+  width: 78px;
+  height: 78px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -294px 0;
+}
+.content.choose-destiny .steps .step.step-one {
+  height: 100%;
+  background-color: #f4f4f4;
+}
+.content.choose-destiny .steps .step.step-one .top {
+  line-height: 120px;
+  background-color: #845996;
+}
+.content.choose-destiny .steps .step.step-one .top:before {
+  content: '1';
+  right: 73%;
+}
+.content.choose-destiny .steps .step.step-one .top:after {
+  border-top: 10px solid #845996;
+}
+.content.choose-destiny .steps .step.step-two {
+  min-height: 1010px;
+  background-color: #f8f8f8;
+}
+.content.choose-destiny .steps .step.step-two .top {
+  padding: 38px 0 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 25px;
+  background-color: #7a4690;
+}
+.content.choose-destiny .steps .step.step-two .top:before {
+  content: '2';
+  right: 75%;
+}
+.content.choose-destiny .steps .step.step-two .top:after {
+  border-top: 10px solid #7a4690;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item {
+  display: block;
+  width: 100%;
+  height: 275px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item:hover {
+  background-color: #fff;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country {
+  display: block;
+  width: 300px;
+  height: 108px;
+  margin: 90px auto 0;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar {
+  float: left;
+  width: 108px;
+  height: 108px;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar.australia {
+  background: transparent url("../img/australia-circle-flag.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar.canada {
+  background: transparent url("../img/canada-circle-flag.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar.japan {
+  background: transparent url("../img/japan-circle-flag.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score {
+  display: block;
+  padding: 15px 0 0 15px;
+  overflow: hidden;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score .name {
+  display: block;
+  padding: 0 0 5px;
+  font-size: 22px;
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+  color: #555;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score p {
+  display: block;
+  text-transform: uppercase;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score p .points {
+  float: left;
+  display: block;
+  padding: 0 10px 0 0;
+  font-size: 40px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #845996;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score p span {
+  display: block;
+  padding: 0 0 5px;
+  font-size: 18px;
+  color: #845996;
+  overflow: hidden;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score p em {
+  display: block;
+  font-style: normal;
+  font-family: 'open_sanslight';
+  font-size: 14px;
+}
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score p em i {
+  font-family: 'open_sanssemibold';
+  font-style: normal;
+  color: #845996;
+}
+.content.choose-destiny .steps .step.step-three {
+  position: relative;
+  min-height: 1010px;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+.content.choose-destiny .steps .step.step-three .top {
+  line-height: 120px;
+  background-color: #68347e;
+}
+.content.choose-destiny .steps .step.step-three .top:before {
+  content: '3';
+  right: 73%;
+}
+.content.choose-destiny .steps .step.step-three .top:after {
+  border-top: 10px solid #68347e;
+}
+.content.choose-destiny .steps .step.step-three .choose-country {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -120px;
+  margin-top: -41px;
+  width: 240px;
+  height: 82px;
+  border: 1px solid #e1e1e1;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.content.choose-destiny .steps .step.step-three .choose-country:before {
+  content: '';
+  position: absolute;
+  left: 35px;
+  top: 30px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  border-left: 2px solid #e1e1e1;
+  border-top: 2px solid #e1e1e1;
+}
+.content.choose-destiny .steps .step.step-three .choose-country p {
+  display: block;
+  padding: 20px 0 0 60px;
+  font-family: 'open_sanslight';
+  font-size: 22px;
+  color: #888;
+}
+.content.choose-destiny .steps .step.step-three .choose-country p strong {
+  display: block;
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step {
+  display: none;
+  padding: 95px 0 0;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .locked {
+  position: relative;
+  display: block;
+  width: 300px;
+  height: 95px;
+  padding: 40px 0 0;
+  margin: 0 auto;
+  line-height: 25px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 18px;
+  text-align: center;
+  color: #c60a20;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .locked:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 20px;
+  height: 29px;
+  margin-left: -10px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-lock.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by {
+  display: block;
+  width: 400px;
+  margin: 90px auto 0;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item {
+  display: block;
+  width: 400px;
+  height: 80px;
+  margin: 0 0 40px;
+  background-color: #7ca745;
+  background-repeat: no-repeat;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item:hover {
+  background-color: #9c46b3;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item.check {
+  background-image: url("../img/illustration-steps.png");
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item.visa {
+  background-image: url("../img/illustration-steps.png");
+  background-position: 0 -81px;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item.moving-to {
+  background-image: url("../img/illustration-steps.png");
+  background-position: 0 bottom;
+}
+.content.choose-destiny .steps .step.step-three .step-by-step .step-by .item a {
+  display: block;
+  width: 400px;
+  height: 80px;
+  padding: 0 0 0 155px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 80px;
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  overflow: hidden;
+}
+.about header {
+  position: fixed;
+  z-index: 6;
+}
+.content.results {
+  width: 100%;
+  margin: 0 auto 0;
+  padding: 80px 0 0 0;
+  overflow: hidden;
+}
+.content.results .country-result {
+  position: fixed;
+  float: left;
+  width: 25%;
+  height: 1000px;
+}
+.content.results .country-result.japan {
+  background: transparent url("../img/ilustration-japan.jpg") no-repeat 0 0;
+}
+.content.results .country-result .country {
+  display: block;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-size: 2.5em;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  background-color: #4c396c;
+  color: #fff;
+}
+.content.results .main {
+  float: right;
+  width: 75%;
+  height: 100%;
+}
+.content.results .main .options {
+  width: 100%;
+  height: 100px;
+}
+.content.results .main .options .option {
+  position: relative;
+  float: left;
+  width: 33.3%;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-family: 'open_sansbold';
+  font-size: 20px;
+  font-weight: normal;
+  cursor: pointer;
+  color: #888;
+}
+.content.results .main .options .option:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.content.results .main .options .option.situation {
+  background-color: #dfdfdf;
+}
+.content.results .main .options .option.situation:after {
+  border-top: 10px solid #dfdfdf;
+}
+.content.results .main .options .option.visa {
+  background-color: #ebebeb;
+}
+.content.results .main .options .option.visa:after {
+  border-top: 10px solid #ebebeb;
+}
+.content.results .main .options .option.movingto {
+  background-color: #dfdfdf;
+}
+.content.results .main .options .option.movingto:after {
+  border-top: 10px solid #dfdfdf;
+}
+.content.results .main .options .option.active {
+  background-color: #ffce00;
+  color: #845996;
+}
+.content.results .main .options .option.active:after {
+  border-top: 10px solid #ffce00;
+}
+.content.results .main .my-situation {
+  width: 100%;
+  height: 100%;
+  padding: 9% 0 0;
+}
+.content.results .main .my-situation .graph {
+  float: left;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.content.results .main .my-situation .graph .circle-progress-bar {
+  display: block;
+  width: 370px;
+  height: 370px;
+  margin: 0 auto;
+}
+.content.results .main .my-situation .graph .circle-progress-bar.canada {
+  background: transparent url("../img/canada-circle-map.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.results .main .my-situation .graph .circle-progress-bar.japan {
+  background: transparent url("../img/japan-circle-map.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.results .main .my-situation .graph .circle-progress-bar.australia {
+  background: transparent url("../img/australia-circle-map.png") no-repeat 0 0;
+  background-position: center center;
+}
+.content.results .main .my-situation .graph .score {
+  display: block;
+  width: 240px;
+  padding: 15px 0 0 15px;
+  margin: 50px auto 0;
+  overflow: hidden;
+}
+.content.results .main .my-situation .graph .score p {
+  display: block;
+  text-transform: uppercase;
+}
+.content.results .main .my-situation .graph .score p .points {
+  float: left;
+  display: block;
+  padding: 0 10px 0 0;
+  font-size: 4em;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #845996;
+}
+.content.results .main .my-situation .graph .score p span {
+  display: block;
+  padding: 7px 0 5px;
+  font-size: 1.7em;
+  color: #845996;
+  overflow: hidden;
+}
+.content.results .main .my-situation .graph .score p em {
+  display: block;
+  font-style: normal;
+  font-family: 'open_sanslight';
+  font-size: 1.2em;
+}
+.content.results .main .my-situation .graph .score p em i {
+  font-family: 'open_sanssemibold';
+  font-style: normal;
+  color: #845996;
+}
+.content.results .main .my-situation .graph .skills {
+  display: block;
+  width: 400px;
+  height: auto;
+  margin: 50px auto 0;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill {
+  display: block;
+  width: 415px;
+  height: 30px;
+  padding: 0 0 10px;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .type {
+  float: left;
+  display: block;
+  width: 100px;
+  padding: 0 10px 0;
+  text-align: right;
+  font-family: 'open_sanslight';
+  font-size: 16px;
+  color: #555;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track {
+  float: left;
+  width: 140px;
+  height: 10px;
+  border-bottom: 1px solid #e1e1e1;
+  margin: 4px 10px 0;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill {
+  height: 10px;
+  background: transparent url("../img/progress-bar-pattern.png") no-repeat 0 0;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-green {
+  background-color: #2fc81f;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-yellow {
+  background-color: #e4ff00;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-orange {
+  background-color: #ffc000;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-red {
+  background-color: #ff7200;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-size-100 {
+  width: 100%;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-size-75 {
+  width: 75%;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-size-50 {
+  width: 50%;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .progress-track .progress-fill.progress-fill-size-25 {
+  width: 25%;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .points {
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'open_sanslight';
+  color: #845996;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .points span {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.content.results .main .my-situation .graph .skills .skills-list .skill .points em {
+  font-style: normal;
+  color: #888;
+}
+.content.results .main .my-situation .hints {
+  float: right;
+  width: 50%;
+  overflow: hidden;
+}
+.content.results .main .my-situation .hints .locked {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 75px;
+  padding: 0 6% 0;
+  margin: 0 auto;
+  line-height: 75px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'open_sansbold';
+  font-size: 22px;
+  text-align: right;
+  background-color: #ebebeb;
+  color: #c60a20;
+}
+.content.results .main .my-situation .hints .locked:before {
+  content: '';
+  position: absolute;
+  left: 7%;
+  top: 20px;
+  width: 20px;
+  height: 29px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-lock.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.results .main .my-situation .hints .subtitle {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: 70px 0 35px 65px;
+  text-transform: uppercase;
+  font-family: 'open_sansbold';
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+  color: #845996;
+}
+.content.results .main .my-situation .hints .subtitle:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 40%;
+  height: 1px;
+  background-color: #ebebeb;
+  overflow: hidden;
+}
+.content.results .main .my-situation .hints .subtitle:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 12px;
+  width: 40%;
+  height: 1px;
+  background-color: #ebebeb;
+  overflow: hidden;
+}
+.content.results .main .my-situation .hints ul {
+  display: block;
+  width: 80%;
+}
+.content.results .main .my-situation .hints ul .hint {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 45px;
+  line-height: 22px;
+  margin: 0 0 35px 40px;
+  padding: 0 0 0 15%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #555;
+  overflow: hidden;
+}
+.content.results .main .my-situation .hints ul .hint:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 35px;
+  height: 35px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-exclamation-mark.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.content.results .main .visa-application {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 9% 0 0;
+}
+.content.results .main .visa-application .visa-topics {
+  width: 60%;
+  margin: 0 auto;
+}
+.content.results .main .visa-application .visa-topics .visa-topic .title-topic {
+  display: block;
+  width: 100%;
+  height: 54px;
+  padding: 0 0 0 24px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 54px;
+  font-size: 20px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  background: transparent url("../img/visa-moving-topics-bg.png") no-repeat 0 0;
+  color: #845996;
+}
+.content.results .main .visa-application .visa-topics .visa-topic .title-topic span {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.content.results .main .visa-application .visa-topics .visa-topic .subtitle {
+  display: block;
+  padding: 0 0 0 21%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #845996;
+}
+.content.results .main .visa-application .visa-topics .visa-topic .text {
+  display: block;
+  width: 90%;
+  padding: 10px 0 20px 23%;
+  line-height: 24px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: normal;
+  color: #555;
+}
+.content.results .main .visa-application .visa-topics .visa-topic img {
+  display: block;
+  padding: 0 0 20px 23%;
+}
+.content.results .main .moving {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 9% 0 0;
+}
+.content.results .main .moving .moving-topics {
+  width: 60%;
+  margin: 0 auto;
+}
+.content.results .main .moving .moving-topics .moving-topic .title-topic {
+  display: block;
+  width: 100%;
+  height: 54px;
+  padding: 0 0 0 24px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 54px;
+  font-size: 20px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  background: transparent url("../img/visa-moving-topics-bg.png") no-repeat 0 0;
+  color: #845996;
+}
+.content.results .main .moving .moving-topics .moving-topic .title-topic span {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.content.results .main .moving .moving-topics .moving-topic .subtitle {
+  display: block;
+  padding: 0 0 0 21%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #845996;
+}
+.content.results .main .moving .moving-topics .moving-topic .text {
+  display: block;
+  width: 90%;
+  padding: 10px 0 20px 23%;
+  line-height: 24px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: normal;
+  color: #555;
+}
+.content.results .main .moving .moving-topics .moving-topic img {
+  display: block;
+  padding: 0 0 20px 23%;
+}
+.contact {
+  font-family: 'open_sansregular';
+  color: #fffefc;
+  background-color: #000;
+}
+.contact .background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.contact .button {
+  display: block;
+  height: auto;
+  padding: 13px 0;
+  line-height: 1;
+  cursor: pointer;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #72d3aa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #28b187;
+  font-family: 'open_sansbold';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px #3a7a1c;
+  -moz-box-shadow: 0 1px 1px 0 #209565;
+  -webkit-box-shadow: 0 1px 1px 0 #209565;
+  box-shadow: 0 1px 1px 0 #209565;
+  color: #fff;
+  overflow: hidden;
+  background: #26a881;
+  background: -moz-linear-gradient(top, #26a881 0%, #2cc092 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #26a881), color-stop(100%, #2cc092));
+  -webkit-background-origin: padding-box;
+}
+.contact .button:hover {
+  -moz-box-shadow: 0 1px 1px 0 #125338;
+  -webkit-box-shadow: 0 1px 1px 0 #125338;
+  box-shadow: 0 1px 1px 0 #125338;
+  background: #7a358e;
+  background: -moz-linear-gradient(top, #7a358e 0%, #9842b1 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7a358e), color-stop(100%, #9842b1));
+  -webkit-background-origin: padding-box;
+  border-color: #9842b1;
+}
+.contact .content .contact-us {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 960px;
+  height: 250px;
+  margin-left: -480px;
+  margin-top: -125px;
+}
+.contact .content .contact-us .title {
+  display: block;
+  padding: 0 0 65px 0;
+  text-align: center;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 60px;
+}
+.contact .content .contact-us .description {
+  display: block;
+  width: 80%;
+  margin: 0 auto 20px;
+  line-height: 32px;
+  text-align: center;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 22px;
+  color: #fff;
+}
+.contact .content .contact-us .description span {
+  font-family: 'open_sansbold';
+  color: #ffce00;
+}
+.contact .content .contact-us form {
+  padding: 0 0 50px 0;
+  overflow: hidden;
+}
+.contact .content .contact-us form fieldset {
+  width: 70%;
+  margin: 0 auto;
+}
+.contact .content .contact-us form fieldset legend {
+  display: block;
+  line-height: 20px;
+  padding: 0 0 45px;
+  font-size: 16px;
+  text-align: center;
+}
+.contact .content .contact-us form fieldset .field {
+  width: 70%;
+  height: 80px;
+  margin: 0 auto;
+}
+.contact .content .contact-us form fieldset .field.message {
+  height: auto;
+}
+.contact .content .contact-us form fieldset .field label {
+  display: block;
+  font-size: 14px;
+  padding: 0 0 5px 10px;
+}
+.contact .content .contact-us form fieldset .field input {
+  width: 100%;
+  font-size: 14px;
+}
+.contact .content .contact-us form fieldset .field textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  resize: none;
+  border-color: transparent;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+.contact .content .contact-us form fieldset .field .bt-send {
+  width: 100%;
+  margin: 10px 0 0;
+}
+.contact footer {
+  display: none;
+}
 @media screen and (max-width: 1366px) {
   .landing header nav {
     width: 480px;

@@ -30,7 +30,6 @@ from wannamigrate.site.views import get_situation_form
 #######################
 # LISTS SERVICE PROVIDERS
 #######################
-@login_required
 def professionals( request ):
     """
     Listing of professionals

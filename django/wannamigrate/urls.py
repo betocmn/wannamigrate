@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
     url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
-    url( r'^', include( 'wannamigrate.points.urls', namespace = "points" ) ),
+    url( r'^elegibility/', include( 'wannamigrate.points.urls', namespace = "points" ) ),
     url( r'^', include( 'wannamigrate.marketplace.urls', namespace = "marketplace" ) ),
     url( r'^', include( 'wannamigrate.qa.urls', namespace = "qa" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),

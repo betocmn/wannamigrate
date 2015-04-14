@@ -44,6 +44,9 @@ class Mailer( object ):
         :return: String
         """
 
+        if not settings.IS_PROD:
+            return True
+
         email = EmailMessage()
         email.content_subtype = "html"
         email.subject = subject
@@ -117,7 +120,7 @@ class Mailer( object ):
 
 
     @staticmethod
-    def send_contact_email( email, name, message ):
+    def send_contact_email( email, name, message, subject ):
         """
         Sends contact e-mail from site
 
@@ -125,9 +128,9 @@ class Mailer( object ):
         :param: name
         :param: message
         """
-        template_data = { 'email': email, 'name': name, 'message': message }
+        template_data = { 'email': email, 'name': name, 'message': message, 'subject': subject }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
-        return Mailer.send( _( 'Contact from site' ), body, settings.CONTACT_FORM_EMAIL )
+        return Mailer.send( _( 'Contact: ' + subject ), body, settings.CONTACT_FORM_EMAIL )
 
 
     @staticmethod

@@ -1,0 +1,62 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <section class="contact_title">
+        <div>
+            Contact Us
+        </div>
+    </section>
+    <section class="contact_bg">
+        <div class="contact">
+            <div class="contact_box">
+
+                {% include "site/_common/status.html" %}
+
+                <form method="post" action="" id="main_form">
+
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <label class="contact_label error-element{% if field.errors %} has-error{% endif %}" for="{{ field.id_for_label }}">
+                            <span>{{ field.label }}:</span>
+                            {{ field }}
+                            {{ field.errors }}
+                        </label>
+                    {% endfor %}
+
+                    <input class="button" type="submit" value="Send" />
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // JS FORM Validation
+			$( "#main_form" ).submit( function() {
+				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+			});
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

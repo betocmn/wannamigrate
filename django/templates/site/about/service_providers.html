@@ -1,0 +1,151 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <section class="service">
+        <div class="top">
+            <div class="top_left">
+                <div class="title">
+                    {% blocktrans %}
+                        Become a <br />
+                        service provider
+                    {% endblocktrans %}
+                </div>
+                <div class="text">
+                    <span>Wanna Migrate</span>
+                    {% blocktrans %}
+                    brings online clients to you.
+                    We are specialized  in attracting people planning to
+                    migrate to another country, temporarirly or permanent
+                    {% endblocktrans %}
+                </div>
+            </div>
+            <img src="{% static 'site/img/become.png' %}" alt="{% trans "Become a Service Provider" %}">
+        </div>
+        <div class="clearfix"></div>
+        <div class="bottom">
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'site/img/service_1.png' %}" alt="{% trans "Free to join" %}" />
+                </div>
+                <div class="text_bottom">
+                    {% blocktrans %}<span>Free</span> to join{% endblocktrans %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'site/img/service_2.png' %}" alt="{% trans "Free to join" %}" />
+                </div>
+                <div class="text_bottom">
+                    {% blocktrans %}<span>No</span> commitment{% endblocktrans %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'site/img/service_3.png' %}" alt="{% trans "Free to join" %}" />
+                </div>
+                <div class="text_bottom">
+                    {% blocktrans %}We find <span>great Clients</span>{% endblocktrans %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img src="{% static 'site/img/service_4.png' %}" alt="{% trans "Free to join" %}" />
+                </div>
+                <div class="text_bottom">
+                    {% blocktrans %}We <span>handle payments</span>{% endblocktrans %}
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="but"><a href="{% url 'site:signup' 'service-provider' %}" class="bt-edit button">{% trans "Sign up" %}</a></div>
+    </section>
+    <section class="how_it_works">
+        <h1>{% trans "How it works" %}</h1>
+        <div class="main">
+            <div class="bottom">
+                <div class="columb">
+                    <img src="{% static 'site/img/1.png' %}" alt="1" />
+                    <div class="title">
+                        {% trans "Setup Your Prices" %}
+                    </div>
+                    <div class="text">
+                        {% trans "Set your prices for services such as 'Live Skype Assessment', 'Translation', 'File Review', 'Full Consultancy'..." %}
+                    </div>
+                </div>
+                <div class="columb">
+                    <img src="{% static 'site/img/2.png' %}" alt="2" />
+                    <div class="title">
+                        {% trans "Accept Service Requests" %}
+                    </div>
+                    <div class="text">
+                        {% trans "Receive requests from our users and decide to accept or decline each offer." %}
+                    </div>
+                </div>
+                <div class="columb">
+                    <img src="{% static 'site/img/3.png' %}" alt="3" />
+                    <div class="title">
+                        {% trans "Receive Payment" %}
+                    </div>
+                    <div class="text">
+                        {% trans "Receive your payment on your Paypal Account." %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="faq">
+        <h1>{% trans "FAQ" %}</h1>
+        <div class="title">
+            {% trans "How much does it cost?" %}
+        </div>
+        <div class="text">
+            {% trans "It's free to join and advertise on Wanna Migrate.  Once you accept a service request, we deduct a 12% fee from the payment." %}
+        </div>
+        <div class="title">
+            {% trans "How much should I charge for my services?" %}
+        </div>
+        <div class="text">
+            {% trans "You are free to decide and setup your own prices. You can check it out your competitors to use as a base." %}
+        </div>
+        <div class="title">
+            {% trans "How and when will I receive the payments?" %}
+        </div>
+        <div class="text">
+            {% trans "On your Paypal our Payoneer Account.  The payment will be made 1 day after the service is completed. For long-term services, smaller amounts of payments will be made during the execution." %}
+        </div>
+        <div class="title">
+            {% trans "How do I get started?" %}
+        </div>
+        <div class="text">
+            <a href="{% url 'site:signup' 'service-provider' %}">{% trans "Sign up" %}</a>
+            {% blocktrans %}
+                and send a photo or scanned image of your identification document to <a href="mailto:documents@wannamigrate.com">documents@wannamigrate.com</a>
+            {% endblocktrans %}
+        </div>
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

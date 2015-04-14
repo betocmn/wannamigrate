@@ -18,6 +18,9 @@ from wannamigrate.points import views
 ##########################
 urlpatterns = patterns('',
 
+    # Dashboard
+    url( r'^$', views.dashboard, name = 'dashboard' ),
+
     # Edit User Data
     url( r'^edit_personal/$', views.edit_personal, name = 'edit_personal' ),
     url( r'^edit_language/$', views.edit_language, name = 'edit_language' ),

@@ -108,7 +108,8 @@ class Provider( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
     review_score = models.DecimalField( _( "discount" ), max_digits = 5, decimal_places = 2, default = 0 )
-    regulator = models.ForeignKey( 'Regulator', verbose_name = _( 'regulator' ) )
+    provider_status = models.ForeignKey( 'ProviderStatus', verbose_name = _( 'status' ) )
+    regulator = models.ForeignKey( 'Regulator', verbose_name = _( 'regulator' ), blank = True, null = True  )
     display_name = models.CharField( _( "professional display name" ), max_length = 80 )
     headline = models.CharField( _( "headline" ), max_length = 150 )
     description = models.TextField( _( "description" ) )
@@ -157,6 +158,7 @@ class Provider( BaseModel ):
             )
         ).filter(
             countries = country_id,
+            provider_status_id = 2
         ).only(
             'id', 'display_name', 'user', 'headline', 'review_score'
         ).order_by(
@@ -181,6 +183,7 @@ class Provider( BaseModel ):
                 'user', 'user__userpersonal', 'user__userstats'
             ).filter(
                 user_id = user_id,
+                provider_status_id = 2
             ).only(
                 'id', 'display_name', 'user', 'headline', 'review_score', 'user__userstats__total_reviews', 'user__userstats__total_questions',
                 'user__userstats__total_answers', 'user__userstats__total_contracts'
@@ -189,6 +192,20 @@ class Provider( BaseModel ):
             return False
 
         return provider
+
+
+
+class ProviderStatus( BaseModel ):
+    """
+    Provider Status - 'pending approval', 'active', 'suspended', etc..
+    """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 45 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
 
 
 

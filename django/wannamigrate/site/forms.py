@@ -246,6 +246,14 @@ class ContactForm( BaseForm ):
         email    EmailField that grabs the e-mail of the user.
         message  CharField that grabs the message of the user.
     """
+    SUBJECTS = (
+        ( '', _( 'Select Subject' ) ),
+        ( '', _( 'General Questions' ) ),
+        ( '', _( 'Become a Service Provider' ) ),
+        ( '', _( 'Errors & Bugs' ) ),
+        ( '', _( 'Payment Problems' ) )
+    )
+    subject = forms.ChoiceField( required = True, label = _( "Subject" ), choices = SUBJECTS, widget = forms.Select( attrs = { 'class' : '' } )  )
     name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
     email = forms.EmailField( required = True, label = _( "E-mail" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
     message = forms.CharField( required = True, label = _( "Message" ), widget = forms.Textarea( attrs = { 'class' : '' } ) )

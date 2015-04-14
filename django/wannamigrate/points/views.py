@@ -19,7 +19,8 @@ from django.conf import settings
 import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 from wannamigrate.core.util import (
-    get_internal_country_progress_css_class, get_internal_section_progress_css_class
+    get_internal_country_progress_css_class, get_internal_section_progress_css_class,
+    get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
 )
 from wannamigrate.points.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
@@ -36,6 +37,94 @@ from wannamigrate.points.models import (
     UserResult, Occupation, UserResultStatus, CountryConfig
 )
 from wannamigrate.core.mailer import Mailer
+
+
+
+
+
+#######################
+# DASHBOARD VIEWS
+#######################
+@login_required
+def dashboard( request ):
+    """
+    Process the dashboard page.
+
+    The dashboard is the main screen of the system,
+    where the users can view its informations, progress, etc.
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # If User edited data, but did not calculate points by clicking in save and exit
+    try:
+        user_stats = UserStats.objects.get( user = request.user )
+    except UserStats.DoesNotExist:
+        user_stats = False
+    if user_stats and user_stats.updating_now:
+        return HttpResponseRedirect( reverse( "points:calculate_points" ) )
+
+    # Instantiate all country_config
+    country_config = CountryConfig.objects.all()
+    country_config_data = {}
+    for item in country_config:
+        if item.country_id not in country_config_data:
+            country_config_data[item.country_id] = {}
+        country_config_data[item.country_id] = item
+
+    # Initial settings
+    template_data = {}
+    template_data['au_min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
+    template_data['ca_min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
+    template_data['nz_min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
+    template_data['au_points'] = 0
+    template_data['ca_points'] = 0
+    template_data['nz_points'] = 0
+    template_data['personal_percentage'] = 0
+    template_data['language_percentage'] = 0
+    template_data['education_percentage'] = 0
+    template_data['work_percentage'] = 0
+
+    # Get User Results per country
+    try:
+        user_result = UserResult.objects.filter( user = request.user )
+    except UserResult.DoesNotExist:
+        user_result = False
+
+    # Pass total points per country to template
+    if user_result:
+        for item in user_result:
+            if item.country.id == settings.ID_COUNTRY_AUSTRALIA:
+                template_data['au_points'] = item.score_total
+            elif item.country.id == settings.ID_COUNTRY_CANADA:
+                template_data['ca_points'] = item.score_total
+            elif item.country.id == settings.ID_COUNTRY_NEW_ZEALAND:
+                template_data['nz_points'] = item.score_total
+
+    # Define the percentage CSS class to use around country flags for progress bar
+    au_percentage = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
+    ca_percentage = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
+    nz_percentage = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
+    template_data['au_percentage_css_class'] = get_dashboard_country_progress_css_class( au_percentage )
+    template_data['ca_percentage_css_class'] = get_dashboard_country_progress_css_class( ca_percentage )
+    template_data['nz_percentage_css_class'] = get_dashboard_country_progress_css_class( nz_percentage )
+
+    # pass user registration percentages to template
+    if user_stats:
+        template_data['personal_percentage'] = user_stats.percentage_personal
+        template_data['language_percentage'] = user_stats.percentage_language
+        template_data['education_percentage'] = user_stats.percentage_education
+        template_data['work_percentage'] = user_stats.percentage_work
+
+    # Define the percentage css class for progress bar on forms (personal, language, education and work)
+    template_data['personal_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['personal_percentage'] )
+    template_data['language_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['language_percentage'] )
+    template_data['education_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['education_percentage'] )
+    template_data['work_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['work_percentage'] )
+
+    # Print Template
+    return render( request, 'points/dashboard/dashboard.html', template_data )
 
 
 

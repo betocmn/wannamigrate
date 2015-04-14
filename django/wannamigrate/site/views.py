@@ -26,7 +26,7 @@ from django.conf import settings
 from django.forms.models import inlineformset_factory
 import math
 from wannamigrate.core.util import (
-    get_object_or_false, get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
+    get_object_or_false
 )
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm,   PasswordResetForm,
@@ -239,7 +239,7 @@ def logout( request ):
     return HttpResponseRedirect( reverse( "site:home" ) )
 
 
-def signup( request ):
+def signup( request, type = 'user' ):
     """
     Signup action. It creates a new user on the platform
 
@@ -253,6 +253,9 @@ def signup( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # If it's a service provider, register in session for further registration
+    template_data['type'] = type
 
     # Instantiates the form
     form = SignupForm( request.POST or None )
@@ -276,6 +279,17 @@ def signup( request ):
             # Sends Welcome Email to User
             # TODO Change this to a celery/signal background task
             Mailer.send_welcome_email( user )
+
+            # If it's a service provider, saves extra info and redirect to further edition
+            if 'type' in request.POST and request.POST['type'] == 'service-provider':
+                provider = Provider()
+                provider.user_id = user.id
+                provider.display_name = user.name if user.name else user.email
+                provider.headline = '--'
+                provider.description = '--'
+                provider.provider_status_id = 1
+                provider.save()
+                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
 
             # Redirect to dashboard
             return HttpResponseRedirect( reverse( 'site:dashboard' ) )
@@ -385,10 +399,10 @@ def contact( request ):
     :return: String - The html page rendered
     """
 
-    # Initialize template data dictionary
-    template_data = { 'finished': False }
+    # Initializes template data dictionary
+    template_data = {}
 
-    # Create form
+    # Creates form
     form = ContactForm( request.POST or None )
 
     # If the form has been submitted...
@@ -396,12 +410,13 @@ def contact( request ):
 
         email = form.cleaned_data[ 'email' ]
         name = form.cleaned_data[ 'name' ]
+        subject = form.cleaned_data[ 'subject' ]
         message = form.cleaned_data[ 'message' ]
 
         # Send Email with message
         # TODO: Change this to a celery background event and use a try/exception block
-        send_result = Mailer.send_contact_email( email, name, message )
-        template_data['finished'] = True
+        send_result = Mailer.send_contact_email( email, name, message, subject )
+        messages.success( request, _( 'Your message was successfully sent.' ) )
 
     # pass form to template
     template_data['form'] = form
@@ -425,8 +440,7 @@ def how_it_works( request ):
     """
 
     # Print Template
-    return HttpResponse( "How It Works" )
-    return render( request, 'site/about/tour.html')
+    return render( request, 'site/about/how_it_works.html' )
 
 
 
@@ -444,8 +458,7 @@ def service_providers( request ):
     """
 
     # Print Template
-    return HttpResponse( "Service Providers" )
-    return render( request, 'site/about/tour.html')
+    return render( request, 'site/about/service_providers.html' )
 
 
 
@@ -527,8 +540,10 @@ def account( request ):
     template_data['user'] = request.user
 
     # if it's a service provider, passes it to template
-    template_data['provider'] = Provider.objects.get( user_id = request.user.id )
-    template_data['provider_service_types'] = ProviderServiceType.get_listing( template_data['provider'].id )
+    provider = get_object_or_false( Provider, user = request.user )
+    if provider:
+        template_data['provider'] = provider
+        template_data['provider_service_types'] = ProviderServiceType.get_listing( provider.id )
 
     # Renders the page
     return render( request, 'site/account/view.html', template_data )
@@ -658,9 +673,10 @@ def edit_account( request ):
 
     # passes forms to template
     template_data['user_form'] = user_form
-    template_data['provider_form'] = provider_form
-    template_data['provider_country_formset'] = provider_country_formset
-    template_data['provider_service_type_formset'] = provider_service_type_formset
+    if provider:
+        template_data['provider_form'] = provider_form
+        template_data['provider_country_formset'] = provider_country_formset
+        template_data['provider_service_type_formset'] = provider_service_type_formset
 
     # Prints Template
     return render( request, 'site/account/edit.html', template_data )

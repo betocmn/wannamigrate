@@ -1,0 +1,406 @@
+.choose
+    header
+        background-color #000 !important
+
+.content
+    &.choose-destiny
+        width 100%
+        margin 0 auto
+        padding 0 0 0 0
+        overflow hidden
+
+        .title
+            display none
+
+        .steps
+            width 100%
+
+            .step
+                float left
+                width 33.33%
+
+                .top
+                    position relative
+                    size 100% 130px
+                    text-align center
+                    fontbd()
+                    font-weight normal
+                    font-size 20px
+                    color #fff
+
+                    &:before
+                        content ''
+                        position absolute
+                        right 0
+                        top 35px
+                        square 54px
+                        line-height 54px
+                        text-align center
+                        border 2px solid #fff
+                        border-radius(50%)
+
+                    &:after
+                        content ''
+                        position absolute
+                        bottom -10px
+                        left 50%
+                        margin-left -10px
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+
+                    .subtitle
+                        position relative
+
+                .item
+                    size 100% 220px
+
+                    &:hover
+                        background-color #fff
+
+                    .progress
+                        float left
+                        width 250px
+                        margin 75px 25% 0
+
+                        .type
+                            fontsb()
+                            font-size 1.6em
+                            font-weight normal
+                            color #555
+
+                        .progress-track
+                            float left
+                            size 140px 16px
+                            border-bottom 2px solid #e1e1e1
+                            margin 15px 0 6px
+
+                            .progress-fill
+                                height 16px
+                                bg('progress-bar-pattern.png')
+
+                                &.progress-fill-green
+                                    background-color #2fc81f
+
+                                &.progress-fill-yellow
+                                    background-color #e4ff00
+
+                                &.progress-fill-orange
+                                    background-color #ffc000
+
+                                &.progress-fill-red
+                                    background-color #ff7200
+
+                                &.progress-fill-size-100
+                                    width 100%
+
+                                &.progress-fill-size-75
+                                    width 75%
+
+                                &.progress-fill-size-50
+                                    width 50%
+
+                                &.progress-fill-size-25
+                                    width 25%
+
+                        p
+                            clear left
+                            display block
+                            font-size 12px
+                            text-transform uppercase
+                            color #777
+
+                    .information-field
+                        position relative
+                        display block
+                        size 400px 220px
+                        margin 0 auto
+
+                        .porcentage
+                            float right
+                            display block
+                            width 80px
+                            padding 7px 0 0
+                            font-weight normal
+                            font-size 27px
+                            fontbd()
+                            color #845996
+
+                        .bt-edit
+                            position absolute
+                            right 0
+                            top 100px
+                            square 32px
+                            replace('icon-edit.png')
+                            border 1px solid #959595
+                            border-radius(2px)
+
+                            &:hover
+                                border-color #845996
+
+                        &.personal
+
+                            &:before
+                                content ''
+                                position absolute
+                                left 0
+                                top 75px
+                                size 82px 80px
+                                replace('icons-choose-destiny.png')
+
+                        &.language
+
+                            &:before
+                                content ''
+                                position absolute
+                                left 0
+                                top 75px
+                                size 72px 73px
+                                replace('icons-choose-destiny.png')
+                                background-position -90px 0
+
+                        &.education
+
+                            &:before
+                                content ''
+                                position absolute
+                                left -15px
+                                top 75px
+                                size 95px 70px
+                                replace('icons-choose-destiny.png')
+                                background-position -178px 0
+
+                        &.work
+
+                            &:before
+                                content ''
+                                position absolute
+                                left 0
+                                top 75px
+                                square 78px
+                                replace('icons-choose-destiny.png')
+                                background-position -294px 0
+
+                &.step-one
+                    height 100%
+                    background-color #f4f4f4
+
+                    .top
+                        line-height 120px
+                        background-color #845996
+
+                        &:before
+                            content '1'
+                            right 73%
+
+                        &:after
+                            border-top: 10px solid #845996;
+
+                &.step-two
+                    min-height 1010px
+                    background-color #f8f8f8
+
+                    .top
+                        padding 38px 0 0 0
+                        box()
+                        line-height 25px
+                        background-color #7a4690
+
+                        &:before
+                            content '2'
+                            right 75%
+
+                        &:after
+                            border-top: 10px solid #7a4690;
+
+                    .countries-list
+
+                        .country-item
+                            display block
+                            size 100% 275px
+                            cursor pointer
+                            overflow hidden
+
+                            &:hover
+                                background-color #fff
+
+                            .country
+                                display block
+                                size 300px 108px
+                                margin 90px auto 0
+
+                                .circle-progress-bar
+                                    float left
+                                    square 108px
+
+                                    &.australia
+                                        bg('australia-circle-flag.png')
+                                        background-position center center
+
+                                    &.canada
+                                        bg('canada-circle-flag.png')
+                                        background-position center center
+
+                                    &.japan
+                                        bg('japan-circle-flag.png')
+                                        background-position center center
+
+                                .score
+                                    display block
+                                    padding 15px 0 0 15px
+                                    overflow hidden
+
+                                    .name
+                                        display block
+                                        padding 0 0 5px
+                                        font-size 22px
+                                        fontsb()
+                                        font-weight normal
+                                        color #555
+
+                                    p
+                                        display block
+                                        text-transform uppercase
+
+                                        .points
+                                            float left
+                                            display block
+                                            padding 0 10px 0 0
+                                            font-size 40px
+                                            fontbd()
+                                            font-weight normal
+                                            color #845996
+
+                                        span
+                                            display block
+                                            padding 0 0 5px
+                                            font-size 18px
+                                            color #845996
+                                            overflow hidden
+
+                                        em
+                                            display block
+                                            font-style normal
+                                            fontlt()
+                                            font-size 14px
+
+                                            i
+                                                fontsb()
+                                                font-style normal
+                                                color #845996
+
+                &.step-three
+                    position relative
+                    min-height 1010px
+                    height 100%
+                    background-color #f4f4f4
+
+                    .top
+                        line-height 120px
+                        background-color #68347e
+
+                        &:before
+                            content '3'
+                            right 73%
+
+                        &:after
+                            border-top: 10px solid #68347e;
+
+                    .choose-country
+                        position absolute
+                        left 50%
+                        top 50%
+                        margin-left -120px
+                        margin-top -41px
+                        size 240px 82px
+                        border 1px solid #e1e1e1
+                        border-radius(3px)
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 35px
+                            top 30px
+                            display block
+                            square 20px
+                            transform rotate(-45deg)
+                            border-left 2px solid #e1e1e1
+                            border-top 2px solid #e1e1e1
+
+                        p
+                            display block
+                            padding 20px 0 0 60px
+                            fontlt()
+                            font-size 22px
+                            color #888
+
+                            strong
+                                display block
+                                fontsb()
+                                font-weight normal
+
+                    .step-by-step
+                        display none
+                        padding 95px 0 0
+
+                        .locked
+                            position relative
+                            display block
+                            size 300px 95px
+                            padding 40px 0 0
+                            margin 0 auto
+                            line-height 25px
+                            box()
+                            font-size 18px
+                            text-align center
+                            color #c60a20
+
+                            &:before
+                                content ''
+                                position absolute
+                                left 50%
+                                top 0
+                                size 20px 29px
+                                margin-left -10px
+                                replace('icon-lock.png')
+
+                        .step-by
+                            display block
+                            width 400px
+                            margin 90px auto 0
+
+                            .item
+                                display block
+                                size 400px 80px
+                                margin 0 0 40px
+                                background-color #7ca745
+                                background-repeat no-repeat
+                                transition .3s ease
+
+                                &:hover
+                                    background-color #9c46b3
+
+                                &.check
+                                    bgi('illustration-steps.png')
+
+                                &.visa
+                                    bgi('illustration-steps.png')
+                                    background-position 0 -81px
+
+                                &.moving-to
+                                    bgi('illustration-steps.png')
+                                    background-position 0 bottom
+
+                                a
+                                    display block
+                                    size 400px 80px
+                                    padding 0 0 0 155px
+                                    box()
+                                    line-height 80px
+                                    fontsb()
+                                    font-weight normal
+                                    font-size 18px
+                                    text-decoration none
+                                    color #fff
+                                    overflow hidden
