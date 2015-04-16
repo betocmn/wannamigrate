@@ -1,0 +1,414 @@
+.about
+    header
+        position fixed
+        z-index 6
+
+.content
+    &.results
+        width 100%
+        margin 0 auto 0
+        padding 80px 0 0 0
+        overflow hidden
+
+        .country-result
+            position fixed
+            float left
+            size 25% 1000px
+
+            &.japan
+                bg('ilustration-japan.jpg')
+
+            .country
+                display block
+                size 100% 100px
+                line-height 100px
+                text-align center
+                font-size 2.5em
+                fontbd()
+                font-weight normal
+                background-color #4c396c
+                color #fff
+
+
+        .main
+            float right
+            size 75% 100%
+
+            .options
+                size 100% 100px
+
+                .option
+                    position relative
+                    float left
+                    size 33.3% 100px
+                    line-height 100px
+                    text-align center
+                    fontbd()
+                    font-size 20px
+                    font-weight normal
+                    cursor pointer
+                    color #888
+
+                    &:after
+                        content ''
+                        position absolute
+                        bottom -10px
+                        left 50%
+                        margin-left -10px
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+
+                    &.situation
+                        background-color #dfdfdf
+
+                        &:after
+                            border-top: 10px solid #dfdfdf;
+
+                    &.visa
+                        background-color #ebebeb
+
+                        &:after
+                            border-top: 10px solid #ebebeb;
+
+                    &.movingto
+                        background-color #dfdfdf
+
+                        &:after
+                            border-top: 10px solid #dfdfdf;
+
+
+
+
+                    &.active
+                        background-color #ffce00
+                        color #845996
+
+                        &:after
+                            border-top: 10px solid #ffce00;
+
+            .my-situation
+                size 100% 100%
+                padding 9% 0 0
+
+                .graph
+                    float left
+                    size 50% 100%
+                    overflow hidden
+
+                    .circle-progress-bar
+                        display block
+                        square 370px
+                        margin 0 auto
+
+                        &.canada
+                            bg('canada-circle-map.png')
+                            background-position center center
+
+                        &.japan
+                            bg('japan-circle-map.png')
+                            background-position center center
+
+                        &.australia
+                            bg('australia-circle-map.png')
+                            background-position center center
+
+                    .score
+                        display block
+                        width 240px
+                        padding 15px 0 0 15px
+                        margin 50px auto 0
+                        overflow hidden
+
+                        p
+                            display block
+                            text-transform uppercase
+
+                            .points
+                                float left
+                                display block
+                                padding 0 10px 0 0
+                                font-size 4em
+                                fontbd()
+                                font-weight normal
+                                color #845996
+
+                            span
+                                display block
+                                padding 7px 0 5px
+                                font-size 1.7em
+                                color #845996
+                                overflow hidden
+
+                            em
+                                display block
+                                font-style normal
+                                fontlt()
+                                font-size 1.2em
+
+                                i
+                                    fontsb()
+                                    font-style normal
+                                    color #845996
+
+                    .skills
+                        display block
+                        size 400px auto
+                        margin 50px auto 0
+
+                        .skills-list
+
+                            .skill
+                                display block
+                                size 415px 30px
+                                padding 0 0 10px
+
+                                .type
+                                    float left
+                                    display block
+                                    width 100px
+                                    padding 0 10px 0
+                                    text-align right
+                                    fontlt()
+                                    font-size 16px
+                                    color #555
+
+                                .progress-track
+                                    float left
+                                    size 140px 10px
+                                    border-bottom 1px solid #e1e1e1
+                                    margin 4px 10px 0
+
+                                    .progress-fill
+                                        height 10px
+                                        bg('progress-bar-pattern.png')
+
+                                        &.progress-fill-green
+                                            background-color #2fc81f
+
+                                        &.progress-fill-yellow
+                                            background-color #e4ff00
+
+                                        &.progress-fill-orange
+                                            background-color #ffc000
+
+                                        &.progress-fill-red
+                                            background-color #ff7200
+
+                                        &.progress-fill-size-100
+                                            width 100%
+
+                                        &.progress-fill-size-75
+                                            width 75%
+
+                                        &.progress-fill-size-50
+                                            width 50%
+
+                                        &.progress-fill-size-25
+                                            width 25%
+
+                                .points
+                                    display block
+                                    font-size 16px
+                                    font-weight normal
+                                    fontlt()
+                                    color #845996
+
+                                    span
+                                        fontbd()
+                                        font-weight normal
+                                        text-transform uppercase
+
+                                    em
+                                        font-style normal
+                                        color #888
+
+                .hints
+                    float right
+                    width 50%
+                    overflow hidden
+
+                    .locked
+                        position relative
+                        display block
+                        size 80% 75px
+                        padding 0 6% 0
+                        margin 0 auto
+                        line-height 75px
+                        border-radius(4px)
+                        box()
+                        fontbd()
+                        font-size 22px
+                        text-align right
+                        background-color #ebebeb
+                        color #c60a20
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 7%
+                            top 20px
+                            size 20px 29px
+                            replace('icon-lock.png')
+
+                    .subtitle
+                        position relative
+                        display block
+                        size 80% auto
+                        margin 70px 0 35px 65px
+                        text-transform uppercase
+                        fontbd()
+                        font-size 24px
+                        font-weight normal
+                        text-align center
+                        color #845996
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 0
+                            top 12px
+                            size 40% 1px
+                            background-color #ebebeb
+                            overflow hidden
+
+                        &:after
+                            content ''
+                            position absolute
+                            right 0
+                            top 12px
+                            size 40% 1px
+                            background-color #ebebeb
+                            overflow hidden
+
+
+                    ul
+                        display block
+                        width 80%
+
+                        .hint
+                            position relative
+                            display block
+                            size 100% 45px
+                            line-height 22px
+                            margin 0 0 35px 40px
+                            padding 0 0 0 15%
+                            box()
+                            font-size 16px
+                            color #555
+                            overflow hidden
+
+                            &:before
+                                content ''
+                                position absolute
+                                left 20px
+                                top 0
+                                square 35px
+                                replace('icon-exclamation-mark.png')
+
+            .visa-application
+                display none
+                size 100% 100%
+                padding 9% 0 0
+
+                .visa-topics
+                    width 60%
+                    margin 0 auto
+
+                    .visa-topic
+                        .title-topic
+                            display block
+                            size 100% 54px
+                            padding 0 0 0 24px
+                            box()
+                            line-height 54px
+                            font-size 20px
+                            fontbd()
+                            font-weight normal
+                            bg('visa-moving-topics-bg.png')
+                            color #845996
+
+                            span
+                                display inline-block
+                                square 35px
+                                line-height 35px
+                                text-align center
+                                border 2px solid #fff
+                                border-radius(50%)
+
+                        .subtitle
+                            display block
+                            padding 0 0 0 21%
+                            box()
+                            font-size 20px
+                            fontbd()
+                            font-weight normal
+                            color #845996
+
+                        .text
+                            display block
+                            width 90%
+                            padding 10px 0 20px 23%
+                            line-height 24px
+                            box()
+                            font-size 16px
+                            font-weight normal
+                            color #555
+
+                        img
+                            display block
+                            padding 0 0 20px 23%
+
+            .moving
+                display none
+                size 100% 100%
+                padding 9% 0 0
+
+                .moving-topics
+                    width 60%
+                    margin 0 auto
+
+                    .moving-topic
+                        .title-topic
+                            display block
+                            size 100% 54px
+                            padding 0 0 0 24px
+                            box()
+                            line-height 54px
+                            font-size 20px
+                            fontbd()
+                            font-weight normal
+                            bg('visa-moving-topics-bg.png')
+                            color #845996
+
+                            span
+                                display inline-block
+                                square 35px
+                                line-height 35px
+                                text-align center
+                                border 2px solid #fff
+                                border-radius(50%)
+
+                        .subtitle
+                            display block
+                            padding 0 0 0 21%
+                            box()
+                            font-size 20px
+                            fontbd()
+                            font-weight normal
+                            color #845996
+
+                        .text
+                            display block
+                            width 90%
+                            padding 10px 0 20px 23%
+                            line-height 24px
+                            box()
+                            font-size 16px
+                            font-weight normal
+                            color #555
+
+                        img
+                            display block
+                            padding 0 0 20px 23%

@@ -93,6 +93,7 @@ MEDIA_ROOT = os.path.join( BASE_DIR, '..', 'upload' )
 MEDIA_URL = '/upload/'
 
 # User Profile Pictures
+UPLOAD_USER_PICTURE_ROOT = os.path.join( BASE_DIR, '..', 'upload', 'user_pictures' )
 UPLOAD_USER_PICTURE_FOLDER = 'user_pictures'
 
 # Statis Files paths

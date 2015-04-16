@@ -1,0 +1,243 @@
+{% extends "site/layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- JQuery Diagram -->
+    <script type="text/javascript" src="{% static "site/js/jquery.diagram.js" %}"></script>
+
+    <!-- Dashboard Custom JS -->
+    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+        /**
+        $(document).ready(function(){
+            // Browser support check.
+            if( isMobile() )
+                window.location = "{% url 'site:not_supported' %}";
+        });
+        */
+
+    </script>
+
+    <!-- INLINE CSS -->
+    <style type="text/css">
+        body,html{
+            overflow-y: hidden;
+        }
+    </style>
+
+{% endblock head %}
+
+
+{% block content %}
+
+	<div class="column column1" style="background:#f4f4f4;">
+
+		<div id="title1">
+			<div>
+			<div class="titleNumber">1</div>
+			<div class="titleText" style="margin-top:5px;">{% trans "Edit your information" %}:</div>
+			</div>
+		</div>
+
+		<div class="formBtn">
+			<div class="formType formPersonal"></div>
+			<div class="formProgressOut">
+				<h3>{% trans "Personal" %}</h3>
+				<div class="progressTrack">
+					<div class="progressFill {{ personal_percentage_css_class }}">
+
+					</div>
+				</div>
+				<p>{% trans "COMPLETED" %}</p>
+			</div>
+			<div class="formPercentage">{{ personal_percentage }}<span>%</span></div>
+			<a href="{% url 'points:edit_personal' %}" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formLanguage"></div>
+			<div class="formProgressOut">
+				<h3>{% trans "Language" %}</h3>
+				<div class="progressTrack">
+					<div class="progressFill {{ language_percentage_css_class }}">
+
+					</div>
+				</div>
+				<p>{% trans "COMPLETED" %}</p>
+			</div>
+			<div class="formPercentage">{{ language_percentage }}<span>%</span></div>
+			<a href="{% url 'points:edit_language' %}" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formEducation"></div>
+			<div class="formProgressOut">
+				<h3>{% trans "Education" %}</h3>
+				<div class="progressTrack">
+					<div class="progressFill {{ education_percentage_css_class }}">
+
+					</div>
+				</div>
+				<p>{% trans "COMPLETED" %}</p>
+			</div>
+			<div class="formPercentage">{{ education_percentage }}<span>%</span></div>
+			<a href="{% url 'points:edit_education' %}" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+
+		<div class="splitBtn"></div>
+
+		<div class="formBtn">
+			<div class="formType formWork"></div>
+			<div class="formProgressOut">
+				<h3>{% trans "Work" %}</h3>
+				<div class="progressTrack">
+					<div class="progressFill {{ work_percentage_css_class }}">
+
+					</div>
+				</div>
+				<p>{% trans "COMPLETED" %}</p>
+			</div>
+			<div class="formPercentage">{{ work_percentage }}<span>%</span></div>
+			<a href="{% url 'points:edit_work' %}" class="formEdit"></a>
+			<div class="clear"> </div>
+		</div>
+	</div>
+	<div class="column column2" style="background:#f8f8f8;">
+		<div id="title2">
+			<div>
+			<div class="titleNumber">2</div>
+			<div class="titleText" style="margin-top: 5px;">{% trans "Check your points per country" %}:</div>
+			</div>
+		</div>
+
+		<div class="countriesOuter selectAustralia">
+            <div class="countries">
+            <div class="circleProgressBar {{ au_percentage_css_class }}">
+                <div class="australiaProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "Australia" %}</p>
+                <div class="textUnderLeft">{{ au_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "POINTS" %}</p>
+                    <p>{% trans "OF" %} <span>{{ au_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
+		</div>
+
+
+
+		<div class="countriesOuter selectCanada">
+            <div class="countries">
+            <div class="circleProgressBar {{ ca_percentage_css_class }}">
+                <div class="canadaProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "Canada" %}</p>
+                <div class="textUnderLeft">{{ ca_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "POINTS" %}</p>
+                    <p>{% trans "OF" %} <span>{{ ca_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
+		</div>
+
+
+
+		<div class="countriesOuter selectNewZealand">
+            <div class="countries">
+            <div class="circleProgressBar {{ nz_percentage_css_class }}">
+                <div class="newzealandProgressBar"></div>
+            </div>
+            <div class="countriesProgress">
+                <p>{% trans "New Zealand" %}</p>
+                <div class="textUnderLeft">{{ nz_points }}</div>
+                <div class="textUnderRight">
+                    <p>{% trans "POINTS" %}</p>
+                    <p>{% trans "OF" %} <span>{{ nz_min_points }}</span> {% trans "REQUIRED" %}</p>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="clear"> </div>
+            </div>
+		</div>
+
+
+	</div>
+	<div class="column column3" style="background:#f4f4f4;">
+		<div id="title3">
+			<div>
+			<div class="titleNumber">3</div>
+			<div class="titleText" style="margin-top:5px;">{% trans "Get help to migrate" %}:</div>
+			</div>
+		</div>
+
+		<div id="selectCountry">
+			<p>{% trans "Select Country" %}</p>
+			<!-- <p>aside</p> -->
+		</div>
+
+		<div class="australiaSelect">
+            <p class="lowPoints">
+                {% if au_points < au_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
+            </p>
+            <a href="{% url 'points:situation' 'australia' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'australia' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'australia' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+		</div>
+
+		<div class="canadaSelect">
+            <p class="lowPoints">
+                {% if ca_points < ca_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
+            </p>
+            <a href="{% url 'points:situation' 'canada' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'canada' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'canada' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+		</div>
+
+		<div class="newzealandSelect">
+            <p class="lowPoints">
+                {% if nz_points < nz_min_points %}
+                    <img src="{% static "site/img/red-lock.png" %}" />
+                    <br />
+                    {% trans "You still don’t have enough points<br />to migrate to this country" %}
+                {% endif %}
+            </p>
+            <a href="{% url 'points:situation' 'new-zealand' %}" class="stepGuideBtn checkBtn"><span>{% trans "Check my results" %}</span></a>
+            <a href="{% url 'points:visa_application' 'new-zealand' %}" class="stepGuideBtn applyBtn"><span>{% trans "Steps fo visa application" %}</span></a>
+            <a href="{% url 'points:professional_help' 'new-zealand' %}" class="stepGuideBtn movingBtn"><span>{% trans "Get professional help" %}</span></a>
+		</div>
+
+
+
+
+	</div>
+
+{% endblock content %}

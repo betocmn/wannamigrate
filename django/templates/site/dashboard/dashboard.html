@@ -28,6 +28,7 @@
                             </div>
                             <div class="data-question">
                                 <a href="{% url "qa:view_post" post.id %}">
+
                                     <h3 class="title-question">{{ post.title }}</h3>
                                     {% with post.answers.all|first as first_answer %}
                                         {% if first_answer.body %}

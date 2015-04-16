@@ -18,7 +18,7 @@ from django.utils import translation
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.marketplace.forms import PaymentForm
 from wannamigrate.marketplace.models import (
-    Provider, Review, ServiceType, Provider_ServiceTypes, Order
+    Provider, Review, ServiceType, ProviderServiceType, Order
 )
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
@@ -30,7 +30,6 @@ from wannamigrate.site.views import get_situation_form
 #######################
 # LISTS SERVICE PROVIDERS
 #######################
-@login_required
 def professionals( request ):
     """
     Listing of professionals
@@ -87,7 +86,7 @@ def profile( request, user_id, name ):
 
     # passes service provider to template
     template_data['provider'] = provider
-    template_data['provider_service_types'] = Provider_ServiceTypes.get_listing( provider.id )
+    template_data['provider_service_types'] = ProviderServiceType.get_listing( provider.id )
     template_data['reviews'] = Review.get_listing( provider.user_id )
 
     # Prints Template
@@ -112,7 +111,7 @@ def payment( request, user_id, service_type_id ):
     # Identify database records
     provider = Provider.get_profile( user_id )
     service_type = get_object_or_false( ServiceType, pk = service_type_id )
-    provider_service_type = get_object_or_false( Provider_ServiceTypes, provider_id = provider.id, service_type_id = service_type.id )
+    provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
     if not provider or not service_type or not provider_service_type:
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
@@ -140,8 +139,8 @@ def payment( request, user_id, service_type_id ):
             # saves order information
             order_info = {
                 'payment_api_result': payment_api_result,
-                'from_user': request.user,
-                'to_user': provider.user,
+                'user': request.user,
+                'provider': provider,
                 'service_type': service_type,
                 'provider_service_type': provider_service_type
             }

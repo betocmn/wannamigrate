@@ -9,6 +9,8 @@ the templates on site app
 # Imports
 ##########################
 from django.contrib import messages
+from django.db import transaction
+from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.core.urlresolvers import reverse
@@ -21,19 +23,22 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.forms.models import inlineformset_factory
 import math
 from wannamigrate.core.util import (
-    get_object_or_false, get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
+    get_object_or_false
 )
 from wannamigrate.site.forms import (
-    ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
-    EditAccountInfoForm, EditAccountPasswordForm, SituationForm
+    ContactForm, LoginForm, SignupForm, PasswordRecoveryForm,   PasswordResetForm,
+    EditAccountForm, EditPasswordForm, SituationForm, EditProviderForm, ProviderCountryForm,
+    BaseProviderCountryFormSet, ProviderServiceTypeForm, BaseProviderServiceTypeFormSet,
+    UploadAvatarForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation
+    Country, UserSituation, Goal, Situation, UserPersonal
 )
 from wannamigrate.marketplace.models import (
-    Provider
+    Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
 )
 from wannamigrate.qa.models import(
     Post, Topic
@@ -41,6 +46,10 @@ from wannamigrate.qa.models import(
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
 from django.core import serializers
+import time
+from PIL import Image
+from django.core.files.base import ContentFile
+
 
 
 
@@ -230,7 +239,7 @@ def logout( request ):
     return HttpResponseRedirect( reverse( "site:home" ) )
 
 
-def signup( request ):
+def signup( request, type = 'user' ):
     """
     Signup action. It creates a new user on the platform
 
@@ -244,6 +253,9 @@ def signup( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # If it's a service provider, register in session for further registration
+    template_data['type'] = type
 
     # Instantiates the form
     form = SignupForm( request.POST or None )
@@ -267,6 +279,17 @@ def signup( request ):
             # Sends Welcome Email to User
             # TODO Change this to a celery/signal background task
             Mailer.send_welcome_email( user )
+
+            # If it's a service provider, saves extra info and redirect to further edition
+            if 'type' in request.POST and request.POST['type'] == 'service-provider':
+                provider = Provider()
+                provider.user_id = user.id
+                provider.display_name = user.name if user.name else user.email
+                provider.headline = '--'
+                provider.description = '--'
+                provider.provider_status_id = 1
+                provider.save()
+                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
 
             # Redirect to dashboard
             return HttpResponseRedirect( reverse( 'site:dashboard' ) )
@@ -376,10 +399,10 @@ def contact( request ):
     :return: String - The html page rendered
     """
 
-    # Initialize template data dictionary
-    template_data = { 'finished': False }
+    # Initializes template data dictionary
+    template_data = {}
 
-    # Create form
+    # Creates form
     form = ContactForm( request.POST or None )
 
     # If the form has been submitted...
@@ -387,12 +410,13 @@ def contact( request ):
 
         email = form.cleaned_data[ 'email' ]
         name = form.cleaned_data[ 'name' ]
+        subject = form.cleaned_data[ 'subject' ]
         message = form.cleaned_data[ 'message' ]
 
         # Send Email with message
         # TODO: Change this to a celery background event and use a try/exception block
-        send_result = Mailer.send_contact_email( email, name, message )
-        template_data['finished'] = True
+        send_result = Mailer.send_contact_email( email, name, message, subject )
+        messages.success( request, _( 'Your message was successfully sent.' ) )
 
     # pass form to template
     template_data['form'] = form
@@ -416,8 +440,7 @@ def how_it_works( request ):
     """
 
     # Print Template
-    return HttpResponse( "How It Works" )
-    return render( request, 'site/about/tour.html')
+    return render( request, 'site/about/how_it_works.html' )
 
 
 
@@ -435,8 +458,7 @@ def service_providers( request ):
     """
 
     # Print Template
-    return HttpResponse( "Service Providers" )
-    return render( request, 'site/about/tour.html')
+    return render( request, 'site/about/service_providers.html' )
 
 
 
@@ -500,23 +522,65 @@ def privacy( request ):
 # MY ACCOUNT VIEWS
 #######################
 @login_required
-def view_account( request ):
+def account( request ):
     """
     Displays "My Account" page with user's info.
 
     :param: request
     :return String - HTML from my account page.
     """
-    
-    # Gets the user object.
-    user = request.user
+
+    # Initial template
+    template_data = {}
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
+    # Passes user to template
+    template_data['user'] = request.user
+
+    # if it's a service provider, passes it to template
+    provider = get_object_or_false( Provider, user = request.user )
+    if provider:
+        template_data['provider'] = provider
+        template_data['provider_service_types'] = ProviderServiceType.get_listing( provider.id )
 
     # Renders the page
-    return render( request, 'site/myaccount/view.html', { 'user': user } )
+    return render( request, 'site/account/view.html', template_data )
 
 
 @login_required
-def edit_account_info( request ):
+def contracts( request ):
+    """
+    Displays "My contracts" page with list of hired services
+
+    :param: request
+    :return String - HTML from my account page.
+    """
+
+    # Initial template
+    template_data = {}
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
+    # Passes services to template
+    template_data['user_services'] = Service.get_listing( request.user.id, False )
+    template_data['provider_services'] = Service.get_listing( request.user.id, True )
+
+    # Renders the page
+    return render( request, 'site/account/contracts.html', template_data )
+
+    # Print SQL Queries
+    from django.db import connection
+    queries_text = ''
+    for query in connection.queries:
+        queries_text += '<br /><br /><br />' + str( query['sql'] )
+    return HttpResponse( queries_text )
+
+
+@login_required
+def edit_account( request ):
     """
     Edit "My Account" page.
 
@@ -524,40 +588,124 @@ def edit_account_info( request ):
     :return String - HTML from Edit My Account page.
     """
 
-    # Form submitted via POST
-    if request.method == 'POST':
+     # Initial template
+    template_data = {}
 
-        user = request.POST.copy()
-        user['email'] = request.user.email
-        
-        form = EditAccountInfoForm( user, instance = request.user )
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
 
-        # Is valid? Save..
-        if form.is_valid():
-            # Save
-            user = form.save()
-            
-            # Changes the active language
-            translation.activate( user.preferred_language )
-            request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+    # Passes user and provider to template
+    template_data['user'] = request.user
 
-            messages.success( request, _('Data successfully updated.') )
-            return HttpResponseRedirect( reverse( 'site:view_account' ) )
-        # Form errors.
-        else:
-            return render( request, 'site/myaccount/edit_info.html', { 'form' : form } )
+    # Instantiates the User Form
+    user_form = EditAccountForm( request.POST or None, instance = request.user )
 
-    # GET or any other method. Reads the user's info from session
-    # and render the edit page.
-    else:
-        user = request.user
-        form = EditAccountInfoForm( instance = user )
-        return render( request, 'site/myaccount/edit_info.html', { 'form' : form } )
+    # Check if the Provider exists
+    provider = get_object_or_false( Provider, user = request.user )
+    template_data['provider'] = provider
+    if provider:
+
+        # instantiates provider FORM
+        provider_form = EditProviderForm( request.POST or None, instance = provider )
+
+        # Instantiates Countries Formset
+        try:
+            count = provider.countries.count()
+            if count > 0:
+                extra = 0
+            else:
+                extra = 1
+        except ProviderCountry.DoesNotExist:
+            extra = 1
+        ProviderCountryInlineFormset = inlineformset_factory( Provider, ProviderCountry, form = ProviderCountryForm, formset = BaseProviderCountryFormSet, extra = extra, can_delete = True )
+        provider_country_formset = ProviderCountryInlineFormset( request.POST or None, instance = provider )
+
+        # Instantiates Services Formset
+        try:
+            count = provider.service_types.count()
+            if count > 0:
+                extra = 0
+            else:
+                extra = 1
+        except ProviderServiceType.DoesNotExist:
+            extra = 1
+        ProviderServiceTypeInlineFormset = inlineformset_factory( Provider, ProviderServiceType, form = ProviderServiceTypeForm, formset = BaseProviderServiceTypeFormSet, extra = extra, can_delete = True )
+        provider_service_type_formset = ProviderServiceTypeInlineFormset( request.POST or None, instance = provider )
+
+    # if form was submitted and is valid
+    success = True
+    if user_form.is_valid() and ( ( provider and provider_form.is_valid() ) or not provider ):
+
+        # Start a DB Transaction, so if there are any errors in answers/points, question is not saved
+        with transaction.atomic():
+
+            # Update user's information
+            user = user_form.save()
+
+            # if it's a provider
+            if provider:
+
+                # Update provider's info
+                provider = provider_form.save()
+
+                # Update countries supported
+                if provider_country_formset.is_valid():
+                    instances = provider_country_formset.save()
+                else:
+                    transaction.set_rollback( True )
+                    success = False
+
+                # Update services supported
+                if provider_service_type_formset.is_valid():
+                    instances = provider_service_type_formset.save()
+                else:
+                    transaction.set_rollback( True )
+                    success = False
+
+            if success:
+                # Changes the active language
+                translation.activate( user.preferred_language )
+                request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+
+                # Redirect to view page with success message
+                messages.success( request, _( 'Data successfully updated.' ) )
+                return HttpResponseRedirect( reverse( 'site:account' ) )
+
+    # passes forms to template
+    template_data['user_form'] = user_form
+    if provider:
+        template_data['provider_form'] = provider_form
+        template_data['provider_country_formset'] = provider_country_formset
+        template_data['provider_service_type_formset'] = provider_service_type_formset
+
+    # Prints Template
+    return render( request, 'site/account/edit.html', template_data )
 
 
 @login_required
-def edit_account_avatar( request ):
-    pass
+def upload_avatar( request ):
+
+    # gets user personal object
+    user_personal = get_object_or_false( UserPersonal, user = request.user )
+    if user_personal:
+
+        # if form was sent
+        if request.method == 'POST':
+
+            # instantiates form to validate the file
+            form = UploadAvatarForm( request.POST, request.FILES )
+            if form.is_valid():
+
+                # sets image name
+                user_name = request.user.name if request.user.name is not None else request.user.email
+                image_basename = slugify( user_name + "-avatar" )
+                image_name = '%s%s.jpg' % ( int( time.time() ), image_basename )
+
+                # save image
+                user_personal.avatar.save( image_name, request.FILES['file'] )
+
+
+    return HttpResponse( 'ok' )
 
 
 @login_required
@@ -571,7 +719,7 @@ def edit_account_password( request ):
     # Form submitted via POST
     if request.method == 'POST':
 
-        form = EditAccountPasswordForm( request.user, request.POST )
+        form = EditPasswordForm( request.user, request.POST )
 
         # Is valid? Save..
         if form.is_valid():
@@ -582,13 +730,13 @@ def edit_account_password( request ):
             return HttpResponseRedirect( reverse( 'site:view_account' ) )
         # Form errors.
         else:
-            return render( request, 'site/myaccount/edit_password.html', { 'form' : form } )
+            return render( request, 'site/account/edit_password.html', { 'form' : form } )
 
     # GET or any other method. Reads the user's info from session
     # and render the edit page.
     else:
-        form = EditAccountPasswordForm( request.user )
-        return render( request, 'site/myaccount/edit_password.html', { 'form' : form } )
+        form = EditPasswordForm( request.user )
+        return render( request, 'site/account/edit_password.html', { 'form' : form } )
 
 
 

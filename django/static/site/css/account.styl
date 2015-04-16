@@ -61,7 +61,6 @@
                             pointer-events none
 
             .my-profile
-                display block
                 padding 0 25px
 
                 .bt-edit
@@ -107,6 +106,25 @@
                             fontsb()
                             font-size 16px
                             color #555
+
+                .extra-field
+                    display block
+                    padding 0 0 15px
+                    font-size 14px
+                    color #555
+
+                    span
+                        display block
+                        padding 0 0 10px
+                        font-size 14px
+                        color #888
+
+                    .text
+                        display block
+                        width 800px
+                        line-height 22px
+                        fontsb()
+                        padding 0 0 0 20px
 
                 .summary
                     size 100% 150px
@@ -196,6 +214,253 @@
                                     padding-bottom 0
                                     color #555
 
+            .my-profile-edit
+                display none
+                padding 0 25px
+
+                .bt-save
+                    float right
+                    width 170px
+
+                .identity
+                    clear left
+                    size 100% 150px
+                    padding 45px 0 0
+                    // box()
+                    overflow hidden
+
+                    .thumb
+                        float left
+                        square 125px
+
+                        span
+                            display block
+                            // clear both
+                            padding 0 0 10px
+                            font-size 14px
+                            color #888
+                            overflow hidden
+
+                        img
+                            display block
+                            square 100px
+
+                    .data
+                        padding 0
+
+                        span
+                            display block
+                            padding 0 0 7px
+                            font-size 14px
+                            color #888
+
+                        strong
+                            display block
+                            padding 0 0 20px
+                            font-weight normal
+                            fontsb()
+                            font-size 16px
+                            color #555
+
+                        .field
+                            display block
+                            padding 0 0 20px
+
+                            label
+                                display block
+                                padding 0 0 5px 0
+                                font-size 14px
+                                color #888
+
+                            input
+                                width 40%
+                                font-size 14px
+                                color #888
+
+                .extra-field
+                    display block
+                    padding 0 0 20px
+
+                    label
+                        display block
+                        padding 0 0 5px 0
+                        font-size 14px
+                        color #888
+
+                    input
+                        width 40%
+                        font-size 14px
+                        color #888
+
+                    .dd
+                        width 200px !important
+
+                .summary
+                    size 100% auto
+                    font-size 14px
+                    color #888
+                    font-size 14px
+                    color #555
+
+                    textarea
+                        display block
+                        width 54%
+                        padding 10px 10px
+                        resize none
+                        box()
+                        border 1px solid #d0b5db
+                        border-radius(4px)
+                        background-color #fff
+
+                    span
+                        display block
+                        padding 0 0 10px
+                        font-size 14px
+                        color #888
+
+                    .text
+                        display block
+                        width 800px
+                        line-height 22px
+                        fontsb()
+                        padding 0 0 0 20px
+
+                .services
+                    padding 35px 0 0 0
+
+
+                    .title
+                        text-transform capitalize
+                        padding-bottom 20px
+
+                    .subtitle
+                        font-size 14px
+                        // margin-left -20px
+
+                    .add-another
+                        display block
+                        margin-top 18px
+                        font-size 12px
+                        color #68347e
+                        text-decoration none
+
+                        &:hover
+                            text-decoration underline
+
+
+                    .supported-countries
+                        padding 0 0 0 0
+
+                        .field
+                            position relative
+                            display block
+                            margin 10px 0 0
+
+                            &:after
+                                position absolute
+                                left 0
+                                top 0
+                                z-index 9
+                                square 12px
+                                replace('icon-delete-select.png')
+
+                        .custom-select
+                            size 215px 45px
+
+                        p
+                            display inline-block
+                            height 30px
+                            line-height 30px
+                            padding 0 10px 0 20px
+                            fontbd()
+                            font-size 16px
+                            font-size 16px
+                            color #777
+
+                            &:last-child
+                                padding 0 0 0 20px
+                                border-left 1px solid #e1e1e1
+
+                    .supported-services
+                        margin 30px 0 5px
+
+                        span
+                            display block
+                            padding 0 0 15px
+
+                        .custom-select
+                            size 350px 50px
+
+                        ul
+                            padding 0 0 0 0
+
+                            .services-list
+                                position relative
+                                display block
+                                size 535px 50px
+                                line-height 50px
+                                padding 0 0 0 0
+                                margin 0 0 15px
+                                fontbd()
+                                font-size 16px
+
+                                .dd
+                                    float left
+
+                                input
+                                    position relative
+                                    size 70px 50px
+                                    line-height 50px
+                                    background none
+                                    border none
+                                    text-align center
+                                    font-size 16px
+                                    fontbd()
+                                    color #555
+
+                                    &::-webkit-input-placeholder
+                                       color #555
+
+                                    &:-moz-placeholder
+                                       color #555
+
+                                    &::-moz-placeholder
+                                       color #555
+
+                                    &:-ms-input-placeholder
+                                       color #555
+
+                                    &:before
+                                        position absolute
+                                        left 0
+                                        top 0
+                                        z-index 9
+                                        square 26px
+                                        replace('icon-question-mark.png')
+
+                                .ddlabel
+                                    padding 0 0 0 20px
+
+                                strong
+                                    position relative
+                                    float left
+                                    display inline-block
+                                    font-weight normal
+                                    color #777
+
+                                    &:after
+                                        content ''
+                                        position absolute
+                                        right -35px
+                                        top 12px
+                                        square 26px
+                                        replace('icon-question-mark.png')
+
+                                span
+                                    display inline-block
+                                    padding-bottom 0
+                                    color #555
+
             .my-contracts
                 display none
                 padding 0 25px
@@ -268,9 +533,10 @@
 
                 .box-menu
                     position absolute
-                    top 80px
+                    top 79px
                     left 0
                     width 150px
+                    border-top 1px solid #e1e1e1
 
                     .box-item
                         display block
@@ -341,6 +607,91 @@
 
                                 &:hover
                                     text-decoration underline
+
+                    .newmessage-top
+                        display none
+                        position absolute
+                        left 0
+                        top 0
+                        size 100% 80px
+
+                        .newmessage-title
+                            position absolute
+                            left 30px
+                            top 15px
+                            display block
+                            text-transform uppercase
+                            fontbd()
+                            font-size 16px
+                            color #68347e
+
+                        .bt-cancel
+                            position absolute
+                            right 0
+                            top 15px
+                            size 105px 30px
+                            line-height 30px
+                            font-size 12px
+
+                .box-newmessage
+                    display none
+                    float right
+                    width 80%
+                    margin 77px 0 0 0
+
+                    form
+                        fieldset
+                            display block
+
+                            .field
+                                display block
+                                padding 0 0 15px
+
+                                &.file
+                                    position relative
+                                    size 105px 20px
+                                    cursor pointer
+
+                                    p
+                                        position relative
+                                        display block
+                                        size 105px 20px
+                                        font-size 14px
+                                        color #68347e
+
+                                        input
+                                            position absolute
+                                            left 0
+                                            top 0
+                                            size 105px 20px
+                                            cursor pointer
+                                            opacity 0
+
+                                label
+                                    display block
+                                    padding 0 0 5px 0
+                                    font-size 14px
+                                    color #888
+
+                                input,
+                                textarea
+                                    width 70%
+                                    font-size 14px
+                                    color #888
+
+                                textarea
+                                    display block
+                                    padding 10px 10px
+                                    resize none
+                                    box()
+                                    border 1px solid #d0b5db
+                                    border-radius(4px)
+                                    background-color #fff
+
+                        .bt-send
+                            width 105px
+                            margin 20px 0 0
+                            font-size 14px
 
                 .box-messages
                     float right

@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url( r'^$', views.home, name = 'home' ),
     url( r'^login/$', views.login, name = 'login' ),
     url( r'^signup/$', views.signup, name = 'signup' ),
+    url( r'^(?P<type>[a-z_\-]+)/signup/$', views.signup, name = 'signup' ),
     url( r'^logout/$', views.logout, name = 'logout' ),
     url( r'^recover_password/$', views.recover_password, name = 'recover_password' ),
     url( r'^reset_password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.reset_password, name = 'reset_password' ),
@@ -43,10 +44,11 @@ urlpatterns = patterns('',
     url( r'^tools/$', views.tools, name = 'tools' ),
 
     # My Account
-    url( r'^view_account/$', views.view_account, name = 'view_account' ),
-    url( r'^edit_account_info/$', views.edit_account_info, name = 'edit_account_info' ),
+    url( r'^account/$', views.account, name = 'account' ),
+    url( r'^contracts/$', views.contracts, name = 'contracts' ),
+    url( r'^edit_account/$', views.edit_account, name = 'edit_account' ),
     url( r'^edit_account_password/$', views.edit_account_password, name = 'edit_account_password' ),
-    url( r'^edit_account_avatar/$', views.edit_account_avatar, name = 'edit_account_avatar' ),
+    url( r'^upload_avatar/$', views.upload_avatar, name = 'upload_avatar' ),
 
     # Dashboard
     url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),

@@ -1,0 +1,378 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        {% block head %}
+
+            {% include "_layouts/meta.html" %}
+
+            <!-- Css files -->
+            <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
+            <link rel="stylesheet" href="{% static "site/css/extra.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/dd.css"%}" />
+            <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/flags.css"%}" />
+
+        {% endblock head %}
+
+    </head>
+
+
+    <body class="dashboard choose">
+        <div class="wrapper">
+            <i class="shadow"></i>
+            <header>
+                <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
+                <a href="#" class="bt-nav">Menu</a>
+                <div class="interaction">
+                    <nav class="nav nav-dashboard">
+                        <ul>
+                            <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Questions" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
+                        </ul>
+                    </nav>
+                    <form action="" class="search">
+                        <a href="#" class="bt-back"></a>
+                        <fieldset>
+                            <label for="search">{% trans "Search" %}</label>
+                            <input class="search-input" type="text" placeholder="{% trans "Search" %}">
+                            <button class="bt-search">{% trans "Search" %}</button>
+                        </fieldset>
+                    </form>
+                    <div class="account category">
+
+                        {% if user.is_authenticated %}
+                            <a href="#" class="my-account options">
+                                {% if user.userpersonal.avatar %}
+                                    <div class="thumb">
+                                        <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="user photo" />
+                                    </div>
+                                {% endif %}
+                                <span>{{ user.name|truncate_smart:13|default:'Profile' }}</span>
+                            </a>
+                            <div class="box-options box-account">
+                                <ul class="box">
+                                    <li><a class="bt-settings" href="{% url 'site:account' %}">My Account</a></li>
+                                    <li><a class="bt-contracts" href="{% url 'site:contracts' %}">My Contracts</a></li>
+                                    <li><a class="bt-pricing" href="#">My Messages</a></li>
+                                    <li><a class="bt-logout" href="{% url 'site:logout' %}">Logout</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'site:login' %}" class="my-account login"><span>Login</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </header>
+            <section id="sticky-list" class="topics">
+                <ul>
+                    <li>
+                        <strong>A</strong>
+                        <ul>
+                            <li>Amostra</li>
+                            <li>Ananindeua</li>
+                            <li>Avião branco do céu</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>B</strong>
+                        <ul>
+                            <li>Banana</li>
+                            <li>Bolacha</li>
+                            <li>Buchada</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>C</strong>
+                        <ul>
+                            <li>Cachorro</li>
+                            <li>Canalha</li>
+                            <li>Cavalo</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <div class="content choose-destiny">
+                <h2 class="title">Choose your destiny</h2>
+                <div class="steps">
+                    <div class="step-one step">
+                        <div class="top">
+                            <h3 class="subtitle">Fill the form below</h3>
+                        </div>
+                        <ul>
+                            <li class="item">
+                                <div class="personal information-field">
+                                    <div class="progress">
+                                        <strong class="type">Personal</strong>
+                                        <div class="progress-track">
+                                            <div class="progress-fill progress-fill-green progress-fill-size-100"></div>
+                                        </div>
+                                        <div class="porcentage">100%</div>
+                                        <p>Completed</p>
+                                    </div>
+                                    <a href="#" class="bt-edit">Edit</a>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="language information-field">
+                                    <div class="progress">
+                                        <strong class="type">Language</strong>
+                                        <div class="progress-track">
+                                            <div class="progress-fill progress-fill-red progress-fill-size-25"></div>
+                                        </div>
+                                        <div class="porcentage">25%</div>
+                                        <p>Completed</p>
+                                    </div>
+                                    <a href="#" class="bt-edit">Edit</a>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="education information-field">
+                                    <div class="progress">
+                                        <strong class="type">Education</strong>
+                                        <div class="progress-track">
+                                            <div class="progress-fill progress-fill-orange progress-fill-size-50"></div>
+                                        </div>
+                                        <div class="porcentage">50%</div>
+                                        <p>Completed</p>
+                                    </div>
+                                    <a href="#" class="bt-edit">Edit</a>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="work information-field">
+                                    <div class="progress">
+                                        <strong class="type">Work</strong>
+                                        <div class="progress-track">
+                                            <div class="progress-fill progress-fill-yellow progress-fill-size-75"></div>
+                                        </div>
+                                        <div class="porcentage">75%</div>
+                                        <p>Completed</p>
+                                    </div>
+                                    <a href="#" class="bt-edit">Edit</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="step-two step">
+                        <div class="top">
+                            <h3 class="subtitle">Check in which countries<br /> you can get the work visa</h3>
+                        </div>
+                        <ul class="countries-list">
+                            <li class="country-item">
+                                <div class="country">
+                                    <div class="circle-progress-bar australia green"></div>
+                                    <div class="score">
+                                        <span class="name">Australia</span>
+                                        <p><strong class="points">40</strong> <span>Points</span> <em>Of <i>45</i> possibles</em></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="country-item">
+                                <div class="country">
+                                    <div class="circle-progress-bar canada yellow"></div>
+                                    <div class="score">
+                                        <span class="name">Canada</span>
+                                        <p><strong class="points">23</strong> <span>Points</span> <em>Of <i>45</i> possibles</em></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="country-item">
+                                <div class="country">
+                                    <div class="circle-progress-bar japan red"></div>
+                                    <div class="score">
+                                        <span class="name">Japan</span>
+                                        <p><strong class="points">08</strong> <span>Points</span> <em>Of <i>45</i> possibles</em></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="step-three step">
+                        <div class="top">
+                            <h3 class="subtitle">Get step-by-step guides</h3>
+                        </div>
+                        <div class="choose-country">
+                            <p><strong>Escolha o país</strong> ao lado</p>
+                        </div>
+                        <div class="step-by-step">
+                            <p class="locked">You still don’t have enough points<br /> to migrate to this country</p>
+                            <ul class="step-by">
+                                <li class="item check"><a href="about-countries.html">Check my results</a></li>
+                                <li class="item visa"><a href="about-countries.html">Apply for the visa</a></li>
+                                <li class="item moving-to"><a href="about-countries.html">Moving to Australia</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <a href="#" class="logo">Wanna Migrate</a>
+                <nav class="nav-footer">
+                    <ul>
+                        <li class="conditions"><a class="nav-footer-link" href="{% url 'marketplace:professionals' %}">{% trans "Find a Professional" %}</a></li>
+                        <li class="privacy"><a class="nav-footer-link" href="#">{% trans "Questions &amp; Answers" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
+                    </ul>
+                </nav>
+                <p class="copyright">© WannaMigrate {% now "Y" %} {% trans "All Rights Reserved" %}</p>
+            </footer>
+
+        </div>
+
+    </body>
+
+    {% block scripts %}
+
+        <!-- JS Libraries -->
+        <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-dd/js/jquery.dd.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-sticksectionheaders/js/jquery.stickysectionheaders.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-autocomplete/js/jquery.autocomplete.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-raty/js/jquery.raty.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/jquery-touchswipe/js/jquery.touchSwipe.js' %}"></script>
+
+        <!-- JS Custom Scripts -->
+        <script type="text/javascript" src="{% static 'site/js/countries.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+        <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
+
+        <!-- INLINE JS -->
+        <script type="text/javascript">
+
+
+            $( document ).ready( function() {
+
+                // set classes for country flags in the options
+                $( "select.custom-select.country option" ).each( function(){
+
+                    if ( $( this ).val() != "" ) {
+                        $( this ).attr( "data-image", "{% static 'site/img/msdropdown/icons/blank.gif' %}" );
+                        $( this ).attr( "data-imagecss", "flag " + COUNTRIES_PER_ID[$( this ).val()] );
+                        $( this ).attr( "data-title", $( this ).text() );
+                    }
+
+                });
+
+                // create custom dropdown for situatino countries
+                $( "div.change-situation .custom-select" ).msDropdown();
+
+                // JS FORM Validation
+                $( "#situation_form" ).submit( function() {
+                    return validate_empty_fields( this, '{{ situation_form.get_required_fields }}', 'none' );
+                });
+
+                // Search listings
+                var currencies = [
+                    { value: 'Afghan afghani', data: 'AFN' },
+                    { value: 'Albanian lek', data: 'ALL' },
+                    { value: 'Algerian dinar', data: 'DZD' },
+                    { value: 'European euro', data: 'EUR' },
+                    { value: 'Angolan kwanza', data: 'AOA' },
+                    { value: 'East Caribbean dollar', data: 'XCD' }
+                ]
+                $('.search-input').autocomplete({
+                    lookup: currencies,
+                    showNoSuggestionNotice: true,
+                    noSuggestionNotice: '{% trans "No results found." %}',
+
+                    onSelect: function ( suggestion ) {
+                        $( 'html' ).addClass( 'show-topics' );
+                    }
+                });
+                $( '.search-input' ).keyup(function(){
+                    if ( !$( this ).val() ) {
+                        $( 'html' ).removeClass('fixed');
+                    }else{
+                        $( 'html' ).addClass('fixed');
+                    }
+                });
+                $( '#sticky-list' ).stickySectionHeaders({
+                  stickyClass     : 'sticky',
+                  headlineSelector: 'strong'
+                });
+
+                // Dashboard navigation and progresses
+                $('.circle-progress-bar.green').circleProgress({
+                    value: 0.90,
+                    size: 108,
+                    fill: {
+                        image: "{% static 'site/img/pattern-green-small.png' %}"
+                    }
+                });
+
+                $('.circle-progress-bar.yellow').circleProgress({
+                    value: 0.50,
+                    size: 108,
+                    fill: {
+                        image: "{% static 'site/img/pattern-yellow-small.png' %}"
+                    }
+                });
+
+                $('.circle-progress-bar.orange').circleProgress({
+                    value: 0.30,
+                    size: 108,
+                    fill: {
+                        image: "{% static 'site/img/pattern-orange-small.png' %}"
+                    }
+                });
+
+                $('.circle-progress-bar.red').circleProgress({
+                    value: 0.10,
+                    size: 108,
+                    fill: {
+                        image: "{% static 'site/img/pattern-orange-small.png' %}"
+                    }
+                });
+
+                $('.country-item').click(function(event) {
+                    $('.choose-country').hide();
+                    $('.step-by-step').fadeIn('fast');
+                });
+
+            })
+
+        </script>
+
+    {% endblock scripts %}
+
+</html>
