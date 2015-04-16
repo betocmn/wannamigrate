@@ -39,6 +39,29 @@
                                             {{ topic.name }}
                                         </dd>
 
+                                        <dt>Related countries:</dt>
+                                        <dd>
+                                            {% with related_countries=topic.related_countries.all %}
+                                                {% for c in related_countries %}
+                                                    {{ c.name }},
+                                                {% empty %}
+                                                    -
+                                                {% endfor %}
+                                            {% endwith %}
+
+                                        </dd>
+
+                                        <dt>Related goals:</dt>
+                                        <dd>
+                                            {% with related_goals=topic.related_goals.all %}
+                                                {% for g in related_goals %}
+                                                    {{ g.name }},
+                                                {% empty %}
+                                                    -
+                                                {% endfor %}
+                                            {% endwith %}
+                                        </dd>
+
                                         <dt>Created date:</dt>
                                         <dd>
                                             {{ topic.created_date }}                                 

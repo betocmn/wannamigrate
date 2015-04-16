@@ -6,7 +6,7 @@
 {% block content %}
 <div class="content social">
     <section class="sidebar">
-        <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a>
+        <a href="{% url "qa:list_questions" %}" class="bt-back back-toKnowledge">Back to Knowledge Base</a>
         <div class="sidebar-questionView">
             <div class="itens post-topics">
                 <h3 class="title">Post Topics</h3>
@@ -47,10 +47,8 @@
         <div class="question-postView">
             <div class="question">
                 <div class="data-question">
-                    <a href="#" class="link-question">
-                        <h3 class="title-question">What is a step-by-step guide do migrate to Canada?</h3>
-                        <p class="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellen tesque porta sagittis lectus vitae vestibulum. Ut congue nisl vel fringilla eleifend. Suspendisse ex nisl.</p>
-                    </a>
+                    <h3 class="title-question">{{ post.title }}</h3>
+                    <p class="answer">{{ post.body }}</p>
                     <a class="data-item">Written in <strong>Jan 15</strong></a>
                 </div>
                 <div class="data">

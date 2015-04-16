@@ -1,0 +1,44 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block head %}
+    {{ block.super }}
+{% endblock head %}
+
+{% block content %}
+<div class="content social">
+        {% include "qa/common/side_menu.html" %}
+        <section class="content">
+            <div class="question-following">
+                <div id="topics">
+                    <form action="" class="add-interest">
+                        <h2 class="title">Add interest...</h2>
+                        <input type="text" placeholder="Ex. Brasil">
+                        <button class="button bt-add">Add</button>
+                    </form>
+                    <div class="tags">
+                        <h2 class="title">Your interests</h2>
+                        <ul class="tags-list">
+                            <li class="tag"><a href="#" class="tag-link country">Brazil</a></li>
+                            <li class="tag"><a href="#" class="tag-link">Move definitely</a></li>
+                            <li class="tag"><a href="#" class="tag-link">Changin live</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

@@ -625,13 +625,30 @@ def dashboard( request ):
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
 
         # Fills the topics related to user's situation
-        related_countries = [ from_country, to_country ]
-        related_goals = [ goal ]
+        related_countries_ids = [ from_country.id, to_country.id ]
+        related_goals_ids = [ goal.id ]
 
         posts_results_per_page = 5
+        posts = Post.get_ranked(
+            related_countries_ids = related_countries_ids,
+            related_goals_ids = related_goals_ids,
+            results_per_step = posts_results_per_page,
+        )
+
+        # Checks if the user is following the posts
+        post_ids = list( post.id for post in posts )
+        following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
+
+        for post in posts:
+            if post.id in following_posts:
+                post.is_followed = True
+            else:
+                post.is_followed = False
+
         # Gets 5 most related questions (page 0 by default)
-        template_data['posts'] = Post.get_ranked( related_countries = related_countries, related_goals = related_goals, results_per_step = posts_results_per_page )
+        template_data['posts'] = posts
         template_data[ "posts_results_per_page" ] = posts_results_per_page
+
 
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )

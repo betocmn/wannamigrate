@@ -1,0 +1,46 @@
+<section class="sidebar">
+    <!-- <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a> -->
+    <div class="sidebar-default">
+        <div class="itens knowledge-base">
+            <h3 class="title">knowledge Base</h3>
+            <ul>
+                <li class="item {% if knowledge_menu_selected %} active {% endif %}">
+                    <a href="{% url "qa:list_posts" %}">All</a>
+                </li>
+                <li class="item {% if questions_menu_selected %} active {% endif %}">
+                    <a href="{% url "qa:list_questions" %}">Questions & answers</a>
+                </li>
+                <li class="item {% if blogposts_menu_selected %} active {% endif %}">
+                    <a href="{% url "qa:list_blogposts" %}">Post</a>
+                </li>
+            </ul>
+        </div>
+        {% with stats=user.user_stats %}
+        <div class="itens personal">
+            <h3 class="title">Personal</h3>
+            <ul>
+                <li class="item {% if topics_menu_selected %} active {% endif %}">
+                    <a href="{% url "qa:list_topics" %}">Topics <span class="count">({{ stats.total_topics_following }})</span></a>
+                </li>
+                <li class="item {% if answers_menu_selected %} active {% endif %}">
+                    <a href="#">Answers <span class="count">({{ stats.total_answers }})</span></a>
+                </li>
+                <li class="item {% if reading_list_menu_selected %} active {% endif %}">
+                    <a href="#">Reading list <span class="count">({{ stats.total_posts_following }})</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="itens social">
+            <h3 class="title">Social</h3>
+            <ul>
+                <li class="item {% if following_menu_selected %} active {% endif %}">
+                    <a href="#">Following <span class="count">({{ stats.total_users_following }})</span></a>
+                </li>
+                <li class="item {% if followers_menu_selected %} active {% endif %}">
+                    <a href="#">Followers <span class="count">({{ stats.total_users_followers }})</span></a>
+                </li>
+            </ul>
+        </div>
+        {% endwith %}
+    </div>
+</section>

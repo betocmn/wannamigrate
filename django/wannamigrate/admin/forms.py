@@ -453,4 +453,12 @@ class AddTopicForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = Topic
-        fields = [ "name" ]
+        fields = [ "name", "related_countries", "related_goals" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        super( AddTopicForm, self ).__init__( *args, **kwargs )
+
+        # Sets related things to not be required.
+        self.fields[ "related_countries" ].required = False
+        self.fields[ "related_goals" ].required = False

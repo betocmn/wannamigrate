@@ -5,54 +5,11 @@
 
 {% block content %}
     <div class="content social">
-        <section class="sidebar">
-            <!-- <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a> -->
-            <div class="sidebar-default">
-                <div class="itens knowledge-base">
-                    <h3 class="title">knowledge Base</h3>
-                    <ul>
-                        <li class="item {% if filter_knowledge %} active {% endif %}">
-                            <a href="{% url "qa:list_posts" %}">All</a>
-                        </li>
-                        <li class="item {% if filter_questions %} active {% endif %}">
-                            <a href="{% url "qa:list_questions" %}">Questions & answers</a>
-                        </li>
-                        <li class="item {% if filter_blogposts %} active {% endif %}">
-                            <a href="{% url "qa:list_blogposts" %}">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="itens personal">
-                    <h3 class="title">Personal</h3>
-                    <ul>
-                        <li class="item">
-                            <a href="#">Topics <span class="count">(0)</span></a>
-                        </li>
-                        <li class="item">
-                            <a href="#">Answers <span class="count">(0)</span></a>
-                        </li>
-                        <li class="item">
-                            <a href="#">Reading list <span class="count">(0)</span></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="itens social">
-                    <h3 class="title">Social</h3>
-                    <ul>
-                        <li class="item">
-                            <a href="#">Following <span class="count">(0)</span></a>
-                        </li>
-                        <li class="item">
-                            <a href="#">Followers <span class="count">(0)</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        {% include "qa/common/side_menu.html" %}
         <section class="content">
             <div class="question-postList">
                 {% if filter_blogposts %}
-                    <a class="button bt-addQuestion">Write a post</a>
+                    <!--a class="button bt-addQuestion">Write a post</a-->
                 {% elif filter_questions or filter_knowledge %}
                     <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
                 {% endif %}
@@ -63,28 +20,38 @@
                             <div class="tags">
                                 <ul class="tags-list">
                                     {% for topic in post.related_topics.all %}
-                                        <li class="tag"><a href="#" class="tag-link active">{{ topic.name }}</a></li>
+                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link active">{{ topic.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="data-question">
                                 <a href="{% url "qa:view_post" post.id %}">
                                     <h3 class="title-question">{{ post.title }}</h3>
-                                    <p class="answer">{{ post.body|striptags|truncate_smart:250 }} (...)</p>
+                                    {% if post.post_type.id == POST_TYPE_QUESTION_ID %}
+                                        <p class="answer">{{ post.answers.first.body|striptags|truncate_smart:250 }}</p>
+                                    {% elif post.post_type.id == POST_TYPE_BLOGPOST_ID %}
+                                        <p class="answer">{{ post.body|striptags|truncate_smart:250 }}</p>
+                                    {% endif %}
                                 </a>
                             </div>
                             <div class="data">
-                                <ul class="data-list">
-                                    <ul class="list-viewers">
-                                        <li class="data-item"><a href="#" class="data-link link-answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</a></li>
-                                        <li class="data-item"><a href="#" class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</a></li>
-                                        <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
-                                    </ul>
-                                    <ul class="list-bt">
-                                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
-                                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
-                                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
-                                    </ul>
+                                <ul class="data-list list-viewers">
+                                    <li class="data-item">
+                                        {% if post.is_followed %}
+                                            <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
+                                                {% trans "Unfollow" %}
+                                                <span class="count">{{ post.followers_count }}</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
+                                                {% trans "Follow" %}
+                                                <span class="count">{{ post.followers_count }}</span>
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
+                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
+                                    <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
                                 </ul>
                             </div>
                             <div class="box-options">
@@ -97,8 +64,6 @@
                             </div>
                             <a href="#" class="bt-options">{% trans "Options" %}</a>
                         </div>
-                    {% empty %}
-                        <p>{% trans "No questions found" %}</p>
                     {% endfor %}
                     <!--div class="answers">
                         <form class="form-comment">
@@ -164,12 +129,40 @@
 
     <!-- INLINE JS -->
     <script type="text/javascript">
-
         $( document ).ready( function() {
 
+            $( ".x-link" ).click(function( e ){
 
+                var elm = $(this);
+                var current_url = elm.attr( "href" );
+                var current_name = elm.attr( "data-name" );
+                var toggle_url = elm.attr( "data-toggle-url" );
+                var toggle_name = elm.attr( "data-toggle-name" );
+
+                $.get( current_url, { "_": $.now() }, function( data ){
+                    // Sets the element's content
+                    elm.html( "" ).append( toggle_name ).append( " " ).append(
+                        $( "<span/>" ).attr( "class", "count" ).text( data )
+                    );
+
+                    // Sets the element's name.
+                    elm.attr( "data-name", toggle_name );
+                    // Sets the element href.
+                    elm.attr( "href", toggle_url );
+
+                    // Sets the toggle attributes
+                    elm.attr( "data-toggle-url", current_url );
+                    elm.attr( "data-toggle-name", current_name );
+
+
+                }).fail(function(httpObj, text){
+                    if ( httpObj.status == 401 )
+                        window.location.href = "{% url "site:login" %}";
+                });
+
+                e.preventDefault();
+            });
         });
-
     </script>
 
     {% include "_layouts/analytics.html" %}

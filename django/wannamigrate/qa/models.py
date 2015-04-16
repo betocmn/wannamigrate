@@ -15,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from wannamigrate.qa.wm_editor import WMEditorParser
+from django.db.models import Prefetch, Count
 import math
 
 
@@ -28,7 +29,7 @@ class Post( BaseModel ):
     """
 
     # The parent of this post (doesn't apply if it's a question or a blog post)
-    parent = models.ForeignKey( "Post", null = True )
+    parent = models.ForeignKey( "Post", null = True, related_name = "answers" )
     # The id of the owner of this post.
     owner = models.ForeignKey( User )
     # The type of this post.
@@ -39,6 +40,8 @@ class Post( BaseModel ):
     body = models.TextField( default = "", blank = True )
     # Indicates if the post is anonymous or not.
     is_anonymous = models.BooleanField( default = False )
+    # The number of upvotes of an answer
+    upvotes_count = models.PositiveIntegerField( default = 0 )
     # The number of visualizations of this post
     views_count = models.PositiveIntegerField( default = 0 )
     # The number of answers to this post
@@ -151,7 +154,7 @@ class Post( BaseModel ):
 
     # Static Methods
     @staticmethod
-    def get_ranked( *args, **kwargs ):
+    def get_ranked( *args, post_type_id=None, related_countries_ids=None, related_goals_ids=None, results_per_step=5, **kwargs ):
         """
         Query used to search for posts sorted
         by relevance.  The relevance is calculated with
@@ -163,32 +166,39 @@ class Post( BaseModel ):
         """
 
         # Extracts arguments
-        post_type_id = kwargs.get( "post_type_id", None )
-        related_countries = kwargs.get( "related_countries", None )
-        related_goals = kwargs.get( "related_goals", None )
-        results_per_step = kwargs.get( "results_per_step", 5 )
+        topic_id = kwargs.pop( "topic_id", None )
+        post_type_id = post_type_id
+        related_countries_ids = related_countries_ids  # The ids of the related countries
+        related_goals_ids = related_goals_ids  # The ids of the related goals
+        results_per_step = results_per_step
         step = kwargs.pop( "step", 0 )
+
 
 
         limit_from = step * results_per_step
         limit_to = step * results_per_step + results_per_step
 
 
+        posts = Post.objects
 
-        posts = Post.objects.select_related(
-            "post", "related_topics"
-        ).only(
-            'title', 'body', 'views_count', 'answers_count', 'followers_count', 'readers', 'last_activity_date',
+        # Filters by topic
+        if ( topic_id ):
+            posts = posts.filter( related_topics = topic_id )
+
+        # Filters by situation
+        if ( related_countries_ids ):
+            posts = posts.filter( related_topics__related_countries__id__in = related_countries_ids )
+        if ( related_goals_ids ):
+            posts = posts.filter( related_topics__related_goals__id__in = related_goals_ids )
+
+        posts = posts.prefetch_related( "related_topics",
+            Prefetch(
+                "answers",
+                queryset=Post.objects.order_by( "-upvotes_count" )
+            )
         )
 
-        if ( related_countries and related_goals ):
-            posts = posts.prefetch_related(
-                "related_topics__related_countries", "related_topics__related_goals"
-            ).filter(
-                related_topics__related_countries__in = related_countries,
-                related_topics__related_goals__in = related_goals,
-            )
-
+        # Filters by post type
         if ( post_type_id ):
             posts = posts.filter(
                 post_type__id = post_type_id
@@ -198,7 +208,8 @@ class Post( BaseModel ):
                 post_type__id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID, settings.QA_POST_TYPE_QUESTION_ID ],
             )
 
-        return posts.order_by( '-last_activity_date' )[limit_from:limit_to]
+
+        return posts.distinct().order_by( '-last_activity_date' )[limit_from:limit_to].all()
 
 
 
@@ -276,7 +287,7 @@ class Vote( BaseModel ):
     """
 
     # The post that this vote is related to.
-    post = models.ForeignKey( "Post" )
+    post = models.ForeignKey( "Post", related_name = "votes" )
     # The user that voted.
     user = models.ForeignKey( User )
     # The type of this vote.

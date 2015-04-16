@@ -534,7 +534,7 @@ class UserStats( BaseModel ):
     """
 
     # Model Attributes
-    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    user = models.OneToOneField( User, verbose_name = _( 'user' ), related_name = "user_stats" )
     percentage_personal = models.IntegerField( _( "percentage personal" ), blank = True, null = True, default = 0 )
     percentage_language = models.IntegerField( _( "percentage language" ), blank = True, null = True, default = 0 )
     percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )
@@ -545,6 +545,12 @@ class UserStats( BaseModel ):
     total_profile_views = models.IntegerField( _( "total profile views" ), blank = True, null = True, default = 0 )
     total_contracts = models.IntegerField( _( "total contracts" ), blank = True, null = True, default = 0 )
     total_reviews = models.IntegerField( _( "total reviews" ), blank = True, null = True, default = 0 )
+    total_topics_following = models.IntegerField( _( "total topics following" ), blank = True, null = True, default = 0 )
+    total_posts_following = models.IntegerField( _( "total posts following" ), blank = True, null = True, default = 0 )
+    total_users_following = models.IntegerField( _( "total users following" ), blank = True, null = True, default = 0 )
+    total_users_followers = models.IntegerField( _( "total users followers" ), blank = True, null = True, default = 0 )
+
+
 
 
 

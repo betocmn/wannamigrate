@@ -22,21 +22,39 @@
                             <div class="tags">
                                 <ul class="tags-list">
                                     {% for topic in post.related_topics.all %}
-                                        <li class="tag"><a href="#" class="tag-link active">{{ topic.name }}</a></li>
+                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link active">{{ topic.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="data-question">
-                                <a href="#">
+                                <a href="{% url "qa:view_post" post.id %}">
                                     <h3 class="title-question">{{ post.title }}</h3>
-                                    <p class="answer">{{ post.body|striptags|truncate_smart:250 }} (...)</p>
+                                    {% with post.answers.all|first as first_answer %}
+                                        {% if first_answer.body %}
+                                        <p class="answer">
+                                            {{ first_answer.body|striptags|truncate_smart:250 }}
+                                        </p>
+                                        {% endif %}
+                                    {% endwith %}
                                 </a>
                             </div>
                             <div class="data">
                                 <ul class="data-list">
-                                    <li class="data-item"><a href="#" class="data-link bt-follow">{% trans "Follow" %} <span>{{ post.followers_count }}</span></a></li>
-                                    <li class="data-item"><a href="#" class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</a></li>
-                                    <li class="data-item"><a href="#" class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</a></li>
+                                    <li class="data-item">
+                                        {% if post.is_followed %}
+                                            <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
+                                                {% trans "Unfollow" %}
+                                                <span class="count">{{ post.followers_count }}</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
+                                                {% trans "Follow" %}
+                                                <span class="count">{{ post.followers_count }}</span>
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
+                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
                                     <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
                                 </ul>
                             </div>
@@ -50,7 +68,7 @@
                             <a href="#" class="bt-options">{% trans "Options" %}</a>
                         </div>
                     {% empty %}
-                        <p>{% trans "No questions found" %}</p>
+                        <p>{% trans "No content found" %}</p>
                     {% endfor %}
 
                     <a href="{% url "qa:list_questions" %}" id="bt-view-more-posts" class="bt-view-more button-transparent">{% trans "View More" %}</a>
@@ -133,6 +151,38 @@
     <script type="text/javascript">
 
         $( document ).ready( function() {
+
+            $( ".x-link" ).click(function( e ){
+
+                var elm = $(this);
+                var current_url = elm.attr( "href" );
+                var current_name = elm.attr( "data-name" );
+                var toggle_url = elm.attr( "data-toggle-url" );
+                var toggle_name = elm.attr( "data-toggle-name" );
+
+                $.get( current_url, { "_": $.now() }, function( data ){
+                    // Sets the element's content
+                    elm.html( "" ).append( toggle_name ).append( " " ).append(
+                        $( "<span/>" ).attr( "class", "count" ).text( data )
+                    );
+
+                    // Sets the element's name.
+                    elm.attr( "data-name", toggle_name );
+                    // Sets the element href.
+                    elm.attr( "href", toggle_url );
+
+                    // Sets the toggle attributes
+                    elm.attr( "data-toggle-url", current_url );
+                    elm.attr( "data-toggle-name", current_name );
+
+
+                }).fail(function(httpObj, text){
+                    if ( httpObj.status == 401 )
+                        window.location.href = "{% url "site:login" %}";
+                });
+
+                e.preventDefault();
+            });
 
             // Create review stars of professional
             $( '.rate' ).raty({

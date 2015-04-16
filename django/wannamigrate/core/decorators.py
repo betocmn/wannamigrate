@@ -65,3 +65,15 @@ def secure_required( view_func ):
                 return HttpResponseRedirect(secure_url)
         return view_func( request, *args, **kwargs )
     return _wrapped_view_func
+
+
+def ajax_login_required( view_func ):
+    """
+    Wraps an ajax request and returns HTTP401 if the user is not authenticated.
+    """
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse( status = 401 )
+    return _wrapped_view
