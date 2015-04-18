@@ -20,13 +20,13 @@
             <h3 class="title">Personal</h3>
             <ul>
                 <li class="item {% if topics_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_topics" %}">Topics <span class="count">({{ stats.total_topics_following }})</span></a>
+                    <a href="{% url "qa:list_topics" %}">Topics {% if user.is_authenticated %}<span class="count">({{ stats.total_topics_following }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if answers_menu_selected %} active {% endif %}">
-                    <a href="#">Answers <span class="count">({{ stats.total_answers }})</span></a>
+                    <a href="#">Answers {% if user.is_authenticated %}<span class="count">({{ stats.total_answers }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if reading_list_menu_selected %} active {% endif %}">
-                    <a href="#">Reading list <span class="count">({{ stats.total_posts_following }})</span></a>
+                    <a href="#">Reading list {% if user.is_authenticated %}<span class="count">({{ stats.total_posts_following }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>
@@ -34,10 +34,10 @@
             <h3 class="title">Social</h3>
             <ul>
                 <li class="item {% if following_menu_selected %} active {% endif %}">
-                    <a href="#">Following <span class="count">({{ stats.total_users_following }})</span></a>
+                    <a href="#">Following {% if user.is_authenticated %}<span class="count">({{ stats.total_users_following }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if followers_menu_selected %} active {% endif %}">
-                    <a href="#">Followers <span class="count">({{ stats.total_users_followers }})</span></a>
+                    <a href="#">Followers {% if user.is_authenticated %}<span class="count">({{ stats.total_users_followers }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>

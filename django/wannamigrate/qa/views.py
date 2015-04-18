@@ -82,15 +82,18 @@ def list_posts( request, *args, **kwargs ):
     # Search the Posts with filters
     posts = Post.get_ranked( **filter_params )
 
-    # Checks if the user is following the posts
-    post_ids = list( post.id for post in posts )
-    following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
+    # If the user is authenticated
+    if request.user.is_authenticated():
+        # Checks if the user is following the posts
+        post_ids = list( post.id for post in posts )
+        following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
 
-    for post in posts:
-        if post.id in following_posts:
-            post.is_followed = True
-        else:
-            post.is_followed = False
+        for post in posts:
+            if post.id in following_posts:
+                post.is_followed = True
+            else:
+                post.is_followed = False
+
 
     template_data[ "posts" ] = posts
     template_data[ "POST_TYPE_QUESTION_ID" ] = settings.QA_POST_TYPE_QUESTION_ID

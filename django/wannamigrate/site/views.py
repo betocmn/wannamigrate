@@ -783,15 +783,17 @@ def dashboard( request ):
             results_per_step = posts_results_per_page,
         )
 
-        # Checks if the user is following the posts
-        post_ids = list( post.id for post in posts )
-        following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
+        # If the user is authenticated
+        if request.user.is_authenticated():
+            # Checks if the user is following the posts
+            post_ids = list( post.id for post in posts )
+            following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
 
-        for post in posts:
-            if post.id in following_posts:
-                post.is_followed = True
-            else:
-                post.is_followed = False
+            for post in posts:
+                if post.id in following_posts:
+                    post.is_followed = True
+                else:
+                    post.is_followed = False
 
         # Gets 5 most related questions (page 0 by default)
         template_data['posts'] = posts
