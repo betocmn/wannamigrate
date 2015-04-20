@@ -202,6 +202,11 @@ form .errorlist {
 
 
 
+/* Contact Us */
+.contactus .content .contact-us form fieldset .field.subject select {
+  width: 470px;
+}
+
 /* Hot it Works */
 .dashboard .howitworks_title {
   background: #f6f6f6;
@@ -266,8 +271,13 @@ form .errorlist {
 }
 
 .dashboard .howitworks .but p a {
-  color: #67337D;
-  font-family: 'open_sanssemibold';
+    color: #4f9276;
+    font-family: 'open_sanssemibold';
+    text-decoration: none;
+}
+
+.dashboard .howitworks .but p a:hover {
+    text-decoration: underline;
 }
 
 @media(min-width: 992px) {
@@ -307,6 +317,15 @@ form .errorlist {
   margin: 0 auto;
   padding-top: 35px;
   padding-bottom: 55px;
+}
+
+.dashboard .faq .text a {
+    text-decoration: none;
+    color: #4f9276;
+}
+
+.dashboard .faq .text a:hover {
+    text-decoration: underline;
 }
 
 .dashboard .service .top .top_left .title {
@@ -419,6 +438,7 @@ form .errorlist {
   text-align: center;
   padding-bottom: 85px;
 }
+
 .dashboard .faq {
   max-width: 95%;
   margin: 0 auto;

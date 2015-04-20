@@ -687,22 +687,24 @@ def upload_avatar( request ):
 
     # gets user personal object
     user_personal = get_object_or_false( UserPersonal, user = request.user )
-    if user_personal:
+    if not user_personal:
+        user_personal = UserPersonal()
+        user_personal.user = request.user
 
-        # if form was sent
-        if request.method == 'POST':
+    # if form was sent
+    if request.method == 'POST':
 
-            # instantiates form to validate the file
-            form = UploadAvatarForm( request.POST, request.FILES )
-            if form.is_valid():
+        # instantiates form to validate the file
+        form = UploadAvatarForm( request.POST, request.FILES )
+        if form.is_valid():
 
-                # sets image name
-                user_name = request.user.name if request.user.name is not None else request.user.email
-                image_basename = slugify( user_name + "-avatar" )
-                image_name = '%s%s.jpg' % ( int( time.time() ), image_basename )
+            # sets image name
+            user_name = request.user.name if request.user.name is not None else request.user.email
+            image_basename = slugify( user_name + "-avatar" )
+            image_name = '%s%s.jpg' % ( int( time.time() ), image_basename )
 
-                # save image
-                user_personal.avatar.save( image_name, request.FILES['file'] )
+            # save image
+            user_personal.avatar.save( image_name, request.FILES['file'] )
 
 
     return HttpResponse( 'ok' )
