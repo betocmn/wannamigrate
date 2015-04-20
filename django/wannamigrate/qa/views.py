@@ -146,9 +146,26 @@ def view_post( request, post_id ):
     template_data = {}
 
     post = Post.objects.get( pk = post_id  )
-    answers = Post.objects.filter( parent__id = post_id ).prefetch_related( "votes" )
+    post.views_count = post.views_count + 1
+    post.save()
 
-    return HttpResponse( answers )
+    related_content = Post.objects.filter( related_topics__in = post.related_topics.all() ).exclude( id = post_id ).only( "id", "title" )[0:3]
+
+    answers = Post.objects.filter( parent__id = post_id ).order_by( "upvotes_count", "created_at" )
+
+    template_data[ "post" ] = post
+
+    # Checks if the user is following the post
+    if post.followers.filter( id = request.user.id ).exists():
+        post.is_followed = True
+    else:
+        post.is_followed = False
+
+    template_data[ "answers" ] = answers
+    template_data[ "related_content" ] = related_content
+
+    # Print Template
+    return render( request, 'qa/posts/view.html', template_data )
 
     """
 
@@ -176,17 +193,19 @@ def set_following_post( request, post_id, follow = False ):
     user_id = request.user.id
     already_following = post.followers.filter( id = user_id ).exists()
 
-
-
     if ( follow ):
         if not already_following:
             post.followers.add( user_id )
             post.followers_count = post.followers_count + 1
+            request.user.userstats.total_posts_following = request.user.userstats.total_posts_following + 1
+            request.user.userstats.save()
             post.save()
     else:
         if already_following:
             post.followers.remove( user_id )
             post.followers_count = post.followers_count - 1
+            request.user.userstats.total_posts_following = request.user.userstats.total_posts_following - 1
+            request.user.userstats.save()
             post.save()
 
     return HttpResponse( post.followers_count )

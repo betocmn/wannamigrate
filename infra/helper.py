@@ -69,14 +69,13 @@ INSTALL_PACKAGES = [
 
 # The packages that should be installed on virtualenv
 VIRTUALENV_PACKAGES = [ 
-    "django", 
-    #"https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz", (no version for django1.8)
-    "mysqlclient",
-    "django-debug-toolbar", 
-    "python-social-auth", 
-    "pillow", 
-    "django-stdimage",
-    "pytz",
+    "django==1.7.5",
+    "https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz",
+    #"mysqlclient",
+    "python-social-auth==0.2.2",
+    "pillow==2.8.1",
+    "django-stdimage==1.2.2",
+    "pytz==2014.10",
 ]
     
 

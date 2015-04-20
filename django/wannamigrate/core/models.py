@@ -534,7 +534,7 @@ class UserStats( BaseModel ):
     """
 
     # Model Attributes
-    user = models.OneToOneField( User, verbose_name = _( 'user' ) )
+    user = models.OneToOneField( User, verbose_name = _( 'user' ), related_name = "userstats" )
     percentage_personal = models.IntegerField( _( "percentage personal" ), blank = True, null = True, default = 0 )
     percentage_language = models.IntegerField( _( "percentage language" ), blank = True, null = True, default = 0 )
     percentage_education = models.IntegerField( _( "percentage education" ), blank = True, null = True, default = 0 )

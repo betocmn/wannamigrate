@@ -3,6 +3,20 @@
 {% load i18n %}
 {% load string_extras %}
 
+{% block head %}
+    {{ block.super }}
+
+    <style>
+        li.related > a {
+            text-decoration:none;
+            color: #F5F5F5;
+        }
+        li.related:hover > a{
+            text-decoration: underline;
+        }
+    </style>
+{% endblock head %}
+
 {% block content %}
 <div class="content social">
     <section class="sidebar">
@@ -11,22 +25,24 @@
             <div class="itens post-topics">
                 <h3 class="title">Post Topics</h3>
                 <ul class="tags">
-                    <li class="tag"><a href="topics.html" class="tag-link active">Brazil</a></li>
-                    <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li>
-                    <!-- <li class="tag"><a href="topics.html" class="tag-link">Move definitely</a></li> -->
+                    {% for topic in post.related_topics.all %}
+                        <li class="tag">
+                            <a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link">{{ topic.name }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="itens post-stats">
                 <h3 class="title">Post Stats</h3>
                 <ul>
                     <li class="item views">
-                        <a href="#">Views <span class="count">(250)</span></a>
+                        <a href="#">Views <span class="count">({{post.views_count}})</span></a>
                     </li>
                     <li class="item answers">
-                        <a href="#">Answers <span class="count">(12)</span></a>
+                        <a href="#">Answers <span class="count">({{post.answers_count}})</span></a>
                     </li>
                     <li class="item followers">
-                        <a href="#">Followers <span class="count">(23)</span></a>
+                        <a href="#">Followers <span class="count">({{post.followers_count}})</span></a>
                     </li>
                 </ul>
             </div>
@@ -44,95 +60,166 @@
         </div>
     </section>
     <section class="content">
-        <div class="question-postView">
-            <div class="question">
-                <div class="data-question">
-                    <h3 class="title-question">{{ post.title }}</h3>
-                    <p class="answer">{{ post.body }}</p>
-                    <a class="data-item">Written in <strong>Jan 15</strong></a>
-                </div>
-                <div class="data">
-                    <ul class="data-list">
-                        <li class="data-item"><a href="#" class="data-link bt-upvote">Upvote <span>898</span></a></li>
-                        <li class="data-item"><a href="#" class="data-link bt-downvote">Downvote</a></li>
-                        <li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li>
-                    </ul>
-                </div>
-                <div class="box-options">
-                    <i class="shadow"></i>
-                    <ul class="box">
-                        <li><a href="#" class="bt-share">Share</a></li>
-                        <li><a href="#" class="bt-report">Report</a></li>
-                        <li><a href="#" class="bt-cancel">Cancel</a></li>
-                    </ul>
-                </div>
-                <a href="#" class="bt-options">Options</a>
+    <div class="question-view">
+        <div class="question">
+            <div class="data-question">
+                <h3 class="title-question">{{ post.title }}</h3>
+                <a class="data-item">Write in <strong>Jan 15</strong></a>
             </div>
-
-            <div class="answers">
-                <form class="form-comment">
+            <div class="data">
+                <ul class="data-list">
+                    <li class="data-item">
+                        {% if post.is_followed %}
+                            <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
+                                {% trans "Unfollow" %}
+                                <span class="count">{{ post.followers_count }}</span>
+                            </a>
+                        {% else %}
+                            <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
+                                {% trans "Follow" %}
+                                <span class="count">{{ post.followers_count }}</span>
+                            </a>
+                        {% endif %}
+                    <!--li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li-->
+                </ul>
+            </div>
+            <div class="box-options">
+                <i class="shadow"></i>
+                <ul class="box">
+                    <li><a href="#" class="bt-share">Share</a></li>
+                    <li><a href="#" class="bt-report">Report</a></li>
+                    <li><a href="#" class="bt-cancel">Cancel</a></li>
+                </ul>
+            </div>
+            <a href="#" class="bt-options">Options</a>
+        </div>
+        <div class="comment">
+            <div class="user">
+                <i class="thumb">
+                    <img src="img/thumb-account.png" alt="">
+                </i>
+                <span class="name">Humberto Martins</span>
+                <span class="info">Designer at humbertolandia.com</span>
+                <label class="make-anonymous" for="make-anonymous">
+                    <!-- <input type="checkbox" name="make-anonymous" value="makeAnonymous"> -->
+                    <i class="checkbox"></i>
+                    <span>Make Anonymous</span>
+                </label>
+            </div>
+            <form>
+                <textarea class="text-coments" placeholder="Make Anonymous"></textarea>
+                <input type="submit" class="button bt-write" value="Write answer">
+            </form>
+        </div>
+        <div class="answers">
+            <div class="answer">
+                <i class="thumb">
+                    <img src="img/thumb-account.png" alt="">
+                </i>
+                <div class="post">
                     <div class="user">
-                        <i class="thumb">
-                            <img src="img/thumb-account.png" alt="">
-                        </i>
+                        <span class="name">Humberto Martins</span>
+                        <span class="info">Designer at humbertolandia.com</span>
                     </div>
-                    <input type="text" class="text-coments" placeholder="Add a comment"></input>
-                    <input type="submit" class="button bt-comment" value="Comment">
-                </form>
-                <div class="answer">
-                    <i class="thumb">
-                        <img src="img/thumb-account.png" alt="">
-                    </i>
-                    <div class="post">
-                        <div class="user">
-                            <span class="name">Humberto Martins</span>
-                            <span class="info">Designer at humbertolandia.com</span>
-                        </div>
 
-                        <span class="text-post">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
-                        </span>
+                    <span class="text-post">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </span>
+
+                    <span class="date-post">Written in <strong>Jan 15</strong></span>
+
+                    <div class="data">
+                        <ul class="data-list">
+                            <li class="data-item">
+                                <a href="#" class="data-link bt-upvote">Upvote <span class="count">999</span></a>
+                            </li>
+                            <li class="data-item">
+                                <a href="#" class="data-link">Downvote</a>
+                            </li>
+                            <li class="data-item">
+                                <a href="#" class="data-link">Comment</a>
+                            </li>
+                        </ul>
                     </div>
+
+                    <div class="box-options">
+                        <i class="shadow"></i>
+                        <ul class="box">
+                            <li><a class="bt-share" href="#">Share</a></li>
+                            <li><a class="bt-report" href="#">Report</a></li>
+                            <li><a class="bt-cancel" href="#">Cancel</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="bt-options">Options</a>
                 </div>
-                <div class="answer active">
-                    <i class="thumb">
-                        <img src="img/thumb-account.png" alt="">
-                    </i>
-                    <div class="post">
-                        <div class="user">
-                            <span class="name">Humberto Martins</span>
-                            <span class="info">Designer at humbertolandia.com</span>
-                        </div>
-
-                        <span class="text-post">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
-                        </span>
+            </div>
+            <div class="answer">
+                <i class="thumb">
+                    <img src="img/thumb-account.png" alt="">
+                </i>
+                <div class="post">
+                    <div class="user">
+                        <span class="name">Humberto Martins</span>
+                        <span class="info">Designer at humbertolandia.com</span>
                     </div>
+
+                    <span class="text-post">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </span>
+
+                    <span class="date-post">Written in <strong>Jan 15</strong></span>
+
+                    <div class="data">
+                        <ul class="data-list">
+                            <li class="data-item">
+                                <a href="#" class="data-link bt-upvote">Upvote <span class="count">999</span></a>
+                            </li>
+                            <li class="data-item">
+                                <a href="#" class="data-link">Downvote</a>
+                            </li>
+                            <li class="data-item">
+                                <a href="#" class="data-link">Comment</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="box-options">
+                        <i class="shadow"></i>
+                        <ul class="box">
+                            <li><a class="bt-share" href="#">Share</a></li>
+                            <li><a class="bt-report" href="#">Report</a></li>
+                            <li><a class="bt-cancel" href="#">Cancel</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="bt-options">Options</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <section class="aside">
+        {% if related_content %}
         <div class="related-content">
             <h3 class="title">Related Content</h3>
             <ul>
+                {% for p in related_content %}
                 <li class="related">
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                    <a href="{% url "qa:view_post" post.id %}">{{ post.title }}</a>
                 </li>
-                <li class="related">
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
-                </li>
-                <li class="related">
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
-                </li>
+                {% endfor %}
             </ul>
         </div>
+        {% endif %}
         <div class="related-professionals">
             <h3 class="title">Related Professionals</h3>
             <ul>
@@ -165,6 +252,38 @@
     <script type="text/javascript">
 
         $( document ).ready( function() {
+
+            $( ".x-link" ).click(function( e ){
+
+                var elm = $(this);
+                var current_url = elm.attr( "href" );
+                var current_name = elm.attr( "data-name" );
+                var toggle_url = elm.attr( "data-toggle-url" );
+                var toggle_name = elm.attr( "data-toggle-name" );
+
+                $.get( current_url, { "_": $.now() }, function( data ){
+                    // Sets the element's content
+                    elm.html( "" ).append( toggle_name ).append( " " ).append(
+                        $( "<span/>" ).attr( "class", "count" ).text( data )
+                    );
+
+                    // Sets the element's name.
+                    elm.attr( "data-name", toggle_name );
+                    // Sets the element href.
+                    elm.attr( "href", toggle_url );
+
+                    // Sets the toggle attributes
+                    elm.attr( "data-toggle-url", current_url );
+                    elm.attr( "data-toggle-name", current_name );
+
+
+                }).fail(function(httpObj, text){
+                    if ( httpObj.status == 401 )
+                        window.location.href = "{% url "site:login" %}";
+                });
+
+                e.preventDefault();
+            });
         });
     </script>
 
