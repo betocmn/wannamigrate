@@ -40,6 +40,17 @@
                 .nav-footer-link
                     font-size 12px
 
+
+    .choose
+        .content
+            &.choose-destiny
+                .steps
+                    .step
+                        .item
+                            .information-field
+                                .bt-edit
+                                    right -50px
+
 @media screen and (max-width: 768px)
     html
         &.fixed
@@ -68,7 +79,7 @@
                 padding-top 20px
                 background-size auto 25%
                 background-position 0 20px
-                    
+
         .content
             .get-help
                 position relative
@@ -128,7 +139,7 @@
 
                 .nav
                     background-color #f3f3f3 !important
-                
+
                     ul
                         .nav-item
                             text-align center
@@ -260,7 +271,7 @@
                             display block
                             margin 0 auto 25px
                             width 90%
-                            
+
                         .bt-view-more
                             display none
 
@@ -459,6 +470,15 @@
                 &.hiring
                     display none
 
+        &.choose
+            .content
+                &.choose-destiny
+                    .steps
+                        .step
+                            float none
+                            clear left
+                            width 100%
+
             footer
                 display none
 
@@ -472,7 +492,7 @@
             border none
             background #4e4e4e
             overflow auto
-            
+
     .landing,
     .dashboard
         .wrapper
@@ -488,7 +508,7 @@
                 background #000
                 z-index 5
                 opacity .8
-                
+
             header
                 .bt-nav
                     position relative
@@ -514,7 +534,7 @@
                         margin-top -9px
                         size 19px 18px
                         replace('icon-mobile-nav.png')
-                        
+
                 .nav
                     position absolute
                     left 0
@@ -527,10 +547,10 @@
                     box()
                     padding 0
                     transition height .3s ease-in-out
-                    
+
                     ul
                         padding 20px 0
-                        
+
                     li
                         float none
                         display block
@@ -552,7 +572,7 @@
 
                             &:focus
                                 color #ca3939
-                   
+
                             &.bt-login
                                 display block
                                 height auto

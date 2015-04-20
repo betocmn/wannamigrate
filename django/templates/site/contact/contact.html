@@ -2,39 +2,48 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block body %}
+    <body class="dashboard choose contactus">
+{% endblock body %}
+
+{% block background %}
+    <div class="background">
+        <img class="img" src="{% static 'site/img/contact-us-bg.jpg' %}" alt="Contact Us" />
+    </div>
+{% endblock background %}
+
 {% block situation %} {% endblock situation %}
 
 {% block content %}
 
-    <section class="contact_title">
-        <div>
-            Contact Us
-        </div>
-    </section>
-    <section class="contact_bg">
-        <div class="contact">
-            <div class="contact_box">
+    <div class="content">
+        <section class="contact-us">
+            <h2 class="title">Contact us</h2>
+            <strong class="description"><span>Wanna Migrate</span> is in BETA version and we are working around the clock to have a full software solution to help future immigrants.</strong>
 
-                {% include "site/_common/status.html" %}
+            <form method="post" action="" id="main_form">
+                <fieldset>
+                    <legend>Your feedback is very valuable for us, so feel free to get in touch using the form below:</legend>
 
-                <form method="post" action="" id="main_form">
+                    {% include "site/_common/status.html" %}
 
                     {% csrf_token %}
 
                     {% for field in form %}
-                        <label class="contact_label error-element{% if field.errors %} has-error{% endif %}" for="{{ field.id_for_label }}">
-                            <span>{{ field.label }}:</span>
+                        <div class="{{ field.name }} field error-element{% if field.errors %} has-error{% endif %}">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                             {{ field }}
                             {{ field.errors }}
-                        </label>
+                        </div>
                     {% endfor %}
 
-                    <input class="button" type="submit" value="Send" />
-
-                </form>
-            </div>
-        </div>
-    </section>
+                    <div class="field">
+                        <button class="button bt-send">Send</button>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
 
 {% endblock content %}
 
@@ -52,6 +61,9 @@
 			$( "#main_form" ).submit( function() {
 				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
 			});
+
+            // create custom dropdown for situatino countries
+            $( "select" ).msDropdown();
 
         });
 

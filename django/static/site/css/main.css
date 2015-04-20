@@ -2751,6 +2751,9 @@ select {
   .landing footer .nav-footer .nav-footer-link {
     font-size: 12px;
   }
+  .choose .content.choose-destiny .steps .step .item .information-field .bt-edit {
+    right: -50px;
+  }
 }
 @media screen and (max-width: 768px) {
   html.fixed {
@@ -3269,7 +3272,12 @@ select {
   .dashboard .wrapper .content.hiring {
     display: none;
   }
-  .dashboard .wrapper footer {
+  .dashboard.choose .content.choose-destiny .steps .step {
+    float: none;
+    clear: left;
+    width: 100%;
+  }
+  .dashboard.choose footer {
     display: none;
   }
   .dashboard .autocomplete-suggestions {
@@ -5882,8 +5890,13 @@ select {
   text-align: center;
   font-family: 'open_sansbold';
   font-weight: normal;
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
+}
+.content.choose-destiny .steps .step .top .subtitle {
+  display: block;
+  width: 70%;
+  padding: 0 0 0 90px;
 }
 .content.choose-destiny .steps .step .top:before {
   content: '';
@@ -5916,15 +5929,22 @@ select {
 }
 .content.choose-destiny .steps .step .item {
   width: 100%;
-  height: 220px;
+  height: 100%;
+  padding: 1% 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .content.choose-destiny .steps .step .item:hover {
   background-color: #fff;
 }
 .content.choose-destiny .steps .step .item .progress {
   float: left;
-  width: 250px;
-  margin: 75px 25% 0;
+  width: 230px;
+  margin: 30px 25% 0;
 }
 .content.choose-destiny .steps .step .item .progress .type {
   font-family: 'open_sanssemibold';
@@ -5977,8 +5997,8 @@ select {
 .content.choose-destiny .steps .step .item .information-field {
   position: relative;
   display: block;
-  width: 400px;
-  height: 220px;
+  width: 70%;
+  height: 150px;
   margin: 0 auto;
 }
 .content.choose-destiny .steps .step .item .information-field .porcentage {
@@ -5994,7 +6014,7 @@ select {
 .content.choose-destiny .steps .step .item .information-field .bt-edit {
   position: absolute;
   right: 0;
-  top: 100px;
+  top: 60px;
   width: 32px;
   height: 32px;
   display: block;
@@ -6015,7 +6035,7 @@ select {
   content: '';
   position: absolute;
   left: 0;
-  top: 75px;
+  top: 30px;
   width: 82px;
   height: 80px;
   display: block;
@@ -6028,7 +6048,7 @@ select {
   content: '';
   position: absolute;
   left: 0;
-  top: 75px;
+  top: 30px;
   width: 72px;
   height: 73px;
   display: block;
@@ -6042,7 +6062,7 @@ select {
   content: '';
   position: absolute;
   left: -15px;
-  top: 75px;
+  top: 30px;
   width: 95px;
   height: 70px;
   display: block;
@@ -6056,7 +6076,7 @@ select {
   content: '';
   position: absolute;
   left: 0;
-  top: 75px;
+  top: 30px;
   width: 78px;
   height: 78px;
   display: block;
@@ -6068,6 +6088,7 @@ select {
 }
 .content.choose-destiny .steps .step.step-one {
   height: 100%;
+  min-height: 800px;
   background-color: #f4f4f4;
 }
 .content.choose-destiny .steps .step.step-one .top {
@@ -6082,7 +6103,7 @@ select {
   border-top: 10px solid #845996;
 }
 .content.choose-destiny .steps .step.step-two {
-  min-height: 1010px;
+  min-height: 800px;
   background-color: #f8f8f8;
 }
 .content.choose-destiny .steps .step.step-two .top {
@@ -6106,18 +6127,19 @@ select {
 .content.choose-destiny .steps .step.step-two .countries-list .country-item {
   display: block;
   width: 100%;
-  height: 275px;
+  height: 100%;
   cursor: pointer;
   overflow: hidden;
 }
 .content.choose-destiny .steps .step.step-two .countries-list .country-item:hover {
-  background-color: #fff;
+  background-color: #f4f4f4;
 }
 .content.choose-destiny .steps .step.step-two .countries-list .country-item .country {
   display: block;
   width: 300px;
   height: 108px;
-  margin: 90px auto 0;
+  padding: 8% 0;
+  margin: 0 auto 0;
 }
 .content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar {
   float: left;
@@ -6182,7 +6204,7 @@ select {
 }
 .content.choose-destiny .steps .step.step-three {
   position: relative;
-  min-height: 1010px;
+  min-height: 800px;
   height: 100%;
   background-color: #f4f4f4;
 }
@@ -6340,8 +6362,8 @@ select {
   width: 25%;
   height: 1000px;
 }
-.content.results .country-result.japan {
-  background: transparent url("../img/ilustration-japan.jpg") no-repeat 0 0;
+.content.results .country-result.new-zealand {
+  background: transparent url("../img/illustration-newzealand.jpg") no-repeat 0 0;
 }
 .content.results .country-result .country {
   display: block;
@@ -6434,8 +6456,8 @@ select {
   background: transparent url("../img/canada-circle-map.png") no-repeat 0 0;
   background-position: center center;
 }
-.content.results .main .my-situation .graph .circle-progress-bar.japan {
-  background: transparent url("../img/japan-circle-map.png") no-repeat 0 0;
+.content.results .main .my-situation .graph .circle-progress-bar.newzealand {
+  background: transparent url("../img/newzealand-circle-map.png") no-repeat 0 0;
   background-position: center center;
 }
 .content.results .main .my-situation .graph .circle-progress-bar.australia {
@@ -6809,18 +6831,18 @@ select {
   display: block;
   padding: 0 0 20px 23%;
 }
-.contact {
+.contactus {
   font-family: 'open_sansregular';
   color: #fffefc;
   background-color: #000;
 }
-.contact .background {
+.contactus .background {
   position: fixed;
   width: 100%;
   height: 100%;
   z-index: -1;
 }
-.contact .button {
+.contactus .button {
   display: block;
   height: auto;
   padding: 13px 0;
@@ -6855,7 +6877,7 @@ select {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #26a881), color-stop(100%, #2cc092));
   -webkit-background-origin: padding-box;
 }
-.contact .button:hover {
+.contactus .button:hover {
   -moz-box-shadow: 0 1px 1px 0 #125338;
   -webkit-box-shadow: 0 1px 1px 0 #125338;
   box-shadow: 0 1px 1px 0 #125338;
@@ -6865,7 +6887,7 @@ select {
   -webkit-background-origin: padding-box;
   border-color: #9842b1;
 }
-.contact .content .contact-us {
+.contactus .content .contact-us {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -6874,7 +6896,7 @@ select {
   margin-left: -480px;
   margin-top: -125px;
 }
-.contact .content .contact-us .title {
+.contactus .content .contact-us .title {
   display: block;
   padding: 0 0 65px 0;
   text-align: center;
@@ -6882,7 +6904,7 @@ select {
   font-weight: normal;
   font-size: 60px;
 }
-.contact .content .contact-us .description {
+.contactus .content .contact-us .description {
   display: block;
   width: 80%;
   margin: 0 auto 20px;
@@ -6893,43 +6915,43 @@ select {
   font-size: 22px;
   color: #fff;
 }
-.contact .content .contact-us .description span {
+.contactus .content .contact-us .description span {
   font-family: 'open_sansbold';
   color: #ffce00;
 }
-.contact .content .contact-us form {
+.contactus .content .contact-us form {
   padding: 0 0 50px 0;
   overflow: hidden;
 }
-.contact .content .contact-us form fieldset {
+.contactus .content .contact-us form fieldset {
   width: 70%;
   margin: 0 auto;
 }
-.contact .content .contact-us form fieldset legend {
+.contactus .content .contact-us form fieldset legend {
   display: block;
   line-height: 20px;
   padding: 0 0 45px;
   font-size: 16px;
   text-align: center;
 }
-.contact .content .contact-us form fieldset .field {
+.contactus .content .contact-us form fieldset .field {
   width: 70%;
   height: 80px;
   margin: 0 auto;
 }
-.contact .content .contact-us form fieldset .field.message {
+.contactus .content .contact-us form fieldset .field.message {
   height: auto;
 }
-.contact .content .contact-us form fieldset .field label {
+.contactus .content .contact-us form fieldset .field label {
   display: block;
   font-size: 14px;
   padding: 0 0 5px 10px;
 }
-.contact .content .contact-us form fieldset .field input {
+.contactus .content .contact-us form fieldset .field input {
   width: 100%;
   font-size: 14px;
 }
-.contact .content .contact-us form fieldset .field textarea {
+.contactus .content .contact-us form fieldset .field textarea {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -6946,12 +6968,777 @@ select {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-.contact .content .contact-us form fieldset .field .bt-send {
+.contactus .content .contact-us form fieldset .field .bt-send {
   width: 100%;
   margin: 10px 0 0;
 }
-.contact footer {
+.contactus footer {
   display: none;
+}
+.dashboard-edit-forms header {
+  position: fixed;
+  z-index: 6;
+}
+.dashboard-edit-forms .content.edit-forms {
+  width: 100%;
+  margin: 0 auto 0;
+  padding: 80px 0 0 0;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms form {
+  display: block;
+}
+.dashboard-edit-forms .content.edit-forms .top {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  height: 130px;
+  padding: 0 5%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e8e8e8;
+}
+.dashboard-edit-forms .content.edit-forms .top .text {
+  position: relative;
+  float: left;
+  width: 40%;
+  padding: 0 0 0 7%;
+  margin: 25px 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dashboard-edit-forms .content.edit-forms .top .text .title {
+  display: block;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 26px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .top .text p {
+  display: block;
+  padding: 10px 0 0;
+  line-height: 22px;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .top .text.personal:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 82px;
+  height: 80px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms .top .text.language:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 72px;
+  height: 73px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -90px 0;
+}
+.dashboard-edit-forms .content.edit-forms .top .text.education:before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 0;
+  width: 95px;
+  height: 70px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -178px 0;
+}
+.dashboard-edit-forms .content.edit-forms .top .text.work:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 78px;
+  height: 78px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icons-choose-destiny.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-position: -294px 0;
+}
+.dashboard-edit-forms .content.edit-forms .top .bt-save {
+  float: right;
+  height: 40px;
+  padding: 0 25px;
+  margin: 40px 0 0;
+  font-size: 16px;
+}
+.dashboard-edit-forms .content.edit-forms .details {
+  width: 28%;
+  height: auto;
+  padding: 170px 0 120px;
+  margin: 0 auto;
+  min-height: 530px;
+}
+.dashboard-edit-forms .content.edit-forms .details .subtitle {
+  display: block;
+  padding: 0 0 40px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+  color: #555;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset {
+  display: block;
+  height: auto;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field {
+  display: block;
+  height: 75px;
+  padding: 0 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field .dd {
+  border-color: #d0b5db;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.name label {
+  line-height: 28px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.make-anonymous {
+  height: 40px;
+  padding: 0 0 0 10px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.make-anonymous label {
+  line-height: 42px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.gender {
+  clear: left;
+  height: 50px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.gender span {
+  float: left;
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 0 0 10px;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.gender .male {
+  float: left;
+  padding: 0 20px 0 15px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.gender label {
+  line-height: 42px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.birth label {
+  display: block;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.birth select {
+  width: 120px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member {
+  height: auto;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member strong {
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 0 0 10px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .option {
+  float: left;
+  height: 42px;
+  line-height: 42px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .option.yes {
+  padding-right: 15px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries {
+  clear: left;
+  display: block;
+  width: 465px;
+  height: auto;
+  padding: 16px 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background: transparent url("../img/form-country-border.png") no-repeat 0 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country {
+  position: relative;
+  display: block;
+  width: 465px;
+  height: 95px;
+  padding: 14px 0 0 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country label {
+  display: block;
+  padding: 0 0 5px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country select {
+  width: 120px;
+  padding: 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country .bt-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country .bt-delete:before {
+  content: '+';
+  display: block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .bt-add {
+  display: block;
+  width: 118px;
+  height: 24px;
+  line-height: 24px;
+  border: 1px solid #707070;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'open_sanssemibold';
+  font-size: 10px;
+  color: #fdfdfd;
+  background-color: #878787;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field {
+  height: auto;
+  padding: 0 0 20px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field strong {
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 0 0 10px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .option {
+  float: left;
+  height: 42px;
+  line-height: 42px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .option.yes {
+  padding-right: 15px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages {
+  clear: left;
+  display: block;
+  width: 465px;
+  height: auto;
+  padding: 16px 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background: transparent url("../img/form-country-border.png") no-repeat 0 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language {
+  position: relative;
+  display: block;
+  width: 465px;
+  height: 95px;
+  padding: 14px 0 0 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-which {
+  float: left;
+  display: block;
+  width: 170px;
+  margin: 0 15px 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language label {
+  display: block;
+  padding: 0 0 5px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language select {
+  width: 170px;
+  padding: 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .bt-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .bt-delete:before {
+  content: '+';
+  display: block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .bt-add {
+  display: block;
+  width: 118px;
+  height: 24px;
+  line-height: 24px;
+  border: 1px solid #707070;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'open_sanssemibold';
+  font-size: 10px;
+  color: #fdfdfd;
+  background-color: #878787;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.married {
+  height: 100px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.married label {
+  display: block;
+  line-height: 22px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.married select {
+  width: 170px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field {
+  height: auto;
+  padding: 0 0 20px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field strong {
+  line-height: 22px;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals {
+  clear: left;
+  display: block;
+  width: 465px;
+  height: auto;
+  padding: 16px 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background: transparent url("../img/form-country-border.png") no-repeat 0 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education {
+  position: relative;
+  display: block;
+  width: 465px;
+  height: auto;
+  padding: 14px 0 15px 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-which {
+  float: left;
+  display: block;
+  width: 170px;
+  margin: 0 15px 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level {
+  padding: 15px 0 0 15px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level select {
+  width: 355px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education label {
+  display: block;
+  padding: 0 0 5px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education input {
+  height: 42px;
+  font-size: 16px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education input::-webkit-input-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education input:-moz-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education input::-moz-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education input:-ms-input-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education select {
+  width: 170px;
+  padding: 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .bt-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .bt-delete:before {
+  content: '+';
+  display: block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .bt-add {
+  display: block;
+  width: 118px;
+  height: 24px;
+  line-height: 24px;
+  border: 1px solid #707070;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'open_sanssemibold';
+  font-size: 10px;
+  color: #fdfdfd;
+  background-color: #878787;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field {
+  height: 140px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field .occupation {
+  margin: 0 0 10px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field strong {
+  display: block;
+  padding: 0 0 5px;
+  line-height: 22px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field label {
+  display: none;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field select {
+  width: 345px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field {
+  height: auto;
+  padding: 0 0 20px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field strong {
+  display: block;
+  padding: 0 0 5px;
+  line-height: 22px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works {
+  clear: left;
+  display: block;
+  width: 465px;
+  height: auto;
+  padding: 16px 0 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background: transparent url("../img/form-country-border.png") no-repeat 0 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work {
+  position: relative;
+  display: block;
+  width: 465px;
+  height: 160px;
+  padding: 14px 0 15px 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience {
+  float: left;
+  width: 195px;
+  margin: 0 15px 10px 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience input {
+  line-height: 40px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work label {
+  display: block;
+  padding: 0 0 5px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work input {
+  height: 42px;
+  font-size: 16px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work input::-webkit-input-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work input:-moz-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work input::-moz-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work input:-ms-input-placeholder {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 16px;
+  color: #845996;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work select {
+  width: 195px;
+  padding: 0;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .bt-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .bt-delete:before {
+  content: '+';
+  display: block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .bt-add {
+  display: block;
+  width: 118px;
+  height: 24px;
+  line-height: 24px;
+  border: 1px solid #707070;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'open_sanssemibold';
+  font-size: 10px;
+  color: #fdfdfd;
+  background-color: #878787;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.hinterland span,
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.commom span {
+  display: block;
+  line-height: 22px;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.hinterland .option,
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.commom .option {
+  float: left;
+  width: 80px;
+  height: 42px;
+  line-height: 42px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.hinterland .option.yes,
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.commom .option.yes {
+  padding-right: 15px;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.commom {
+  clear: left;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset label {
+  padding: 0 0 5px 10px;
+  font-size: 14px;
+  color: #888;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset input[type="checkbox"],
+.dashboard-edit-forms .content.edit-forms .details fieldset input[type="radio"] {
+  display: block;
+  float: left;
+  width: auto;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset input[type="text"] {
+  width: 100%;
+}
+.dashboard-edit-forms .content.edit-forms .education-form .married label {
+  padding-left: 0;
+}
+.dashboard-edit-forms footer {
+  position: fixed;
+  bottom: 0;
+  padding: 0;
+  background-color: #252525;
+}
+.dashboard-edit-forms footer .options-list {
+  width: 405px;
+  height: 70px;
+  margin: 0 auto;
+}
+.dashboard-edit-forms footer .options-list .option-item {
+  position: relative;
+  float: left;
+  display: block;
+  width: auto;
+  height: 70px;
+  line-height: 70px;
+  padding: 0 20px;
+}
+.dashboard-edit-forms footer .options-list .option-item:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 27px;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid #565656;
+  border-right: 2px solid #565656;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.dashboard-edit-forms footer .options-list .option-item:last-child:after {
+  display: none;
+}
+.dashboard-edit-forms footer .options-list .option-item .option-link {
+  font-size: 12px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #888;
+}
+.dashboard-edit-forms footer .options-list .option-item .option-link:hover {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #fccc00;
+}
+.dashboard-edit-forms footer .bt {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 149px;
+  height: 70px;
+  line-height: 70px;
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  background-color: #363636;
+}
+.dashboard-edit-forms footer .bt:hover {
+  background-color: #fccc00;
+}
+.dashboard-edit-forms footer .bt.bt-previous {
+  left: 0;
+  border-right: 1px solid #494949;
+}
+.dashboard-edit-forms footer .bt.bt-next {
+  right: 0;
+  border-left: 1px solid #494949;
 }
 @media screen and (max-width: 1366px) {
   .landing header nav {
@@ -6987,6 +7774,9 @@ select {
   }
   .landing footer .nav-footer .nav-footer-link {
     font-size: 12px;
+  }
+  .choose .content.choose-destiny .steps .step .item .information-field .bt-edit {
+    right: -50px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -7506,7 +8296,12 @@ select {
   .dashboard .wrapper .content.hiring {
     display: none;
   }
-  .dashboard .wrapper footer {
+  .dashboard.choose .content.choose-destiny .steps .step {
+    float: none;
+    clear: left;
+    width: 100%;
+  }
+  .dashboard.choose footer {
     display: none;
   }
   .dashboard .autocomplete-suggestions {

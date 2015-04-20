@@ -21,10 +21,15 @@
     </head>
 
 
+    {% block body %}
     <body class="dashboard">
+    {% endblock body %}
 
         <div class="wrapper">
 
+            {% block background %}{% endblock background %}
+
+            {% block header %}
             <header>
                 <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
                 <a href="#" class="bt-nav">Menu</a>
@@ -129,6 +134,7 @@
                     </li>
                 </ul>
             </section>
+            {% endblock header %}
 
             {% block situation %}
                 <section class="situations">

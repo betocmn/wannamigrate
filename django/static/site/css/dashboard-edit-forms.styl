@@ -1,0 +1,672 @@
+.dashboard-edit-forms
+    header
+        position fixed
+        z-index 6
+    .content
+        &.edit-forms
+            width 100%
+            margin 0 auto 0
+            padding 80px 0 0 0
+            overflow hidden
+
+            form
+                display block
+
+            .top
+                position fixed
+                z-index 5
+                size 100% 130px
+                padding 0 5%
+                box()
+                background-color #f9f9f9
+                border-bottom 1px solid #e8e8e8
+
+                .text
+                    position relative
+                    float left
+                    width 40%
+                    padding 0 0 0 7%
+                    margin 25px 0 0
+                    box()
+
+                    .title
+                        display block
+                        fontbd()
+                        font-weight normal
+                        font-size 26px
+                        color #845996
+
+                    p
+                        display block
+                        padding 10px 0 0
+                        line-height 22px
+                        font-size 14px
+                        color #888
+
+                    &.personal
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 0
+                            top 0
+                            size 82px 80px
+                            replace('icons-choose-destiny.png')
+
+                    &.language
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 0
+                            top 0
+                            size 72px 73px
+                            replace('icons-choose-destiny.png')
+                            background-position -90px 0
+
+                    &.education
+
+                        &:before
+                            content ''
+                            position absolute
+                            left -15px
+                            top 0
+                            size 95px 70px
+                            replace('icons-choose-destiny.png')
+                            background-position -178px 0
+
+                    &.work
+
+                        &:before
+                            content ''
+                            position absolute
+                            left 0
+                            top 0
+                            square 78px
+                            replace('icons-choose-destiny.png')
+                            background-position -294px 0
+
+                .bt-save
+                    float right
+                    height 40px
+                    padding 0 25px
+                    margin 40px 0 0
+                    font-size 16px
+
+            .details
+                size 28% auto
+                padding 170px 0 120px
+                margin 0 auto
+                min-height 530px
+
+                .subtitle
+                    display block
+                    padding 0 0 40px
+                    text-align center
+                    text-transform uppercase
+                    font-size 16px
+                    fontsb()
+                    font-weight normal
+                    color #555
+
+                fieldset
+                    display block
+                    height auto
+
+                    .field
+                        display block
+                        height 75px
+                        padding 0 0
+
+                        .dd
+                            border-color #d0b5db
+
+                        &.name
+                            label
+                                line-height 28px
+
+                        &.make-anonymous
+                            height 40px
+                            padding 0 0 0 10px
+
+                            label
+                                line-height 42px
+
+                        &.gender
+                            clear left
+                            height 50px
+
+                            span
+                                float left
+                                display block
+                                height 42px
+                                line-height 42px
+                                padding 0 0 0 10px
+                                font-size 14px
+                                color #888
+
+                            .male
+                                float left
+                                padding 0 20px 0 15px
+
+                            label
+                                line-height 42px
+
+                        &.birth
+                            label
+                                display block
+
+                            select
+                                width 120px
+
+
+                        &.family-member
+                            height auto
+
+                            strong
+                                display block
+                                height 42px
+                                line-height 42px
+                                padding 0 0 0 10px
+                                font-weight normal
+                                font-size 14px
+                                color #888
+
+                            .option
+                                float left
+                                height 42px
+                                line-height 42px
+
+                                &.yes
+                                    padding-right 15px
+
+                            .countries
+                                clear left
+                                display block
+                                size 465px auto
+                                padding 16px 0 0
+                                box()
+                                bg('form-country-border.png')
+
+                                .country
+                                    position relative
+                                    display block
+                                    size 465px 95px
+                                    padding 14px 0 0 20px
+                                    box()
+                                    background-color #f9f9f9
+
+                                    label
+                                        display block
+                                        padding 0 0 5px
+
+                                    select
+                                        width 120px
+                                        padding 0
+
+                                    .bt-delete
+                                        position absolute
+                                        right 0
+                                        top 0
+                                        display block
+                                        square 24px
+                                        text-decoration none
+                                        border 1px solid #e2e2e2
+                                        overflow hidden
+
+                                        &:before
+                                            content '+'
+                                            display block
+                                            transform rotate(-45deg)
+                                            font-size 24px
+                                            text-align center
+                                            text-decoration none
+                                            color #888
+
+                            .bt-add
+                                display block
+                                size 118px 24px
+                                line-height 24px
+                                border 1px solid #707070
+                                text-align center
+                                text-transform uppercase
+                                text-decoration none
+                                fontsb()
+                                font-size 10px
+                                color #fdfdfd
+                                background-color #878787
+
+                        &.languages-field
+                            height auto
+                            padding 0 0 20px
+
+                            strong
+                                display block
+                                height 42px
+                                line-height 42px
+                                padding 0 0 0 10px
+                                font-weight normal
+                                font-size 14px
+                                color #888
+
+                            .option
+                                float left
+                                height 42px
+                                line-height 42px
+
+                                &.yes
+                                    padding-right 15px
+
+                            .languages
+                                clear left
+                                display block
+                                size 465px auto
+                                padding 16px 0 0
+                                box()
+                                bg('form-country-border.png')
+
+                                .language
+                                    position relative
+                                    display block
+                                    size 465px 95px
+                                    padding 14px 0 0 20px
+                                    box()
+                                    background-color #f9f9f9
+
+                                    .language-which
+                                        float left
+                                        display block
+                                        width 170px
+                                        margin 0 15px 0
+
+                                    label
+                                        display block
+                                        padding 0 0 5px
+
+                                    select
+                                        width 170px
+                                        padding 0
+
+                                    .bt-delete
+                                        position absolute
+                                        right 0
+                                        top 0
+                                        display block
+                                        square 24px
+                                        text-decoration none
+                                        border 1px solid #e2e2e2
+                                        overflow hidden
+
+                                        &:before
+                                            content '+'
+                                            display block
+                                            transform rotate(-45deg)
+                                            font-size 24px
+                                            text-align center
+                                            text-decoration none
+                                            color #888
+
+                            .bt-add
+                                display block
+                                size 118px 24px
+                                line-height 24px
+                                border 1px solid #707070
+                                text-align center
+                                text-transform uppercase
+                                text-decoration none
+                                fontsb()
+                                font-size 10px
+                                color #fdfdfd
+                                background-color #878787
+
+                        &.married
+                            height 100px
+                            label
+                                display block
+                                line-height 22px
+
+                            select
+                                width 170px
+
+                        &.educational-field
+                            height auto
+                            padding 0 0 20px
+
+                            strong
+                                line-height 22px
+                                font-size 14px
+                                color #888
+
+                            .educationals
+                                clear left
+                                display block
+                                size 465px auto
+                                padding 16px 0 0
+                                box()
+                                bg('form-country-border.png')
+
+                                .education
+                                    position relative
+                                    display block
+                                    size 465px auto
+                                    padding 14px 0 15px 20px
+                                    box()
+                                    background-color #f9f9f9
+
+                                    .education-which
+                                        float left
+                                        display block
+                                        width 170px
+                                        margin 0 15px 0
+
+                                    .field.level
+                                        padding 15px 0 0 15px
+
+                                        select
+                                            width 355px
+
+                                    label
+                                        display block
+                                        padding 0 0 5px
+
+                                    input
+                                        height 42px
+                                        font-size 16px
+                                        color #888
+
+                                        &::-webkit-input-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &:-moz-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &::-moz-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &:-ms-input-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+
+                                    select
+                                        width 170px
+                                        padding 0
+
+                                    .bt-delete
+                                        position absolute
+                                        right 0
+                                        top 0
+                                        display block
+                                        square 24px
+                                        text-decoration none
+                                        border 1px solid #e2e2e2
+                                        overflow hidden
+
+                                        &:before
+                                            content '+'
+                                            display block
+                                            transform rotate(-45deg)
+                                            font-size 24px
+                                            text-align center
+                                            text-decoration none
+                                            color #888
+
+                            .bt-add
+                                display block
+                                size 118px 24px
+                                line-height 24px
+                                border 1px solid #707070
+                                text-align center
+                                text-transform uppercase
+                                text-decoration none
+                                fontsb()
+                                font-size 10px
+                                color #fdfdfd
+                                background-color #878787
+
+                        &.occupation-field
+                            height 140px
+
+                            .occupation
+                                margin 0 0 10px
+
+                            strong
+                                display block
+                                padding 0 0 5px
+                                line-height 22px
+                                font-weight normal
+                                font-size 14px
+                                color #888
+
+                            label
+                                display none
+
+                            select
+                                width 345px
+
+                        &.works-field
+                            height auto
+                            padding 0 0 20px
+
+                            strong
+                                display block
+                                padding 0 0 5px
+                                line-height 22px
+                                font-weight normal
+                                font-size 14px
+                                color #888
+
+                            .works
+                                clear left
+                                display block
+                                size 465px auto
+                                padding 16px 0 0
+                                box()
+                                bg('form-country-border.png')
+
+                                .work
+                                    position relative
+                                    display block
+                                    size 465px 160px
+                                    padding 14px 0 15px 20px
+                                    box()
+                                    background-color #f9f9f9
+
+                                    .experience
+                                        float left
+                                        width 195px
+                                        margin 0 15px 10px 0
+
+                                        input
+                                            line-height 40px
+
+                                    label
+                                        display block
+                                        padding 0 0 5px
+
+                                    input
+                                        height 42px
+                                        font-size 16px
+                                        color #888
+
+                                        &::-webkit-input-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &:-moz-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &::-moz-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                        &:-ms-input-placeholder
+                                            fontbd()
+                                            font-weight normal
+                                            font-size 16px
+                                            color #845996
+
+                                    select
+                                        width 195px
+                                        padding 0
+
+                                    .bt-delete
+                                        position absolute
+                                        right 0
+                                        top 0
+                                        display block
+                                        square 24px
+                                        text-decoration none
+                                        border 1px solid #e2e2e2
+                                        overflow hidden
+
+                                        &:before
+                                            content '+'
+                                            display block
+                                            transform rotate(-45deg)
+                                            font-size 24px
+                                            text-align center
+                                            text-decoration none
+                                            color #888
+
+                            .bt-add
+                                display block
+                                size 118px 24px
+                                line-height 24px
+                                border 1px solid #707070
+                                text-align center
+                                text-transform uppercase
+                                text-decoration none
+                                fontsb()
+                                font-size 10px
+                                color #fdfdfd
+                                background-color #878787
+
+                        &.hinterland,
+                        &.commom
+                            span
+                                display block
+                                line-height 22px
+                                font-size 14px
+                                color #888
+
+                            .option
+                                float left
+                                width 80px
+                                height 42px
+                                line-height 42px
+
+                                &.yes
+                                    padding-right 15px
+
+                         &.commom
+                             clear left
+
+                    label
+                        padding 0 0 5px 10px
+                        font-size 14px
+                        color #888
+
+                    input[type="checkbox"],
+                    input[type="radio"]
+                        display block
+                        float left
+                        width auto
+
+
+                    input[type="text"]
+                        width 100%
+
+            .education-form
+                .married
+                    label
+                        padding-left 0
+
+    footer
+        position fixed
+        bottom 0
+        padding 0
+        background-color #252525
+
+        .options-list
+            size 405px 70px
+            margin 0 auto
+
+            .option-item
+                position relative
+                float left
+                display block
+                size auto 70px
+                line-height 70px
+                padding 0 20px
+
+                &:after
+                    content ''
+                    position absolute
+                    right 0
+                    top 27px
+                    square 15px
+                    border-top 2px solid #565656
+                    border-right 2px solid #565656
+                    transform rotate(45deg)
+
+                &:last-child
+                    &:after
+                        display none
+
+                .option-link
+                    font-size 12px
+                    fontbd()
+                    font-weight normal
+                    text-transform uppercase
+                    text-decoration none
+                    color #888
+
+                    &:hover
+                        fontbd()
+                        font-weight normal
+                        color #fccc00
+
+        .bt
+            position absolute
+            top 0
+            display block
+            size 149px 70px
+            line-height 70px
+            fontbd()
+            font-weight normal
+            font-size 14px
+            text-decoration none
+            text-transform uppercase
+            text-align center
+            color #fff
+            background-color #363636
+
+            &:hover
+                background-color #fccc00
+
+            &.bt-previous
+                left 0
+                border-right 1px solid #494949
+
+            &.bt-next
+                right 0
+                border-left 1px solid #494949
