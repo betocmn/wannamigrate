@@ -20,7 +20,7 @@ import math
 from wannamigrate.core.immigration_calculator import ImmigrationCalculator
 from wannamigrate.core.util import (
     get_internal_country_progress_css_class, get_internal_section_progress_css_class,
-    get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
+    get_dashboard_country_progress_css_color, get_dashboard_user_progress_css_color
 )
 from wannamigrate.points.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
@@ -103,12 +103,12 @@ def dashboard( request ):
                 template_data['nz_points'] = item.score_total
 
     # Define the percentage CSS class to use around country flags for progress bar
-    au_percentage = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
-    ca_percentage = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
-    nz_percentage = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
-    template_data['au_percentage_css_class'] = get_dashboard_country_progress_css_class( au_percentage )
-    template_data['ca_percentage_css_class'] = get_dashboard_country_progress_css_class( ca_percentage )
-    template_data['nz_percentage_css_class'] = get_dashboard_country_progress_css_class( nz_percentage )
+    template_data['au_percentage'] = math.floor( ( 100 * template_data['au_points'] ) / template_data['au_min_points'] )
+    template_data['ca_percentage'] = math.floor( ( 100 * template_data['ca_points'] ) / template_data['ca_min_points'] )
+    template_data['nz_percentage'] = math.floor( ( 100 * template_data['nz_points'] ) / template_data['nz_min_points'] )
+    template_data['au_percentage_css_color'] = get_dashboard_country_progress_css_color( template_data['au_percentage'] )
+    template_data['ca_percentage_css_color'] = get_dashboard_country_progress_css_color( template_data['ca_percentage'] )
+    template_data['nz_percentage_css_color'] = get_dashboard_country_progress_css_color( template_data['nz_percentage'] )
 
     # pass user registration percentages to template
     if user_stats:
@@ -118,10 +118,10 @@ def dashboard( request ):
         template_data['work_percentage'] = user_stats.percentage_work
 
     # Define the percentage css class for progress bar on forms (personal, language, education and work)
-    template_data['personal_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['personal_percentage'] )
-    template_data['language_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['language_percentage'] )
-    template_data['education_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['education_percentage'] )
-    template_data['work_percentage_css_class'] = get_dashboard_user_progress_css_class( template_data['work_percentage'] )
+    template_data['personal_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['personal_percentage'] )
+    template_data['language_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['language_percentage'] )
+    template_data['education_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['education_percentage'] )
+    template_data['work_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['work_percentage'] )
 
     # Print Template
     return render( request, 'points/dashboard/dashboard.html', template_data )

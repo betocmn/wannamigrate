@@ -233,7 +233,7 @@ def get_months_duration_tuple():
     return tuple( [( '', _( 'Select Duration' ) )] + result  )
 
 
-def get_dashboard_country_progress_css_class( percentage ):
+def get_dashboard_country_progress_css_color( percentage ):
     """
     Returns the css class for the approximate percentage for user country points
 
@@ -241,40 +241,18 @@ def get_dashboard_country_progress_css_class( percentage ):
     :return: String
     """
 
-    # If zero, return empty css class
-    if percentage == 0:
-        return 'orange6'
-
-    # if it's 100% full
-    if percentage >= 100:
-        return 'green96'
-
-    # These are the percentages defined by css classes in 'style.css'
-    possible_percentages = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96]
-
     # Define the color of the bar
-    if percentage <= 30:
+    if percentage <= 50:
         color = 'orange'
-    elif percentage <= 70:
+    elif percentage < 100:
         color = 'yellow'
     else:
         color = 'green'
 
-    # We will find the nearest number on the possible list to represent it
-    list_size = len( possible_percentages )
-    for count in range( 0, list_size ):
-        if percentage < possible_percentages[count]:
-            if count == 0:
-                return color + str( possible_percentages[count] )
-            else:
-                return color + str( possible_percentages[count-1] )
-        elif ( count + 1 ) == list_size:
-            return color + str( possible_percentages[count-1] )
-
-    return ''
+    return color
 
 
-def get_dashboard_user_progress_css_class( percentage ):
+def get_dashboard_user_progress_css_color( percentage ):
     """
     Returns the css class for the approximate percentage for user registration data
 
@@ -282,39 +260,17 @@ def get_dashboard_user_progress_css_class( percentage ):
     :return: String
     """
 
-    # If zero, return the minimum class
-    if percentage == 0:
-        return 'progressFillDarkOrange progressFillSize5'
-
-    # if it's 100% full
-    if percentage >= 100:
-        return 'progressFillGreen progressFillSize100'
-
-    # These are the percentages defined by css classes in 'style.css'
-    possible_percentages = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
-
     # Define the color of the bar
     if percentage <= 25:
-        color = 'progressFillDarkOrange progressFillSize'
+        color = 'progress-fill-red'
     elif percentage <= 50:
-        color = 'progressFillOrange progressFillSize'
-    elif percentage <= 75:
-        color = 'progressFillYellow progressFillSize'
+        color = 'progress-fill-orange'
+    elif percentage <= 80:
+        color = 'progress-fill-yellow'
     else:
-        color = 'progressFillGreen progressFillSize'
+        color = 'progress-fill-green'
 
-    # We will find the nearest number on the possible list to represent it
-    list_size = len( possible_percentages )
-    for count in range( 0, list_size ):
-        if percentage < possible_percentages[count]:
-            if count == 0:
-                return color + str( possible_percentages[count] )
-            else:
-                return color + str( possible_percentages[count-1] )
-        elif ( count + 1 ) == list_size:
-            return color + str( possible_percentages[count-1] )
-
-    return ''
+    return color
 
 
 def get_internal_country_progress_css_class( percentage ):

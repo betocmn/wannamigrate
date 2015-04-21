@@ -3272,6 +3272,38 @@ select {
   .dashboard .wrapper .content.hiring {
     display: none;
   }
+  .dashboard .wrapper .content.extra-tools {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.extra-tools .title {
+    padding-left: 40px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool {
+    width: 100%;
+    height: auto;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool .title-tool {
+    line-height: 25px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool:before {
+    display: none;
+  }
+  .dashboard .wrapper footer {
+    overflow: hidden;
+  }
+  .dashboard .wrapper footer .logo {
+    float: none;
+    margin: 28px auto 0;
+  }
+  .dashboard .wrapper footer .nav-footer,
+  .dashboard .wrapper footer .copyright {
+    display: none;
+  }
   .dashboard.choose .content.choose-destiny .steps .step {
     float: none;
     clear: left;
@@ -8294,6 +8326,38 @@ select {
   }
   .dashboard .wrapper .content.hire,
   .dashboard .wrapper .content.hiring {
+    display: none;
+  }
+  .dashboard .wrapper .content.extra-tools {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.extra-tools .title {
+    padding-left: 40px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool {
+    width: 100%;
+    height: auto;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool .title-tool {
+    line-height: 25px;
+  }
+  .dashboard .wrapper .content.extra-tools .tools .tool:before {
+    display: none;
+  }
+  .dashboard .wrapper footer {
+    overflow: hidden;
+  }
+  .dashboard .wrapper footer .logo {
+    float: none;
+    margin: 28px auto 0;
+  }
+  .dashboard .wrapper footer .nav-footer,
+  .dashboard .wrapper footer .copyright {
     display: none;
   }
   .dashboard.choose .content.choose-destiny .steps .step {
