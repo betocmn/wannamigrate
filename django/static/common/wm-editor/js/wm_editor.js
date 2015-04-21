@@ -80,7 +80,7 @@
         var defaults = 
         {
             // List of buttons enabled on the editor
-            enabled_buttons : [ "heading", "bold", "italic", "underline", "ol", "ul", "quote", "link" ],
+            enabled_buttons : [ "heading", "bold", "italic", "underline", "ol", "ul", "link" ],
 
             // Keep the information about the element
             element_name : this.attr( "name" ),

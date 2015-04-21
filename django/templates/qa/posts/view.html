@@ -6,6 +6,8 @@
 {% block head %}
     {{ block.super }}
 
+    <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
     <style>
         li.related > a {
             text-decoration:none;
@@ -13,6 +15,11 @@
         }
         li.related:hover > a{
             text-decoration: underline;
+        }
+
+        textarea#{{ answer_form.body.id_for_label }}
+        {
+            height:50px;
         }
     </style>
 {% endblock head %}
@@ -96,18 +103,22 @@
         <div class="comment">
             <div class="user">
                 <i class="thumb">
-                    <img src="img/thumb-account.png" alt="">
+                    {% if user.userpersonal.avatar %}
+                        <img id="answer_user_picture" src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="user photo">
+                    {% else %}
+                        <img id="answer_user_picture" src="{% static 'site/img/thumb-account.png' %}" alt="user photo">
+                    {% endif %}
                 </i>
-                <span class="name">Humberto Martins</span>
-                <span class="info">Designer at humbertolandia.com</span>
-                <label class="make-anonymous" for="make-anonymous">
-                    <!-- <input type="checkbox" name="make-anonymous" value="makeAnonymous"> -->
-                    <i class="checkbox"></i>
-                    <span>Make Anonymous</span>
-                </label>
+                <span id="answer_user_name" class="name">{{ user.name }}</span><br>
+                <!--span class="info">Designer at humbertolandia.com</span-->
+                    <label class="make-anonymous" for="id_is_anonymous">
+                        {{ answer_form.is_anonymous }} <span>Make Anonymous</span>
+                    </label>
             </div>
-            <form>
-                <textarea class="text-coments" placeholder="Make Anonymous"></textarea>
+            <form action="{{ action_url|default:'' }}" method="post" id="main_form" class="add-topic">
+                {% csrf_token %}
+                {{ answer_form.body }}
+                <!--textarea class="text-coments" placeholder="Write your answer..."></textarea-->
                 <input type="submit" class="button bt-write" value="Write answer">
             </form>
         </div>
@@ -248,10 +259,27 @@
     <!-- JS REQUIRED BY THIS PAGE -->
     <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
 
+    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+
     <!-- INLINE JS -->
     <script type="text/javascript">
+        function onAnonymousChange()
+        {
+            if ( $( "#{{ answer_form.is_anonymous.id_for_label }}" ).is( ":checked" ) ) {
+                $( "#answer_user_picture" ).attr( "src", "{% static 'site/img/thumb-account.png' %}" );
+                $( "#answer_user_name" ).text( "Anonymous" );
+            }
+            else {
+                {% if user.userpersonal.avatar %}
+                    $( "#answer_user_picture" ).attr( "src", "{{ user.userpersonal.avatar.thumbnail.url }}" );
+                {% endif %}
+                $( "#answer_user_name" ).text( "{{ user.name }}" );
+            }
+        }
 
         $( document ).ready( function() {
+
+            onAnonymousChange();
 
             $( ".x-link" ).click(function( e ){
 
@@ -284,6 +312,15 @@
 
                 e.preventDefault();
             });
+
+
+            $("#{{ answer_form.body.id_for_label }}").focus(function(){
+                $("#{{ answer_form.body.id_for_label }}").wm_editor();
+                $(this).unbind( "focus" );
+                $("#{{ answer_form.body.id_for_label }}").focus();
+            });
+
+            $( "#{{ answer_form.is_anonymous.id_for_label }}" ).change( onAnonymousChange );
         });
     </script>
 

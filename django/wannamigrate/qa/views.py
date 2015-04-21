@@ -17,7 +17,7 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
-    AddQuestionForm
+    AddQuestionForm, AddAnswerForm
 )
 from wannamigrate.qa.models import(
     Post, Topic
@@ -163,6 +163,9 @@ def view_post( request, post_id ):
 
     template_data[ "answers" ] = answers
     template_data[ "related_content" ] = related_content
+
+    template_data[ "answer_form" ] = AddAnswerForm( owner = request.user )
+
 
     # Print Template
     return render( request, 'qa/posts/view.html', template_data )
