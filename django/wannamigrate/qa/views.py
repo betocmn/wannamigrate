@@ -22,7 +22,12 @@ from wannamigrate.qa.forms import (
 from wannamigrate.qa.models import(
     Post, Topic
 )
+from wannamigrate.core.models import(
+    User, UserStats
+)
 from django.conf import settings
+from django.utils.translation import ugettext as _
+from django.db import transaction
 
 
 ##########################
@@ -34,15 +39,6 @@ def list_posts( request, *args, **kwargs ):
     :param request:
     :return: A template rendered
     """
-
-
-    dbg_str = ""
-    if "post_type_id" in kwargs:
-        dbg_str += "post type found" + "<br>"
-    if "topic_id" in kwargs:
-        dbg_str += "topic id found" + "<br>"
-
-
 
     # FILTERS
     filter_params = {
@@ -56,6 +52,7 @@ def list_posts( request, *args, **kwargs ):
     # Should filter by topics?
     if "topic_id" in kwargs:
         filter_params[ "topic_id" ] = kwargs.get( "topic_id" )
+
     # No? So filter by user's situation
     else:
         # Fills up the situation
@@ -119,10 +116,20 @@ def add_question( request ):
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
         # Saves the post
-        post = form.save()
-        messages.success( request, 'Post successfully created.' )
-        # Redirect with success message
-        return HttpResponseRedirect( reverse( 'qa:view_post', args = ( post.id, ) ) )
+        with transaction.atomic():
+            post = form.save()
+            # PUT GET OR CREATE EVERYWHERE! NICE PATTERN. --
+            stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+            post.followers.add( request.user )
+            post.followers_count += 1
+            stats.total_posts_following += 1
+
+            post.save()
+            stats.save()
+
+            messages.success( request, 'Post successfully created.' )
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'qa:view_post', args = ( post.id, ) ) )
 
     # Template data
     template_data = {
@@ -149,11 +156,15 @@ def view_post( request, post_id ):
     post.views_count = post.views_count + 1
     post.save()
 
+    # Gets the answer form
+    answer_form = AddAnswerForm( request.POST or None, owner = request.user, parent = post )
+    if answer_form.is_valid():
+        answer = answer_form.save()
+        messages.success( request, _( '{0} successfully created.'.format( answer.post_type.name ) ) )
+        return HttpResponseRedirect( reverse( "qa:view_post", kwargs={ "post_id" : post_id } ) + "#answer_{0}".format( answer.id ) )
+
     related_content = Post.objects.filter( related_topics__in = post.related_topics.all() ).exclude( id = post_id ).only( "id", "title" )[0:3]
-
-    answers = Post.objects.filter( parent__id = post_id ).order_by( "upvotes_count", "created_at" )
-
-    template_data[ "post" ] = post
+    answers = Post.objects.filter( parent__id = post_id ).order_by( "-upvotes_count", "-created_date" )
 
     # Checks if the user is following the post
     if post.followers.filter( id = request.user.id ).exists():
@@ -161,11 +172,12 @@ def view_post( request, post_id ):
     else:
         post.is_followed = False
 
+
+    # Fills template data
     template_data[ "answers" ] = answers
     template_data[ "related_content" ] = related_content
-
-    template_data[ "answer_form" ] = AddAnswerForm( owner = request.user )
-
+    template_data[ "answer_form" ] = answer_form
+    template_data[ "post" ] = post
 
     # Print Template
     return render( request, 'qa/posts/view.html', template_data )
@@ -192,24 +204,25 @@ def set_following_post( request, post_id, follow = False ):
     :param following: True to follow the post, False to unfollow.
     :return: A template rendered
     """
-    post = Post.objects.get( pk = post_id )
-    user_id = request.user.id
-    already_following = post.followers.filter( id = user_id ).exists()
+    # Gets the post
+    post = Post.objects.get( id = post_id )
+    stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
 
-    if ( follow ):
-        if not already_following:
-            post.followers.add( user_id )
-            post.followers_count = post.followers_count + 1
-            request.user.userstats.total_posts_following = request.user.userstats.total_posts_following + 1
-            request.user.userstats.save()
-            post.save()
-    else:
-        if already_following:
-            post.followers.remove( user_id )
-            post.followers_count = post.followers_count - 1
-            request.user.userstats.total_posts_following = request.user.userstats.total_posts_following - 1
-            request.user.userstats.save()
-            post.save()
+    with transaction.atomic():
+        if follow:
+            if not post.followers.filter( id = request.user.id ).exists():
+                post.followers.add( request.user )
+                post.followers_count += 1
+                stats.total_posts_following += 1
+                post.save()
+                stats.save()
+        else:
+            if post.followers.filter( id = request.user.id ).exists():
+                post.followers.remove( request.user )
+                post.followers_count -= 1
+                stats.total_posts_following -= 1
+                post.save()
+                stats.save()
 
     return HttpResponse( post.followers_count )
 

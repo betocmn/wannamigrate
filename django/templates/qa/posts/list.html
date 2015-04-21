@@ -27,11 +27,13 @@
                             <div class="data-question">
                                 <a href="{% url "qa:view_post" post.id %}">
                                     <h3 class="title-question">{{ post.title }}</h3>
-                                    {% if post.post_type.id == POST_TYPE_QUESTION_ID %}
-                                        <p class="answer">{{ post.answers.first.body|striptags|truncate_smart:250 }}</p>
-                                    {% elif post.post_type.id == POST_TYPE_BLOGPOST_ID %}
-                                        <p class="answer">{{ post.body|striptags|truncate_smart:250 }}</p>
-                                    {% endif %}
+                                    {% autoescape off %}
+                                        {% if post.post_type.id == POST_TYPE_QUESTION_ID %}
+                                            <p class="answer">{{ post.answers.first.body|striptags|truncate_smart:250 }}</p>
+                                        {% elif post.post_type.id == POST_TYPE_BLOGPOST_ID %}
+                                            <p class="answer">{{ post.body|striptags|truncate_smart:250 }}</p>
+                                        {% endif %}
+                                    {% endautoescape %}
                                 </a>
                             </div>
                             <div class="data">

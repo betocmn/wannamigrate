@@ -95,6 +95,7 @@ class AddAnswerForm( BaseModelForm ):
 
         # Extracts arguments from kwargs
         owner = kwargs.pop( "owner" )
+        parent = kwargs.pop( "parent" )
 
         # Calls the constructor
         super( AddAnswerForm, self ).__init__( *args, **kwargs )
@@ -102,6 +103,7 @@ class AddAnswerForm( BaseModelForm ):
         # Initialize pre-defined data.
         self.instance.post_type = PostType.objects.get( pk = settings.QA_POST_TYPE_ANSWER_ID )
         self.instance.owner = owner
+        self.instance.parent = parent
 
         # Overrides the IS_ANONYMOUS widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
@@ -115,8 +117,9 @@ class AddAnswerForm( BaseModelForm ):
             :param: commit Indicates wether to save the model or not
         """
         with transaction.atomic():
-            instance = super( AddQuestionForm, self ).save( commit = False )
+            instance = super( AddAnswerForm, self ).save( commit = False )
             instance.parent.last_activity_date = timezone.now()
+            instance.parent.answers_count += 1
 
             if commit:
                 instance.save()
