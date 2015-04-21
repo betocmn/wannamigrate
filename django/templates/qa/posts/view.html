@@ -189,9 +189,9 @@
         <div class="related-content">
             <h3 class="title">Related Content</h3>
             <ul>
-                {% for p in related_content %}
+                {% for related_post in related_content %}
                 <li class="related">
-                    <a href="{% url "qa:view_post" post.id %}">{{ post.title }}</a>
+                    <a href="{% url "qa:view_post" related_post.id %}">{{ related_post.title|truncate_smart:50 }}</a>
                 </li>
                 {% endfor %}
             </ul>
