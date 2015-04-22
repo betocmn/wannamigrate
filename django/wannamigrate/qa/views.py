@@ -20,7 +20,7 @@ from wannamigrate.qa.forms import (
     AddQuestionForm, AddAnswerForm
 )
 from wannamigrate.qa.models import(
-    Post, Topic
+    Post, Topic, Vote
 )
 from wannamigrate.core.models import(
     User, UserStats
@@ -227,6 +227,60 @@ def set_following_post( request, post_id, follow = False ):
     return HttpResponse( post.followers_count )
 
 
+@ajax_login_required
+def set_upvote_post( request, post_id, upvote = False ):
+    """
+        Upvote or downvote a post.
+    :param request:
+    :param post_id: The id of the post to follow/unfollow
+    :param upvote: True to upvote the post, False to downvote.
+    :return: A template rendered
+    """
+    post = Post.objects.get( id = post_id )
+
+    upvoted = Vote.objects.filter(
+        post_id = post_id,
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
+    ).first()
+
+    downvoted = Vote.objects.filter(
+        post_id = post_id,
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
+    ).first()
+
+    with transaction.atomic():
+        if upvote: # UPVOTING
+            # Delete the downvote if exists
+            if downvoted:
+                downvoted.delete()
+                post.upvotes_count += 1 # Do the mahts... downvote = -upvote -> -downvote = -(-upvote) -> -downvote = +upvote
+
+            # The post wasn't upvoted yet?
+            if not upvoted:
+                # Creates the upvote
+                v = Vote.objects.create( post_id = post_id, user_id = request.user.id, vote_type_id = settings.QA_VOTE_TYPE_UPVOTE_ID )
+
+                # Increments the upvotes counter of the post
+                post.upvotes_count += 1
+                post.save()
+        else:   # DOWNVOTING
+            # Delete the upvote if exists
+            if upvoted:
+                upvoted.delete()
+                post.upvotes_count -= 1 # Do the mahts...
+
+            # The post wasn't downvoted yet?
+            if not downvoted:
+                # Creates the downvote
+                v = Vote.objects.create( post_id = post_id, user_id = request.user.id, vote_type_id = settings.QA_VOTE_TYPE_DOWNVOTE_ID )
+
+                # Decrements the upvotes counter of the post
+                post.upvotes_count -= 1
+                post.save()
+
+    return HttpResponse( post.upvotes_count )
 
 
 @login_required

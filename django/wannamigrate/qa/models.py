@@ -41,7 +41,7 @@ class Post( BaseModel ):
     # Indicates if the post is anonymous or not.
     is_anonymous = models.BooleanField( default = False )
     # The number of upvotes of an answer
-    upvotes_count = models.PositiveIntegerField( default = 0 )
+    upvotes_count = models.IntegerField( default = 0 )
     # The number of visualizations of this post
     views_count = models.PositiveIntegerField( default = 0 )
     # The number of answers to this post

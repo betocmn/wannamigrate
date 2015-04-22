@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     # AJAX URL's
     url( r'^x/post/follow/(?P<post_id>\d+)', views.set_following_post, { "follow" : True }, name = "ajax_follow_post" ),
     url( r'^x/post/unfollow/(?P<post_id>\d+)', views.set_following_post, { "follow" : False }, name = "ajax_unfollow_post" ),
+    url( r'^x/post/upvote/(?P<post_id>\d+)', views.set_upvote_post, { "upvote" : True }, name = "ajax_upvote_post" ),
+    url( r'^x/post/downvote/(?P<post_id>\d+)', views.set_upvote_post, { "upvote" : False }, name = "ajax_downvote_post" ),
 
 
 

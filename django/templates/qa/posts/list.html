@@ -7,53 +7,56 @@
     <div class="content social">
         {% include "qa/common/side_menu.html" %}
         <section class="content">
-            <div class="question-postList">
+            <div class="questions-answers">
                 {% if blogposts_menu_selected %}
                     <!--a class="button bt-addQuestion">Write a post</a-->
                 {% elif knowledge_menu_selected or questions_menu_selected %}
                     <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
                 {% endif %}
-                <div class="conten-postList">
+                <div class="content-questionsAnswers">
                     {% for post in posts %}
-
                         <div class="question">
                             <div class="tags">
                                 <ul class="tags-list">
                                     {% for topic in post.related_topics.all %}
-                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link active">{{ topic.name }}</a></li>
+                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link">{{ topic.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="data-question">
                                 <a href="{% url "qa:view_post" post.id %}">
                                     <h3 class="title-question">{{ post.title }}</h3>
-                                    {% autoescape off %}
+                                    <p class="answer">
                                         {% if post.post_type.id == POST_TYPE_QUESTION_ID %}
-                                            <p class="answer">{{ post.answers.first.body|striptags|truncate_smart:250 }}</p>
+                                            {{ post.answers.first.body|striptags|truncate_smart:250 }}
                                         {% elif post.post_type.id == POST_TYPE_BLOGPOST_ID %}
-                                            <p class="answer">{{ post.body|striptags|truncate_smart:250 }}</p>
+                                            {{ post.body|striptags|truncate_smart:250 }}
                                         {% endif %}
-                                    {% endautoescape %}
+                                    </p>
                                 </a>
                             </div>
                             <div class="data">
-                                <ul class="data-list list-viewers">
-                                    <li class="data-item">
-                                        {% if post.is_followed %}
-                                            <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
-                                                {% trans "Unfollow" %}
-                                                <span class="count">{{ post.followers_count }}</span>
-                                            </a>
-                                        {% else %}
-                                            <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
-                                                {% trans "Follow" %}
-                                                <span class="count">{{ post.followers_count }}</span>
-                                            </a>
-                                        {% endif %}
-                                    </li>
-                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
-                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
-                                    <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
+                                <ul class="data-list">
+                                    <ul class="list-bt">
+                                        <li class="data-item">
+                                            {% if post.is_followed %}
+                                                <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
+                                                    {% trans "Unfollow" %}
+                                                    <span class="count">{{ post.followers_count }}</span>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
+                                                    {% trans "Follow" %}
+                                                    <span class="count">{{ post.followers_count }}</span>
+                                                </a>
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                    <ul class="list-viewers">
+                                        <li class="data-item"><span class="data-link link-answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
+                                        <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
+                                        <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
+                                    </ul>
                                 </ul>
                             </div>
                             <div class="box-options">
@@ -67,53 +70,6 @@
                             <a href="#" class="bt-options">{% trans "Options" %}</a>
                         </div>
                     {% endfor %}
-                    <!--div class="answers">
-                        <form class="form-comment">
-                            <div class="user">
-                                <i class="thumb">
-                                    <img src="img/thumb-account.png" alt="">
-                                </i>
-                            </div>
-                            <input type="text" class="text-coments" placeholder="Add a comment"></input>
-                            <input type="submit" class="button bt-comment" value="Comment">
-                        </form>
-                        <div class="answer">
-                            <i class="thumb">
-                                <img src="img/thumb-account.png" alt="">
-                            </i>
-                            <div class="post">
-                                <div class="user">
-                                    <span class="name">Humberto Martins</span>
-                                    <span class="info">Designer at humbertolandia.com</span>
-                                </div>
-
-                                <span class="text-post">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.
-                                </span>
-                            </div>
-                        </div>
-                        <div class="answer active">
-                            <i class="thumb">
-                                <img src="img/thumb-account.png" alt="">
-                            </i>
-                            <div class="post">
-                                <div class="user">
-                                    <span class="name">Humberto Martins</span>
-                                    <span class="info">Designer at humbertolandia.com</span>
-                                </div>
-
-                                <span class="text-post">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.
-                                </span>
-                            </div>
-                        </div>
-                    </div-->
                 </div>
             </div>
         </section>
