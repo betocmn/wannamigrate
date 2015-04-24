@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if post.is_followed %}
+    <a id="bt-toggle-follow-{{ post.id }}" href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow bt-toggle-follow">
+        {% trans "Unfollow" %}
+        <span class="count">{{ post.followers_count }}</span>
+    </a>
+{% else %}
+    <a id="bt-toggle-follow-{{ post.id }}" href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow bt-toggle-follow">
+        {% trans "Follow" %}
+        <span class="count">{{ post.followers_count }}</span>
+    </a>
+{% endif %}

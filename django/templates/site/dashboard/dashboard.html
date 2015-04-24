@@ -42,17 +42,7 @@
                             <div class="data">
                                 <ul class="data-list">
                                     <li class="data-item">
-                                        {% if post.is_followed %}
-                                            <a href="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-url="{% url "qa:ajax_follow_post" post.id %}" data-toggle-name="{% trans "Follow" %}" data-name="{% trans "UnFollow" %}" class="data-link bt-follow x-link">
-                                                {% trans "Unfollow" %}
-                                                <span class="count">{{ post.followers_count }}</span>
-                                            </a>
-                                        {% else %}
-                                            <a href="{% url "qa:ajax_follow_post" post.id %}" data-toggle-url="{% url "qa:ajax_unfollow_post" post.id %}" data-toggle-name="{% trans "Unfollow" %}" data-name="{% trans "Follow" %}" class="data-link bt-follow x-link">
-                                                {% trans "Follow" %}
-                                                <span class="count">{{ post.followers_count }}</span>
-                                            </a>
-                                        {% endif %}
+                                        {% include "qa/common/bt_toggle_follow.html" with post=post %}
                                     </li>
                                     <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
                                     <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
@@ -147,43 +137,14 @@
 
     <!-- JS REQUIRED BY THIS PAGE -->
     <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
 
-            $( ".x-link" ).click(function( e ){
-
-                var elm = $(this);
-                var current_url = elm.attr( "href" );
-                var current_name = elm.attr( "data-name" );
-                var toggle_url = elm.attr( "data-toggle-url" );
-                var toggle_name = elm.attr( "data-toggle-name" );
-
-                $.get( current_url, { "_": $.now() }, function( data ){
-                    // Sets the element's content
-                    elm.html( "" ).append( toggle_name ).append( " " ).append(
-                        $( "<span/>" ).attr( "class", "count" ).text( data )
-                    );
-
-                    // Sets the element's name.
-                    elm.attr( "data-name", toggle_name );
-                    // Sets the element href.
-                    elm.attr( "href", toggle_url );
-
-                    // Sets the toggle attributes
-                    elm.attr( "data-toggle-url", current_url );
-                    elm.attr( "data-toggle-name", current_name );
-
-
-                }).fail(function(httpObj, text){
-                    if ( httpObj.status == 401 )
-                        window.location.href = "{% url "site:login" %}";
-                });
-
-                e.preventDefault();
-            });
+            $( ".bt-toggle-follow" ).bind( "click", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
 
             // Create review stars of professional
             $( '.rate' ).raty({
