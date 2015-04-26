@@ -28,6 +28,7 @@ from wannamigrate.core.models import(
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.db import transaction
+import json
 
 
 ##########################
@@ -291,6 +292,62 @@ def list_topics( request ):
     :return: A template rendered
     """
     template_data = {
-        "topics_menu_selected" : True
+        "topics_menu_selected" : True,
+        "topics" : Topic.objects.values( "id", "name" )
     }
     return render( request, 'qa/topics/list.html', template_data )
+
+
+
+@ajax_login_required
+def ajax_get_topics( request ):
+    """ Searchs for topics that matches the GET param "term" and returns a JSON.
+    :param request:
+    :return:
+    """
+    if request.is_ajax():
+        q = request.GET.get( 'term', '' )
+        topics = Topic.objects.filter( name__icontains = q )[:20]
+        results = []
+        for topic in topics:
+            topic_json = {}
+            topic_json['id'] = topic.id
+            topic_json['unfollow_url'] = reverse( "qa:ajax_unfollow_topic", kwargs = { "topic_id" : topic.id } )
+            topic_json['follow_url'] = reverse( "qa:ajax_follow_topic", kwargs = { "topic_id" : topic.id } )
+            topic_json['value'] = topic.name
+            results.append( topic_json )
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
+
+
+@ajax_login_required
+def ajax_set_following_topic( request, topic_id, follow = False ):
+    """
+        Follows or unfollows a TOPIC.
+    :param request:
+    :param post_id: The id of the post to follow/unfollow
+    :param following: True to follow the post, False to unfollow.
+    :return: A template rendered
+    """
+    # Gets the post
+    topic = Topic.objects.get( id = topic_id )
+    stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+
+    with transaction.atomic():
+        if follow:
+            if not topic.followers.filter( id = request.user.id ).exists():
+                topic.followers.add( request.user )
+                stats.total_topics_following += 1
+                topic.save()
+                stats.save()
+        else:
+            if topic.followers.filter( id = request.user.id ).exists():
+                topic.followers.remove( request.user )
+                stats.total_topics_following -= 1
+                topic.save()
+                stats.save()
+
+    return HttpResponse( stats.total_topics_following )

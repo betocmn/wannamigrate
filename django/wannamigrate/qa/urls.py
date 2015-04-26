@@ -36,6 +36,9 @@ urlpatterns = patterns('',
     url( r'^x/post/unfollow/(?P<post_id>\d+)', views.set_following_post, { "follow" : False }, name = "ajax_unfollow_post" ),
     url( r'^x/post/upvote/(?P<post_id>\d+)', views.set_upvote_post, { "upvote" : True }, name = "ajax_upvote_post" ),
     url( r'^x/post/downvote/(?P<post_id>\d+)', views.set_upvote_post, { "upvote" : False }, name = "ajax_downvote_post" ),
+    url( r'^x/get_topics', views.ajax_get_topics, name = "ajax_get_topics" ),
+    url( r'^x/topic/follow/(?P<topic_id>\d+)', views.ajax_set_following_topic, { "follow" : True }, name = "ajax_follow_topic" ),
+    url( r'^x/topic/unfollow/(?P<topic_id>\d+)', views.ajax_set_following_topic, { "follow" : False }, name = "ajax_unfollow_topic" ),
 
 
 

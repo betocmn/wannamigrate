@@ -55,3 +55,42 @@ function onUpvoteClicked( evt )
             window.location.href = evt.data.redirect_url;
     });
 }
+
+/** Updates the counter of the given selector with value.
+    @param selector The selector of the element to update the counter.
+    @param value The value to put on the field.
+**/
+function updateCounter( selector, value )
+{
+    return $( selector ).html( '(' + value + ')' );
+}
+
+/** Updates the number of following topics */
+function updateFollowingTopicsCounter( value )
+{
+    return updateCounter( "#following_topics_counter", value );
+}
+
+/** Updates the number of following topics */
+function updateAnswersCounter( value )
+{
+    return updateCounter( "#answers_counter", value );
+}
+
+/** Updates the number of following posts */
+function updateReadingListCounter( value )
+{
+    return updateCounter( "#reading_list_counter", value );
+}
+
+/** Updates the number of following users */
+function updateUsersFollowingCounter( value )
+{
+    return updateCounter( "#users_following_counter", value );
+}
+
+/** Updates the number of followers  */
+function updateUsersFollowersCounter( value )
+{
+    return updateCounter( "#users_followers_counter", value );
+}
