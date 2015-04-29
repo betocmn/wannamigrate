@@ -44,13 +44,13 @@
                 <h3 class="title">Post Stats</h3>
                 <ul>
                     <li class="item views">
-                        <a href="#">Views <span class="count">({{post.views_count}})</span></a>
+                        <a href="#">Views <span class="count">({{post.views_count|kmi}})</span></a>
                     </li>
                     <li class="item answers">
-                        <a href="#">Answers <span class="count">({{post.answers_count}})</span></a>
+                        <a href="#">Answers <span class="count">({{post.answers_count|kmi}})</span></a>
                     </li>
                     <li class="item followers">
-                        <a href="#">Followers <span class="count">({{post.followers_count}})</span></a>
+                        <a href="#">Followers <span class="count" id="post_followers_counter">({{post.followers_count|kmi}})</span></a>
                     </li>
                 </ul>
             </div>
@@ -148,7 +148,7 @@
                             <div class="data">
                                 <ul class="data-list">
                                     <li class="data-item">
-                                        <a data-upvote-counter-selector="#upvote_counter_{{ ans.id }}" href="{% url 'qa:ajax_upvote_post' ans.id %}" class="data-link bt-upvote">Upvote <span id="upvote_counter_{{ ans.id }}" class="count">{{ ans.upvotes_count }}</span></a>
+                                        <a data-upvote-counter-selector="#upvote_counter_{{ ans.id }}" href="{% url 'qa:ajax_upvote_post' ans.id %}" class="data-link bt-upvote">Upvote <span id="upvote_counter_{{ ans.id }}" class="count">{{ ans.upvotes_count|kmi }}</span></a>
                                     </li>
                                     <li class="data-item">
                                         <a data-upvote-counter-selector="#upvote_counter_{{ ans.id }}" href="{% url 'qa:ajax_downvote_post' ans.id %}" class="data-link bt-downvote">Downvote</a>

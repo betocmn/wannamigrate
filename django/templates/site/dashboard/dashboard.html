@@ -44,8 +44,8 @@
                                     <li class="data-item">
                                         {% include "qa/common/bt_toggle_follow.html" with post=post %}
                                     </li>
-                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
-                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
+                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count|kmi }}</strong> {% trans "answers" %}</span></li>
+                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count|kmi }}</strong> {% trans "viewers" %}</span></li>
                                     <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
                                 </ul>
                             </div>
@@ -92,7 +92,7 @@
                                 <p class="expert">{{ provider.headline }}</p>
                             </a>
                             <div class="rate" data-score="{{ provider.review_score }}">
-                                <span class="count">({{ provider.user.userstats.total_reviews }})</span>
+                                <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
                             </div>
                             <div class="service">
                                 <p class="truncate-line">

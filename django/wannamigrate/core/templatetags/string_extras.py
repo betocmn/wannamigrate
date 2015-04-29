@@ -69,6 +69,7 @@ def str_or_dash( value ):
     """
     return value if len( value ) > 0 else "-"
 
+
 @register.filter( name = 'yes_or_no' )
 def yes_or_no( value ):
     """ Returns a string representation of a boolean. True becomes the 
@@ -77,3 +78,28 @@ def yes_or_no( value ):
         :return: Yes if value is True, No otherwise.
     """
     return "Yes" if value else "No"
+
+
+@register.filter( name = 'kmi' )
+def kmi( value ):
+    """ Converts a number into kmi representation.
+        (k -> thousand, mi -> million)
+    :param value: The number to be converted
+    :return: X / 1000 k if the number is greater than 1 thousand. X / 1000000 if the number is greater than 1 million.
+    """
+    temp = int( value )
+    MI = 1000000
+    K = 1000
+
+    if temp >= MI: # greater than 1 million
+        if temp % MI == 0:
+            return "{0} mi".format( int( temp / MI ) )
+        else:
+            return "{0:.1f} mi".format( float( temp / MI ) )
+    elif temp >= K: # greater than 1 thousand
+        if temp % K == 0:
+            return "{0} k".format( int( temp / K ) )
+        else:
+            return "{0:.1f} k".format( float( temp / K ) )
+    else:
+        return str( temp )

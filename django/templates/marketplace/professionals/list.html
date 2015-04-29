@@ -1,6 +1,7 @@
 {% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load string_extras %}
 
 {% block content %}
 
@@ -32,7 +33,7 @@
                                 <strong class="name"><a class="link-hiring" href="{{ view_professional_url }}">{{ provider.display_name }}</a></strong>
                                 <p class="expert"><a class="link-hiring" href="{{ view_professional_url }}">{{ provider.headline }}</a></p>
                                 <div class="rate" data-score="{{ provider.review_score }}">
-                                    <span class="count">({{ provider.user.userstats.total_reviews }})</span>
+                                    <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
                                 </div>
                             </div>
                             <div class="data">

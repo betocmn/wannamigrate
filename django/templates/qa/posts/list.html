@@ -43,8 +43,8 @@
                                         </li>
                                     </ul>
                                     <ul class="list-viewers">
-                                        <li class="data-item"><span class="data-link link-answers"><strong>{{ post.answers_count }}</strong> {% trans "answers" %}</span></li>
-                                        <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count }}</strong> {% trans "viewers" %}</span></li>
+                                        <li class="data-item"><span class="data-link link-answers"><strong>{{ post.answers_count|kmi }}</strong> {% trans "answers" %}</span></li>
+                                        <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count|kmi }}</strong> {% trans "viewers" %}</span></li>
                                         <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
                                     </ul>
                                 </ul>

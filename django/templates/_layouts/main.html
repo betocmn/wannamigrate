@@ -145,7 +145,7 @@
                         <div class="want field">
                             <p>{% trans "I wanna" %} <strong>{{ request.session.situation.goal }}</strong></p>
                             {% if request.session.situation.total_users > 0 %}
-                                <span class="other-people">{% trans "And other" %} {{ request.session.situation.total_users }} {% trans "user(s)" %}</span>
+                                <span class="other-people">{% trans "And other" %} {{ request.session.situation.total_users|kmi }} {% trans "user(s)" %}</span>
                             {% endif %}
                         </div>
                         <div class="to field">

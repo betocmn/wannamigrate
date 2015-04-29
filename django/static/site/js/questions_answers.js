@@ -19,7 +19,7 @@ function onToggleFollow( evt )
         elm.html('').append( toggle_name ).append( " " ).append( counter );
 
         // Updates the counter
-        counter.text( data );
+        counter.text( to_kmi( data ) );
 
         // Switches the active name and URL with the toggle values.
         // toggle -> active
@@ -48,7 +48,7 @@ function onUpvoteClicked( evt )
     // Request the active URL
     $.get( active_url, { "_": $.now() }, function( data ){
         // Updates the counter
-        $( target_selectors ).text( data );
+        $( target_selectors ).text( to_kmi( data ) );
 
     }).fail(function(httpObj, text){
         if ( httpObj.status == 401 )
@@ -62,7 +62,7 @@ function onUpvoteClicked( evt )
 **/
 function updateCounter( selector, value )
 {
-    return $( selector ).html( '(' + value + ')' );
+    return $( selector ).html( '(' + to_kmi( value ) + ')' );
 }
 
 /** Updates the number of following topics */
@@ -93,4 +93,41 @@ function updateUsersFollowingCounter( value )
 function updateUsersFollowersCounter( value )
 {
     return updateCounter( "#users_followers_counter", value );
+}
+
+/** Updates the number of following topics */
+function updatePostFollowersCounter( value )
+{
+    return updateCounter( "#post_followers_counter", value );
+}
+
+
+
+/** Converts a number to it's kmi representation
+    @param value The value to be converted
+    @return The kmi representation of the value.
+**/
+function to_kmi( value )
+{
+    temp = parseInt( value );
+
+    MI = 1000000;
+    K = 1000;
+
+    if ( temp >= MI )
+    {
+        if ( temp % MI == 0 )
+            return parseInt( temp / MI ) + " mi";
+        else
+            return parseFloat( temp / MI ).toFixed( 1 ) + " mi";
+    }
+    else if ( temp >= K )
+    {
+        if ( temp % K == 0 )
+            return parseInt( temp / K ) + " k";
+        else
+            return parseFloat( temp / K ).toFixed( 1 ) + " k";
+    }
+    else
+        return temp;
 }

@@ -1,3 +1,4 @@
+{% load string_extras %}
 <section class="sidebar">
     <!-- <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a> -->
     <div class="sidebar-default">
@@ -20,13 +21,13 @@
             <h3 class="title">Personal</h3>
             <ul>
                 <li class="item {% if topics_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_topics" %}">Topics {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following }})</span>{% endif %}</a>
+                    <a href="{% url "qa:list_topics" %}">Topics {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if answers_menu_selected %} active {% endif %}">
-                    <a href="#">Answers {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers }})</span>{% endif %}</a>
+                    <a href="#">Answers {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if reading_list_menu_selected %} active {% endif %}">
-                    <a href="#">Reading list {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_posts_following }})</span>{% endif %}</a>
+                    <a href="#">Reading list {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_posts_following|kmi }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>
@@ -34,10 +35,10 @@
             <h3 class="title">Social</h3>
             <ul>
                 <li class="item {% if following_menu_selected %} active {% endif %}">
-                    <a href="#">Following {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following }})</span>{% endif %}</a>
+                    <a href="#">Following {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if followers_menu_selected %} active {% endif %}">
-                    <a href="#">Followers {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers }})</span>{% endif %}</a>
+                    <a href="#">Followers {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers|kmi }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,7 @@
 {% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load string_extras %}
 
 {% block content %}
 
@@ -18,7 +19,7 @@
                     <strong class="name">{{ provider.display_name }}</strong>
                     <p class="expert">{{ provider.headline }}</p>
                     <div class="rate" data-score="{{ provider.review_score }}">
-                        <span class="count">({{ provider.user.userstats.total_reviews }})</span>
+                        <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
                     </div>
                 </div>
                 <div class="description">
@@ -45,7 +46,7 @@
         <section class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-reviews active">Reviews ({{ provider.user.userstats.total_reviews }})</a>
+                    <a href="#" class="interaction-link bt-reviews active">Reviews ({{ provider.user.userstats.total_reviews|kmi }})</a>
                 </li>
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-answers">Answers ({{ provider.user.userstats.total_answers }})</a>
