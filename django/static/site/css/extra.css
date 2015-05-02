@@ -20,7 +20,9 @@ select.default-select {
     border: 1px solid #d0b5db;
     background-color: #FFF;
     width: 350px;
-    height: 50px;
+    height: 42px;
+    font-size: 16px;
+    color: #888;
 }
 
 
@@ -206,6 +208,74 @@ form .errorlist {
 .contactus .content .contact-us form fieldset .field.subject select {
   width: 470px;
 }
+
+
+
+/* Points Calculator - Edit Forms */
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.country label {
+  display: block;
+}
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.country select {
+  width: 373px;
+}
+
+.dashboard-edit-forms footer .options-list .option-item .option-link.active {
+  font-family: 'open_sansbold';
+  font-weight: normal;
+  color: #fccc00;
+}
+
+.dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country select {
+  width: 220px;
+  padding: 0;
+}
+
+
+
+/* Countries - Situation */
+.content.results .main .my-situation .hints .success {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 75px;
+  padding: 0 6% 0;
+  margin: 0 auto;
+  line-height: 75px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'open_sansbold';
+  font-size: 22px;
+  text-align: right;
+  background-color: #ebebeb;
+  color: #859C01;
+}
+.content.results .main .my-situation .hints .success:before {
+  content: '';
+  position: absolute;
+  left: 7%;
+  top: 20px;
+  width: 35px;
+  height: 37px;
+  display: block;
+  border: 0;
+  background: transparent url("../img/icon-success.png") no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.content.results .main .visa-application {
+  display: block;
+}
+
+
 
 /* Hot it Works */
 .dashboard .howitworks_title {

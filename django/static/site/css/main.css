@@ -3293,7 +3293,193 @@ select {
   .dashboard .wrapper .content.extra-tools .tools .tool:before {
     display: none;
   }
+  .dashboard .wrapper .content.myaccount {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount >.title {
+    text-align: center;
+  }
+  .dashboard .wrapper .content.myaccount .interactions {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .interactions .interaction-list .interaction-item {
+    width: 33.3%;
+    margin: 0;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .bt-edit {
+    float: none;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .identity {
+    height: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .identity .thumb {
+    float: none;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .summary {
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .summary .text {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .bt-save {
+    float: none;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity {
+    height: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .thumb {
+    float: none;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .data {
+    padding-top: 20px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .data .field input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .extra-field input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .summary textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul {
+    display: block;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list {
+    display: block;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list select {
+    float: none;
+    display: block;
+    width: 200px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list .dd {
+    font-size: 13px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list input {
+    width: 60px;
+  }
+  .dashboard .wrapper .content.myaccount .my-contracts {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-contracts table {
+    display: table;
+    width: 800px;
+  }
+  .dashboard .wrapper .content.myaccount .inbox {
+    width: 100%;
+    padding: 0;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box-menu {
+    display: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top .bt-newmessage {
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top .messages-menu {
+    display: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages {
+    float: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages table {
+    display: table;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages table td.check {
+    display: none;
+  }
+  .dashboard .wrapper .content.social {
+    width: 100%;
+    min-height: 0;
+  }
+  .dashboard .wrapper .content.social .sidebar {
+    display: none;
+  }
+  .dashboard .wrapper .content.social .content {
+    width: 100%;
+    min-height: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .dashboard .wrapper .content.social .content .add-question {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics input {
+    width: 130px;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics .tags .tag {
+    margin-bottom: 15px;
+  }
+  .dashboard .wrapper .content.social .content .add-post {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics input {
+    width: 130px;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics .tags .tag {
+    margin-bottom: 15px;
+  }
+  .dashboard .wrapper .content.social .content .question-following .add-interest {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .question-following .add-interest input {
+    width: 50%;
+  }
+  .dashboard .wrapper .content.social .content .question-following .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .question-following .tags .tag {
+    margin-bottom: 15px;
+  }
   .dashboard .wrapper footer {
+    display: none;
     overflow: hidden;
   }
   .dashboard .wrapper footer .logo {
@@ -3311,6 +3497,33 @@ select {
   }
   .dashboard.choose footer {
     display: none;
+  }
+  .dashboard.contactus {
+    width: 100%;
+  }
+  .dashboard.contactus .content {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.contactus .content .contact-us {
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding-top: 50px;
+    width: 100%;
+    height: auto;
+  }
+  .dashboard.contactus .content .contact-us .title {
+    font-size: 42px;
+  }
+  .dashboard.contactus .content .contact-us .description {
+    font-size: 18px;
+  }
+  .dashboard.contactus .content .contact-us fieldset {
+    width: 100%;
+  }
+  .dashboard.contactus .content .contact-us fieldset legend {
+    width: 75%;
   }
   .dashboard .autocomplete-suggestions {
     top: 48px !important;
@@ -3456,6 +3669,128 @@ select {
   .landing .wrapper header .nav.open,
   .dashboard .wrapper header .nav.open {
     height: 175px;
+  }
+  .dashboard-edit-forms .content.edit-forms {
+    padding-top: 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .top {
+    position: relative;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text {
+    float: none;
+    padding: 0;
+    margin: 0 auto 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text .title {
+    text-align: center;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text:before {
+    display: none !important;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text p {
+    display: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .bt-save {
+    float: none;
+    margin: 15px auto 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details {
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 30px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field {
+    padding: 0 5%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member strong {
+    line-height: 24px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field strong {
+    line-height: 24px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language {
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-which,
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-level {
+    float: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-which {
+    margin: 0 0 10px 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field strong {
+    padding-left: 10px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education {
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-which,
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-level {
+    float: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-which {
+    margin: 0 0 10px 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level {
+    padding: 15px 0 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field strong {
+    padding-left: 10px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field .occupation {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field .occupation select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field {
+    position: relative;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works {
+    width: 100%;
+    height: auto;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work {
+    width: 100%;
+    height: 290px;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience {
+    display: block;
+    padding: 15px 0 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .education-form .details fieldset .field.married,
+  .dashboard-edit-forms .education-form .details fieldset .field.hinterland {
+    height: auto !important;
+    padding-bottom: 15px;
   }
 }
 @media screen and (max-width: 360px) {
@@ -5918,7 +6253,7 @@ select {
 .content.choose-destiny .steps .step .top {
   position: relative;
   width: 100%;
-  height: 130px;
+  height: 65px;
   text-align: center;
   font-family: 'open_sansbold';
   font-weight: normal;
@@ -5929,15 +6264,16 @@ select {
   display: block;
   width: 70%;
   padding: 0 0 0 90px;
+  font-size: 16px;
 }
 .content.choose-destiny .steps .step .top:before {
   content: '';
   position: absolute;
   right: 0;
-  top: 35px;
-  width: 54px;
-  height: 54px;
-  line-height: 54px;
+  top: 12px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
   text-align: center;
   border: 2px solid #fff;
   -webkit-border-radius: 50%;
@@ -6124,7 +6460,7 @@ select {
   background-color: #f4f4f4;
 }
 .content.choose-destiny .steps .step.step-one .top {
-  line-height: 120px;
+  line-height: 65px;
   background-color: #845996;
 }
 .content.choose-destiny .steps .step.step-one .top:before {
@@ -6139,14 +6475,7 @@ select {
   background-color: #f8f8f8;
 }
 .content.choose-destiny .steps .step.step-two .top {
-  padding: 38px 0 0 0;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
-  line-height: 25px;
+  line-height: 65px;
   background-color: #7a4690;
 }
 .content.choose-destiny .steps .step.step-two .top:before {
@@ -6186,8 +6515,8 @@ select {
   background: transparent url("../img/canada-circle-flag.png") no-repeat 0 0;
   background-position: center center;
 }
-.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar.japan {
-  background: transparent url("../img/japan-circle-flag.png") no-repeat 0 0;
+.content.choose-destiny .steps .step.step-two .countries-list .country-item .country .circle-progress-bar.newzealand {
+  background: transparent url("../img/newzealand-circle-flag.png") no-repeat 0 0;
   background-position: center center;
 }
 .content.choose-destiny .steps .step.step-two .countries-list .country-item .country .score {
@@ -6241,7 +6570,7 @@ select {
   background-color: #f4f4f4;
 }
 .content.choose-destiny .steps .step.step-three .top {
-  line-height: 120px;
+  line-height: 65px;
   background-color: #68347e;
 }
 .content.choose-destiny .steps .step.step-three .top:before {
@@ -8349,7 +8678,193 @@ select {
   .dashboard .wrapper .content.extra-tools .tools .tool:before {
     display: none;
   }
+  .dashboard .wrapper .content.myaccount {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount >.title {
+    text-align: center;
+  }
+  .dashboard .wrapper .content.myaccount .interactions {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .interactions .interaction-list .interaction-item {
+    width: 33.3%;
+    margin: 0;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .bt-edit {
+    float: none;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .identity {
+    height: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .identity .thumb {
+    float: none;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .summary {
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile .summary .text {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .bt-save {
+    float: none;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity {
+    height: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .thumb {
+    float: none;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .data {
+    padding-top: 20px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .identity .data .field input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .extra-field input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .summary textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul {
+    display: block;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list {
+    display: block;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list select {
+    float: none;
+    display: block;
+    width: 200px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list .dd {
+    font-size: 13px;
+  }
+  .dashboard .wrapper .content.myaccount .my-profile-edit .services .supported-services ul .services-list input {
+    width: 60px;
+  }
+  .dashboard .wrapper .content.myaccount .my-contracts {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .my-contracts table {
+    display: table;
+    width: 800px;
+  }
+  .dashboard .wrapper .content.myaccount .inbox {
+    width: 100%;
+    padding: 0;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box-menu {
+    display: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top .bt-newmessage {
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-top .messages-menu {
+    display: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages {
+    float: none;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages table {
+    display: table;
+    overflow-x: auto;
+  }
+  .dashboard .wrapper .content.myaccount .inbox .box .box-messages table td.check {
+    display: none;
+  }
+  .dashboard .wrapper .content.social {
+    width: 100%;
+    min-height: 0;
+  }
+  .dashboard .wrapper .content.social .sidebar {
+    display: none;
+  }
+  .dashboard .wrapper .content.social .content {
+    width: 100%;
+    min-height: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .dashboard .wrapper .content.social .content .add-question {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics input {
+    width: 130px;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .add-question .add-topics .tags .tag {
+    margin-bottom: 15px;
+  }
+  .dashboard .wrapper .content.social .content .add-post {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics textarea {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics input {
+    width: 130px;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .add-post .add-topics .tags .tag {
+    margin-bottom: 15px;
+  }
+  .dashboard .wrapper .content.social .content .question-following .add-interest {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.social .content .question-following .add-interest input {
+    width: 50%;
+  }
+  .dashboard .wrapper .content.social .content .question-following .tags {
+    height: 60px;
+  }
+  .dashboard .wrapper .content.social .content .question-following .tags .tag {
+    margin-bottom: 15px;
+  }
   .dashboard .wrapper footer {
+    display: none;
     overflow: hidden;
   }
   .dashboard .wrapper footer .logo {
@@ -8367,6 +8882,33 @@ select {
   }
   .dashboard.choose footer {
     display: none;
+  }
+  .dashboard.contactus {
+    width: 100%;
+  }
+  .dashboard.contactus .content {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.contactus .content .contact-us {
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding-top: 50px;
+    width: 100%;
+    height: auto;
+  }
+  .dashboard.contactus .content .contact-us .title {
+    font-size: 42px;
+  }
+  .dashboard.contactus .content .contact-us .description {
+    font-size: 18px;
+  }
+  .dashboard.contactus .content .contact-us fieldset {
+    width: 100%;
+  }
+  .dashboard.contactus .content .contact-us fieldset legend {
+    width: 75%;
   }
   .dashboard .autocomplete-suggestions {
     top: 48px !important;
@@ -8512,6 +9054,128 @@ select {
   .landing .wrapper header .nav.open,
   .dashboard .wrapper header .nav.open {
     height: 175px;
+  }
+  .dashboard-edit-forms .content.edit-forms {
+    padding-top: 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .top {
+    position: relative;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text {
+    float: none;
+    padding: 0;
+    margin: 0 auto 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text .title {
+    text-align: center;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text:before {
+    display: none !important;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .text p {
+    display: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .top .bt-save {
+    float: none;
+    margin: 15px auto 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details {
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 30px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field {
+    padding: 0 5%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member strong {
+    line-height: 24px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field strong {
+    line-height: 24px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language {
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-which,
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-level {
+    float: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.languages-field .languages .language .language-which {
+    margin: 0 0 10px 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field strong {
+    padding-left: 10px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education {
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-which,
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-level {
+    float: none;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .education-which {
+    margin: 0 0 10px 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level {
+    padding: 15px 0 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.educational-field .educationals .education .field.level select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field strong {
+    padding-left: 10px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field .occupation {
+    width: 100%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.occupation-field .occupation select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field {
+    position: relative;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works {
+    width: 100%;
+    height: auto;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work {
+    width: 100%;
+    height: 290px;
+    padding-bottom: 20px;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience {
+    display: block;
+    padding: 15px 0 0;
+  }
+  .dashboard-edit-forms .content.edit-forms .details fieldset .field.works-field .works .work .experience select {
+    width: 80%;
+  }
+  .dashboard-edit-forms .education-form .details fieldset .field.married,
+  .dashboard-edit-forms .education-form .details fieldset .field.hinterland {
+    height: auto !important;
+    padding-bottom: 15px;
   }
 }
 @media screen and (max-width: 360px) {

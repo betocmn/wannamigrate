@@ -95,16 +95,16 @@
                             <div class="circle-progress-bar canada"></div>
                             <div class="score">
                                 <span class="name">{% trans "Canada" %}</span>
-                                <p><strong class="points">{{ ca_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "OF" %} <i>{{ ca_min_points }}</i> {% trans "possible" %}</em></p>
+                                <p><strong class="points">{{ ca_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "OF" %} <i>{{ ca_min_points }}</i> {% trans "REQUIRED" %}</em></p>
                             </div>
                         </div>
                     </li>
                     <li class="country-item nz">
                         <div class="country">
-                            <div class="circle-progress-bar japan"></div>
+                            <div class="circle-progress-bar newzealand"></div>
                             <div class="score">
                                 <span class="name">{% trans "New Zealand" %}</span>
-                                <p><strong class="points">{{ nz_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "OF" %} <i>{{ nz_min_points }}</i> {% trans "possible" %}</em></p>
+                                <p><strong class="points">{{ nz_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "OF" %} <i>{{ nz_min_points }}</i> {% trans "REQUIRED" %}</em></p>
                             </div>
                         </div>
                     </li>
@@ -163,7 +163,7 @@
                 }
             });
 
-            $( '.circle-progress-bar.japan' ).circleProgress({
+            $( '.circle-progress-bar.newzealand' ).circleProgress({
                 value: ( parseInt( '{{ nz_percentage|default:2 }}' ) / 100 ),
                 size: 108,
                 fill: {

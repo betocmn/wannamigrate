@@ -1,47 +1,238 @@
-{% extends "_layouts/site.html" %}
+{% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head %}
+{% block body %}
+    <body class="dashboard choose dashboard-edit-forms">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+    <div class="content edit-forms">
+        <div class="edit-form personal-form">
+            <form method="post" id="main_form" action="">
+                <div class="top">
+                    <div class="text personal">
+                        <h2 class="title">{% trans "Work Details" %}</h2>
+                        <p>{% trans "We need all this information to calculate your points." %}</p>
+                    </div>
+                    <button type="button" class="bt-save button go-to-exit submit-form">{% trans "Save and Exit" %}</button>
+                </div>
+                <div class="details">
+                    <!--<h3 class="subtitle">Personal details</h3>-->
+                    {% csrf_token %}
+
+                    <input type="hidden" id="next" name="next" value="" />
+
+                    {% if user_education_form.errors or user_education_history_formset.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <ul>
+                                <li><strong>{% trans "Errors Found!" %}</strong></li>
+                                {% for error in user_education_form.non_field_errors %}
+                                    <li>{{ error|escape }}</li>
+                                {% endfor %}
+                                {% for error in user_education_history_formset.non_form_errors %}
+                                    <li>{{ error|escape }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <fieldset>
+                        <div class="field occupation-field error-element{% if user_work_form.occupation.errors %} has-error{% endif %}">
+                            <strong>{{ user_work_form.occupation.label }}?</strong>
+                            <div class="occupation">
+                                <label for="{{ user_work_form.occupation_category.id_for_label }}">Category</label>
+                                {{ user_work_form.occupation_category }}
+                            </div>
+                            <div class="occupation">
+                                <label for=" {{ user_work_form.occupation.id_for_label }}">Occupation</label>
+                                {{ user_work_form.occupation }}
+                            </div>
+                            {{ user_work_form.occupation_category.errors }}
+                            {{ user_work_form.occupation.errors }}
+                        </div>
+
+                        <div class="field works-field">
+                            <strong>{% trans "Add below your work experiences" %}:</strong>
+
+                            <div class="works">
+
+                                {{ user_work_experience_formset.management_form }}
+                                {% for user_work_experience_form in user_work_experience_formset %}
+                                    <div class="work">
+
+                                        {{ user_work_experience_form.id }}
+                                        {{ user_work_experience_form.DELETE }}
+                                        <div class="experience business error-element{% if user_work_experience_form.company.errors %} has-error{% endif %}">
+                                            <label for="business">{{ user_work_experience_form.company.label }}:</label>
+                                            {{ user_work_experience_form.company }}
+                                            {{ user_work_experience_form.company.errors }}
+                                        </div>
+                                        <div class="experience country error-element{% if user_work_experience_form.country.errors %}has-error{% endif %}">
+                                            <label for="country">{{ user_work_experience_form.country.label }}:</label>
+                                            {{ user_work_experience_form.country }}
+                                            {{ user_work_experience_form.country.errors }}
+                                        </div>
+                                        <div class="experience duration error-element{% if user_work_experience_form.months.errors %}has-error{% endif %}">
+                                            <label for="duration">{{ user_work_experience_form.months.label }}:</label>
+                                            {{ user_work_experience_form.months }}
+                                            {{ user_work_experience_form.months.errors }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <div class="field commom error-element{% if user_work_form.willing_to_invest.errors %} has-error{% endif %}">
+                            <span>{{ user_work_form.willing_to_invest.label }}?</span>
+                            {% for radio in user_work_form.willing_to_invest %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.willing_to_invest.errors }}
+                        </div>
+                        <div class="field commom error-element{% if user_work_form.canadian_startup_letter.errors %} has-error{% endif %}">
+                            <span>{{ user_work_form.canadian_startup_letter.label }}?</span>
+                            {% for radio in user_work_form.canadian_startup_letter %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.canadian_startup_letter.errors }}
+                        </div>
+                        <div class="field commom error-element{% if user_work_form.australian_professional_year.errors %} has-error{% endif %}">
+                            <span>{{ user_work_form.australian_professional_year.label }}?</span>
+                            {% for radio in user_work_form.australian_professional_year %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.australian_professional_year.errors }}
+                        </div>
+                        <div class="field family-member error-element{% if user_work_form.work_offer.errors %} has-error{% endif %}">
+                            <strong style="padding-left: 0px;">{{ user_work_form.work_offer.label }}?</strong>
+
+                            <div class="clear"></div>
+
+                            {% for radio in user_work_form.work_offer %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.work_offer.errors }}
+
+                            <div class="clear"></div>
+
+                            <div class="countries">
+                                <div id="user_work_offer_container" style="display: none; margin-bottom: 15px;">
+                                    {{ user_work_offer_formset.management_form }}
+                                    {% for user_work_offer_form in user_work_offer_formset %}
+                                        <div class="country error-element{% if user_work_offer_form.country.errors %} has-error{% endif %}">
+                                            {{ user_work_offer_form.id }}
+                                            {{ user_work_offer_form.DELETE }}
+                                            <label for="{{ user_work_offer_form.country.id_for_label }}">{{ user_work_offer_form.country.label }}?</label>
+                                            {{ user_work_offer_form.country }}
+                                        </div>
+                                        {{ user_work_offer_form.country.errors }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                        </div>
+
+
+                        <div class="field commom error-element{% if user_work_form.canadian_partner_work_study_experience.errors %} has-error{% endif %}">
+                            <span>{{ user_work_form.canadian_partner_work_study_experience.label }}?</span>
+                            {% for radio in user_work_form.canadian_partner_work_study_experience %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.canadian_partner_work_study_experience.errors }}
+                        </div>
+                        <div class="field commom error-element{% if user_work_form.partner_skills.errors %} has-error{% endif %}">
+                            <span>{{ user_work_form.partner_skills.label }}?</span>
+                            {% for radio in user_work_form.partner_skills %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.partner_skills.errors }}
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+    <footer>
+        <a href="javascript:void(0)" class="bt-previous bt go-to-education submit-form">< Previous</a>
+        <ul class="options-list">
+            <li class="option-item"><a class="option-link go-to-personal submit-form" href="javascript:void(0)">{% trans "PERSONAL" %}</a></li>
+            <li class="option-item"><a class="option-link go-to-language submit-form" href="javascript:void(0)">{% trans "LANGUAGE" %}</a></li>
+            <li class="option-item"><a class="option-link go-to-education submit-form" href="javascript:void(0)">{% trans "EDUCATION" %}</a></li>
+            <li class="option-item"><a class="active option-link go-to-work submit-form" href="javascript:void(0)">{% trans "WORK" %}</a></li>
+        </ul>
+        <!--<a href="javascript:void(0)" class="bt-next bt go-to-work submit-form">Next ></a>-->
+    </footer>
+{% endblock footer %}
+
+
+{% block scripts %}
 
     {{ block.super }}
 
-    <!-- Page-Level Plugin Scripts - Tables -->
-    <script src="{% static 'site/js/jquery.formset.js' %}"></script>
+    <!-- JS Custom Scripts -->
+    <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         /**
-		 * Hide/Show personal family overseas options
-		 *
-		 */
-        function toggle_work_offer_container(){
-            var radio_value = $( "input[name='work_offer']:checked" ).val();
-            if ( radio_value == 'True' ) {
-                $( "#user_work_offer_container" ).slideDown();
-                if ( $( "#user_work_offer_container .dynamic-form" ).length == 0 ){
-                    $( '#main_form #user_work_offer_container div.which-country' ).formset({
-                        prefix: '{{ user_work_offer_formset.prefix }}',
-                        addCssClass: 'addAnother',
-                        deleteCssClass: 'closeBtn',
-                        deleteText: ''
-                    });
-                }
-            } else
-                $( "#user_work_offer_container" ).slideUp();
-        }
-
-        /**
 		 * Jquery On Load
 		 *
 		 */
-		$( document ).ready(function() {
+        $( document ).ready( function() {
 
             // include CSRF protection on all ajax calls
             csrf_ajax_setup();
 
-            //Submit form when navigating through action links
+            // create custom dropdown for situatino countries
+            $( "div.edit-forms .custom-select" ).msDropdown();
+
+            // Submit form when navigating through action links
             $( ".submit-form" ).click( function() {
 
                 // set next page by looking to the class name
@@ -60,318 +251,49 @@
                 // submit form
                 $( '#main_form').submit();
 
+
 			});
 
             // Load Formset for Work Experience
-            $( '#main_form #user_work_experience_container div.which-country' ).formset({
+            $( '#main_form div.works-field div.works' ).formset({
                 prefix: '{{ user_work_experience_formset.prefix }}',
-                addCssClass: 'addAnother',
-                deleteCssClass: 'closeBtn',
+                addCssClass: 'bt-add',
+                deleteCssClass: 'bt-delete',
                 addText: '{% trans "add another" %}',
                 deleteText: ''
             });
-            
+
+            // Load Formset for Job Offers Overseas
+            $( '#main_form div.countries div.country' ).formset({
+                prefix: '{{ user_work_offer_formset.prefix }}',
+                addCssClass: 'bt-add',
+                deleteCssClass: 'bt-delete',
+                deleteText: ''
+            });
+
             //Hide/Show personal family overseas options
             $( 'input[name^=work_offer]' ).click( function(){
-                toggle_work_offer_container();
+                var radio_value = $( "input[name='work_offer']:checked" ).val();
+                if ( radio_value == 'True' ) {
+                    $( "#user_work_offer_container" ).slideDown();
+                } else
+                    $( "#user_work_offer_container" ).slideUp();
             });
-            toggle_work_offer_container()
 
             // Load occupations after category is selected
 			$( "#id_occupation_category" ).change( function() {
 				load_ajax_dropdown(
-                        'id_occupation_category', 'id_occupation', '', '',
-                        "{% url 'points:get_occupations_html' %}",
-                        "{% static "site/img/loading.gif" %}"
+                    'id_occupation_category', 'id_occupation', '', '',
+                    "{% url 'points:get_occupations_html' %}",
+                    "{% static "site/img/loading.gif" %}"
                 );
 
 			});
 
-
-            // font style for custom selects
-            $( 'select' ).on( 'change', function ( e ) {
-                $( this ).addClass( "selectChange" );
-            });
-
-			// JS for onload
-			{{ on_load|default:'' }}
-
-		});
-
-
+        });
 
     </script>
 
-    <!-- INLINE CSS -->
-    <style type="text/css">
+    {% include "_layouts/analytics.html" %}
 
-
-    </style>
-
-{% endblock head %}
-
-
-{% block content %}
-
-	<div class="formBox fullWidth">
-		<div id="update" class="updateFix">
-			<h2>{% trans "Work Details" %}</h2>
-			<p>{% trans "We need all this information to calculate your points." %}</p>
-			<a href="javascript:void(0)" class="saveBtn saveBtnSpecial go-to-exit submit-form">{% trans "Save and Exit" %}</a>
-		</div>
-
-		<form class="takeMeAwayFromTheTop100px" method="post" id="main_form" action="">
-
-            {% csrf_token %}
-
-            {% if user_work_form.errors or user_work_experience_formset.errors or user_work_offer_form.errors %}
-                <div class="alert alert-danger alert-dismissable">
-                    <ul>
-                        <li><strong>{% trans "Errors Found!" %}</strong></li>
-                        {% for error in user_work_form.non_field_errors %}
-                            <li>{{ error|escape }}</li>
-                        {% endfor %}
-                        {% for error in user_work_experience_formset.non_form_errors %}
-                            <li>{{ error|escape }}</li>
-                        {% endfor %}
-                        {% for error in user_work_offer_formset.non_form_errors %}
-                            <li>{{ error|escape }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        
-            <div class="{% if user_work_form.occupation.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;"><strong>{{ user_work_form.occupation.label }}?</strong> &nbsp;</span>
-                <div class="clear"></div>
-                <div class="select-style" style="float: left; margin-right: 10px;">
-                    {{ user_work_form.occupation_category }}
-                </div>
-                <div class="select-style" style="float: left;">
-                    {{ user_work_form.occupation }}
-                </div>
-                <div class="clear"></div>
-                {{ user_work_form.occupation_category.errors }}
-                {{ user_work_form.occupation.errors }}
-            </div>
-        
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <span style="font-size: 14px;color:#888888;"><strong>{% trans "Add below your work experiences" %}:</strong>&nbsp;</span>
-            <div class="break10"></div>
-
-            {{ user_work_experience_formset.management_form }}
-            {% for user_work_experience_form in user_work_experience_formset %}
-
-                <div id="user_work_experience_container">
-
-                    <div class="which-country">
-
-                        {{ user_work_experience_form.id }}
-                        {{ user_work_experience_form.DELETE }}
-
-
-                        <div style="width: 201px !important;">
-                            <label style="width: 190px !important;" class="smallInput {% if user_work_experience_form.company.errors %}has-error{% endif %}">{{ user_work_experience_form.company.label }}:
-                                {{ user_work_experience_form.company }}
-                                {{ user_work_experience_form.company.errors }}
-                            </label>
-                        </div>
-
-                        <div style="width: 201px !important;" class="smallSelect {% if user_work_experience_form.country.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_experience_form.country.label }}:</span>
-                            <!-- <div class="break10"></div> -->
-                            <div class="select-style" style="width: 190px !important;">
-                                {{ user_work_experience_form.country }}
-                            </div>
-                            {{ user_work_experience_form.country.errors }}
-                        </div>
-
-                        <div class="clear"> </div>
-                        <div class="break10"></div>
-
-                        <div style="width: 201px !important; margin-left: 10px;" class="smallSelect {% if user_work_experience_form.months.errors %}has-error{% endif %}">
-                            <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_experience_form.months.label }}:</span>
-                            <!-- <div class="break10"></div> -->
-                            <div class="select-style" style="width: 190px !important;">
-                                {{ user_work_experience_form.months }}
-                            </div>
-                            {{ user_work_experience_form.months.errors }}
-                        </div>
-
-
-                        <div class="clear"> </div>
-
-                    </div>
-
-
-                </div>
-
-            {% endfor %}
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <div class="{% if user_work_form.willing_to_invest.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.willing_to_invest.label }}?</strong></span>
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.willing_to_invest %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.willing_to_invest.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <div class="{% if user_work_form.canadian_startup_letter.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.canadian_startup_letter.label }}?</strong></span>
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.canadian_startup_letter %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.canadian_startup_letter.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-
-            <div class="{% if user_work_form.australian_professional_year.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.australian_professional_year.label }}?</strong></span>
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.australian_professional_year %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.australian_professional_year.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-        
-            <div class="{% if user_work_form.work_offer.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.work_offer.label }}?</strong></span>
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.work_offer %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.work_offer.errors }}
-            </div>
-
-			<div class="break10"></div>
-			<div class="break10"></div>
-
-            <div id="user_work_offer_container" style="display: none;">
-
-                <div class="line-break"></div>
-			    <div class="break10"></div>
-
-                    {{ user_work_offer_formset.management_form }}
-                    {% for user_work_offer_form in user_work_offer_formset %}
-
-                        <div>
-
-                            <div class="which-country {% if user_work_offer_form.country.errors %}has-error{% endif %}">
-
-                                {{ user_work_offer_form.id }}
-                                {{ user_work_offer_form.DELETE }}
-
-                                <span style="font-size: 14px;color:#888888;display:block;">{{ user_work_offer_form.country.label }}?</span>
-                                <div class="break10"></div>
-                                <div class="select-style">
-                                    {{ user_work_offer_form.country }}
-                                </div>
-
-                                {{ user_work_offer_form.country.errors }}
-
-                            </div>
-
-                        </div>
-
-                    {% endfor %}
-
-                <div class="break10"></div>
-                <div class="break10"></div>
-                <div class="break10"></div>
-
-            </div>
-
-
-            <div class="{% if user_work_form.canadian_partner_work_study_experience.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;"><strong>{{ user_work_form.canadian_partner_work_study_experience.label }}?</strong></span>
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.canadian_partner_work_study_experience %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.canadian_partner_work_study_experience.errors }}
-            </div>
-
-            <div class="break10"></div>
-            <div class="break10"></div>
-            
-            <div class="{% if user_work_form.partner_skills.errors %}has-error{% endif %}">
-                <span style="font-size: 14px;color:#888888;display:block;">
-                   <strong>{{ user_work_form.partner_skills.label }}?</strong>&nbsp;<i class="hint fa fa-question-circle" title="{% trans "Proved Skills: Under 50 yeard old. Competent English. Same skilled occupation as you." %}"></i>
-                </span>
-
-                <div class="break10"></div>
-
-                {% for radio in user_work_form.partner_skills %}
-                    {% if radio.choice_label != '---------' %}
-                        {{ radio.tag }}
-                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                    {% endif %}
-                {% endfor %}
-                {{ user_work_form.partner_skills.errors }}
-            </div>
-
-            <input type="hidden" id="next" name="next" value="" />
-
-		</form>
-	</div>
-
-
-    <!--
-	<div class="opened-features">
-		<p>We have the <b>right tools</b> <br />for you!</p>
-		<a href="#"><span>Check Your english skills with our TOEFL proeficiency test</span></a>
-		<a href="#"><span>Check Your english skills with our TOEFL</span></a>
-		<a href="#"><span>Check Your english skillsour TOEFL proeficiency test</span></a>
-	</div>
-    -->
-
-	<div class="staticFooter">
-        <a href="javascript:void(0)" class="previousBtn go-to-education submit-form">&lt; {% trans "PREVIOUS" %}</a>
-		<div>
-			<a href="javascript:void(0)" class="go-to-personal submit-form">{% trans "PERSONAL" %}</a>
-			<span class="leftArrow"> </span>
-			<a href="javascript:void(0)" class="go-to-language submit-form">{% trans "LANGUAGE" %}</a>
-			<span class="leftArrow"> </span>
-			<a href="javascript:void(0)" class="go-to-education submit-form">{% trans "EDUCATION" %}</a>
-			<span class="leftArrow"> </span>
-			<a href="javascript:void(0)" class="activeFooterLink go-to-work submit-form">{% trans "WORK" %}</a>
-		</div>
-		<a href="javascript:void(0)" class="nextBtn go-to-exit submit-form">{% trans "FINISH" %} &gt;</a>
-	</div>
-
-{% endblock content %}
+{% endblock scripts %}

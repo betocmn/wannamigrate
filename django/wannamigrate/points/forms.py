@@ -8,7 +8,7 @@ Form definitions used by views/templates from the points app
 # Imports
 ##########################
 from django import forms
-from django.forms import RadioSelect, ModelChoiceField, ChoiceField
+from django.forms import RadioSelect, ModelChoiceField, ChoiceField, Select
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import pgettext_lazy, ugettext_lazy as _
 from django.forms.models import BaseInlineFormSet
@@ -38,13 +38,18 @@ class UserPersonalForm( BaseModelForm ):
     Form for USER PERSONAL data
     """
 
-    country = CountryChoiceField( required = False, label = _( "Country of Citizenship" ), queryset = Country.objects.order_by( 'immigration_enabled' ), empty_label = _( 'Select Country' ) )
+    country = CountryChoiceField(
+        required = False, label = _( "Country of Citizenship" ),
+        queryset = Country.objects.order_by( 'immigration_enabled' ),
+        empty_label = _( 'Select Country' ),
+        widget = Select( attrs = { 'class': 'default-select' } )
+    )
 
     class Meta:
         model = UserPersonal
         fields = [ 'birth_date', 'australian_regional_immigration', 'gender', 'country', 'family_overseas' ]
         widgets = {
-            'birth_date': SelectDateWidget( years = range( 1940, date.today().year - 15 ), attrs = { 'class': 'force-style', 'style': 'display: inline; width: 120px;' } ),
+            'birth_date': SelectDateWidget( years = range( 1940, date.today().year - 15 ), attrs = { 'class': 'custom-select' } ),
             'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'australian_regional_immigration': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'family_overseas': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
@@ -79,7 +84,13 @@ class UserPersonalFamilyForm( BaseModelForm ):
     Form for USER PERSONAL FAMILY data (If user has family in any other country)
     """
 
-    country = CountryChoiceField( required = True, label = _( "In Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    country = CountryChoiceField(
+        required = True,
+        label = _( "In Which Country" ),
+        queryset = Country.objects.order_by( 'name' ),
+        empty_label = _( 'Select Country' ),
+        widget = Select( attrs = { 'class': 'default-select' } )
+    )
 
     class Meta:
         model = UserPersonalFamily
@@ -148,8 +159,20 @@ class UserLanguageForm( BaseModelForm ):
     Form for USER LANGUAGE data
     """
 
-    partner_english_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her ENGLISH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_ENGLISH ), empty_label = _( 'Select Level' ) )
-    partner_french_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her FRENCH Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_FRENCH ), empty_label = _( 'Select Level' ) )
+    partner_english_level_answer = ModelChoiceField(
+        required = False,
+        label = _( "If you have a partner/spouse, what is his/her ENGLISH Level" ),
+        queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_ENGLISH ),
+        empty_label = _( 'Select Level' ),
+        widget = forms.Select( attrs = { 'class' : 'custom-select' } )
+    )
+    partner_french_level_answer = ModelChoiceField(
+        required = False,
+        label = _( "If you have a partner/spouse, what is his/her FRENCH Level" ),
+        queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_FRENCH ),
+        empty_label = _( 'Select Level' ),
+        widget = forms.Select( attrs = { 'class' : 'custom-select' } )
+    )
 
     class Meta:
         model = UserLanguage
@@ -184,8 +207,20 @@ class UserLanguageProficiencyForm( BaseModelForm ):
     Form for USER LANGUAGE PROFICIENCY data (levels of foreign languages)
     """
 
-    language = LanguageChoiceField( required = True, label = pgettext_lazy( "Singular", "Language" ), queryset = Language.objects.order_by( 'name' ), empty_label = _( 'Select Language' ) )
-    language_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_LANGUAGE_LEVEL_OTHERS ), empty_label = _( 'Select Level' ) )
+    language = LanguageChoiceField(
+        required = True,
+        label = pgettext_lazy( "Singular", "Language" ),
+        queryset = Language.objects.order_by( 'name' ),
+        empty_label = _( 'Select Language' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    language_level_answer = ModelChoiceField(
+        required = True,
+        label = _( "Level" ),
+        queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_LANGUAGE_LEVEL_OTHERS ),
+        empty_label = _( 'Select Level' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserLanguageProficiency
@@ -271,7 +306,13 @@ class UserEducationForm( BaseModelForm ):
     Form for USER EDUCATION data
     """
 
-    partner_education_level_answer = ModelChoiceField( required = False, label = _( "If you have a partner/spouse, what is his/her highest Degree" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE ), empty_label = _( 'Select Degree' ) )
+    partner_education_level_answer = ModelChoiceField(
+        required = False,
+        label = _( "If you have a partner/spouse, what is his/her highest Degree" ),
+        queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_EDUCATION_DEGREE ),
+        empty_label = _( 'Select Degree' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserEducation
@@ -312,10 +353,31 @@ class UserEducationHistoryForm( BaseModelForm ):
     YEARS_START = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
     YEARS_END = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 5 ) )
 
-    education_level_answer = ModelChoiceField( required = True, label = _( "Level" ), queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_EDUCATION_DEGREE ), empty_label = _( 'Select Level' ) )
-    country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
-    year_start = ChoiceField( required = True, label = _( "Start Year" ), choices = YEARS_START )
-    year_end = ChoiceField( required = True, label = _( "End Year" ), choices = YEARS_END )
+    education_level_answer = ModelChoiceField(
+        required = True, label = _( "Level" ),
+        queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_EDUCATION_DEGREE ),
+        empty_label = _( 'Select Level' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    country = CountryChoiceField(
+        required = True,
+        label = _( "Country" ),
+        queryset = Country.objects.order_by( 'name' ),
+        empty_label = _( 'Select Country' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    year_start = ChoiceField(
+        required = True,
+        label = _( "Start Year" ),
+        choices = YEARS_START,
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    year_end = ChoiceField(
+        required = True,
+        label = _( "End Year" ),
+        choices = YEARS_END,
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserEducationHistory
@@ -330,8 +392,19 @@ class UserWorkForm( BaseModelForm ):
     Form for USER WORK data
     """
 
-    occupation_category = ModelChoiceField( required = False, label = _( "Category" ), queryset = OccupationCategory.objects.all(), empty_label = _( 'Select Area' ) )
-    occupation = ModelChoiceField( required = False, label = _( "What is your occupation" ), queryset = Occupation.objects.none() )
+    occupation_category = ModelChoiceField(
+        required = False,
+        label = _( "Category" ),
+        queryset = OccupationCategory.objects.all(),
+        empty_label = _( 'Select Area' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    occupation = ModelChoiceField(
+        required = False,
+        label = _( "What is your occupation" ),
+        queryset = Occupation.objects.none(),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserWork
@@ -383,8 +456,19 @@ class UserWorkExperienceForm( BaseModelForm ):
     Form for USER WORK EXPERIENCE data (degrees of work)
     """
 
-    country = CountryChoiceField( required = True, label = _( "Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
-    months = ChoiceField( required = True, label = _( "Duration" ), choices = get_months_duration_tuple() )
+    country = CountryChoiceField(
+        required = True,
+        label = _( "Country" ),
+        queryset = Country.objects.order_by( 'name' ),
+        empty_label = _( 'Select Country' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
+    months = ChoiceField(
+        required = True,
+        label = _( "Duration" ),
+        choices = get_months_duration_tuple(),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserWorkExperience
@@ -396,7 +480,13 @@ class UserWorkOfferForm( BaseModelForm ):
     Form for USER WORK OFFER data (If user has job offers from other countries)
     """
 
-    country = CountryChoiceField( required = True, label = _( "From Which Country" ), queryset = Country.objects.order_by( 'name' ), empty_label = _( 'Select Country' ) )
+    country = CountryChoiceField(
+        required = True,
+        label = _( "From Which Country" ),
+        queryset = Country.objects.order_by( 'name' ),
+        empty_label = _( 'Select Country' ),
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
+    )
 
     class Meta:
         model = UserWorkOffer

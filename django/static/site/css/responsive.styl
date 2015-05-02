@@ -40,7 +40,6 @@
                 .nav-footer-link
                     font-size 12px
 
-
     .choose
         .content
             &.choose-destiny
@@ -491,7 +490,198 @@
                             &:before
                                 display none
 
+                &.myaccount
+                    width 100%
+
+                    >.title
+                        text-align center
+
+                    .interactions
+                        width 100%
+                        .interaction-list
+                            width 100%
+
+                            .interaction-item
+                                width 33.3%
+                                margin 0
+
+                    .my-profile
+
+                        .bt-edit
+                            float none
+                            margin 0 auto
+
+                        .identity
+                            height auto
+
+                            .thumb
+                                float none
+                                overflow hidden
+
+                        .summary
+                            height auto
+                            padding-bottom 20px
+                            .text
+                                width 100%
+
+                    .my-profile-edit
+
+                        .bt-save
+                            float none
+                            margin 0 auto
+
+                        .identity
+                            height auto
+
+                            .thumb
+                                float none
+                                overflow hidden
+
+                            .data
+                                padding-top 20px
+
+                                .field
+                                    input
+                                        width 100%
+
+                        .extra-field
+                            input
+                                width 100%
+
+                        .summary
+                            textarea
+                                width 100%
+
+                        .services
+                            width 100%
+
+                            .supported-services
+                                width 100%
+
+                                ul
+                                    display block
+                                    width 100%
+
+                                    .services-list
+                                        display block
+                                        width 100%
+
+                                        select
+                                            float none
+                                            display block
+                                            width 200px
+
+                                        .dd
+                                            font-size 13px
+
+                                        input
+                                            width 60px
+
+
+                    .my-contracts
+                        width 100%
+                        overflow-x auto
+
+                        table
+                            display table
+                            width 800px
+
+                    .inbox
+                        width 100%
+                        padding 0
+                        // overflow-x auto
+
+                        .box-menu
+                            display none
+
+                        .box
+                            width 100%
+                            overflow-x auto
+
+                            .box-top
+                                width 100%
+
+                                .bt-newmessage
+                                    margin 0 auto
+
+                                .messages-menu
+                                    display none
+
+                            .box-messages
+                                float none
+
+                                table
+                                    display table
+                                    overflow-x auto
+
+                                    td.check
+                                        display none
+
+                &.social
+                    width 100%
+                    min-height 0
+
+                    .sidebar
+                        display none
+
+                    .content
+                        width 100%
+                        min-height 0
+                        box()
+
+                        .add-question
+                            width 100%
+
+                            .add-topics
+                                width 100%
+
+                                textarea
+                                    width 100%
+
+                                input
+                                    width 130px
+
+                                .tags
+                                    height 60px
+
+                                    .tag
+                                        margin-bottom 15px
+
+                        .add-post
+                            width 100%
+
+                            .add-topics
+                                width 100%
+
+                                textarea
+                                    width 100%
+
+                                input
+                                    width 130px
+
+                                .tags
+                                    height 60px
+
+                                    .tag
+                                        margin-bottom 15px
+
+
+                        .question-following
+
+                            .add-interest
+                                width 100%
+
+                                input
+                                    width 50%
+
+                            .tags
+                                height 60px
+
+                                .tag
+                                    margin-bottom 15px
+
             footer
+                display none
                 overflow hidden
                 .logo
                     float none
@@ -512,6 +702,33 @@
 
             footer
                 display none
+
+        &.contactus
+            width 100%
+
+            .content
+                float none
+                width 100%
+
+                .contact-us
+                    position relative
+                    left 0
+                    margin 0
+                    padding-top 50px
+                    width 100%
+                    height auto
+
+                    .title
+                        font-size 42px
+
+                    .description
+                        font-size 18px
+
+                    fieldset
+                        width 100%
+
+                        legend
+                            width 75%
 
         .autocomplete-suggestions
             top 48px !important
@@ -620,6 +837,138 @@
 
                     &.open
                         height 175px
+
+    .dashboard-edit-forms
+        .content.edit-forms
+            padding-top 0
+
+            .top
+                position relative
+                height auto
+                padding-top 15px
+                padding-bottom 15px
+
+                .text
+                    float none
+                    padding 0
+                    margin 0 auto 0
+
+                    .title
+                        text-align center
+
+                    &:before
+                        display none !important
+
+                    p
+                        display none
+
+                .bt-save
+                    float none
+                    margin 15px auto 0
+
+            .details
+                width 100%
+                padding-top 25px
+                padding-bottom 30px
+
+                fieldset
+                    width 100%
+
+                    .field
+                        padding 0 5%
+
+                        &.family-member
+                            strong
+                                line-height 24px
+
+                            .countries
+                                width 100%
+                                .country
+                                    width 100%
+
+                        &.languages-field
+                            strong
+                                line-height 24px
+
+                            .languages
+                                width 100%
+
+                                .language
+                                    width 100%
+                                    height auto
+                                    padding-bottom 20px
+
+                                    .language-which,
+                                    .language-level
+                                        float none
+
+                                    .language-which
+                                        margin 0 0 10px 0
+
+                        &.educational-field
+
+                            strong
+                                padding-left 10px
+
+                            .educationals
+                                width 100%
+
+                                .education
+                                    width 100%
+                                    height auto
+                                    padding-bottom 20px
+
+                                    .education-which,
+                                    .education-level
+                                        float none
+
+                                    .education-which
+                                        margin 0 0 10px 0
+
+                                    .field.level
+                                        padding 15px 0 0
+
+                                        select
+                                            width 80%
+
+                        &.occupation-field
+
+                            strong
+                                padding-left 10px
+
+                            .occupation
+                                width 100%
+
+                                select
+                                    width 80%
+
+                        &.works-field
+                            position relative
+                            .works
+                                width 100%
+                                height auto
+
+                                .work
+                                    width 100%
+                                    height 290px
+                                    padding-bottom 20px
+
+                                    .experience
+                                        display block
+                                        padding 15px 0 0
+
+                                        select
+                                            width 80%
+
+        .education-form
+            .details
+                fieldset
+                    .field.married,
+                    .field.hinterland
+                        height auto !important
+                        padding-bottom 15px
+
+
 
 @media screen and (max-width: 360px)
     .landing

@@ -262,13 +262,13 @@ def get_dashboard_user_progress_css_color( percentage ):
 
     # Define the color of the bar
     if percentage <= 25:
-        color = 'progress-fill-red'
+        color = 'red'
     elif percentage <= 50:
-        color = 'progress-fill-orange'
+        color = 'orange'
     elif percentage <= 80:
-        color = 'progress-fill-yellow'
+        color = 'yellow'
     else:
-        color = 'progress-fill-green'
+        color = 'green'
 
     return color
 

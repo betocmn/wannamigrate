@@ -534,7 +534,7 @@ def calculate_points( request ):
     )
 
     # Redirect to Dashboard
-    return HttpResponseRedirect( reverse( "site:dashboard" ) )
+    return HttpResponseRedirect( reverse( "points:dashboard" ) )
 
 
 
@@ -563,7 +563,7 @@ def situation( request, country_name ):
     template_data['education_points'] = 0
     template_data['work_points'] = 0
     template_data['status_success'] = False
-    template_data['status_message'] = _( "You still don’t have enough points" )
+    template_data['status_message'] = _( "You don’t have enough points" )
 
     # Instantiate all country_config
     country_config = CountryConfig.objects.all()
@@ -611,7 +611,7 @@ def situation( request, country_name ):
         template_data['work_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_work_points
 
     else:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+        return HttpResponseRedirect( reverse( "points:dashboard" ) )
 
 
     # Get User Results for this country
@@ -636,51 +636,51 @@ def situation( request, country_name ):
             template_data['status_message'] = _( "You have enough points" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_POINTS:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "You still don’t have enough points" )
+            template_data['status_message'] = _( "You don’t have enough points" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_OCCUPATION:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "Your occupation is not in demand" )
+            template_data['status_message'] = _( "Occupation is not in demand" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_AGE:
             template_data['status_success'] = False
             template_data['status_message'] = _( "Your age is not allowed" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_LANGUAGE:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "You don't have the minimum language requirements" )
+            template_data['status_message'] = _( "Minimum language requirements not met" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_WORK_EXPERIENCE:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "You don't have enough work experience" )
+            template_data['status_message'] = _( "Minimum work experience not met" )
 
     # Define the percentage CSS class to use around country flag for progress bar for total points
-    percentage_total = math.floor( ( 100 * template_data['total_points'] ) / template_data['min_points'] )
-    template_data['percentage_total_css_class'] = get_internal_country_progress_css_class( percentage_total )
+    template_data['percentage_total'] = math.floor( ( 100 * template_data['total_points'] ) / template_data['min_points'] )
+    template_data['percentage_total_css_color'] = get_dashboard_country_progress_css_color( template_data['percentage_total'] )
 
     # Define the percentage CSS class for PERSONAL points
     if template_data['personal_points'] == 0 or template_data['personal_max_points'] == 0:
-        percentage_personal = 0
+        template_data['personal_percentage'] = 0
     else:
-        percentage_personal = math.floor( ( 100 * template_data['personal_points'] ) / template_data['personal_max_points'] )
-    template_data['percentage_personal_css_class'] = get_internal_section_progress_css_class( percentage_personal )
+        template_data['personal_percentage'] = math.floor( ( 100 * template_data['personal_points'] ) / template_data['personal_max_points'] )
+    template_data['personal_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['personal_percentage'] )
 
     # Define the percentage CSS class for LANGUAGE points
     if template_data['language_points'] == 0 or template_data['language_max_points'] == 0:
-        percentage_language = 0
+        template_data['language_percentage'] = 0
     else:
-        percentage_language = math.floor( ( 100 * template_data['language_points'] ) / template_data['language_max_points'] )
-    template_data['percentage_language_css_class'] = get_internal_section_progress_css_class( percentage_language )
+        template_data['language_percentage'] = math.floor( ( 100 * template_data['language_points'] ) / template_data['language_max_points'] )
+    template_data['language_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['language_percentage'] )
 
     # Define the percentage CSS class for EDUCATION points
     if template_data['education_points'] == 0 or template_data['education_max_points'] == 0:
-        percentage_education = 0
+        template_data['education_percentage'] = 0
     else:
-        percentage_education = math.floor( ( 100 * template_data['education_points'] ) / template_data['education_max_points'] )
-    template_data['percentage_education_css_class'] = get_internal_section_progress_css_class( percentage_education )
+        template_data['education_percentage'] = math.floor( ( 100 * template_data['education_points'] ) / template_data['education_max_points'] )
+    template_data['education_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['education_percentage'] )
 
     # Define the percentage CSS class for WORK points
     if template_data['work_points'] == 0 or template_data['work_max_points'] == 0:
-        percentage_work = 0
+        template_data['work_percentage'] = 0
     else:
-        percentage_work = math.floor( ( 100 * template_data['work_points'] ) / template_data['work_max_points'] )
-    template_data['percentage_work_css_class'] = get_internal_section_progress_css_class( percentage_work )
+        template_data['work_percentage'] = math.floor( ( 100 * template_data['work_points'] ) / template_data['work_max_points'] )
+    template_data['work_percentage_css_color'] = get_dashboard_user_progress_css_color( template_data['work_percentage'] )
 
     # If user does not have enough points, we build a list of hints for that country on how to get more points
     template_data['hints'] = []
@@ -737,6 +737,9 @@ def situation( request, country_name ):
              # Investments
             template_data['hints'].append( _( "If you have money/assets that you will take with you, you can apply for an investment visa." ) )
 
+    else:
+        template_data['hints'].append( _( "<strong>Congratulations!</strong> You have enough points to apply for a visa" ) )
+
 
     # Print Template
     return render( request, 'points/country/situation.html', template_data )
@@ -780,7 +783,7 @@ def visa_application( request, country_name ):
         template_data['photo_column_css_class'] = 'columnNewZealand'
 
     else:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+        return HttpResponseRedirect( reverse( "points:dashboard" ) )
 
     # Print Template
     return render( request, 'points/country/visa_application.html', template_data )
@@ -798,27 +801,6 @@ def professional_help( request, country_name ):
 
     # Initial settings
     template_data = {}
-    template_data['top_bar_css_class'] = "fixTopBar"
-    template_data['country_name'] = country_name
-    template_data['finished'] = False
-
-    # Create form
-    form = ProfessionalHelpForm( request.POST or None )
-
-    # If the form has been submitted...
-    if form.is_valid():
-
-        email = request.user.email
-        name = request.user.name
-        message = form.cleaned_data[ 'message' ]
-
-        # Send Email with message
-        # TODO: Change this to a celery background event and use a try/exception block
-        send_result = Mailer.send_professional_help_email( email, name, message )
-        template_data['finished'] = True
-
-    # pass form to template
-    template_data['form'] = form
 
     # Get Country and set options for it
     if country_name == 'australia':
@@ -843,7 +825,7 @@ def professional_help( request, country_name ):
         template_data['photo_column_css_class'] = 'columnNewZealand'
 
     else:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+        return HttpResponseRedirect( reverse( "points:dashboard" ) )
 
     # Print Template
     return render( request, 'points/country/professional_help.html', template_data )

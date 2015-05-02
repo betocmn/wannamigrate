@@ -1,110 +1,66 @@
-{% extends "_layouts/site.html" %}
+{% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head %}
+{% block body %}
+    <body class="dashboard choose about">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <div class="content results">
+        <div class="result">
+            <aside class="country-result new-zealand">
+                <div class="country">
+                    <strong>{{ country_name_as_label }}</strong>
+                </div>
+            </aside>
+            <div class="main">
+                <ul class="options">
+                    <li class="option situation">{% trans "My situation" %}</li>
+                    <li class="option visa">{% trans "Visa application" %}</li>
+                    <li class="option movingto active">{% trans "Get expert help" %}</li>
+                </ul>
+                <div class="visa-application guide-steps">
+                    <div class="visa-topics">
+
+                        <div class="visa-topic">
+
+                            <p class="text"> <a href="{% url 'marketplace:professionals' %}">{% trans "Clicke Here" %}:</a>{% trans " to search for an expert that can help you with you migration plan." %}</p>
+                            <img src="{% static "site/img/temp-visa-image.jpg" %}" />
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
 
     {{ block.super }}
-
-    <!-- Dashboard Custom JS -->
-    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
-        /**
-		 * Jquery On Load
-		 *
-		 */
-		$( document ).ready(function() {
+        $( document ).ready( function() {
 
-			// JS FORM Validation
-			$( "#main_form" ).submit( function() {
-				return validate_empty_fields( this, '{{ form.get_required_fields }}' );
-			});
 
-			// JS for onload
-			{{ on_load|default:'' }}
 
-		});
+        });
 
     </script>
 
-{% endblock head %}
+    {% include "_layouts/analytics.html" %}
 
-{% block content %}
-
-	<div class="column25"></div>
-	<div class="column25 {{ photo_column_css_class }}">
-		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
-	</div>
-	<div class="column75">
-		<a href="{% url 'points:situation' country_name %}" class="tab1">{% trans "My situation" %}</a>
-		<a href="{% url 'points:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
-		<a href="{% url 'points:professional_help' country_name %}" class="tab3 tab-active">{% trans "Get professional help" %}</a>
-		<div class="clear"> </div>
-
-
-
-        <div class="movingStepsContainer" id="professionalHelp">
-
-            {% if finished %}
-
-                <p class="movingIntroduction">
-
-                    {% trans "<strong>Thank You!</strong> We will send you some options of professionals." %}
-                </p>
-
-            {% else %}
-
-                <p class="movingIntroduction">
-
-                    {% trans "<strong>Services that you can get help with:</strong>" %}
-
-                    <br /><br />
-
-                    - {% trans "<strong>Skype interview</strong> with an immigration professional (portuguese or english)" %} <br /><br />
-                    - {% trans "Assessment to determine best <strong>type of visa</strong>." %} <br /><br />
-                    - {% trans "Full <strong>visa assessment</strong>." %} <br /><br />
-                    - {% trans "<strong>File Review</strong> (before you send your application)" %} <br /><br />
-                    - {% trans "<strong>Translation</strong> of documents" %} <br /><br />
-
-                </p>
-
-                <form method="post" action="" id="main_form">
-
-                    <div style="width: 100%; margin: 0 auto;">
-                        {% include "site/_common/status.html" %}
-                    </div>
-
-                    {% csrf_token %}
-
-                    {% for field in form %}
-
-                        <label class="{% if field.errors %}has-error{% endif %}" for="{{ field.id_for_label }}">
-                            <span>{{ field.label }}:</span>
-                            {{ field }}
-                            {{ field.errors }}
-                        </label>
-
-                    {% endfor %}
-
-                    <input type="submit" />
-
-                </form>
-
-            {% endif %}
-
-            <br /><br />
-
-            <p>
-                <a href="{% url 'site:dashboard' %}">{% trans "Go back to dashboard" %}</a>
-            </p>
-
-            <br /><br />
-
-        </div>
-
-	</div>
-	
-{% endblock content %}
+{% endblock scripts %}

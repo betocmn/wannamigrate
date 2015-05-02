@@ -1,249 +1,177 @@
-{% extends "_layouts/site.html" %}
+{% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head %}
+{% block body %}
+    <body class="dashboard choose about">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <div class="content results">
+        <div class="result">
+            <aside class="country-result new-zealand">
+                <div class="country">
+                    <strong>{{ country_name_as_label }}</strong>
+                </div>
+            </aside>
+            <div class="main">
+                <ul class="options">
+                    <li class="option situation">{% trans "My situation" %}</li>
+                    <li class="option visa active">{% trans "Visa application" %}</li>
+                    <li class="option movingto">{% trans "Get expert help" %}</li>
+                </ul>
+                <div class="visa-application guide-steps">
+                    <div class="visa-topics">
+
+                        {% if country_name == 'australia' %}
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>1</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Get your passport ready" %}</h3>
+                                <p class="text">{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
+                                <p class="text">{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
+
+                                <h3 class="subtitle">• {% trans "Provide proofs that you have competent English skills" %}</h3>
+                                <p class="text">{% trans "You need to have one of the following:" %}</p>
+                                <p class="text">- <a href="http://www.ielts.org/" target="_blank">IELTS:</a> {% trans "Score of at least 6 for each of the four test components." %}</p>
+                                <p class="text">- <a href="https://www.ets.org/toefl/ibt/about" target="_blank">TOEFL:</a> {% trans "Score of at least 'B' for each of the four test components (OET) or 12 for listening, 13 for reading, 21 for writing and 18 for speaking (TOEFL iBT)." %}</p>
+                                <p class="text">- <a href="http://pearsonpte.com/" target="_blank">PTE:</a> {% trans "Score of at least 50 in each of the four test components." %}</p>
+                                <p class="text">- {% trans "Valid passport from the United Kingdom, the United States of America, Canada, New Zealand or the Republic of Ireland and you are a citizen of that country." %}</p>
+
+                                <h3 class="subtitle">• {% trans "Get your occupation recognized by Australia" %}</h3>
+                                <p class="text">{% trans "You will have to apply for an Australian Skills Assessment from the relevant authority on your field of work." %}</p>
+                                <p class="text">{% trans "In almost all cases, assessing bodies will require that you have post-secondary, such as university or trade, qualifications in order to receive a positive assessment of your skills." %}</p>
+                                <p class="text">{% trans "In almost all cases, assessing bodies will require that you have post-secondary, such as university or trade, qualifications in order to receive a positive assessment of your skills." %}</p>
+                                <img src="{% static "site/img/temp-visa-image.jpg" %}" />
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>2</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Submit an Expression of Interest" %}</h3>
+                                <p class="text">{% trans "In Australia you need to be invited to apply for the visa.  To be invited you need to have the minimum number of points required and then submit an expression of interest, which is an online form." %}</p>
+                                <p class="text"><a href="https://skillselect.gov.au/SKILLSELECT/ExpressionOfInterest/PreReg/Start" target="_blank">{% trans "Click Here" %}</a> {% trans "to send your expression of interest." %}</p>
+                                <img src="{% static "site/img/australia-eoi-form.png" %}" />
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>3</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Send your Visa Application" %}</h3>
+                                <p class="text">{% trans "After you receive an invitation from the Governmenet of Australia you will be able to send your visa application." %}</p>
+                                <p class="text">{% trans "Remember that after the invitation, you have only 60 days to apply and you will have to provide all the documentation, so make sure you have it all prepared even before you send your Expression of Interest:" %}</p>
+                                <p class="text">-{% trans "Proofs for English skills." %}</p>
+                                <p class="text">-{% trans "Skills Assessment for your occupation." %}</p>
+                                <p class="text">-{% trans "Proofs for education degrees" %}</p>
+                                <p class="text">-{% trans "Personal Identification Documentation (including Passport)" %}</p>
+                                <p class="text">-{% trans "Policy and Medical checks (certificates)" %}</p>
+                            </div>
+
+                        {% elif country_name == 'canada' %}
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>1</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Get your passport ready" %}</h3>
+                                <p class="text">{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
+                                <p class="text">{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
+
+                                <h3 class="subtitle">• {% trans "Provide proofs for Minimum Language Requirement" %}</h3>
+                                <p class="text">{% trans "It can be for English or French. You will need to provide one of the following certificates:" %}</p>
+                                <p class="text">- <a href="http://www.celpiptest.ca/" target="_blank">CELPIP:</a> {% trans "Score of at least 7 for each of the four test components." %}</p>
+                                <p class="text">- <a href="http://www.ielts.org/" target="_blank">IELTS:</a> {% trans "Score of at least 6 for each of the four test components" %}</p>
+                                <p class="text">- <a href="http://www.fda.ccip.fr/" target="_blank">TEF:</a> {% trans "Score of: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 (Reading), 310 – 348 (Writing)." %}</p>
+
+                                <h3 class="subtitle">• {% trans "Provide proofs for Minimum Education Requirement" %}</h3>
+                                <p class="text">{% trans "If your degree was obtained outside Canada, you will need an Educational Credential Assessment (ECA) report issued by an organization designated by Citizenship and Immigration Canada. " %}</p>
+                                <p class="text"><a href="http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp" target="_blank">{% trans "Click Here" %}</a> {% trans "to have your education assessed." %}</p>
+
+                                <h3 class="subtitle">• {% trans "Provide proofs for Minimum Work Experience Requirements" %}</h3>
+                                <p class="text">{% trans "You will have to prove all of the following:" %}</p>
+                                <p class="text">- {% trans "You must have at least one year of continuous full-time (or the equivalent in continuous part-time) paid work experience in the primary occupation you specify in your application." %}</p>
+                                <p class="text">- {% trans "You must have had this experience within the last 10 years." %}</p>
+                                <p class="text"><a href="http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp" target="_blank">{% trans "Click Here" %}</a> {% trans "to have your education assessed." %}</p>
+
+                                <img src="{% static "site/img/temp-visa-image.jpg" %}" />
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>2</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Fill Out The Application" %}</h3>
+                                <p class="text">{% trans "You will need the documents listed above and also Police Certificates and Translations of all document, if not in English or French." %}</p>
+                                <p class="text">{% trans "Then you need to fill out all the following forms:" %} <a href="http://www.cic.gc.ca/english/information/applications/guides/EG7TOC.asp#eg74" target="_blank">{% trans "Click Here" %}</a> </p>
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>3</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Pay the Fees" %}</h3>
+                                <p class="text">{% trans "Complete the Fee Payment Form - Application for Permanent Residence (IMM 5620) and include it with your application to the CIO. On-line payments are not accepted by the CIO." %}</p>
+                                <p class="text"><a href="http://www.cic.gc.ca/english/pdf/kits/forms/IMM5620E.pdf" target="_blank">{% trans "Click Here" %}</a> {% trans "to get the form." %}</p>
+                            </div>
+
+                        {% elif country_name == 'new-zealand' %}
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>1</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Get your passport ready" %}</h3>
+                                <p class="text">{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
+                                <p class="text">{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
+
+                                <img src="{% static "site/img/temp-visa-image.jpg" %}" />
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>2</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Submit an Expression of Interest (EOI)" %}</h3>
+                                <p class="text">{% trans "On the EOI form you fill out information about yourself, your family, your skills and your work experience. As you complete your EOI, you claim points. However, you do not have to provide evidence at this point." %}</p>
+                                <p class="text">{% trans "Submitting an online EOI costs a fee of NZ$510.00. Submitting a paper-based EOI costs a fee of NZ$650. Online EOIs cost less because they require less processing than paper-based EOIs." %}</p>
+                                <p class="text">{% trans "If your EOI has a score of 100 points or more, it goes in the pool of EOIs. Every two weeks they automatically select EOIs with a points score of 140 or over from the pool. Then they select EOIs with a points score between 100 and 139 which include points for a skilled job or job offer. If there are still have spaces available, they use additional criteria to select lower-scoring EOIs." %}</p>
+                                <p class="text">{% trans "EOIs are only valid for six months. If your EOI is not selected within six months, it will lapse and be withdrawn from the pool. Your EOI fee will not be refunded." %}</p>
+                                <p class="text"><a href="https://www.immigration.govt.nz/secure/Login+Skilled+Migrant.htm" target="_blank">{% trans "Click Here" %}</a> {% trans "for online application." %}</p>
+                                <p class="text"><a href="http://www.immigration.govt.nz/NR/rdonlyres/C4AFDC08-CA7F-441A-B862-56A7A25A20D3/0/INZ110030July2012.pdf" target="_blank">{% trans "Click Here" %}</a> {% trans "for paper application." %}</p>
+
+                                <img src="{% static "site/img/new-zealand-eoi-form.png" %}" />
+                            </div>
+                            <div class="visa-topic">
+                                <h2 class="title-topic">{% trans "Step" %} <span>3</span></h2>
+
+                                <h3 class="subtitle">• {% trans "Send your Visa Application" %}</h3>
+                                <p class="text">{% trans "After you receive an invitation to apply, you need to check the information you provided in your EOI is still up to date and correct. You also need to provide:" %}</p>
+                                <p class="text">- {% trans "evidence to support the points you claimed in your EOI." %}</p>
+                                <p class="text">- {% trans "proof that you and everyone else on your application meet all of our health, character and English language requirements." %}</p>
+                                <p class="text">{% trans "You then need to send all documents and evidence, with your application form and a fee. You must make your application within four months of being invited to apply for residence. Any applications received after four months will not be accepted.." %}</p>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
 
     {{ block.super }}
-
-    <!-- Dashboard Custom JS -->
-    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
+        $( document ).ready( function() {
+
+
+
+        });
+
     </script>
 
-{% endblock head %}
+    {% include "_layouts/analytics.html" %}
 
-{% block content %}
-
-	<div class="column25"></div>
-	<div class="column25 {{ photo_column_css_class }}">
-		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
-	</div>
-	<div class="column75">
-		<a href="{% url 'points:situation' country_name %}" class="tab1">{% trans "My situation" %}</a>
-		<a href="{% url 'points:visa_application' country_name %}" class="tab2 tab-active">{% trans "Steps for visa application" %}</a>
-		<a href="{% url 'points:professional_help' country_name %}" class="tab3">{% trans "Get professional help" %}</a>
-		<div class="clear"> </div>
-
-
-		<div class="movingStepsContainer doItYellow">
-
-
-
-            {% if country_name == 'australia' %}
-
-
-                <p class="movingIntroduction">
-                    {% trans "<strong>Follow the steps</strong> below to start your <strong>visa application</strong> for" %} {{ country_name_as_label }}:
-                </p>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>1</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Get your passport ready" %}</h3>
-                    <p>{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
-                    <p>{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
-
-                    <h3>&#149; {% trans "Provide proofs that you have competent English skills" %}</h3>
-                    <p>{% trans "You need to have one of the following:" %}</p>
-                    <p>- <a href="http://www.ielts.org/" target="_blank">IELTS:</a> {% trans "Score of at least 6 for each of the four test components." %}</p>
-                    <p>- <a href="https://www.ets.org/toefl/ibt/about" target="_blank">TOEFL:</a> {% trans "Score of at least 'B' for each of the four test components (OET) or 12 for listening, 13 for reading, 21 for writing and 18 for speaking (TOEFL iBT)." %}</p>
-                    <p>- <a href="http://pearsonpte.com/" target="_blank">PTE:</a> {% trans "Score of at least 50 in each of the four test components." %}</p>
-                    <p>- {% trans "Valid passport from the United Kingdom, the United States of America, Canada, New Zealand or the Republic of Ireland and you are a citizen of that country." %}</p>
-
-                    <h3>&#149; {% trans "Get your occupation recognized by Australia" %}</h3>
-                    <p>{% trans "You will have to apply for an Australian Skills Assessment from the relevant authority on your field of work." %}</p>
-                    <p>{% trans "In almost all cases, assessing bodies will require that you have post-secondary, such as university or trade, qualifications in order to receive a positive assessment of your skills." %}</p>
-                    <p>{% trans "(More details here soon)" %}</p>
-
-                    <br />
-                    <br />
-                    <img src="{% static "site/img/globe.png" %}" />
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>2</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Submit an Expression of Interest" %}</h3>
-                    <p>{% trans "In Australia you need to be invited to apply for the visa.  To be invited you need to have the minimum number of points required and then submit an expression of interest, which is an online form." %}</p>
-                    <p><a href="https://skillselect.gov.au/SKILLSELECT/ExpressionOfInterest/PreReg/Start" target="_blank">{% trans "Click Here" %}</a> {% trans "to send your expression of interest." %}</p>
-
-                    <br />
-                    <br />
-                    <img src="{% static "site/img/australia-eoi-form.png" %}" />
-
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>3</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Send your Visa Application" %}</h3>
-                    <p>{% trans "After you receive an invitation from the Governmenet of Australia you will be able to send your visa application." %}</p>
-                    <p>{% trans "Remember that after the invitation, you have only 60 days to apply and you will have to provide all the documentation, so make sure you have it all prepared even before you send your Expression of Interest:" %}</p>
-                    <p>-{% trans "Proofs for English skills." %}</p>
-                    <p>-{% trans "Skills Assessment for your occupation." %}</p>
-                    <p>-{% trans "Proofs for education degrees" %}</p>
-                    <p>-{% trans "Personal Identification Documentation (including Passport)" %}</p>
-                    <p>-{% trans "Policy and Medical checks (certificates)" %}</p>
-
-                </div>
-
-                <div class="clear" style="height:100px;"> </div>
-
-            {% elif country_name == 'canada' %}
-
-                <p class="movingIntroduction">
-                    {% trans "<strong>Follow the steps</strong> below to start your <strong>visa application</strong> for" %} {{ country_name_as_label }}:
-                </p>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>1</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Get your passport ready" %}</h3>
-                    <p>{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
-                    <p>{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
-
-                    <h3>&#149; {% trans "Provide proofs for Minimum Language Requirement" %}</h3>
-                    <p>{% trans "It can be for English or French. You will need to provide one of the following certificates:" %}</p>
-                    <p>- <a href="http://www.celpiptest.ca/" target="_blank">CELPIP:</a> {% trans "Score of at least 7 for each of the four test components." %}</p>
-                    <p>- <a href="http://www.ielts.org/" target="_blank">IELTS:</a> {% trans "Score of at least 6 for each of the four test components" %}</p>
-                    <p>- <a href="http://www.fda.ccip.fr/" target="_blank">TEF:</a> {% trans "Score of: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 (Reading), 310 – 348 (Writing)." %}</p>
-
-                    <h3>&#149; {% trans "Provide proofs for Minimum Education Requirement" %}</h3>
-                    <p>{% trans "If your degree was obtained outside Canada, you will need an Educational Credential Assessment (ECA) report issued by an organization designated by Citizenship and Immigration Canada. " %}</p>
-                    <p><a href="http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp" target="_blank">{% trans "Click Here" %}</a> {% trans "to have your education assessed." %}</p>
-
-                    <h3>&#149; {% trans "Provide proofs for Minimum Work Experience Requirements" %}</h3>
-                    <p>{% trans "You will have to prove all of the following:" %}</p>
-                    <p>- {% trans "You must have at least one year of continuous full-time (or the equivalent in continuous part-time) paid work experience in the primary occupation you specify in your application." %}</p>
-                    <p>- {% trans "You must have had this experience within the last 10 years." %}</p>
-                    <p><a href="http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp" target="_blank">{% trans "Click Here" %}</a> {% trans "to have your education assessed." %}</p>
-
-                    <br />
-                    <br />
-                    <img src="{% static "site/img/globe.png" %}" />
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>2</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Fill Out The Application" %}</h3>
-                    <p>{% trans "You will need the documents listed above and also Police Certificates and Translations of all document, if not in English or French." %}</p>
-                    <p>{% trans "Then you need to fill out all the following forms:" %} <a href="http://www.cic.gc.ca/english/information/applications/guides/EG7TOC.asp#eg74" target="_blank">{% trans "Click Here" %}</a> </p>
-
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>3</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Pay the Fees" %}</h3>
-                    <p>{% trans "Complete the Fee Payment Form - Application for Permanent Residence (IMM 5620) and include it with your application to the CIO. On-line payments are not accepted by the CIO." %}</p>
-                    <p><a href="http://www.cic.gc.ca/english/pdf/kits/forms/IMM5620E.pdf" target="_blank">{% trans "Click Here" %}</a> {% trans "to get the form." %}</p>
-
-                </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>4</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Send you application by mail" %}</h3>
-                    <p>{% trans "Put the completed forms, supporting documents and fee payment in a 23 cm x 30.5 cm (9″ x 12″) envelope and send your completed application." %}</p>
-                    <p><a href="http://www.cic.gc.ca/english/information/applications/guides/EG7TOC.asp#eg76" target="_blank">{% trans "Click Here" %}</a> {% trans "to get the address." %}</p>
-
-                </div>
-
-                <div class="clear" style="height:100px;"> </div>
-
-
-            {% elif country_name == 'new-zealand' %}
-
-                <p class="movingIntroduction">
-                    {% trans "<strong>Follow the steps</strong> below to start your <strong>visa application</strong> for" %} {{ country_name_as_label }}:
-                </p>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>1</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Get your passport ready" %}</h3>
-                    <p>{% trans "If you still don't have a passport or need to renew it, you will have to do it before applying for the visa." %}</p>
-                    <p>{% trans "Passports are issued by specific government departments, such as the police, immigration dept., etc... This will vary from country to country." %}</p>
-
-                    <br />
-                    <br />
-                    <img src="{% static "site/img/globe.png" %}" />
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>2</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Submit an Expression of Interest (EOI)" %}</h3>
-                    <p>{% trans "On the EOI form you fill out information about yourself, your family, your skills and your work experience. As you complete your EOI, you claim points. However, you do not have to provide evidence at this point." %}</p>
-                    <p>{% trans "Submitting an online EOI costs a fee of NZ$510.00. Submitting a paper-based EOI costs a fee of NZ$650. Online EOIs cost less because they require less processing than paper-based EOIs." %}</p>
-                    <p>{% trans "If your EOI has a score of 100 points or more, it goes in the pool of EOIs. Every two weeks they automatically select EOIs with a points score of 140 or over from the pool. Then they select EOIs with a points score between 100 and 139 which include points for a skilled job or job offer. If there are still have spaces available, they use additional criteria to select lower-scoring EOIs." %}</p>
-                    <p>{% trans "EOIs are only valid for six months. If your EOI is not selected within six months, it will lapse and be withdrawn from the pool. Your EOI fee will not be refunded." %}</p>
-                    <p><a href="https://www.immigration.govt.nz/secure/Login+Skilled+Migrant.htm" target="_blank">{% trans "Click Here" %}</a> {% trans "for online application." %}</p>
-                    <p><a href="http://www.immigration.govt.nz/NR/rdonlyres/C4AFDC08-CA7F-441A-B862-56A7A25A20D3/0/INZ110030July2012.pdf" target="_blank">{% trans "Click Here" %}</a> {% trans "for paper application." %}</p>
-
-                    <br />
-                    <br />
-                    <img src="{% static "site/img/new-zealand-eoi-form.png" %}" />
-
-                </div>
-
-                <div class="clear" style="height:50px;"> </div>
-
-                <div class="movingStepsNumber">
-                    {% trans "STEP" %} <span>3</span>
-                </div>
-                <div class="movingStepsContent">
-
-                    <h3>&#149; {% trans "Send your Visa Application" %}</h3>
-                    <p>{% trans "After you receive an invitation to apply, you need to check the information you provided in your EOI is still up to date and correct. You also need to provide:" %}</p>
-                    <p>- {% trans "evidence to support the points you claimed in your EOI." %}</p>
-                    <p>- {% trans "proof that you and everyone else on your application meet all of our health, character and English language requirements." %}</p>
-                    <p>{% trans "You then need to send all documents and evidence, with your application form and a fee. You must make your application within four months of being invited to apply for residence. Any applications received after four months will not be accepted.." %}</p>
-
-                </div>
-
-                <div class="clear" style="height:100px;"> </div>
-
-            {% endif %}
-
-
-
-
-		</div>
-
-	</div>
-	
-{% endblock content %}
+{% endblock scripts %}

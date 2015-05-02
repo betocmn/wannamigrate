@@ -178,6 +178,7 @@
 
             {% block content %}{% endblock content %}
 
+            {% block footer %}
             <footer>
                 <a href="#" class="logo">Wanna Migrate</a>
                 <nav class="nav-footer">
@@ -189,6 +190,7 @@
                 </nav>
                 <p class="copyright">© WannaMigrate {% now "Y" %} {% trans "All Rights Reserved" %}</p>
             </footer>
+            {% endblock footer %}
 
         </div>
 

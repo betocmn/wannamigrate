@@ -1,154 +1,118 @@
-{% extends "_layouts/site.html" %}
+{% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head %}
+{% block body %}
+    <body class="dashboard choose about">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <div class="content results">
+        <div class="result">
+            <aside class="country-result new-zealand">
+                <div class="country">
+                    <strong>{{ country_name_as_label }}</strong>
+                </div>
+            </aside>
+            <div class="main">
+                <ul class="options">
+                    <li class="option situation active">{% trans "My situation" %}</li>
+                    <li class="option visa">{% trans "Visa application" %}</li>
+                    <li class="option movingto">{% trans "Get expert help" %}</li>
+                </ul>
+                <div class="my-situation guide-steps">
+                    <div class="graph">
+
+                        <div class="circle-progress-bar newzealand">
+
+                        </div>
+                        <div class="score">
+                            <p><strong class="points">{{ total_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "Of" %} <i>{{ min_points }}</i> {% trans "REQUIRED" %}</em></p>
+                        </div>
+                        <div class="skills">
+                            <ul class="skills-list">
+                                <li class="skill">
+                                    <strong class="type personal">{% trans 'Personal' %}</strong>
+                                    <div class="progress-track">
+                                        <div class="progress-fill progress-fill-{{ personal_percentage_css_color }}" style="width: {{ personal_percentage|default:2 }}%"></div>
+                                    </div>
+                                    <strong class="points"><span>{{ personal_points }}</span> {% trans "POINTS" %} <em>({% trans "of" %} {{ personal_max_points }})</em></strong>
+                                </li>
+                                <li class="skill">
+                                    <strong class="type professional">{% trans 'Language' %}</strong>
+                                    <div class="progress-track">
+                                        <div class="progress-fill progress-fill-{{ language_percentage_css_color }}" style="width: {{ language_percentage|default:2 }}%"></div>
+                                    </div>
+                                    <strong class="points"><span>{{ language_points }}</span> {% trans "POINTS" %} <em>({% trans "of" %} {{ language_max_points }})</em></strong>
+                                </li>
+                                <li class="skill">
+                                    <strong class="type education">{% trans 'Education' %}</strong>
+                                    <div class="progress-track">
+                                        <div class="progress-fill progress-fill-{{ education_percentage_css_color }}" style="width: {{ education_percentage|default:2 }}%"></div>
+                                    </div>
+                                    <strong class="points"><span>{{ education_points }}</span> {% trans "POINTS" %} <em>({% trans "of" %} {{ education_max_points }})</em></strong>
+                                </li>
+                                <li class="skill">
+                                    <strong class="type work">{% trans 'Work' %}</strong>
+                                    <div class="progress-track">
+                                        <div class="progress-fill progress-fill-{{ work_percentage_css_color }}" style="width: {{ work_percentage|default:2 }}%"></div>
+                                    </div>
+                                    <strong class="points"><span>{{ work_points }}</span> {% trans "POINTS" %} <em>({% trans "of" %} {{ work_max_points }})</em></strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hints">
+
+                        <p class="{% if status_success %}success{% else %}locked{% endif %}">{{ status_message }}</p>
+
+                        <h3 class="subtitle">{% trans "Hints" %}</h3>
+                        <ul>
+                            {% for hint in hints %}
+                                <li class="hint">{{ hint|safe }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
 
     {{ block.super }}
 
-    <!-- Dashboard Custom JS -->
-    <script type="text/javascript" src="{% static "site/js/dashboard.js" %}"></script>
+    <!-- JS Custom Scripts -->
+    <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
+        $( document ).ready( function() {
+
+            $( '.circle-progress-bar' ).circleProgress({
+                value: ( parseInt( '{{ percentage_total|default:2 }}' ) / 100 ),
+                size: 370,
+                thickness: "12",
+                fill: {
+                    image: '{% static "site/img/pattern-"|add:percentage_total_css_color|add:"-big.png" %}'
+                }
+            });
+
+        });
+
     </script>
 
-{% endblock head %}
+    {% include "_layouts/analytics.html" %}
 
-{% block content %}
-
-	<div class="column25"></div>
-	<div class="column25 {{ photo_column_css_class }}">
-		<p><img src="{% static "site/img/"|add:country_flag_image_name %}" /> {{ country_name_as_label }}</p>
-	</div>
-	<div class="column75">
-		<a href="{% url 'points:situation' country_name %}" class="tab1 tab-active">{% trans "My situation" %}</a>
-		<a href="{% url 'points:visa_application' country_name %}" class="tab2">{% trans "Steps for visa application" %}</a>
-		<a href="{% url 'points:professional_help' country_name %}" class="tab3">{% trans "Get professional help" %}</a>
-		<div class="clear"> </div>
-
-
-		<div class="halfWidth">
-
-			<div class="countriesOuter bigProgress">
-                <div class="countries">
-                <div class="circleProgressBarBig {{ percentage_total_css_class }}">
-                    <div class="{{ country_map_css_class }}"></div>
-                </div>
-                <div class="clear"> </div>
-                <div class="countriesProgress" style="margin-left:100px;margin-top:20px;">
-                    <div class="textUnderLeft">{{ total_points }}</div>
-                    <div class="textUnderRight">
-                        <p>{% trans "POINTS" %}</p>
-                        <p>{% trans "OF" %} <span>{{ min_points }}</span> {% trans "REQUIRED" %}</p>
-                    </div>
-                    <div class="clear"> </div>
-                </div>
-                <div class="clear"> </div>
-                </div>
-                </div>
-
-                <div class="stats">
-
-                    <div class="clear"> </div>
-                    <div class="statsName">{% trans 'Personal' %}</div>
-                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_personal_css_class }}"></div></div>
-                    <div class="statsPoints"><span><b>{{ personal_points }}</b> {% trans "pts" %}</span> ({% trans "of" %} {{ personal_max_points }})</div>
-                    <div class="clear" style="height:10px;"> </div>
-
-                    <div class="statsName">{% trans 'Language' %}</div>
-                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_language_css_class }}"></div></div>
-                    <div class="statsPoints"><span><b>{{ language_points }}</b> {% trans "pts" %}</span> ({% trans "of" %} {{ language_max_points }})</div>
-                    <div class="clear" style="height:10px;"> </div>
-
-                    <div class="statsName">{% trans 'Education' %}</div>
-                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_education_css_class }}"></div></div>
-                    <div class="statsPoints"><span><b>{{ education_points }}</b> {% trans "pts" %}</span> ({% trans "of" %} {{ education_max_points }})</div>
-                    <div class="clear" style="height:10px;"> </div>
-
-                    <div class="statsName">{% trans 'Work' %}</div>
-                    <div class="statsProgress"><div class="innerStatsProgress {{ percentage_work_css_class }}"></div></div>
-                    <div class="statsPoints"><span><b>{{ work_points }}</b> {% trans "pts" %}</span> ({% trans "of" %} {{ work_max_points }})</div>
-                    <div class="clear"> </div>
-
-                    <div class="break10"></div>
-                    <div class="break10"></div>
-                    <div class="break10"></div>
-
-                </div>
-
-		</div>
-
-		<div class="halfWidth">
-
-            {% if status_success %}
-
-                <div class="success"><img src="{% static "site/img/success.png" %}" /> &nbsp;&nbsp;{{ status_message }}</div>
-
-                <div class="smallLineBreak"></div>
-			    <p class="hints">{% trans "HINTS" %}</p>
-
-                <div id="hints">
-                    <div class="hintp">{% trans "<strong>Congratulations!</strong> You have enough points to get a visa." %}</div>
-                    <div class="hintp">&nbsp;</div>
-                    <div class="hintp">
-                        <a href="{% url 'points:visa_application' country_name %}">Click Here</a>
-                        {% trans "to see all steps for your visa application." %}
-                    </div>
-                    <div class="clear" style="height:20px;"> </div>
-
-                </div>
-
-            {% else %}
-
-                <div class="warning"><img src="{% static "site/img/lock.png" %}" /> &nbsp;&nbsp;{% trans "Requirements not met" %}</div>
-
-                <div class="clear"></div>
-                <br />
-                <p>{{ status_message }}</p>
-
-                <div class="smallLineBreak"></div>
-			    <p class="hints">{% trans "HINTS" %}</p>
-
-                    <div id="hints">
-
-                        {% for hint in hints %}
-                            <div class="hintq">!</div>
-                            <div class="hintp">{{ hint|safe }}</div>
-                            <div class="clear" style="height:20px;"> </div>
-                        {% endfor %}
-
-                    </div>
-
-            {% endif %}
-
-
-
-        <!--
-			<div id="hints">
-				<div class="hintq">?</div>
-				<div class="hintp">Donec iaculis consequat arcu sed accumsan. Etiam ornare laoreet lorem, non sodales enim pulvinar eget.</div>
-				<div class="clear" style="height:20px;"> </div>
-
-				<div class="hintq">?</div>
-				<div class="hintp">Nulla in auctor mauris, vitae elementum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
-				<div class="clear" style="height:20px;"> </div>
-				
-				<div class="hintq">?</div>
-				<div class="hintp">Auctor mauris, vitae elementum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
-				<div class="clear" style="height:20px;"> </div>
-
-				<ul>
-					<li>Auctor mauris, vitae elementum velit.</li>
-  					<li>Interdum et malesuada fames ac ante ipsum primis infaucibus.</li>
-				</ul>
-				
-			</div>
-		-->
-
-		</div>
-
-	</div>
-	
-{% endblock content %}
+{% endblock scripts %}
