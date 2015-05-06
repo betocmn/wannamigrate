@@ -16,16 +16,16 @@
 
     <div class="content results">
         <div class="result">
-            <aside class="country-result new-zealand">
+            <aside class="country-result {{ country_name }}">
                 <div class="country">
                     <strong>{{ country_name_as_label }}</strong>
                 </div>
             </aside>
             <div class="main">
                 <ul class="options">
-                    <li class="option situation">{% trans "My situation" %}</li>
-                    <li class="option visa active">{% trans "Visa application" %}</li>
-                    <li class="option movingto">{% trans "Get expert help" %}</li>
+                    <li class="option situation"><a href="{% url 'points:situation' country_name %}">{% trans "My situation" %}</a></li>
+                    <li class="option visa active"><a href="{% url 'points:visa_application' country_name %}">{% trans "Visa application" %}</a></li>
+                    <li class="option movingto"><a href="{% url 'points:professional_help' country_name %}">{% trans "Get expert help" %}</a></li>
                 </ul>
                 <div class="visa-application guide-steps">
                     <div class="visa-topics">

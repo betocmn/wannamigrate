@@ -576,10 +576,8 @@ def situation( request, country_name ):
     # Get Country and set options for it
     if country_name == 'australia':
         country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
-        template_data['country_flag_image_name'] = 'australia-flag-small.png'
         template_data['country_name_as_label'] = _( 'Australia' )
-        template_data['country_map_css_class'] = 'australiaMap'
-        template_data['photo_column_css_class'] = 'columnAustralia'
+        template_data['map_css_class'] = 'australia'
         template_data['min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
         template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_personal_points
         template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].max_language_points
@@ -588,10 +586,8 @@ def situation( request, country_name ):
 
     elif country_name == 'canada':
         country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-        template_data['country_flag_image_name'] = 'canada-flag-small.png'
         template_data['country_name_as_label'] = _( 'Canada' )
-        template_data['country_map_css_class'] = 'canadaMap'
-        template_data['photo_column_css_class'] = 'columnCanada'
+        template_data['map_css_class'] = 'canada'
         template_data['min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
         template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_personal_points
         template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_CANADA].max_language_points
@@ -600,10 +596,8 @@ def situation( request, country_name ):
 
     elif country_name == 'new-zealand':
         country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
-        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
         template_data['country_name_as_label'] = _( 'New Zealand' )
-        template_data['country_map_css_class'] = 'newZealandMap'
-        template_data['photo_column_css_class'] = 'columnNewZealand'
+        template_data['map_css_class'] = 'newzealand'
         template_data['min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
         template_data['personal_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_personal_points
         template_data['language_max_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].max_language_points
@@ -763,24 +757,18 @@ def visa_application( request, country_name ):
     # Get Country and set options for it
     if country_name == 'australia':
         country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
-        template_data['country_flag_image_name'] = 'australia-flag-small.png'
+        template_data['map_css_class'] = 'australia'
         template_data['country_name_as_label'] = _( 'Australia' )
-        template_data['country_map_css_class'] = 'australiaMap'
-        template_data['photo_column_css_class'] = 'columnAustralia'
 
     elif country_name == 'canada':
         country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-        template_data['country_flag_image_name'] = 'canada-flag-small.png'
+        template_data['map_css_class'] = 'canada'
         template_data['country_name_as_label'] = _( 'Canada' )
-        template_data['country_map_css_class'] = 'canadaMap'
-        template_data['photo_column_css_class'] = 'columnCanada'
 
     elif country_name == 'new-zealand':
         country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
-        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
+        template_data['map_css_class'] = 'newzealand'
         template_data['country_name_as_label'] = _( 'New Zealand' )
-        template_data['country_map_css_class'] = 'newZealandMap'
-        template_data['photo_column_css_class'] = 'columnNewZealand'
 
     else:
         return HttpResponseRedirect( reverse( "points:dashboard" ) )
@@ -800,29 +788,23 @@ def professional_help( request, country_name ):
     """
 
     # Initial settings
-    template_data = {}
+    template_data = { 'country_name': country_name }
 
     # Get Country and set options for it
     if country_name == 'australia':
         country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
-        template_data['country_flag_image_name'] = 'australia-flag-small.png'
+        template_data['map_css_class'] = 'australia'
         template_data['country_name_as_label'] = _( 'Australia' )
-        template_data['country_map_css_class'] = 'australiaMap'
-        template_data['photo_column_css_class'] = 'columnAustralia'
 
     elif country_name == 'canada':
         country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-        template_data['country_flag_image_name'] = 'canada-flag-small.png'
+        template_data['map_css_class'] = 'canada'
         template_data['country_name_as_label'] = _( 'Canada' )
-        template_data['country_map_css_class'] = 'canadaMap'
-        template_data['photo_column_css_class'] = 'columnCanada'
 
     elif country_name == 'new-zealand':
         country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
-        template_data['country_flag_image_name'] = 'newzealand-flag-small.png'
+        template_data['map_css_class'] = 'newzealand'
         template_data['country_name_as_label'] = _( 'New Zealand' )
-        template_data['country_map_css_class'] = 'newZealandMap'
-        template_data['photo_column_css_class'] = 'columnNewZealand'
 
     else:
         return HttpResponseRedirect( reverse( "points:dashboard" ) )

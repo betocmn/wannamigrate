@@ -9,12 +9,11 @@ the templates on the marketplace app
 # Imports
 ##########################
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
-from django.utils import translation
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.marketplace.forms import PaymentForm
 from wannamigrate.marketplace.models import (
