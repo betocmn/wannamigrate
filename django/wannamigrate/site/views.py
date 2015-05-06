@@ -41,7 +41,7 @@ from wannamigrate.marketplace.models import (
     Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
 )
 from wannamigrate.qa.models import(
-    Post, Topic
+    Question, Topic
 )
 from wannamigrate.core.mailer import Mailer
 from django.utils import translation
@@ -778,28 +778,25 @@ def dashboard( request ):
         related_countries_ids = [ from_country.id, to_country.id ]
         related_goals_ids = [ goal.id ]
 
-        posts_results_per_page = 5
-        posts = Post.get_ranked(
+        questions = Question.objects.get_listing(
             related_countries_ids = related_countries_ids,
             related_goals_ids = related_goals_ids,
-            results_per_step = posts_results_per_page,
         )
 
         # If the user is authenticated
         if request.user.is_authenticated():
             # Checks if the user is following the posts
-            post_ids = list( post.id for post in posts )
-            following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
+            question_ids = list( question.id for question in questions )
+            following_posts = Question.objects.filter( id__in = question_ids, followers__id = request.user.id ).values_list( "id", flat=True )
 
-            for post in posts:
-                if post.id in following_posts:
-                    post.is_followed = True
+            for question in questions:
+                if question.id in following_posts:
+                    question.is_followed = True
                 else:
-                    post.is_followed = False
+                    question.is_followed = False
 
         # Gets 5 most related questions (page 0 by default)
-        template_data['posts'] = posts
-        template_data[ "posts_results_per_page" ] = posts_results_per_page
+        template_data['questions'] = questions
 
 
     # Print Template

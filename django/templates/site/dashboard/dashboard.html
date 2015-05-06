@@ -17,20 +17,20 @@
                 </div>
 
                 <div class="content-questions">
-                    {% for post in posts %}
+                    {% for question in questions %}
                         <div class="question category">
                             <div class="tags">
                                 <ul class="tags-list">
-                                    {% for topic in post.related_topics.all %}
+                                    {% for topic in question.related_topics.all %}
                                         <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link active">{{ topic.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="data-question">
-                                <a href="{% url "qa:view_post" post.id %}">
+                                <a href="{% url "qa:view_question" question.id %}">
 
-                                    <h3 class="title-question">{{ post.title }}</h3>
-                                    {% with post.answers.all|first as first_answer %}
+                                    <h3 class="title-question">{{ question.title }}</h3>
+                                    {% with question.answers.all|first as first_answer %}
                                         {% if first_answer.body %}
                                         <p class="answer">
                                             {{ first_answer.body|striptags|truncate_smart:250 }}
@@ -44,9 +44,9 @@
                                     <li class="data-item">
                                         {% include "qa/common/bt_toggle_follow.html" with post=post %}
                                     </li>
-                                    <li class="data-item"><span class="data-link answers"><strong>{{ post.answers_count|kmi }}</strong> {% trans "answers" %}</span></li>
-                                    <li class="data-item"><span class="data-link viewers"><strong>{{ post.views_count|kmi }}</strong> {% trans "viewers" %}</span></li>
-                                    <li class="data-item">{% trans "Last activity in" %} <strong>{{ post.last_activity_date|date:"b d" }}</strong></li>
+                                    <li class="data-item"><span class="data-link answers"><strong>{{ question.total_answers|kmi }}</strong> {% trans "answers" %}</span></li>
+                                    <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>
+                                    <li class="data-item">{% trans "Last activity in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong></li>
                                 </ul>
                             </div>
                             <div class="box-options">

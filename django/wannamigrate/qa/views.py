@@ -19,9 +19,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
     AddQuestionForm, AddAnswerForm
 )
-from wannamigrate.qa.models import(
-    Post, Topic, Vote
-)
+from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic
 from wannamigrate.core.models import(
     User, UserStats
 )
@@ -118,19 +116,19 @@ def add_question( request ):
     if form.is_valid():
         # Saves the post
         with transaction.atomic():
-            post = form.save()
+            question = form.save()
             # PUT GET OR CREATE EVERYWHERE! NICE PATTERN. --
-            stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
-            post.followers.add( request.user )
-            post.followers_count += 1
-            stats.total_posts_following += 1
+            user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+            question.followers.add( request.user )
+            question.total_followers += 1
+            user_stats.total_questions_following += 1
 
-            post.save()
-            stats.save()
+            question.save()
+            user_stats.save()
 
             messages.success( request, 'Post successfully created.' )
             # Redirect with success message
-            return HttpResponseRedirect( reverse( 'qa:view_post', args = ( post.id, ) ) )
+            return HttpResponseRedirect( reverse( 'qa:view_question', args = ( question.slug, ) ) )
 
     # Template data
     template_data = {
@@ -141,6 +139,45 @@ def add_question( request ):
 
     # Print Template
     return render( request, 'qa/posts/add_question.html', template_data )
+
+
+@login_required
+def view_question( request, slug ):
+    template_data = {}
+
+    question = Question.objects.get( slug = slug )
+    question.total_views += 1
+    question.save()
+
+    return HttpResponse( question.slug )
+
+    # Gets the answer form
+    answer_form = AddAnswerForm( request.POST or None, owner = request.user, parent = post )
+    if answer_form.is_valid():
+        answer = answer_form.save()
+        messages.success( request, _( '{0} successfully created.'.format( answer.post_type.name ) ) )
+        return HttpResponseRedirect( reverse( "qa:view_post", kwargs={ "post_id" : post_id } ) + "#answer_{0}".format( answer.id ) )
+
+    related_content = Post.objects.filter( related_topics__in = post.related_topics.all() ).exclude( id = post_id ).only( "id", "title" )[0:3]
+    answers = Post.objects.filter( parent__id = post_id ).order_by( "-upvotes_count", "-created_date" )
+
+    # Checks if the user is following the post
+    if post.followers.filter( id = request.user.id ).exists():
+        post.is_followed = True
+    else:
+        post.is_followed = False
+
+
+    # Fills template data
+    template_data[ "answers" ] = answers
+    template_data[ "related_content" ] = related_content
+    template_data[ "answer_form" ] = answer_form
+    template_data[ "post" ] = post
+
+    # Print Template
+    return render( request, 'qa/posts/view.html', template_data )
+
+
 
 
 @login_required

@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url( r'^posts$', views.list_posts, { "post_type_id" : settings.QA_POST_TYPE_BLOGPOST_ID }, name = "list_blogposts" ),
     url( r'^questions$', views.list_posts, { "post_type_id" : settings.QA_POST_TYPE_QUESTION_ID }, name = "list_questions" ),
     url( r'^question/add$', views.add_question, name = "add_question" ),
+    url( r'^question/(?P<slug>[-\w]+)/$', views.view_question, name = "view_question" ),
     url( r'^post/view/(?P<post_id>\d+)', views.view_post, name = "view_post" ),
 
     # Topics

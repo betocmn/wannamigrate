@@ -13,9 +13,7 @@ from wannamigrate.admin.forms import (
     AddTopicForm,
 )
 from wannamigrate.core.decorators import restrict_internal_ips
-from wannamigrate.qa.models import (
-    Post, PostType, PostHistory, Topic, Vote
-)
+from wannamigrate.qa.models import Topic, Vote
 from wannamigrate.admin.views import admin_check
 from django.db import transaction
 

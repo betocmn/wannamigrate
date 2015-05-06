@@ -546,7 +546,8 @@ class UserStats( BaseModel ):
     total_contracts = models.IntegerField( _( "total contracts" ), blank = True, null = True, default = 0 )
     total_reviews = models.IntegerField( _( "total reviews" ), blank = True, null = True, default = 0 )
     total_topics_following = models.IntegerField( _( "total topics following" ), blank = True, null = True, default = 0 )
-    total_posts_following = models.IntegerField( _( "total posts following" ), blank = True, null = True, default = 0 )
+    total_questions_following = models.IntegerField( _( "total questions following" ), blank = True, null = True, default = 0 )
+    total_blogposts_following = models.IntegerField( _( "total blogposts following" ), blank = True, null = True, default = 0 )
     total_users_following = models.IntegerField( _( "total users following" ), blank = True, null = True, default = 0 )
     total_users_followers = models.IntegerField( _( "total users followers" ), blank = True, null = True, default = 0 )
 
