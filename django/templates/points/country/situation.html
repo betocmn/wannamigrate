@@ -16,23 +16,24 @@
 
     <div class="content results">
         <div class="result">
-            <aside class="country-result new-zealand">
+            <aside class="country-result {{ country_name }}">
                 <div class="country">
                     <strong>{{ country_name_as_label }}</strong>
                 </div>
             </aside>
             <div class="main">
                 <ul class="options">
-                    <li class="option situation active">{% trans "My situation" %}</li>
-                    <li class="option visa">{% trans "Visa application" %}</li>
-                    <li class="option movingto">{% trans "Get expert help" %}</li>
+                    <li class="option situation active"><a href="{% url 'points:situation' country_name %}">{% trans "My situation" %}</a></li>
+                    <li class="option visa"><a href="{% url 'points:visa_application' country_name %}">{% trans "Visa application" %}</a></li>
+                    <li class="option movingto"><a href="{% url 'points:professional_help' country_name %}">{% trans "Get expert help" %}</a></li>
                 </ul>
                 <div class="my-situation guide-steps">
                     <div class="graph">
 
-                        <div class="circle-progress-bar newzealand">
+                        <div class="circle-progress-bar {{ map_css_class }}">
 
                         </div>
+
                         <div class="score">
                             <p><strong class="points">{{ total_points }}</strong> <span>{% trans "Points" %}</span> <em>{% trans "Of" %} <i>{{ min_points }}</i> {% trans "REQUIRED" %}</em></p>
                         </div>

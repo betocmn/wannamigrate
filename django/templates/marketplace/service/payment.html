@@ -34,14 +34,14 @@
         <div class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-card active">Credit Card</a>
+                    <a href="#" class="interaction-link bt-card active">{% trans 'Credit Card' %}</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-paypal">Paypal</a>
+                    <a href="#" class="interaction-link bt-paypal">{% trans 'Boleto' %}</a>
                 </li>
                 <!--
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-billet">Boleto</a>
+                    <a href="#" class="interaction-link bt-billet">{% trans 'Paypal' %}</a>
                 </li>
                 -->
             </ul>
@@ -50,7 +50,10 @@
                 {% include "site/_common/status.html" %}
 
                 <form id="payment_form" method="post" action="">
+
                     {% csrf_token %}
+                    <input name="token" id="token" type="hidden" value="" />
+
                     <!--
                     <fieldset class="address">
                         <strong>Endereço de cobrança:</strong>
@@ -75,28 +78,51 @@
                         </div>
                         <div class="card-number field error-element">
                             <label for="id_credit_card_number">Card Number</label>
-                            {{ form.credit_card_number }} {{ form.credit_card_number.errors }}
+                            <input data-iugu="number" id="number" type="text" value="" autocomplete="off" />
                         </div>
                         <div class="name field error-element">
                             <label for="id_credit_card_name">Cardholder Name</label>
-                            {{ form.credit_card_name}} {{ form.credit_card_name.errors }}
-                        </div>
-                        <div class="cpf field error-element">
-                            <label for="id_postal_code">Postal Code</label>
-                            {{ form.postal_code }} {{ form.postal_code.errors }}
+                            <input data-iugu="full_name" id="full_name" type="text" value="" autocomplete="off" />
                         </div>
                         <div class="expiration-date field error-element">
                             <label for="expiration-date">Expiry Date</label>
                             <div class="month error-element">
-                                {{ form.credit_card_expiry_month }} {{ form.credit_card_expiry_month.errors }}
+                                <select id="expiry_month" class="default-select small">
+                                    <option value="01">01 - {% trans 'January' %}</option>
+                                    <option value="02">02 - {% trans 'February' %}</option>
+                                    <option value="03">03 - {% trans 'March' %}</option>
+                                    <option value="04">04 - {% trans 'April' %}</option>
+                                    <option value="05">05 - {% trans 'May' %}</option>
+                                    <option value="06">06 - {% trans 'June' %}</option>
+                                    <option value="07">07 - {% trans 'July' %}</option>
+                                    <option value="08">08 - {% trans 'August' %}</option>
+                                    <option value="09">09 - {% trans 'September' %}</option>
+                                    <option value="10">10 - {% trans 'October' %}</option>
+                                    <option value="11">11 - {% trans 'November' %}</option>
+                                    <option value="12">12 - {% trans 'Dezember' %}</option>
+                                </select>
+                                <input data-iugu="expiration" id="expiration" type="hidden" />
                             </div>
                             <div class="year error-element">
-                                {{ form.credit_card_expiry_year }} {{ form.credit_card_expiry_year.errors }}
+                                <select id="expiry_year" class="default-select small">
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2017</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                </select>
                             </div>
                         </div>
                         <div class="security-code field error-element">
                             <label for="id_credit_card_cvv">Security Code (CVV)</label>
-                            {{ form.credit_card_cvv }} {{ form.credit_card_cvv.errors }}
+                            <input data-iugu="verification_value" id="verification_value" type="text" value="" autocomplete="off" maxlength="5" />
                         </div>
                         <!--
                         <div class="hire-purchase field">
@@ -121,10 +147,97 @@
 
     {{ block.super }}
 
+    <!-- Custom JS Libraries -->
+    <script type="text/javascript" src="https://js.iugu.com/v2"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-formatter/js/jquery.formatter.js' %}"></script>
+
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
+
+            // Activating the payment processor IUGU
+            Iugu.setAccountID( "d8e362b4-c5d1-4d69-a3f6-ab9dbb4a046d" );
+
+            // Sets test mode
+            Iugu.setTestMode( true );
+
+            // Formatter settings
+            Iugu.setup();
+
+            // JS FORM Submission
+            $( "#payment_form" ).submit( function() {
+
+                // JS required fields validation
+                var required = 'number,full_name,expiry_month,expiry_year,verification_value';
+                if ( !validate_empty_fields( this, required ) ) {
+                    return false;
+                }
+
+                // Set expiry date in the format 'mm/yyyy'
+                $( "#expiration").val( $( "#expiry_month" ).val() + '/' + $( "#expiry_year" ).val() );
+
+                // Call our Payment Token request function
+                var form = $( this );
+                var tokenResponseHandler = function( data ) {
+
+                    if ( data.errors ) {
+                        //console.log(data.errors);
+                        //alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
+                        error_message = 'Invalid Information:';
+                        for ( var error in data.errors ){
+                            if ( error == 'number' ){
+                                hightlight_error_element( 'number' );
+                                error_message += ' [{% trans 'Card Number' %}] ';
+                            } else if ( error == 'full_name' ){
+                                hightlight_error_element( 'full_name' );
+                                error_message += ' [{% trans 'Cardholder Name' %}]';
+                            } else if ( error == 'expiration' ){
+                                hightlight_error_element( 'expiry_month' );
+                                hightlight_error_element( 'expiry_year' );
+                                error_message += ' [{% trans 'Expiry Date' %}]';
+                            } else if ( error == 'verification_value' ){
+                                hightlight_error_element( 'verification_value' );
+                                error_message += ' [{% trans 'Security Code (CVV)' %}]';
+                            }
+                        }
+                        display_error_message( error_message, true );
+                        $( "#number").focus();
+
+                    } else {
+                        $( "#token" ).val( data.id );
+                        form.get(0).submit();
+                    }
+
+                }
+
+                Iugu.createPaymentToken( this, tokenResponseHandler );
+                return false;
+
+            });
+
+            // Automatically set credit card flag by number
+            $( '#number').keyup( function( event ) {
+                var flag = Iugu.utils.getBrandByCreditCardNumber( $(this).val() );
+                if ( flag ){
+                    if ( flag == 'visa' ){
+                        $( ".card-flags .visa" ).trigger( "click" );
+                    } else if ( flag == 'mastercard' ){
+                        $( ".card-flags .mastercard" ).trigger( "click" );
+                    } else if ( flag == 'diners' ){
+                        $( ".card-flags .diners" ).trigger( "click" );
+                    } else if ( flag == 'amex' ){
+                        $( ".card-flags .american" ).trigger( "click" );
+                    }
+                }
+            });
+
+            // Credit Card Selection
+            $('.card-flags li').click(function(event) {
+                event.preventDefault()
+                $('.card-flags li').removeClass('active');
+                $(this).addClass('active');
+            });
 
             // Create review stars of professional
             $( '.rate' ).raty({
@@ -136,17 +249,6 @@
                 }
             });
 
-            // JS FORM Validation
-            $( "#payment_form" ).submit( function() {
-                return validate_empty_fields( this, '{{ form.get_required_fields }}' );
-            });
-
-            // Credit Card Selection
-            $('.card-flags li').click(function(event) {
-                event.preventDefault()
-                $('.card-flags li').removeClass('active');
-                $(this).addClass('active');
-            });
 
             /*
             var  $scope = {

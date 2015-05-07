@@ -43,12 +43,7 @@ class PaymentForm( BaseForm ):
     Form for PAYMENT PAGE
     """
 
-    credit_card_number = forms.CharField( required = True, max_length = 20, label = _( "Credit-Card Number" ) )
-    credit_card_name = forms.CharField( required = True, max_length = 100, label = _( "Cardholder Name" ) )
     postal_code = forms.CharField( required = True, max_length = 12, label = _( "Postal Code" ) )
-    credit_card_expiry_month = forms.CharField( required = True, max_length = 2, label = _( "Expiry Month" ), widget = forms.TextInput( attrs = { 'placeholder' : 'mm', 'class': 'month' } )  )
-    credit_card_expiry_year = forms.CharField( required = True, max_length = 4, label = _( "Expiry Year" ), widget = forms.TextInput( attrs = { 'placeholder' : 'yyyy', 'class': 'year' } )  )
-    credit_card_cvv = forms.CharField( required = True, max_length = 4, label = _( "Security Code (CVV)" ) )
 
     def save( self, commit = True, order_info = False  ):
         """

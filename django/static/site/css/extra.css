@@ -25,6 +25,11 @@ select.default-select {
     color: #888;
 }
 
+select.default-select.small {
+    height: 35px;
+    font-size: 14px;
+}
+
 
 /** Messages, alerts, etc */
 form .errorlist {
@@ -66,6 +71,37 @@ form .errorlist {
   padding-top: 43px;
 }
 
+
+/* Payment Page */
+.dashboard .content.payment .credit-card .data .expiration-date {
+    margin-right: 2px;
+    width: 300px;
+}
+
+.dashboard .content.payment .credit-card .data .expiration-date .month {
+  float: left;
+  margin-right: 5px;
+}
+.dashboard .content.payment .credit-card .data .expiration-date .month select {
+  width: 170px;
+}
+.dashboard .content.payment .credit-card .data .expiration-date .year select {
+  width: 100px;
+}
+
+.dashboard .content.payment .credit-card .data .security-code input {
+  width: 200px;
+}
+
+.dashboard .content.payment .credit-card .data .security-code {
+  position: relative;
+  float: left;
+}
+
+.dashboard .content.payment .credit-card .data input {
+    font-size: 14px;
+    color: #888;
+}
 
 
 /* Payment Confirmation Page */
