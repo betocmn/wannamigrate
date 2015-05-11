@@ -8,6 +8,7 @@ the templates on qa app
 ##########################
 # Imports
 ##########################
+from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -32,6 +33,30 @@ import json
 ##########################
 # Methods
 ##########################
+def get_questions_by_step( user, filter_params, step, results_per_step ):
+
+    # Limits
+    start = results_per_step * step
+    end = results_per_step * step + results_per_step
+
+    # Search the Posts with filters
+    questions = Question.objects.get_listing( **filter_params )[ start : end ]
+
+    # If the user is authenticated
+    if user.is_authenticated():
+        # Checks if the user is following the posts
+        question_ids = list( question.id for question in questions )
+        following_posts = Question.objects.filter( id__in = question_ids, followers__id = user.id ).values_list( "id", flat=True )
+        for question in questions:
+            if question.id in following_posts:
+                question.is_followed = True
+            else:
+                question.is_followed = False
+
+    return questions
+
+
+
 def list_questions( request, *args, **kwargs ):
     """
         Handles the process of listing questions.
@@ -39,15 +64,12 @@ def list_questions( request, *args, **kwargs ):
     :return: A template rendered
     """
 
-    # FILTERS
-    filter_params = {
-        "results_per_step" : 10,
-        "step" : 0
-    }
+    # SET UP THE STEP AND THE TOTAL OF STEPS
+    step = 0    # starts from the begining
+    results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
 
-    # TEMPLATE
-    template_data = {}
-
+    # PROCESS FILTERS
+    filter_params = {}
 
     # Fills up the situation
     from_country = request.session['situation']['from_country']
@@ -58,26 +80,15 @@ def list_questions( request, *args, **kwargs ):
     filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
     filter_params[ "related_goals_ids" ] = [ goal.id ]
 
+    # Get questions per step
+    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
 
-    # Search the Posts with filters
-    questions = Question.objects.get_listing( **filter_params )
-
-    # If the user is authenticated
-    if request.user.is_authenticated():
-        # Checks if the user is following the posts
-        question_ids = list( question.id for question in questions )
-        following_posts = Question.objects.filter( id__in = question_ids, followers__id = request.user.id ).values_list( "id", flat=True )
-        for question in questions:
-            if question.id in following_posts:
-                question.is_followed = True
-            else:
-                question.is_followed = False
-
-
-    # Sets the menu "questions" as selected
-    template_data[ "questions_menu_selected" ] = True
-    # Sets the questions
-    template_data[ "questions" ] = questions
+    # TEMPLATE DATA
+    template_data = {
+        "questions_menu_selected" : True,
+        "questions" : questions,
+        "next_step" : step + 1,
+    }
 
     # Print Template
     return render( request, 'qa/question/list.html', template_data )
@@ -374,6 +385,40 @@ def list_topics( request ):
     }
     return render( request, 'qa/topics/list.html', template_data )
 
+
+
+@ajax_login_required
+def ajax_load_questions( request ):
+    """ Searchs for topics that matches the GET param "term" and returns a JSON.
+    :param request:
+    :return:
+    """
+
+    # SET UP STEP AND TOTAL RESULTS PER STEP
+    step = int( request.GET.get( 'step', 0 ) ) # starts from the begining
+    results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+
+    # FILTERS
+    filter_params = {}
+
+    # Fills up the situation
+    from_country = request.session['situation']['from_country']
+    to_country = request.session['situation']['to_country']
+    goal = request.session['situation']['goal']
+
+    # Fills the topics related to user's situation
+    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_goals_ids" ] = [ goal.id ]
+
+    # Get questions
+    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
+
+    if questions:
+        # Render to string
+        html = render_to_string( "qa/question/list_group.html", { "questions": questions } )
+        return HttpResponse( html )
+    else:
+        return HttpResponse( "" )
 
 
 @ajax_login_required

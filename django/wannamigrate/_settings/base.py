@@ -378,6 +378,9 @@ ID_MINIMUM_FRENCH_LEVEL = 98
 #######################################
 # Questions and Answers constants
 #######################################
+# The number of questions that should be loaded on each ajax load step.
+QA_QUESTIONS_PER_STEP = 10
+
 # IDs for post types
 QA_POST_TYPE_ANSWER_ID = 1
 QA_POST_TYPE_BLOGPOST_ID = 2
@@ -388,6 +391,7 @@ QA_POST_TYPE_QUESTION_ID = 4
 QA_VOTE_TYPE_UPVOTE_ID = 1
 QA_VOTE_TYPE_DOWNVOTE_ID = 2
 QA_VOTE_TYPE_REPORT_ID = 3
+
 
 
 

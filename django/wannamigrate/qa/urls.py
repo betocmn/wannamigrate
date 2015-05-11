@@ -33,10 +33,14 @@ urlpatterns = patterns('',
 
 
     # AJAX URL's
+    # Follow / Unfollow
     url( r'^x/follow/question/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : Question }, name = "ajax_follow_question" ),
     url( r'^x/unfollow/question/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : Question }, name = "ajax_unfollow_question" ),
     url( r'^x/follow/blogpost/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : BlogPost }, name = "ajax_follow_blogpost" ),
     url( r'^x/unfollow/blogpost/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : BlogPost }, name = "ajax_unfollow_blogpost" ),
+
+    # Load More
+    url( r'^x/load/questions/$', views.ajax_load_questions, name = "ajax_load_questions" ),
 
 
     url( r'^x/post/follow/(?P<post_id>\d+)', views.set_following_post, { "follow" : True }, name = "ajax_follow_post" ),

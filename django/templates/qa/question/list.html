@@ -10,54 +10,7 @@
             <div class="questions-answers">
                 <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
                 <div class="content-questionsAnswers">
-                    {% for question in questions %}
-                        <div class="question">
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    {% for topic in question.related_topics.all %}
-                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link">{{ topic.name }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="data-question">
-                                <a href="{% url "qa:view_question" question.slug %}">
-                                    <h3 class="title-question">{{ question.title }}</h3>
-                                    <p class="answer">
-                                        {% with question.answers.all|first as first_answer %}
-                                            {% if first_answer.body %}
-                                                {{ first_answer.body|striptags|truncate_smart:250 }}
-                                            {% else %}
-                                                {{ question.body|striptags|truncate_smart:250 }}
-                                            {% endif %}
-                                        {% endwith %}
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="data">
-                                <ul class="data-list">
-                                    <ul class="list-bt">
-                                        <li class="data-item">
-                                            {% include "qa/common/bt_toggle_follow.html" with obj=question %}
-                                        </li>
-                                    </ul>
-                                    <ul class="list-viewers">
-                                        <li class="data-item"><span class="data-link link-answers"><strong>{{ question.total_answers|kmi }}</strong> {% trans "answers" %}</span></li>
-                                        <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>
-                                        <li class="data-item">{% trans "Last activity in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong></li>
-                                    </ul>
-                                </ul>
-                            </div>
-                            <div class="box-options">
-                                <i class="shadow"></i>
-                                <ul class="box">
-                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="bt-options">{% trans "Options" %}</a>
-                        </div>
-                    {% endfor %}
+                    {% include "qa/question/list_group.html" with question=questions %}
                 </div>
             </div>
         </section>
@@ -76,9 +29,35 @@
 
     <!-- INLINE JS -->
     <script type="text/javascript">
+        var step = {{ next_step }};
+        var keep_loading = true;
+
+        function load_more_questions(){
+            $.ajax({
+                type: "GET",
+                url: "{% url "qa:ajax_load_questions" %}",
+                data: { 'step': step, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                success : function(data) {
+                    if ( data.length == 0 )
+                        keep_loading = false;
+
+                    $('.content-questionsAnswers').append( data );
+                    step++;
+                }
+            });
+        }
+
         $( document ).ready( function() {
-            $( ".bt-toggle-follow" ).bind( "click", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
+            // Binds toggleFollow to every toggle-follow button (including dynamic buttons).
+            $( document ).on( "click", ".bt-toggle-follow", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
+
+            $( window ).scroll( function() {
+                if( keep_loading && $( window ).scrollTop() == $( document ).height() - $( window ).height() )
+                    load_more_questions();
+            });
         });
+
+
     </script>
 
     {% include "_layouts/analytics.html" %}
