@@ -163,7 +163,11 @@
             Iugu.setTestMode( true );
 
             // Formatter settings
-            Iugu.setup();
+            //Iugu.setup();
+
+            $( '#number' ).formatter({
+              'pattern': '{{9999}}-{{9999}}-{{9999}}-{{9999}}'
+            });
 
             // JS FORM Submission
             $( "#payment_form" ).submit( function() {
