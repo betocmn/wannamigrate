@@ -3270,7 +3270,168 @@ select {
   }
   .dashboard .wrapper .content.hire,
   .dashboard .wrapper .content.hiring {
+    display: block;
+  }
+  .dashboard .wrapper .content.hire {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .top {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional {
+    clear: left;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .identity {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .identity .thumb {
     display: none;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .description {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .bt-hire {
+    float: none;
+    margin: 15px auto 0;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .tags {
+    height: 110px;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .tags .tags-list .tag {
+    height: 30px;
+  }
+  .dashboard .wrapper .content.hiring .professional {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .identity {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .identity .description {
+    margin: 25px auto;
+  }
+  .dashboard .wrapper .content.hiring .professional .services {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .services .services-list .service-item:before {
+    display: none;
+  }
+  .dashboard .wrapper .content.hiring .professional .services .services-list .service-item .title-service {
+    padding-left: 0;
+    width: 172px;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .review .thumb {
+    display: none;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .review .box {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction form {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction form input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .title-answers {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer .thumb {
+    float: none;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer .answer-field {
+    width: 100%;
+    margin: 15px auto 0;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.payment {
+    float: none;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .dashboard .wrapper .content.payment .professional {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.payment .professional .top {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.payment .professional .identity {
+    float: none;
+    width: 80%;
+  }
+  .dashboard .wrapper .content.payment .professional .identity .thumb {
+    display: none;
+  }
+  .dashboard .wrapper .content.payment .services {
+    display: block;
+    width: 100%;
+    padding: 30px 0 30px 15px;
+  }
+  .dashboard .wrapper .content.payment .interactions {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard .wrapper .content.payment .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
+  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
+    display: none;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags {
+    width: 170px;
+    height: auto;
+    padding: 25px 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags .diners {
+    clear: left;
+    margin-top: 10px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags .american {
+    margin-top: 10px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field {
+    float: none;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.name {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.name input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.security-code {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.security-code input {
+    width: 200px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .button {
+    float: none;
   }
   .dashboard .wrapper .content.extra-tools {
     width: 100%;
@@ -3496,6 +3657,97 @@ select {
     width: 100%;
   }
   .dashboard.choose footer {
+    display: none;
+  }
+  .dashboard.about .content.results {
+    padding-top: 0;
+  }
+  .dashboard.about .content.results .result aside {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .options .option {
+    font-size: 16px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph,
+  .dashboard.about .content.results .result .main .my-situation .hints {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .circle-progress-bar {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .score {
+    margin-top: 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills {
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill {
+    width: 100%;
+    height: 70px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .type {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .progress-track {
+    float: none;
+    display: block;
+    margin: 5px auto 5px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .points {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .locked {
+    font-size: 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle {
+    margin: 20px auto 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle:before,
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle:after {
+    width: 34%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints ul .hint {
+    padding: 0;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints ul .hint:before {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics,
+  .dashboard.about .content.results .result .main .moving .visa-topics,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics,
+  .dashboard.about .content.results .result .main .moving .moving-topics {
+    width: 85%;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .title-topic,
+  .dashboard.about .content.results .result .main .moving .visa-topics .title-topic,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .title-topic,
+  .dashboard.about .content.results .result .main .moving .moving-topics .title-topic {
+    margin-bottom: 20px;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .subtitle,
+  .dashboard.about .content.results .result .main .moving .visa-topics .subtitle,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .subtitle,
+  .dashboard.about .content.results .result .main .moving .moving-topics .subtitle,
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .text,
+  .dashboard.about .content.results .result .main .moving .visa-topics .text,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .text,
+  .dashboard.about .content.results .result .main .moving .moving-topics .text {
+    padding-left: 0;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .image,
+  .dashboard.about .content.results .result .main .moving .visa-topics .image,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .image,
+  .dashboard.about .content.results .result .main .moving .moving-topics .image {
     display: none;
   }
   .dashboard.contactus {
@@ -3791,6 +4043,29 @@ select {
   .dashboard-edit-forms .education-form .details fieldset .field.hinterland {
     height: auto !important;
     padding-bottom: 15px;
+  }
+  .dashboard-edit-forms footer {
+    position: relative;
+    display: block !important;
+  }
+  .dashboard-edit-forms footer .bt {
+    width: 90px;
+  }
+  .dashboard-edit-forms footer .options-list {
+    width: 70px;
+  }
+  .dashboard-edit-forms footer .options-list .option-item {
+    float: none;
+    width: auto;
+    height: 14px;
+    line-height: 28px;
+    padding: 0;
+  }
+  .dashboard-edit-forms footer .options-list .option-item:after {
+    display: none;
+  }
+  .dashboard-edit-forms footer .options-list .option-item .option-link {
+    font-size: 12px;
   }
 }
 @media screen and (max-width: 360px) {
@@ -6315,6 +6590,7 @@ select {
   margin: 30px 25% 0;
 }
 .content.choose-destiny .steps .step .item .progress .type {
+  display: block;
   font-family: 'open_sanssemibold';
   font-size: 1.6em;
   font-weight: normal;
@@ -8082,7 +8358,8 @@ select {
   text-decoration: none;
   color: #888;
 }
-.dashboard-edit-forms footer .options-list .option-item .option-link:hover {
+.dashboard-edit-forms footer .options-list .option-item .option-link:hover,
+.dashboard-edit-forms footer .options-list .option-item .option-link.active {
   font-family: 'open_sansbold';
   font-weight: normal;
   color: #fccc00;
@@ -8668,7 +8945,168 @@ select {
   }
   .dashboard .wrapper .content.hire,
   .dashboard .wrapper .content.hiring {
+    display: block;
+  }
+  .dashboard .wrapper .content.hire {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .top {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional {
+    clear: left;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .identity {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .identity .thumb {
     display: none;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .description {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .bt-hire {
+    float: none;
+    margin: 15px auto 0;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .tags {
+    height: 110px;
+  }
+  .dashboard .wrapper .content.hire .professionals .professional .tags .tags-list .tag {
+    height: 30px;
+  }
+  .dashboard .wrapper .content.hiring .professional {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .identity {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .identity .description {
+    margin: 25px auto;
+  }
+  .dashboard .wrapper .content.hiring .professional .services {
+    float: none;
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .professional .services .services-list .service-item:before {
+    display: none;
+  }
+  .dashboard .wrapper .content.hiring .professional .services .services-list .service-item .title-service {
+    padding-left: 0;
+    width: 172px;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .review .thumb {
+    display: none;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .review .box {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction form {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction form input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .title-answers {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer .thumb {
+    float: none;
+  }
+  .dashboard .wrapper .content.hiring .interactions .interaction .answer .answer-field {
+    width: 100%;
+    margin: 15px auto 0;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.payment {
+    float: none;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .dashboard .wrapper .content.payment .professional {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.payment .professional .top {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .dashboard .wrapper .content.payment .professional .identity {
+    float: none;
+    width: 80%;
+  }
+  .dashboard .wrapper .content.payment .professional .identity .thumb {
+    display: none;
+  }
+  .dashboard .wrapper .content.payment .services {
+    display: block;
+    width: 100%;
+    padding: 30px 0 30px 15px;
+  }
+  .dashboard .wrapper .content.payment .interactions {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .dashboard .wrapper .content.payment .interactions .interaction-list {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
+  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
+    display: none;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags {
+    width: 170px;
+    height: auto;
+    padding: 25px 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags .diners {
+    clear: left;
+    margin-top: 10px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .card-flags .american {
+    margin-top: 10px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field {
+    float: none;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.name {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.name input {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.security-code {
+    width: 100%;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .field.security-code input {
+    width: 200px;
+  }
+  .dashboard .wrapper .content.payment .credit-card .data .button {
+    float: none;
   }
   .dashboard .wrapper .content.extra-tools {
     width: 100%;
@@ -8894,6 +9332,97 @@ select {
     width: 100%;
   }
   .dashboard.choose footer {
+    display: none;
+  }
+  .dashboard.about .content.results {
+    padding-top: 0;
+  }
+  .dashboard.about .content.results .result aside {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .options .option {
+    font-size: 16px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph,
+  .dashboard.about .content.results .result .main .my-situation .hints {
+    float: none;
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .circle-progress-bar {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .score {
+    margin-top: 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills {
+    width: 100%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill {
+    width: 100%;
+    height: 70px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .type {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .progress-track {
+    float: none;
+    display: block;
+    margin: 5px auto 5px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .graph .skills .skills-list .skill .points {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .locked {
+    font-size: 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle {
+    margin: 20px auto 10px;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle:before,
+  .dashboard.about .content.results .result .main .my-situation .hints .subtitle:after {
+    width: 34%;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints ul .hint {
+    padding: 0;
+  }
+  .dashboard.about .content.results .result .main .my-situation .hints ul .hint:before {
+    display: none;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics,
+  .dashboard.about .content.results .result .main .moving .visa-topics,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics,
+  .dashboard.about .content.results .result .main .moving .moving-topics {
+    width: 85%;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .title-topic,
+  .dashboard.about .content.results .result .main .moving .visa-topics .title-topic,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .title-topic,
+  .dashboard.about .content.results .result .main .moving .moving-topics .title-topic {
+    margin-bottom: 20px;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .subtitle,
+  .dashboard.about .content.results .result .main .moving .visa-topics .subtitle,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .subtitle,
+  .dashboard.about .content.results .result .main .moving .moving-topics .subtitle,
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .text,
+  .dashboard.about .content.results .result .main .moving .visa-topics .text,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .text,
+  .dashboard.about .content.results .result .main .moving .moving-topics .text {
+    padding-left: 0;
+  }
+  .dashboard.about .content.results .result .main .visa-application .visa-topics .image,
+  .dashboard.about .content.results .result .main .moving .visa-topics .image,
+  .dashboard.about .content.results .result .main .visa-application .moving-topics .image,
+  .dashboard.about .content.results .result .main .moving .moving-topics .image {
     display: none;
   }
   .dashboard.contactus {
@@ -9189,6 +9718,29 @@ select {
   .dashboard-edit-forms .education-form .details fieldset .field.hinterland {
     height: auto !important;
     padding-bottom: 15px;
+  }
+  .dashboard-edit-forms footer {
+    position: relative;
+    display: block !important;
+  }
+  .dashboard-edit-forms footer .bt {
+    width: 90px;
+  }
+  .dashboard-edit-forms footer .options-list {
+    width: 70px;
+  }
+  .dashboard-edit-forms footer .options-list .option-item {
+    float: none;
+    width: auto;
+    height: 14px;
+    line-height: 28px;
+    padding: 0;
+  }
+  .dashboard-edit-forms footer .options-list .option-item:after {
+    display: none;
+  }
+  .dashboard-edit-forms footer .options-list .option-item .option-link {
+    font-size: 12px;
   }
 }
 @media screen and (max-width: 360px) {

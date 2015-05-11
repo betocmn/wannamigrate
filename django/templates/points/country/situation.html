@@ -101,6 +101,7 @@
 
         $( document ).ready( function() {
 
+            // progress around country flag
             $( '.circle-progress-bar' ).circleProgress({
                 value: ( parseInt( '{{ percentage_total|default:2 }}' ) / 100 ),
                 size: 370,
@@ -108,6 +109,11 @@
                 fill: {
                     image: '{% static "site/img/pattern-"|add:percentage_total_css_color|add:"-big.png" %}'
                 }
+            });
+
+            // Tabs click option
+            $('.option').click(function(event) {
+                window.location = $( this ).find( 'a:first' ).attr( 'href' );
             });
 
         });
