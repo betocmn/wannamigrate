@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/topics/http/urls/
 from django.conf.urls import patterns, url
 from wannamigrate.qa import views
 from django.conf import settings
-
+from wannamigrate.qa.models import Question, BlogPost
 
 
 
@@ -22,8 +22,8 @@ urlpatterns = patterns('',
     # Posts
     url( r'^knowledge', views.list_posts, name = "list_posts" ),
     url( r'^posts$', views.list_posts, { "post_type_id" : settings.QA_POST_TYPE_BLOGPOST_ID }, name = "list_blogposts" ),
-    url( r'^questions$', views.list_posts, { "post_type_id" : settings.QA_POST_TYPE_QUESTION_ID }, name = "list_questions" ),
-    url( r'^question/add$', views.add_question, name = "add_question" ),
+    url( r'^questions$', views.list_questions, name = "list_questions" ),
+    url( r'^add/question$', views.add_question, name = "add_question" ),
     url( r'^question/(?P<slug>[-\w]+)/$', views.view_question, name = "view_question" ),
     url( r'^post/view/(?P<post_id>\d+)', views.view_post, name = "view_post" ),
 
@@ -33,6 +33,12 @@ urlpatterns = patterns('',
 
 
     # AJAX URL's
+    url( r'^x/follow/question/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : Question }, name = "ajax_follow_question" ),
+    url( r'^x/unfollow/question/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : Question }, name = "ajax_unfollow_question" ),
+    url( r'^x/follow/blogpost/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : BlogPost }, name = "ajax_follow_blogpost" ),
+    url( r'^x/unfollow/blogpost/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : BlogPost }, name = "ajax_unfollow_blogpost" ),
+
+
     url( r'^x/post/follow/(?P<post_id>\d+)', views.set_following_post, { "follow" : True }, name = "ajax_follow_post" ),
     url( r'^x/post/unfollow/(?P<post_id>\d+)', views.set_following_post, { "follow" : False }, name = "ajax_unfollow_post" ),
     url( r'^x/post/upvote/(?P<post_id>\d+)', views.set_upvote_post, { "upvote" : True }, name = "ajax_upvote_post" ),

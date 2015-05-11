@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
                             <div class="data-question">
-                                <a href="{% url "qa:view_question" question.id %}">
+                                <a href="{% url "qa:view_question" question.slug %}">
 
                                     <h3 class="title-question">{{ question.title }}</h3>
                                     {% with question.answers.all|first as first_answer %}
@@ -42,7 +42,7 @@
                             <div class="data">
                                 <ul class="data-list">
                                     <li class="data-item">
-                                        {% include "qa/common/bt_toggle_follow.html" with post=post %}
+                                        {% include "qa/common/bt_toggle_follow.html" with obj=question %}
                                     </li>
                                     <li class="data-item"><span class="data-link answers"><strong>{{ question.total_answers|kmi }}</strong> {% trans "answers" %}</span></li>
                                     <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>

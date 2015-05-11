@@ -32,9 +32,9 @@ import json
 ##########################
 # Methods
 ##########################
-def list_posts( request, *args, **kwargs ):
+def list_questions( request, *args, **kwargs ):
     """
-        Handles the process of adding a question.
+        Handles the process of listing questions.
     :param request:
     :return: A template rendered
     """
@@ -48,57 +48,44 @@ def list_posts( request, *args, **kwargs ):
     # TEMPLATE
     template_data = {}
 
-    # Should filter by topics?
-    if "topic_id" in kwargs:
-        filter_params[ "topic_id" ] = kwargs.get( "topic_id" )
 
-    # No? So filter by user's situation
-    else:
-        # Fills up the situation
-        from_country = request.session['situation']['from_country']
-        to_country = request.session['situation']['to_country']
-        goal = request.session['situation']['goal']
+    # Fills up the situation
+    from_country = request.session['situation']['from_country']
+    to_country = request.session['situation']['to_country']
+    goal = request.session['situation']['goal']
 
-        # Fills the topics related to user's situation
-        filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
-        filter_params[ "related_goals_ids" ] = [ goal.id ]
+    # Fills the topics related to user's situation
+    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_goals_ids" ] = [ goal.id ]
 
-    # Should filter by a specific post type?
-    if "post_type_id" in kwargs:
-        filter_params[ "post_type_id" ] = kwargs.get( "post_type_id" )
-
-        # Sets the selected filter to the template.
-        if filter_params[ "post_type_id" ] == settings.QA_POST_TYPE_BLOGPOST_ID:
-            template_data[ "blogposts_menu_selected" ] = True
-        elif filter_params[ "post_type_id" ] == settings.QA_POST_TYPE_QUESTION_ID:
-            template_data[ "questions_menu_selected" ] = True
-    else:
-        template_data[ "knowledge_menu_selected" ] = True
 
     # Search the Posts with filters
-    posts = Post.get_ranked( **filter_params )
+    questions = Question.objects.get_listing( **filter_params )
 
     # If the user is authenticated
     if request.user.is_authenticated():
         # Checks if the user is following the posts
-        post_ids = list( post.id for post in posts )
-        following_posts = Post.objects.filter( id__in = post_ids, followers__id = request.user.id ).values_list( "id", flat=True )
-
-        for post in posts:
-            if post.id in following_posts:
-                post.is_followed = True
+        question_ids = list( question.id for question in questions )
+        following_posts = Question.objects.filter( id__in = question_ids, followers__id = request.user.id ).values_list( "id", flat=True )
+        for question in questions:
+            if question.id in following_posts:
+                question.is_followed = True
             else:
-                post.is_followed = False
+                question.is_followed = False
 
 
-    template_data[ "posts" ] = posts
-    template_data[ "POST_TYPE_QUESTION_ID" ] = settings.QA_POST_TYPE_QUESTION_ID
-    template_data[ "POST_TYPE_BLOGPOST_ID" ] = settings.QA_POST_TYPE_BLOGPOST_ID
+    # Sets the menu "questions" as selected
+    template_data[ "questions_menu_selected" ] = True
+    # Sets the questions
+    template_data[ "questions" ] = questions
 
     # Print Template
-    return render( request, 'qa/posts/list.html', template_data )
+    return render( request, 'qa/question/list.html', template_data )
 
 
+
+def list_posts( request, *args, **kwargs ):
+    pass
 
 @login_required
 def add_question( request ):
@@ -139,6 +126,10 @@ def add_question( request ):
 
     # Print Template
     return render( request, 'qa/posts/add_question.html', template_data )
+
+
+
+
 
 
 @login_required
@@ -231,6 +222,55 @@ def view_post( request, post_id ):
     return render( request, 'qa/posts/view.html', template_data )
 
     """
+
+
+@ajax_login_required
+def follow( request, slug, followable_instance ):
+    """
+    Follows a FollowableContent.
+    :param: slug The identifier of the content
+    :param: model The model of the content (Question?BlogPost? etc)
+    :return: The number of followers of the content.
+    """
+    # Gets the object
+    obj = followable_instance.objects.get( slug = slug )
+    user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+    with transaction.atomic():
+        if not obj.followers.filter( id = request.user.id ).exists():
+            obj.followers.add( request.user )
+            obj.total_followers += 1
+            if followable_instance == Question:
+                user_stats.total_questions_following += 1
+            elif followable_instance == BlogPost:
+                user_stats.total_blogposts_following += 1
+            obj.save()
+            user_stats.save()
+    return HttpResponse( obj.total_followers )
+
+
+@ajax_login_required
+def unfollow( request, slug, followable_instance ):
+    """
+    Follows a FollowableContent.
+    :param: slug The identifier of the content
+    :param: model The model of the content (Question?BlogPost? etc)
+    :return: The number of followers of the content.
+    """
+    # Gets the object
+    obj = followable_instance.objects.get( slug = slug )
+    user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+    with transaction.atomic():
+        if obj.followers.filter( id = request.user.id ).exists():
+            obj.followers.remove( request.user )
+            obj.total_followers -= 1
+            if followable_instance == Question:
+                user_stats.total_questions_following -= 1
+            elif followable_instance == BlogPost:
+                user_stats.total_blogposts_following -= 1
+            obj.save()
+            user_stats.save()
+    return HttpResponse( obj.total_followers )
+
 
 
 @ajax_login_required

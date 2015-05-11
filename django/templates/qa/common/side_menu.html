@@ -27,7 +27,7 @@
                     <a href="#">Answers {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if reading_list_menu_selected %} active {% endif %}">
-                    <a href="#">Reading list {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_posts_following|kmi }})</span>{% endif %}</a>
+                    <a href="#">Reading list {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_questions_following|add:stats.total_blogposts_following|kmi }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>
