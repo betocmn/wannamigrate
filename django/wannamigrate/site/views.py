@@ -23,14 +23,15 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import math
 from wannamigrate.core.util import (
-    get_object_or_false, get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
+    get_object_or_false, get_list_or_false,
+    get_dashboard_country_progress_css_class, get_dashboard_user_progress_css_class
 )
 from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm,
     EditAccountInfoForm, EditAccountPasswordForm
 )
 from wannamigrate.core.models import (
-    UserStats
+    UserStats, UserLoginHistory
 )
 from wannamigrate.points.models import (
     UserResult, CountryConfig
@@ -542,6 +543,20 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initiates template variable
+    template_data = {}
+
+    # Checks if this is the first login of this user
+    user_login_history = get_list_or_false( UserLoginHistory, user = request.user )
+    try:
+        user_login_history_count = UserLoginHistory.objects.filter( user = request.user ).count()
+    except UserStats.DoesNotExist:
+        user_login_history_count = 0
+    if user_login_history_count > 1:
+        template_data['is_first_login'] = False
+    else:
+        template_data['is_first_login'] = True
+
     # If User edited data, but did not calculate points by clicking in save and exit
     try:
         user_stats = UserStats.objects.get( user = request.user )
@@ -550,7 +565,7 @@ def dashboard( request ):
     if user_stats and user_stats.updating_now:
         return HttpResponseRedirect( reverse( "points:calculate_points" ) )
 
-    # Instantiate all country_config
+    # Instantiates all country_config
     country_config = CountryConfig.objects.all()
     country_config_data = {}
     for item in country_config:
@@ -559,7 +574,6 @@ def dashboard( request ):
         country_config_data[item.country_id] = item
 
     # Initial settings
-    template_data = {}
     template_data['au_min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
     template_data['ca_min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
     template_data['nz_min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points

@@ -34,7 +34,4 @@ urlpatterns = patterns('',
 # URLs USED BY DEBUG BAR
 ##########################
 if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += patterns('',
-        url( r'^__debug__/', include( debug_toolbar.urls ) ),
-    )
+    pass
