@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/topics/http/urls/
 from django.conf.urls import patterns, url
 from wannamigrate.qa import views
 from django.conf import settings
-from wannamigrate.qa.models import Question, BlogPost
+from wannamigrate.qa.models import Question, BlogPost, Answer
 
 
 
@@ -38,6 +38,14 @@ urlpatterns = patterns('',
     url( r'^x/unfollow/question/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : Question }, name = "ajax_unfollow_question" ),
     url( r'^x/follow/blogpost/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : BlogPost }, name = "ajax_follow_blogpost" ),
     url( r'^x/unfollow/blogpost/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : BlogPost }, name = "ajax_unfollow_blogpost" ),
+
+    # Upvote / Downvote
+    url( r'^x/upvote/question/(?P<id>\d+)/$', views.upvote, { "votable_instance" : Question }, name = "ajax_upvote_question" ),
+    url( r'^x/downvote/question/(?P<id>\d+)/$', views.downvote, { "votable_instance" : Question }, name = "ajax_downvote_question" ),
+    url( r'^x/upvote/blogpost/(?P<id>\d+)/$', views.upvote, { "votable_instance" : BlogPost }, name = "ajax_upvote_blogpost" ),
+    url( r'^x/downvote/blogpost/(?P<id>\d+)/$', views.downvote, { "votable_instance" : BlogPost }, name = "ajax_downvote_blogpost" ),
+    url( r'^x/upvote/answer/(?P<id>\d+)/$', views.upvote, { "votable_instance" : Answer }, name = "ajax_upvote_answer" ),
+    url( r'^x/downvote/answer/(?P<id>\d+)/$', views.downvote, { "votable_instance" : Answer }, name = "ajax_downvote_answer" ),
 
     # Load More
     url( r'^x/load/questions/$', views.ajax_load_questions, name = "ajax_load_questions" ),

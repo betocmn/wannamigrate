@@ -83,14 +83,14 @@ class AddAnswerForm( BaseModelForm ):
 
         # Extracts arguments from kwargs
         owner = kwargs.pop( "owner" )
-        parent = kwargs.pop( "parent" )
+        question = kwargs.pop( "question" )
 
         # Calls the constructor
         super( AddAnswerForm, self ).__init__( *args, **kwargs )
 
         # Initialize pre-defined data.
         self.instance.owner = owner
-        self.instance.parent = parent
+        self.instance.question = question
 
         # Overrides the IS_ANONYMOUS widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"

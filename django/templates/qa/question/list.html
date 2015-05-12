@@ -3,6 +3,24 @@
 {% load i18n %}
 {% load string_extras %}
 
+{% block head %}
+    {{ block.super }}
+    <style>
+        #loading-gif
+        {
+            display:none;
+            width: 32px;
+            height:32px;
+            z-index:100;
+            background-image : url( '{% static "site/img/loading.gif" %}');
+            position:relative;
+            margin:0 auto;
+        }
+
+        #loading-gif.show{ display:block; }
+    </style>
+{% endblock head %}
+
 {% block content %}
     <div class="content social">
         {% include "qa/common/side_menu.html" %}
@@ -11,6 +29,7 @@
                 <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a>
                 <div class="content-questionsAnswers">
                     {% include "qa/question/list_group.html" with question=questions %}
+                    <div id="loading-gif"></div>
                 </div>
             </div>
         </section>
@@ -30,30 +49,44 @@
     <!-- INLINE JS -->
     <script type="text/javascript">
         var step = {{ next_step }};
-        var keep_loading = true;
-
-        function load_more_questions(){
-            $.ajax({
-                type: "GET",
-                url: "{% url "qa:ajax_load_questions" %}",
-                data: { 'step': step, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                success : function(data) {
-                    if ( data.length == 0 )
-                        keep_loading = false;
-
-                    $('.content-questionsAnswers').append( data );
-                    step++;
-                }
-            });
-        }
+        var request_locked = false;
+        var loading_ended = false;
 
         $( document ).ready( function() {
             // Binds toggleFollow to every toggle-follow button (including dynamic buttons).
             $( document ).on( "click", ".bt-toggle-follow", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
 
-            $( window ).scroll( function() {
-                if( keep_loading && $( window ).scrollTop() == $( document ).height() - $( window ).height() )
-                    load_more_questions();
+            $( window ).scroll( function(){
+                var reached_bottom = $( window ).scrollTop() == $( document ).height() - $( window ).height();
+
+                if ( ! request_locked && ! loading_ended && reached_bottom )
+                {
+                    // Locks requests and shows the loading gif.
+                    request_locked = true;
+                    $( "#loading-gif" ).addClass( "show" );
+
+                    // requesting...
+                    var request = $.get(
+                        "{% url "qa:ajax_load_questions" %}",
+                        { "step" : step, "csrfmiddlewaretoken" : '{{ csrf_token }}' }
+                    ).done( function( data ){
+                        $('#loading-gif').before( data );
+                        step++;
+                    }).fail( function( httpObj, text ){
+                        // Unauthorized?
+                        if ( httpObj.status == 401 )
+                            window.location.href = "{% url "site:login" %}";
+                        else if ( httpObj.status == 404 )
+                        {
+                            // End of content
+                            $('#loading-gif').before( $( "<div>" ).html( "{% trans "No more results" %}" ) );
+                            loading_ended = true;
+                        }
+                    }).always( function(){
+                        $( "#loading-gif" ).removeClass( "show" );
+                        request_locked = false;
+                    });
+                }
             });
         });
 

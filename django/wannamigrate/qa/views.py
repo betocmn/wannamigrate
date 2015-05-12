@@ -8,6 +8,7 @@ the templates on qa app
 ##########################
 # Imports
 ##########################
+from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
@@ -151,33 +152,31 @@ def view_question( request, slug ):
     question.total_views += 1
     question.save()
 
-    return HttpResponse( question.slug )
-
     # Gets the answer form
-    answer_form = AddAnswerForm( request.POST or None, owner = request.user, parent = post )
+    answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
     if answer_form.is_valid():
         answer = answer_form.save()
-        messages.success( request, _( '{0} successfully created.'.format( answer.post_type.name ) ) )
-        return HttpResponseRedirect( reverse( "qa:view_post", kwargs={ "post_id" : post_id } ) + "#answer_{0}".format( answer.id ) )
+        messages.success( request, _( 'Answer successfully created.' ) )
+        return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
 
-    related_content = Post.objects.filter( related_topics__in = post.related_topics.all() ).exclude( id = post_id ).only( "id", "title" )[0:3]
-    answers = Post.objects.filter( parent__id = post_id ).order_by( "-upvotes_count", "-created_date" )
+    related_content = Question.objects.filter( related_topics__in = question.related_topics.all() ).exclude( id = question.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
+    answers = Answer.objects.filter( question__id = question.id ).order_by( "-total_upvotes", "-created_date" )
 
     # Checks if the user is following the post
-    if post.followers.filter( id = request.user.id ).exists():
-        post.is_followed = True
+    if question.followers.filter( id = request.user.id ).exists():
+        question.is_followed = True
     else:
-        post.is_followed = False
+        question.is_followed = False
 
 
     # Fills template data
     template_data[ "answers" ] = answers
     template_data[ "related_content" ] = related_content
     template_data[ "answer_form" ] = answer_form
-    template_data[ "post" ] = post
+    template_data[ "question" ] = question
 
     # Print Template
-    return render( request, 'qa/posts/view.html', template_data )
+    return render( request, 'qa/question/view.html', template_data )
 
 
 
@@ -282,6 +281,85 @@ def unfollow( request, slug, followable_instance ):
             user_stats.save()
     return HttpResponse( obj.total_followers )
 
+
+@ajax_login_required
+def upvote( request, id, votable_instance ):
+    """
+    Toggle upvotes on a VotableInstance.
+    :param: slug The identifier of the content
+    :param: model The model of the content (Question?BlogPost? etc)
+    :return: The number of upvotes of the content.
+    """
+    obj = votable_instance.objects.get( pk = id )
+
+    # Check if the object was already upvoted
+    upvote = Vote.objects.filter(
+        object_id = obj.id,
+        content_type = ContentType.objects.get_for_model( votable_instance ),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
+    ).first()
+
+    # The post wasn't upvoted yet?
+    if not upvote:
+        with transaction.atomic():
+            # Creates the upvote
+            v = Vote( content_object = obj, user = request.user, vote_type_id = settings.QA_VOTE_TYPE_UPVOTE_ID )
+            v.save()
+
+            # Increments the upvotes counter of the post
+            obj.total_upvotes += 1
+            obj.save()
+    else:
+        with transaction.atomic():
+            # Creates the upvote
+            upvote.delete()
+
+            # Increments the upvotes counter of the post
+            obj.total_upvotes -= 1
+            obj.save()
+
+    return HttpResponse( obj.total_upvotes )
+
+
+@ajax_login_required
+def downvote( request, id, votable_instance ):
+    """
+    Toggle downvotes on a VotableInstance.
+    :param: slug The identifier of the content
+    :param: model The model of the content (Question?BlogPost? etc)
+    :return: The number of upvotes of the content.
+    """
+    obj = votable_instance.objects.get( pk = id )
+
+    # Check if the object was already upvoted
+    downvote = Vote.objects.filter(
+        object_id = obj.id,
+        content_type = ContentType.objects.get_for_model( votable_instance ),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
+    ).first()
+
+    # The post wasn't upvoted yet?
+    if not downvote:
+        with transaction.atomic():
+            # Creates the upvote
+            v = Vote( content_object = obj, user = request.user, vote_type_id = settings.QA_VOTE_TYPE_DOWNVOTE_ID )
+            v.save()
+
+            # Increments the upvotes counter of the post
+            obj.total_downvotes += 1
+            obj.save()
+    else:
+        with transaction.atomic():
+            # Creates the upvote
+            downvote.delete()
+
+            # Increments the upvotes counter of the post
+            obj.total_downvotes -= 1
+            obj.save()
+
+    return HttpResponse( obj.total_downvotes )
 
 
 @ajax_login_required
@@ -418,7 +496,7 @@ def ajax_load_questions( request ):
         html = render_to_string( "qa/question/list_group.html", { "questions": questions } )
         return HttpResponse( html )
     else:
-        return HttpResponse( "" )
+        raise Http404( "No results found." )
 
 
 @ajax_login_required
