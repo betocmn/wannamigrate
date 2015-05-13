@@ -28,12 +28,12 @@
 {% block content %}
 <div class="content social">
     <section class="sidebar">
-        <a href="{% url "qa:list_questions" %}" class="bt-back back-toKnowledge">{% trans "Back to Knowledge Base" %}</a>
+        <a href="{% url "qa:list_questions" %}" class="bt-back back-toKnowledge">{% trans "Back to Questions" %}</a>
         <div class="sidebar-questionView">
             <div class="itens post-topics">
                 <h3 class="title">{% trans "Question Topics" %}</h3>
                 <ul class="tags">
-                    {% for topic in post.related_topics.all %}
+                    {% for topic in question.related_topics.all %}
                         <li class="tag">
                             <a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link">{{ topic.name }}</a>
                         </li>
@@ -78,7 +78,7 @@
                 <div class="data">
                     <ul class="data-list">
                         <li class="data-item">
-                            {% include "qa/common/bt_toggle_follow.html" with obj=question %}
+                            {% include "qa/buttons/toggle_follow.html" with obj=question %}
                         <!--li class="data-item"><a href="#" class="data-link bt-coments">Comment</a></li-->
                     </ul>
                 </div>
@@ -148,10 +148,10 @@
                             <div class="data">
                                 <ul class="data-list">
                                     <li class="data-item">
-                                        <a data-upvote-counter-selector="#upvote_counter_{{ ans.id }}" href="{% url 'qa:ajax_upvote_answer' ans.id %}" class="data-link bt-upvote">{% trans "Upvote" %} <span id="upvote_counter_{{ ans.id }}" class="count">{{ ans.total_upvotes|kmi }}</span></a>
+                                        {% include "qa/buttons/toggle_upvote.html" with obj=ans %}
                                     </li>
                                     <li class="data-item">
-                                        <a data-upvote-counter-selector="#upvote_counter_{{ ans.id }}" href="{% url 'qa:ajax_downvote_answer' ans.id %}" class="data-link bt-downvote">{% trans "Downvote" %}</a>
+                                        {% include "qa/buttons/toggle_downvote.html" with obj=ans %}
                                     </li>
                                     <!--li class="data-item">
                                         <a href="#" class="data-link">Comment</a>
@@ -177,7 +177,7 @@
     <section class="aside">
         {% if related_content %}
         <div class="related-content">
-            <h3 class="title">{% trans "Related Content" %}</h3>
+            <h3 class="title">{% trans "Related Questions" %}</h3>
             <ul>
                 {% for related_question in related_content %}
                 <li class="related">
@@ -235,12 +235,8 @@
 
         $( document ).ready( function() {
 
-            // Follow/Unfollow buttons
-            $( ".bt-toggle-follow" ).bind( "click", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
-
-            // Upvote/Downvote buttons
-            $( ".bt-upvote, .bt-downvote" ).bind( "click", { redirect_url : "{% url "site:login" %}" }, onUpvoteClicked );
-
+            // XToggleButton Handler
+            $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
 
 
             {% if answer_form.body.value|length == 0 %}

@@ -42,7 +42,7 @@
                             <div class="data">
                                 <ul class="data-list">
                                     <li class="data-item">
-                                        {% include "qa/common/bt_toggle_follow.html" with obj=question %}
+                                        {% include "qa/buttons/toggle_follow.html" with obj=question %}
                                     </li>
                                     <li class="data-item"><span class="data-link answers"><strong>{{ question.total_answers|kmi }}</strong> {% trans "answers" %}</span></li>
                                     <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>
@@ -144,7 +144,8 @@
 
         $( document ).ready( function() {
 
-            $( ".bt-toggle-follow" ).bind( "click", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
+            // XToggleButton Handler
+            $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
 
             // Create review stars of professional
             $( '.rate' ).raty({

@@ -53,8 +53,10 @@
         var loading_ended = false;
 
         $( document ).ready( function() {
-            // Binds toggleFollow to every toggle-follow button (including dynamic buttons).
-            $( document ).on( "click", ".bt-toggle-follow", { redirect_url : "{% url "site:login" %}" }, onToggleFollow );
+
+            // XToggleButton Handler
+            $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
+
 
             $( window ).scroll( function(){
                 var reached_bottom = $( window ).scrollTop() == $( document ).height() - $( window ).height();

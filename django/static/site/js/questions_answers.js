@@ -35,6 +35,44 @@ function onToggleFollow( evt )
     });
 }
 
+
+function onXToggleButtonClicked( evt )
+{
+    evt.preventDefault();
+    elm = $( this );
+
+    // Gets the active name of the link.
+    var primary_action_name = elm.attr( "data-primary-action-name" );
+    // Gets the toggle name of the link.
+    var secondary_action_name= elm.attr( "data-secondary-action-name" );
+
+    // Peform the request...
+    $.get( elm.attr( "href" ), { "_": $.now() }, function( data ){
+
+        name_container = elm.find( "span.name" )
+        total_container = elm.find( "span.count" )
+
+        current_name = data.primary_action ? primary_action_name : secondary_action_name;
+        current_total = parseInt( data.total );
+
+        if ( name_container.length )    // if name container exists
+            name_container.text( current_name );
+        if ( total_container.length )  // if counter container exists
+            total_container.text( to_kmi( current_total ) )
+
+        if ( data.primary_action )
+            elm.addClass( "primary-action" );
+        else
+            elm.removeClass( "primary-action" );
+
+    }).fail(function(httpObj, text){
+        if ( httpObj.status == 401 )
+            window.location.href = evt.data.redirect_url;
+    });
+}
+
+
+
 function onUpvoteClicked( evt )
 {
     evt.preventDefault();

@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load string_extras %}
+{% load object_extras %}
+
+{% with url_append=obj|get_class|lower %}
+{% with follow_url="qa:ajax_follow_"|add:url_append %}
+    <a href="{% url follow_url obj.id %}" data-primary-action-name="{% trans "Follow" %}" data-secondary-action-name="{% trans "UnFollow" %}" id="bt-toggle-follow-{{ obj|get_class|lower }}-{{ obj.id }}" class="data-link bt-follow x-toggle-button {% if not obj.is_followed %}primary-action{% endif %}">
+        <span class="name">
+            {% if obj.is_followed %}
+                {% trans "Unfollow" %}
+            {% else %}
+                {% trans "Follow" %}
+            {% endif %}
+        </span>
+        <span class="count">{{ obj.total_followers|kmi }}</span>
+    </a>
+{% endwith %}
+{% endwith %}

@@ -160,7 +160,30 @@ def view_question( request, slug ):
         return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
 
     related_content = Question.objects.filter( related_topics__in = question.related_topics.all() ).exclude( id = question.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
-    answers = Answer.objects.filter( question__id = question.id ).order_by( "-total_upvotes", "-created_date" )
+    answers = Answer.objects.filter( question__id = question.id ).order_by( "-total_upvotes", "total_downvotes", "-created_date" )
+
+    answers_ids = list( answer.id for answer in answers )
+
+    upvoted_answers_ids = Vote.objects.filter(
+        object_id__in = answers_ids,
+        content_type = ContentType.objects.get_for_model( Answer ),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
+    ).values_list( "object_id", flat = True )
+
+    downvoted_answers_ids = Vote.objects.filter(
+        object_id__in = answers_ids,
+        content_type = ContentType.objects.get_for_model( Answer ),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
+    ).values_list( "object_id", flat = True )
+
+    for answer in answers:
+        if answer.id in upvoted_answers_ids:
+            answer.is_upvoted = True
+        if answer.id in downvoted_answers_ids:
+            answer.is_downvoted = True
+
 
     # Checks if the user is following the post
     if question.followers.filter( id = request.user.id ).exists():
@@ -235,55 +258,56 @@ def view_post( request, post_id ):
 
 
 @ajax_login_required
-def follow( request, slug, followable_instance ):
+def toggle_follow( request, id, followable_instance ):
     """
-    Follows a FollowableContent.
+    Follows/Unfollows a FollowableContent.
     :param: slug The identifier of the content
     :param: model The model of the content (Question?BlogPost? etc)
     :return: The number of followers of the content.
     """
     # Gets the object
-    obj = followable_instance.objects.get( slug = slug )
+    obj = followable_instance.objects.get( pk = id )
     user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+
+    is_followed = False   # flag indicating if the user is following the obj
+    # The name of the field on UserStats that corresponds to the counter of the given FollowableInstance
+    instance_counter_field_name = "total_" + followable_instance.__name__.lower() + 's' + "_following"
+
     with transaction.atomic():
         if not obj.followers.filter( id = request.user.id ).exists():
+            # Adds the user to the followers of the content and increments its counter.
             obj.followers.add( request.user )
             obj.total_followers += 1
-            if followable_instance == Question:
-                user_stats.total_questions_following += 1
-            elif followable_instance == BlogPost:
-                user_stats.total_blogposts_following += 1
+            # updates the counter for the followable instance on user stats
+            user_stats.__dict__[ instance_counter_field_name ] += 1
+            # Save the object and the userstats
             obj.save()
             user_stats.save()
-    return HttpResponse( obj.total_followers )
-
-
-@ajax_login_required
-def unfollow( request, slug, followable_instance ):
-    """
-    Follows a FollowableContent.
-    :param: slug The identifier of the content
-    :param: model The model of the content (Question?BlogPost? etc)
-    :return: The number of followers of the content.
-    """
-    # Gets the object
-    obj = followable_instance.objects.get( slug = slug )
-    user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
-    with transaction.atomic():
-        if obj.followers.filter( id = request.user.id ).exists():
+            # Set a flag indicating that the user is following the FollowableInstance.
+            is_followed = True
+        else:
+            # Removes the user from the followers of the content and decrements its counter.
             obj.followers.remove( request.user )
             obj.total_followers -= 1
-            if followable_instance == Question:
-                user_stats.total_questions_following -= 1
-            elif followable_instance == BlogPost:
-                user_stats.total_blogposts_following -= 1
+            # updates the counter for the followable instance on user stats
+            user_stats.__dict__[ instance_counter_field_name ] -= 1
+            # Save the content and the UserStats
             obj.save()
             user_stats.save()
-    return HttpResponse( obj.total_followers )
+            # Set a flag indicating that the user is not following the FollowableInstance
+            is_followed = False
+
+    # Creates a response to the call
+    response = {
+        "primary_action" : False if is_followed else True,
+        "total" : obj.total_followers
+    }
+
+    return JsonResponse( response )
 
 
 @ajax_login_required
-def upvote( request, id, votable_instance ):
+def toggle_upvote( request, id, votable_instance ):
     """
     Toggle upvotes on a VotableInstance.
     :param: slug The identifier of the content
@@ -291,6 +315,8 @@ def upvote( request, id, votable_instance ):
     :return: The number of upvotes of the content.
     """
     obj = votable_instance.objects.get( pk = id )
+
+    is_upvoted = False
 
     # Check if the object was already upvoted
     upvote = Vote.objects.filter(
@@ -300,37 +326,40 @@ def upvote( request, id, votable_instance ):
         vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
     ).first()
 
-    # The post wasn't upvoted yet?
-    if not upvote:
-        with transaction.atomic():
-            # Creates the upvote
+    # Create or delete the upovte and update counters
+    with transaction.atomic():
+        if not upvote:
             v = Vote( content_object = obj, user = request.user, vote_type_id = settings.QA_VOTE_TYPE_UPVOTE_ID )
             v.save()
-
-            # Increments the upvotes counter of the post
             obj.total_upvotes += 1
             obj.save()
-    else:
-        with transaction.atomic():
-            # Creates the upvote
+            is_upvoted = True
+        else:
             upvote.delete()
-
-            # Increments the upvotes counter of the post
             obj.total_upvotes -= 1
             obj.save()
+            is_upvoted = False
 
-    return HttpResponse( obj.total_upvotes )
+    # Creates a response to the call
+    response = {
+        "primary_action" : False if is_upvoted else True,
+        "total" : obj.total_upvotes
+    }
+
+    return JsonResponse( response )
 
 
 @ajax_login_required
-def downvote( request, id, votable_instance ):
+def toggle_downvote( request, id, votable_instance ):
     """
     Toggle downvotes on a VotableInstance.
     :param: slug The identifier of the content
     :param: model The model of the content (Question?BlogPost? etc)
     :return: The number of upvotes of the content.
     """
+
     obj = votable_instance.objects.get( pk = id )
+    is_downvoted = False
 
     # Check if the object was already upvoted
     downvote = Vote.objects.filter(
@@ -340,26 +369,26 @@ def downvote( request, id, votable_instance ):
         vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
     ).first()
 
-    # The post wasn't upvoted yet?
-    if not downvote:
-        with transaction.atomic():
-            # Creates the upvote
+    with transaction.atomic():
+        if not downvote:
             v = Vote( content_object = obj, user = request.user, vote_type_id = settings.QA_VOTE_TYPE_DOWNVOTE_ID )
             v.save()
-
-            # Increments the upvotes counter of the post
             obj.total_downvotes += 1
             obj.save()
-    else:
-        with transaction.atomic():
-            # Creates the upvote
+            is_downvoted = True
+        else:
             downvote.delete()
-
-            # Increments the upvotes counter of the post
             obj.total_downvotes -= 1
             obj.save()
+            is_downvoted = False
 
-    return HttpResponse( obj.total_downvotes )
+        # Creates a response to the call
+    response = {
+        "primary_action" : False if is_downvoted else True,
+        "total" : obj.total_downvotes
+    }
+
+    return JsonResponse( response )
 
 
 @ajax_login_required

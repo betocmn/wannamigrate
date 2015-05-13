@@ -1,0 +1,17 @@
+{% load i18n %}
+{% load string_extras %}
+{% load object_extras %}
+
+{% with url_append=obj|get_class|lower %}
+{% with follow_url="qa:ajax_downvote_"|add:url_append %}
+    <a href="{% url 'qa:ajax_downvote_answer' ans.id %}" data-primary-action-name="{% trans "Downvote" %}" data-secondary-action-name="{% trans "Downvoted (Undo)" %}" id="bt-toggle-downvote-{{ obj|get_class|lower }}-{{ obj.id }}" class="data-link bt-downvote x-toggle-button {% if not obj.is_downvoted %}primary-action{% endif %}">
+        <span class="name">
+            {% if obj.is_downvoted %}
+                {% trans "Downvoted (Undo)" %}
+            {% else %}
+                {% trans "Downvote" %}
+            {% endif %}
+        </span>
+    </a>
+{% endwith %}
+{% endwith %}

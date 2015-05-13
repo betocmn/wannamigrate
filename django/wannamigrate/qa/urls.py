@@ -33,19 +33,19 @@ urlpatterns = patterns('',
 
 
     # AJAX URL's
-    # Follow / Unfollow
-    url( r'^x/follow/question/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : Question }, name = "ajax_follow_question" ),
-    url( r'^x/unfollow/question/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : Question }, name = "ajax_unfollow_question" ),
-    url( r'^x/follow/blogpost/(?P<slug>[-\w]+)/$', views.follow, { "followable_instance" : BlogPost }, name = "ajax_follow_blogpost" ),
-    url( r'^x/unfollow/blogpost/(?P<slug>[-\w]+)/$', views.unfollow, { "followable_instance" : BlogPost }, name = "ajax_unfollow_blogpost" ),
+    # Follow (Toggle)
+    url( r'^x/follow/question/(?P<id>\d+)/$', views.toggle_follow, { "followable_instance" : Question }, name = "ajax_follow_question" ),
+    url( r'^x/follow/blogpost/(?P<id>\d+)/$', views.toggle_follow, { "followable_instance" : BlogPost }, name = "ajax_follow_blogpost" ),
 
-    # Upvote / Downvote
-    url( r'^x/upvote/question/(?P<id>\d+)/$', views.upvote, { "votable_instance" : Question }, name = "ajax_upvote_question" ),
-    url( r'^x/downvote/question/(?P<id>\d+)/$', views.downvote, { "votable_instance" : Question }, name = "ajax_downvote_question" ),
-    url( r'^x/upvote/blogpost/(?P<id>\d+)/$', views.upvote, { "votable_instance" : BlogPost }, name = "ajax_upvote_blogpost" ),
-    url( r'^x/downvote/blogpost/(?P<id>\d+)/$', views.downvote, { "votable_instance" : BlogPost }, name = "ajax_downvote_blogpost" ),
-    url( r'^x/upvote/answer/(?P<id>\d+)/$', views.upvote, { "votable_instance" : Answer }, name = "ajax_upvote_answer" ),
-    url( r'^x/downvote/answer/(?P<id>\d+)/$', views.downvote, { "votable_instance" : Answer }, name = "ajax_downvote_answer" ),
+    # Upvote (Toggle)
+    url( r'^x/upvote/question/(?P<id>\d+)/$', views.toggle_upvote, { "votable_instance" : Question }, name = "ajax_upvote_question" ),
+    url( r'^x/upvote/blogpost/(?P<id>\d+)/$', views.toggle_upvote, { "votable_instance" : BlogPost }, name = "ajax_upvote_blogpost" ),
+    url( r'^x/upvote/answer/(?P<id>\d+)/$', views.toggle_upvote, { "votable_instance" : Answer }, name = "ajax_upvote_answer" ),
+
+    # Downvote (Toggle)
+    url( r'^x/downvote/question/(?P<id>\d+)/$', views.toggle_downvote, { "votable_instance" : Question }, name = "ajax_downvote_question" ),
+    url( r'^x/downvote/blogpost/(?P<id>\d+)/$', views.toggle_downvote, { "votable_instance" : BlogPost }, name = "ajax_downvote_blogpost" ),
+    url( r'^x/downvote/answer/(?P<id>\d+)/$', views.toggle_downvote, { "votable_instance" : Answer }, name = "ajax_downvote_answer" ),
 
     # Load More
     url( r'^x/load/questions/$', views.ajax_load_questions, name = "ajax_load_questions" ),
