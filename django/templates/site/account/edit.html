@@ -238,9 +238,16 @@
                 params: { 'csrfmiddlewaretoken': get_cookie('csrftoken') }
             });
 
-            myDropzone.on( "thumbnail", function( file, dataUrl) {
-                $( "#current_avatar").hide();
+
+            // hide old thumbnails
+            myDropzone.on( "thumbnail", function( file, dataUrl ) {
+                $( "#current_avatar" ).hide();
+                if ( $( "#preview-avatar div.dz-preview").length > 1 ){
+                    $( "#preview-avatar div.dz-preview:first").remove();
+                }
             });
+
+
 
 
         });
