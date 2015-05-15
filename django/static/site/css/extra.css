@@ -218,6 +218,18 @@ form .errorlist {
 
 
 
+/* My Account */
+.content.myaccount .interactions div.password a {
+    text-decoration: none;
+    text-align: left;
+    color: #4f9276;
+}
+
+.content.myaccount .interactions div.password a:hover {
+    text-decoration: underline;
+}
+
+
 /* Edit My Account */
 .content.myaccount .interactions .my-profile-edit {
   display: block;

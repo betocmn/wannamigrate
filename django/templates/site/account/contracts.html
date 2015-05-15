@@ -6,30 +6,30 @@
 {% block content %}
 
     <div class="content myaccount">
-        <h2 class="title">My Account</h2>
+        <h2 class="title">{% trans 'My Account' %}</h2>
         <div class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
-                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">My profile</a>
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts active">My contracts</a>
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts active">{% trans 'My contracts' %}</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox">Inbox <span class="counter"></span>(0)</a>
+                    <a href="#" class="interaction-link bt-inbox">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
                 </li>
             </ul>
             <div class="my-contracts">
 
                 {% if user_services %}
-                    <h2 class="title">Services received</h2>
+                    <h2 class="title">{% trans 'My Services' %}</h2>
                     <table>
                         <tr>
-                            <th class="service">Service</th>
-                            <th class="professional">Company/Professional</th>
-                            <th class="date">Date</th>
-                            <th class="total">Total</th>
-                            <th class="status">Status</th>
+                            <th class="service">{% trans 'Service' %}</th>
+                            <th class="professional">{% trans 'Company/Professional' %}</th>
+                            <th class="date">{% trans 'Date' %}</th>
+                            <th class="total">{% trans 'Total' %}</th>
+                            <th class="status">{% trans 'Status' %}</th>
                         </tr>
 
                         {% for service in user_services %}
@@ -43,17 +43,18 @@
                         {% endfor %}
 
                     </table>
+                    <br /><br />
                 {% endif %}
 
                 {% if provider_services %}
-                    <h2 class="title">Services provided</h2>
+                    <h2 class="title">{% trans 'Client Contracts' %}</h2>
                     <table>
                         <tr>
-                            <th class="service">Service</th>
-                            <th class="professional">User</th>
-                            <th class="date">Date</th>
-                            <th class="total">Total</th>
-                            <th class="status">Status</th>
+                            <th class="service">{% trans 'Service' %}</th>
+                            <th class="professional">{% trans 'User' %}</th>
+                            <th class="date">{% trans 'Date' %}</th>
+                            <th class="total">{% trans 'Total' %}</th>
+                            <th class="status">{% trans 'Status' %}</th>
                         </tr>
 
                         {% for service in provider_services %}

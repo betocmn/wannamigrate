@@ -281,6 +281,53 @@ class EditAccountForm( BaseModelForm ):
 
 
 
+class EditPasswordForm( BaseModelForm ):
+    """
+    Form for EDIT PASSWORD
+    """
+
+    confirm_password = forms.CharField( required = True, label = "Confirm New Password", widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
+
+    class Meta:
+        model = get_user_model()
+        fields = [ 'password' ]
+        widgets = {
+            'password': PasswordInput(),
+        }
+
+
+    def save( self, commit = True ):
+        """
+        If passwords are set, they need to be set on a different way
+
+        :return: Dictionary
+        """
+        user = super( EditPasswordForm, self ).save( commit = False )
+        password = self.cleaned_data["password"]
+        if password:
+            user.set_password( password )
+        if commit:
+            user.save()
+        return user
+
+
+    def clean( self ):
+        """
+        Extra validation for fields that depends on other fields
+
+        :return: Dictionary
+        """
+        cleaned_data = super( EditPasswordForm, self ).clean()
+        password = cleaned_data.get( "password" )
+        confirm_password = cleaned_data.get( "confirm_password" )
+
+        if password != confirm_password:
+            raise forms.ValidationError( _( "Passwords do not match." ) )
+
+        return cleaned_data
+
+
+
 class EditProviderForm( BaseModelForm ):
     """
     Form for EDIT MY ACCOUNT on provider information
@@ -407,58 +454,3 @@ class UploadAvatarForm( BaseModelForm ):
     class Meta:
         model = UserPersonal
         fields = [ 'avatar' ]
-
-
-
-class EditPasswordForm( BaseForm ):
-    """
-    Form for EDIT MY ACCOUNT PASSWORD
-    """
-    # Initializes form values with user data.
-    def __init__( self, user,  *args, **kwargs ):
-        super( BaseForm, self ).__init__( *args, **kwargs )
-
-
-        self.is_password_usable = False
-        self.user = user
-        self.is_password_usable = is_password_usable( self.user.password )
-       
-        # Creates an old password input dinamically
-        if self.is_password_usable:
-            self.fields['old_password'] = forms.CharField( required = True, label = _( "Old Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
-
-        # Other form fields
-        self.fields['new_password'] = forms.CharField( required = True, label = _( "New Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
-        self.fields['password_confirmation'] = forms.CharField( required = True, label = _( "Confirm New Password" ), widget = forms.PasswordInput( attrs = { 'class' : ''  } ) )
-
-
-    def save( self ):
-        
-        # Save user new password
-        self.user.set_password( self.cleaned_data.get( "new_password" ) )
-        return self.user.save()
-
-
-    # Extra validation
-    def clean( self ):
-        cleaned_data = super( BaseForm, self ).clean()
-        
-        # Gets cleaned data.
-        new_password = cleaned_data[ 'new_password' ]
-        password_confirmation = cleaned_data[ 'password_confirmation' ]
-
-        # Check if old password matches.
-        if self.is_password_usable:
-            old_password = cleaned_data[ 'old_password' ]
-            if not self.user.check_password( old_password ):
-                raise forms.ValidationError( _( "The old password does not match." ) )    
-
-        # Check if new password and password confirmation matches.
-        if new_password != password_confirmation:
-            raise forms.ValidationError( _( "The new password and confirmation does not match." ) )    
-
-        # Everything ok
-        return cleaned_data
-
-
-
