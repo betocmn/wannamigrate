@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url( r'^professionals/$', views.professionals, name = 'professionals' ),
 
     # Payment Page
-    url( r'^payment/(?P<user_id>\d+)/(?P<service_type_id>\d+)$', views.payment, name = 'payment' ),
+    url( r'^payment/$', views.payment, name = 'payment' ),
 
     # Order Confirmation Page
     url( r'^confirmation/(?P<order_id>\d+)$', views.confirmation, name = 'confirmation' ),

@@ -401,3 +401,32 @@ QA_VOTE_TYPE_REPORT_ID = 3
 # Global constants
 ###########################
 DEFAULT_LISTING_ITEMS_PER_PAGE = 15
+
+
+
+
+
+#######################################
+# Payment Settings
+#######################################
+
+# Payment API (Iugu) settings
+PAYMENT_API_MODE = 'TEST' # 'TEST' or 'LIVE'
+PAYMENT_API_ACCOUNT_ID = 'd8e362b4-c5d1-4d69-a3f6-ab9dbb4a046d'
+PAYMENT_API_KEY_TEST = '8fac43a9239524b3724fb55607acbde3'
+PAYMENT_API_KEY_LIVE = 'c98052235240700fc5c07f2cffab443a'
+PAYMENT_API_BASE_URL = 'https://api.iugu.com/v1/'
+
+# Database IDs for order statuses
+ID_ORDER_STATUS_PENDING = 1
+ID_ORDER_STATUS_APPROVED = 2
+ID_ORDER_STATUS_DENIED = 3
+ID_ORDER_STATUS_CANCELLED = 4
+ID_ORDER_STATUS_REFUNDED = 5
+
+# Database IDs for service statuses
+ID_SERVICE_STATUS_PENDING = 1
+ID_SERVICE_STATUS_STARTED = 2
+ID_SERVICE_STATUS_COMPLETED = 3
+ID_SERVICE_STATUS_CANCELLED = 4
+

@@ -8,6 +8,8 @@ the templates on points app
 ##########################
 # Imports
 ##########################
+import math
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -16,17 +18,16 @@ from django.utils.translation import ugettext as _
 from django.forms.models import inlineformset_factory
 from django.db import transaction
 from django.conf import settings
-import math
-from wannamigrate.core.immigration_calculator import ImmigrationCalculator
+
+from wannamigrate.points.immigration_calculator import ImmigrationCalculator
 from wannamigrate.core.util import (
-    get_internal_country_progress_css_class, get_internal_section_progress_css_class,
     get_dashboard_country_progress_css_color, get_dashboard_user_progress_css_color
 )
 from wannamigrate.points.forms import (
     UserPersonalForm, UserPersonalFamilyForm, BaseUserPersonalFamilyFormSet,
     UserLanguageForm, UserLanguageProficiencyForm, BaseUserLanguageProficiencyFormSet,
     UserEducationForm, UserEducationHistoryForm, UserWorkForm, UserWorkExperienceForm,
-    UserWorkOfferForm, BaseUserWorkOfferFormSet, ProfessionalHelpForm
+    UserWorkOfferForm, BaseUserWorkOfferFormSet
 )
 from wannamigrate.core.models import (
     User, UserPersonalFamily, UserPersonal, UserEducation, UserEducationHistory,
@@ -36,7 +37,7 @@ from wannamigrate.core.models import (
 from wannamigrate.points.models import (
     UserResult, Occupation, UserResultStatus, CountryConfig
 )
-from wannamigrate.core.mailer import Mailer
+
 
 
 

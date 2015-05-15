@@ -131,7 +131,7 @@
                                             {{ provider_service_type_form.id }}
                                             {{ provider_service_type_form.DELETE }}
                                             {{ provider_service_type_form.service_type }}
-                                            &nbsp;&nbsp;&nbsp;$&nbsp;{{ provider_service_type_form.price }}
+                                            &nbsp;&nbsp;&nbsp;R$&nbsp;{{ provider_service_type_form.price }}
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -159,6 +159,7 @@
     <!-- JS REQUIRED BY THIS PAGE -->
     <script type="text/javascript" src="{% static 'common/dropzone/js/dropzone.js' %}"></script>
     <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/auto-numeric/js/autoNumeric.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -173,7 +174,7 @@
                 return validate_empty_fields( this, 'id_name,id_email' );
             });
 
-            // Formset
+            // Formsets
             $( '#main_form div.supported-countries div.field' ).formset({
                 prefix: '{{ provider_country_formset.prefix }}',
                 formCssClass: 'countries-form',
@@ -195,10 +196,21 @@
                 added: function( row ){
                     row.find( "select" ).val( '' );
                     row.find( "input" ).val( '' );
+                    row.find( "input.price" ).autoNumeric(
+                        'init',
+                        { aSep: ',', aDec: '.' }
+                    );
                 }
             });
 
-            function getCookie(name) {
+            // format currency
+            $( "input.price" ).autoNumeric(
+                'init',
+                { aSep: ',', aDec: '.' }
+            );
+
+            // get cookie (used to get the CSRF protection cookie)
+            function get_cookie(name) {
                 var cookieValue = null;
                 if (document.cookie && document.cookie != '') {
                     var cookies = document.cookie.split(';');
@@ -223,7 +235,7 @@
                 thumbnailHeight: 100,
                 acceptedFiles: 'image/*',
                 previewTemplate: $( '#preview-template' ).html(),
-                params: { 'csrfmiddlewaretoken': getCookie('csrftoken') }
+                params: { 'csrfmiddlewaretoken': get_cookie('csrftoken') }
             });
 
             myDropzone.on( "thumbnail", function( file, dataUrl) {

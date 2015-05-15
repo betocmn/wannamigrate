@@ -36,10 +36,12 @@
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-card active">{% trans 'Credit Card' %}</a>
                 </li>
+
+                <!--
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-paypal">{% trans 'Boleto' %}</a>
                 </li>
-                <!--
+
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-billet">{% trans 'Paypal' %}</a>
                 </li>
@@ -49,10 +51,10 @@
 
                 {% include "site/_common/status.html" %}
 
-                <form id="payment_form" method="post" action="">
+                <form id="payment_form" method="post" action="{% url 'marketplace:payment' %}#payment_form">
 
                     {% csrf_token %}
-                    <input name="token" id="token" type="hidden" value="" />
+                    {{ form.token }}
 
                     <!--
                     <fieldset class="address">
@@ -133,7 +135,7 @@
                             </select>
                         </div>
                         -->
-                        <input class="bt-pay button" value="Pay Now" type="submit" />
+                        <button class="bt-pay button" type="submit">Pay Now</button>
                     </fieldset>
                 </form>
             </div>
@@ -149,7 +151,7 @@
 
     <!-- Custom JS Libraries -->
     <script type="text/javascript" src="https://js.iugu.com/v2"></script>
-    <script type="text/javascript" src="{% static 'common/jquery-formatter/js/jquery.formatter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/formatter/js/formatter.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -157,17 +159,15 @@
         $( document ).ready( function() {
 
             // Activating the payment processor IUGU
-            Iugu.setAccountID( "d8e362b4-c5d1-4d69-a3f6-ab9dbb4a046d" );
+            Iugu.setAccountID( "{{ payment_api_account_id }}" );
 
             // Sets test mode
-            Iugu.setTestMode( true );
+            {% if payment_api_test_mode %}
+                Iugu.setTestMode( true );
+            {% endif %}
 
             // Formatter settings
-            //Iugu.setup();
-
-            $( '#number' ).formatter({
-              'pattern': '{{9999}}-{{9999}}-{{9999}}-{{9999}}'
-            });
+            Iugu.setup();
 
             // JS FORM Submission
             $( "#payment_form" ).submit( function() {
@@ -187,13 +187,13 @@
 
                     if ( data.errors ) {
                         //console.log(data.errors);
-                        //alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
+                        alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
                         error_message = 'Invalid Information:';
                         for ( var error in data.errors ){
                             if ( error == 'number' ){
                                 hightlight_error_element( 'number' );
                                 error_message += ' [{% trans 'Card Number' %}] ';
-                            } else if ( error == 'full_name' ){
+                            } else if ( error == 'full_name' || error == 'first_name' || error == 'last_name' ){
                                 hightlight_error_element( 'full_name' );
                                 error_message += ' [{% trans 'Cardholder Name' %}]';
                             } else if ( error == 'expiration' ){
@@ -209,7 +209,7 @@
                         $( "#number").focus();
 
                     } else {
-                        $( "#token" ).val( data.id );
+                        $( "#id_token" ).val( data.id );
                         form.get(0).submit();
                     }
 

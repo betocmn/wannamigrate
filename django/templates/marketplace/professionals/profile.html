@@ -35,12 +35,17 @@
                     {% for provider_service_type in provider_service_types %}
                         <li class="service-item {{ provider_service_type.service_type.icon_css_class }}">
                             <strong class="title-service">{{ provider_service_type.service_type.name }}</strong>
-                            <span class="price">${{ provider_service_type.price }}</span>
-                            <a href="{% url 'marketplace:payment' provider.user_id provider_service_type.service_type_id %}" class="bt-hire button">Hire</a>
+                            <span class="price">R$ {{ provider_service_type.price }}</span>
+                            <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">Hire</a>
                         </li>
                     {% endfor %}
 
                 </ul>
+                <form id="service_form" method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="provider_user_id" id="provider_user_id" value="{{ provider.user_id }}" />
+                    <input type="hidden" name="service_type_id" id="service_type_id" value="" />
+                </form>
             </div>
         </div>
         <section class="interactions">
@@ -142,6 +147,12 @@
 
 
         });
+
+        // Sets service and submit form to payment page
+        function hire_service( service_type_id ){
+            $( "#service_type_id" ).val( service_type_id );
+            $( "#service_form").submit();
+        }
 
     </script>
 

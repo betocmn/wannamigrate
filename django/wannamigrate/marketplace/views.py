@@ -10,17 +10,19 @@ the templates on the marketplace app
 ##########################
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.marketplace.forms import PaymentForm
 from wannamigrate.marketplace.models import (
-    Provider, Review, ServiceType, ProviderServiceType, Order
+    Provider, Review, ServiceType, ProviderServiceType, Order,
+    Service, ServiceStatus
 )
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
+from django.conf import settings
 
 
 
@@ -61,7 +63,7 @@ def professionals( request ):
 
 
 #######################
-# PROFILE PAGE OF A SERVICE PROVIDERS
+# PROFILE PAGE OF A SERVICE PROVIDER
 #######################
 @login_required
 def profile( request, user_id, name ):
@@ -72,24 +74,58 @@ def profile( request, user_id, name ):
     :return: String - The html page rendered
     """
 
-    # Identify database record
-    provider = Provider.get_profile( user_id )
-    if not provider:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
 
-    # Initializes template data dictionary
-    template_data = {}
+        # Identifies database records
+        provider = get_object_or_false( Provider, user_id = request.POST['provider_user_id'] )
+        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
+        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
+        if not provider or not service_type or not provider_service_type:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-    # passes form to template
-    template_data['situation_form'] = get_situation_form( request )
+        # saves service
+        service = Service()
+        service.service_price = provider_service_type.price
+        service.description = service_type.name
+        service.user = request.user
+        service.provider = provider
+        service.service_type = service_type
+        service.service_status_id = ServiceStatus.get_status_from_order_status()
+        service.save()
 
-    # passes service provider to template
-    template_data['provider'] = provider
-    template_data['provider_service_types'] = ProviderServiceType.get_listing( provider.id )
-    template_data['reviews'] = Review.get_listing( provider.user_id )
+        # saves details to session
+        request.session['payment'] = {
+            'provider': provider,
+            'service_type': service_type,
+            'provider_service_type': provider_service_type,
+            'service': service
+        }
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
 
-    # Prints Template
-    return render( request, 'marketplace/professionals/view.html', template_data )
+    else:
+
+        # Cleans payment session
+        request.session['payment'] = {}
+
+        # Identify database record
+        provider = Provider.get_profile( user_id )
+        if not provider:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # Initializes template data dictionary
+        template_data = {}
+
+        # passes form to template
+        template_data['situation_form'] = get_situation_form( request )
+
+        # passes service provider to template
+        template_data['provider'] = provider
+        template_data['provider_service_types'] = ProviderServiceType.get_listing( provider.id )
+        template_data['reviews'] = Review.get_listing( provider.user_id )
+
+        # Prints Template
+        return render( request, 'marketplace/professionals/profile.html', template_data )
 
 
 
@@ -99,7 +135,7 @@ def profile( request, user_id, name ):
 # PAYMENT PAGE
 #######################
 @login_required
-def payment( request, user_id, service_type_id ):
+def payment( request ):
     """
     Payment page for hiring a professional
 
@@ -107,63 +143,56 @@ def payment( request, user_id, service_type_id ):
     :return: String - The html page rendered
     """
 
-    # Identify database records
-    provider = Provider.get_profile( user_id )
-    service_type = get_object_or_false( ServiceType, pk = service_type_id )
-    provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
-    if not provider or not service_type or not provider_service_type:
+    # Only allows if coming from form submission on view professional page
+    if ( 'payment' not in request.session or not request.session['payment'] ) \
+        or ( 'service' not in request.session['payment'] or not request.session['payment']['service'] ):
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # Initializes template data dictionary
     template_data = {}
 
-    # Instantiates the form
-    form = PaymentForm( request.POST or None )
+    # If form was submitted
+    if request.method == 'POST':
 
-    # if form was submitted and is valid
-    if form.is_valid():
+        # Passes order info for for
+        payment_info = {
+            'token': request.POST.get( 'token', '' ),
+            'user': request.user,
+            'provider': request.session['payment']['provider'],
+            'service_type': request.session['payment']['service_type'],
+            'provider_service_type': request.session['payment']['provider_service_type'],
+            'service': request.session['payment']['service']
+        }
+        form = PaymentForm( request.POST, payment_info = payment_info )
 
-        #TODO create payment API request here
-        payment_api_result = {}
-        credit_card_name = form.cleaned_data['credit_card_name']
-        credit_card_number = form.cleaned_data['credit_card_number']
-        payment_api_result['result'] = 2
-        payment_api_result['external_code'] = "xeu37203sk32"
-        payment_api_result['transaction_code'] = "32342342134124214321421421"
-        payment_api_result['payment_code'] = "88891"
+        # if payment was authorized
+        if form.is_valid():
 
-        # If payment was successful we save order info and confirm to the user
-        if payment_api_result['result'] == 2:
-
-            # saves order information
-            order_info = {
-                'payment_api_result': payment_api_result,
-                'user': request.user,
-                'provider': provider,
-                'service_type': service_type,
-                'provider_service_type': provider_service_type
-            }
-            order = form.save( order_info = order_info )
+            # Saves all order info
+            order = form.save()
 
             # Sends Order Confirmation email
             # TODO Change this to a celery/signal background task
-            Mailer.send_order_confirmation( request.user.email, provider_service_type, order )
+            Mailer.send_order_confirmation( request.user.email, request.session['payment']['provider_service_type'], order )
 
             # Redirect to confirmation page
+            request.session['payment'] = {}
             return HttpResponseRedirect( reverse( 'marketplace:confirmation', args = ( order.id, ) ) )
 
-        else:
-
-            # Return error message to template
-            messages.error( request, _( 'Payment was declined.' ) )
+    else:
+        form = PaymentForm()
 
     # passes forms to template
     template_data['form'] = form
     template_data['situation_form'] = get_situation_form( request )
 
     # passes objects to the template
-    template_data['provider'] = provider
-    template_data['service_type'] = service_type
+    template_data['provider'] = request.session['payment']['provider']
+    template_data['service_type'] = request.session['payment']['service_type']
+
+    # passes payment API config to template
+    template_data['payment_api_account_id'] = settings.PAYMENT_API_ACCOUNT_ID
+    template_data['payment_api_test_mode'] = True if settings.PAYMENT_API_MODE != 'LIVE' else False
 
     # Prints Template
     return render( request, 'marketplace/service/payment.html', template_data )
@@ -201,19 +230,19 @@ def confirmation( request, order_id ):
     template_data = {}
 
     # Defines message and status
-    if order.order_status_id == 1:
+    if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
         template_data['message_text'] = "Your payment was <span>received</span> and will be processed soon."
         template_data['message_css_class'] = ""
-    elif order.order_status_id == 2:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
         template_data['message_text'] = "Your payment was <span>approved</span>."
         template_data['message_css_class'] = "approved"
-    elif order.order_status_id == 3:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
         template_data['message_text'] = "Your payment was <span>denied</span>."
         template_data['message_css_class'] = "denied"
-    elif order.order_status_id == 4:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
         template_data['message_text'] = "Your payment was <span>cancelled</span>."
         template_data['message_css_class'] = "denied"
-    elif order.order_status_id == 5:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
         template_data['message_text'] = "Your payment was <span>refunded</span>."
         template_data['message_css_class'] = "approved"
 
