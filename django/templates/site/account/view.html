@@ -3,6 +3,16 @@
 {% load i18n %}
 {% load string_extras %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block content %}
 
     <div class="content myaccount">
@@ -73,7 +83,7 @@
                             <span class="subtitle">Supported Services:</span>
                             <ul>
                                 {% for provider_service_type in provider_service_types %}
-                                    <li class="services-list">
+                                    <li class="services-list tooltip" title="{{ provider_service_type.service_type.description }}">
                                         <strong>{{ provider_service_type.service_type.name }}</strong><span>${{ provider_service_type.price }}</span>
                                     </li>
                                 {% endfor %}
@@ -93,11 +103,21 @@
 
     {{ block.super }}
 
+    <!-- Custom JS Libraries -->
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
+
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
 
+            // Activate tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'right',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
+            });
 
         });
 

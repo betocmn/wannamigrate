@@ -61,18 +61,44 @@ form .errorlist {
 
 
 
-/* Professional Details Page */
-.dashboard .content.hiring .services .services-list .service-item.review:before {
-  width: 42px;
-  height: 42px;
-  background-position: 0 -311px;
+/* ICON Services for profile and payment pages */
+.dashboard .content.hiring .services .services-list .service-item:before,
+.dashboard .content.payment .services .service:before {
+    background: none;
+    width: 40px;
+    height: 40px;
 }
-.dashboard .content.hiring .services .services-list .service-item.review .title-service {
-  padding-top: 43px;
+.dashboard .content.hiring .services .services-list .service-item.document:before,
+.dashboard .content.payment .services .service.document:before {
+    background: transparent url( "../img/icon-service-document.png" ) no-repeat 0px 0px;
 }
+.dashboard .content.hiring .services .services-list .service-item.skype:before,
+.dashboard .content.payment .services .service.skype:before {
+    background: transparent url( "../img/icon-service-skype.png" ) no-repeat 0px 0px;
+    width: 40px;
+    height: 40px;
+}
+.dashboard .content.hiring .services .services-list .service-item.translation:before,
+.dashboard .content.payment .services .service.translation:before {
+    background: transparent url( "../img/icon-service-translation.png" ) no-repeat 0px 0px;
+}
+.dashboard .content.hiring .services .services-list .service-item.language:before,
+.dashboard .content.payment .services .service.language:before {
+    background: transparent url( "../img/icon-service-world.png" ) no-repeat 0px 0px;
+}
+
 
 
 /* Payment Page */
+.dashboard .content.payment .services .service {
+    padding: 8px 0px 0px 50px;
+}
+
+.dashboard .content.payment .credit-card .data .total-price {
+    float: right;
+    font-weight: bold;
+}
+
 .dashboard .content.payment .credit-card .data .expiration-date {
     margin-right: 2px;
     width: 300px;

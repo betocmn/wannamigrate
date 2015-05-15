@@ -13,6 +13,7 @@ from wannamigrate.core.models import (
     BaseModel, Country
 )
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 
@@ -28,6 +29,7 @@ class Order( BaseModel ):
     # Model Attributes
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
     promo_code = models.ForeignKey( 'PromoCode', verbose_name = _( 'promo code' ), blank = True, null = True )
+    description = models.CharField( _( "description" ), max_length = 100 )
     order_status = models.ForeignKey( 'OrderStatus', verbose_name = _( 'order status' ) )
     service = models.ForeignKey( 'Service', verbose_name = _( 'service' ) )
     history = models.ManyToManyField( 'OrderStatus', through = 'OrderHistory', related_name = 'history' )
@@ -53,8 +55,7 @@ class OrderHistory( BaseModel ):
     order = models.ForeignKey( Order, verbose_name = _( 'order' ) )
     order_status = models.ForeignKey( 'OrderStatus', verbose_name = _( 'order status' ) )
     transaction_code = models.CharField( _( "transaction code" ), max_length = 100 )
-    payment_code = models.CharField( _( "payment code" ), max_length = 100 )
-    message = models.TextField( _( "message" ), blank = True, null = True )
+    full_api_response = models.TextField( _( "full API response" ), blank = True, null = True )
 
     # META Options
     class Meta:
@@ -73,30 +74,6 @@ class OrderStatus( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
-
-    # Class Methods
-    @staticmethod
-    def get_status_from_payment_result( result_code ):
-        """
-        Return the correct order_status accordingly to the
-        payment result code
-
-        :param: result_code
-        :return: Int
-        """
-
-        if result_code == 1:
-            order_status_id = 1 # Awaiting Payment
-        elif result_code == 2:
-            order_status_id = 2 # Approved
-        elif result_code == 3:
-            order_status_id = 3 # Payment Denied
-        elif result_code == 4:
-            order_status_id = 4 # Cancelled
-        elif result_code == 5:
-            order_status_id = 5 # Refunded
-
-        return order_status_id
 
 
 
@@ -358,6 +335,7 @@ class Service( BaseModel ):
 
     # Model Attributes
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
+    description = models.CharField( _( "description" ), max_length = 100 )
     provider = models.ForeignKey( 'Provider', verbose_name = _( 'service provider' ) )
     service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ) )
     service_status = models.ForeignKey( 'ServiceStatus', verbose_name = _( 'service status' ) )
@@ -426,7 +404,7 @@ class ServiceStatus( BaseModel ):
 
     # Class Methods
     @staticmethod
-    def get_status_from_payment_result( result_code ):
+    def get_status_from_order_status( order_status_id = None ):
         """
         Return the correct order_status accordingly to the
         payment result code
@@ -435,12 +413,14 @@ class ServiceStatus( BaseModel ):
         :return: Int
         """
 
-        if result_code == 2:
-            service_status_id = 2 # started
-        else:
-            service_status_id = 1 # waiting payment
+        if not order_status_id or order_status_id == settings.ID_ORDER_STATUS_PENDING:
+            return settings.ID_SERVICE_STATUS_PENDING
 
-        return service_status_id
+        elif order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            return settings.ID_SERVICE_STATUS_STARTED
+
+        else:
+            return settings.ID_SERVICE_STATUS_CANCELLED
 
 
 
