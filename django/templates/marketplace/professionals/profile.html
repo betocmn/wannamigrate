@@ -3,6 +3,16 @@
 {% load i18n %}
 {% load string_extras %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block content %}
 
     <div class="content hiring">
@@ -33,7 +43,7 @@
                 <ul class="services-list">
 
                     {% for provider_service_type in provider_service_types %}
-                        <li class="service-item {{ provider_service_type.service_type.icon_css_class }}">
+                        <li class="tooltip service-item {{ provider_service_type.service_type.icon_css_class }}" title="{{ provider_service_type.service_type.description }}">
                             <strong class="title-service">{{ provider_service_type.service_type.name }}</strong>
                             <span class="price">R$ {{ provider_service_type.price }}</span>
                             <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">Hire</a>
@@ -109,10 +119,21 @@
 
     {{ block.super }}
 
+    <!-- Custom JS Libraries -->
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
+
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
+
+            // Activate tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'left',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
+            });
 
             // Create review stars of professional
             $( '.rate' ).raty({

@@ -182,15 +182,12 @@ def payment( request ):
     else:
         form = PaymentForm()
 
-    # passes forms to template
+    # passes data to template
     template_data['form'] = form
     template_data['situation_form'] = get_situation_form( request )
-
-    # passes objects to the template
+    template_data['total_price'] = request.session['payment']['provider_service_type'].price
     template_data['provider'] = request.session['payment']['provider']
     template_data['service_type'] = request.session['payment']['service_type']
-
-    # passes payment API config to template
     template_data['payment_api_account_id'] = settings.PAYMENT_API_ACCOUNT_ID
     template_data['payment_api_test_mode'] = True if settings.PAYMENT_API_MODE != 'LIVE' else False
 

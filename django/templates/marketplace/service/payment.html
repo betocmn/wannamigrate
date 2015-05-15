@@ -3,6 +3,16 @@
 {% load i18n %}
 {% load string_extras %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block content %}
 
     <div class="content payment">
@@ -27,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="services">
+        <div class="services tooltip" title="{{ service_type.description }}">
             <h2 class="title">Service</h2>
             <strong class="service {{ service_type.icon_css_class }}">{{ service_type.name }}</strong>
         </div>
@@ -70,6 +80,9 @@
                     </fieldset>
                     -->
                     <fieldset class="data">
+
+                        <div class="total-price">{% trans 'Total' %}: R$ {{ total_price }}</div>
+
                         <div class="card-flags">
                             <ul>
                                 <li class="visa active">Visa</li>
@@ -152,6 +165,7 @@
     <!-- Custom JS Libraries -->
     <script type="text/javascript" src="https://js.iugu.com/v2"></script>
     <script type="text/javascript" src="{% static 'common/formatter/js/formatter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -187,7 +201,7 @@
 
                     if ( data.errors ) {
                         //console.log(data.errors);
-                        alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
+                        //alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
                         error_message = 'Invalid Information:';
                         for ( var error in data.errors ){
                             if ( error == 'number' ){
@@ -241,6 +255,14 @@
                 event.preventDefault()
                 $('.card-flags li').removeClass('active');
                 $(this).addClass('active');
+            });
+
+            // Activate tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'right',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
             });
 
             // Create review stars of professional
