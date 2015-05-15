@@ -1,11 +1,11 @@
-.wm_editor_container
+.wm-editor-container
 {
     width: 445px;
     height: auto;
     margin-top: 15px;
 }
 
-.wm_editor_menu
+.wm-editor-menu
 {
     width: 100%;
     height: 30px;
@@ -25,7 +25,7 @@
 
 }
 
-.wm_editor_content
+.wm-editor-content
 {
     width: 100%;
     min-height: 150px;
@@ -47,10 +47,10 @@
     border-top: none !important;
 }
 
-.wm_editor_content:focus { outline: 0px solid transparent; }
+.wm-editor-content:focus { outline: 0px solid transparent; }
 
 
-.wm_editor_button
+.wm-editor-button
 {
     width: 30px;
     height: 30px;
@@ -62,15 +62,15 @@
     color: #444;
 }
 
-.wm_editor_button:hover
+.wm-editor-button:hover
 {
     text-decoration: none;
     background-color: #eee;
 }
-.wm_editor_button:visited
+.wm-editor-button:visited
 {
     color: #444;
 }
 
-.wm_editor_content > ol, .wm_editor_content > ul { margin-top:5px; margin-left:10%; }
-.wm_editor_content > h1 { font-size:17px; }
+.wm-editor-content > ol, .wm-editor-content > ul { margin-top:5px; margin-left:10%; }
+.wm-editor-content > h1 { font-size:17px; }
