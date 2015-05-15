@@ -7,6 +7,54 @@
     fontrg()
     color #888
 
+    .box-options
+        display none
+        .box
+            position absolute
+            right -45px
+            bottom -105px
+            z-index 3
+            width 109px
+            padding 0 2px
+            border 2px solid #ebebeb
+            border-radius(4px)
+            background-color #fff
+            -webkit-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
+            -moz-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
+            box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
+
+            &:before
+                content ''
+                position absolute
+                top -15px
+                left 50%
+                margin-left -14px
+                square 0
+                border-style: solid;
+                border-width: 0 15px 15px 15px;
+                border-color: transparent transparent #ffffff transparent;
+
+            li
+                size 100% 33px
+
+                a
+                    display block
+                    size 100% 33px
+                    line-height 33px
+                    fontsb()
+                    font-size 14px
+                    text-align center
+                    text-decoration none
+                    color #888
+
+                    &:hover
+                        background-color #9546ab
+                        color #fff
+
+    .show-box
+        .box-options
+            display block
+
     .button
         button()
 
@@ -163,8 +211,8 @@
                                     background-color #9546ab
                                     color #fff
 
-                    &.show-box
-                        display block
+                    // &.show-box
+                    //     display block
 
                 .my-account
                     position relative
@@ -503,7 +551,7 @@
                             font-size 12px
                             color #555
 
-                            &.active
+                            &:hover
                                 background-color #ebebeb
 
                 .data-question
@@ -551,6 +599,42 @@
                             strong
                                 font-weight normal
 
+                            &.bt-upvote
+                                display block
+                                size 115px 32px
+                                line-height 30px
+                                padding 0 18px 0 18px
+                                box()
+                                text-transform capitalize
+                                fontbd()
+                                font-size 12px
+                                border 1px solid #dfc3eb
+                                border-radius(4px)
+                                color #68347e
+
+                                span
+                                    position relative
+                                    padding 0
+                                    float right
+
+                                    &.name
+                                        float left
+
+                                    &.count
+                                        float right
+
+                                        &:before
+                                            content ''
+                                            position absolute
+                                            right 15px
+                                            top 9px
+                                            size 16px 10px
+                                            replace('icon-data.png')
+
+
+                                &:hover
+                                    background-color #f7effa
+
                             &.bt-follow
                                 display block
                                 size 115px 30px
@@ -569,17 +653,23 @@
 
                                 span
                                     position relative
-                                    padding 0 0 0 18px
+                                    padding 0 18px 0 0
 
-                                    &:before
-                                        content ''
-                                        position absolute
-                                        left 0
-                                        top 3px
-                                        size 16px 10px
-                                        replace('icon-data.png')
+                                    &.name
+                                        float left
 
-                            &.answers
+                                    &.count
+                                        float right
+
+                                        &:before
+                                            content ''
+                                            position absolute
+                                            left -20px
+                                            top 9px
+                                            size 16px 10px
+                                            replace('icon-data.png')
+
+                            &.bt-answers
                                 position relative
                                 padding 0 0 0 20px
 
@@ -604,12 +694,49 @@
                                     size 16px 9px
                                     replace('icon-data.png')
                                     background-position 0 -89px
-
-
                         strong
                             fontbd()
                             font-weight normal
                             color #333
+
+                .data-upvote
+                    margin-top 0
+                    height auto
+
+                    .data-list
+                        .list-viewers,
+                        .list-bt
+                            float left
+                            margin 0 0 10px 0
+
+                        .list-bt
+                            margin 0 0 5px 0
+
+                        .list-viewers
+                            .data-item
+                                .data-link
+                                    position relative
+                                    padding 0 0 0 22px
+
+                                    &:before
+                                        content ""
+                                        position absolute
+                                        top 0
+                                        bottom 0
+                                        left 0
+                                        margin auto 0
+                                        display block
+                                        width 16px
+                                        height 12px
+                                        replace('icon-data.png')
+
+                                    &.viewers
+                                        &:before
+                                            background-position 0 -89px
+
+                                    &.link-answers
+                                        &:before
+                                            background-position 0 bottom
 
                 .bt-options
                     position absolute
@@ -802,58 +929,6 @@
                 margin 45px auto 75px
                 overflow hidden
 
-        .questions,
-        .professionals
-            .question,
-            .professional
-                .box-options
-                    display none
-
-                    .box
-                        position absolute
-                        right -45px
-                        bottom -105px
-                        z-index 3
-                        width 109px
-                        padding 0 2px
-                        border 2px solid #ebebeb
-                        border-radius(4px)
-                        background-color #fff
-                        -webkit-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-                        -moz-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-                        box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-
-                        &:before
-                            content ''
-                            position absolute
-                            top -15px
-                            left 50%
-                            margin-left -14px
-                            square 0
-                            border-style: solid;
-                            border-width: 0 15px 15px 15px;
-                            border-color: transparent transparent #ffffff transparent;
-
-                        li
-                            size 100% 33px
-
-                            a
-                                display block
-                                size 100% 33px
-                                line-height 33px
-                                fontsb()
-                                font-size 14px
-                                text-align center
-                                text-decoration none
-                                color #888
-
-                                &:hover
-                                    background-color #9546ab
-                                    color #fff
-
-                    &.show-box
-                        display block
-
         &.hire
             .professionals
                 clear left
@@ -939,7 +1014,7 @@
                                 font-size 12px
                                 color #555
 
-                                &.active
+                                &:hover
                                     background-color #ebebeb
 
             .bt-view-more

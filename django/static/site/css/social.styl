@@ -179,16 +179,18 @@
                         color #555
 
                         &:hover
-                            &:after
-                                background-position 0 -25px
+                            background-color #ebebeb
+                            // &:after
+                            //     background-position 0 -25px
 
                         &:after
-                            content ''
-                            position absolute
-                            right 7px
-                            top 8px
-                            square 7px
-                            replace('icon-delete.png')
+                            display none
+                            // content ''
+                            // position absolute
+                            // right 7px
+                            // top 8px
+                            // square 7px
+                            // replace('icon-delete.png')
 
                         &.country
                             background-color #ebebeb
@@ -273,16 +275,41 @@
                                     replace('icon-data.png')
 
                         &.bt-follow
+                            display block
+                            size 115px 30px
+                            line-height 30px
                             padding 0 12px 0 12px
-                            width 112px
+                            box()
+                            text-transform capitalize
+                            fontbd()
+                            font-size 12px
+                            border 1px solid #dfc3eb
+                            border-radius(4px)
+                            color #68347e
+
+                            &:hover
+                                background-color #f7effa
 
                             span
-                                float right
+                                position relative
+                                padding 0 0 0 0
 
-                                &:before
-                                    top 0
-                                    bottom 0
-                                    margin auto
+                                &.name
+                                    float left
+
+                                    &:before
+                                        display none
+
+                                &.count
+                                    float right
+
+                                    &:before
+                                        content ''
+                                        position absolute
+                                        left -20px
+                                        top 9px
+                                        size 16px 10px
+                                        replace('icon-data.png')
 
                         &.bt-coments,
                         &.bt-downvote
@@ -326,54 +353,6 @@
                     display block
                     float left
                     font-size 14px
-
-            .box-options
-                display none
-
-                .box
-                    position absolute
-                    right -45px
-                    bottom -105px
-                    z-index 3
-                    width 109px
-                    padding 0 2px
-                    border 2px solid #ebebeb
-                    border-radius(4px)
-                    background-color #fff
-                    -webkit-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-                    -moz-box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-                    box-shadow: -4px 1px 31px 0px rgba(102,102,102,1);
-
-                    &:before
-                        content ''
-                        position absolute
-                        top -15px
-                        left 50%
-                        margin-left -14px
-                        square 0
-                        border-style: solid;
-                        border-width: 0 15px 15px 15px;
-                        border-color: transparent transparent #ffffff transparent;
-
-                    li
-                        size 100% 33px
-
-                        a
-                            display block
-                            size 100% 33px
-                            line-height 33px
-                            fontsb()
-                            font-size 14px
-                            text-align center
-                            text-decoration none
-                            color #888
-
-                            &:hover
-                                background-color #9546ab
-                                color #fff
-
-                &.show-box
-                    display block
 
             .answers
                 float left
@@ -461,6 +440,44 @@
 
                                             &:hover
                                                 background-color #f7effa
+
+                                        &.bt-follow
+                                            display block
+                                            size 115px 30px
+                                            line-height 30px
+                                            padding 0 0 0 12px
+                                            box()
+                                            text-transform capitalize
+                                            fontbd()
+                                            font-size 12px
+                                            border 1px solid #dfc3eb
+                                            border-radius(4px)
+                                            color #68347e
+
+                                            &:hover
+                                                background-color #f7effa
+
+                                            span
+                                                position relative
+                                                padding 0 0 0 0
+
+                                                &.name
+                                                    float left
+
+                                                    &:before
+                                                        display none
+
+                                                &.count
+                                                    float right
+
+                                                    &:before
+                                                        content ''
+                                                        position absolute
+                                                        left -20px
+                                                        top 9px
+                                                        size 16px 10px
+                                                        replace('icon-data.png')
+
 
                         .bt-options
                             right 18px
@@ -760,16 +777,18 @@
                             color #555
 
                             &:hover
-                                &:after
-                                    background-position 0 -25px
+                                background-color #ebebeb
+                                // &:after
+                                //     background-position 0 -25px
 
                             &:after
-                                content ''
-                                position absolute
-                                right 7px
-                                top 8px
-                                square 7px
-                                replace('icon-delete.png')
+                                display none
+                                // content ''
+                                // position absolute
+                                // right 7px
+                                // top 8px
+                                // square 7px
+                                // replace('icon-delete.png')
 
                             &.country
                                 background-color #ebebeb
@@ -947,10 +966,6 @@
 
                                     &:after
                                         display none
-
-                                    &.active
-                                        background-color #ebebeb
-                                        border-color #ebebeb
 
             .add-post
                 display block
