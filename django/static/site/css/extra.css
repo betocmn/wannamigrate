@@ -349,6 +349,34 @@ form .errorlist {
   display: block;
 }
 
+/* Terms & Conditions */
+.content.terms-and-privacy p {
+    font-family: 'open_sansregular';
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 25px;
+}
+
+.content.terms-and-privacy strong {
+    font-family: 'open_sansbold';
+}
+
+.content.terms-and-privacy h1 {
+    font-family: 'open_sansbold';
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-size: 16pt
+}
+
+.content.terms-and-privacy a {
+    text-decoration: none;
+    color: #4f9276;
+}
+
+.content.terms-and-privacy a:hover {
+    text-decoration: underline;
+}
+
 
 
 /* Hot it Works */
