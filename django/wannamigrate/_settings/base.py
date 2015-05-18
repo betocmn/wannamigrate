@@ -430,3 +430,14 @@ ID_SERVICE_STATUS_STARTED = 2
 ID_SERVICE_STATUS_COMPLETED = 3
 ID_SERVICE_STATUS_CANCELLED = 4
 
+
+
+
+
+#######################################
+# Messages settings
+#######################################
+# The number of questions that should be loaded on each ajax load step.
+CORE_CONVERSATION_STATUS_INBOX_ID = 1
+CORE_CONVERSATION_STATUS_OUTBOX_ID = 2
+CORE_CONVERSATION_STATUS_ARCHIVE_ID = 3

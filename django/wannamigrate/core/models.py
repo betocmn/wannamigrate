@@ -133,8 +133,6 @@ class Goal( BaseModel ):
 
 
 
-
-
 class Language( BaseModel ):
     """
     Language Model - Ex: english, french, portuguese, etc.
@@ -167,16 +165,56 @@ class Language( BaseModel ):
 
 
 
-class Message( BaseModel ):
+class ConversationStatus( BaseModel ):
     """
-    Inbox Messages - Messages between users
+    The status of a Conversation
     """
+    name = models.CharField( max_length = 50, default = '' )
 
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+
+class Conversation( BaseModel ):
+    """
+    Conversation
+    """
     # Model Attributes
-    from_user = models.ForeignKey( 'User', related_name = 'message_from_user', verbose_name = _( 'from user' ) )
-    to_user = models.ForeignKey( 'User', related_name = 'message_to_user', verbose_name = _( 'to user' ) )
-    content = models.TextField( _( "comment" ) )
-    is_read = models.BooleanField( _( "is read" ), default = False )
+    from_user = models.ForeignKey( 'User', related_name = 'conversations_started' )
+    to_user = models.ForeignKey( 'User', related_name = 'conversations_received' )
+    subject = models.CharField( max_length = 150, default = '' )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+
+class ConversationStatus_User( BaseModel ):
+    """
+    Relational table. Keep the status of a conversation for each user.
+    """
+    user = models.ForeignKey( 'User', related_name = 'conversations_status' )
+    conversation = models.ForeignKey( 'Conversation', related_name = 'conversations_status' )
+    status = models.ForeignKey( 'ConversationStatus', related_name = 'conversations_status' )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+
+class ConversationMessage( BaseModel ):
+    """
+    Message. The content of a conversation.
+    """
+    # Model Attributes
+    conversation = models.ForeignKey( 'Conversation', related_name = 'messages' )
+    content = models.TextField()
+    is_read = models.BooleanField( default = False )
+    owner = models.ForeignKey( 'User', related_name = 'messages' )
 
     # META Options
     class Meta:
