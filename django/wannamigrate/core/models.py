@@ -550,6 +550,8 @@ class UserStats( BaseModel ):
     total_blogposts_following = models.IntegerField( _( "total blogposts following" ), blank = True, null = True, default = 0 )
     total_users_following = models.IntegerField( _( "total users following" ), blank = True, null = True, default = 0 )
     total_users_followers = models.IntegerField( _( "total users followers" ), blank = True, null = True, default = 0 )
+    total_favorite_questions = models.IntegerField( _( "total favorite questions" ), blank = True, null = True, default = 0 )
+    total_favorite_blogposts = models.IntegerField( _( "total favorite blogposts" ), blank = True, null = True, default = 0 )
 
 
 
