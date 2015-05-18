@@ -277,9 +277,19 @@ $(function() {
         // ---------
 
         showBox: function(currentBox){
-            // dashboard.boxOptions.hideBox();
-            currentBox.closest('.category').find('.box-options').toggleClass('show-box');
-            dashboard.shadow();
+            $('.content').find('*').removeClass('show-box');
+
+            if (test === 0) {
+                currentBox.parent().addClass('show-box');
+                test = 1
+            }else{
+                if (!currentBox.parent().hasClass('show-box')) {
+                    currentBox.parent().addClass('show-box');
+                }
+
+                currentBox.parent().removeClass('show-box');
+                test = 0
+            }
         },
 
         hideBox: function(){

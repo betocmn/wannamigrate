@@ -51,7 +51,7 @@
 
                 <form id="main_form" method="post" action="">
                     {% csrf_token %}
-                    <input class="bt-save button" value="Save Information" type="submit" />
+                    <input class="bt-save button" value="{% trans 'Save Information' %}" type="submit" />
                     <div class="identity">
                         <div class="thumb">
                             <span>{% trans "Profile Photo" %}</span>
@@ -139,7 +139,7 @@
                         </div>
                     {% endif %}
 
-                    <input class="bt-save button" value="Save Information" type="submit" />
+                    <input class="bt-save button" value="{% trans 'Save Information' %}" type="submit" />
 
                     <div style="margin-bottom: 30px;"></div>
 

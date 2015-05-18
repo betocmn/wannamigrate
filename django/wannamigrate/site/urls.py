@@ -47,7 +47,7 @@ urlpatterns = patterns('',
     url( r'^account/$', views.account, name = 'account' ),
     url( r'^contracts/$', views.contracts, name = 'contracts' ),
     url( r'^edit_account/$', views.edit_account, name = 'edit_account' ),
-    url( r'^edit_account_password/$', views.edit_account_password, name = 'edit_account_password' ),
+    url( r'^edit_password/$', views.edit_password, name = 'edit_password' ),
     url( r'^upload_avatar/$', views.upload_avatar, name = 'upload_avatar' ),
 
     # Dashboard

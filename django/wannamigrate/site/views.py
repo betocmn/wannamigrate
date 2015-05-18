@@ -588,7 +588,7 @@ def edit_account( request ):
     :return String - HTML from Edit My Account page.
     """
 
-     # Initial template
+    # Initial template
     template_data = {}
 
     # Gets Situation Form
@@ -711,34 +711,41 @@ def upload_avatar( request ):
 
 
 @login_required
-def edit_account_password( request ):
+def edit_password( request ):
     """
     Edit account's password page.
 
     :param: request
     :return String - HTML from Edit account's password page.
     """
-    # Form submitted via POST
-    if request.method == 'POST':
+    # Initial template
+    template_data = {}
 
-        form = EditPasswordForm( request.user, request.POST )
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
 
-        # Is valid? Save..
-        if form.is_valid():
-            # TODO: Change the user's password
-            form.save()
+    # Passes user and provider to template
+    template_data['user'] = request.user
 
-            messages.success( request, _('Data successfully updated.') )
-            return HttpResponseRedirect( reverse( 'site:view_account' ) )
-        # Form errors.
-        else:
-            return render( request, 'site/account/edit_password.html', { 'form' : form } )
+    # Instantiates the User Form
+    form = EditPasswordForm( request.POST or None, instance = request.user )
 
-    # GET or any other method. Reads the user's info from session
-    # and render the edit page.
-    else:
-        form = EditPasswordForm( request.user )
-        return render( request, 'site/account/edit_password.html', { 'form' : form } )
+    # If the form has been submitted...
+    if form.is_valid():
+
+        # saves in the db
+        form.save()
+
+        # redirect with success message
+        messages.success( request, _( 'Your password was successfully updated.' ) )
+        return HttpResponseRedirect( reverse( 'site:account' ) )
+
+
+    # pass form to template
+    template_data['form'] = form
+
+    # Print Template
+    return render( request, 'site/account/edit_password.html', template_data )
 
 
 
