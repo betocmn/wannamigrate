@@ -1,0 +1,191 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block head %}
+    {{ block.super }}
+
+    <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
+    <style>
+        li.related > a {
+            text-decoration:none;
+            color: #F5F5F5;
+        }
+        li.related:hover > a{
+            text-decoration: underline;
+        }
+
+        textarea#{{ answer_form.body.id_for_label }}
+        {
+            height:50px;
+        }
+
+    </style>
+{% endblock head %}
+
+{% block content %}
+<div class="content social">
+    <section class="sidebar">
+        <a href="{% url "qa:list_blogposts" %}" class="bt-back back-toKnowledge">{% trans "Back to BlogPosts" %}</a>
+        <div class="sidebar-questionView">
+            <div class="itens post-topics">
+                <h3 class="title">{% trans "BlogPost Topics" %}</h3>
+                <ul class="tags">
+                    {% for topic in blogpost.related_topics.all %}
+                        <li class="tag">
+                            <a href="{% url "qa:view_topic" topic.slug %}" class="tag-link">{{ topic.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="itens post-stats">
+                <h3 class="title">{% trans "BlogPost Stats" %}</h3>
+                <ul>
+                    <li class="item views">
+                        <a href="#">{% trans "Views" %} <span class="count">({{ blogpost.total_views|kmi}})</span></a>
+                    </li>
+                    <li class="item answers">
+                        <a href="#">{% trans "Comments" %} <span class="count">(0)</span></a>
+                    </li>
+                    <li class="item followers">
+                        <a href="#">{% trans "Followers" %} <span class="count" id="post_followers_counter">({{ blogpost.total_followers|kmi }})</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="itens post-share">
+                <h3 class="title">{% trans "Share" %}</h3>
+                <ul>
+                    <li class="item twitter">
+                        <a href="#">{% trans "Twitter" %}</a>
+                    </li>
+                    <li class="item facebook">
+                        <a href="#">{% trans "Facebook" %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        {% include "site/_common/status.html" %}
+        <div class="question-postView">
+            <div class="question">
+                <div class="data-question">
+                    <h3 class="title-question">{{ blogpost.title }}</h3>
+
+                    <p class="answer">
+                        {% autoescape off %}
+                            {{ blogpost.body }}
+                        {% endautoescape %}
+                    </p>
+                    <a class="data-item">{% trans "Writen in" %} <strong>{{ blogpost.last_activity_date|date:"b d" }}</strong></a>
+                </div>
+                <div class="data">
+                    <ul class="data-list">
+                        <li class="data-item">
+                            {% include "qa/buttons/toggle_upvote.html" with obj=blogpost %}
+                        </li>
+                        <li class="data-item">
+                            {% include "qa/buttons/toggle_downvote.html" with obj=blogpost %}
+                        </li>
+                        <!--li class="data-item">
+                            <a href="#" class="data-link">Comment</a>
+                        </li-->
+                    </ul>
+                </div>
+                <div class="box-options">
+                    <i class="shadow"></i>
+                    <ul class="box">
+                        <li><a href="#" class="bt-share">{% trans "Share" %}</a></li>
+                        <li><a href="#" class="bt-report">{% trans "Report" %}</a></li>
+                        <li><a href="#" class="bt-cancel">{% trans "Cancel" %}</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="bt-options">{% trans "Options" %}</a>
+            </div>
+        </div>
+    </section>
+    <section class="aside">
+        {% if related_content %}
+        <div class="related-content">
+            <h3 class="title">{% trans "Related Questions" %}</h3>
+            <ul>
+                {% for related_question in related_content %}
+                <li class="related">
+                    <a href="{% url "qa:view_blogpost" related_question.slug %}">{{ related_question.title|truncate_smart:50 }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="related-professionals">
+            <h3 class="title">Related Professionals</h3>
+            <ul>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+                <li class="related">
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven...
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+        function onAnonymousChange()
+        {
+            if ( $( "#{{ answer_form.is_anonymous.id_for_label }}" ).is( ":checked" ) ) {
+                $( "#answer_user_picture" ).attr( "src", "{% static 'site/img/thumb-account.png' %}" );
+                $( "#answer_user_name" ).text( "Anonymous" );
+            }
+            else {
+                {% if user.userpersonal.avatar %}
+                    $( "#answer_user_picture" ).attr( "src", "{{ user.userpersonal.avatar.thumbnail.url }}" );
+                {% endif %}
+                $( "#answer_user_name" ).text( "{{ user.name }}" );
+            }
+        }
+
+        $( document ).ready( function() {
+
+            // XToggleButton Handler
+            $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
+
+
+            {% if answer_form.body.value|length == 0 %}
+                $("#{{ answer_form.body.id_for_label }}").focus(function(){
+                    $("#{{ answer_form.body.id_for_label }}").wm_editor();
+                    $(this).unbind( "focus" );
+                    $("#{{ answer_form.body.id_for_label }}").focus();
+                });
+            {% else %}
+                $("#{{ answer_form.body.id_for_label }}").wm_editor();
+            {% endif %}
+
+            onAnonymousChange();
+            $( "#{{ answer_form.is_anonymous.id_for_label }}" ).change( onAnonymousChange );
+        });
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

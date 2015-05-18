@@ -1,0 +1,111 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block head %}
+    {{ block.super }}
+
+    <link href="{% static 'common/jquery-ui/css/ui-lightness/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
+    <style>
+        input.checkbox {
+            width:10px !important;
+            height:10px !important;
+        }
+        /*
+        .ui-autocomplete-input
+        {
+            width: 200px !important;
+        }
+        */
+    </style>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="content social">
+        {% include "site/_common/status.html" %}
+        <section class="sidebar">
+            <a href="{% url "qa:list_blogposts" %}" class="bt-back back-toKnowledge">Back to Knowledge Base</a>
+        </section>
+        <section class="content">
+            <div class="add-post">
+                <form action="{{ action_url|default:'' }}" method="post" id="main_form" class="add-topics">
+                    {% csrf_token %}
+                    <div class="talk-about">
+                        <h2 class="title">{% trans "What will you talk about?" %}</h2>
+                        {{ form.title }}
+                        {{ form.title.errors }}
+                        <!-- textarea>Type your question here...</textarea-->
+                    </div>
+                    <div class="say">
+                        <h2 class="title">{% trans "Write what you have to say" %}</h2>
+                        {{ form.body }}
+                        {{ form.body.errors }}
+                    </div>
+                    <h2 class="title">Add topics to your post</h2>
+                    <!--input type="text" placeholder="Ex. Brasil"-->
+                    {{ form.related_topics }}
+                    {{ form.related_topics.errors }}
+                    <!--button class="button bt-add">Add</button-->
+                    <div class="tags">
+                        <ul class="tags-list">
+                        </ul>
+                    </div>
+                    <label class="make-anonymous" for="id_is_anonymous">
+                        <!-- <input type="checkbox" name="make-anonymous" value="makeAnonymous"> -->
+                        <!-- i class="checkbox"></i-->
+                        {{ form.is_anonymous }} <span>Make Anonymous</span>
+                    </label>
+                    <button class="button bt-write">Write Post</button>
+                </form>
+            </div>
+        </section>
+</div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <script src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'common/custom-combobox/js/custom-combobox.js' %}"></script>
+    <script src="{% static 'common/auto-topics/js/autotopics.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+            $("#{{ form.related_topics.id_for_label }}").autotopics( {
+                target : ".tags-list",
+                wrapper : "li",
+                wrapper_class : "tag",
+            } );
+
+
+            {% if form.body.value|length == 0 %}
+                $("#{{ form.body.id_for_label }}").focus(function(){
+                    $("#{{ form.body.id_for_label }}").wm_editor();
+                    $(this).unbind( "focus" );
+                    $("#{{ form.body.id_for_label }}").focus();
+                });
+            {% else %}
+                $("#{{ form.body.id_for_label }}").wm_editor();
+            {% endif %}
+        });
+    </script>
+
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

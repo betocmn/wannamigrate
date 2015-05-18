@@ -62,6 +62,15 @@ class FollowableContent( models.Model ):
 
 class IndexableContentManager( models.Manager ):
     def get_listing( self, *args, **kwargs ):
+        # If you're seeing this errors, you should create a Custom Manager that inherits from
+        # IndexableContentManager, override the method get_listing and also override the
+        # objects manager on your IndexableContent model.
+        raise Exception( "[IndexableContentManager] Abstract method not implemented." )
+
+
+
+class QuestionsManager( IndexableContentManager ):
+    def get_listing( self, *args, **kwargs ):
         # Extracts arguments
         related_topics_ids = kwargs.pop( "related_topics_ids", None )
         related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
@@ -81,8 +90,33 @@ class IndexableContentManager( models.Manager ):
             "comments",
             Prefetch(
                 "answers",
-                queryset=Answer.objects.order_by( "-total_upvotes" )
+                queryset=Answer.objects.order_by( "-total_upvotes", "total_downvotes", "-created_date" )
             ),
+        )
+
+        return self.distinct().order_by( '-last_activity_date' )
+
+
+
+class BlogPostsManager( IndexableContentManager ):
+    def get_listing( self, *args, **kwargs ):
+        # Extracts arguments
+        related_topics_ids = kwargs.pop( "related_topics_ids", None )
+        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
+
+        # Filters by topics
+        if ( related_topics_ids ):
+            self = self.filter( related_topics__in = related_topics_ids )
+        # Filters by situation
+        if ( related_countries_ids ):
+            self = self.filter( related_topics__related_countries__id__in = related_countries_ids )
+        if ( related_goals_ids ):
+            self = self.filter( related_topics__related_goals__id__in = related_goals_ids )
+
+        self = self.prefetch_related(
+            "related_topics",
+            "comments",
         )
 
         return self.distinct().order_by( '-last_activity_date' )
@@ -158,6 +192,8 @@ class CommentableContent( models.Model ):
 
 
 class BlogPost( BaseContent, IndexableContent, FollowableContent, VotableContent, CommentableContent ):
+    # Overrides the object's manager
+    objects = BlogPostsManager()
 
     # META CLASS
     class Meta:
@@ -174,7 +210,9 @@ class BlogPost( BaseContent, IndexableContent, FollowableContent, VotableContent
 class Question( BaseContent, IndexableContent, FollowableContent, VotableContent, CommentableContent ):
     # The total number of answers of this question.
     total_answers = models.PositiveIntegerField( default = 0 )
-    
+    # Overrides the object's manager
+    objects = QuestionsManager()
+
     # META CLASS
     class Meta:
         default_permissions = []

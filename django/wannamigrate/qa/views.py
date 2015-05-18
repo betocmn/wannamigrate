@@ -19,7 +19,7 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
-    AddQuestionForm, AddAnswerForm
+    AddQuestionForm, AddBlogPostForm, AddAnswerForm
 )
 from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic
 from wannamigrate.core.models import(
@@ -35,9 +35,10 @@ import urllib
 ##########################
 # NON HTTP METHODS
 ##########################
-def get_questions_by_step( user, filter_params, step, results_per_step ):
+def get_content_by_step( instance, user, filter_params, step, results_per_step ):
     """
-    Returns a list of questions filtered by filter_params. The results are limited by step and results_per_step
+    Returns a list of contents specified by instance filtered by filter_params. The results are limited by step and results_per_step
+    :param instance: The model to lookup
     :param user: The logged user.
     :param filter_params: A list of params to filter.
     :param step: The step on the filtering
@@ -49,21 +50,30 @@ def get_questions_by_step( user, filter_params, step, results_per_step ):
     end = results_per_step * step + results_per_step
 
     # Search the Posts with filters
-    questions = Question.objects.get_listing( **filter_params )[ start : end ]
+    posts = instance.objects.get_listing( **filter_params )[ start : end ]
 
     # If the user is authenticated
     if user.is_authenticated():
         # Checks if the user is following the question
-        question_ids = list( question.id for question in questions )
-        following_posts = Question.objects.filter( id__in = question_ids, followers__id = user.id ).values_list( "id", flat=True )
-        for question in questions:
-            if question.id in following_posts:
-                question.is_followed = True
+        posts_ids = list( post.id for post in posts )
+        following_posts = instance.objects.filter( id__in = posts_ids, followers__id = user.id ).values_list( "id", flat=True )
+        for post in posts:
+            if post.id in following_posts:
+                post.is_followed = True
             else:
-                question.is_followed = False
+                post.is_followed = False
 
-    return questions
+    return posts
 
+
+# Shortcut method to query questions
+def get_questions_by_step( user, filter_params, step, results_per_step ):
+    return get_content_by_step( Question, user, filter_params, step, results_per_step )
+
+
+# Shortcut method to query blogposts
+def get_blogposts_by_step( user, filter_params, step, results_per_step ):
+    return get_content_by_step( BlogPost, user, filter_params, step, results_per_step )
 
 
 
@@ -138,7 +148,6 @@ def add_question( request ):
         # Saves the post
         with transaction.atomic():
             question = form.save()
-            # PUT GET OR CREATE EVERYWHERE! NICE PATTERN. --
             user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
             question.followers.add( request.user )
             question.total_followers += 1
@@ -155,11 +164,11 @@ def add_question( request ):
     template_data = {
         'form': form,
         'cancel_url': reverse( 'qa:list_questions' ),
-        'topics' : Topic.objects.values( "id", "name" ),
+        'topics' : Topic.objects.order_by( "name" ).values( "id", "name" ),
     }
 
     # Print Template
-    return render( request, 'qa/posts/add_question.html', template_data )
+    return render( request, 'qa/question/add_question.html', template_data )
 
 
 @login_required
@@ -249,18 +258,18 @@ def list_blogposts( request, *args, **kwargs ):
     filter_params[ "related_goals_ids" ] = [ goal.id ]
 
     # Get questions per step
-    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
+    blogposts = get_blogposts_by_step( request.user, filter_params, step, results_per_step )
 
     # TEMPLATE DATA
     template_data = {
-        "questions_menu_selected" : True,
-        "questions" : questions,
+        "blogposts_menu_selected" : True,
+        "blogposts" : blogposts,
         "next_step" : step + 1,
         "filter_params" : urllib.parse.urlencode( filter_params, True ),
     }
 
     # Print Template
-    return render( request, 'qa/question/list.html', template_data )
+    return render( request, 'qa/blogpost/list.html', template_data )
 
 
 @login_required
@@ -270,18 +279,77 @@ def add_blogpost( request ):
     :param request:
     :return: A template rendered
     """
-    pass
+
+    # Instantiate FORM
+    form = AddBlogPostForm( request.POST or None, owner = request.user )
+
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+        # Saves the post
+        with transaction.atomic():
+            blogpost = form.save()
+            user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+            blogpost.followers.add( request.user )
+            blogpost.total_followers += 1
+            user_stats.total_questions_following += 1
+
+            blogpost.save()
+            user_stats.save()
+
+            messages.success( request, 'Post successfully created.' )
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'qa:view_blogpost', args = ( blogpost.slug, ) ) )
+
+    # Template data
+    template_data = {
+        'form': form,
+        'cancel_url': reverse( 'qa:list_blogposts' ),
+        'topics' : Topic.objects.order_by( "name" ).values( "id", "name" ),
+    }
+
+    # Print Template
+    return render( request, 'qa/blogpost/add.html', template_data )
 
 
 @login_required
 def view_blogpost( request, slug ):
     """
-    View a blgopost.
+    BlogPost view. Shows a blogpost and its comments.
     :param request:
-    :param slug:
+    :param slug: The identifier of the question.
     :return:
     """
-    pass
+    template_data = {}
+
+    blogpost = get_object_or_404( BlogPost, slug = slug )
+    blogpost.total_views += 1
+    blogpost.save()
+
+    related_content = BlogPost.objects.filter( related_topics__in = blogpost.related_topics.all() ).exclude( id = blogpost.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
+
+    # Checks if the user has upvoted or downvoted the post
+    blogpost.is_upvoted = Vote.objects.filter(
+        object_id = blogpost.id,
+        content_type = ContentType.objects.get_for_model( BlogPost),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
+    ).exists()
+
+    blogpost.is_downvoted = Vote.objects.filter(
+        object_id = blogpost.id,
+        content_type = ContentType.objects.get_for_model( BlogPost),
+        user_id = request.user.id,
+        vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
+    ).exists()
+
+
+    # Fills template data
+    template_data[ "related_content" ] = related_content
+    template_data[ "blogpost" ] = blogpost
+
+    # Print Template
+    return render( request, 'qa/blogpost/view.html', template_data )
 
 
 @login_required

@@ -4,7 +4,7 @@
 
 {% with url_append=obj|get_class|lower %}
 {% with follow_url="qa:ajax_upvote_"|add:url_append %}
-    <a href="{% url 'qa:ajax_upvote_answer' ans.id %}" data-primary-action-name="{% trans "Upvote" %}" data-secondary-action-name="{% trans "Upvoted" %}" id="bt-toggle-upvote-{{ obj|get_class|lower }}-{{ obj.id }}" class="data-link bt-upvote x-toggle-button {% if not obj.is_upvoted %}primary-action{% endif %}">
+    <a href="{% url follow_url obj.id %}" data-primary-action-name="{% trans "Upvote" %}" data-secondary-action-name="{% trans "Upvoted" %}" id="bt-toggle-upvote-{{ obj|get_class|lower }}-{{ obj.id }}" class="data-link bt-upvote x-toggle-button {% if not obj.is_upvoted %}primary-action{% endif %}">
         <span class="name">
             {% if obj.is_upvoted %}
                 {% trans "Upvoted" %}
