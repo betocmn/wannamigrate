@@ -81,7 +81,6 @@ def get_blogposts_by_step( user, filter_params, step, results_per_step ):
 ##########################
 # HTTP Methods
 ##########################
-@login_required
 def list_all( request, *args, **kwargs ):
     """
     Lists all contents (questions and blogposts).
@@ -90,7 +89,43 @@ def list_all( request, *args, **kwargs ):
     :param kwargs:
     :return:
     """
-    pass
+    # SET UP THE STEP AND THE TOTAL OF STEPS
+    step = 0    # starts from the begining
+    results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+
+    # PROCESS FILTERS
+    filter_params = {}
+
+    # Fills up the situation
+    from_country = request.session['situation']['from_country']
+    to_country = request.session['situation']['to_country']
+    goal = request.session['situation']['goal']
+
+    # Fills the topics related to user's situation
+    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_goals_ids" ] = [ goal.id ]
+
+    # Get questions per step
+    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
+    blogposts = get_blogposts_by_step( request.user, filter_params, step, results_per_step )
+
+    # Join two querysets
+    contents = [ x for x in questions ]
+    contents += [ x for x in blogposts ]
+
+    # Sorts elements
+    contents.sort( key=lambda x: x.last_activity_date, reverse=True )
+
+    # TEMPLATE DATA
+    template_data = {
+        "knowledge_menu_selected" : True,
+        "contents" : contents,
+        "next_step" : step + 1,
+        "filter_params" : urllib.parse.urlencode( filter_params, True ),
+    }
+
+    # Print Template
+    return render( request, 'qa/common/list_all.html', template_data )
 
 
 def list_questions( request, *args, **kwargs ):
@@ -233,7 +268,6 @@ def view_question( request, slug ):
     return render( request, 'qa/question/view.html', template_data )
 
 
-@login_required
 def list_blogposts( request, *args, **kwargs ):
     """
         Handles the process of listing blogposts.
@@ -429,6 +463,77 @@ def ajax_load_questions( request ):
     # Render the result and return or raise a Http404 if no questions was found.
     if questions:
         html = render_to_string( "qa/question/list_group.html", { "questions": questions } )
+        return HttpResponse( html )
+    else:
+        raise Http404( "No results found." )
+
+
+def ajax_load_blogposts( request ):
+    """
+    Loads blogposts based on params passed via GET.
+    :param request:
+    :return:
+    """
+    # Initializing variables
+    filter_params = {}
+    results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+    step = request.GET.get( "step", None )
+
+    # If no step was provided, raise a Not Found error.
+    if not step:
+        raise Http404( "Not found." )
+
+    # Get filters
+    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids" ]
+    for filter_name in allowed_filters_names:
+        if filter_name in request.GET:
+            filter_params[ filter_name ] = request.GET.getlist( filter_name )
+
+    # Get questions by step
+    blogposts = get_blogposts_by_step( request.user, filter_params, int( step ), results_per_step )
+
+    # Render the result and return or raise a Http404 if no questions was found.
+    if blogposts:
+        html = render_to_string( "qa/blogpost/list_group.html", { "blogposts": blogposts } )
+        return HttpResponse( html )
+    else:
+        raise Http404( "No results found." )
+
+
+def ajax_load_all( request ):
+    """
+    Loads all based on params passed via GET.
+    :param request:
+    :return:
+    """
+    # Initializing variables
+    filter_params = {}
+    results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+    step = request.GET.get( "step", None )
+
+    # If no step was provided, raise a Not Found error.
+    if not step:
+        raise Http404( "Not found." )
+
+    # Get filters
+    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids" ]
+    for filter_name in allowed_filters_names:
+        if filter_name in request.GET:
+            filter_params[ filter_name ] = request.GET.getlist( filter_name )
+
+    # Get questions by step
+    questions = get_questions_by_step( request.user, filter_params, int( step ), results_per_step )
+    blogposts = get_blogposts_by_step( request.user, filter_params, int( step ), results_per_step )
+
+    contents = [x for x in questions]
+    contents += [x for x in blogposts]
+
+    # Sorts elements
+    contents.sort( key=lambda x: x.last_activity_date, reverse=True )
+
+    # Render the result and return or raise a Http404 if no questions was found.
+    if len( contents ) > 0:
+        html = render_to_string( "qa/common/list_group_all.html", { "contents": contents } )
         return HttpResponse( html )
     else:
         raise Http404( "No results found." )

@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load string_extras %}
+{% load object_extras %}
 
 {% block head %}
     {{ block.super }}
@@ -25,16 +26,15 @@
     <div class="content social">
         {% include "qa/common/side_menu.html" %}
         <section class="content">
-            <div class="question-postList">
-                <a href="{% url "qa:add_blogpost" %}" class="button bt-addQuestion">Write a post</a>
-                <div class="conten-postList">
-                    {% include "qa/blogpost/list_group.html" with blogposts=blogposts %}
+            <div class="questions-answers">
+                <!-- a href="{% url "qa:add_question" %}" class="button bt-addQuestion">Add Question</a-->
+                <div class="content-questionsAnswers">
+                    {% include "qa/common/list_group_all.html" with contents=contents %}
                     <div id="loading-gif"></div>
                 </div>
             </div>
         </section>
     </div>
-
 
 {% endblock content %}
 
@@ -68,7 +68,7 @@
                     request_locked = true;
                     $( "#loading-gif" ).addClass( "show" );
 
-                    var request_url = "{% url "qa:ajax_load_blogposts" %}" + "?step=" + step + {% autoescape off %} "&{{filter_params}}" {% endautoescape %}
+                    var request_url = "{% url "qa:ajax_load_all" %}" + "?step=" + step + {% autoescape off %} "&{{filter_params}}" {% endautoescape %}
                     // requesting...
                     var request = $.get(
                         request_url

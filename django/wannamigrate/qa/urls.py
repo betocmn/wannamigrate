@@ -52,6 +52,10 @@ urlpatterns = patterns('',
 
     # AJAX load questions
     url( r'^x/load/questions/$', views.ajax_load_questions, name = "ajax_load_questions" ),
+    url( r'^x/load/blogposts/$', views.ajax_load_blogposts, name = "ajax_load_blogposts" ),
+    url( r'^x/load/all/$', views.ajax_load_all, name = "ajax_load_all" ),
+
+
     url( r'^x/get/topics', views.ajax_get_topics, name = "ajax_get_topics" ),
     url( r'^x/topic/follow/(?P<topic_id>\d+)', views.ajax_follow_topic, name = "ajax_follow_topic" ),
     url( r'^x/topic/unfollow/(?P<topic_id>\d+)', views.ajax_unfollow_topic, name = "ajax_unfollow_topic" ),
