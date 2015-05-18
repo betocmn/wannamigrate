@@ -3,7 +3,7 @@
         width 960px
         margin 0 auto 58px
         padding 58px 0 0 0
-        overflow hidden
+        // overflow hidden
 
         .sidebar
             width 190px
@@ -377,6 +377,12 @@
                         border 1px solid #FF9C00
                         box()
 
+                        &.commom
+                            border 1px solid #d7d7d7
+
+                            &:before
+                                display none
+
                         &:before
                             content ""
                             position absolute
@@ -441,7 +447,8 @@
                                             &:hover
                                                 background-color #f7effa
 
-                                        &.bt-follow
+                                        &.bt-follow,
+                                        &.bt-upvote
                                             display block
                                             size 115px 30px
                                             line-height 30px
@@ -478,6 +485,8 @@
                                                         size 16px 10px
                                                         replace('icon-data.png')
 
+                                        &.bt-upvote
+                                            padding 0 12px
 
                         .bt-options
                             right 18px

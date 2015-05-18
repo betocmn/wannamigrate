@@ -104,7 +104,8 @@ $(function() {
         from,
         to,
         textFrom,
-        textTo
+        textTo,
+        test = 0
 
     var dashboard = {
 
