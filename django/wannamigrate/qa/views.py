@@ -154,7 +154,7 @@ def add_question( request ):
     # Template data
     template_data = {
         'form': form,
-        'cancel_url': reverse( 'qa:list_posts' ),
+        'cancel_url': reverse( 'qa:list_questions' ),
         'topics' : Topic.objects.values( "id", "name" ),
     }
 
