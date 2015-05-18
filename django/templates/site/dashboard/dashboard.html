@@ -22,7 +22,7 @@
                             <div class="tags">
                                 <ul class="tags-list">
                                     {% for topic in question.related_topics.all %}
-                                        <li class="tag"><a href="{% url "qa:browse_topic" topic_id=topic.id %}" class="tag-link active">{{ topic.name }}</a></li>
+                                        <li class="tag"><a href="{% url "qa:view_topic" topic.slug %}" class="tag-link active">{{ topic.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>

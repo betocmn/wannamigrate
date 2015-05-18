@@ -100,15 +100,16 @@ class AddAnswerForm( BaseModelForm ):
     def clean( self, *args, **kwargs ):
         cleaned_data = super( AddAnswerForm, self ).clean( *args, **kwargs )
 
-        body = cleaned_data[ 'body' ]
+        if "body" in cleaned_data:
+            body = cleaned_data[ 'body' ]
 
-        parser = WMEditorParser( convert_charrefs = True )
-        parser.feed( body )
-        parser.close()
+            parser = WMEditorParser( convert_charrefs = True )
+            parser.feed( body )
+            parser.close()
 
-        if not parser.is_valid():
-            parser_errors = parser.get_errors()
-            for e in parser_errors:
-                self.add_error( 'body', e )
+            if not parser.is_valid():
+                parser_errors = parser.get_errors()
+                for e in parser_errors:
+                    self.add_error( 'body', e )
 
         return cleaned_data

@@ -63,14 +63,13 @@ class FollowableContent( models.Model ):
 class IndexableContentManager( models.Manager ):
     def get_listing( self, *args, **kwargs ):
         # Extracts arguments
-        topic_id = kwargs.pop( "topic_id", None )
-        related_countries_ids = kwargs.pop( "related_countries_ids" )  # The ids of the related countries
-        related_goals_ids = kwargs.pop( "related_goals_ids" )  # The ids of the related goals
+        related_topics_ids = kwargs.pop( "related_topics_ids", None )
+        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
 
-        # Filters by topic
-        if ( topic_id ):
-            self = self.filter( related_topics = topic_id )
-
+        # Filters by topics
+        if ( related_topics_ids ):
+            self = self.filter( related_topics__in = related_topics_ids )
         # Filters by situation
         if ( related_countries_ids ):
             self = self.filter( related_topics__related_countries__id__in = related_countries_ids )
@@ -251,7 +250,9 @@ class Topic( BaseModel ):
     """
 
     # The name of the topic
-    name = models.CharField( max_length = 255 )
+    name = models.CharField( max_length = 100 )
+    # The slug of the title
+    slug = models.SlugField( max_length = 100, unique = True )
     # Users following this topic
     followers = models.ManyToManyField( User, related_name = "following_topics" )
     # The countries related to this topic
@@ -269,6 +270,20 @@ class Topic( BaseModel ):
             ( "admin_view_topic", "[ADMIN] Can view topic" ),
             ( "admin_list_topic", "[ADMIN] Can list topic" ),
         )
+
+    def save( self, *args, **kwargs ):
+        if not self.slug:
+            # Calculates the slug handling repetition
+            max_length = self._meta.get_field( 'slug' ).max_length
+            self.slug = orig = slugify( self.name )[:max_length]
+
+            for x in itertools.count(1):
+                if not self.__class__.objects.filter( slug = self.slug ).exists():
+                    break
+                # Truncate the original slug dynamically. Minus 1 for the hyphen.
+                self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
+
+        super( Topic, self ).save( *args, **kwargs )
 
 
 
