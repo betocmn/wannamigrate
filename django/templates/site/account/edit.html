@@ -94,6 +94,11 @@
                         <label for="{{ user_form.preferred_language.id_for_label }}">{{ user_form.preferred_language.label }}</label>
                         {{ user_form.preferred_language }} {{ user_form.preferred_language.errors }}
                     </div>
+                
+                    <div class="language extra-field error-element{% if user_form.preferred_timezone.errors  %} has-error{% endif %}">
+                        <label for="{{ user_form.preferred_timezone.id_for_label }}">{{ user_form.preferred_timezone.label }}</label>
+                        {{ user_form.preferred_timezone }} {{ user_form.preferred_timezone.errors }}
+                    </div>
 
                     {% if provider %}
                         <div class="display-name extra-field error-element{% if provider_form.display_name.errors  %} has-error{% endif %}">
@@ -206,7 +211,7 @@
             // format currency
             $( "input.price" ).autoNumeric(
                 'init',
-                { aSep: ',', aDec: '.' }
+                { aSep: '', aDec: '.' }
             );
 
             // get cookie (used to get the CSRF protection cookie)

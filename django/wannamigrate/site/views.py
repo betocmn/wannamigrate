@@ -49,6 +49,8 @@ from django.core import serializers
 import time
 from PIL import Image
 from django.core.files.base import ContentFile
+from django.utils import timezone, translation
+import pytz
 
 
 
@@ -571,13 +573,6 @@ def contracts( request ):
     # Renders the page
     return render( request, 'site/account/contracts.html', template_data )
 
-    # Print SQL Queries
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str( query['sql'] )
-    return HttpResponse( queries_text )
-
 
 @login_required
 def edit_account( request ):
@@ -663,11 +658,15 @@ def edit_account( request ):
                     success = False
 
             if success:
-                # Changes the active language
+                # Updates the active language
                 translation.activate( user.preferred_language )
                 request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
 
-                # Redirect to view page with success message
+                # Updates the active timezone
+                timezone.activate( pytz.timezone( user.preferred_timezone ) )
+                request.session['django_timezone'] = user.preferred_timezone
+
+                # Redirects to view page with success message
                 messages.success( request, _( 'Data successfully updated.' ) )
                 return HttpResponseRedirect( reverse( 'site:account' ) )
 
@@ -825,7 +824,7 @@ def dashboard( request ):
 #######################
 # INTERNATIONALIZATION VIEWS
 #######################
-def setlang( request, language_code ):
+def set_lang( request, language_code ):
     """
     Changes the current language to the desired language defined by language_code parameter.
     If you want to redirect the user to other page that isn't '/' provide a parameter named "next" in the GET request.

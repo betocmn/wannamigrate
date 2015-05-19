@@ -17,6 +17,7 @@ from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
 import math
 from wannamigrate._settings.base import LANGUAGES
+import pytz
 
 
 
@@ -294,14 +295,16 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     User Model - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
     """
 
+    TIMEZONES = [(tz, tz) for tz in pytz.common_timezones]
+
     # Model Attributes
     email = models.EmailField( _( "e-mail" ), max_length = 255, unique = True )
     name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'points.UserResult' )
-    preferred_language = models.CharField( _( "Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
-    preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, null = True, blank = True )
+    preferred_language = models.CharField( _( "Preferred Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
+    preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, choices = TIMEZONES, null = True, blank = True )
 
     # META Options
     class Meta:

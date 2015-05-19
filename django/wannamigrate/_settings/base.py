@@ -59,7 +59,7 @@ os.environ['wsgi.url_scheme'] = 'https'
 #########################################
 LANGUAGES = (
     ( 'en', _( 'English' ) ),
-    ( 'pt-br', _( 'Portuguese (BR)' ) ),
+    ( 'pt-br', 'Português' ),
 )
 
 LANGUAGE_CODE = 'en'
@@ -69,7 +69,7 @@ COUNTRIES_BY_LANGUAGE = {
     'pt-br': [ 'br', 'pt', 'mz', 'ao', 'gw', 'mo', 'cv', 'st', 'tl' ]
 }
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
