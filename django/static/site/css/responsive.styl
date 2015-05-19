@@ -434,29 +434,18 @@
                                     strong
                                             color #999
 
-
-                                    .bt-follow
-                                        padding 0 12px
-                                        font-size 11px
-                                        width 115px
-
-                                        span
-                                            float right
-
-                                            &:before
-                                                top 0
-                                                bottom 0
-                                                margin auto 0
-
                                     &:first-child
-                                        position absolute
-                                        left 0
-                                        bottom 10px
+                                        // position absolute
+                                        // left 0
+                                        // bottom 10px
 
                                     &:last-child
-                                        width 70px
+                                        width 120px
                                         line-height 15px
                                         margin-top 8px
+
+                                .list-bt
+                                    clear left
 
                         .content-questions
                             position absolute
@@ -849,6 +838,22 @@
 
                                 .tag
                                     margin-bottom 15px
+
+                        .question-postList
+
+                            .answers
+                                .form-comment
+                                    input[type=text]
+                                        float none
+                                        width 80%
+
+                                    .bt-comment
+                                        float none
+                                        margin 10px auto 0
+
+                                .answer
+                                    .post
+                                        width 100%
 
             footer
                 display none
@@ -1258,3 +1263,28 @@
                     strong ~ strong
                         clear left
                         display inline-block
+
+    .dashboard
+        .wrapper
+            .content
+                &.social
+                    .content
+                        .question-postList
+                            .question
+                                .data
+                                    .data-list
+                                        .list-bt
+                                            .data-item
+                                                margin-right 10px
+                                                &:last-child
+                                                    margin 0
+                            .answers
+                                .answer
+                                    .post
+                                        .user
+                                            .name
+                                                padding 5px 0 10px
+
+                                            .info
+                                                float none
+                                                padding 5px 0 0
