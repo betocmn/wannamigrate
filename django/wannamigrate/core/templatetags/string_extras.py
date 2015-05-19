@@ -87,6 +87,9 @@ def kmi( value ):
     :param value: The number to be converted
     :return: X / 1000 k if the number is greater than 1 thousand. X / 1000000 if the number is greater than 1 million.
     """
+    if not value:
+        return 0
+
     temp = int( value )
     MI = 1000000
     K = 1000

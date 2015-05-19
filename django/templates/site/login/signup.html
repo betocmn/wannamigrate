@@ -31,7 +31,7 @@
 
                     {% include "site/_common/status.html" %}
 
-                    <form id="signup_form_email" class="signup_item" method="post" role="form" action="{% url 'site:signup' %}">
+                    <form id="signup_form_email" class="signup_item" method="post" role="form" action="">
                         {% csrf_token %}
                         <input type="hidden" name="type" value="{{ type }}" />
                         <div class="error-element inline">{{ form.name }}</div> {{ form.name.errors }}

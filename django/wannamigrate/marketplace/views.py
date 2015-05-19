@@ -20,9 +20,11 @@ from wannamigrate.marketplace.models import (
     Provider, Review, ServiceType, ProviderServiceType, Order,
     Service, ServiceStatus
 )
+from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
 from django.conf import settings
+from django.db.models import F
 
 
 
@@ -53,7 +55,7 @@ def professionals( request ):
         goal = request.session['situation']['goal']
 
         # Gets 5 most related service providers
-        template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
+        template_data['providers'] = Provider.get_listing( to_country.id, 0, 20 )
 
     # Print Template
     return render( request, 'marketplace/professionals/list.html', template_data )
@@ -112,6 +114,17 @@ def profile( request, user_id, name ):
         provider = Provider.get_profile( user_id )
         if not provider:
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # Increments Profile Views if it's a new session
+        if 'profile_view_incremented' not in request.session:
+            request.session['profile_view_incremented'] = []
+        if user_id not in request.session['profile_view_incremented']:
+            request.session['profile_view_incremented'].append( user_id )
+            UserStats.objects.update_or_create(
+                user_id = user_id, defaults = {
+                    'total_profile_views': F( 'total_profile_views' ) + 1
+                }
+            )
 
         # Initializes template data dictionary
         template_data = {}

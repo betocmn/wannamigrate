@@ -38,8 +38,8 @@
                             </div>
                             <div class="data">
                                 <ul class="data-list">
-                                    <li class="data-item"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers }}</strong> answers</a></li>
-                                    <li class="data-item"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views }}</strong> viewers</a></li>
+                                    <li class="data-item"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers|kmi }}</strong> {% trans 'answers' %}</a></li>
+                                    <li class="data-item"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views|kmi }}</strong> {% trans 'views' %}</a></li>
                                     <li class="data-item">{% trans "Joined" %} <strong>{{ provider.user.created_date|date:"M Y"|lower }}</strong></li>
                                 </ul>
                             </div>
