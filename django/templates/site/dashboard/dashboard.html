@@ -45,7 +45,7 @@
                                         {% include "qa/buttons/toggle_follow.html" with obj=question %}
                                     </li>
                                     <li class="data-item"><span class="data-link answers"><strong>{{ question.total_answers|kmi }}</strong> {% trans "answers" %}</span></li>
-                                    <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>
+                                    <li class="data-item"><span class="data-link viewers"><strong>{{ question.total_views|kmi }}</strong> {% trans "views" %}</span></li>
                                     <li class="data-item">{% trans "Last activity in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong></li>
                                 </ul>
                             </div>
@@ -103,8 +103,8 @@
                             </div>
                             <div class="data">
                                 <ul class="data-list">
-                                    <li class="data-item data-item-answers"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers }}</strong> {% trans "answers" %}</a></li>
-                                    <li class="data-item data-item-viewers"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views }}</strong> {% trans "views" %}</a></li>
+                                    <li class="data-item data-item-answers"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers|kmi }}</strong> {% trans "answers" %}</a></li>
+                                    <li class="data-item data-item-viewers"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views|kmi }}</strong> {% trans "views" %}</a></li>
                                     <li class="data-item data-item-since">{% trans "Joined" %} <strong>{{ provider.user.created_date|date:"M Y"|lower }}</strong></li>
                                 </ul>
                             </div>
@@ -112,8 +112,7 @@
                             <div class="box-options">
                                 <ul class="box">
                                     <li><a class="bt-share" href="{{ view_professional_url }}">{% trans "View" %}</a></li>
-                                    <li><a class="bt-report" href="#">{% trans "Share" %}</a></li>
-                                    <li><a class="bt-cancel" href="#">{% trans "Report" %}</a></li>
+                                    <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
                                 </ul>
                             </div>
                         </div>

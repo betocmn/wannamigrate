@@ -59,7 +59,7 @@ os.environ['wsgi.url_scheme'] = 'https'
 #########################################
 LANGUAGES = (
     ( 'en', _( 'English' ) ),
-    ( 'pt-br', _( 'Portuguese (BR)' ) ),
+    ( 'pt-br', 'Português' ),
 )
 
 LANGUAGE_CODE = 'en'
@@ -69,7 +69,7 @@ COUNTRIES_BY_LANGUAGE = {
     'pt-br': [ 'br', 'pt', 'mz', 'ao', 'gw', 'mo', 'cv', 'st', 'tl' ]
 }
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -129,6 +129,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
     'wannamigrate.core.context_processors.add_prod_setting',
+    'wannamigrate.core.context_processors.add_base_url',
 )
 
 
@@ -169,7 +170,9 @@ EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
 
 # Email to reiceve contact form messages
-CONTACT_FORM_EMAIL = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_NEW_ORDER = 'humberto@wannamigrate.com'
 
 
 

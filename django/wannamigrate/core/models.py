@@ -17,6 +17,7 @@ from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
 import math
 from wannamigrate._settings.base import LANGUAGES
+import pytz
 
 
 
@@ -252,20 +253,45 @@ class UserManager( BaseUserManager ):
         """
 
 
+        # Validates and identify user
         if not email:
             raise ValueError( 'Users must have an email address' )
-
         user = self.model(
             email = self.normalize_email( email ),
             name = name,
         )
 
+        # inserts user
         user.set_password( password )
         user.is_superuser = False
         user.is_admin = False
         user.is_active = True
         user.save( using = self._db )
+
+        # Inserts user_stats
+        user_stats = UserStats()
+        user_stats.user_id = user.id
+        user_stats.updating_now = 0
+        user_stats.percentage_personal = 0
+        user_stats.percentage_language = 0
+        user_stats.percentage_education = 0
+        user_stats.percentage_work = 0
+        user_stats.total_answers = 0
+        user_stats.total_contracts = 0
+        user_stats.total_profile_views = 1
+        user_stats.total_questions = 0
+        user_stats.total_reviews = 0
+        user_stats.total_topics_following = 0
+        user_stats.total_users_followers = 0
+        user_stats.total_users_following = 0
+        user_stats.total_blogposts_following = 0
+        user_stats.total_questions_following = 0
+        user_stats.total_favorite_blogposts = 0
+        user_stats.total_favorite_questions = 0
+        user_stats.save( using = self._db )
+
         return user
+
 
     def create_superuser( self, email, password, name = None ):
         """
@@ -294,14 +320,16 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     User Model - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
     """
 
+    TIMEZONES = [(tz, tz) for tz in pytz.common_timezones]
+
     # Model Attributes
     email = models.EmailField( _( "e-mail" ), max_length = 255, unique = True )
     name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'points.UserResult' )
-    preferred_language = models.CharField( _( "Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
-    preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, null = True, blank = True )
+    preferred_language = models.CharField( _( "Preferred Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
+    preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, choices = TIMEZONES, null = True, blank = True )
 
     # META Options
     class Meta:

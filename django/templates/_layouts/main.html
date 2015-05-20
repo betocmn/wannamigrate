@@ -181,13 +181,35 @@
             {% block footer %}
             <footer>
                 <a href="#" class="logo">Wanna Migrate</a>
+                <ul class="social-links">
+                    <li class="facebook"><a target="_blank" href="https://www.facebook.com/wannamigrate"></a></li>
+                    <li class="angel-list"><a target="_blank" href="https://angel.co/wannamigrate"></a></li>
+                    <li class="twitter"><a target="_blank" href="https://www.twitter.com/wannamigrate"></a></li>
+                </ul>
                 <nav class="nav-footer">
-                    <ul>
+                    <ul class="about">
+                        <li class="conditions"><a class="nav-footer-link" href="{% url 'site:how_it_works' %}">{% trans "How It Works" %}</a></li>
+                        <li class="privacy"><a class="nav-footer-link" href="{% url 'site:terms' %}">{% trans "Terms &amp; Conditions" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:privacy' %}">{% trans "Privacy Police" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:contact' %}">{% trans "Contact Us" %}</a></li>
+                    </ul>
+                    <ul class="explore">
                         <li class="conditions"><a class="nav-footer-link" href="{% url 'marketplace:professionals' %}">{% trans "Find a Professional" %}</a></li>
-                        <li class="privacy"><a class="nav-footer-link" href="{% url 'qa:list_questions' %}">{% trans "Questions &amp; Answers" %}</a></li>
-                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
+                        <li class="privacy"><a class="nav-footer-link" href="{% url 'qa:list_questions' %}">{% trans "Ask a Question" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:tools' %}">{% trans "Immigration Points Calculator" %}</a></li>
+                        <li class="contact"><a class="nav-footer-link" href="{% url 'site:service_providers' %}">{% trans "Become a Service Provider" %}</a></li>
                     </ul>
                 </nav>
+                {% get_language_info for LANGUAGE_CODE as current_language %}
+                <a href="#" class="bt-options language {{ current_language.code }}">{{ current_language.name_local }}</a>
+                <div class="box-options">
+                    <ul class="box">
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                                <li><a class="{{ language.code }}" href="{% url 'site:set_lang' language.code %}?next={{request.path}}">{{ language.name_local }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <p class="copyright">© WannaMigrate {% now "Y" %} {% trans "All Rights Reserved" %}</p>
             </footer>
             {% endblock footer %}

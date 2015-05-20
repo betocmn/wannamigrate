@@ -301,6 +301,7 @@ $(function() {
         events: function(){
             $scope.boxOptions.btOptions.click(function(event) {
                 event.preventDefault();
+
                 dashboard.boxOptions.showBox($(this));
             });
 

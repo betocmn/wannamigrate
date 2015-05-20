@@ -49,6 +49,8 @@ from django.core import serializers
 import time
 from PIL import Image
 from django.core.files.base import ContentFile
+from django.utils import timezone, translation
+import pytz
 
 
 
@@ -276,12 +278,10 @@ def signup( request, type = 'user' ):
             user = authenticate( email = email, password = password )
             auth_login( request, user )
 
-            # Sends Welcome Email to User
-            # TODO Change this to a celery/signal background task
-            Mailer.send_welcome_email( user )
-
             # If it's a service provider, saves extra info and redirect to further edition
+            is_provider = False
             if 'type' in request.POST and request.POST['type'] == 'service-provider':
+                is_provider = True
                 provider = Provider()
                 provider.user_id = user.id
                 provider.display_name = user.name if user.name else user.email
@@ -289,10 +289,16 @@ def signup( request, type = 'user' ):
                 provider.description = '--'
                 provider.provider_status_id = 1
                 provider.save()
-                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
 
-            # Redirect to dashboard
-            return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+
+            # Sends Welcome Email to User
+            # TODO Change this to a celery/signal background task
+            Mailer.send_welcome_email( user, type )
+
+            if is_provider:
+                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
+            else:
+                return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
     # passes form to template Forms
     template_data['form'] = form
@@ -329,7 +335,7 @@ def recover_password( request ):
 
             # Send email with link to reset password
             # TODO: Change this to a celery background event and use a try/exception block
-            #Mailer.send_reset_password_email( user )
+            Mailer.send_reset_password_email( user )
 
             # Return success message to template
             messages.success( request, _( 'Password reset instructions were successfully sent to your e-mail.' ) )
@@ -571,13 +577,6 @@ def contracts( request ):
     # Renders the page
     return render( request, 'site/account/contracts.html', template_data )
 
-    # Print SQL Queries
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str( query['sql'] )
-    return HttpResponse( queries_text )
-
 
 @login_required
 def list_conversations( request, conversation_status = None ):
@@ -787,11 +786,15 @@ def edit_account( request ):
                     success = False
 
             if success:
-                # Changes the active language
+                # Updates the active language
                 translation.activate( user.preferred_language )
                 request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
 
-                # Redirect to view page with success message
+                # Updates the active timezone
+                timezone.activate( pytz.timezone( user.preferred_timezone ) )
+                request.session['django_timezone'] = user.preferred_timezone
+
+                # Redirects to view page with success message
                 messages.success( request, _( 'Data successfully updated.' ) )
                 return HttpResponseRedirect( reverse( 'site:account' ) )
 
@@ -949,7 +952,7 @@ def dashboard( request ):
 #######################
 # INTERNATIONALIZATION VIEWS
 #######################
-def setlang( request, language_code ):
+def set_lang( request, language_code ):
     """
     Changes the current language to the desired language defined by language_code parameter.
     If you want to redirect the user to other page that isn't '/' provide a parameter named "next" in the GET request.

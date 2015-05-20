@@ -20,9 +20,11 @@ from wannamigrate.marketplace.models import (
     Provider, Review, ServiceType, ProviderServiceType, Order,
     Service, ServiceStatus
 )
+from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
 from django.conf import settings
+from django.db.models import F
 
 
 
@@ -53,7 +55,7 @@ def professionals( request ):
         goal = request.session['situation']['goal']
 
         # Gets 5 most related service providers
-        template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
+        template_data['providers'] = Provider.get_listing( to_country.id, 0, 20 )
 
     # Print Template
     return render( request, 'marketplace/professionals/list.html', template_data )
@@ -113,6 +115,17 @@ def profile( request, user_id, name ):
         if not provider:
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
+        # Increments Profile Views if it's a new session
+        if 'profile_view_incremented' not in request.session:
+            request.session['profile_view_incremented'] = []
+        if user_id not in request.session['profile_view_incremented']:
+            request.session['profile_view_incremented'].append( user_id )
+            UserStats.objects.update_or_create(
+                user_id = user_id, defaults = {
+                    'total_profile_views': F( 'total_profile_views' ) + 1
+                }
+            )
+
         # Initializes template data dictionary
         template_data = {}
 
@@ -161,7 +174,8 @@ def payment( request ):
             'provider': request.session['payment']['provider'],
             'service_type': request.session['payment']['service_type'],
             'provider_service_type': request.session['payment']['provider_service_type'],
-            'service': request.session['payment']['service']
+            'service': request.session['payment']['service'],
+            'service_type_category': request.session['payment']['service_type'].service_type_category
         }
         form = PaymentForm( request.POST, payment_info = payment_info )
 
@@ -171,9 +185,14 @@ def payment( request ):
             # Saves all order info
             order = form.save()
 
-            # Sends Order Confirmation email
+            # Sends Order Confirmation email to USER
             # TODO Change this to a celery/signal background task
-            Mailer.send_order_confirmation( request.user.email, request.session['payment']['provider_service_type'], order )
+            service_type = request.session['payment']['provider_service_type'].service_type
+            Mailer.send_order_confirmation_user( request.user, order, payment_info )
+
+            # Sends Order Confirmation email to PROVIDER
+            # TODO Change this to a celery/signal background task
+            Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order, payment_info )
 
             # Redirect to confirmation page
             request.session['payment'] = {}

@@ -61,6 +61,254 @@ form .errorlist {
 
 
 
+/* Landing Page */
+.landing footer .nav-footer {
+    width: 540px;
+}
+
+@media screen and (max-width: 1366px) {
+    .landing footer .nav-footer {
+        width: 470px;
+      }
+}
+.landing footer .nav-footer li.contact {
+    border-right: 1px solid #a9a9a9;
+}
+.landing footer .nav-footer li.language a.nav-footer-link.bt-options {
+    padding-left: 22px;
+    position: relative;
+}
+.landing footer .nav-footer li.language a.nav-footer-link.pt,
+.landing footer .nav-footer li.language a.nav-footer-link.pt-br {
+    background: transparent url( "../img/icon-language-pt.png" ) no-repeat 0px 0px;
+}
+.landing footer .nav-footer li.language a.nav-footer-link.en {
+    background: transparent url( "../img/icon-language-en.png" ) no-repeat 0px 0px;
+}
+.landing footer .nav-footer li.language a.nav-footer-link.bt-options:after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 0px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 3px solid #a9a9a9;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.landing footer .box-options {
+    display: none;
+    position: relative;
+    bottom: 145px;
+}
+.landing footer .box-options .box {
+    position: absolute;
+    right: -45px;
+    bottom: -105px;
+    z-index: 3;
+    width: 164px;
+    font-size: 12px;
+    padding: 0 3px;
+    border: 2px solid #ebebeb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #fff;
+    -webkit-box-shadow: -4px 1px 31px 0px #666;
+    -moz-box-shadow: -4px 1px 31px 0px #666;
+    -moz-box-shadow: -4px 1px 31px 0px #666;
+    -webkit-box-shadow: -4px 1px 31px 0px #666;
+    box-shadow: -4px 1px 31px 0px #666;
+}
+.landing footer .box-options .box:before {
+    content: '';
+    position: absolute;
+    top: 66px;
+    left: 50%;
+    margin-left: -14px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 15px 15px 15px;
+    border-color: #fff transparent transparent transparent;
+}
+.landing footer .box-options .box li {
+    width: 100%;
+    height: 33px;
+    padding: 0px;
+}
+.landing footer .box-options .box li a {
+    display: block;
+    height: 33px;
+    line-height: 33px;
+    font-family: 'open_sanssemibold';
+    font-size: 12px;
+    text-decoration: none;
+    color: #888;
+    padding-left: 22px;
+}
+.landing footer .show-box .box-options {
+    display: block;
+}
+.landing footer .box-options .box li a.pt-br,
+.landing footer .box-options .box li a.pt{
+    background: transparent url( "../img/icon-language-pt.png" ) no-repeat 0px 8px;
+}
+.landing footer .box-options .box li a.en {
+    background: transparent url( "../img/icon-language-en.png" ) no-repeat 0px 8px;
+}
+.landing footer .box-options .box li a:hover {
+    background-color: #9546ab;
+    color: #fff;
+}
+
+
+
+/* Footer of inside pages */
+.dashboard footer {
+    height: 160px;
+}
+.dashboard .wrapper footer ul.social-links {
+    float: left;
+    width: 105px;
+    height: 30px;
+    margin: 99px 0 0 -110px;
+}
+.dashboard .wrapper footer ul.social-links li {
+    display: inline;
+    float: left;
+}
+
+.dashboard .wrapper footer ul.social-links li.facebook a {
+    background: transparent url( "../img/icon-facebook.png" ) no-repeat 0px 0px;
+}
+.dashboard .wrapper footer ul.social-links li.angel-list a {
+    background: transparent url( "../img/icon-angel-list.png" ) no-repeat 0px 1px;
+}
+.dashboard .wrapper footer ul.social-links li.twitter a {
+    background: transparent url( "../img/icon-twitter.png" ) no-repeat 6px 2px;
+    width: 35px;
+}
+.dashboard .wrapper footer ul.social-links li a{
+    width: 25px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    -khtml-opacity: 0.5;
+    border-radius: 50%;
+    background-color: #999;
+    background-size: 20px 20px;
+
+}
+.dashboard footer .nav-footer ul {
+    float: left;
+}
+.dashboard footer .nav-footer ul.explore {
+    margin-left: 83px;
+}
+.dashboard footer .nav-footer li {
+    float: none;
+    display: block;
+    padding: 0;
+    line-height: 25px;
+}
+.dashboard footer .nav-footer li.privacy {
+    border: none;
+}
+.dashboard footer .nav-footer li .nav-footer-link {
+    font-size: 13px
+}
+.dashboard footer .nav-footer li .nav-footer-link:hover {
+    text-decoration: underline;
+}
+.dashboard footer .copyright {
+    top: 104px;
+    height: 45px;
+}
+.dashboard footer a.language {
+    padding-left: 22px;
+    position: absolute;
+    right: 80px;
+    top: 25px;
+    display: block;
+    text-align: right;
+    line-height: 20px;
+    font-size: 12px;
+    color: #cacaca;
+    text-decoration: none;
+}
+.dashboard footer a.language.pt,
+.dashboard footer a.language.pt-br {
+    background: transparent url( "../img/icon-language-pt.png" ) no-repeat 0px 0px;
+}
+.dashboard footer a.language.en {
+    background: transparent url( "../img/icon-language-en.png" ) no-repeat 0px 0px;
+}
+.dashboard footer a.language:after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 0px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 3px solid #a9a9a9;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.dashboard footer .box-options {
+    display: none;
+    position: relative;
+}
+
+.dashboard footer .box-options .box {
+    width: 164px;
+    right: -12px;
+    bottom: -132px;
+}
+.dashboard footer .box-options .box li a{
+    text-align: left;
+    font-size: 12px;
+    padding-left: 20px;
+    width: auto;
+}
+
+.dashboard footer .box-options .box li a.pt-br,
+.dashboard footer .box-options .box li a.pt{
+    background: transparent url( "../img/icon-language-pt.png" ) no-repeat 0px 8px;
+}
+.dashboard footer .box-options .box li a.en {
+    background: transparent url( "../img/icon-language-en.png" ) no-repeat 0px 8px;
+}
+.dashboard footer .box-options .box li a:hover {
+    background-color: #9546ab;
+    color: #fff;
+}
+
+
+
 /* ICON Services for profile and payment pages */
 .dashboard .content.hiring .services .services-list .service-item:before,
 .dashboard .content.payment .services .service:before {
@@ -235,7 +483,9 @@ form .errorlist {
   display: block;
   padding: 0 25px;
 }
-
+.content.myaccount .interactions .my-profile-edit .identity {
+    margin-bottom: 12px;
+}
 .content.myaccount .interactions .my-profile-edit .services .remove {
   font-size: 12px;
   color: #68347e;

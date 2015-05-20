@@ -272,11 +272,12 @@ class EditAccountForm( BaseModelForm ):
 
     class Meta:
         model = get_user_model()
-        fields = [ 'name', 'email', 'preferred_language' ]
+        fields = [ 'name', 'email', 'preferred_language', 'preferred_timezone' ]
         widgets = {
             'name': TextInput( attrs = { 'class': '', 'autofocus': 'true' } ),
             'email': TextInput( attrs = { 'class': '' } ),
             'preferred_language': Select( attrs = { 'class': 'default-select' } ),
+            'preferred_timezone': Select( attrs = { 'class': 'default-select' } ),
         }
 
 
