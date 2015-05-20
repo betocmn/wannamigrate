@@ -32,10 +32,10 @@ from wannamigrate.site.forms import (
     ContactForm, LoginForm, SignupForm, PasswordRecoveryForm,   PasswordResetForm,
     EditAccountForm, EditPasswordForm, SituationForm, EditProviderForm, ProviderCountryForm,
     BaseProviderCountryFormSet, ProviderServiceTypeForm, BaseProviderServiceTypeFormSet,
-    UploadAvatarForm
+    UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation, UserPersonal
+    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
@@ -577,6 +577,130 @@ def contracts( request ):
     for query in connection.queries:
         queries_text += '<br /><br /><br />' + str( query['sql'] )
     return HttpResponse( queries_text )
+
+
+@login_required
+def list_conversations( request, conversation_status = None ):
+    """
+    Displays "inbox" page.
+
+    :param: request
+    :return String - HTML from my account page.
+    """
+
+    # Initial template
+    template_data = {}
+
+    if conversation_status == settings.CORE_CONVERSATION_STATUS_OUTBOX_ID:
+        template_data['sent_menu_selected'] = True
+    elif conversation_status == settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID:
+        template_data['archive_menu_selected'] = True
+    else:
+        template_data['messages_menu_selected'] = True
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
+
+    # Renders the page
+    return render( request, 'site/conversation/list.html', template_data )
+
+
+@login_required
+def view_conversation( request, id ):
+    """
+    Displays "inbox" page.
+
+    :param: request
+    :return String - HTML from my account page.
+    """
+    conversation = get_object_or_404( Conversation, pk = id )
+
+    # Checks if the conversation relates to the user
+    if request.user.id not in [ conversation.from_user_id, conversation.to_user_id ]:
+        return HttpResponseRedirect( reverse( 'site:list_conversations' ) )
+
+    # Get the messages of the conversation
+    messages = ConversationMessage.objects.filter( conversation = conversation ).order_by( "-created_date" ).all()
+
+    # Sets the message class to view
+    for message in messages:
+        if message.owner == request.user:
+            message.custom_class = "odd"
+        else:
+            message.custom_class = "recent" if not message.is_read else "even"
+
+    # Set all received messages as read
+    ConversationMessage.objects.filter( conversation = conversation ).exclude( owner = request.user ).update( is_read = True )
+
+    form = ReplyConversationForm( request.POST or None, conversation = conversation )
+    if form.is_valid():
+        with transaction.atomic():
+            # Saves the message
+            message = form.save()
+
+            # Updates the conversation status for both users
+            csu = ConversationStatus_User.objects.filter( conversation = conversation ).update( status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID )
+
+            return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
+
+    template_data = {}
+    template_data[ "form" ] = form
+    template_data[ "conversation" ] = conversation
+    template_data[ "messages" ] = messages
+    template_data[ "messages_menu_selected" ] = True
+
+    return render( request, 'site/conversation/view.html', template_data )
+
+
+@login_required
+def start_conversation( request ):
+    """
+    Displays "inbox" page.
+
+    :param: request
+    :return String - HTML from my account page.
+    """
+
+    form = StartConversationForm( request.POST or None, owner = request.user )
+
+    if form.is_valid():
+        with transaction.atomic():
+            conversation = form.save()
+
+            # Sets the status of the message for from_user
+            csu_from = ConversationStatus_User()
+            csu_from.conversation = conversation
+            csu_from.user = conversation.from_user
+            csu_from.status_id = settings.CORE_CONVERSATION_STATUS_OUTBOX_ID
+            csu_from.save()
+
+            # Sets the status of the message for to_user
+            csu_to = ConversationStatus_User()
+            csu_to.conversation = conversation
+            csu_to.user = conversation.to_user
+            csu_to.status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID
+            csu_to.save()
+
+            # Creates the message
+            msg = ConversationMessage()
+            msg.conversation = conversation
+            msg.owner = conversation.from_user
+            msg.is_read = False
+            msg.content = form.cleaned_data[ "content" ]
+            msg.save()
+
+            return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
+
+
+    # Initial template
+    template_data = {}
+    template_data[ 'messages_menu_selected' ] = True
+    template_data[ 'form' ] = form
+    template_data[ 'situation_form' ] = get_situation_form( request )
+
+    # Renders the page
+    return render( request, 'site/conversation/start.html', template_data )
 
 
 @login_required

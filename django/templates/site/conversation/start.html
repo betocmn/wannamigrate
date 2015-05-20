@@ -1,0 +1,86 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">{% trans 'My Account' %}</h2>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
+                </li>
+            </ul>
+            <div style="display: block;" class="inbox">
+                <h2 class="title">Inbox</h2>
+                {% include "site/conversation/box_menu.html"%}
+                <div class="box">
+                    <div class="box-top">
+                        <a style="display: none;" href="#" class="button bt-newmessage">{% trans "New message" %}</a>
+                        <div style="display: block;" class="newmessage-top">
+                            <a href="{% url "site:list_conversations" %}" class="bt-cancel button-transparent">{% trans "Cancel" %}</a>
+                            <strong class="newmessage-title">{% trans "New Message" %}</strong>
+
+                        </div>
+                    </div>
+                    <div style="display: block;" class="box-newmessage">
+                        <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="sendto field">
+                                    <label for="sendto">Send to</label>
+                                    {{ form.to_user }}
+                                    {{ form.to_user.errors }}
+                                </div>
+                                <div class="subject field">
+                                    <label for="subject">Subject</label>
+                                    {{ form.subject }}
+                                    {{ form.subject.errors }}
+                                </div>
+                                <div class="message field">
+                                    <label for="message">Message</label>
+                                    {{ form.content }}
+                                    {{ form.content.errors }}
+                                    <!--textarea name="" id="" cols="30" rows="10"></textarea-->
+                                </div>
+                            </fieldset>
+                            <button class="button bt-send">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

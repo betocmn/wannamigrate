@@ -1,0 +1,146 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">{% trans 'My Account' %}</h2>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
+                </li>
+            </ul>
+            <div style="display: block;" class="inbox">
+                <h2 class="title">Inbox</h2>
+                {% include "site/conversation/box_menu.html"%}
+                <div class="box">
+                    <div class="box-top">
+                        <a href="{% url "site:start_conversation" %}" class="button bt-newmessage">New message</a>
+                        <ul class="messages-menu">
+                            <li><a href="#">Arquivar</a></li>
+                            <li class="check-all"><input class="all" type="checkbox"></li>
+                        </ul>
+                    </div>
+                    <div class="box-messages">
+                        <form action="">
+                            <table>
+                                <tbody><tr class="not-read">
+                                    <td class="author">
+                                        <a href="#" class="message-link">
+                                            Humberto <span>(3)</span>
+                                        </a>
+                                    </td>
+                                    <td class="message-title">
+                                        <a href="#" class="message-link">
+                                            Pellentesque interdum libero sit amet sem scelerisque, nec...
+                                        </a>
+                                    </td>
+                                    <td class="date">
+                                        Feb 15th
+                                    </td>
+                                    <td class="time">
+                                        16:20
+                                    </td>
+                                    <td class="check">
+                                        <span><input type="checkbox"></span>
+                                    </td>
+                                </tr>
+                                <tr class="read">
+                                    <td class="author">
+                                        <a href="#" class="message-link">
+                                            Pedro Henrique <span>(7)</span>
+                                        </a>
+                                    </td>
+                                    <td class="message-title">
+                                        <a href="#" class="message-link">
+                                            Pellentesque interdum libero sit amet sem scelerisque, nec...
+                                        </a>
+                                    </td>
+                                    <td class="date">
+                                        Feb 15th
+                                    </td>
+                                    <td class="time">
+                                        16:20
+                                    </td>
+                                    <td class="check">
+                                        <span><input type="checkbox"></span>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </form>
+                    </div>
+                    <div class="box-dialogue">
+                        <div class="message-title">
+                            <p class="message">Aliquam erat volutpat. In eu vulputate erat</p>
+                            <a href="#" class="button-transparent bt-answer">Responder</a>
+                        </div>
+                        <div class="answer">
+                            <form action="">
+                                <fieldset>
+                                    <label for="answer">Answer</label>
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                    <button class="bt-send button">Send</button>
+                                    <a href="#" class="bt-discard" title="Discard">Discard</a>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="dialogues">
+                            <div class="dialogue recent">
+                                <div class="thumb"><img src="img/thumb-review-author.png" alt=""></div>
+                                <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet.</p>
+                                <p class="text">Pellentesque vestibulum lorem sit amet quam sagittis facilisis. Aliquam erat volutpat. In eu vulputate erat.</p>
+                                <strong class="author">Alessandra moraes</strong>
+                                <span class="when">22:15   Há 2 horas</span>
+                            </div>
+                            <div class="dialogue odd">
+                                <div class="thumb"><img src="img/thumb-review-author.png" alt=""></div>
+                                <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet.</p>
+                                <strong class="author">Alessandra moraes</strong>
+                                <span class="when">Ontem</span>
+                            </div>
+                            <div class="dialogue even">
+                                <div class="thumb"><img src="img/thumb-review-author.png" alt=""></div>
+                                <p class="text">Aliquam erat volutpat. In eu vulputate erat. Duis at ipsum aliquet turpis sodales tempus. Nunc volutpat id erat vitae pulvinar. Fusce aliquam dolor et purus suscipit faucibus. Pellentesque vestibulum lorem sit amet.</p>
+                                <strong class="author">Alessandra moraes</strong>
+                                <span class="when">Ontem</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

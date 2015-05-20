@@ -17,7 +17,7 @@ from wannamigrate.core.forms import (
     GoalChoiceField, CountryImmigrationChoiceField
 )
 from wannamigrate.marketplace.forms import ServiceTypeChoiceField
-from wannamigrate.core.models import Situation, Country, Goal, UserSituation, UserPersonal
+from wannamigrate.core.models import Situation, Country, Goal, UserSituation, UserPersonal, Conversation, ConversationMessage
 from wannamigrate.marketplace.models import Provider, ProviderCountry, ProviderServiceType, ServiceType
 from django.contrib.auth.hashers import is_password_usable
 from django.db.models import F
@@ -454,3 +454,50 @@ class UploadAvatarForm( BaseModelForm ):
     class Meta:
         model = UserPersonal
         fields = [ 'avatar' ]
+
+
+
+class StartConversationForm( BaseModelForm ):
+    """
+    Form to create a message on site.
+    """
+    # The content of the initial message.
+    content = forms.CharField( widget=forms.Textarea )
+
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = Conversation
+        fields = [ "subject", "to_user" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        # The owner of the conversation (from_user)
+        owner = kwargs.pop( "owner" )
+        # Calls the constructor
+        super( StartConversationForm, self ).__init__( *args, **kwargs )
+        # Initialize pre-defined data.
+        self.instance.from_user = owner
+
+
+
+class ReplyConversationForm( BaseModelForm ):
+    """
+    Form to create a message.
+    """
+    # The content of the initial message.
+    content = forms.CharField( widget=forms.Textarea )
+
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = ConversationMessage
+        fields = [ "content" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        # The owner of the conversation (from_user)
+        conversation = kwargs.pop( "conversation" )
+        # Calls the constructor
+        super( ReplyConversationForm, self ).__init__( *args, **kwargs )
+        # Initialize pre-defined data.
+        self.instance.conversation = conversation
+        self.instance.is_read = False

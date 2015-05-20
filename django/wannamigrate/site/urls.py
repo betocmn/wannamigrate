@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/topics/http/urls/
 ##########################
 from django.conf.urls import patterns, url
 from wannamigrate.site import views
+from django.conf import settings
 
 
 
@@ -49,6 +50,13 @@ urlpatterns = patterns('',
     url( r'^edit_account/$', views.edit_account, name = 'edit_account' ),
     url( r'^edit_password/$', views.edit_password, name = 'edit_password' ),
     url( r'^upload_avatar/$', views.upload_avatar, name = 'upload_avatar' ),
+
+    # Messages
+    url( r'^start/conversation$', views.start_conversation, name = 'start_conversation' ),
+    url( r'^conversation/(?P<id>\d+)/$', views.view_conversation, name = 'view_conversation' ),
+    url( r'^conversations/$', views.list_conversations, name = 'list_conversations' ),
+    url( r'^conversations/sent$', views.list_conversations, { "conversation_status" : settings.CORE_CONVERSATION_STATUS_OUTBOX_ID }, name = 'list_conversations_sent' ),
+    url( r'^conversations/archive$', views.list_conversations, { "conversation_status" : settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID }, name = 'list_conversations_archive' ),
 
     # Dashboard
     url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),

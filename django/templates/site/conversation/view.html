@@ -1,0 +1,88 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">{% trans 'My Account' %}</h2>
+        <div class="interactions">
+            <ul class="interaction-list">
+                <li class="interaction-item">
+                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
+                </li>
+                <li class="interaction-item">
+                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
+                </li>
+            </ul>
+            <div style="display: block;" class="inbox">
+                <h2 class="title">Inbox</h2>
+                {% include "site/conversation/box_menu.html"%}
+                <div class="box">
+                    <div class="box-top">
+                        <a style="display: none;" href="#" class="button bt-newmessage">{% trans "New message" %}</a>
+                    </div>
+
+                    <div style="display: block;" class="box-dialogue">
+                        <div class="message-title">
+                            <p class="message">{{ conversation.subject }}</p>
+                            <a href="#" class="button-transparent bt-answer">Responder</a>
+                        </div>
+                        <div class="answer">
+                            <form action="">
+                                <fieldset>
+                                    <label for="answer">Answer</label>
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                    <button class="bt-send button">Send</button>
+                                    <a href="#" class="bt-discard" title="Discard">Discard</a>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="dialogues">
+                            {% for message in messages %}
+                                <div class="dialogue {{message.custom_class}}">
+                                    <div class="thumb">
+                                        <img src="{{ message.owner.userpersonal.avatar.thumbnail.url }}" alt="">
+                                    </div>
+                                    <p class="text">{{message.content}}</p>
+                                    <strong class="author">{{message.owner.name}}</strong>
+                                    <span class="when">{{ message.created_date|date:"d b H:i" }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

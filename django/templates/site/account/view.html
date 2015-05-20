@@ -26,7 +26,7 @@
                     <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
+                    <a href="{% url 'site:list_conversations' %}" class="interaction-link bt-inbox">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
                 </li>
             </ul>
             <div class="my-profile">
