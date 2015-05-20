@@ -74,8 +74,14 @@ def dashboard( request ):
             country_config_data[item.country_id] = {}
         country_config_data[item.country_id] = item
 
-    # Initial settings
+    # Initializes template data
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Points Calculator - Check your chances for Australia, Canada and New Zealand - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
+
+    # Initial Settings
     template_data['au_min_points'] = country_config_data[settings.ID_COUNTRY_AUSTRALIA].pass_mark_points
     template_data['ca_min_points'] = country_config_data[settings.ID_COUNTRY_CANADA].pass_mark_points
     template_data['nz_min_points'] = country_config_data[settings.ID_COUNTRY_NEW_ZEALAND].pass_mark_points
@@ -145,6 +151,10 @@ def edit_personal( request ):
 
     # Initial Settings
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Edit Personal - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
@@ -217,6 +227,10 @@ def edit_language( request ):
 
     # Initial Settings
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Edit Language - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
@@ -297,6 +311,10 @@ def edit_education( request ):
     # Initial Settings
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Edit Education - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
+
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
 
@@ -375,6 +393,10 @@ def edit_work( request ):
 
     # Initial Settings
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Edit Work - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
     template_data['top_bar_css_class'] = "fixTopBar"
@@ -554,8 +576,14 @@ def situation( request, country_name ):
     :return: String - HTML
     """
 
-    # Initial settings
+    # Initializes template data
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Situation - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
+
+    # Initial settings
     template_data['top_bar_css_class'] = "fixTopBar"
     template_data['country_name'] = country_name
     template_data['total_points'] = 0
@@ -750,8 +778,14 @@ def visa_application( request, country_name ):
     :return: String - HTML
     """
 
-    # Initial settings
+    # Initializes template data
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Visa Application - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
+
+    # Initial settings
     template_data['top_bar_css_class'] = "fixTopBar"
     template_data['country_name'] = country_name
 
@@ -790,6 +824,10 @@ def professional_help( request, country_name ):
 
     # Initial settings
     template_data = { 'country_name': country_name }
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Professional Help - Points Calculator - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Get Country and set options for it
     if country_name == 'australia':

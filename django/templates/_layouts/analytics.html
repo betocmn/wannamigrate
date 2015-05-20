@@ -1,7 +1,7 @@
 {% load staticfiles %}
+{% load l10n %}
 
-    <!-- Analytics (3td party) -->
-    {% if is_prod %}
+    {% if not is_prod  %}
 
         <!-- Google Analytics -->
         <script>
@@ -12,14 +12,118 @@
 
           ga('create', 'UA-7734790-20', 'auto');
           ga('send', 'pageview');
+
         </script>
 
-        <!-- Mixpanel -->
-        <script type="text/javascript">
-            (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("1e2cfc5e54b65e683b7065194bf45ab7");
-        </script>
-        <script type="text/javascript" src="{% static 'site/js/mixpanel_events.js' %}"></script>
+
+        {% if track_conversion_view_dashboard %}
+            <!-- Google Code for View Dashboard (clicked from home) Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 998229382;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "0WzSCIGJ1VwQhov_2wM";
+            var google_remarketing_only = false;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/998229382/?label=0WzSCIGJ1VwQhov_2wM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+        {% endif %}
+
+        {% if track_conversion_sign_up %}
+            <!-- Google Code for Sign-Up Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 998229382;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "-FTACPmi0lwQhov_2wM";
+            var google_remarketing_only = false;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/998229382/?label=-FTACPmi0lwQhov_2wM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+        {% endif %}
+
+        {% if track_conversion_view_expert %}
+            <!-- Google Code for View Expert Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 998229382;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "oRqiCOSb1VwQhov_2wM";
+            var google_remarketing_only = false;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/998229382/?label=oRqiCOSb1VwQhov_2wM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+
+        {% endif %}
+
+        {% if track_conversion_view_payment %}
+            <!-- Google Code for View Payment Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 998229382;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "_ojPCKSd1VwQhov_2wM";
+            var google_remarketing_only = false;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/998229382/?label=_ojPCKSd1VwQhov_2wM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+        {% endif %}
+
+        {% if track_conversion_order_received %}
+            <!-- Google Code for Order Received Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 998229382;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "op2YCKmm0lwQhov_2wM";
+            var google_conversion_value = {{ track_conversion_value|default:5.00|unlocalize }};
+            var google_conversion_currency = "BRL";
+            var google_remarketing_only = false;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/998229382/?value={{ track_conversion_value|default:5.00|unlocalize }}&amp;currency_code=BRL&amp;label=op2YCKmm0lwQhov_2wM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+
+        {% endif %}
+
 
     {% endif %}

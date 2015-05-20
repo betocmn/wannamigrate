@@ -44,6 +44,10 @@ def professionals( request ):
     # Initial template
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Find and Hire an Immigration Expert - Wanna Migrate' )
+    template_data['meta_description'] =  _( 'Make faster & better decisions when planning to go to another country.  Get help from immigration experts in Wanna Migrate.' )
+
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
@@ -129,6 +133,13 @@ def profile( request, user_id, name ):
         # Initializes template data dictionary
         template_data = {}
 
+        # Overwrites meta title and description (for SEO)
+        template_data['meta_title'] = provider.display_name + ' - ' + provider.headline
+        template_data['meta_description'] = provider.display_name + ' ' + _( 'can be hired through Wanna Migrate. Sign-up to connect with thousands of experts in immigration and related.' )
+
+        # Activates Page Conversion tags for Google Ad Words
+        template_data['track_conversion_view_expert'] = True
+
         # passes form to template
         template_data['situation_form'] = get_situation_form( request )
 
@@ -163,6 +174,13 @@ def payment( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Payment - Wanna Migrate' )
+    template_data['meta_description'] =  _( 'Make faster & better decisions when planning to go to another country.  Get help from immigration experts in Wanna Migrate.' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_payment'] = True
 
     # If form was submitted
     if request.method == 'POST':
@@ -244,6 +262,14 @@ def confirmation( request, order_id ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Order Confirmation - Wanna Migrate' )
+    template_data['meta_description'] =  _( 'Make faster & better decisions when planning to go to another country.  Get help from immigration experts in Wanna Migrate.' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_order_received'] = True
+    template_data['track_conversion_value'] = order.net_total
 
     # Defines message and status
     if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:

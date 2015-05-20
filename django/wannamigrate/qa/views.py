@@ -14,6 +14,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from wannamigrate.core.decorators import ajax_login_required
+from wannamigrate.site.views import get_situation_form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
@@ -30,6 +31,9 @@ from django.utils.translation import ugettext as _
 from django.db import transaction
 import json
 import urllib
+
+
+
 
 
 ##########################
@@ -78,6 +82,7 @@ def get_blogposts_by_step( user, filter_params, step, results_per_step ):
 
 
 
+
 ##########################
 # HTTP Methods
 ##########################
@@ -118,6 +123,8 @@ def list_all( request, *args, **kwargs ):
 
     # TEMPLATE DATA
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Knowledge - Wanna Migrate' ),
         "knowledge_menu_selected" : True,
         "contents" : contents,
         "next_step" : step + 1,
@@ -156,6 +163,8 @@ def list_questions( request, *args, **kwargs ):
 
     # TEMPLATE DATA
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Questions & Answers - Wanna Migrate' ),
         "questions_menu_selected" : True,
         "questions" : questions,
         "next_step" : step + 1,
@@ -197,6 +206,8 @@ def add_question( request ):
 
     # Template data
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Add Question - Wanna Migrate' ),
         'form': form,
         'cancel_url': reverse( 'qa:list_questions' ),
         'topics' : Topic.objects.order_by( "name" ).values( "id", "name" ),
@@ -259,6 +270,8 @@ def view_question( request, slug ):
         question.is_followed = False
 
     # Fills template data
+    template_data['situation_form'] = get_situation_form( request )
+    template_data['meta_title'] = question.title
     template_data[ "answers" ] = answers
     template_data[ "related_content" ] = related_content
     template_data[ "answer_form" ] = answer_form
@@ -296,6 +309,8 @@ def list_blogposts( request, *args, **kwargs ):
 
     # TEMPLATE DATA
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Blog Posts - Wanna Migrate' ),
         "blogposts_menu_selected" : True,
         "blogposts" : blogposts,
         "next_step" : step + 1,
@@ -337,6 +352,8 @@ def add_blogpost( request ):
 
     # Template data
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Add Blog Post - Wanna Migrate' ),
         'form': form,
         'cancel_url': reverse( 'qa:list_blogposts' ),
         'topics' : Topic.objects.order_by( "name" ).values( "id", "name" ),
@@ -379,6 +396,8 @@ def view_blogpost( request, slug ):
 
 
     # Fills template data
+    template_data['situation_form'] = get_situation_form( request )
+    template_data['meta_title'] = blogpost.title
     template_data[ "related_content" ] = related_content
     template_data[ "blogpost" ] = blogpost
 
@@ -394,6 +413,8 @@ def list_topics( request ):
     :return: A template rendered
     """
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : _( 'Topics - Wanna Migrate' ),
         "topics_menu_selected" : True,
         "following_topics" : request.user.following_topics.order_by( "name" ).values( "id", "name", "slug" )
     }
@@ -419,6 +440,8 @@ def view_topic( request, slug ):
 
     # TEMPLATE DATA
     template_data = {
+        "situation_form" : get_situation_form( request ),
+        "meta_title" : topic.name,
         "questions_menu_selected" : True,
         "questions" : questions,
         "next_step" : step + 1,
@@ -427,7 +450,6 @@ def view_topic( request, slug ):
 
     # Print Template
     return render( request, 'qa/question/list.html', template_data )
-
 
 
 

@@ -62,6 +62,21 @@ form .errorlist {
 
 
 /* Landing Page */
+.landing header nav {
+  width: 590px;
+}
+@media screen and (max-width: 1366px) {
+    .landing header nav {
+        width: 510px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .landing header nav {
+        width: 510px;
+    }
+}
+
 .landing footer .nav-footer {
     width: 540px;
 }

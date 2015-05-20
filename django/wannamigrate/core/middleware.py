@@ -25,6 +25,12 @@ class SituationLocaleMiddleware( object ):
 
     def process_request( self, request ):
 
+        # If a language subdomain was forced (eg: 'https://pt.wannamigrate.com' - SEO
+        subdomain = request.get_host().split( '.', 2 )[0]
+        if subdomain not in [ 'www', 'dev' ] and subdomain in settings.COUNTRIES_BY_LANGUAGE:
+            translation.activate( subdomain )
+            request.session[translation.LANGUAGE_SESSION_KEY] = subdomain
+
         # if this is a guest visitor's first visit
         if not request.user.is_authenticated() and 'situation' not in request.session:
 

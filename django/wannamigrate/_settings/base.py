@@ -59,14 +59,14 @@ os.environ['wsgi.url_scheme'] = 'https'
 #########################################
 LANGUAGES = (
     ( 'en', _( 'English' ) ),
-    ( 'pt-br', 'Português' ),
+    ( 'pt', 'Português' ),
 )
 
 LANGUAGE_CODE = 'en'
 
 # countries that speak Non-english languages supported by our LANGUAGES setting
 COUNTRIES_BY_LANGUAGE = {
-    'pt-br': [ 'br', 'pt', 'mz', 'ao', 'gw', 'mo', 'cv', 'st', 'tl' ]
+    'pt': [ 'br', 'pt', 'mz', 'ao', 'gw', 'mo', 'cv', 'st', 'tl' ]
 }
 
 TIME_ZONE = 'America/Sao_Paulo'
@@ -171,6 +171,7 @@ EMAIL_PORT = 587
 
 # Email to reiceve contact form messages
 EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_NEW_ORDER = 'humberto@wannamigrate.com'
 

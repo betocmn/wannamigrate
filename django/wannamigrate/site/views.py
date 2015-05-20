@@ -198,6 +198,9 @@ def login( request ):
     # Initializes template data dictionary
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Login - Wanna Migrate' )
+
     # Instantiates the form
     form = LoginForm( request.POST or None )
 
@@ -256,6 +259,9 @@ def signup( request, type = 'user' ):
     # Initializes template data dictionary
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Sign Up - Wanna Migrate' )
+
     # If it's a service provider, register in session for further registration
     template_data['type'] = type
 
@@ -274,9 +280,12 @@ def signup( request, type = 'user' ):
 
         if user is not None:
 
-            # Login user
+            # Logins user
             user = authenticate( email = email, password = password )
             auth_login( request, user )
+
+            # Saves session to indicate this is a new fresh user
+            request.session['new_sign_up'] = True
 
             # If it's a service provider, saves extra info and redirect to further edition
             is_provider = False
@@ -321,6 +330,9 @@ def recover_password( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Recover Password - Wanna Migrate' )
 
     # Instantiates the form
     form = PasswordRecoveryForm( request.POST or None )
@@ -371,6 +383,9 @@ def reset_password( request, uidb64 = None, token = None ):
     # Initialize template data dictionary
     template_data = { 'finished': False }
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Reset Password - Wanna Migrate' )
+
     # Create form
     form = PasswordResetForm( request.POST or None )
 
@@ -407,6 +422,9 @@ def contact( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Contact Us - Wanna Migrate' )
 
     # Creates form
     form = ContactForm( request.POST or None )
@@ -445,8 +463,15 @@ def how_it_works( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'How it Works - Wanna Migrate' )
+
+
     # Print Template
-    return render( request, 'site/about/how_it_works.html' )
+    return render( request, 'site/about/how_it_works.html', template_data )
 
 
 
@@ -463,8 +488,15 @@ def service_providers( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Become a Service Provider - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Wanna Migrate brings online clients to you. We are specialized in attracting people planning to migrate to another country, temporarily or permanently.' )
+
     # Print Template
-    return render( request, 'site/about/service_providers.html' )
+    return render( request, 'site/about/service_providers.html', template_data )
 
 
 
@@ -481,8 +513,11 @@ def tools( request ):
     :return String - HTML
     """
 
-    # Initial template
+    # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Extra Tools - Wanna Migrate' )
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -505,8 +540,14 @@ def terms( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Terms & Conditions - Wanna Migrate' )
+
     # Print Template
-    return render( request, 'site/terms/terms.html')
+    return render( request, 'site/terms/terms.html', template_data )
 
 
 def privacy( request ):
@@ -517,8 +558,14 @@ def privacy( request ):
     :return String - HTML from The dashboard page.
     """
 
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Privacy Policy - Wanna Migrate' )
+
     # Print Template
-    return render( request, 'site/terms/privacy.html')
+    return render( request, 'site/terms/privacy.html', template_data )
 
 
 
@@ -538,6 +585,9 @@ def account( request ):
 
     # Initial template
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'My Account - Wanna Migrate' )
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -566,6 +616,9 @@ def contracts( request ):
 
     # Initial template
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'My Contracts - Wanna Migrate' )
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -714,6 +767,9 @@ def edit_account( request ):
     # Initial template
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Edit My Account - Wanna Migrate' )
+
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
@@ -848,6 +904,9 @@ def edit_password( request ):
     # Initial template
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Change Password - Wanna Migrate' )
+
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
@@ -894,6 +953,12 @@ def dashboard( request ):
 
     # Initial template
     template_data = {}
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_dashboard'] = True
+    if 'new_sign_up' in request.session and request.session['new_sign_up']:
+        template_data['track_conversion_sign_up'] = True
+        request.session['new_sign_up'] = False
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -971,7 +1036,7 @@ def set_lang( request, language_code ):
     translation.activate( language_code )
     request.session[translation.LANGUAGE_SESSION_KEY] = language_code
 
-    return redirect( next )
+    return redirect( settings.BASE_URL_SECURE + next )
 
 
 
