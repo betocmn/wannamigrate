@@ -269,7 +269,7 @@ def confirmation( request, order_id ):
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_order_received'] = True
-    template_data['track_conversion_value'] = order.net_total
+    template_data['track_conversion_value'] = float( order.net_total ) * float( 0.05 )
 
     # Defines message and status
     if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
