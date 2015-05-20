@@ -106,7 +106,7 @@ class PaymentForm( BaseForm ):
 
         # If payment was not authorized, raise ERROR
         if not payment_api_result['success']:
-            raise forms.ValidationError( _( "Payment not authorized. " + payment_api_result['full_api_response'] ) )
+            raise forms.ValidationError( _( "Payment not authorized." ) )
 
         return cleaned_data
 

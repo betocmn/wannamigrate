@@ -174,7 +174,8 @@ def payment( request ):
             'provider': request.session['payment']['provider'],
             'service_type': request.session['payment']['service_type'],
             'provider_service_type': request.session['payment']['provider_service_type'],
-            'service': request.session['payment']['service']
+            'service': request.session['payment']['service'],
+            'service_type_category': request.session['payment']['service_type'].service_type_category
         }
         form = PaymentForm( request.POST, payment_info = payment_info )
 
@@ -184,9 +185,14 @@ def payment( request ):
             # Saves all order info
             order = form.save()
 
-            # Sends Order Confirmation email
+            # Sends Order Confirmation email to USER
             # TODO Change this to a celery/signal background task
-            Mailer.send_order_confirmation( request.user.email, request.session['payment']['provider_service_type'], order )
+            service_type = request.session['payment']['provider_service_type'].service_type
+            Mailer.send_order_confirmation_user( request.user, order, payment_info )
+
+            # Sends Order Confirmation email to PROVIDER
+            # TODO Change this to a celery/signal background task
+            Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order, payment_info )
 
             # Redirect to confirmation page
             request.session['payment'] = {}

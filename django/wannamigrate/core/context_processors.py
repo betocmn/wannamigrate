@@ -21,3 +21,8 @@ from django.conf import settings
 ##########################
 def add_prod_setting( request ):
     return { 'is_prod': settings.IS_PROD }
+
+def add_base_url( request ):
+    protocol = 'https://' if request.is_secure else 'http://'
+    url = protocol + request.get_host()
+    return { 'base_url': url }

@@ -278,12 +278,10 @@ def signup( request, type = 'user' ):
             user = authenticate( email = email, password = password )
             auth_login( request, user )
 
-            # Sends Welcome Email to User
-            # TODO Change this to a celery/signal background task
-            Mailer.send_welcome_email( user )
-
             # If it's a service provider, saves extra info and redirect to further edition
+            is_provider = False
             if 'type' in request.POST and request.POST['type'] == 'service-provider':
+                is_provider = True
                 provider = Provider()
                 provider.user_id = user.id
                 provider.display_name = user.name if user.name else user.email
@@ -291,10 +289,16 @@ def signup( request, type = 'user' ):
                 provider.description = '--'
                 provider.provider_status_id = 1
                 provider.save()
-                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
 
-            # Redirect to dashboard
-            return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+
+            # Sends Welcome Email to User
+            # TODO Change this to a celery/signal background task
+            Mailer.send_welcome_email( user, type )
+
+            if is_provider:
+                return HttpResponseRedirect( reverse( 'site:edit_account' ) )
+            else:
+                return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
     # passes form to template Forms
     template_data['form'] = form
@@ -331,7 +335,7 @@ def recover_password( request ):
 
             # Send email with link to reset password
             # TODO: Change this to a celery background event and use a try/exception block
-            #Mailer.send_reset_password_email( user )
+            Mailer.send_reset_password_email( user )
 
             # Return success message to template
             messages.success( request, _( 'Password reset instructions were successfully sent to your e-mail.' ) )

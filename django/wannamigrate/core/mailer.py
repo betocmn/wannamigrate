@@ -44,8 +44,8 @@ class Mailer( object ):
         :return: String
         """
 
-        if not settings.IS_PROD:
-            return True
+        #if not settings.IS_PROD:
+            #return True
 
         email = EmailMessage()
         email.content_subtype = "html"
@@ -55,9 +55,9 @@ class Mailer( object ):
         if from_email:
             email.from_email = from_email
         if cc:
-            email.cc = cc
+            email.cc = [cc] if isinstance( cc, str ) else cc
         if bcc:
-            email.bcc = bcc
+            email.bcc = [bcc] if isinstance( bcc, str ) else bcc
         if attachments:
             for attachment in attachments:
                 email.attach( attachment )
@@ -78,23 +78,29 @@ class Mailer( object ):
         template = get_template( template_path )
         template_data['base_url'] = settings.BASE_URL
         template_data['base_url_secure'] = settings.BASE_URL_SECURE
-        template_data['logo_url'] = settings.EMAIL_LOGO_URL
         context = Context( template_data )
         content = template.render( context )
         return content
 
 
     @staticmethod
-    def send_welcome_email( user ):
+    def send_welcome_email( user, type = 'user' ):
         """
         Sends welcome email to users
 
         :param: user
         """
 
+        if type == 'service-provider':
+            bcc = settings.EMAIL_NOTIFICATION_PROVIDER_SIGNUP
+            template_file = 'welcome_provider.html'
+        else:
+            bcc = None
+            template_file = 'welcome_user.html'
+
         template_data = { 'user': user }
-        body = Mailer.build_body_from_template( 'emails/welcome.html', template_data )
-        return Mailer.send( _( 'Welcome to Wanna Migrate' ), body, user.email )
+        body = Mailer.build_body_from_template( 'emails/' + template_file, template_data )
+        return Mailer.send( _( 'Welcome to Wanna Migrate' ), body, user.email, None, None, bcc )
 
 
     @staticmethod
@@ -130,7 +136,7 @@ class Mailer( object ):
         """
         template_data = { 'email': email, 'name': name, 'message': message, 'subject': subject }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
-        return Mailer.send( _( 'Contact: ' + subject ), body, settings.CONTACT_FORM_EMAIL )
+        return Mailer.send( _( 'Contact: ' + subject ), body, settings.EMAIL_NOTIFICATION_CONTACT_FORM )
 
 
     @staticmethod
@@ -144,36 +150,80 @@ class Mailer( object ):
         """
         template_data = { 'email': email, 'name': name, 'message': message }
         body = Mailer.build_body_from_template( 'emails/contact.html', template_data )
-        return Mailer.send( _( 'Professional Help Requested' ), body, settings.CONTACT_FORM_EMAIL )
+        return Mailer.send( _( 'Professional Help Requested' ), body, settings.EMAIL_NOTIFICATION_CONTACT_FORM )
 
 
     @staticmethod
-    def send_order_confirmation( email, provider_service_type, order ):
+    def send_order_confirmation_user( user, order, order_info ):
         """
         Sends order confirmation to user
 
         :param: user
+        :param: order
+        :param: order_info
         """
         
         # Defines order message accordingly to status
         message = ''
-        if order.order_status_id == 1:
-            message = "Your payment was received and will be processed soon."
-        elif order.order_status_id == 2:
-            message = "Your payment was approved."
-        elif order.order_status_id == 3:
-            message = "Your payment was denied."
-        elif order.order_status_id == 4:
-            message = "Your payment was cancelled."
-        elif order.order_status_id == 5:
-            message = "Your payment was refunded."
+        if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
+            message = _( "Your payment was received and will be processed soon." )
+        elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            message = _( "Your payment was approved." )
+        elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
+            message = _( "Your payment was denied." )
+        elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
+            message = _( "Your payment was cancelled." )
+        elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
+            message = _( "Your payment was refunded." )
 
         template_data = {
-            'provider_service_type': provider_service_type,
+            'provider_service_type': order_info['provider_service_type'],
             'order': order,
-            'service_type': provider_service_type.service_type,
-            'provider': provider_service_type.provider,
-            'message': message
+            'service_type': order_info['service_type'],
+            'service_type_category': order_info['service_type_category'],
+            'provider': order_info['provider'],
+            'message': message,
+            'user': user,
         }
-        body = Mailer.build_body_from_template( 'emails/order_confirmation.html', template_data )
-        return Mailer.send( _( 'Your Order Details' ), body, email )
+        body = Mailer.build_body_from_template( 'emails/order_confirmation_user.html', template_data )
+        return Mailer.send( _( 'Your Order Details' ), body, user.email, None, None, settings.EMAIL_NOTIFICATION_NEW_ORDER )
+
+
+    @staticmethod
+    def send_order_confirmation_provider( provider, order, order_info ):
+        """
+        Sends order confirmation to provider.
+
+        We do NOT use translation here so that it will always be in english
+
+        :param: provider
+        :param: order
+        :param: order_info
+        """
+
+        # Defines order message accordingly to status
+        message = ''
+        if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
+            message = "The payment was received and will be processed soon."
+        elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            message = "The payment was approved."
+        elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
+            message = "The payment was denied."
+        elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
+            message = "The payment was cancelled."
+        elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
+            message = "The payment was refunded."
+
+        provider_user = provider.user
+        template_data = {
+            'provider_service_type': order_info['provider_service_type'],
+            'order': order,
+            'service_type': order_info['service_type'],
+            'service_type_category': order_info['service_type_category'],
+            'provider': order_info['provider'],
+            'message': message,
+            'provider_user': provider_user,
+            'user': order_info['user']
+        }
+        body = Mailer.build_body_from_template( 'emails/order_confirmation_provider.html', template_data )
+        return Mailer.send( 'Service Requested', body, provider_user.email )
