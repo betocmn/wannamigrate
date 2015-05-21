@@ -53,6 +53,17 @@ class AddQuestionForm( BaseModelForm ):
         self.fields[ "related_topics" ].required = True
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
 
+    def clean( self, *args, **kwargs ):
+        cleaned_data = super( AddQuestionForm, self ).clean( *args, **kwargs )
+
+        # The user should select one country as topic
+        if "related_topics" in cleaned_data:
+            country_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ] ).exclude( country__isnull = True ).exists()
+            if not country_topic_selected:
+                self.add_error( 'related_topics', _( "Select at least one country as topic." ) )
+
+        return cleaned_data
+
     def save( self, commit = True ):
         """
             Saves the post info taking care of add the related topics to it.
@@ -99,6 +110,12 @@ class AddBlogPostForm( BaseModelForm ):
 
     def clean( self, *args, **kwargs ):
         cleaned_data = super( AddBlogPostForm, self ).clean( *args, **kwargs )
+
+        # The user should select one country as topic
+        if "related_topics" in cleaned_data:
+            country_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ] ).exclude( country__isnull = True ).exists()
+            if not country_topic_selected:
+                self.add_error( 'related_topics', _( "Select at least one country as topic." ) )
 
         if "body" in cleaned_data:
             body = cleaned_data[ 'body' ]

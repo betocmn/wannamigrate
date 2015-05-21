@@ -39,15 +39,9 @@
                                             {{ topic.name }}
                                         </dd>
 
-                                        <dt>Related countries:</dt>
+                                        <dt>Related Country:</dt>
                                         <dd>
-                                            {% with related_countries=topic.related_countries.all %}
-                                                {% for c in related_countries %}
-                                                    {{ c.name }},
-                                                {% empty %}
-                                                    -
-                                                {% endfor %}
-                                            {% endwith %}
+                                            {{ topic.country.name }}
 
                                         </dd>
 

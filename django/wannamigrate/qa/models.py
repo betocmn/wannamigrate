@@ -72,18 +72,11 @@ class IndexableContentManager( models.Manager ):
 class QuestionsManager( IndexableContentManager ):
     def get_listing( self, *args, **kwargs ):
         # Extracts arguments
-        related_topics_ids = kwargs.pop( "related_topics_ids", None )
-        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
-        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
+        related_topics_ids = kwargs.pop( "related_topics_ids", [] )
+        related_countries_ids = kwargs.pop( "related_countries_ids", [] )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", [] )  # The ids of the related goals
 
-        # Filters by topics
-        if ( related_topics_ids ):
-            self = self.filter( related_topics__in = related_topics_ids )
-        # Filters by situation
-        if ( related_countries_ids ):
-            self = self.filter( related_topics__related_countries__id__in = related_countries_ids )
-        if ( related_goals_ids ):
-            self = self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        self = self.filter( related_topics__in = related_topics_ids ) | self.filter( related_topics__country__id__in = related_countries_ids ) | self.filter( related_topics__related_goals__id__in = related_goals_ids )
 
         self = self.prefetch_related(
             "related_topics",
@@ -101,18 +94,11 @@ class QuestionsManager( IndexableContentManager ):
 class BlogPostsManager( IndexableContentManager ):
     def get_listing( self, *args, **kwargs ):
         # Extracts arguments
-        related_topics_ids = kwargs.pop( "related_topics_ids", None )
-        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
-        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
+        related_topics_ids = kwargs.pop( "related_topics_ids", [] )
+        related_countries_ids = kwargs.pop( "related_countries_ids", [] )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", [] )  # The ids of the related goals
 
-        # Filters by topics
-        if ( related_topics_ids ):
-            self = self.filter( related_topics__in = related_topics_ids )
-        # Filters by situation
-        if ( related_countries_ids ):
-            self = self.filter( related_topics__related_countries__id__in = related_countries_ids )
-        if ( related_goals_ids ):
-            self = self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        self = self.filter( related_topics__in = related_topics_ids ) | self.filter( related_topics__country__id__in = related_countries_ids ) | self.filter( related_topics__related_goals__id__in = related_goals_ids )
 
         self = self.prefetch_related(
             "related_topics",
@@ -294,9 +280,9 @@ class Topic( BaseModel ):
     # Users following this topic
     followers = models.ManyToManyField( User, related_name = "following_topics" )
     # The countries related to this topic
-    related_countries = models.ManyToManyField( Country, related_name = "related_topics" )
+    country = models.ForeignKey( Country, related_name = "topic", null = True, blank = True )
     # The goals related to this topic
-    related_goals = models.ManyToManyField( Goal, related_name = "related_topics" )
+    related_goals = models.ManyToManyField( Goal, related_name = "related_topics", null = True, blank = True )
 
     # META Options: Sets the possible permissions required by this model.
     class Meta:
