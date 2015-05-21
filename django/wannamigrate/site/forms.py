@@ -117,7 +117,7 @@ class SituationForm( BaseModelForm ):
             try:
                 user_situation = UserSituation.objects.get( user = self.user )
                 situation = user_situation.situation
-                situation.total_users = F('total_users') - 1
+                situation.total_users = F( 'total_users' ) - 1
                 situation.save()
             except UserSituation.DoesNotExist:
                 user_situation = False

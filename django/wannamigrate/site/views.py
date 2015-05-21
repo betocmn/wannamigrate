@@ -51,7 +51,8 @@ from PIL import Image
 from django.core.files.base import ContentFile
 from django.utils import timezone, translation
 import pytz
-from django.db.models import Prefetch, Count
+from django.db.models import Prefetch, Count, F
+
 
 
 
@@ -81,30 +82,6 @@ def get_situation_form( request ):
         initial_data['from_country'] = request.session['situation']['from_country']
         initial_data['to_country'] = request.session['situation']['to_country']
         initial_data['goal'] = request.session['situation']['goal']
-
-    else:
-
-        # Defaults to country by IP and other default values
-        initial_data['to_country'] = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-        initial_data['goal'] = Goal.objects.get( pk = 1 )
-        if 'situation' in request.session and 'country_code' in request.session['situation'] and request.session['situation']['country_code']:
-            initial_data['from_country'] = Country.objects.get( code = request.session['situation']['country_code'] )
-        else:
-            initial_data['from_country'] = Country.objects.get( pk = settings.ID_COUNTRY_BRAZIL )
-
-        # Makes sure sessions are set
-        request.session['situation']['from_country'] = initial_data['from_country']
-        request.session['situation']['goal'] = initial_data['goal']
-        request.session['situation']['to_country'] = initial_data['to_country']
-        try:
-            situation = Situation.objects.get(
-                from_country = initial_data['from_country'],
-                to_country = initial_data['to_country'],
-                goal = initial_data['goal']
-            )
-            request.session['situation']['total_users'] = situation.total_users
-        except Situation.DoesNotExist:
-            request.session['situation']['total_users'] = 0
 
     # Returns filled form
     if request.user.is_authenticated():
@@ -1011,11 +988,17 @@ def dashboard( request ):
     # Initial template
     template_data = {}
 
+    # Checks if its a new signup
+    if 'new_sign_up' in request.session and request.session['new_sign_up']:
+        is_new_signup = True
+        request.session['new_sign_up'] = False
+    else:
+        is_new_signup = False
+
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_view_dashboard'] = True
-    if 'new_sign_up' in request.session and request.session['new_sign_up']:
+    if is_new_signup:
         template_data['track_conversion_sign_up'] = True
-        request.session['new_sign_up'] = False
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -1026,6 +1009,28 @@ def dashboard( request ):
         from_country = request.session['situation']['from_country']
         to_country = request.session['situation']['to_country']
         goal = request.session['situation']['goal']
+
+        # Saves user situation from session if it's a new signup
+        if is_new_signup:
+            situation, created = Situation.objects.get_or_create(
+                from_country = from_country,
+                to_country = to_country,
+                goal = goal,
+                defaults = {
+                    'total_users': 1,
+                    'total_visitors': 0,
+                    'from_country': from_country,
+                    'to_country': to_country,
+                    'goal': goal
+                }
+            )
+            if not created:
+                situation.total_users = F( 'total_users' ) + 1
+                situation.save()
+            user_situation = UserSituation()
+            user_situation.user = request.user
+            user_situation.situation = situation
+            user_situation.save()
 
         # Gets 5 most related service providers
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
