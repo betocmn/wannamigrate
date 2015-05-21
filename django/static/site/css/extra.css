@@ -244,7 +244,8 @@ form .errorlist {
     border: none;
 }
 .dashboard footer .nav-footer li .nav-footer-link {
-    font-size: 13px
+    font-size: 13px;
+    color: #dddddd;
 }
 .dashboard footer .nav-footer li .nav-footer-link:hover {
     text-decoration: underline;
@@ -349,6 +350,23 @@ form .errorlist {
 .dashboard .content.payment .services .service.language:before {
     background: transparent url( "../img/icon-service-world.png" ) no-repeat 0px 0px;
 }
+.dashboard .content.hiring .services .services-list .service-item.headhunting:before,
+.dashboard .content.payment .services .service.headhunting:before {
+    background: transparent url( "../img/icon-service-headhunting.png" ) no-repeat 0px 0px;
+}
+.dashboard .content.hiring .services .services-list .service-item.exchange:before,
+.dashboard .content.payment .services .service.exchange:before {
+    background: transparent url( "../img/icon-service-exchange.png" ) no-repeat 0px 0px;
+}
+.dashboard .content.hiring .services .services-list .service-item.travel:before,
+.dashboard .content.payment .services .service.travel:before {
+    background: transparent url( "../img/icon-service-travel.png" ) no-repeat 0px 0px;
+}
+.dashboard .content.hiring .services .services-list .service-item.housing:before,
+.dashboard .content.payment .services .service.housing:before {
+    background: transparent url( "../img/icon-service-housing.png" ) no-repeat 0px 0px;
+}
+
 
 
 
