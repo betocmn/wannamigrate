@@ -52,11 +52,11 @@ urlpatterns = patterns('',
     url( r'^upload_avatar/$', views.upload_avatar, name = 'upload_avatar' ),
 
     # Messages
-    url( r'^start/conversation$', views.start_conversation, name = 'start_conversation' ),
+    url( r'^start/conversation/(?P<to_user_id>\d+)/$', views.start_conversation, name = 'start_conversation' ),
     url( r'^conversation/(?P<id>\d+)/$', views.view_conversation, name = 'view_conversation' ),
-    url( r'^conversations/$', views.list_conversations, name = 'list_conversations' ),
-    url( r'^conversations/sent$', views.list_conversations, { "conversation_status" : settings.CORE_CONVERSATION_STATUS_OUTBOX_ID }, name = 'list_conversations_sent' ),
-    url( r'^conversations/archive$', views.list_conversations, { "conversation_status" : settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID }, name = 'list_conversations_archive' ),
+    url( r'^conversations/$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_INBOX_ID }, name = 'list_conversations' ),
+    url( r'^conversations/sent$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_OUTBOX_ID }, name = 'list_conversations_sent' ),
+    url( r'^conversations/archive$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID }, name = 'list_conversations_archive' ),
 
     # Dashboard
     url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),

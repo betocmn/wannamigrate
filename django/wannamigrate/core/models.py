@@ -200,6 +200,7 @@ class ConversationStatus_User( BaseModel ):
     user = models.ForeignKey( 'User', related_name = 'conversations_status' )
     conversation = models.ForeignKey( 'Conversation', related_name = 'conversations_status' )
     status = models.ForeignKey( 'ConversationStatus', related_name = 'conversations_status' )
+    has_updates = models.BooleanField( default = False )
 
     # META Options
     class Meta:

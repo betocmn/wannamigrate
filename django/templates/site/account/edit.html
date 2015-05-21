@@ -16,17 +16,7 @@
     <div class="content myaccount">
         <h2 class="title">{% trans "Edit My Account" %}</h2>
         <div class="interactions">
-            <ul class="interaction-list">
-                <li class="interaction-item">
-                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile active">{% trans "My profile" %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans "My contracts" %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox">{% trans "Inbox" %} <span class="counter"></span>(0)</a>
-                </li>
-            </ul>
+            {% include "site/_common/my_account_menu.html" with account_menu_selected=True %}
             <div class="my-profile-edit">
 
                 {% if user_form.errors or provider_form.errors or provider_country_formset.errors or provider_service_type_formset.errors %}

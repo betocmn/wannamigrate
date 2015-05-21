@@ -8,23 +8,15 @@
     <div class="content myaccount">
         <h2 class="title">{% trans 'My Account' %}</h2>
         <div class="interactions">
-            <ul class="interaction-list">
-                <li class="interaction-item">
-                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
-                </li>
-            </ul>
+            {% include "site/_common/my_account_menu.html" with inbox_menu_selected=True %}
             <div style="display: block;" class="inbox">
                 <h2 class="title">Inbox</h2>
                 {% include "site/conversation/box_menu.html"%}
                 <div class="box">
                     <div class="box-top">
-                        <a style="display: none;" href="#" class="button bt-newmessage">{% trans "New message" %}</a>
+                        <div style="display: block;" class="newmessage-top">
+                            <strong class="newmessage-title">{% trans "Conversation" %}</strong>
+                        </div>
                     </div>
 
                     <div style="display: block;" class="box-dialogue">
@@ -33,11 +25,13 @@
                             <a href="#" class="button-transparent bt-answer">Responder</a>
                         </div>
                         <div class="answer">
-                            <form action="">
+                            <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+                                {% csrf_token %}
                                 <fieldset>
-                                    <label for="answer">Answer</label>
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                    <button class="bt-send button">Send</button>
+                                    <label for="form.content.id_for_label">{% trans "Answer" %}</label>
+                                    {{ form.content }}
+                                    {{ form.content.errors }}
+                                    <input type="submit" class="bt-send button" value="{% trans "Send" %}" />
                                     <a href="#" class="bt-discard" title="Discard">Discard</a>
                                 </fieldset>
                             </form>
@@ -77,7 +71,22 @@
 
         $( document ).ready( function() {
 
+            {% if form.errors %}
+                $('.bt-answer').hide();
+                $('.answer').fadeIn('fast')
+            {% endif %}
 
+            $('.bt-answer').click(function(event) {
+                event.preventDefault()
+                $(this).hide();
+                $('.answer').fadeIn('fast')
+            });
+
+            $('.bt-discard').click(function(event) {
+                event.preventDefault()
+                $('.answer').fadeOut('fast')
+                $('.bt-answer').fadeIn('fast');
+            });
 
         });
 

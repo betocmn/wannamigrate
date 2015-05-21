@@ -33,6 +33,7 @@
                     </div>
                 </div>
                 <div class="description">
+                    <a href="{% url "site:start_conversation" provider.user.id %}" class="bt-hire button">{% trans "Send Message" %}</a>
                     {{ provider.description|linebreaks }}
                 </div>
             </div>

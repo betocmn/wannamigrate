@@ -8,27 +8,14 @@
     <div class="content myaccount">
         <h2 class="title">{% trans 'My Account' %}</h2>
         <div class="interactions">
-            <ul class="interaction-list">
-                <li class="interaction-item">
-                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
-                </li>
-            </ul>
+            {% include "site/_common/my_account_menu.html" with inbox_menu_selected=True %}
             <div style="display: block;" class="inbox">
                 <h2 class="title">Inbox</h2>
                 {% include "site/conversation/box_menu.html"%}
                 <div class="box">
                     <div class="box-top">
-                        <a style="display: none;" href="#" class="button bt-newmessage">{% trans "New message" %}</a>
                         <div style="display: block;" class="newmessage-top">
-                            <a href="{% url "site:list_conversations" %}" class="bt-cancel button-transparent">{% trans "Cancel" %}</a>
                             <strong class="newmessage-title">{% trans "New Message" %}</strong>
-
                         </div>
                     </div>
                     <div style="display: block;" class="box-newmessage">
@@ -37,8 +24,7 @@
                             <fieldset>
                                 <div class="sendto field">
                                     <label for="sendto">Send to</label>
-                                    {{ form.to_user }}
-                                    {{ form.to_user.errors }}
+                                    <input class="disabled" type="text" disabled="disabled" value="{{ to_user.name }}" />
                                 </div>
                                 <div class="subject field">
                                     <label for="subject">Subject</label>
@@ -74,8 +60,6 @@
     <script type="text/javascript">
 
         $( document ).ready( function() {
-
-
 
         });
 

@@ -468,16 +468,20 @@ class StartConversationForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = Conversation
-        fields = [ "subject", "to_user" ]
+        fields = [ "subject" ]
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
         # The owner of the conversation (from_user)
         owner = kwargs.pop( "owner" )
+        to_user = kwargs.pop( "to_user" )
+
         # Calls the constructor
         super( StartConversationForm, self ).__init__( *args, **kwargs )
+
         # Initialize pre-defined data.
         self.instance.from_user = owner
+        self.instance.to_user = to_user
 
 
 
@@ -497,8 +501,10 @@ class ReplyConversationForm( BaseModelForm ):
     def __init__( self, *args, **kwargs ):
         # The owner of the conversation (from_user)
         conversation = kwargs.pop( "conversation" )
+        owner = kwargs.pop( "owner" )
         # Calls the constructor
         super( ReplyConversationForm, self ).__init__( *args, **kwargs )
         # Initialize pre-defined data.
         self.instance.conversation = conversation
+        self.instance.owner = owner
         self.instance.is_read = False

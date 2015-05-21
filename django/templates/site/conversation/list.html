@@ -8,73 +8,51 @@
     <div class="content myaccount">
         <h2 class="title">{% trans 'My Account' %}</h2>
         <div class="interactions">
-            <ul class="interaction-list">
-                <li class="interaction-item">
-                    <a href="{% url 'site:account' %}" class="interaction-link bt-profile">{% trans 'My profile' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts">{% trans 'My contracts' %}</a>
-                </li>
-                <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-inbox active">{% trans 'Inbox' %} <span class="counter"></span>(0)</a>
-                </li>
-            </ul>
+            {% include "site/_common/my_account_menu.html" with inbox_menu_selected=True %}
             <div style="display: block;" class="inbox">
                 <h2 class="title">Inbox</h2>
-                {% include "site/conversation/box_menu.html"%}
+                {% include "site/conversation/box_menu.html" %}
                 <div class="box">
                     <div class="box-top">
-                        <a href="{% url "site:start_conversation" %}" class="button bt-newmessage">New message</a>
+                        <div style="display: block; width:auto;" class="newmessage-top">
+                            <strong class="newmessage-title">{{ display_title }}</strong>
+                        </div>
+                        <!--a href="#" class="button bt-newmessage">New message</a-->
                         <ul class="messages-menu">
-                            <li><a href="#">Arquivar</a></li>
-                            <li class="check-all"><input class="all" type="checkbox"></li>
+                            <li><a href="#" id="bt-archive">{% if archive_menu_selected %} {% trans "Restore" %} {% else %} {% trans "Archive" %} {% endif %}</a></li>
+                            <li class="check-all"><input id="check-all" class="all" type="checkbox"></li>
                         </ul>
                     </div>
                     <div class="box-messages">
-                        <form action="">
+                        <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+                            {% csrf_token %}
                             <table>
-                                <tbody><tr class="not-read">
-                                    <td class="author">
-                                        <a href="#" class="message-link">
-                                            Humberto <span>(3)</span>
-                                        </a>
-                                    </td>
-                                    <td class="message-title">
-                                        <a href="#" class="message-link">
-                                            Pellentesque interdum libero sit amet sem scelerisque, nec...
-                                        </a>
-                                    </td>
-                                    <td class="date">
-                                        Feb 15th
-                                    </td>
-                                    <td class="time">
-                                        16:20
-                                    </td>
-                                    <td class="check">
-                                        <span><input type="checkbox"></span>
-                                    </td>
-                                </tr>
-                                <tr class="read">
-                                    <td class="author">
-                                        <a href="#" class="message-link">
-                                            Pedro Henrique <span>(7)</span>
-                                        </a>
-                                    </td>
-                                    <td class="message-title">
-                                        <a href="#" class="message-link">
-                                            Pellentesque interdum libero sit amet sem scelerisque, nec...
-                                        </a>
-                                    </td>
-                                    <td class="date">
-                                        Feb 15th
-                                    </td>
-                                    <td class="time">
-                                        16:20
-                                    </td>
-                                    <td class="check">
-                                        <span><input type="checkbox"></span>
-                                    </td>
-                                </tr>
+                                <tbody>
+                                {% for entry in entries %}
+                                    <tr class="{% if entry.has_updates %}not-read{% else %}read{% endif %}">
+                                        <td class="author">
+                                            <a href="{% url "site:view_conversation" entry.conversation.id %}" class="message-link">
+                                                {{ entry.other_user.name|truncate_smart:15 }} <!--span>(3)</span-->
+                                            </a>
+                                        </td>
+                                        <td class="message-title">
+                                            <a href="{% url "site:view_conversation" entry.conversation.id %}" class="message-link">
+                                                {{ entry.conversation.subject|truncate_smart:30 }}
+                                            </a>
+                                        </td>
+                                        <td class="date">
+                                            {{ entry.conversation.modified_date|date:"b d" }}
+                                        </td>
+                                        <td class="time">
+                                            {{ entry.conversation.modified_date|date:"H:i" }}
+                                        </td>
+                                        <td class="check">
+                                            <span><input type="checkbox" class="archive-check" name="archive" value="{{ entry.id }}"></span>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                <tr><td>{% trans "(empty)" %}</td></tr>
+                                {% endfor %}
                             </tbody></table>
                         </form>
                     </div>
@@ -134,7 +112,16 @@
     <script type="text/javascript">
 
         $( document ).ready( function() {
-
+            $( "#bt-archive" ).click(function(e){
+                e.preventDefault();
+                $( "#main_form" ).submit();
+            });
+            $( "#check-all" ).change(function(e){
+                var v = $( this ).is( ":checked" );
+                $('.archive-check').each(function () {
+                   $( this ).prop( "checked", v );
+                });
+            });
 
 
         });

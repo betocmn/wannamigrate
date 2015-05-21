@@ -35,7 +35,7 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User
+    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
@@ -51,7 +51,7 @@ from PIL import Image
 from django.core.files.base import ContentFile
 from django.utils import timezone, translation
 import pytz
-
+from django.db.models import Prefetch, Count
 
 
 
@@ -632,7 +632,7 @@ def contracts( request ):
 
 
 @login_required
-def list_conversations( request, conversation_status = None ):
+def list_conversations( request, conversation_status_id ):
     """
     Displays "inbox" page.
 
@@ -640,19 +640,54 @@ def list_conversations( request, conversation_status = None ):
     :return String - HTML from my account page.
     """
 
+    if request.POST:
+        # Updates the status of the selected items
+        archive_csu_ids = request.POST.getlist( "archive" )
+        ConversationStatus_User.objects.filter(
+            id__in = archive_csu_ids,
+            user__id = request.user.id,
+        ).update( status_id = ( settings.CORE_CONVERSATION_STATUS_INBOX_ID if conversation_status_id == settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID else settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID ) )
+
+
+
+
+    # Gets the status of all conversations that belongs to the user
+    entries = ConversationStatus_User.objects.filter(
+        user__id = request.user.id,
+        status__id = conversation_status_id
+    ).select_related( "conversation", "conversation__from_user", "conversation__to_user" ).only( "conversation", "has_updates" )
+
+    for entry in entries:
+        entry.other_user = entry.conversation.to_user if ( entry.conversation.from_user == request.user ) else entry.conversation.from_user
+
+
+
+
+
+
+
+
+
     # Initial template
     template_data = {}
 
-    if conversation_status == settings.CORE_CONVERSATION_STATUS_OUTBOX_ID:
+    if conversation_status_id == settings.CORE_CONVERSATION_STATUS_OUTBOX_ID:
         template_data['sent_menu_selected'] = True
-    elif conversation_status == settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID:
+    elif conversation_status_id == settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID:
         template_data['archive_menu_selected'] = True
     else:
         template_data['messages_menu_selected'] = True
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
+    template_data['entries'] = entries
 
+    if conversation_status_id == settings.CORE_CONVERSATION_STATUS_INBOX_ID:
+        template_data['display_title'] = _( "Inbox" )
+    elif conversation_status_id == settings.CORE_CONVERSATION_STATUS_OUTBOX_ID:
+        template_data['display_title'] = _( "Sent" )
+    else:
+        template_data['display_title'] = _( "Archive" )
 
     # Renders the page
     return render( request, 'site/conversation/list.html', template_data )
@@ -684,15 +719,22 @@ def view_conversation( request, id ):
 
     # Set all received messages as read
     ConversationMessage.objects.filter( conversation = conversation ).exclude( owner = request.user ).update( is_read = True )
+    # Set the status of the conversation (has_updates to false)
+    ConversationStatus_User.objects.filter( conversation = conversation, user = request.user ).update( has_updates = False )
 
-    form = ReplyConversationForm( request.POST or None, conversation = conversation )
+
+    form = ReplyConversationForm( request.POST or None, conversation = conversation, owner = request.user )
     if form.is_valid():
         with transaction.atomic():
             # Saves the message
             message = form.save()
 
-            # Updates the conversation status for both users
-            csu = ConversationStatus_User.objects.filter( conversation = conversation ).update( status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID )
+            # updates the modified date of the conversation
+            conversation.modified_date = message.created_date
+            conversation.save()
+
+            # Updates the conversation status for the other user
+            csu = ConversationStatus_User.objects.filter( conversation = conversation ).exclude( user = request.user ).update( status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID, has_updates = True )
 
             return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
 
@@ -700,21 +742,30 @@ def view_conversation( request, id ):
     template_data[ "form" ] = form
     template_data[ "conversation" ] = conversation
     template_data[ "messages" ] = messages
-    template_data[ "messages_menu_selected" ] = True
+    #template_data[ "messages_menu_selected" ] = True
 
     return render( request, 'site/conversation/view.html', template_data )
 
 
 @login_required
-def start_conversation( request ):
+def start_conversation( request, to_user_id ):
     """
     Displays "inbox" page.
+    Obs: for now, the destination should be specified
 
     :param: request
     :return String - HTML from my account page.
     """
 
-    form = StartConversationForm( request.POST or None, owner = request.user )
+    # Make sure that the destination is a service provider
+    provider = get_object_or_404( Provider, user_id = to_user_id )
+    to_user = provider.user
+
+    # Avoid auto-messaging.
+    if to_user == request.user:
+        return HttpResponseRedirect( reverse( 'site:list_conversations' ) )
+
+    form = StartConversationForm( request.POST or None, owner = request.user, to_user = to_user )
 
     if form.is_valid():
         with transaction.atomic():
@@ -725,6 +776,7 @@ def start_conversation( request ):
             csu_from.conversation = conversation
             csu_from.user = conversation.from_user
             csu_from.status_id = settings.CORE_CONVERSATION_STATUS_OUTBOX_ID
+            csu_from.has_updates = False
             csu_from.save()
 
             # Sets the status of the message for to_user
@@ -732,6 +784,7 @@ def start_conversation( request ):
             csu_to.conversation = conversation
             csu_to.user = conversation.to_user
             csu_to.status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID
+            csu_to.has_updates = True
             csu_to.save()
 
             # Creates the message
@@ -749,6 +802,7 @@ def start_conversation( request ):
     template_data = {}
     template_data[ 'messages_menu_selected' ] = True
     template_data[ 'form' ] = form
+    template_data[ 'to_user' ] = to_user
     template_data[ 'situation_form' ] = get_situation_form( request )
 
     # Renders the page
