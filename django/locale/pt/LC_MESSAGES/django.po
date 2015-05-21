@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-21 14:48-0300\n"
+"POT-Creation-Date: 2015-05-21 16:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,8 +171,8 @@ msgstr "Wanna Migrate - More no exterior. Mude de vida."
 #: templates/db_translations/core_answer.html:184
 #: templates/db_translations/core_answer.html:186
 #: templates/db_translations/core_answer.html:208
-#: wannamigrate/core/models.py:384 wannamigrate/core/models.py:529
-#: wannamigrate/core/models.py:632
+#: wannamigrate/core/models.py:385 wannamigrate/core/models.py:530
+#: wannamigrate/core/models.py:633
 msgid "Yes"
 msgstr "Sim"
 
@@ -187,8 +187,8 @@ msgstr "Sim"
 #: templates/db_translations/core_answer.html:185
 #: templates/db_translations/core_answer.html:187
 #: templates/db_translations/core_answer.html:209
-#: wannamigrate/core/models.py:385 wannamigrate/core/models.py:530
-#: wannamigrate/core/models.py:633
+#: wannamigrate/core/models.py:386 wannamigrate/core/models.py:531
+#: wannamigrate/core/models.py:634
 msgid "No"
 msgstr ""
 
@@ -725,455 +725,470 @@ msgstr "Angola"
 
 #: templates/db_translations/core_country.html:4
 msgid "Ascension"
-msgstr ""
+msgstr "Ascension"
 
 #: templates/db_translations/core_country.html:5
 msgid "Benin"
-msgstr ""
+msgstr "Benim"
 
 #: templates/db_translations/core_country.html:6
 msgid "Botswana"
-msgstr ""
+msgstr "Botsuana"
 
 #: templates/db_translations/core_country.html:7
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burquina Faso"
 
 #: templates/db_translations/core_country.html:8
 msgid "Burundi"
-msgstr ""
+msgstr "Burúndi"
 
 #: templates/db_translations/core_country.html:9
 msgid "Cameroon"
-msgstr ""
+msgstr "Camarões"
 
 #: templates/db_translations/core_country.html:10
 msgid "Cape Verde Islands"
-msgstr ""
+msgstr "Cabo Verde"
 
 #: templates/db_translations/core_country.html:11
 msgid "Central African Republic"
-msgstr ""
+msgstr "República Centro-Africana"
 
 #: templates/db_translations/core_country.html:12
 msgid "Chad Republic"
-msgstr ""
+msgstr "Chade"
 
 #: templates/db_translations/core_country.html:13
 msgid "Comoros"
-msgstr ""
+msgstr "Comores"
 
 #: templates/db_translations/core_country.html:14
 msgid "Congo"
-msgstr ""
+msgstr "Congo"
 
 #: templates/db_translations/core_country.html:15
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibouti"
 
 #: templates/db_translations/core_country.html:16
 msgid "Egypt"
-msgstr ""
+msgstr "Egito"
 
 #: templates/db_translations/core_country.html:17
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Guiné Equatorial"
 
 #: templates/db_translations/core_country.html:18
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritreia"
 
 #: templates/db_translations/core_country.html:19
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiópia"
 
 #: templates/db_translations/core_country.html:20
 msgid "Gabon Republic"
-msgstr ""
+msgstr "Gabão"
 
 #: templates/db_translations/core_country.html:21
 msgid "Gambia"
-msgstr ""
+msgstr "Gâmbia"
 
 #: templates/db_translations/core_country.html:22
 msgid "Ghana"
-msgstr ""
+msgstr "Gana"
 
 #: templates/db_translations/core_country.html:23
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guiné-Bissau"
 
 #: templates/db_translations/core_country.html:24
 msgid "Guinea"
-msgstr ""
+msgstr "Guiné"
 
 #: templates/db_translations/core_country.html:25
+#: templates/db_translations/qa_topic.html:73
 msgid "Ivory Coast"
-msgstr ""
+msgstr "Costa do Marfim"
 
 #: templates/db_translations/core_country.html:26
 msgid "Kenya"
-msgstr ""
+msgstr "Quênia"
 
 #: templates/db_translations/core_country.html:27
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesoto"
 
 #: templates/db_translations/core_country.html:28
 msgid "Liberia"
-msgstr ""
+msgstr "Libéria"
 
 #: templates/db_translations/core_country.html:29
 msgid "Libya"
-msgstr ""
+msgstr "Líbia"
 
 #: templates/db_translations/core_country.html:30
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagáscar"
 
 #: templates/db_translations/core_country.html:31
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: templates/db_translations/core_country.html:32
 msgid "Mali Republic"
-msgstr ""
+msgstr "Mali"
 
 #: templates/db_translations/core_country.html:33
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritânia"
 
 #: templates/db_translations/core_country.html:34
 msgid "Mauritius"
-msgstr ""
+msgstr "Maurícia"
 
 #: templates/db_translations/core_country.html:35
 msgid "Mayotte Island"
-msgstr ""
+msgstr "Mayotte"
 
 #: templates/db_translations/core_country.html:36
 msgid "Morocco"
-msgstr ""
+msgstr "Marrocos"
 
 #: templates/db_translations/core_country.html:37
 msgid "Mozambique"
-msgstr ""
+msgstr "Moçambique"
 
 #: templates/db_translations/core_country.html:38
 msgid "Namibia"
-msgstr ""
+msgstr "Namíbia"
 
 #: templates/db_translations/core_country.html:39
 msgid "Niger Republic"
-msgstr ""
+msgstr "Níger"
 
 #: templates/db_translations/core_country.html:40
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigéria"
 
 #: templates/db_translations/core_country.html:41
 msgid "Principe"
-msgstr ""
+msgstr "Príncipe"
 
 #: templates/db_translations/core_country.html:42
 msgid "Reunion Island"
-msgstr ""
+msgstr "Reunião"
 
 #: templates/db_translations/core_country.html:43
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruanda"
 
 #: templates/db_translations/core_country.html:44
 msgid "Sao Tome"
-msgstr ""
+msgstr "São Tomé"
 
 #: templates/db_translations/core_country.html:45
 msgid "Senegal Republic"
-msgstr ""
+msgstr "Senegal"
 
 #: templates/db_translations/core_country.html:46
 msgid "Seychelles"
-msgstr ""
+msgstr "Seicheles"
 
 #: templates/db_translations/core_country.html:47
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Serra Leoa"
 
 #: templates/db_translations/core_country.html:48
 msgid "Somalia Republic"
-msgstr ""
+msgstr "Somália"
 
 #: templates/db_translations/core_country.html:49
+#: templates/db_translations/qa_topic.html:22
 msgid "South Africa"
-msgstr ""
+msgstr "África do Sul"
 
 #: templates/db_translations/core_country.html:50
 msgid "St. Helena"
-msgstr ""
+msgstr "Santa Helena"
 
 #: templates/db_translations/core_country.html:51
 msgid "Sudan"
-msgstr ""
+msgstr "Sudão"
 
 #: templates/db_translations/core_country.html:52
 msgid "Swaziland"
-msgstr ""
+msgstr "Suazilândia"
 
 #: templates/db_translations/core_country.html:53
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzânia"
 
 #: templates/db_translations/core_country.html:54
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: templates/db_translations/core_country.html:55
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunísia"
 
 #: templates/db_translations/core_country.html:56
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: templates/db_translations/core_country.html:57
 msgid "Zaire"
-msgstr ""
+msgstr "Zaire"
 
 #: templates/db_translations/core_country.html:58
 msgid "Zambia"
-msgstr ""
+msgstr "Zâmbia"
 
 #: templates/db_translations/core_country.html:59
 msgid "Zanzibar"
-msgstr ""
+msgstr "Zanzibar"
 
 #: templates/db_translations/core_country.html:60
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: templates/db_translations/core_country.html:61
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudão do Sul"
 
 #: templates/db_translations/core_country.html:62
 msgid "Dem. Republic of the Congo"
-msgstr ""
+msgstr "República Democrática do Congo"
 
 #: templates/db_translations/core_country.html:63
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afeganistão"
 
 #: templates/db_translations/core_country.html:64
 msgid "Armenia"
-msgstr ""
+msgstr "Armênia"
 
 #: templates/db_translations/core_country.html:65
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaijão"
 
 #: templates/db_translations/core_country.html:66
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrein"
 
 #: templates/db_translations/core_country.html:67
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: templates/db_translations/core_country.html:68
 msgid "Bhutan"
-msgstr ""
+msgstr "Butão"
 
 #: templates/db_translations/core_country.html:69
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: templates/db_translations/core_country.html:70
 msgid "Cambodia"
-msgstr ""
+msgstr "Camboja"
 
 #: templates/db_translations/core_country.html:71
+#: templates/db_translations/qa_topic.html:20
 msgid "China"
-msgstr ""
+msgstr "China"
 
 #: templates/db_translations/core_country.html:72
 msgid "Christmas Island"
-msgstr ""
+msgstr "Ilha Christmas"
 
 #: templates/db_translations/core_country.html:73
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Ilhas Cocos (Keeling)"
 
 #: templates/db_translations/core_country.html:74
 msgid "Diego Garcia"
-msgstr ""
+msgstr "Diego Garcia"
 
 #: templates/db_translations/core_country.html:75
 msgid "Georgia"
-msgstr ""
+msgstr "Geórgia"
 
 #: templates/db_translations/core_country.html:76
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: templates/db_translations/core_country.html:77
+#: templates/db_translations/qa_topic.html:65
 msgid "India"
-msgstr ""
+msgstr "Índia"
 
 #: templates/db_translations/core_country.html:78
 msgid "Indonesia"
-msgstr ""
+msgstr "Idonésia"
 
 #: templates/db_translations/core_country.html:79
+#: templates/db_translations/qa_topic.html:71
 msgid "Iran"
-msgstr ""
+msgstr "Irã"
 
 #: templates/db_translations/core_country.html:80
 msgid "Iraq"
-msgstr ""
+msgstr "Iraque"
 
 #: templates/db_translations/core_country.html:81
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 #: templates/db_translations/core_country.html:82
+#: templates/db_translations/qa_topic.html:11
 msgid "Japan"
-msgstr ""
+msgstr "Japão"
 
 #: templates/db_translations/core_country.html:83
+#: templates/db_translations/qa_topic.html:70
 msgid "Jordan"
-msgstr ""
+msgstr "Jordânia"
 
 #: templates/db_translations/core_country.html:84
+#: templates/db_translations/qa_topic.html:69
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Cazaquistão"
 
 #: templates/db_translations/core_country.html:85
 msgid "North Korea"
-msgstr ""
+msgstr "Coreia do Norte"
 
 #: templates/db_translations/core_country.html:86
 msgid "South Korea"
-msgstr ""
+msgstr "Coreia do Sul"
 
 #: templates/db_translations/core_country.html:87
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuwait"
 
 #: templates/db_translations/core_country.html:88
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Quirguistão"
 
 #: templates/db_translations/core_country.html:89
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: templates/db_translations/core_country.html:90
 msgid "Lebanon"
-msgstr ""
+msgstr "Líbano"
 
 #: templates/db_translations/core_country.html:91
 #: templates/db_translations/core_country.html:98
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 #: templates/db_translations/core_country.html:92
+#: templates/db_translations/qa_topic.html:72
 msgid "Malaysia"
-msgstr ""
+msgstr "Malásia"
 
 #: templates/db_translations/core_country.html:93
 msgid "Maldives"
-msgstr ""
+msgstr "Maldivas"
 
 #: templates/db_translations/core_country.html:94
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongólia"
 
 #: templates/db_translations/core_country.html:95
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: templates/db_translations/core_country.html:96
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: templates/db_translations/core_country.html:97
 msgid "Oman"
-msgstr ""
+msgstr "Omã"
 
 #: templates/db_translations/core_country.html:99
+#: templates/db_translations/qa_topic.html:67
 msgid "Pakistan"
-msgstr ""
+msgstr "Paquistão"
 
 #: templates/db_translations/core_country.html:100
 msgid "Philippines"
-msgstr ""
+msgstr "Filipinas"
 
 #: templates/db_translations/core_country.html:101
 msgid "Qatar"
-msgstr ""
+msgstr "Catar"
 
 #: templates/db_translations/core_country.html:102
+#: templates/db_translations/qa_topic.html:64
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Arábia Saudita"
 
 #: templates/db_translations/core_country.html:103
+#: templates/db_translations/qa_topic.html:75
 msgid "Singapore"
-msgstr ""
+msgstr "Singapura"
 
 #: templates/db_translations/core_country.html:104
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 #: templates/db_translations/core_country.html:105
 #: templates/db_translations/core_country.html:106
 msgid "Syria"
-msgstr ""
+msgstr "Síria"
 
 #: templates/db_translations/core_country.html:107
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: templates/db_translations/core_country.html:108
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tajiquistão"
 
 #: templates/db_translations/core_country.html:109
+#: templates/db_translations/qa_topic.html:68
 msgid "Thailand"
-msgstr ""
+msgstr "Tailândia"
 
 #: templates/db_translations/core_country.html:110
 msgid "Turkey"
-msgstr ""
+msgstr "Turquia"
 
 #: templates/db_translations/core_country.html:111
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turquemenistão"
 
 #: templates/db_translations/core_country.html:112
+#: templates/db_translations/qa_topic.html:63
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Emirados Árabes Unidos"
 
 #: templates/db_translations/core_country.html:113
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbequistão"
 
 #: templates/db_translations/core_country.html:114
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnã"
 
 #: templates/db_translations/core_country.html:115
 msgid "Yemen"
-msgstr ""
+msgstr "Iémen"
 
 #: templates/db_translations/core_country.html:116
 msgid "Palestine"
-msgstr ""
+msgstr "Palestina"
 
 #: templates/db_translations/core_country.html:117
 msgid "American Samoa"
-msgstr ""
+msgstr "Samoa Americana"
 
 #: templates/db_translations/core_country.html:118
+#: templates/db_translations/qa_topic.html:7
 #: templates/points/dashboard/dashboard.html:88
 #: wannamigrate/points/views.py:608 wannamigrate/points/views.py:796
 #: wannamigrate/points/views.py:836
@@ -1182,58 +1197,59 @@ msgstr "Austrália"
 
 #: templates/db_translations/core_country.html:119
 msgid "Chatham Island, NZ"
-msgstr ""
+msgstr "Ilhas Chatham"
 
 #: templates/db_translations/core_country.html:120
 msgid "Cook Islands"
-msgstr ""
+msgstr "Ilhas Cook"
 
 #: templates/db_translations/core_country.html:121
 msgid "Fiji Islands"
-msgstr ""
+msgstr "Fiji"
 
 #: templates/db_translations/core_country.html:122
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinésia Francesa"
 
 #: templates/db_translations/core_country.html:123
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: templates/db_translations/core_country.html:124
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: templates/db_translations/core_country.html:125
 msgid "American"
-msgstr ""
+msgstr "American"
 
 #: templates/db_translations/core_country.html:126
 msgid "Mariana Islands"
-msgstr ""
+msgstr "Ilhas Marianas"
 
 #: templates/db_translations/core_country.html:127
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Ilhas Marshall"
 
 #: templates/db_translations/core_country.html:128
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "Estados Federados da Micronésia"
 
 #: templates/db_translations/core_country.html:129
 msgid "Midway Islands"
-msgstr ""
+msgstr "Ilhas Midway"
 
 #: templates/db_translations/core_country.html:130
 #: templates/db_translations/core_language.html:99
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: templates/db_translations/core_country.html:131
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nova Caledônia"
 
 #: templates/db_translations/core_country.html:132
+#: templates/db_translations/qa_topic.html:9
 #: templates/points/dashboard/dashboard.html:106
 #: wannamigrate/points/views.py:628 wannamigrate/points/views.py:806
 #: wannamigrate/points/views.py:846
@@ -1242,242 +1258,253 @@ msgstr "Nova Zelândia"
 
 #: templates/db_translations/core_country.html:133
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: templates/db_translations/core_country.html:134
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Ilha Norfolk"
 
 #: templates/db_translations/core_country.html:135
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: templates/db_translations/core_country.html:136
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua-Nova Guiné"
 
 #: templates/db_translations/core_country.html:137
 msgid "Saipan"
-msgstr ""
+msgstr "Saipan"
 
 #: templates/db_translations/core_country.html:138
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Ilhas Salomão"
 
 #: templates/db_translations/core_country.html:139
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: templates/db_translations/core_country.html:140
 #: templates/db_translations/core_language.html:144
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: templates/db_translations/core_country.html:141
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: templates/db_translations/core_country.html:142
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: templates/db_translations/core_country.html:143
 msgid "Wake Island"
-msgstr ""
+msgstr "Ilha Wake"
 
 #: templates/db_translations/core_country.html:144
 msgid "Wallis and Futuna Islands"
-msgstr ""
+msgstr "Wallis e Futuna"
 
 #: templates/db_translations/core_country.html:145
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: templates/db_translations/core_country.html:146
 msgid "East Timor"
-msgstr ""
+msgstr "Timor-Leste"
 
 #: templates/db_translations/core_country.html:147
 msgid "Antarctica"
-msgstr ""
+msgstr "Antártida"
 
 #: templates/db_translations/core_country.html:148
 msgid "Albania"
-msgstr ""
+msgstr "Albânia"
 
 #: templates/db_translations/core_country.html:149
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: templates/db_translations/core_country.html:150
 msgid "Austria"
-msgstr ""
+msgstr "Áustria"
 
 #: templates/db_translations/core_country.html:151
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorrússia"
 
 #: templates/db_translations/core_country.html:152
 msgid "Belgium"
-msgstr ""
+msgstr "Bélgica"
 
 #: templates/db_translations/core_country.html:153
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bósnia e Herzegovina"
 
 #: templates/db_translations/core_country.html:154
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgária"
 
 #: templates/db_translations/core_country.html:155
 msgid "Croatia"
-msgstr ""
+msgstr "Croácia"
 
 #: templates/db_translations/core_country.html:156
 msgid "Cyprus"
-msgstr ""
+msgstr "Chipre"
 
 #: templates/db_translations/core_country.html:157
 msgid "Czech Republic"
-msgstr ""
+msgstr "República Checa"
 
 #: templates/db_translations/core_country.html:158
 msgid "Denmark"
-msgstr ""
+msgstr "Dinamarca"
 
 #: templates/db_translations/core_country.html:159
 msgid "Estonia"
-msgstr ""
+msgstr "Estônia"
 
 #: templates/db_translations/core_country.html:160
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Ilhas Feroe"
 
 #: templates/db_translations/core_country.html:161
 msgid "Finland"
-msgstr ""
+msgstr "Finlândia"
 
 #: templates/db_translations/core_country.html:162
+#: templates/db_translations/qa_topic.html:17
 msgid "France"
-msgstr ""
+msgstr "França"
 
 #: templates/db_translations/core_country.html:163
+#: templates/db_translations/qa_topic.html:13
 msgid "Germany"
-msgstr ""
+msgstr "Alemanha"
 
 #: templates/db_translations/core_country.html:164
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: templates/db_translations/core_country.html:165
 msgid "Greece"
-msgstr ""
+msgstr "Grécia"
 
 #: templates/db_translations/core_country.html:166
 msgid "Hungary"
-msgstr ""
+msgstr "Hungria"
 
 #: templates/db_translations/core_country.html:167
 msgid "Iceland"
-msgstr ""
+msgstr "Islândia"
 
 #: templates/db_translations/core_country.html:168
+#: templates/db_translations/qa_topic.html:24
 msgid "Ireland"
 msgstr "Irlanda"
 
 #: templates/db_translations/core_country.html:169
+#: templates/db_translations/qa_topic.html:15
 msgid "Italy"
-msgstr ""
+msgstr "Itália"
 
 #: templates/db_translations/core_country.html:170
 msgid "Latvia"
-msgstr ""
+msgstr "Letônia"
 
 #: templates/db_translations/core_country.html:171
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: templates/db_translations/core_country.html:172
 msgid "Lithuania"
-msgstr ""
+msgstr "Lituânia"
 
 #: templates/db_translations/core_country.html:173
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxemburgo"
 
 #: templates/db_translations/core_country.html:174
 msgid "Macedonia"
-msgstr ""
+msgstr "República da Macedônia"
 
 #: templates/db_translations/core_country.html:175
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: templates/db_translations/core_country.html:176
 msgid "Moldova"
-msgstr ""
+msgstr "Moldávia"
 
 #: templates/db_translations/core_country.html:177
 msgid "Monaco"
-msgstr ""
+msgstr "Mônaco"
 
 #: templates/db_translations/core_country.html:178
+#: templates/db_translations/qa_topic.html:23
 msgid "Netherlands"
 msgstr "Holanda"
 
 #: templates/db_translations/core_country.html:179
+#: templates/db_translations/qa_topic.html:26
 msgid "Norway"
 msgstr "Noruega"
 
 #: templates/db_translations/core_country.html:180
 msgid "Poland"
-msgstr "Poônia"
+msgstr "Polônia"
 
 #: templates/db_translations/core_country.html:181
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 #: templates/db_translations/core_country.html:182
 msgid "Romania"
 msgstr "Romênia"
 
 #: templates/db_translations/core_country.html:183
+#: templates/db_translations/qa_topic.html:14
 msgid "Russia"
 msgstr "Rússia"
 
 #: templates/db_translations/core_country.html:184
 msgid "San Marino"
-msgstr ""
+msgstr "São Marinho"
 
 #: templates/db_translations/core_country.html:185
 msgid "Serbia"
-msgstr ""
+msgstr "Sérvia"
 
 #: templates/db_translations/core_country.html:186
 msgid "Slovakia"
-msgstr ""
+msgstr "Eslováquia"
 
 #: templates/db_translations/core_country.html:187
 msgid "Slovenia"
-msgstr ""
+msgstr "Eslovênia"
 
 #: templates/db_translations/core_country.html:188
+#: templates/db_translations/qa_topic.html:16
 msgid "Spain"
-msgstr ""
+msgstr "Espanha"
 
 #: templates/db_translations/core_country.html:189
 msgid "Sweden"
 msgstr "Suécia"
 
 #: templates/db_translations/core_country.html:190
+#: templates/db_translations/qa_topic.html:74
 msgid "Switzerland"
 msgstr "Suiça"
 
 #: templates/db_translations/core_country.html:191
+#: templates/db_translations/qa_topic.html:66
 msgid "Ukraine"
 msgstr "Ucrânia"
 
 #: templates/db_translations/core_country.html:192
+#: templates/db_translations/qa_topic.html:25
 msgid "United Kingdom"
 msgstr "Inglaterra"
 
@@ -1487,49 +1514,50 @@ msgstr "Vaticano"
 
 #: templates/db_translations/core_country.html:194
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Iugoslávia"
 
 #: templates/db_translations/core_country.html:195
 msgid "Kosovo"
-msgstr ""
+msgstr "Kosovo"
 
 #: templates/db_translations/core_country.html:196
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #: templates/db_translations/core_country.html:197
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: templates/db_translations/core_country.html:198
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antígua e Barbuda"
 
 #: templates/db_translations/core_country.html:199
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: templates/db_translations/core_country.html:200
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #: templates/db_translations/core_country.html:201
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: templates/db_translations/core_country.html:202
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: templates/db_translations/core_country.html:203
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermudas"
 
 #: templates/db_translations/core_country.html:204
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Ilhas Virgens Britânicas"
 
 #: templates/db_translations/core_country.html:205
+#: templates/db_translations/qa_topic.html:8
 #: templates/points/dashboard/dashboard.html:97
 #: wannamigrate/points/views.py:618 wannamigrate/points/views.py:801
 #: wannamigrate/points/views.py:841
@@ -1538,143 +1566,145 @@ msgstr "Canadá"
 
 #: templates/db_translations/core_country.html:206
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Ilhas Cayman"
 
 #: templates/db_translations/core_country.html:207
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: templates/db_translations/core_country.html:208
 msgid "Cuba"
-msgstr ""
+msgstr "Cuba"
 
 #: templates/db_translations/core_country.html:209
 msgid "Curacao"
-msgstr ""
+msgstr "Curaçao"
 
 #: templates/db_translations/core_country.html:210
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #: templates/db_translations/core_country.html:211
 msgid "Dominican Republic"
-msgstr ""
+msgstr "República Dominicana"
 
 #: templates/db_translations/core_country.html:212
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: templates/db_translations/core_country.html:213
 msgid "Greenland"
-msgstr ""
+msgstr "Gronelândia"
 
 #: templates/db_translations/core_country.html:214
 msgid "Grenada and Carriacuou"
-msgstr ""
+msgstr "Grenada e Carriacuou"
 
 #: templates/db_translations/core_country.html:215
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadalupe"
 
 #: templates/db_translations/core_country.html:216
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: templates/db_translations/core_country.html:217
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: templates/db_translations/core_country.html:218
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: templates/db_translations/core_country.html:219
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: templates/db_translations/core_country.html:220
 msgid "Martinique"
-msgstr ""
+msgstr "Martinica"
 
 #: templates/db_translations/core_country.html:221
+#: templates/db_translations/qa_topic.html:21
 msgid "Mexico"
-msgstr ""
+msgstr "México"
 
 #: templates/db_translations/core_country.html:222
 msgid "Miquelon"
-msgstr ""
+msgstr "Miquelon"
 
 #: templates/db_translations/core_country.html:223
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: templates/db_translations/core_country.html:224
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Antilhas Neerlandesas"
 
 #: templates/db_translations/core_country.html:225
 msgid "Nevis"
-msgstr ""
+msgstr "Nevis"
 
 #: templates/db_translations/core_country.html:226
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicarágua"
 
 #: templates/db_translations/core_country.html:227
 msgid "Panama"
-msgstr ""
+msgstr "Panamá"
 
 #: templates/db_translations/core_country.html:228
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Porto Rico"
 
 #: templates/db_translations/core_country.html:229
 msgid "St. Kitts"
-msgstr ""
+msgstr "Ilha de São Cristóvão"
 
 #: templates/db_translations/core_country.html:230
 msgid "St. Lucia"
-msgstr ""
+msgstr "Santa Lúcia"
 
 #: templates/db_translations/core_country.html:231
 msgid "St. Pierre and Miquelon"
-msgstr ""
+msgstr "St. Pierre e Miquelon"
 
 #: templates/db_translations/core_country.html:232
 msgid "St. Vincent"
-msgstr ""
+msgstr "São Vicente e Granadinas"
 
 #: templates/db_translations/core_country.html:233
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad e Tobago"
 
 #: templates/db_translations/core_country.html:234
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks e Caicos"
 
 #: templates/db_translations/core_country.html:235
 msgid "US Virgin Islands"
-msgstr ""
+msgstr "Ilhas Virgens Americanas"
 
 #: templates/db_translations/core_country.html:236
+#: templates/db_translations/qa_topic.html:10
 msgid "United States"
 msgstr "Estados Unidos"
 
 #: templates/db_translations/core_country.html:237
 msgid "Sint Maarten"
-msgstr ""
+msgstr "São Martinho"
 
 #: templates/db_translations/core_country.html:238
 msgid "Bonaire"
-msgstr ""
+msgstr "Bonaire"
 
 #: templates/db_translations/core_country.html:239
 msgid "Saba"
-msgstr ""
+msgstr "Saba"
 
 #: templates/db_translations/core_country.html:240
 msgid "Sint Eustatius"
-msgstr ""
+msgstr "Santo Eustáquio"
 
 #: templates/db_translations/core_country.html:241
 msgid "Argentina"
@@ -1685,12 +1715,14 @@ msgid "Bolivia"
 msgstr "Bolívia"
 
 #: templates/db_translations/core_country.html:243
+#: templates/db_translations/qa_topic.html:18
 msgid "Brazil"
 msgstr "Brasil"
 
 #: templates/db_translations/core_country.html:244
+#: templates/db_translations/qa_topic.html:19
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: templates/db_translations/core_country.html:245
 msgid "Colombia"
@@ -1698,23 +1730,23 @@ msgstr "Colômbia"
 
 #: templates/db_translations/core_country.html:246
 msgid "Ecuador"
-msgstr ""
+msgstr "Equador"
 
 #: templates/db_translations/core_country.html:247
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Ilhas Malvinas"
 
 #: templates/db_translations/core_country.html:248
 msgid "French Guiana"
-msgstr ""
+msgstr "Guiana Francesa"
 
 #: templates/db_translations/core_country.html:249
 msgid "Guiana"
-msgstr ""
+msgstr "Guiana"
 
 #: templates/db_translations/core_country.html:250
 msgid "Guyana"
-msgstr ""
+msgstr "Guiana"
 
 #: templates/db_translations/core_country.html:251
 msgid "Paraguay"
@@ -1722,11 +1754,11 @@ msgstr "Paraguai"
 
 #: templates/db_translations/core_country.html:252
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: templates/db_translations/core_country.html:253
 msgid "Suriname"
-msgstr ""
+msgstr "Suriname"
 
 #: templates/db_translations/core_country.html:254
 msgid "Uruguay"
@@ -5525,6 +5557,192 @@ msgstr "Vendas / Serviços"
 msgid "Trades / Transports / Equipments / Manufacturing / Utilities"
 msgstr "Comércio / Transportes / Equipamentos / Manufatura / Utilidades"
 
+#: templates/db_translations/qa_topic.html:2
+#, fuzzy
+#| msgid "score language"
+msgid "Study Foreign Language"
+msgstr "pontuação - línguas"
+
+#: templates/db_translations/qa_topic.html:3
+msgid "Study in University"
+msgstr ""
+
+#: templates/db_translations/qa_topic.html:4
+msgid "Study Masters or Phd"
+msgstr ""
+
+#: templates/db_translations/qa_topic.html:5
+msgid "Study Technical Course"
+msgstr ""
+
+#: templates/db_translations/qa_topic.html:6
+msgid "Study in High School"
+msgstr ""
+
+#: templates/db_translations/qa_topic.html:12
+#, fuzzy
+#| msgid "Uruguay"
+msgid "Portugual"
+msgstr "Uruguai"
+
+#: templates/db_translations/qa_topic.html:27
+#, fuzzy
+#| msgid "Sweden"
+msgid "Sweeden"
+msgstr "Suécia"
+
+#: templates/db_translations/qa_topic.html:28
+#, fuzzy
+#| msgid "Set Your Migration Plan"
+msgid "Skilled Worker Migration"
+msgstr "Crie seu Plano de Imigração"
+
+#: templates/db_translations/qa_topic.html:29
+#, fuzzy
+#| msgid "Work Details"
+msgid "Work Visa"
+msgstr "Dados de Trabalho"
+
+#: templates/db_translations/qa_topic.html:30
+#, fuzzy
+#| msgid "Reunite with family"
+msgid "Move with Family"
+msgstr "Reunir com a família"
+
+#: templates/db_translations/qa_topic.html:31
+msgid "Temporary Work Visa"
+msgstr "Visto Temporário de Trabalho"
+
+#: templates/db_translations/qa_topic.html:32
+msgid "Student Visa"
+msgstr "Visto de Estudante"
+
+#: templates/db_translations/qa_topic.html:33
+#, fuzzy
+#| msgid "Search"
+msgid "Job Searching"
+msgstr "Busca"
+
+#: templates/db_translations/qa_topic.html:34
+#, fuzzy
+#| msgid "Start Year"
+msgid "Startup Visa"
+msgstr "Ano de Início"
+
+#: templates/db_translations/qa_topic.html:35
+msgid "Business Visa"
+msgstr "Visto de Negócios"
+
+#: templates/db_translations/qa_topic.html:36
+msgid "Investment Visa"
+msgstr "Visto de Investimento"
+
+#: templates/db_translations/qa_topic.html:37
+msgid "IELTS"
+msgstr "IETLS"
+
+#: templates/db_translations/qa_topic.html:38
+msgid "TOEFL"
+msgstr "TOEFL"
+
+#: templates/db_translations/qa_topic.html:39
+msgid "Learning English"
+msgstr "Aprendendo Inglês"
+
+#: templates/db_translations/qa_topic.html:40
+msgid "Learning French"
+msgstr "Aprendendo Francês"
+
+#: templates/db_translations/qa_topic.html:41
+msgid "Learning Portuguese"
+msgstr "Aprendendo Português"
+
+#: templates/db_translations/qa_topic.html:42
+msgid "Learning Spanish"
+msgstr "Aprendendo Espanhol"
+
+#: templates/db_translations/qa_topic.html:43
+msgid "Work Experience"
+msgstr "Experiência de Trabalho"
+
+#: templates/db_translations/qa_topic.html:44
+msgid "Job Offer"
+msgstr "Proposta de Emprego"
+
+#: templates/db_translations/qa_topic.html:45
+msgid "General Immigration"
+msgstr "Imigração Geral"
+
+#: templates/db_translations/qa_topic.html:46
+msgid "Housing"
+msgstr "Moradia"
+
+#: templates/db_translations/qa_topic.html:47
+msgid "Flight Tickets"
+msgstr "Passagens aéreas"
+
+#: templates/db_translations/qa_topic.html:48
+msgid "Immigration Consultants and Agents"
+msgstr "Consultores e Agentes de Imigração"
+
+#: templates/db_translations/qa_topic.html:49
+msgid "Professional Assessment and Recognition"
+msgstr "Validação Profissional"
+
+#: templates/db_translations/qa_topic.html:50
+msgid "Move Countries"
+msgstr "Mudança de País"
+
+#: templates/db_translations/qa_topic.html:51
+#: templates/points/country/situation.html:64
+#: templates/points/dashboard/dashboard.html:67
+msgid "Work"
+msgstr "Trabalho"
+
+#: templates/db_translations/qa_topic.html:52
+msgid "De-Facto Relationships"
+msgstr "União Estável"
+
+#: templates/db_translations/qa_topic.html:53
+msgid "Spouse Visa"
+msgstr "Visto de Esposo(a)"
+
+#: templates/db_translations/qa_topic.html:54
+msgid "Parents & Children Visa"
+msgstr "Visto de Pais e Filhos"
+
+#: templates/db_translations/qa_topic.html:55
+msgid "Employer Sponsored Visa"
+msgstr "Visto Patrocinado Empresa"
+
+#: templates/db_translations/qa_topic.html:56
+msgid "Citizen Sponsored Visa"
+msgstr "Visto Patrocinado Cidadão"
+
+#: templates/db_translations/qa_topic.html:57
+msgid "Startups"
+msgstr "Startups"
+
+#: templates/db_translations/qa_topic.html:58
+msgid "Business Relocation"
+msgstr "Mudança de País com Empresa"
+
+#: templates/db_translations/qa_topic.html:59
+msgid "Create Business"
+msgstr "Criar Empresa"
+
+#: templates/db_translations/qa_topic.html:60
+msgid "Open a Branch"
+msgstr "Abrir Filial"
+
+#: templates/db_translations/qa_topic.html:61
+msgid "Investors"
+msgstr "Investidores"
+
+#: templates/db_translations/qa_topic.html:62
+msgid "Buy Property"
+msgstr "Comprar Imóvel"
+
 #: templates/emails/order_confirmation_provider.html:145
 #: templates/emails/order_confirmation_user.html:142
 msgid "Subtotal"
@@ -5539,8 +5757,8 @@ msgstr "Desconto"
 #: templates/emails/order_confirmation_user.html:105
 #: templates/emails/order_confirmation_user.html:144
 #: templates/marketplace/service/payment.html:84
-#: templates/site/account/contracts.html:31
-#: templates/site/account/contracts.html:56
+#: templates/site/account/contracts.html:21
+#: templates/site/account/contracts.html:46
 msgid "Total"
 msgstr "Total"
 
@@ -5573,8 +5791,8 @@ msgid "Order Number"
 msgstr "Número do Pedido"
 
 #: templates/emails/order_confirmation_user.html:99
-#: templates/site/account/contracts.html:28
-#: templates/site/account/contracts.html:53
+#: templates/site/account/contracts.html:18
+#: templates/site/account/contracts.html:43
 msgid "Service"
 msgstr "Serviço"
 
@@ -5735,6 +5953,11 @@ msgstr "Ver Mais"
 msgid "see more"
 msgstr "veja mais"
 
+#: templates/marketplace/professionals/profile.html:36
+#: templates/site/contact/contact.html:41
+msgid "Send Message"
+msgstr "Enviar Mensagem"
+
 #: templates/marketplace/service/confirmation.html:14
 msgid "You will receive an email confirmation with all the details."
 msgstr "Você receberá um email confirmando todos os detalhes."
@@ -5892,7 +6115,7 @@ msgstr "de"
 
 #: templates/points/country/situation.html:50
 #: templates/points/dashboard/dashboard.html:41
-#: templates/site/account/view.html:63
+#: templates/site/account/view.html:53
 msgid "Language"
 msgstr "Línguas"
 
@@ -5900,11 +6123,6 @@ msgstr "Línguas"
 #: templates/points/dashboard/dashboard.html:54
 msgid "Education"
 msgstr "Escolaridade"
-
-#: templates/points/country/situation.html:64
-#: templates/points/dashboard/dashboard.html:67
-msgid "Work"
-msgstr "Trabalho"
 
 #: templates/points/country/situation.html:77
 msgid "Hints"
@@ -6459,7 +6677,6 @@ msgstr "Compartilhar"
 #: templates/qa/common/list_group_all.html:95
 #: templates/qa/question/list_group.html:46 templates/qa/question/view.html:90
 #: templates/qa/question/view.html:167
-#: templates/site/conversation/start.html:29
 #: templates/site/dashboard/dashboard.html:56
 msgid "Cancel"
 msgstr "Cancelar"
@@ -6583,6 +6800,19 @@ msgstr "Voltar"
 #: templates/site/_common/form.html:15
 msgid "Save"
 msgstr "Salvar"
+
+#: templates/site/_common/my_account_menu.html:4
+msgid "My profile"
+msgstr "Meu perfil"
+
+#: templates/site/_common/my_account_menu.html:7
+msgid "My contracts"
+msgstr "Meus contratos"
+
+#: templates/site/_common/my_account_menu.html:10
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:686
+msgid "Inbox"
+msgstr "Inbox"
 
 #: templates/site/about/how_it_works.html:11
 msgid "how it works"
@@ -6780,59 +7010,29 @@ msgstr ""
 "e configure os países e serviços que você deseja oferecer. Sua conta será "
 "avaliada em menos de 24 horas."
 
-#: templates/site/account/contracts.html:13
-#: templates/site/account/edit.html:21
-#: templates/site/account/edit_password.html:21
-#: templates/site/account/view.html:24
-#: templates/site/conversation/list.html:13
-#: templates/site/conversation/start.html:13
-#: templates/site/conversation/view.html:13
-msgid "My profile"
-msgstr "Meu perfil"
-
-#: templates/site/account/contracts.html:16
-#: templates/site/account/edit.html:24
-#: templates/site/account/edit_password.html:24
-#: templates/site/account/view.html:27
-#: templates/site/conversation/list.html:16
-#: templates/site/conversation/start.html:16
-#: templates/site/conversation/view.html:16
-msgid "My contracts"
-msgstr "Meus contratos"
-
-#: templates/site/account/contracts.html:19
-#: templates/site/account/edit.html:27
-#: templates/site/account/edit_password.html:27
-#: templates/site/account/view.html:30
-#: templates/site/conversation/list.html:19
-#: templates/site/conversation/start.html:19
-#: templates/site/conversation/view.html:19
-msgid "Inbox"
-msgstr "Inbox"
-
-#: templates/site/account/contracts.html:25
+#: templates/site/account/contracts.html:15
 msgid "My Services"
 msgstr "Meus Serviços"
 
-#: templates/site/account/contracts.html:29
+#: templates/site/account/contracts.html:19
 msgid "Company/Professional"
 msgstr "Empresa/Profissional"
 
-#: templates/site/account/contracts.html:30
-#: templates/site/account/contracts.html:55
+#: templates/site/account/contracts.html:20
+#: templates/site/account/contracts.html:45
 msgid "Date"
 msgstr "Data"
 
-#: templates/site/account/contracts.html:32
-#: templates/site/account/contracts.html:57
+#: templates/site/account/contracts.html:22
+#: templates/site/account/contracts.html:47
 msgid "Status"
 msgstr "Status"
 
-#: templates/site/account/contracts.html:50
+#: templates/site/account/contracts.html:40
 msgid "Client Contracts"
 msgstr "Contratos de Clientes"
 
-#: templates/site/account/contracts.html:54
+#: templates/site/account/contracts.html:44
 msgid "User"
 msgstr "Usuário"
 
@@ -6840,31 +7040,31 @@ msgstr "Usuário"
 msgid "Edit My Account"
 msgstr "Editar Minha Conta"
 
-#: templates/site/account/edit.html:35
+#: templates/site/account/edit.html:25
 msgid "Please correct fhe following errors:"
 msgstr "Favor corrigir os seguintes erros:"
 
-#: templates/site/account/edit.html:54 templates/site/account/edit.html:147
+#: templates/site/account/edit.html:44 templates/site/account/edit.html:137
 msgid "Save Information"
 msgstr "Salvar Dados"
 
-#: templates/site/account/edit.html:57
+#: templates/site/account/edit.html:47
 msgid "Profile Photo"
 msgstr "Foto do Perfil"
 
-#: templates/site/account/edit.html:113 templates/site/account/view.html:82
+#: templates/site/account/edit.html:103 templates/site/account/view.html:72
 msgid "Summary"
 msgstr "Descrição"
 
-#: templates/site/account/edit.html:117 templates/site/account/view.html:86
+#: templates/site/account/edit.html:107 templates/site/account/view.html:76
 msgid "Services Setup"
 msgstr "Configuração de Serviços"
 
-#: templates/site/account/edit.html:119
+#: templates/site/account/edit.html:109
 msgid "Supported countries:"
 msgstr "Países que dou suporte:"
 
-#: templates/site/account/edit.html:188 templates/site/account/edit.html:199
+#: templates/site/account/edit.html:178 templates/site/account/edit.html:189
 msgid "+ Add another"
 msgstr "+ Adicionar outro"
 
@@ -6872,45 +7072,45 @@ msgstr "+ Adicionar outro"
 msgid "Change My Password"
 msgstr "Mudar Minha Senha"
 
-#: templates/site/account/edit_password.html:56
+#: templates/site/account/edit_password.html:46
 #: templates/site/login/reset_password.html:42
 msgid "Update Password"
 msgstr "Mudar Senha"
 
-#: templates/site/account/view.html:42
+#: templates/site/account/view.html:32
 msgid "Profile photo"
 msgstr "Foto do perfil"
 
-#: templates/site/account/view.html:50
+#: templates/site/account/view.html:40
 msgid "Your Name"
 msgstr "Seu Nome"
 
-#: templates/site/account/view.html:58 wannamigrate/site/forms.py:37
+#: templates/site/account/view.html:48 wannamigrate/site/forms.py:37
 #: wannamigrate/site/forms.py:54
 msgid "Password"
 msgstr "Senha"
 
-#: templates/site/account/view.html:59
+#: templates/site/account/view.html:49
 msgid "Change Password"
 msgstr "Mudar Senha"
 
-#: templates/site/account/view.html:68 wannamigrate/core/models.py:331
+#: templates/site/account/view.html:58 wannamigrate/core/models.py:332
 msgid "Timezone"
 msgstr "Fuso-horário"
 
-#: templates/site/account/view.html:74
+#: templates/site/account/view.html:64
 msgid "Display Name"
 msgstr "Nome Comercial"
 
-#: templates/site/account/view.html:78
+#: templates/site/account/view.html:68
 msgid "Headline"
 msgstr "Título Profissional"
 
-#: templates/site/account/view.html:88
+#: templates/site/account/view.html:78
 msgid "Supported countries"
 msgstr "Países que dou suporte"
 
-#: templates/site/account/view.html:94
+#: templates/site/account/view.html:84
 msgid "Supported services"
 msgstr "Serviços que dou suporte"
 
@@ -6926,30 +7126,40 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/contact/contact.html:41
-msgid "Send Message"
-msgstr "Enviar Mensagem"
-
-#: templates/site/conversation/box_menu.html:3
-msgid "Messages"
-msgstr "Mensagens"
-
-#: templates/site/conversation/box_menu.html:4
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:688
 msgid "Sent"
 msgstr "Enviadas"
 
 #: templates/site/conversation/box_menu.html:5
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:690
 msgid "Archive"
 msgstr "Arquivo"
 
-#: templates/site/conversation/start.html:27
-#: templates/site/conversation/view.html:27
-msgid "New message"
-msgstr "Nova mensagem"
+#: templates/site/conversation/list.html:22
+msgid "Restore"
+msgstr ""
 
-#: templates/site/conversation/start.html:30
+#: templates/site/conversation/list.html:54
+msgid "(empty)"
+msgstr ""
+
+#: templates/site/conversation/start.html:18
 msgid "New Message"
 msgstr "Nova Mensagem"
+
+#: templates/site/conversation/view.html:18
+#, fuzzy
+#| msgid "Translation"
+msgid "Conversation"
+msgstr "Tradução"
+
+#: templates/site/conversation/view.html:31 wannamigrate/points/models.py:30
+msgid "Answer"
+msgstr "Resposta"
+
+#: templates/site/conversation/view.html:34
+msgid "Send"
+msgstr ""
 
 #: templates/site/dashboard/dashboard.html:15
 msgid "Questions"
@@ -7214,7 +7424,7 @@ msgstr "data de modificação"
 
 #: wannamigrate/core/models.py:50 wannamigrate/core/models.py:67
 #: wannamigrate/core/models.py:107 wannamigrate/core/models.py:142
-#: wannamigrate/core/models.py:326 wannamigrate/marketplace/models.py:72
+#: wannamigrate/core/models.py:327 wannamigrate/marketplace/models.py:72
 #: wannamigrate/marketplace/models.py:181
 #: wannamigrate/marketplace/models.py:284
 #: wannamigrate/marketplace/models.py:399
@@ -7245,7 +7455,7 @@ msgstr "imigração ativada"
 msgid "Select Country"
 msgstr "Selecione País"
 
-#: wannamigrate/core/models.py:108 wannamigrate/core/models.py:327
+#: wannamigrate/core/models.py:108 wannamigrate/core/models.py:328
 #: wannamigrate/marketplace/models.py:436
 msgid "is active"
 msgstr "está ativo"
@@ -7258,241 +7468,241 @@ msgstr "Selecione Objetivo"
 msgid "Select Language"
 msgstr "Selecione Idioma"
 
-#: wannamigrate/core/models.py:231
+#: wannamigrate/core/models.py:232
 msgid "from country"
 msgstr "país de origem"
 
-#: wannamigrate/core/models.py:232
+#: wannamigrate/core/models.py:233
 msgid "to country"
 msgstr "país de destino"
 
-#: wannamigrate/core/models.py:233
+#: wannamigrate/core/models.py:234
 msgid "goal"
 msgstr "objetivo"
 
-#: wannamigrate/core/models.py:234
+#: wannamigrate/core/models.py:235
 msgid "total users"
 msgstr "total de usuários"
 
-#: wannamigrate/core/models.py:235
+#: wannamigrate/core/models.py:236
 msgid "total visitors"
 msgstr "total de visitantes"
 
-#: wannamigrate/core/models.py:325
+#: wannamigrate/core/models.py:326
 msgid "e-mail"
 msgstr "e-mail"
 
-#: wannamigrate/core/models.py:328
+#: wannamigrate/core/models.py:329
 msgid "is admin"
 msgstr "é admin"
 
-#: wannamigrate/core/models.py:330
+#: wannamigrate/core/models.py:331
 msgid "Preferred Language"
 msgstr "Idioma de Preferência"
 
-#: wannamigrate/core/models.py:387 wannamigrate/core/models.py:430
-#: wannamigrate/core/models.py:449 wannamigrate/core/models.py:491
-#: wannamigrate/core/models.py:507 wannamigrate/core/models.py:533
-#: wannamigrate/core/models.py:576 wannamigrate/core/models.py:591
-#: wannamigrate/core/models.py:602 wannamigrate/core/models.py:635
-#: wannamigrate/core/models.py:682 wannamigrate/core/models.py:697
+#: wannamigrate/core/models.py:388 wannamigrate/core/models.py:431
+#: wannamigrate/core/models.py:450 wannamigrate/core/models.py:492
+#: wannamigrate/core/models.py:508 wannamigrate/core/models.py:534
+#: wannamigrate/core/models.py:577 wannamigrate/core/models.py:592
+#: wannamigrate/core/models.py:603 wannamigrate/core/models.py:636
+#: wannamigrate/core/models.py:683 wannamigrate/core/models.py:698
 #: wannamigrate/marketplace/models.py:30 wannamigrate/marketplace/models.py:86
 #: wannamigrate/marketplace/models.py:337 wannamigrate/points/models.py:196
 msgid "user"
 msgstr "usuário"
 
-#: wannamigrate/core/models.py:388
+#: wannamigrate/core/models.py:389
 msgid "Did you complete any studies in a regional part of Australia"
 msgstr "Você completou algum curso em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:389
+#: wannamigrate/core/models.py:390
 msgid "partner/spouse education level"
 msgstr "escolaridade do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:431 wannamigrate/core/models.py:577
-#: wannamigrate/core/models.py:683 wannamigrate/core/models.py:698
+#: wannamigrate/core/models.py:432 wannamigrate/core/models.py:578
+#: wannamigrate/core/models.py:684 wannamigrate/core/models.py:699
 #: wannamigrate/marketplace/models.py:196 wannamigrate/points/models.py:46
 #: wannamigrate/points/models.py:66 wannamigrate/points/models.py:179
 #: wannamigrate/points/models.py:197
 msgid "country"
 msgstr "país"
 
-#: wannamigrate/core/models.py:432
+#: wannamigrate/core/models.py:433
 msgid "education level"
 msgstr "nível de escolaridade"
 
-#: wannamigrate/core/models.py:433
+#: wannamigrate/core/models.py:434
 msgid "school/university"
 msgstr "escola/universidade"
 
-#: wannamigrate/core/models.py:434
+#: wannamigrate/core/models.py:435
 msgid "start year"
 msgstr "ano de início"
 
-#: wannamigrate/core/models.py:435
+#: wannamigrate/core/models.py:436
 msgid "end year"
 msgstr "ano de término"
 
-#: wannamigrate/core/models.py:450
+#: wannamigrate/core/models.py:451
 msgid "partner/spouse english level"
 msgstr "nível de inglês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:451
+#: wannamigrate/core/models.py:452
 msgid "partner/spouse french level"
 msgstr "nível de francês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:492 wannamigrate/marketplace/models.py:212
+#: wannamigrate/core/models.py:493 wannamigrate/marketplace/models.py:212
 msgid "language"
 msgstr "idioma"
 
-#: wannamigrate/core/models.py:493
+#: wannamigrate/core/models.py:494
 msgid "language level"
 msgstr "nível na língua"
 
-#: wannamigrate/core/models.py:508
+#: wannamigrate/core/models.py:509
 msgid "is logout"
 msgstr "é logout"
 
-#: wannamigrate/core/models.py:525
+#: wannamigrate/core/models.py:526
 msgid "Female"
 msgstr "Feminino"
 
-#: wannamigrate/core/models.py:526
+#: wannamigrate/core/models.py:527
 msgid "Male"
 msgstr "Masculino"
 
-#: wannamigrate/core/models.py:534
+#: wannamigrate/core/models.py:535
 msgid "country of citizenship"
 msgstr "país de cidadania"
 
-#: wannamigrate/core/models.py:535
+#: wannamigrate/core/models.py:536
 msgid "avatar"
 msgstr "avatar"
 
-#: wannamigrate/core/models.py:541
+#: wannamigrate/core/models.py:542
 msgid "birth date"
 msgstr "data de nascimento"
 
-#: wannamigrate/core/models.py:542
+#: wannamigrate/core/models.py:543
 msgid "gender"
 msgstr "sexo"
 
-#: wannamigrate/core/models.py:543
+#: wannamigrate/core/models.py:544
 msgid "Would you be willing to live in Regional Australia"
 msgstr "Você aceitaria morar em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:544
+#: wannamigrate/core/models.py:545
 msgid "Any family members who are citizens in other countries"
 msgstr "Algum parente que é cidadão em outros países"
 
-#: wannamigrate/core/models.py:592
+#: wannamigrate/core/models.py:593
 msgid "situation"
 msgstr "situação"
 
-#: wannamigrate/core/models.py:603
+#: wannamigrate/core/models.py:604
 msgid "percentage personal"
 msgstr "porcentagem - pessoal"
 
-#: wannamigrate/core/models.py:604
+#: wannamigrate/core/models.py:605
 msgid "percentage language"
 msgstr "porcentagem - línguas"
 
-#: wannamigrate/core/models.py:605
+#: wannamigrate/core/models.py:606
 msgid "percentage education"
 msgstr "porcentagem - escolaridade"
 
-#: wannamigrate/core/models.py:606
+#: wannamigrate/core/models.py:607
 msgid "percentage work"
 msgstr "porcetangem - trabalho"
 
-#: wannamigrate/core/models.py:607
+#: wannamigrate/core/models.py:608
 msgid "updating now"
 msgstr "atualizando agora"
 
-#: wannamigrate/core/models.py:608
+#: wannamigrate/core/models.py:609
 msgid "total answers"
 msgstr "Total de respostas"
 
-#: wannamigrate/core/models.py:609
+#: wannamigrate/core/models.py:610
 msgid "total questions"
 msgstr "total de perguntas"
 
-#: wannamigrate/core/models.py:610
+#: wannamigrate/core/models.py:611
 msgid "total profile views"
 msgstr "total de visualizações"
 
-#: wannamigrate/core/models.py:611
+#: wannamigrate/core/models.py:612
 msgid "total contracts"
 msgstr "total de contratos"
 
-#: wannamigrate/core/models.py:612
+#: wannamigrate/core/models.py:613
 msgid "total reviews"
 msgstr "total de avaliações"
 
-#: wannamigrate/core/models.py:613
+#: wannamigrate/core/models.py:614
 msgid "total topics following"
 msgstr "total de tópicos seguindo"
 
-#: wannamigrate/core/models.py:614
+#: wannamigrate/core/models.py:615
 msgid "total questions following"
 msgstr "total de perguntas seguindo"
 
-#: wannamigrate/core/models.py:615
+#: wannamigrate/core/models.py:616
 msgid "total blogposts following"
 msgstr "total de posts seguindo"
 
-#: wannamigrate/core/models.py:616
+#: wannamigrate/core/models.py:617
 msgid "total users following"
 msgstr "Total de usuários seguindo"
 
-#: wannamigrate/core/models.py:617
+#: wannamigrate/core/models.py:618
 msgid "total users followers"
 msgstr "total de seguidores"
 
-#: wannamigrate/core/models.py:618
+#: wannamigrate/core/models.py:619
 msgid "total favorite questions"
 msgstr "total de perguntas favoritas"
 
-#: wannamigrate/core/models.py:619
+#: wannamigrate/core/models.py:620
 msgid "total favorite blogposts"
 msgstr "total de posts favoritos"
 
-#: wannamigrate/core/models.py:636
+#: wannamigrate/core/models.py:637
 msgid "occupation"
 msgstr "profissão"
 
-#: wannamigrate/core/models.py:637
+#: wannamigrate/core/models.py:638
 msgid "Do you have a partner/spouse with proved skills"
 msgstr ""
 "Você tem um(a) esposo(a) (ou união estável) com Habilidades Comprovadas"
 
-#: wannamigrate/core/models.py:638
+#: wannamigrate/core/models.py:639
 msgid "are you willing to invest money on the country of destination"
 msgstr "Você pretende investir dinheiro no país de destino"
 
-#: wannamigrate/core/models.py:639
+#: wannamigrate/core/models.py:640
 msgid "do you have a startup recommendation letter approved by canada"
 msgstr "Você tem uma carta de recomendação de sua startup aprovada pelo Canadá"
 
-#: wannamigrate/core/models.py:640
+#: wannamigrate/core/models.py:641
 msgid "Did you complete a Professional Year Course in Australia"
 msgstr "Você fez um curso de 'Professional Year' na Austrália"
 
-#: wannamigrate/core/models.py:641
+#: wannamigrate/core/models.py:642
 msgid "If you have a partner/spouse, has he/she worked or studied in Canada"
 msgstr ""
 "Se você tem um(a) esposo(a) (ou união estável), ele(a) já trabalhou ou "
 "estudou no Canadá"
 
-#: wannamigrate/core/models.py:642
+#: wannamigrate/core/models.py:643
 msgid "Do you have a work offer overseas"
 msgstr "Você tem uma proposta de trabalho no exterior"
 
-#: wannamigrate/core/models.py:699
+#: wannamigrate/core/models.py:700
 msgid "company"
 msgstr "empresa"
 
-#: wannamigrate/core/models.py:700
+#: wannamigrate/core/models.py:701
 msgid "Duration of Employment"
 msgstr "Duração do Emprego"
 
@@ -7801,10 +8011,6 @@ msgstr "Nos informe o serviço que você precisa"
 msgid "question"
 msgstr "pergunta"
 
-#: wannamigrate/points/models.py:30
-msgid "Answer"
-msgstr "Resposta"
-
 #: wannamigrate/points/models.py:47
 msgid "pass mark points"
 msgstr "mínimo de pontos"
@@ -8068,11 +8274,15 @@ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/qa/forms.py:95
+#: wannamigrate/qa/forms.py:63 wannamigrate/qa/forms.py:118
+msgid "Select at least one country as topic."
+msgstr ""
+
+#: wannamigrate/qa/forms.py:106
 msgid "Ex: The first step is"
 msgstr "Ex: o primeiro passo é"
 
-#: wannamigrate/qa/forms.py:159
+#: wannamigrate/qa/forms.py:176
 msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
@@ -8282,21 +8492,27 @@ msgstr "Minha Conta - Wanna Migrate"
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:771
+#: wannamigrate/site/views.py:825
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:857
+#: wannamigrate/site/views.py:911
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:911
+#: wannamigrate/site/views.py:965
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:929
+#: wannamigrate/site/views.py:983
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
+
+#~ msgid "Messages"
+#~ msgstr "Mensagens"
+
+#~ msgid "New message"
+#~ msgstr "Nova mensagem"
 
 #~ msgid "Errors & Bugs"
 #~ msgstr "Erros"

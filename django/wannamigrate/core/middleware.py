@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 from django.conf import settings
 import pytz
 from django.utils import timezone, translation
+from wannamigrate.core.models import Situation, Country, Goal
 
 
 
@@ -31,7 +32,7 @@ class SituationLocaleMiddleware( object ):
             translation.activate( subdomain )
             request.session[translation.LANGUAGE_SESSION_KEY] = subdomain
 
-        # if this is a guest visitor's first visit
+        # if this is a guest visitor's first visit we try to get their country
         if not request.user.is_authenticated() and 'situation' not in request.session:
 
             request.session['situation'] = {}
@@ -73,3 +74,28 @@ class SituationLocaleMiddleware( object ):
             else:
                 timezone.deactivate()
             """
+
+        # If there's no situation session, sets one with default values
+        if 'situation' not in request.session or 'from_country' not in request.session['situation']:
+
+            # Defaults to country by IP and other default values
+            to_country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
+            goal = Goal.objects.get( pk = 1 )
+            if 'situation' in request.session and 'country_code' in request.session['situation'] and request.session['situation']['country_code']:
+                from_country = Country.objects.get( code = request.session['situation']['country_code'] )
+            else:
+                from_country = Country.objects.get( pk = settings.ID_COUNTRY_BRAZIL )
+    
+            # Sets Session
+            request.session['situation']['from_country'] = from_country
+            request.session['situation']['goal'] = goal
+            request.session['situation']['to_country'] = to_country
+            try:
+                situation = Situation.objects.get(
+                    from_country = from_country,
+                    to_country = to_country,
+                    goal = goal
+                )
+                request.session['situation']['total_users'] = situation.total_users
+            except Situation.DoesNotExist:
+                request.session['situation']['total_users'] = 0
