@@ -51,5 +51,6 @@ urlpatterns = patterns('',
 
     # Exceptions
     url( r'^not_supported/$', views.not_supported, name = 'not_supported' ),
+    url( r'^maintenance/$', views.maintenance, name = 'maintenance' ),
 
 )

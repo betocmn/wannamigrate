@@ -53,6 +53,7 @@ def home( request, static = None ):
     :param: request
     :return: String - The html page rendered
     """
+    return HttpResponseRedirect( reverse( "site:maintenance" ) )
 
     # Initialize template data dictionary
     template_data = {}
@@ -83,6 +84,8 @@ def login( request ):
     :param: request
     :return: String - The html page rendered
     """
+
+    return HttpResponseRedirect( reverse( "site:maintenance" ) )
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
@@ -151,6 +154,7 @@ def logout( request ):
     return HttpResponseRedirect( reverse( "site:home" ) )
 
 
+
 def signup( request ):
     """
     Signup action. It creates a new user on the platform
@@ -158,6 +162,8 @@ def signup( request ):
     :param: request
     :return: String - The html page rendered
     """
+
+    return HttpResponseRedirect( reverse( "site:maintenance" ) )
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
@@ -542,6 +548,8 @@ def dashboard( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
+
+    return HttpResponseRedirect( reverse( "site:maintenance" ) )
 
     # Initiates template variable
     template_data = {}
