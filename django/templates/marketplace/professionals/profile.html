@@ -45,7 +45,7 @@
 
                     {% for provider_service_type in provider_service_types %}
                         <li class="tooltip service-item {{ provider_service_type.service_type.icon_css_class }}" title="{{ provider_service_type.service_type.description }}">
-                            <strong class="title-service">{{ provider_service_type.service_type.name }}</strong>
+                            <strong class="title-service">{% trans provider_service_type.service_type.name %}</strong>
                             <span class="price">R$ {{ provider_service_type.price }}</span>
                             <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">Hire</a>
                         </li>

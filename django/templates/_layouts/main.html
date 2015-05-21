@@ -36,7 +36,7 @@
                 <div class="interaction">
                     <nav class="nav nav-dashboard">
                         <ul>
-                            <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Questions" %}</a></li>
+                            <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Q&A" %}</a></li>
                             <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
                         </ul>
@@ -62,14 +62,14 @@
                             </a>
                             <div class="box-options box-account">
                                 <ul class="box">
-                                    <li><a class="bt-settings" href="{% url 'site:account' %}">My Account</a></li>
-                                    <li><a class="bt-contracts" href="{% url 'site:contracts' %}">My Contracts</a></li>
-                                    <li><a class="bt-pricing" href="#">My Messages</a></li>
-                                    <li><a class="bt-logout" href="{% url 'site:logout' %}">Logout</a></li>
+                                    <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'My Account' %}</a></li>
+                                    <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Contracts' %}</a></li>
+                                    <li><a class="bt-pricing" href="#">{% trans 'My Messages' %}</a></li>
+                                    <li><a class="bt-logout" href="{% url 'site:logout' %}">{% trans 'Logout' %}</a></li>
                                 </ul>
                             </div>
                         {% else %}
-                            <a href="{% url 'site:login' %}" class="my-account login"><span>Login</span></a>
+                            <a href="{% url 'site:login' %}" class="my-account login"><span>{% trans 'Login' %}</span></a>
                         {% endif %}
                     </div>
                 </div>

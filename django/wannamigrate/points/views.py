@@ -78,7 +78,7 @@ def dashboard( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Points Calculator - Check your chances for Australia, Canada and New Zealand - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Immigration Calculator - Check your chances for Australia, Canada and New Zealand - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Initial Settings
@@ -153,7 +153,7 @@ def edit_personal( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Edit Personal - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Edit Personal - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
@@ -229,7 +229,7 @@ def edit_language( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Edit Language - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Edit Language - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
@@ -312,7 +312,7 @@ def edit_education( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Edit Education - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Edit Education - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
@@ -395,7 +395,7 @@ def edit_work( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Edit Work - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Edit Work - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Set top bar css class to be fixed on top
@@ -580,7 +580,7 @@ def situation( request, country_name ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Situation - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Situation - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Initial settings
@@ -782,7 +782,7 @@ def visa_application( request, country_name ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Visa Application - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Visa Application - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Initial settings
@@ -826,7 +826,7 @@ def professional_help( request, country_name ):
     template_data = { 'country_name': country_name }
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Professional Help - Points Calculator - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Professional Help - Immigration Calculator - Wanna Migrate' )
     template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
 
     # Get Country and set options for it
