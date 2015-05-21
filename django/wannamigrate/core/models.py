@@ -125,11 +125,10 @@ class Goal( BaseModel ):
         It's used on dropdowns on forms
         :return: String
         """
-        goals = Goal.objects.filter( **kwargs ).order_by( 'name' )
+        goals = Goal.objects.filter( **kwargs ).order_by( 'id' )
         result = []
         for goal in goals:
             result.append( ( goal.id, _( goal.name ) ) )
-        result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Goal' ) )] + result  )
 
 
