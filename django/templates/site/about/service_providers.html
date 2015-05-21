@@ -49,7 +49,7 @@
                     <img src="{% static 'site/img/service_3.png' %}" alt="{% trans "Free to join" %}" />
                 </div>
                 <div class="text_bottom">
-                    {% blocktrans %}We find <span>great Clients</span>{% endblocktrans %}
+                    {% blocktrans %}We find <span>great clients</span>{% endblocktrans %}
                 </div>
             </div>
             <div class="col">
@@ -92,7 +92,7 @@
                         {% trans "Receive Payment" %}
                     </div>
                     <div class="text">
-                        {% trans "Receive your payment on your Paypal Account." %}
+                        {% trans "Receive your payment on your Paypal, Payoneer or Iugu.com.br Account." %}
                     </div>
                 </div>
             </div>
@@ -104,7 +104,9 @@
             {% trans "How much does it cost?" %}
         </div>
         <div class="text">
-            {% trans "It's free to join and advertise on Wanna Migrate.  Once you accept a service request, we deduct a 12% fee from the payment." %}
+            {% blocktrans %}
+            It's free to join and advertise on Wanna Migrate.  Once you accept a service request, we deduct a 12% fee from the payment.
+            {% endblocktrans %}
         </div>
         <div class="title">
             {% trans "How much should I charge for my services?" %}
@@ -116,16 +118,14 @@
             {% trans "How and when will I receive the payments?" %}
         </div>
         <div class="text">
-            {% trans "On your Paypal our Payoneer Account.  The payment will be made 1 day after the service is completed. For long-term services, smaller amounts of payments will be made during the execution." %}
+            {% trans "On your Paypal, Iugu.com.br or Payoneer Account.  The payment will be made 1 day after the service is completed. For long-term services, smaller amounts of payments will be made during the execution." %}
         </div>
         <div class="title">
             {% trans "How do I get started?" %}
         </div>
         <div class="text">
             <a href="{% url 'site:signup' 'service-provider' %}">{% trans "Sign up" %}</a>
-            {% blocktrans %}
-                and send a photo or scanned image of your identification document to <a href="mailto:documents@wannamigrate.com">documents@wannamigrate.com</a>
-            {% endblocktrans %}
+            {% trans "and setup the countries and services you want to offer. Your account will be reviewed in less than 24 hours." %}
         </div>
     </section>
 

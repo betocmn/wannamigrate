@@ -13,7 +13,7 @@
             <section class="questions home-questions show">
                 <div class="top">
                     <h2 class="title">{% trans "Questions" %}</h2>
-                    <a href="{% url 'qa:add_question' %}" class="bt-add button">{% trans "Add Question" %}</a>
+                    <a href="{% url 'qa:add_question' %}" class="bt-add button">{% trans "Add Question" context 'Button' %}</a>
                 </div>
 
                 <div class="content-questions">
@@ -59,16 +59,16 @@
                             <a href="#" class="bt-options">{% trans "Options" %}</a>
                         </div>
                     {% empty %}
-                        <p>{% trans "No content found" %}</p>
+                        <p class="no-content">{% trans "No content found" %}</p>
                     {% endfor %}
 
                     <a href="{% url "qa:list_questions" %}" id="bt-view-more-posts" class="bt-view-more button-transparent">{% trans "View More" %}</a>
-                    <a href="{% url "qa:add_question" %}" class="bt-add-mobile button">{% trans "Add Question" %}</a>
+                    <a href="{% url "qa:add_question" %}" class="bt-add-mobile button">{% trans "Add Question" context 'button' %}</a>
                 </div>
             </section>
             <section class="professionals home-professionals">
             <div class="top">
-                <h2 class="title">Professionals</h2>
+                <h2 class="title">{% trans 'Professionals' %}</h2>
             </div>
             <div class="content-professionals">
 
@@ -97,7 +97,7 @@
                             <div class="service">
                                 <p class="truncate-line">
                                     {% for service_type in provider.service_types.all %}
-                                        {% ifchanged %}{{ service_type.service_type_category.name }} -{% endifchanged %}
+                                        {% ifchanged %}{% trans service_type.service_type_category.name %} -{% endifchanged %}
                                     {% endfor %}
                                 </p>
                             </div>
@@ -121,7 +121,7 @@
                 {% endfor %}
 
             </div>
-            <a href="{% url 'marketplace:professionals' %}" class="bt-view-more button-transparent">View More</a>
+            <a href="{% url 'marketplace:professionals' %}" class="bt-view-more button-transparent">{% trans 'View More' %}</a>
         </section>
 
         {% endif %}

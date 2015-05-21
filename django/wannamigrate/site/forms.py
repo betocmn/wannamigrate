@@ -250,8 +250,9 @@ class ContactForm( BaseForm ):
         ( '', _( 'Select Subject' ) ),
         ( '', _( 'General Questions' ) ),
         ( '', _( 'Become a Service Provider' ) ),
-        ( '', _( 'Errors & Bugs' ) ),
-        ( '', _( 'Payment Problems' ) )
+        ( '', _( 'Website Errors' ) ),
+        ( '', _( 'Payment Problems' ) ),
+        ( '', _( 'Report User or Content' ) )
     )
     subject = forms.ChoiceField( required = True, label = _( "Subject" ), choices = SUBJECTS, widget = forms.Select( attrs = { 'class' : '' } )  )
     name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )

@@ -11,7 +11,10 @@ those strings for later translations.
 # Imports
 ##########################
 from django.core.management.base import BaseCommand, CommandError
-from wannamigrate.core.models import Country, Language, Answer
+from wannamigrate.core.models import Country, Language, Goal
+from wannamigrate.points.models import Answer, Occupation, OccupationCategory
+from wannamigrate.qa.models import Topic
+from wannamigrate.marketplace.models import ServiceType, ServiceTypeCategory
 from django.core.files import File
 from django.conf import settings
 import os
@@ -42,6 +45,24 @@ class Command( BaseCommand ):
             elif table_name == 'core_answer':
                 model = Answer
                 possible_fields = [ 'description' ]
+            elif table_name == 'core_goal':
+                model = Goal
+                possible_fields = [ 'name' ]
+            elif table_name == 'marketplace_servicetype':
+                model = ServiceType
+                possible_fields = [ 'name', 'description' ]
+            elif table_name == 'marketplace_servicetypecategory':
+                model = ServiceTypeCategory
+                possible_fields = [ 'name' ]
+            elif table_name == 'points_occupation':
+                model = Occupation
+                possible_fields = [ 'name' ]
+            elif table_name == 'points_occupationcategory':
+                model = OccupationCategory
+                possible_fields = [ 'name' ]
+            elif table_name == 'qa_topic':
+                model = Topic
+                possible_fields = [ 'name' ]
             else:
                 raise CommandError( 'Table does not need translations or do not exist' )
 

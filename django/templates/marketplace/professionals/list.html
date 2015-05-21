@@ -11,7 +11,7 @@
 
             <section class="professionals">
                 <div class="top">
-                    <h2 class="title">Hire a Professional</h2>
+                    <h2 class="title">{% trans 'Hire a Professional' %}</h2>
                 </div>
 
                 {% for provider in providers.all %}
@@ -45,11 +45,11 @@
                             </div>
                         </div>
                         <p class="description"><a class="link-hiring" href="{{ view_professional_url }}">{{ provider.description|truncatechars:280 }}</a></p>
-                        <a href="{{ view_professional_url }}" class="bt-hire button">Hire</a>
+                        <a href="{{ view_professional_url }}" class="bt-hire button">{% trans 'Hire' context 'button' %}</a>
                         <div class="tags">
                             <ul class="tags-list">
                                 {% for service_type in provider.service_types.all %}
-                                    {% ifchanged %}<li class="tag"><a href="{{ view_professional_url }}#services" class="tag-link">{{ service_type.service_type_category.name }}</a></li>{% endifchanged %}
+                                    {% ifchanged %}<li class="tag"><a href="{{ view_professional_url }}#services" class="tag-link">{% trans service_type.service_type_category.name %}</a></li>{% endifchanged %}
                                 {% endfor %}
                             </ul>
                         </div>
@@ -65,7 +65,10 @@
                 {% endfor %}
 
             </section>
-            <a href="#" class="bt-view-more button-transparent">View More</a>
+
+            <!--
+            <a href="#" class="bt-view-more button-transparent">{% trans 'View More' %}</a>
+            -->
 
         {% endif %}
     </div>

@@ -896,13 +896,16 @@ def edit_account( request ):
                     success = False
 
             if success:
+
                 # Updates the active language
-                translation.activate( user.preferred_language )
-                request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+                if user.preferred_language:
+                    translation.activate( user.preferred_language )
+                    request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
 
                 # Updates the active timezone
-                timezone.activate( pytz.timezone( user.preferred_timezone ) )
-                request.session['django_timezone'] = user.preferred_timezone
+                if user.preferred_timezone:
+                    timezone.activate( pytz.timezone( user.preferred_timezone ) )
+                    request.session['django_timezone'] = user.preferred_timezone
 
                 # Redirects to view page with success message
                 messages.success( request, _( 'Data successfully updated.' ) )

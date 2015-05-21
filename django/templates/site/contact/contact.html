@@ -18,12 +18,12 @@
 
     <div class="content">
         <section class="contact-us">
-            <h2 class="title">Contact us</h2>
-            <strong class="description"><span>Wanna Migrate</span> is in BETA version and we are working around the clock to have a full software solution to help future immigrants.</strong>
+            <h2 class="title">{% trans 'Contact Us' %}</h2>
+            <strong class="description"><span>Wanna Migrate</span> {% trans 'is a Brazilian Startup willing to create software tools to help people to migrate around the world.' %}</strong>
 
             <form method="post" action="" id="main_form">
                 <fieldset>
-                    <legend>Your feedback is very valuable for us, so feel free to get in touch using the form below:</legend>
+                    <legend>{% trans 'Send us your feedback or request:' %}</legend>
 
                     {% include "site/_common/status.html" %}
 
@@ -38,7 +38,7 @@
                     {% endfor %}
 
                     <div class="field">
-                        <button class="button bt-send">Send</button>
+                        <button class="button bt-send">{% trans 'Send Message' %}</button>
                     </div>
                 </fieldset>
             </form>

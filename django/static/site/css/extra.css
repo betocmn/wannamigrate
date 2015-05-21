@@ -232,7 +232,7 @@ form .errorlist {
     float: left;
 }
 .dashboard footer .nav-footer ul.explore {
-    margin-left: 83px;
+    margin-left: 56px;
 }
 .dashboard footer .nav-footer li {
     float: none;
@@ -253,6 +253,7 @@ form .errorlist {
 .dashboard footer .copyright {
     top: 104px;
     height: 45px;
+    width: 296px;
 }
 .dashboard footer a.language {
     padding-left: 22px;
@@ -367,6 +368,12 @@ form .errorlist {
     background: transparent url( "../img/icon-service-housing.png" ) no-repeat 0px 0px;
 }
 
+
+
+/* Site Dashboard */
+.dashboard .content .questions .no-content {
+    margin: 30px 0;
+}
 
 
 
@@ -564,6 +571,10 @@ form .errorlist {
 /* Contact Us */
 .contactus .content .contact-us form fieldset .field.subject select {
   width: 470px;
+}
+.contactus .content .contact-us form fieldset .field .bt-send {
+  width: 100%;
+  margin: 23px 0 0;
 }
 
 

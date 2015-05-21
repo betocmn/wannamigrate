@@ -5,25 +5,25 @@
 {% block content %}
 
     <div class="content extra-tools">
-        <h2 class="title">Extra Tools</h2>
+        <h2 class="title">{% trans 'Extra Tools' context 'Page Title' %}</h2>
         <div class="tools">
             <div class="tool calculator">
                 <a href="{% url 'points:dashboard' %}">
-                    <h3 class="title-tool">Immigration Points Calculator</h3>
-                    <p class="text">Find out if you qualify for a visa to work and live in awesome countries.</p>
+                    <h3 class="title-tool">{% trans 'Immigration Points Calculator' %}</h3>
+                    <p class="text">{% trans 'Find out if you qualify for a visa to work and live in Canada, Australia and New Zealand.' %}</p>
                 </a>
             </div>
             <div class="tool unavailable find-jobs">
-                <h3 class="title-tool">Find Jobs Overseas</h3>
-                <p class="text">Get exposed to international employers and receive notifications about new job openings.</p>
+                <h3 class="title-tool">{% trans 'Find Jobs Overseas' %}</h3>
+                <p class="text">{% trans 'Get exposed to international employers and receive notifications about new job openings.' %}</p>
             </div>
             <div class="tool unavailable genius">
-                <h3 class="title-tool">Immigration Genius</h3>
-                <p class="text">Answer some questions and get a final destination where you should live and can get a visa.</p>
+                <h3 class="title-tool">{% trans 'Immigration Genius' %}</h3>
+                <p class="text">{% trans 'Answer some questions and get a final destination where you should live and can get a visa.' %}</p>
             </div>
             <div class="tool unavailable ebooks">
-                <h3 class="title-tool">E-Books</h3>
-                <p class="text">Download our complete guides for immigrants.</p>
+                <h3 class="title-tool">{% trans 'E-Books' %}</h3>
+                <p class="text">{% trans 'Download our complete step-by-step immigration guides.' %}</p>
             </div>
         </div>
     </div>
