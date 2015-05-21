@@ -11,7 +11,7 @@ Also you can create custom form fields or methods
 ##########################
 # Imports
 ##########################
-from django.forms import TextInput, SelectMultiple, HiddenInput, Select, ModelMultipleChoiceField, ModelChoiceField
+from django import forms
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.qa.models import Question, BlogPost, Topic, Answer
 from django.conf import settings
@@ -49,9 +49,13 @@ class AddQuestionForm( BaseModelForm ):
         self.instance.owner = owner
 
         # Overrides the choices to the related_topics field.
+        self.fields[ "title" ].widget = forms.Textarea()
+        self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Type your question here..." )
         self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
         self.fields[ "related_topics" ].required = True
+        self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
 
     def clean( self, *args, **kwargs ):
         cleaned_data = super( AddQuestionForm, self ).clean( *args, **kwargs )
@@ -101,11 +105,13 @@ class AddBlogPostForm( BaseModelForm ):
         self.instance.owner = owner
 
         # Overrides the choices to the related_topics field.
+        self.fields[ "title" ].widget = forms.Textarea()
+        self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Ex: How to take your pet to Canada" ) + "..."
         self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
         self.fields[ "body" ].required = True
-        self.fields[ "body" ].widget.attrs[ "class" ] = "wm-html-content"
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Ex: The first step is" ) + "..."
         self.fields[ "related_topics" ].required = True
+        self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
 
 
@@ -173,7 +179,7 @@ class AddAnswerForm( BaseModelForm ):
 
         # Overrides the IS_ANONYMOUS widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
-        self.fields[ "body" ].widget.attrs[ "class" ] = "text-coments wm-html-content"
+        self.fields[ "body" ].widget.attrs[ "class" ] = "text-coments"
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Write your answer" ) + "..."
 
     def clean( self, *args, **kwargs ):

@@ -9,6 +9,7 @@
             opts : [],  // the topics options for the autocomplete.
             element_name : this.attr( "name" ),
             element_id : this.attr( "id" ),
+            element_placeholder : this.attr( "placeholder" ),
             target : ".topics-container",
             wrapper : "span",
             wrapper_class : "topic",
@@ -30,7 +31,7 @@
         });
 
         // Creates the search input for the topics
-        var search_input = $( "<input/>" ).attr( "id", "topics-input" ).insertAfter( this );
+        var search_input = $( "<input/>" ).attr( "placeholder", settings.element_placeholder ).attr( "id", "topics-input" ).insertAfter( this );
 
         // Creates the container
         var topics_container = $( "<div/>" ).attr( "class", "topics-container" ).insertAfter( search_input );

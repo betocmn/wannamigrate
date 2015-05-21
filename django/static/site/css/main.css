@@ -3682,7 +3682,7 @@ select {
     width: 100%;
   }
   .dashboard .wrapper .content.social .content .add-post .add-topics input {
-    width: 130px;
+    width: 100%;
   }
   .dashboard .wrapper .content.social .content .add-post .add-topics .tags {
     height: 60px;
@@ -5394,10 +5394,12 @@ select {
 }
 .content.social .content .add-post .add-topics input {
   float: left;
-  width: 375px;
+  width: 100%;
   margin-right: 14px;
+  margin-bottom: 20px;
   font-size: 14px;
   color: #888;
+  background: transparent url("../img/icon-lupa.png") no-repeat right center;
 }
 .content.social .content .add-post .add-topics .bt-add {
   display: inline-block;
@@ -5467,10 +5469,12 @@ select {
 }
 .content.social .content .add-question .add-topics input {
   float: left;
-  width: 375px;
+  width: 100%;
   margin-right: 14px;
+  margin-bottom: 20px;
   font-size: 14px;
   color: #888;
+  background: transparent url("../img/icon-lupa.png") no-repeat right center;
 }
 .content.social .content .add-question .add-topics .bt-add {
   display: inline-block;
@@ -9373,7 +9377,7 @@ select {
     width: 100%;
   }
   .dashboard .wrapper .content.social .content .add-question .add-topics input {
-    width: 130px;
+    width: 100%;
   }
   .dashboard .wrapper .content.social .content .add-question .add-topics .tags {
     height: 60px;
