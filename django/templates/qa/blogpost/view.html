@@ -74,11 +74,11 @@
                 <div class="data-question">
                     <h3 class="title-question">{{ blogpost.title }}</h3>
 
-                    <p class="answer">
+                    <div style="margin:20px 0 30px 0" class="wm-html-content">
                         {% autoescape off %}
                             {{ blogpost.body }}
                         {% endautoescape %}
-                    </p>
+                    </div>
                     <a class="data-item">{% trans "Writen in" %} <strong>{{ blogpost.last_activity_date|date:"b d" }}</strong></a>
                 </div>
                 <div class="data">

@@ -103,6 +103,7 @@ class AddBlogPostForm( BaseModelForm ):
         # Overrides the choices to the related_topics field.
         self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
         self.fields[ "body" ].required = True
+        self.fields[ "body" ].widget.attrs[ "class" ] = "wm-html-content"
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Ex: The first step is" ) + "..."
         self.fields[ "related_topics" ].required = True
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
@@ -172,7 +173,7 @@ class AddAnswerForm( BaseModelForm ):
 
         # Overrides the IS_ANONYMOUS widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
-        self.fields[ "body" ].widget.attrs[ "class" ] = "text-coments"
+        self.fields[ "body" ].widget.attrs[ "class" ] = "text-coments wm-html-content"
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Write your answer" ) + "..."
 
     def clean( self, *args, **kwargs ):

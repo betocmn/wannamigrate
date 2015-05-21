@@ -386,3 +386,12 @@ def dbg( var ):
         debug_str += "({0}) {1}".format( type(var), str( var ) )
 
     return HttpResponse( debug_str )
+
+
+def debug_sql():
+    # Print SQL Queries
+    from django.db import connection
+    queries_text = ''
+    for query in connection.queries:
+        queries_text += '<br /><br /><br />' + str( query['sql'] )
+    return HttpResponse( queries_text )

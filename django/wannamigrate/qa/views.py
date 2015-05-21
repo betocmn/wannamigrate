@@ -238,11 +238,21 @@ def view_question( request, slug ):
         messages.success( request, _( 'Answer successfully created.' ) )
         return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
 
-    related_content = Question.objects.filter( related_topics__in = question.related_topics.all() ).exclude( id = question.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
-    answers = Answer.objects.filter( question__id = question.id ).order_by( "-total_upvotes", "total_downvotes", "-created_date" )
+    # Get related contents
+    related_content = Question.objects.filter( related_topics__in = question.related_topics.all() )\
+        .exclude( id = question.id )\
+        .order_by( "-total_upvotes", "-created_date" )\
+        .only( "id", "title", "slug" )[0:3]
+
+    # Get answers
+    answers = Answer.objects.filter( question__id = question.id )\
+        .select_related( "owner" )\
+        .prefetch_related( "owner__provider_set", "owner__userpersonal" )\
+        .order_by( "-total_upvotes", "total_downvotes", "-created_date" )
 
     answers_ids = list( answer.id for answer in answers )
 
+    # Get upvoted answers
     upvoted_answers_ids = Vote.objects.filter(
         object_id__in = answers_ids,
         content_type = ContentType.objects.get_for_model( Answer ),
@@ -250,6 +260,7 @@ def view_question( request, slug ):
         vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
     ).values_list( "object_id", flat = True )
 
+    # Get downvoted answers
     downvoted_answers_ids = Vote.objects.filter(
         object_id__in = answers_ids,
         content_type = ContentType.objects.get_for_model( Answer ),
@@ -257,13 +268,16 @@ def view_question( request, slug ):
         vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
     ).values_list( "object_id", flat = True )
 
+    # extra processing
     for answer in answers:
         if answer.id in upvoted_answers_ids:
             answer.is_upvoted = True
         if answer.id in downvoted_answers_ids:
             answer.is_downvoted = True
+        answer.klass = "" if answer.owner.provider_set.exists() else "commom"
 
     # Checks if the user is following the post
+
     if question.followers.filter( id = request.user.id ).exists():
         question.is_followed = True
     else:

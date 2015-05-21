@@ -123,10 +123,10 @@
                             {% if ans.is_anonymous or not ans.owner.userpersonal.avatar %}
                                 <img src="{% static 'site/img/thumb-account.png' %}" alt="user photo">
                             {% else %}
-                                <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="user photo">
+                                <img src="{{ ans.owner.userpersonal.avatar.thumbnail.url }}" alt="user photo">
                             {% endif %}
                         </i>
-                        <div class="post">
+                        <div class="post {{ ans.klass }}">
                             <div class="user">
                                 <span class="name">
                                     {% if ans.is_anonymous %}
@@ -137,7 +137,7 @@
                                 </span>
                                 <span class="info"></span>
                             </div>
-                            <span class="text-post">
+                            <span class="text-post wm-html-content">
                                 {% autoescape off %}
                                     {{ ans.body }}
                                 {% endautoescape %}

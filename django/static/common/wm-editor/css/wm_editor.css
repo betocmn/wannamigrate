@@ -71,6 +71,24 @@
 {
     color: #444;
 }
-
+/*
 .wm-editor-content > ol, .wm-editor-content > ul { margin-top:5px; margin-left:10%; }
 .wm-editor-content > h1 { font-size:17px; }
+*/
+
+
+.wm-html-content { color: #555; font-size: 14px; }
+.wm-html-content * { margin:0; padding:0; text-decoration:none; color: #555; font-size: 14px; }
+.wm-html-content p { font-family:"open_sansregular"; font-size:14px; }
+.wm-html-content b { font-family:"open_sansblightold"; font-size:14px; }
+.wm-html-content h1 { font-family:"open_sansblightold"; font-size:18px; }
+.wm-html-content ol { list-style-type:decimal; padding-left: 30px; margin: 0px; }
+.wm-html-content ol li { padding-left: 3px; }
+.wm-html-content ul { list-style-type: square; padding-left: 30px; margin: 0px; }
+.wm-html-content ul li { padding-left: 3px; }
+.wm-html-content u { text-decoration:underline; }
+.wm-html-content a { text-decoration:underline; color:#68367D; }
+.wm-html-content a:hover{ color: #9D79AD; }
+.wm-html-content blockquote { background: #f9f9f9; border-left: 10px solid #ccc; margin: 1.5em 10px; padding: 0.5em 10px; quotes: "\201C""\201D""\2018""\2019"; }
+.wm-html-content blockquote:before { color: #ccc; content: open-quote; font-size: 4em; line-height: 0.1em; margin-right: 0.25em; vertical-align: -0.4em; }
+.wm-html-content blockquote p { display: inline; }
