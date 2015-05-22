@@ -251,9 +251,13 @@ form .errorlist {
     text-decoration: underline;
 }
 .dashboard footer .copyright {
-    top: 104px;
-    height: 45px;
+    position: absolute;
+    height: auto;
     width: 336px;
+    line-height: inherit;
+    float: right;
+    top: 135px;
+    right: 36px;
 }
 .dashboard footer a.language {
     padding-left: 22px;
