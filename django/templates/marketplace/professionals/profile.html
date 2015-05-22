@@ -32,8 +32,10 @@
                         <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
                     </div>
                 </div>
-                <div class="description">
+                <div class="send-message">
                     <a href="{% url "site:start_conversation" provider.user.id %}" class="bt-hire button">{% trans "Send Message" %}</a>
+                </div>
+                <div class="description">
                     {{ provider.description|linebreaks }}
                 </div>
             </div>

@@ -30,7 +30,7 @@ class ServiceTypeChoiceField( ModelChoiceField ):
     Custom Model for service types, to get translation
     """
 
-    choices = ServiceType.get_translated_tuple()
+    choices = ServiceType.get_translated_tuple( is_active = True )
 
 
 

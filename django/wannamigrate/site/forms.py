@@ -413,7 +413,7 @@ class ProviderServiceTypeForm( BaseModelForm ):
 
     service_type = ServiceTypeChoiceField(
         required = True,
-        queryset = ServiceType.objects.filter(),
+        queryset = ServiceType.objects.filter( is_active = True ),
         empty_label = _( 'Select Service' ),
         widget = forms.Select( attrs = { 'class': 'default-select' } )
     )

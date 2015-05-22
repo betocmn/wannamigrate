@@ -449,11 +449,10 @@ class ServiceType( BaseModel ):
 
         :return: String
         """
-        service_types = ServiceType.objects.filter( **kwargs ).order_by( 'name' )
+        service_types = ServiceType.objects.filter( **kwargs ).order_by( 'service_type_category_id', 'name' )
         result = []
         for service_type in service_types:
             result.append( ( service_type.id, _( service_type.name ) ) )
-        result = sorted( result, key = lambda x: x[1] )
         return tuple( [( '', _( 'Select Service' ) )] + result  )
 
 

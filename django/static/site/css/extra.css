@@ -506,6 +506,19 @@ form .errorlist {
 
 
 
+/* View Professional (PROFILE) page */
+.dashboard .content.hiring .professional .send-message {
+    margin-top: 75px;
+}
+.dashboard .content.hiring .professional .send-message .button {
+    width: 175px;
+}
+.dashboard .content.hiring .professional .description {
+    margin-top: 0px;
+}
+
+
+
 /* My Account */
 .content.myaccount .interactions div.password a {
     text-decoration: none;
