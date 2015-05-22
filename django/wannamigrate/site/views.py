@@ -52,6 +52,8 @@ from django.core.files.base import ContentFile
 from django.utils import timezone, translation
 import pytz
 from django.db.models import Prefetch, Count, F
+from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
+
 
 
 
@@ -1035,26 +1037,13 @@ def dashboard( request ):
         # Gets 5 most related service providers
         template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
 
+        filter_params = {}
         # Fills the topics related to user's situation
-        related_countries_ids = [ from_country.id, to_country.id ]
-        related_goals_ids = [ goal.id ]
+        filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+        filter_params[ "related_goals_ids" ] = [ goal.id ]
 
-        questions = Question.objects.get_listing(
-            related_countries_ids = related_countries_ids,
-            related_goals_ids = related_goals_ids,
-        )
-
-        # If the user is authenticated
-        if request.user.is_authenticated():
-            # Checks if the user is following the posts
-            question_ids = list( question.id for question in questions )
-            following_posts = Question.objects.filter( id__in = question_ids, followers__id = request.user.id ).values_list( "id", flat=True )
-
-            for question in questions:
-                if question.id in following_posts:
-                    question.is_followed = True
-                else:
-                    question.is_followed = False
+        # Get questions per step
+        questions = get_questions_by_step( request, filter_params, 0, 5 )
 
         # Gets 5 most related questions (page 0 by default)
         template_data['questions'] = questions
