@@ -253,7 +253,7 @@ form .errorlist {
 .dashboard footer .copyright {
     top: 104px;
     height: 45px;
-    width: 296px;
+    width: 336px;
 }
 .dashboard footer a.language {
     padding-left: 22px;
@@ -502,6 +502,19 @@ form .errorlist {
 
 .dashboard .content.payment .confirmation .message p.denied span {
   color: #a94442;
+}
+
+
+
+/* View Professional (PROFILE) page */
+.dashboard .content.hiring .professional .send-message {
+    margin-top: 75px;
+}
+.dashboard .content.hiring .professional .send-message .button {
+    width: 175px;
+}
+.dashboard .content.hiring .professional .description {
+    margin-top: 0px;
 }
 
 

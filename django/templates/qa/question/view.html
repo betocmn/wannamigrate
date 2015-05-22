@@ -35,7 +35,7 @@
                 <ul class="tags">
                     {% for topic in question.related_topics.all %}
                         <li class="tag">
-                            <a href="{% url "qa:view_topic" topic.slug %}" class="tag-link">{{ topic.name }}</a>
+                            <a href="{% url "qa:view_topic" topic.slug %}" class="tag-link">{% trans topic.name %}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -44,16 +44,18 @@
                 <h3 class="title">{% trans "Question Stats" %}</h3>
                 <ul>
                     <li class="item views">
-                        <a href="#">{% trans "Views" %} <span class="count">({{ question.total_views|kmi}})</span></a>
+                        <p>{% trans "Views" %} <span class="count">({{ question.total_views|kmi}})</span></p>
                     </li>
                     <li class="item answers">
-                        <a href="#">{% trans "Answers" %} <span class="count">({{ question.total_answers|kmi}})</span></a>
+                        <p>{% trans "Answers" %} <span class="count">({{ question.total_answers|kmi}})</span></p>
                     </li>
                     <li class="item followers">
-                        <a href="#">{% trans "Followers" %} <span class="count" id="post_followers_counter">({{ question.total_followers|kmi }})</span></a>
+                        <p>{% trans "Followers" %} <span class="count" id="post_followers_counter">({{ question.total_followers|kmi }})</span></p>
                     </li>
                 </ul>
             </div>
+
+            <!--
             <div class="itens post-share">
                 <h3 class="title">{% trans "Share" %}</h3>
                 <ul>
@@ -65,6 +67,8 @@
                     </li>
                 </ul>
             </div>
+            -->
+
         </div>
     </section>
     <section class="content">
@@ -85,12 +89,11 @@
                 <div class="box-options">
                     <i class="shadow"></i>
                     <ul class="box">
-                        <li><a href="#" class="bt-share">{% trans "Share" %}</a></li>
-                        <li><a href="#" class="bt-report">{% trans "Report" %}</a></li>
-                        <li><a href="#" class="bt-cancel">{% trans "Cancel" %}</a></li>
+                        <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "View" %}</a></li>
+                        <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
                     </ul>
-                </div>
-                <a href="#" class="bt-options">{% trans "Options" %}</a>
+                </div><!--
+                <a href="#" class="bt-options">{% trans "Options" %}</a> -->
             </div>
             <div class="comment">
                 <form action="{{ action_url|default:'' }}" method="post" id="main_form" class="add-answer">
@@ -130,7 +133,7 @@
                             <div class="user">
                                 <span class="name">
                                     {% if ans.is_anonymous %}
-                                        Anonymous
+                                        {% trans 'Anonymous' %}
                                     {% else %}
                                         {{ans.owner.name}}
                                     {% endif %}
@@ -162,12 +165,10 @@
                             <div class="box-options">
                                 <i class="shadow"></i>
                                 <ul class="box">
-                                    <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                                    <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                                    <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                                    <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
                                 </ul>
                             </div>
-                            <a href="#" class="bt-options">{% trans "Options" %}</a>
+                            <!--<a href="#" class="bt-options">{% trans "Options" %}</a> -->
                         </div>
                     </div>
                 {% endfor %}
@@ -187,6 +188,8 @@
             </ul>
         </div>
         {% endif %}
+
+        <!--
         <div class="related-professionals">
             <h3 class="title">Related Professionals</h3>
             <ul>
@@ -201,6 +204,8 @@
                 </li>
             </ul>
         </div>
+        -->
+
     </section>
 </div>
 

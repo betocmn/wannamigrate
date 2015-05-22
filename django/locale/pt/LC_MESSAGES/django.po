@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-21 16:30-0300\n"
+"POT-Creation-Date: 2015-05-22 02:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr "Email do Wanna Migrate"
 msgid "Q&A"
 msgstr "Tira-Dúvidas"
 
-#: templates/_layouts/main.html:40 templates/site/dashboard/dashboard.html:71
+#: templates/_layouts/main.html:40 templates/site/dashboard/dashboard.html:70
 msgid "Professionals"
 msgstr "Profissionais"
 
@@ -38,12 +38,13 @@ msgstr "Extras"
 msgid "Search"
 msgstr "Busca"
 
-#: templates/_layouts/main.html:65 templates/site/account/contracts.html:9
-#: templates/site/account/view.html:20 templates/site/conversation/list.html:9
-#: templates/site/conversation/start.html:9
-#: templates/site/conversation/view.html:9
-msgid "My Account"
-msgstr "Minha Conta"
+#: templates/_layouts/main.html:61
+msgid "My Profile"
+msgstr "Meu Perfil"
+
+#: templates/_layouts/main.html:65
+msgid "Edit Profile"
+msgstr "Editar Perfil"
 
 #: templates/_layouts/main.html:66
 msgid "My Contracts"
@@ -2684,6 +2685,56 @@ msgstr ""
 #: templates/db_translations/marketplace_servicetype.html:18
 msgid "Travel Services"
 msgstr ""
+
+#: templates/db_translations/marketplace_servicetype.html:19
+msgid "PROMO Consultation Skype 20-min"
+msgstr "PROMO Consulta Skype 20-min"
+
+#: templates/db_translations/marketplace_servicetype.html:19
+msgid ""
+"LAUNCH PROMO: Initial consultation to understand your goals and professional/"
+"personal qualifications.  With that you will understand the best immigration "
+"process for your case. 20 minutes by Phone or Skype. The date and time will "
+"be arranged between client and professional after the payment."
+msgstr ""
+"PROMOÇÃO DE LANÇAMENTO: Consulta inicial para entender seus objetivos e "
+"qualificações profissionais/pessoais. Com isso, você entenderá o melhor "
+"processo de imigração para o seu caso. 20 minutos por Telefone ou Skype. A "
+"data e hora serão combinados entre o cliente e o profissionals, após o "
+"pagamento."
+
+#: templates/db_translations/marketplace_servicetype.html:20
+msgid "Investors Consultation Skype 120-min"
+msgstr "Consulta para Investidores Skype 30-min"
+
+#: templates/db_translations/marketplace_servicetype.html:20
+msgid ""
+"Initial consultation to understand your investment goals.  With that you "
+"will understand the best immigration process for your case. 120 minutes by "
+"Phone or Skype. The date and time will be arranged between client and "
+"professional after the payment."
+msgstr ""
+"Consulta inicial para entender seus objetivos de investimento. Com isso, "
+"você entenderá o melhor processo de imigração para o seu caso. 120 minutos "
+"por Telefone ou Skype. A data e hora serão combinados entre o cliente e o "
+"profissionals, após o pagamento."
+
+#: templates/db_translations/marketplace_servicetype.html:21
+msgid "Tourism Visa"
+msgstr "Visto de Turismo"
+
+#: templates/db_translations/marketplace_servicetype.html:21
+msgid "Assistance for the tourism visa application."
+msgstr "Assistência para obtenção de visto de turismo"
+
+#: templates/db_translations/marketplace_servicetype.html:22
+#: templates/db_translations/qa_topic.html:32
+msgid "Student Visa"
+msgstr "Visto de Estudante"
+
+#: templates/db_translations/marketplace_servicetype.html:22
+msgid "Assistance for the student visa application."
+msgstr "Assistência para obtenção de visto de estudante."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -5558,76 +5609,56 @@ msgid "Trades / Transports / Equipments / Manufacturing / Utilities"
 msgstr "Comércio / Transportes / Equipamentos / Manufatura / Utilidades"
 
 #: templates/db_translations/qa_topic.html:2
-#, fuzzy
-#| msgid "score language"
 msgid "Study Foreign Language"
-msgstr "pontuação - línguas"
+msgstr "Estudo de Línguas"
 
 #: templates/db_translations/qa_topic.html:3
 msgid "Study in University"
-msgstr ""
+msgstr "Estudo Universidade"
 
 #: templates/db_translations/qa_topic.html:4
 msgid "Study Masters or Phd"
-msgstr ""
+msgstr "Estudo Mestrado ou Phd"
 
 #: templates/db_translations/qa_topic.html:5
 msgid "Study Technical Course"
-msgstr ""
+msgstr "Estudo Curso Técnico"
 
 #: templates/db_translations/qa_topic.html:6
 msgid "Study in High School"
-msgstr ""
+msgstr "Estudo Ensino Médio"
 
 #: templates/db_translations/qa_topic.html:12
-#, fuzzy
-#| msgid "Uruguay"
 msgid "Portugual"
-msgstr "Uruguai"
+msgstr "Portugal"
 
 #: templates/db_translations/qa_topic.html:27
-#, fuzzy
-#| msgid "Sweden"
 msgid "Sweeden"
 msgstr "Suécia"
 
 #: templates/db_translations/qa_topic.html:28
-#, fuzzy
-#| msgid "Set Your Migration Plan"
 msgid "Skilled Worker Migration"
-msgstr "Crie seu Plano de Imigração"
+msgstr "Imigração de Profissional Qualificado"
 
 #: templates/db_translations/qa_topic.html:29
-#, fuzzy
-#| msgid "Work Details"
 msgid "Work Visa"
-msgstr "Dados de Trabalho"
+msgstr "Visto de Trabalho"
 
 #: templates/db_translations/qa_topic.html:30
-#, fuzzy
-#| msgid "Reunite with family"
 msgid "Move with Family"
-msgstr "Reunir com a família"
+msgstr "Mudar com a família"
 
 #: templates/db_translations/qa_topic.html:31
 msgid "Temporary Work Visa"
 msgstr "Visto Temporário de Trabalho"
 
-#: templates/db_translations/qa_topic.html:32
-msgid "Student Visa"
-msgstr "Visto de Estudante"
-
 #: templates/db_translations/qa_topic.html:33
-#, fuzzy
-#| msgid "Search"
 msgid "Job Searching"
-msgstr "Busca"
+msgstr "Busca de Empregos"
 
 #: templates/db_translations/qa_topic.html:34
-#, fuzzy
-#| msgid "Start Year"
 msgid "Startup Visa"
-msgstr "Ano de Início"
+msgstr "Visto de Startup"
 
 #: templates/db_translations/qa_topic.html:35
 msgid "Business Visa"
@@ -5791,6 +5822,7 @@ msgid "Order Number"
 msgstr "Número do Pedido"
 
 #: templates/emails/order_confirmation_user.html:99
+#: templates/marketplace/service/payment.html:41
 #: templates/site/account/contracts.html:18
 #: templates/site/account/contracts.html:43
 msgid "Service"
@@ -5836,10 +5868,10 @@ msgstr "Por enquanto, comece a construir sua reputação ao responder algumas"
 
 #: templates/emails/welcome_provider.html:23
 #: templates/marketplace/professionals/list.html:41
-#: templates/qa/common/list_group_all.html:84
+#: templates/qa/common/list_group_all.html:83
 #: templates/qa/question/list_group.html:35
 #: templates/site/dashboard/dashboard.html:47
-#: templates/site/dashboard/dashboard.html:106
+#: templates/site/dashboard/dashboard.html:105
 msgid "answers"
 msgstr "respostas"
 
@@ -5910,23 +5942,31 @@ msgid "Get a visa faster and safer with the help of a professional"
 msgstr "Consiga seu visto mais rápido e seguro com um expert"
 
 #: templates/marketplace/professionals/list.html:42
+#: templates/qa/blogpost/list_group.html:25
+#: templates/qa/common/list_group_all.html:27
+#: templates/qa/question/list_group.html:36
 #: templates/site/dashboard/dashboard.html:48
-#: templates/site/dashboard/dashboard.html:107
+#: templates/site/dashboard/dashboard.html:106
 msgid "views"
 msgstr "cliques"
 
 #: templates/marketplace/professionals/list.html:43
-#: templates/site/dashboard/dashboard.html:108
+#: templates/site/dashboard/dashboard.html:107
 msgid "Joined"
-msgstr "Cadastrado"
+msgstr "Desde"
 
 #: templates/marketplace/professionals/list.html:48
 msgctxt "button"
 msgid "Hire"
-msgstr "Contrate"
+msgstr "Ver"
 
 #: templates/marketplace/professionals/list.html:59
-#: templates/site/dashboard/dashboard.html:114
+#: templates/qa/blogpost/list_group.html:44
+#: templates/qa/common/list_group_all.html:46
+#: templates/qa/common/list_group_all.html:92
+#: templates/qa/question/list_group.html:44 templates/qa/question/view.html:92
+#: templates/site/dashboard/dashboard.html:54
+#: templates/site/dashboard/dashboard.html:113
 msgid "View"
 msgstr "Ver"
 
@@ -5934,22 +5974,22 @@ msgstr "Ver"
 #: templates/qa/blogpost/list_group.html:45
 #: templates/qa/blogpost/view.html:101
 #: templates/qa/common/list_group_all.html:47
-#: templates/qa/common/list_group_all.html:94
-#: templates/qa/question/list_group.html:45 templates/qa/question/view.html:89
-#: templates/qa/question/view.html:166
+#: templates/qa/common/list_group_all.html:93
+#: templates/qa/question/list_group.html:45 templates/qa/question/view.html:93
+#: templates/qa/question/view.html:168
 #: templates/site/dashboard/dashboard.html:55
-#: templates/site/dashboard/dashboard.html:115
+#: templates/site/dashboard/dashboard.html:114
 msgid "Report"
 msgstr "Denuncie"
 
 #: templates/marketplace/professionals/list.html:70
-#: templates/site/dashboard/dashboard.html:65
-#: templates/site/dashboard/dashboard.html:124
+#: templates/site/dashboard/dashboard.html:64
+#: templates/site/dashboard/dashboard.html:123
 msgid "View More"
 msgstr "Ver Mais"
 
 #: templates/marketplace/professionals/list.html:103
-#: templates/site/dashboard/dashboard.html:161
+#: templates/site/dashboard/dashboard.html:160
 msgid "see more"
 msgstr "veja mais"
 
@@ -5958,9 +5998,35 @@ msgstr "veja mais"
 msgid "Send Message"
 msgstr "Enviar Mensagem"
 
+#: templates/marketplace/professionals/profile.html:44
+msgid "Services"
+msgstr "Serviços"
+
+#: templates/marketplace/professionals/profile.html:52
+msgctxt "expert_view_page"
+msgid "Hire"
+msgstr "Obter"
+
+#: templates/marketplace/professionals/profile.html:67
+msgid "Reviews"
+msgstr "Avaliações"
+
+#: templates/marketplace/professionals/profile.html:70
+#: templates/qa/common/side_menu.html:28 templates/qa/question/view.html:50
+msgid "Answers"
+msgstr "Respostas"
+
+#: templates/marketplace/service/confirmation.html:10
+msgid "Your order was received"
+msgstr "Seu pedido foi recebido."
+
 #: templates/marketplace/service/confirmation.html:14
 msgid "You will receive an email confirmation with all the details."
 msgstr "Você receberá um email confirmando todos os detalhes."
+
+#: templates/marketplace/service/payment.html:21
+msgid "Hiring Professional"
+msgstr "Contrate um Expert"
 
 #: templates/marketplace/service/payment.html:47
 msgid "Credit Card"
@@ -5973,6 +6039,21 @@ msgstr "Boleto"
 #: templates/marketplace/service/payment.html:56
 msgid "Paypal"
 msgstr "Paypal"
+
+#: templates/marketplace/service/payment.html:95
+#: templates/marketplace/service/payment.html:213
+msgid "Card Number"
+msgstr "Número do Cartão"
+
+#: templates/marketplace/service/payment.html:99
+#: templates/marketplace/service/payment.html:216
+msgid "Cardholder Name"
+msgstr "Nome Impresso no Cartão"
+
+#: templates/marketplace/service/payment.html:103
+#: templates/marketplace/service/payment.html:220
+msgid "Expiry Date"
+msgstr "Data de Validade"
 
 #: templates/marketplace/service/payment.html:106
 msgid "January"
@@ -6022,25 +6103,22 @@ msgstr "Novembro"
 msgid "Dezember"
 msgstr "Dezembro"
 
-#: templates/marketplace/service/payment.html:204
+#: templates/marketplace/service/payment.html:139
+#: templates/marketplace/service/payment.html:223
+msgid "Security Code (CVV)"
+msgstr "Cód. de Segurança"
+
+#: templates/marketplace/service/payment.html:151
+msgid "Pay Now"
+msgstr "Pagar"
+
+#: templates/marketplace/service/payment.html:208
 msgid "Error Savind Credit Card"
 msgstr "Erro ao Salvar Cartão de Crédito"
 
 #: templates/marketplace/service/payment.html:209
-msgid "Card Number"
-msgstr "Número do Cartão"
-
-#: templates/marketplace/service/payment.html:212
-msgid "Cardholder Name"
-msgstr "Nome Impresso no Cartão"
-
-#: templates/marketplace/service/payment.html:216
-msgid "Expiry Date"
-msgstr "Data de Validade"
-
-#: templates/marketplace/service/payment.html:219
-msgid "Security Code (CVV)"
-msgstr "Cód. de Segurança"
+msgid "Invalid Information:"
+msgstr "Dados Inválidos:"
 
 #: templates/points/country/professional_help.html:26
 #: templates/points/country/situation.html:26
@@ -6052,13 +6130,13 @@ msgstr "Minha situação"
 #: templates/points/country/situation.html:27
 #: templates/points/country/visa_application.html:27
 msgid "Visa application"
-msgstr "Aplicação ao bisto"
+msgstr "Aplicação ao visto"
 
 #: templates/points/country/professional_help.html:28
 #: templates/points/country/situation.html:28
 #: templates/points/country/visa_application.html:28
 msgid "Get expert help"
-msgstr "Requisite um expert"
+msgstr "Contrate um expert"
 
 #: templates/points/country/professional_help.html:35
 #: templates/points/country/visa_application.html:59
@@ -6628,67 +6706,60 @@ msgstr "Dados de Trabalho"
 msgid "Add below your work experiences"
 msgstr "Adicione abaixo suas experiências de trabalho"
 
+#: templates/qa/blogpost/add.html:31
+#: templates/qa/question/add_question.html:23
+msgid "Back to Knowledge Base"
+msgstr "Voltar"
+
 #: templates/qa/blogpost/add.html:38
 msgid "What will you talk about?"
 msgstr "Do que você irá falar?"
 
 #: templates/qa/blogpost/add.html:44
 msgid "Write what you have to say"
-msgstr ""
+msgstr "Escreva o que deseja"
+
+#: templates/qa/blogpost/add.html:48
+msgid "Add topics to your post"
+msgstr "Adicione tópicos relacionados"
+
+#: templates/qa/blogpost/add.html:60
+#: templates/qa/question/add_question.html:43
+#: templates/qa/question/view.html:112
+msgid "Make Anonymous"
+msgstr "Tornar Anônimo"
+
+#: templates/qa/blogpost/add.html:62 templates/qa/blogpost/list.html:29
+msgctxt "button"
+msgid "Write Post"
+msgstr "Criar Post"
 
 #: templates/qa/blogpost/list.html:85 templates/qa/common/list_all.html:85
 #: templates/qa/question/list.html:84
 msgid "No more results"
-msgstr ""
+msgstr "Sem resultados"
 
 #: templates/qa/blogpost/list_group.html:24
 #: templates/qa/common/list_group_all.html:26
 msgid "comments"
 msgstr "comentários"
 
-#: templates/qa/blogpost/list_group.html:25
-#: templates/qa/common/list_group_all.html:27
-#: templates/qa/common/list_group_all.html:85
-#: templates/qa/question/list_group.html:36
-msgid "viewers"
-msgstr "cliques"
-
 #: templates/qa/blogpost/list_group.html:26
 #: templates/qa/common/list_group_all.html:28
-#: templates/qa/common/list_group_all.html:86
+#: templates/qa/common/list_group_all.html:85
 #: templates/qa/question/list_group.html:37
 #: templates/site/dashboard/dashboard.html:49
 msgid "Last activity in"
 msgstr "Última atividade"
 
-#: templates/qa/blogpost/list_group.html:44 templates/qa/blogpost/view.html:58
-#: templates/qa/blogpost/view.html:100
-#: templates/qa/common/list_group_all.html:46
-#: templates/qa/common/list_group_all.html:93
-#: templates/qa/question/list_group.html:44 templates/qa/question/view.html:58
-#: templates/qa/question/view.html.py:88 templates/qa/question/view.html:165
-#: templates/site/dashboard/dashboard.html:54
-msgid "Share"
-msgstr "Compartilhar"
-
-#: templates/qa/blogpost/list_group.html:46
-#: templates/qa/blogpost/view.html:102
-#: templates/qa/common/list_group_all.html:48
-#: templates/qa/common/list_group_all.html:95
-#: templates/qa/question/list_group.html:46 templates/qa/question/view.html:90
-#: templates/qa/question/view.html:167
-#: templates/site/dashboard/dashboard.html:56
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: templates/qa/blogpost/list_group.html:49
+#: templates/qa/blogpost/list_group.html:48
 #: templates/qa/blogpost/view.html:105
-#: templates/qa/common/list_group_all.html:51
-#: templates/qa/common/list_group_all.html:98
-#: templates/qa/question/list_group.html:49 templates/qa/question/view.html:93
-#: templates/qa/question/view.html:170
-#: templates/site/dashboard/dashboard.html:59
-#: templates/site/dashboard/dashboard.html:111
+#: templates/qa/common/list_group_all.html:50
+#: templates/qa/common/list_group_all.html:96
+#: templates/qa/question/list_group.html:48 templates/qa/question/view.html:96
+#: templates/qa/question/view.html:171
+#: templates/site/dashboard/dashboard.html:58
+#: templates/site/dashboard/dashboard.html:110
 msgid "Options"
 msgstr "Opções"
 
@@ -6712,23 +6783,33 @@ msgstr "Cliques"
 msgid "Comments"
 msgstr "Comentários"
 
-#: templates/qa/blogpost/view.html:53 templates/qa/question/view.html:53
+#: templates/qa/blogpost/view.html:53 templates/qa/common/side_menu.html:43
+#: templates/qa/question/view.html:53
 msgid "Followers"
 msgstr "Seguidores"
 
-#: templates/qa/blogpost/view.html:61 templates/qa/question/view.html:61
+#: templates/qa/blogpost/view.html:58 templates/qa/blogpost/view.html:100
+#: templates/qa/question/view.html:60
+msgid "Share"
+msgstr "Compartilhar"
+
+#: templates/qa/blogpost/view.html:61 templates/qa/question/view.html:63
 msgid "Twitter"
 msgstr "Twitter"
 
-#: templates/qa/blogpost/view.html:64 templates/qa/question/view.html:64
+#: templates/qa/blogpost/view.html:64 templates/qa/question/view.html:66
 msgid "Facebook"
 msgstr "Facebook"
 
-#: templates/qa/blogpost/view.html:82 templates/qa/question/view.html:76
+#: templates/qa/blogpost/view.html:82 templates/qa/question/view.html:80
 msgid "Writen in"
-msgstr "Escreva em"
+msgstr "Escrito em"
 
-#: templates/qa/blogpost/view.html:112 templates/qa/question/view.html:180
+#: templates/qa/blogpost/view.html:102
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/qa/blogpost/view.html:112 templates/qa/question/view.html:181
 msgid "Related Questions"
 msgstr "Perguntas Relacionadas"
 
@@ -6745,15 +6826,15 @@ msgstr "Downvoted (Desfazer)"
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
 msgid "Follow"
-msgstr "Seguir"
+msgstr "Follow"
 
 #: templates/qa/buttons/toggle_follow.html:7
 msgid "UnFollow"
-msgstr "Parar de Seguir"
+msgstr "UnFollow"
 
 #: templates/qa/buttons/toggle_follow.html:10
 msgid "Unfollow"
-msgstr "Parar de Seguir"
+msgstr "Unfollow"
 
 #: templates/qa/buttons/toggle_upvote.html:7
 #: templates/qa/buttons/toggle_upvote.html:12
@@ -6765,33 +6846,96 @@ msgstr "Upvote"
 msgid "Upvoted"
 msgstr "Upvoted"
 
+#: templates/qa/common/list_group_all.html:84
+msgid "viewers"
+msgstr "cliques"
+
+#: templates/qa/common/side_menu.html:7
+msgid "knowledge Base"
+msgstr "Base de Conhecimento"
+
+#: templates/qa/common/side_menu.html:10
+msgid "All"
+msgstr "Todos"
+
+#: templates/qa/common/side_menu.html:13
+msgid "Questions & answers"
+msgstr "Perguntas e Respostas"
+
+#: templates/qa/common/side_menu.html:16
+msgid "Posts"
+msgstr "Posts"
+
+#: templates/qa/common/side_menu.html:22
+msgid "My Content"
+msgstr "Meu Conteúdo"
+
+#: templates/qa/common/side_menu.html:25
+msgid "Topics"
+msgstr "Tópicos"
+
+#: templates/qa/common/side_menu.html:31
+msgid "Reading list"
+msgstr "Lista de leitura"
+
+#: templates/qa/common/side_menu.html:37
+msgid "Social"
+msgstr "Social"
+
+#: templates/qa/common/side_menu.html:40
+msgid "Following"
+msgstr "Seguindo"
+
+#: templates/qa/question/add_question.html:30
+msgid "What do you want to know?"
+msgstr "O que deseja saber?"
+
+#: templates/qa/question/add_question.html:35
+msgid "Add topics to your question"
+msgstr "Adicione tópicos relacionados"
+
+#: templates/qa/question/add_question.html:45
+#: templates/qa/question/list.html:29
+#: templates/site/dashboard/dashboard.html:65
+msgctxt "button"
+msgid "Add Question"
+msgstr "Fazer Pergunta"
+
 #: templates/qa/question/view.html:31
 msgid "Back to Questions"
-msgstr "Voltar às Perguntas"
+msgstr "Voltar"
 
 #: templates/qa/question/view.html:34
 msgid "Question Topics"
-msgstr "Tópicos da Pergunta"
+msgstr "Tópicos"
 
 #: templates/qa/question/view.html:44
 msgid "Question Stats"
-msgstr "Estatísticas da Pergunta"
+msgstr "Estatísticas"
 
-#: templates/qa/question/view.html:50
-msgid "Answers"
-msgstr "Respostas"
-
-#: templates/qa/question/view.html:109
-msgid "Make Anonymous"
-msgstr "Tornar Anônimo"
-
-#: templates/qa/question/view.html:116
+#: templates/qa/question/view.html:119
 msgid "Write answer"
 msgstr "Responder"
 
-#: templates/qa/question/view.html:146
+#: templates/qa/question/view.html:136
+msgid "Anonymous"
+msgstr "Anônimo"
+
+#: templates/qa/question/view.html:149
 msgid "Written in"
 msgstr "Escrito em"
+
+#: templates/qa/topic/list.html:38
+msgid "Add interest..."
+msgstr "Adicione interesse...."
+
+#: templates/qa/topic/list.html:39
+msgid "E.g. Brazil"
+msgstr "Ex: Canadá"
+
+#: templates/qa/topic/list.html:43
+msgid "Your interests"
+msgstr "Seus interesses"
 
 #: templates/site/_common/form.html:14
 msgid "Back"
@@ -6810,9 +6954,13 @@ msgid "My contracts"
 msgstr "Meus contratos"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:686
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:663
 msgid "Inbox"
 msgstr "Inbox"
+
+#: templates/site/_common/status.html:14
+msgid "Please correct the following errors:"
+msgstr "Favor corrigir os seguintes erros:"
 
 #: templates/site/about/how_it_works.html:11
 msgid "how it works"
@@ -7010,6 +7158,13 @@ msgstr ""
 "e configure os países e serviços que você deseja oferecer. Sua conta será "
 "avaliada em menos de 24 horas."
 
+#: templates/site/account/contracts.html:9 templates/site/account/view.html:20
+#: templates/site/conversation/list.html:9
+#: templates/site/conversation/start.html:9
+#: templates/site/conversation/view.html:9
+msgid "My Account"
+msgstr "Minha Conta"
+
 #: templates/site/account/contracts.html:15
 msgid "My Services"
 msgstr "Meus Serviços"
@@ -7126,32 +7281,34 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:688
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:665
 msgid "Sent"
 msgstr "Enviadas"
 
 #: templates/site/conversation/box_menu.html:5
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:690
+msgctxt "noun"
 msgid "Archive"
 msgstr "Arquivo"
 
 #: templates/site/conversation/list.html:22
 msgid "Restore"
-msgstr ""
+msgstr "Restaurar"
+
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:667
+msgid "Archive"
+msgstr "Arquivar"
 
 #: templates/site/conversation/list.html:54
 msgid "(empty)"
-msgstr ""
+msgstr "(vazio)"
 
 #: templates/site/conversation/start.html:18
 msgid "New Message"
 msgstr "Nova Mensagem"
 
 #: templates/site/conversation/view.html:18
-#, fuzzy
-#| msgid "Translation"
 msgid "Conversation"
-msgstr "Tradução"
+msgstr "Conversa"
 
 #: templates/site/conversation/view.html:31 wannamigrate/points/models.py:30
 msgid "Answer"
@@ -7159,7 +7316,7 @@ msgstr "Resposta"
 
 #: templates/site/conversation/view.html:34
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: templates/site/dashboard/dashboard.html:15
 msgid "Questions"
@@ -7170,14 +7327,9 @@ msgctxt "Button"
 msgid "Add Question"
 msgstr "Fazer Pergunta"
 
-#: templates/site/dashboard/dashboard.html:62
+#: templates/site/dashboard/dashboard.html:61
 msgid "No content found"
 msgstr "Sem conteúdo"
-
-#: templates/site/dashboard/dashboard.html:66
-msgctxt "button"
-msgid "Add Question"
-msgstr "Fazer Pergunta"
 
 #: templates/site/home/home.html:31
 msgid "How it works?"
@@ -7430,7 +7582,7 @@ msgstr "data de modificação"
 #: wannamigrate/marketplace/models.py:399
 #: wannamigrate/marketplace/models.py:434
 #: wannamigrate/marketplace/models.py:437
-#: wannamigrate/marketplace/models.py:467 wannamigrate/points/models.py:180
+#: wannamigrate/marketplace/models.py:466 wannamigrate/points/models.py:180
 msgid "name"
 msgstr "nome"
 
@@ -7880,7 +8032,7 @@ msgstr "alterado pelo usuário"
 msgid "category"
 msgstr "categoria"
 
-#: wannamigrate/marketplace/models.py:457 wannamigrate/site/forms.py:417
+#: wannamigrate/marketplace/models.py:456 wannamigrate/site/forms.py:417
 msgid "Select Service"
 msgstr "Selecione Serviço"
 
@@ -7912,6 +8064,26 @@ msgstr "Pagamento - Wanna Migrate"
 #: wannamigrate/marketplace/views.py:267
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
+
+#: wannamigrate/marketplace/views.py:276
+msgid "Your payment was <span>received</span> and will be processed soon."
+msgstr "Seu pagamento foi <span>recebido</span> e está sendo processado."
+
+#: wannamigrate/marketplace/views.py:279
+msgid "Your payment was <span>approved</span>."
+msgstr "Seu pagamento foi <span>aprovado</span>."
+
+#: wannamigrate/marketplace/views.py:282
+msgid "Your payment was <span>denied</span>."
+msgstr "Seu pagamento foi <span>recusado</span>."
+
+#| msgid "Your payment was cancelled."
+msgid "Your payment was <span>cancelled</span>."
+msgstr "Seu pagamento foi <span>cancelado</span>."
+
+#: wannamigrate/marketplace/views.py:288
+msgid "Your payment was <span>refunded</span>."
+msgstr "Seu pagamento foi <span>devolvido</span>.."
 
 #: wannamigrate/points/forms.py:42
 msgid "Country of Citizenship"
@@ -8128,29 +8300,33 @@ msgstr "Selecione Profissão"
 msgid "Situation - Immigration Calculator - Wanna Migrate"
 msgstr "Situação - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:595 wannamigrate/points/views.py:662
+#: wannamigrate/points/views.py:595
 msgid "You don’t have enough points"
 msgstr "Você não tem pontos suficientes"
 
 #: wannamigrate/points/views.py:659
-msgid "You have enough points"
-msgstr "Você tem pontos suficientes"
+msgid "Enough points"
+msgstr "Pontos suficientes"
+
+#: wannamigrate/points/views.py:662
+msgid "Not enough points"
+msgstr "Pontuação Insuficiente"
 
 #: wannamigrate/points/views.py:665
-msgid "Occupation is not in demand"
+msgid "Occupation not in demand"
 msgstr "Profissão fora da lista de demanda"
 
 #: wannamigrate/points/views.py:668
-msgid "Your age is not allowed"
+msgid "Age not allowed"
 msgstr "Idade não permitida"
 
 #: wannamigrate/points/views.py:671
-msgid "Minimum language requirements not met"
+msgid "Language requirements not met"
 msgstr "Requisitos de língua insuficientes"
 
 #: wannamigrate/points/views.py:674
-msgid "Minimum work experience not met"
-msgstr "Requisitos de experiência de trabalho insuficiente"
+msgid "Work experience not enough"
+msgstr "Experiência de trabalho insuficiente"
 
 #: wannamigrate/points/views.py:715
 msgid ""
@@ -8274,15 +8450,28 @@ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/qa/forms.py:63 wannamigrate/qa/forms.py:118
-msgid "Select at least one country as topic."
-msgstr ""
+#: wannamigrate/qa/forms.py:53
+msgid "Type your question here..."
+msgstr "Escreva sua pergunta aqui..."
 
-#: wannamigrate/qa/forms.py:106
+#: wannamigrate/qa/forms.py:56 wannamigrate/qa/forms.py:114
+msgid "Ex: Brazil, Canada, Student visa, Work visa, General immigration"
+msgstr ""
+"Ex: Brasil, Canadá, Visto de Estudante, Visto de Trabalho, Imigração em Geral"
+
+#: wannamigrate/qa/forms.py:67 wannamigrate/qa/forms.py:125
+msgid "Select at least one country as topic."
+msgstr "Selecione ao menos um país como tópico."
+
+#: wannamigrate/qa/forms.py:109
+msgid "Ex: How to take your pet to Canada"
+msgstr "Ex: Como levar seu cachorro para o Canadá"
+
+#: wannamigrate/qa/forms.py:112
 msgid "Ex: The first step is"
 msgstr "Ex: o primeiro passo é"
 
-#: wannamigrate/qa/forms.py:176
+#: wannamigrate/qa/forms.py:183
 msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
@@ -8302,15 +8491,15 @@ msgstr "Pergunte - Wanna Migrate"
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:313
+#: wannamigrate/qa/views.py:327
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:356
+#: wannamigrate/qa/views.py:370
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:417
+#: wannamigrate/qa/views.py:431
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
@@ -8419,51 +8608,51 @@ msgstr "Você possui países duplicados para dar suporte."
 msgid "You must choose different services for supported services."
 msgstr "Você possui serviços duplicados para dar suporte."
 
-#: wannamigrate/site/views.py:202
+#: wannamigrate/site/views.py:179
 msgid "Login - Wanna Migrate"
 msgstr "Login - Wanna Migrate"
 
-#: wannamigrate/site/views.py:221
+#: wannamigrate/site/views.py:198
 msgid "Invalid login. Please try again."
 msgstr "Login inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:263
+#: wannamigrate/site/views.py:240
 msgid "Sign Up - Wanna Migrate"
 msgstr "Cadastre-se - Wanna Migrate"
 
-#: wannamigrate/site/views.py:335
+#: wannamigrate/site/views.py:312
 msgid "Recover Password - Wanna Migrate"
 msgstr "Recupere sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:353
+#: wannamigrate/site/views.py:330
 msgid "Password reset instructions were successfully sent to your e-mail."
 msgstr "As instruções para redefinição de senha foram enviados por e-mail."
 
-#: wannamigrate/site/views.py:387
+#: wannamigrate/site/views.py:364
 msgid "Reset Password - Wanna Migrate"
 msgstr "Redefina sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:400
+#: wannamigrate/site/views.py:377
 msgid "Password successfully updated."
 msgstr "Senha alterada com sucesso."
 
-#: wannamigrate/site/views.py:427
+#: wannamigrate/site/views.py:404
 msgid "Contact Us - Wanna Migrate"
 msgstr "Contato - Wanna Migrate"
 
-#: wannamigrate/site/views.py:443
+#: wannamigrate/site/views.py:420
 msgid "Your message was successfully sent."
 msgstr "Sua mensagem foi enviada com sucesso."
 
-#: wannamigrate/site/views.py:470
+#: wannamigrate/site/views.py:447
 msgid "How it Works - Wanna Migrate"
 msgstr "Como Funciona - Wanna Migrate"
 
-#: wannamigrate/site/views.py:495
+#: wannamigrate/site/views.py:472
 msgid "Become a Service Provider - Wanna Migrate"
 msgstr "Torne-se um Prestador de Serviços - Wanna Migrate"
 
-#: wannamigrate/site/views.py:496
+#: wannamigrate/site/views.py:473
 msgid ""
 "Wanna Migrate brings online clients to you. We are specialized in attracting "
 "people planning to migrate to another country, temporarily or permanently."
@@ -8472,39 +8661,39 @@ msgstr ""
 "pessoas planejando migrar para um novo país, de forma temporária ou "
 "permanente."
 
-#: wannamigrate/site/views.py:520
+#: wannamigrate/site/views.py:497
 msgid "Extra Tools - Wanna Migrate"
 msgstr "Ferramentas Extras - Wanna Migrate"
 
-#: wannamigrate/site/views.py:547
+#: wannamigrate/site/views.py:524
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:565
+#: wannamigrate/site/views.py:542
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:590
+#: wannamigrate/site/views.py:567
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:621
+#: wannamigrate/site/views.py:598
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:825
+#: wannamigrate/site/views.py:802
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:911
+#: wannamigrate/site/views.py:888
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:965
+#: wannamigrate/site/views.py:942
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:983
+#: wannamigrate/site/views.py:960
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 

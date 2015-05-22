@@ -656,22 +656,22 @@ def situation( request, country_name ):
         # Status and message
         if user_result.user_result_status_id == settings.ID_RESULT_STATUS_ALLOWED:
             template_data['status_success'] = True
-            template_data['status_message'] = _( "You have enough points" )
+            template_data['status_message'] = _( "Enough points" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_POINTS:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "You don’t have enough points" )
+            template_data['status_message'] = _( "Not enough points" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_OCCUPATION:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "Occupation is not in demand" )
+            template_data['status_message'] = _( "Occupation not in demand" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_AGE:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "Your age is not allowed" )
+            template_data['status_message'] = _( "Age not allowed" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_LANGUAGE:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "Minimum language requirements not met" )
+            template_data['status_message'] = _( "Language requirements not met" )
         elif user_result.user_result_status_id == settings.ID_RESULT_STATUS_DENIED_WORK_EXPERIENCE:
             template_data['status_success'] = False
-            template_data['status_message'] = _( "Minimum work experience not met" )
+            template_data['status_message'] = _( "Work experience not enough" )
 
     # Define the percentage CSS class to use around country flag for progress bar for total points
     template_data['percentage_total'] = math.floor( ( 100 * template_data['total_points'] ) / template_data['min_points'] )

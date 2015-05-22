@@ -26,7 +26,7 @@
         {% include "qa/common/side_menu.html" %}
         <section class="content">
             <div class="question-postList">
-                <a href="{% url "qa:add_blogpost" %}" class="button bt-addQuestion">Write a post</a>
+                <a href="{% url "qa:add_blogpost" %}" class="button bt-addQuestion">{% trans 'Write Post' context 'button' %}</a>
                 <div class="conten-postList">
                     {% include "qa/blogpost/list_group.html" with blogposts=blogposts %}
                     <div id="loading-gif"></div>

@@ -35,12 +35,12 @@
             <div class="question-following">
                 <div id="topics">
                     <form id="add-topic-form" action="#" class="add-interest">
-                        <h2 class="title">Add interest...</h2>
-                        <input id="search-topics" type="text" placeholder="Ex. Brasil">
+                        <h2 class="title">{% trans 'Add interest...' %}</h2>
+                        <input id="search-topics" type="text" placeholder="{% trans 'E.g. Brazil' %}">
                         <!--button class="button bt-add">Add</button-->
                     </form>
                     <div class="tags">
-                        <h2 class="title">Your interests</h2>
+                        <h2 class="title">{% trans 'Your interests' %}</h2>
                         <ul class="tags-list"></ul>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
         };
 
         {% for topic in following_topics %}
-            addTopic( { "id" : {{ topic.id }}, "value" : "{{ topic.name }}", "view_url" : "{% url "qa:view_topic" topic.slug %}", "follow_url" : "{% url "qa:ajax_follow_topic" topic.id %}", "unfollow_url" : "{% url "qa:ajax_unfollow_topic" topic.id %}" } );
+            addTopic( { "id" : {{ topic.id }}, "value" : "{% trans topic.name %}", "view_url" : "{% url "qa:view_topic" topic.slug %}", "follow_url" : "{% url "qa:ajax_follow_topic" topic.id %}", "unfollow_url" : "{% url "qa:ajax_unfollow_topic" topic.id %}" } );
         {% endfor %}
 
 

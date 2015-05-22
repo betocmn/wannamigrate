@@ -16,7 +16,7 @@
 
 {% block content %}
 
-    <div class="content" style="width: 100%">
+    <div class="content login" style="width: 100%">
 
         <div id="login-container">
 
@@ -59,7 +59,7 @@
                     </div>
                     <div class="clear"></div>
 
-                    <a class="switcher signup_item login-switcher" href="{% url 'site:login' %}">
+                    <a class="switcher button" href="{% url 'site:login' %}">
                         {% trans "Already registered?" %} <span class="bold"> {% trans "Log in" %} </span>
                     </a>
 

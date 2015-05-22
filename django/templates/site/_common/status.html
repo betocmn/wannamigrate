@@ -1,3 +1,4 @@
+{% load i18n %}
 
 <div id="global_alert_error" class="alert alert-danger" style="display: none;">
     <span id="global_alert_error_msg"></span>
@@ -10,7 +11,7 @@
 {% if form.errors %}
     <div class="alert alert-danger alert-dismissable">
         <ul>
-            <li><strong>Please correct the following errors:</strong></li>
+            <li><strong>{% trans 'Please correct the following errors:' %}</strong></li>
             {% for error in form.non_field_errors %}
                 <li>{{ error|escape }}</li>
             {% endfor %}

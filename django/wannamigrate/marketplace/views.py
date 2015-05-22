@@ -273,19 +273,19 @@ def confirmation( request, order_id ):
 
     # Defines message and status
     if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
-        template_data['message_text'] = "Your payment was <span>received</span> and will be processed soon."
+        template_data['message_text'] = _( "Your payment was <span>received</span> and will be processed soon." )
         template_data['message_css_class'] = ""
     elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-        template_data['message_text'] = "Your payment was <span>approved</span>."
+        template_data['message_text'] = _( "Your payment was <span>approved</span>." )
         template_data['message_css_class'] = "approved"
     elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
-        template_data['message_text'] = "Your payment was <span>denied</span>."
+        template_data['message_text'] = _( "Your payment was <span>denied</span>." )
         template_data['message_css_class'] = "denied"
     elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
-        template_data['message_text'] = "Your payment was <span>cancelled</span>."
+        template_data['message_text'] = _( "Your payment was <span>cancelled</span>." )
         template_data['message_css_class'] = "denied"
     elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
-        template_data['message_text'] = "Your payment was <span>refunded</span>."
+        template_data['message_text'] = _( "Your payment was <span>refunded</span>." )
         template_data['message_css_class'] = "approved"
 
     # Prints Template

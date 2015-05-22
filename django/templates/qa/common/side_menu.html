@@ -1,44 +1,46 @@
 {% load string_extras %}
+{% load i18n %}
 <section class="sidebar">
     <!-- <a href="#" class="bt-back back-toKnowledge">Back to Knowledge Base</a> -->
     <div class="sidebar-default">
         <div class="itens knowledge-base">
-            <h3 class="title">knowledge Base</h3>
+            <h3 class="title">{% trans 'knowledge Base' %}</h3>
             <ul>
                 <li class="item {% if knowledge_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_all" %}">All</a>
+                    <a href="{% url "qa:list_all" %}">{% trans 'All' %}</a>
                 </li>
                 <li class="item {% if questions_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_questions" %}">Questions & answers</a>
+                    <a href="{% url "qa:list_questions" %}">{% trans 'Questions & answers' %}</a>
                 </li>
                 <li class="item {% if blogposts_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_blogposts" %}">Posts</a>
+                    <a href="{% url "qa:list_blogposts" %}">{% trans 'Posts' %}</a>
                 </li>
             </ul>
         </div>
         {% with stats=user.userstats %}
         <div class="itens personal">
-            <h3 class="title">Personal</h3>
+            <h3 class="title">{% trans 'My Content' %}</h3>
             <ul>
                 <li class="item {% if topics_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_topics" %}">Topics {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following|kmi }})</span>{% endif %}</a>
+                    <a href="{% url "qa:list_topics" %}">{% trans 'Topics' %} {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if answers_menu_selected %} active {% endif %}">
-                    <a href="#">Answers {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</a>
+                    <p>{% trans 'Answers' %} {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</p>
                 </li>
                 <li class="item {% if reading_list_menu_selected %} active {% endif %}">
-                    <a href="#">Reading list {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_favorite_questions|add:stats.total_favorite_blogposts|kmi }})</span>{% endif %}</a>
+                    <p>{% trans 'Reading list' %} {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_favorite_questions|add:stats.total_favorite_blogposts|kmi }})</span>{% endif %}</p>
                 </li>
             </ul>
         </div>
+
         <div class="itens social">
-            <h3 class="title">Social</h3>
+            <h3 class="title">{% trans 'Social' %}</h3>
             <ul>
                 <li class="item {% if following_menu_selected %} active {% endif %}">
-                    <a href="#">Following {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following|kmi }})</span>{% endif %}</a>
+                    <p>{% trans 'Following' %} {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following|kmi }})</span>{% endif %}</p>
                 </li>
                 <li class="item {% if followers_menu_selected %} active {% endif %}">
-                    <a href="#">Followers {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers|kmi }})</span>{% endif %}</a>
+                    <p>{% trans 'Followers' %} {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers|kmi }})</span>{% endif %}</p>
                 </li>
             </ul>
         </div>
