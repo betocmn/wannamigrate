@@ -76,6 +76,8 @@
             </header>
             <section id="sticky-list" class="topics">
                 <ul>
+
+                    <!--
                     <li>
                         <strong>A</strong>
                         <ul>
@@ -92,46 +94,8 @@
                             <li>Buchada</li>
                         </ul>
                     </li>
-                    <li>
-                        <strong>C</strong>
-                        <ul>
-                            <li>Cachorro</li>
-                            <li>Canalha</li>
-                            <li>Cavalo</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>C</strong>
-                        <ul>
-                            <li>Cachorro</li>
-                            <li>Canalha</li>
-                            <li>Cavalo</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>C</strong>
-                        <ul>
-                            <li>Cachorro</li>
-                            <li>Canalha</li>
-                            <li>Cavalo</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>C</strong>
-                        <ul>
-                            <li>Cachorro</li>
-                            <li>Canalha</li>
-                            <li>Cavalo</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>C</strong>
-                        <ul>
-                            <li>Cachorro</li>
-                            <li>Canalha</li>
-                            <li>Cavalo</li>
-                        </ul>
-                    </li>
+                    -->
+
                 </ul>
             </section>
             {% endblock header %}
@@ -261,14 +225,16 @@
                 });
 
                 // Search listings
-                var currencies = [
+                var currencies = [{}][
+                        /*
                     { value: 'Afghan afghani', data: 'AFN' },
                     { value: 'Albanian lek', data: 'ALL' },
                     { value: 'Algerian dinar', data: 'DZD' },
                     { value: 'European euro', data: 'EUR' },
                     { value: 'Angolan kwanza', data: 'AOA' },
                     { value: 'East Caribbean dollar', data: 'XCD' }
-                ]
+                ]*/
+                        
                 $('.search-input').autocomplete({
                     lookup: currencies,
                     showNoSuggestionNotice: true,
