@@ -233,7 +233,7 @@ def put_file( args ):
             if not dest.endswith( '/' ):
                 filename_or_recursive = '/' + filename_or_recursive
             commands.append( "ubuntu@{0}:{1}{2}".format( SERVERS[ server ][ "ip" ], dest, filename_or_recursive ) )
-        
+
         return cmd( " ".join( commands ) )
 
 
