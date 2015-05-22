@@ -31,6 +31,8 @@ IS_PROD = True
 
 DEBUG = False
 
+SQL_DEBUG = False
+
 TEMPLATE_DEBUG = False
 
 

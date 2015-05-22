@@ -1,3 +1,23 @@
+
+/* SQL Output - For debug */
+#sql-output {
+    clear: both;
+    display: block;
+    border: 1px solid #000;
+    width: 80%;
+    margin: 300px auto;
+    font-size: 16px;
+    font-family: open_sansregular;
+    padding: 30px;
+}
+
+#sql-output h1 {
+    text-align: center;
+    font-size: 20px;
+    font-family: open_sanssemibold;
+    color: #000;
+}
+
 /* Form errors */
 .inputError{
 	border: 2px solid #ed1c24 !important;

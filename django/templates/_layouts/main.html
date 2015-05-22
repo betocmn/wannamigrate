@@ -181,6 +181,14 @@
 
         {% include "_layouts/analytics.html" %}
 
+        {% if sql_output %}
+            <br /><br /><br />
+            <div id="sql-output">
+                <h1>SQL Queries - Make 'em faster :)</h1>
+                {{ sql_output|safe }}
+            </div>
+        {% endif %}
+
     </body>
 
     {% block scripts %}

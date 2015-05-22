@@ -1048,18 +1048,8 @@ def dashboard( request ):
         # Gets 5 most related questions (page 0 by default)
         template_data['questions'] = questions
 
-
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
-
-    """
-    # Print SQL Queries
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str( query['sql'] )
-    return HttpResponse( queries_text )
-    """
 
 
 
