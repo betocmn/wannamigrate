@@ -192,6 +192,8 @@ form .errorlist {
 
 /* Footer of inside pages */
 .dashboard footer {
+    clear:left;
+    float:left;
     height: 160px;
 }
 .dashboard .wrapper footer ul.social-links {
