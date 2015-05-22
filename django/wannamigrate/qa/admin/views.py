@@ -10,10 +10,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from wannamigrate.admin.forms import (
     AddPostForm, AddAnswerForm, EditPostForm,
-    AddTopicForm,
+    AddTopicForm, AddTopicTranslationForm
 )
 from wannamigrate.core.decorators import restrict_internal_ips
-from wannamigrate.qa.models import Topic, Vote
+from wannamigrate.qa.models import Topic, Vote, TopicTranslation
+from wannamigrate.core.models import Language
 from wannamigrate.admin.views import admin_check
 from django.db import transaction
 
@@ -240,10 +241,6 @@ def list_topic( request, reported = None ):
 
     paginator = Paginator( topics, settings.DEFAULT_LISTING_ITEMS_PER_PAGE )
 
-    context = {
-        "topics" : topics,
-    }
-
 
     # Checks if the page number was passed.
     page = request.GET.get( 'page' )
@@ -255,6 +252,10 @@ def list_topic( request, reported = None ):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         topics = paginator.page( paginator.num_pages )
+
+    context = {
+        "topics" : topics,
+    }
 
     return render( request, "qa/admin/topic/list.html", context )
 
@@ -275,8 +276,13 @@ def add_topic( request ):
 
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
-        # Saves the post
-        topic = form.save()
+        with transaction.atomic():
+            # Saves the post
+            topic = form.save()
+            # Saves the translation to english
+            english = Language.objects.filter( code = settings.LANGUAGE_CODE ).first()
+            translation = TopicTranslation( name = topic.name, slug = topic.slug, topic = topic, language = english )
+            translation.save()
         messages.success( request, 'Topic successfully created.' )
         # Redirect with success message
         return HttpResponseRedirect( reverse( 'admin:qa:view_topic', args = ( topic.id, ) ) )
@@ -363,3 +369,144 @@ def delete_topic( request, topic_id ):
         messages.error( request, "Topic(id = {0}) not found.".format( topic_id ) )
 
     return HttpResponseRedirect( reverse( "admin:qa:list_topic" ) )
+
+
+
+############################
+# Topics Translations
+#############################
+@restrict_internal_ips
+@permission_required( 'qa.admin_add_topic_translation', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def add_topic_translation( request, topic_id = None ):
+    """
+    Creates a Topic.
+
+    :param: request
+    :return: String
+    """
+
+    # Instantiate FORM
+    if topic_id:
+        form = AddTopicTranslationForm( request.POST or None, initial={ "topic" : Topic.objects.get( pk=topic_id ) } )
+    else:
+        form = AddTopicTranslationForm( request.POST or None )
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+        # Saves the post
+        translation = form.save()
+        messages.success( request, 'Topic Translation successfully created.' )
+        # Redirect with success message
+        return HttpResponseRedirect( reverse( 'admin:qa:view_topic_translation', args = ( translation.id, ) ) )
+
+    # Template data
+    context = {
+        'form': form,
+        'cancel_url': reverse( 'admin:qa:list_topic_translation' ),
+    }
+
+    return render( request, 'qa/admin/topic/add.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_list_topic_translation', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def list_topic_translation( request ):
+    """
+    Lists Topics with pagination.
+
+    :param: request
+    :return: String
+    """
+    translations = TopicTranslation.objects.all()
+
+    paginator = Paginator( translations, settings.DEFAULT_LISTING_ITEMS_PER_PAGE )
+
+    # Checks if the page number was passed.
+    page = request.GET.get( 'page' )
+    try:
+        translations = paginator.page( page )
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        translations = paginator.page( 1 )
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        translations = paginator.page( paginator.num_pages )
+
+
+    context = {
+        "translations" : translations,
+    }
+
+    return render( request, "qa/admin/topic_translation/list.html", context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_view_topic_translation', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def view_topic_translation( request, id ):
+    """
+    Show Topic details.
+
+    :param: request
+    :return: String
+    """
+
+    context = {
+        'translation' : TopicTranslation.objects.get( id = id ),
+    }
+
+    return render( request, 'qa/admin/topic_translation/view.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_edit_topic_translation', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def edit_topic_translation( request, id ):
+    """
+    Edit a Topic.
+
+    :param: request
+    :return: String
+    """
+    # Gets the information about the topic being edited
+    translation = TopicTranslation.objects.get( pk = id )
+
+    form = AddTopicForm( request.POST or None, instance = translation )
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+        translation = form.save()
+        messages.success( request, 'Topic Translation successfully updated.' )
+        # Redirect with success message
+        return HttpResponseRedirect( reverse( 'admin:qa:view_topic_translation', args = ( translation.id, ) ) )
+
+
+    context = {
+        'form' : form,
+        'cancel_url': reverse( 'admin:qa:list_topic_translation' ),
+    }
+
+    return render( request, 'qa/admin/topic/edit.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_delete_topic_translation', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def delete_topic_translation( request, id ):
+    """
+    Delete a topic.
+
+    :param: request
+    :return: String
+    """
+
+    translation = TopicTranslation.objects.filter( pk = id )
+    if translation.exists():
+        translation.delete()
+        messages.success( request, "TopicTranslation(id = {0}) successfully deleted.".format( id ) )
+    else:
+        messages.error( request, "TopicTranslation(id = {0}) not found.".format( id ) )
+
+    return HttpResponseRedirect( reverse( "admin:qa:list_topic_translations" ) )

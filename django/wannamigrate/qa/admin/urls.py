@@ -36,4 +36,12 @@ urlpatterns = patterns('',
     url( r'^topics/edit/(?P<topic_id>\d+)$', views.edit_topic, name = "edit_topic" ),
     url( r'^topics/delete/(?P<topic_id>\d+)$', views.delete_topic, name = "delete_topic" ),
 
+    # Topics Translations
+    url( r'^topics_translations$', views.list_topic_translation, name = "list_topic_translation" ),
+    url( r'^topic_translation/add$', views.add_topic_translation, name = "add_topic_translation" ),
+    url( r'^topic_translation/add/(?P<topic_id>\d+)$', views.add_topic_translation, name = "add_topic_translation" ),
+    url( r'^topic_translation/view/(?P<id>\d+)$', views.view_topic_translation, name = "view_topic_translation" ),
+    url( r'^topic_translation/edit/(?P<id>\d+)$', views.edit_topic_translation, name = "edit_topic_translation" ),
+    url( r'^topic_translation/delete/(?P<id>\d+)$', views.delete_topic_translation, name = "delete_topic_translation" ),
+
 )

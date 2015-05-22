@@ -1,0 +1,90 @@
+{% extends "_layouts/admin.html" %}
+{% load string_extras %}
+{% load staticfiles %}
+{% block head %}
+    {{ block.super }}
+    <script type="text/javascript">
+        /** JQuery onload */
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock head %}
+
+{% block content %}
+
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Topic details</h1>
+                </div>
+            </div>
+            
+            {% include "admin/_common/status.html" %}
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            Topic Translation ID# {{ translation.id }}
+                        </div>
+                                                
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                
+                                    <dl class="dl-horizontal">
+                                        
+                                        <dt>Name:</dt>
+                                        <dd>
+                                            {{ translation.name }}
+                                        </dd>
+                                        <dt>Slug:</dt>
+                                        <dd>
+                                            {{ translation.slug }}
+                                        </dd>
+                                        <dt>Topic:</dt>
+                                        <dd>
+                                            <a href="{% url "admin:qa:view_topic" translation.topic.id %}">{{ translation.topic.name }}</a>
+                                        </dd>
+                                        <dt>Language:</dt>
+                                        <dd>
+                                            {{ translation.language.name }}
+                                        </dd>
+
+                                        <dt>Created date:</dt>
+                                        <dd>
+                                            {{ translation.created_date }}
+                                        </dd>
+
+                                        <dt>Modified date:</dt>
+                                        <dd>
+                                            {{ translation.modified_date }}
+                                        </dd>
+                                    </dl>
+                                    
+                                    <div class="text-center buttons">
+                                        <a href="{% url 'admin:qa:list_topic_translation' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+                                        <a href="{% url 'admin:qa:edit_topic_translation' translation.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+                                        <a href="#" onclick="confirm_delete( '{% url 'admin:qa:delete_topic_translation' translation.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                   
+                    </div>
+                    
+                </div>
+            
+            </div>
+
+{% endblock content %}
+
+
+
+
+
+
+

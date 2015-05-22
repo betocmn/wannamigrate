@@ -10,7 +10,7 @@ Questions and Answers model classes.
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from wannamigrate.core.models import BaseModel, User, Country, Goal
+from wannamigrate.core.models import BaseModel, User, Country, Goal, Language
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db.models import Prefetch, Count
@@ -80,7 +80,6 @@ class QuestionsManager( IndexableContentManager ):
 
         self = self.prefetch_related(
             "related_topics",
-            "comments",
             Prefetch(
                 "answers",
                 queryset=Answer.objects.order_by( "-total_upvotes", "total_downvotes", "-created_date" )
@@ -268,6 +267,51 @@ class Comment( BaseContent, VotableContent, CommentableContent  ):
 
 
 
+class TopicTranslation( BaseModel ):
+    """
+    A translation to a topic.
+    """
+
+    # The translated name of the topic
+    name = models.CharField( max_length = 100 )
+    # The translated slug of the title
+    slug = models.SlugField( max_length = 100, unique = True )
+    # The topic
+    topic = models.ForeignKey( "Topic", related_name = "translations" )
+    # The language
+    language = models.ForeignKey( Language, related_name = "topics_translations" )
+
+    # META Options: Sets the possible permissions required by this model.
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_topic_translation", "[ADMIN] Can add topic translation" ),
+            ( "admin_edit_topic_translation", "[ADMIN] Can edit topic translation" ),
+            ( "admin_delete_topic_translation", "[ADMIN] Can delete topic translation" ),
+            ( "admin_view_topic_translation", "[ADMIN] Can view topic translation" ),
+            ( "admin_list_topic_translation", "[ADMIN] Can list topic translation" ),
+        )
+
+    def save( self, *args, **kwargs ):
+        if not self.slug:
+            # Calculates the slug handling repetition
+            max_length = self._meta.get_field( 'slug' ).max_length
+            self.slug = orig = slugify( self.name )[:max_length]
+
+            for x in itertools.count(1):
+                if not self.__class__.objects.filter( slug = self.slug ).exists():
+                    break
+                # Truncate the original slug dynamically. Minus 1 for the hyphen.
+                self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
+
+        super( TopicTranslation, self ).save( *args, **kwargs )
+
+
+    def __str__(self):
+        return self.name
+
+
+
 class Topic( BaseModel ):
     """
     Topic class. This class represents topics.
@@ -308,6 +352,10 @@ class Topic( BaseModel ):
                 self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
 
         super( Topic, self ).save( *args, **kwargs )
+
+
+    def __str__(self):
+        return self.name
 
 
 

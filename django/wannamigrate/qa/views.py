@@ -22,16 +22,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
     AddQuestionForm, AddBlogPostForm, AddAnswerForm
 )
-from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic
+from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic, TopicTranslation
 from wannamigrate.core.models import(
     User, UserStats
 )
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.utils import translation
 from django.db import transaction
 import json
 import urllib
-
+from django.db.models import F
 
 
 
@@ -39,7 +40,7 @@ import urllib
 ##########################
 # NON HTTP METHODS
 ##########################
-def get_content_by_step( instance, user, filter_params, step, results_per_step ):
+def get_content_by_step( instance, request, filter_params, step, results_per_step ):
     """
     Returns a list of contents specified by instance filtered by filter_params. The results are limited by step and results_per_step
     :param instance: The model to lookup
@@ -56,11 +57,30 @@ def get_content_by_step( instance, user, filter_params, step, results_per_step )
     # Search the Posts with filters
     posts = instance.objects.get_listing( **filter_params )[ start : end ]
 
-    # If the user is authenticated
-    if user.is_authenticated():
+    ############################################
+    # Process the translations for each topic
+    ############################################
+    topics_ids = []
+    for q in posts:
+        for t in q.related_topics.all():
+            topics_ids.append( t.id )
+    temp = TopicTranslation.objects.filter( language__code = request.LANGUAGE_CODE, topic__id__in = topics_ids ).all()
+    translations = {}
+    for t in temp:
+        translations[ t.topic_id ] = t
+    for q in posts:
+        for t in q.related_topics.all():
+            if t.id in translations:
+                t.name = translations[ t.id ].name
+                t.slug = translations[ t.id ].slug
+
+    ######################################
+    # Process if the user is following the contents
+    ######################################
+    if request.user.is_authenticated():
         # Checks if the user is following the question
         posts_ids = list( post.id for post in posts )
-        following_posts = instance.objects.filter( id__in = posts_ids, followers__id = user.id ).values_list( "id", flat=True )
+        following_posts = instance.objects.filter( id__in = posts_ids, followers__id = request.user.id ).values_list( "id", flat=True )
         for post in posts:
             if post.id in following_posts:
                 post.is_followed = True
@@ -71,13 +91,13 @@ def get_content_by_step( instance, user, filter_params, step, results_per_step )
 
 
 # Shortcut method to query questions
-def get_questions_by_step( user, filter_params, step, results_per_step ):
-    return get_content_by_step( Question, user, filter_params, step, results_per_step )
+def get_questions_by_step( request, filter_params, step, results_per_step ):
+    return get_content_by_step( Question, request, filter_params, step, results_per_step )
 
 
 # Shortcut method to query blogposts
-def get_blogposts_by_step( user, filter_params, step, results_per_step ):
-    return get_content_by_step( BlogPost, user, filter_params, step, results_per_step )
+def get_blogposts_by_step( request, filter_params, step, results_per_step ):
+    return get_content_by_step( BlogPost, request, filter_params, step, results_per_step )
 
 
 
@@ -111,8 +131,8 @@ def list_all( request, *args, **kwargs ):
     filter_params[ "related_goals_ids" ] = [ goal.id ]
 
     # Get questions per step
-    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
-    blogposts = get_blogposts_by_step( request.user, filter_params, step, results_per_step )
+    questions = get_questions_by_step( request, filter_params, step, results_per_step )
+    blogposts = get_blogposts_by_step( request, filter_params, step, results_per_step )
 
     # Join two querysets
     contents = [ x for x in questions ]
@@ -159,7 +179,7 @@ def list_questions( request, *args, **kwargs ):
     filter_params[ "related_goals_ids" ] = [ goal.id ]
 
     # Get questions per step
-    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
+    questions = get_questions_by_step( request, filter_params, step, results_per_step )
 
     # TEMPLATE DATA
     template_data = {
@@ -175,6 +195,7 @@ def list_questions( request, *args, **kwargs ):
     return render( request, 'qa/question/list.html', template_data )
 
 
+
 @login_required
 def add_question( request ):
     """
@@ -184,7 +205,7 @@ def add_question( request ):
     """
 
     # Instantiate FORM
-    form = AddQuestionForm( request.POST or None, owner = request.user )
+    form = AddQuestionForm( request.POST or None, owner = request.user, language_code = request.LANGUAGE_CODE )
 
 
     # If form was submitted, it tries to validate and save data
@@ -227,9 +248,22 @@ def view_question( request, slug ):
     """
     template_data = {}
 
-    question = get_object_or_404( Question, slug = slug )
+    question = get_object_or_404( Question.objects.prefetch_related( "related_topics"), slug = slug )
     question.total_views += 1
     question.save()
+
+    ###############################
+    # Process topic translation
+    ###############################
+    topics_ids = [x.id for x in question.related_topics.all()]
+    temp = TopicTranslation.objects.filter( language__code = request.LANGUAGE_CODE, topic__id__in = topics_ids ).all()
+    translations = {}
+    for t in temp:
+        translations[ t.topic_id ] = t
+    for t in question.related_topics.all():
+        if t.id in translations:
+            t.name = translations[ t.id ].name
+            t.slug = translations[ t.id ].slug
 
     # Gets the answer form
     answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
@@ -294,6 +328,9 @@ def view_question( request, slug ):
     # Print Template
     return render( request, 'qa/question/view.html', template_data )
 
+#    from wannamigrate.core.util import debug_sql
+#    return debug_sql()
+
 
 def list_blogposts( request, *args, **kwargs ):
     """
@@ -319,7 +356,7 @@ def list_blogposts( request, *args, **kwargs ):
     filter_params[ "related_goals_ids" ] = [ goal.id ]
 
     # Get questions per step
-    blogposts = get_blogposts_by_step( request.user, filter_params, step, results_per_step )
+    blogposts = get_blogposts_by_step( request, filter_params, step, results_per_step )
 
     # TEMPLATE DATA
     template_data = {
@@ -344,7 +381,7 @@ def add_blogpost( request ):
     """
 
     # Instantiate FORM
-    form = AddBlogPostForm( request.POST or None, owner = request.user )
+    form = AddBlogPostForm( request.POST or None, owner = request.user, language_code = request.LANGUAGE_CODE )
 
 
     # If form was submitted, it tries to validate and save data
@@ -387,9 +424,22 @@ def view_blogpost( request, slug ):
     """
     template_data = {}
 
-    blogpost = get_object_or_404( BlogPost, slug = slug )
+    blogpost = get_object_or_404( BlogPost.objects.prefetch_related( "related_topics"), slug = slug )
     blogpost.total_views += 1
     blogpost.save()
+
+    ###############################
+    # Process topic translation
+    ###############################
+    topics_ids = [x.id for x in blogpost.related_topics.all()]
+    temp = TopicTranslation.objects.filter( language__code = request.LANGUAGE_CODE, topic__id__in = topics_ids ).all()
+    translations = {}
+    for t in temp:
+        translations[ t.topic_id ] = t
+    for t in blogpost.related_topics.all():
+        if t.id in translations:
+            t.name = translations[ t.id ].name
+            t.slug = translations[ t.id ].slug
 
     related_content = BlogPost.objects.filter( related_topics__in = blogpost.related_topics.all() ).exclude( id = blogpost.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
 
@@ -426,19 +476,26 @@ def list_topics( request ):
     :param request:
     :return: A template rendered
     """
+
+    translations = TopicTranslation.objects.filter( topic__in=request.user.following_topics.all() ).order_by( "name" ).only( "topic", "name", "slug" )
+
+    for t in translations:
+        t.id = t.topic_id
+
     template_data = {
         "situation_form" : get_situation_form( request ),
         "meta_title" : _( 'Topics - Wanna Migrate' ),
         "topics_menu_selected" : True,
-        "following_topics" : request.user.following_topics.order_by( "name" ).values( "id", "name", "slug" )
+        "following_topics" : translations
     }
     return render( request, 'qa/topic/list.html', template_data )
+
 
 
 @login_required
 def view_topic( request, slug ):
 
-    topic = get_object_or_404( Topic, slug = slug )
+    topic = get_object_or_404( TopicTranslation, slug = slug, language__code = request.LANGUAGE_CODE ).topic
     # SET UP THE STEP AND THE TOTAL OF STEPS
     step = 0    # starts from the begining
     results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
@@ -450,7 +507,7 @@ def view_topic( request, slug ):
     filter_params[ "related_topics_ids" ] = [ topic.id ]
 
     # Get questions per step
-    questions = get_questions_by_step( request.user, filter_params, step, results_per_step )
+    questions = get_questions_by_step( request, filter_params, step, results_per_step )
 
     # TEMPLATE DATA
     template_data = {
@@ -464,8 +521,6 @@ def view_topic( request, slug ):
 
     # Print Template
     return render( request, 'qa/question/list.html', template_data )
-
-
 
 
 
@@ -494,7 +549,7 @@ def ajax_load_questions( request ):
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
 
     # Get questions by step
-    questions = get_questions_by_step( request.user, filter_params, int( step ), results_per_step )
+    questions = get_questions_by_step( request, filter_params, int( step ), results_per_step )
 
     # Render the result and return or raise a Http404 if no questions was found.
     if questions:
@@ -526,7 +581,7 @@ def ajax_load_blogposts( request ):
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
 
     # Get questions by step
-    blogposts = get_blogposts_by_step( request.user, filter_params, int( step ), results_per_step )
+    blogposts = get_blogposts_by_step( request, filter_params, int( step ), results_per_step )
 
     # Render the result and return or raise a Http404 if no questions was found.
     if blogposts:
@@ -558,8 +613,8 @@ def ajax_load_all( request ):
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
 
     # Get questions by step
-    questions = get_questions_by_step( request.user, filter_params, int( step ), results_per_step )
-    blogposts = get_blogposts_by_step( request.user, filter_params, int( step ), results_per_step )
+    questions = get_questions_by_step( request, filter_params, int( step ), results_per_step )
+    blogposts = get_blogposts_by_step( request, filter_params, int( step ), results_per_step )
 
     contents = [x for x in questions]
     contents += [x for x in blogposts]
@@ -584,15 +639,15 @@ def ajax_get_topics( request ):
     """
     if request.is_ajax():
         q = request.GET.get( 'term', '' )
-        topics = Topic.objects.filter( name__icontains = q )[:20]
+        topics_translations = TopicTranslation.objects.filter( language__code = request.LANGUAGE_CODE, name__icontains = q )[:10]
         results = []
-        for topic in topics:
+        for t in topics_translations :
             topic_json = {}
-            topic_json['id'] = topic.id
-            topic_json['view_url'] = reverse( "qa:view_topic", kwargs = { "slug" : topic.slug } )
-            topic_json['unfollow_url'] = reverse( "qa:ajax_unfollow_topic", kwargs = { "topic_id" : topic.id } )
-            topic_json['follow_url'] = reverse( "qa:ajax_follow_topic", kwargs = { "topic_id" : topic.id } )
-            topic_json['value'] = topic.name
+            topic_json['id'] = t.topic.id
+            topic_json['view_url'] = reverse( "qa:view_topic", kwargs = { "slug" : t.slug } )
+            topic_json['unfollow_url'] = reverse( "qa:ajax_unfollow_topic", kwargs = { "topic_id" : t.topic.id } )
+            topic_json['follow_url'] = reverse( "qa:ajax_follow_topic", kwargs = { "topic_id" : t.topic.id } )
+            topic_json['value'] = t.name
             results.append( topic_json )
         data = json.dumps(results)
     else:

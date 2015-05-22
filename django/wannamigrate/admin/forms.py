@@ -15,7 +15,7 @@ from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.core.models import Country
 from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
-from wannamigrate.qa.models import Topic
+from wannamigrate.qa.models import Topic, TopicTranslation
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
@@ -336,3 +336,13 @@ class AddTopicForm( BaseModelForm ):
         model = Topic
         fields = [ "name", "country", "related_goals" ]
 
+
+class AddTopicTranslationForm( BaseModelForm ):
+    """
+    Form to create or edit a Topic Translation.
+    """
+
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = TopicTranslation
+        fields = [ "name", "topic", "language" ]

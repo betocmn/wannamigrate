@@ -13,7 +13,7 @@ Also you can create custom form fields or methods
 ##########################
 from django import forms
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from wannamigrate.qa.models import Question, BlogPost, Topic, Answer
+from wannamigrate.qa.models import Question, BlogPost, Topic, Answer, TopicTranslation
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
@@ -41,6 +41,7 @@ class AddQuestionForm( BaseModelForm ):
 
         # Extracts arguments from kwargs
         owner = kwargs.pop( "owner" )
+        language_code = kwargs.pop( "language_code" )
 
         # Calls the constructor
         super( AddQuestionForm, self ).__init__( *args, **kwargs )
@@ -51,7 +52,7 @@ class AddQuestionForm( BaseModelForm ):
         # Overrides the choices to the related_topics field.
         self.fields[ "title" ].widget = forms.Textarea()
         self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Type your question here..." )
-        self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
+        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language__code = language_code ).values_list( "topic_id", "name" )
         self.fields[ "related_topics" ].required = True
         self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
@@ -97,6 +98,7 @@ class AddBlogPostForm( BaseModelForm ):
 
         # Extracts arguments from kwargs
         owner = kwargs.pop( "owner" )
+        language_code = kwargs.pop( "language_code" )
 
         # Calls the constructor
         super( AddBlogPostForm, self ).__init__( *args, **kwargs )
@@ -107,7 +109,7 @@ class AddBlogPostForm( BaseModelForm ):
         # Overrides the choices to the related_topics field.
         self.fields[ "title" ].widget = forms.Textarea()
         self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Ex: How to take your pet to Canada" ) + "..."
-        self.fields[ "related_topics" ].choices = Topic.objects.values_list( "id", "name" )
+        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language__code = language_code ).values_list( "topic_id", "name" )
         self.fields[ "body" ].required = True
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Ex: The first step is" ) + "..."
         self.fields[ "related_topics" ].required = True
