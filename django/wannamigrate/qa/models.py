@@ -80,6 +80,7 @@ class QuestionsManager( IndexableContentManager ):
 
         self = self.prefetch_related(
             "related_topics",
+            "comments",
             Prefetch(
                 "answers",
                 queryset=Answer.objects.order_by( "-total_upvotes", "total_downvotes", "-created_date" )
@@ -275,7 +276,7 @@ class TopicTranslation( BaseModel ):
     # The translated name of the topic
     name = models.CharField( max_length = 100 )
     # The translated slug of the title
-    slug = models.SlugField( max_length = 100, unique = True )
+    slug = models.SlugField( max_length = 100, unique = False )
     # The topic
     topic = models.ForeignKey( "Topic", related_name = "translations" )
     # The language
@@ -299,7 +300,7 @@ class TopicTranslation( BaseModel ):
             self.slug = orig = slugify( self.name )[:max_length]
 
             for x in itertools.count(1):
-                if not self.__class__.objects.filter( slug = self.slug ).exists():
+                if not self.__class__.objects.filter( slug = self.slug, language = self.language ).exists():
                     break
                 # Truncate the original slug dynamically. Minus 1 for the hyphen.
                 self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
@@ -353,9 +354,9 @@ class Topic( BaseModel ):
 
         super( Topic, self ).save( *args, **kwargs )
 
-
     def __str__(self):
         return self.name
+
 
 
 
