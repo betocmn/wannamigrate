@@ -41,15 +41,15 @@
             </div>
             <div class="services">
                 <div class="top">
-                    <h2 class="title">Services</h2>
+                    <h2 class="title">{% trans 'Services' %}</h2>
                 </div>
                 <ul class="services-list">
 
                     {% for provider_service_type in provider_service_types %}
-                        <li class="tooltip service-item {{ provider_service_type.service_type.icon_css_class }}" title="{{ provider_service_type.service_type.description }}">
+                        <li class="tooltip service-item {{ provider_service_type.service_type.icon_css_class }}" title="{% trans provider_service_type.service_type.description %}">
                             <strong class="title-service">{% trans provider_service_type.service_type.name %}</strong>
                             <span class="price">R$ {{ provider_service_type.price }}</span>
-                            <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">Hire</a>
+                            <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">{% trans 'Hire' context 'expert_view_page' %}</a>
                         </li>
                     {% endfor %}
 
@@ -64,10 +64,10 @@
         <section class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-reviews active">Reviews ({{ provider.user.userstats.total_reviews|kmi }})</a>
+                    <a href="#" class="interaction-link bt-reviews active">{% trans 'Reviews' %} ({{ provider.user.userstats.total_reviews|kmi }})</a>
                 </li>
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-answers">Answers ({{ provider.user.userstats.total_answers }})</a>
+                    <a href="#" class="interaction-link bt-answers">{% trans 'Answers' %} ({{ provider.user.userstats.total_answers }})</a>
                 </li>
             </ul>
             <div class="interaction reviews">
@@ -91,6 +91,8 @@
 
             </div>
             <div class="interaction answers">
+
+                <!--
                 <form action="" class="search">
                     <a class="bt-back"></a>
                     <fieldset>
@@ -111,7 +113,10 @@
                     </div>
                     <a href="#" class="bt-options">Options</a>
                 </div>
+                -->
+
             </div>
+
         </section>
     </div>
 

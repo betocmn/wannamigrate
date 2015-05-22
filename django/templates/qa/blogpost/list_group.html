@@ -6,7 +6,7 @@
         <div class="tags">
             <ul class="tags-list">
                 {% for topic in blogpost.related_topics.all %}
-                    <li class="tag"><a href="{% url "qa:view_topic" topic.slug %}" class="tag-link">{{ topic.name }}</a></li>
+                    <li class="tag"><a href="{% url "qa:view_topic" topic.slug %}" class="tag-link">{% trans topic.name %}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -22,7 +22,7 @@
             <ul class="data-list">
                 <ul class="list-viewers">
                     <li class="data-item"><span class="data-link link-answers"><strong>0</strong> {% trans "comments" %}</span></li>
-                    <li class="data-item"><span class="data-link viewers"><strong>{{ blogpost.total_views|kmi }}</strong> {% trans "viewers" %}</span></li>
+                    <li class="data-item"><span class="data-link viewers"><strong>{{ blogpost.total_views|kmi }}</strong> {% trans "views" %}</span></li>
                     <li class="data-item">{% trans "Last activity in" %} <strong>{{ blogpost.last_activity_date|date:"b d" }}</strong></li>
                 </ul>
                 <ul class="list-bt">
@@ -41,9 +41,8 @@
         <div class="box-options">
             <i class="shadow"></i>
             <ul class="box">
-                <li><a class="bt-share" href="#">{% trans "Share" %}</a></li>
-                <li><a class="bt-report" href="#">{% trans "Report" %}</a></li>
-                <li><a class="bt-cancel" href="#">{% trans "Cancel" %}</a></li>
+                <li><a class="bt-share" href="{% url "qa:view_blogpost" blogpost.slug %}">{% trans "View" %}</a></li>
+                <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
             </ul>
         </div>
         <a href="#" class="bt-options">{% trans "Options" %}</a>

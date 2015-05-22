@@ -55,14 +55,14 @@
                             <a href="#" class="my-account options">
                                 {% if user.userpersonal.avatar %}
                                     <div class="thumb">
-                                        <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="user photo" />
+                                        <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="photo" />
                                     </div>
                                 {% endif %}
-                                <span>{{ user.name|truncate_smart:13|default:'Profile' }}</span>
+                                <span>{% trans 'My Profile' %}</span>
                             </a>
                             <div class="box-options box-account">
                                 <ul class="box">
-                                    <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'My Account' %}</a></li>
+                                    <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'Edit Profile' %}</a></li>
                                     <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Contracts' %}</a></li>
                                     <li><a class="bt-pricing" href="#">{% trans 'My Messages' %}</a></li>
                                     <li><a class="bt-logout" href="{% url 'site:logout' %}">{% trans 'Logout' %}</a></li>

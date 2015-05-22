@@ -28,7 +28,7 @@
     <div class="content social">
         {% include "site/_common/status.html" %}
         <section class="sidebar">
-            <a href="{% url "qa:list_blogposts" %}" class="bt-back back-toKnowledge">Back to Knowledge Base</a>
+            <a href="{% url "qa:list_blogposts" %}" class="bt-back back-toKnowledge">{% trans 'Back to Knowledge Base' %}</a>
         </section>
         <section class="content">
             <div class="add-post">
@@ -45,7 +45,7 @@
                         {{ form.body }}
                         {{ form.body.errors }}
                     </div>
-                    <h2 class="title">Add topics to your post</h2>
+                    <h2 class="title">{% trans 'Add topics to your post' %}</h2>
                     <!--input type="text" placeholder="Ex. Brasil"-->
                     {{ form.related_topics }}
                     {{ form.related_topics.errors }}
@@ -57,9 +57,9 @@
                     <label class="make-anonymous" for="id_is_anonymous">
                         <!-- <input type="checkbox" name="make-anonymous" value="makeAnonymous"> -->
                         <!-- i class="checkbox"></i-->
-                        {{ form.is_anonymous }} <span>Make Anonymous</span>
+                        {{ form.is_anonymous }} <span>{% trans 'Make Anonymous' %}</span>
                     </label>
-                    <button class="button bt-write">Write Post</button>
+                    <button class="button bt-write">{% trans 'Write Post' context 'button' %}</button>
                 </form>
             </div>
         </section>

@@ -1368,6 +1368,10 @@ select {
   float: left;
   display: inline-block;
   margin-right: 5px;
+  margin-bottom: 5px;
+}
+.dashboard .content .questions .question .data-question{
+  clear: both;
 }
 .dashboard .content .questions .question .tags .tag .tag-link {
   display: inline-block;
@@ -2134,7 +2138,7 @@ select {
 .dashboard .content.hiring .services .bt-hire:before {
   content: '';
   position: absolute;
-  left: 24px;
+  left: 18px;
   top: 9px;
   width: 25px;
   height: 22px;
@@ -2763,7 +2767,7 @@ select {
   left: 50%;
   top: 28px;
   display: block;
-  width: 430px;
+  width: 445px;
   height: 18px;
   margin-left: -220px;
 }
@@ -4190,6 +4194,7 @@ select {
   cursor: pointer;
   overflow: hidden;
 }
+.content.social .sidebar .itens ul .item p,
 .content.social .sidebar .itens ul .item a {
   width: 100%;
   padding: 8px;
@@ -4205,6 +4210,10 @@ select {
   text-decoration: none;
   color: #888;
 }
+.content.social .sidebar .itens ul .item p{
+    cursor: default;
+}
+
 .content.social .sidebar .itens ul .item:hover,
 .content.social .sidebar .itens ul .item.active {
   border-right: 5px solid #ffc600;
@@ -4346,6 +4355,9 @@ select {
   width: 100%;
   height: 45px;
 }
+.content.social .content .data-question {
+  clear: both;
+}
 .content.social .content .tags .title {
   padding-bottom: 7px;
   margin: 0 0 20px;
@@ -4355,6 +4367,7 @@ select {
   float: left;
   display: inline-block;
   margin-right: 5px;
+  margin-bottom: 5px;
 }
 .content.social .content .tags .tag .tag-link {
   position: relative;
@@ -7340,6 +7353,7 @@ select {
 .content.results .main .my-situation .graph .skills .skills-list .skill .points em {
   font-style: normal;
   color: #888;
+  font-size: 11px;
 }
 .content.results .main .my-situation .hints {
   float: right;

@@ -18,7 +18,7 @@
     <div class="content payment">
         <div class="professional">
             <div class="top">
-                <h2 class="title">Hiring Professional</h2>
+                <h2 class="title">{% trans 'Hiring Professional' %}</h2>
             </div>
             <div class="identity">
                 <div class="thumb">
@@ -37,8 +37,8 @@
                 </div>
             </div>
         </div>
-        <div class="services tooltip" title="{{ service_type.description }}">
-            <h2 class="title">Service</h2>
+        <div class="services tooltip" title="{% trans service_type.description %}">
+            <h2 class="title">{% trans 'Service' %}</h2>
             <strong class="service {{ service_type.icon_css_class }}">{% trans service_type.name %}</strong>
         </div>
         <div class="interactions">
@@ -92,15 +92,15 @@
                             </ul>
                         </div>
                         <div class="card-number field error-element">
-                            <label for="id_credit_card_number">Card Number</label>
+                            <label for="id_credit_card_number">{% trans 'Card Number' %}</label>
                             <input data-iugu="number" id="number" type="text" value="" autocomplete="off" />
                         </div>
                         <div class="name field error-element">
-                            <label for="id_credit_card_name">Cardholder Name</label>
+                            <label for="id_credit_card_name">{% trans 'Cardholder Name' %}</label>
                             <input data-iugu="full_name" id="full_name" type="text" value="" autocomplete="off" />
                         </div>
                         <div class="expiration-date field error-element">
-                            <label for="expiration-date">Expiry Date</label>
+                            <label for="expiration-date">{% trans 'Expiry Date' %}</label>
                             <div class="month error-element">
                                 <select id="expiry_month" class="default-select small">
                                     <option value="01">01 - {% trans 'January' %}</option>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="security-code field error-element">
-                            <label for="id_credit_card_cvv">Security Code (CVV)</label>
+                            <label for="id_credit_card_cvv">{% trans 'Security Code (CVV)' %}</label>
                             <input data-iugu="verification_value" id="verification_value" type="text" value="" autocomplete="off" maxlength="5" />
                         </div>
                         <!--
@@ -148,7 +148,7 @@
                             </select>
                         </div>
                         -->
-                        <button class="bt-pay button" type="submit">Pay Now</button>
+                        <button class="bt-pay button" id="pay_button" type="submit">{% trans 'Pay Now' %}</button>
                     </fieldset>
                 </form>
             </div>
@@ -186,6 +186,9 @@
             // JS FORM Submission
             $( "#payment_form" ).submit( function() {
 
+                // Hide payment button to avoid double order
+                $( "#pay_button").hide();
+
                 // JS required fields validation
                 var required = 'number,full_name,expiry_month,expiry_year,verification_value';
                 if ( !validate_empty_fields( this, required ) ) {
@@ -200,9 +203,10 @@
                 var tokenResponseHandler = function( data ) {
 
                     if ( data.errors ) {
+                        $( "#pay_button").show();
                         //console.log(data.errors);
                         //alert( "{% trans 'Error Savind Credit Card' %}: " + JSON.stringify( data.errors ) );
-                        error_message = 'Invalid Information:';
+                        error_message = '{% trans 'Invalid Information:' %}';
                         for ( var error in data.errors ){
                             if ( error == 'number' ){
                                 hightlight_error_element( 'number' );

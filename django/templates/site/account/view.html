@@ -77,15 +77,15 @@
                         <div class="supported-countries">
                             <span class="subtitle">{% trans 'Supported countries' %}:</span>
                             {% for country in provider.countries.all %}
-                                <p><i class="flag {{ country.code|lower }}"></i><strong class="country">{{ country.name }}</strong></p>
+                                <p><i class="flag {{ country.code|lower }}"></i><strong class="country">{% trans country.name %}</strong></p>
                             {% endfor %}
                         </div>
                         <div class="supported-services">
                             <span class="subtitle">{% trans 'Supported services' %}:</span>
                             <ul>
                                 {% for provider_service_type in provider_service_types %}
-                                    <li class="services-list tooltip" title="{{ provider_service_type.service_type.description }}">
-                                        <strong>{{ provider_service_type.service_type.name }}</strong><span>R$ {{ provider_service_type.price }}</span>
+                                    <li class="services-list tooltip" title="{% trans provider_service_type.service_type.description %}">
+                                        <strong>{% trans provider_service_type.service_type.name %}</strong><span>R$ {{ provider_service_type.price }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
