@@ -543,6 +543,17 @@ form .errorlist {
     margin-top: 0px;
 }
 
+.dashboard .content.hiring .professional .description a {
+    text-decoration: none;
+    text-align: left;
+    color: #4f9276;
+    font-weight: bold;
+}
+
+.dashboard .content.hiring .professional .description a:hover {
+    text-decoration: underline;
+}
+
 
 
 /* My Account */

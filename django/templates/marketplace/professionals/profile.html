@@ -36,7 +36,7 @@
                     <a href="{% url "site:start_conversation" provider.user.id %}" class="bt-hire button">{% trans "Send Message" %}</a>
                 </div>
                 <div class="description">
-                    {{ provider.description|linebreaks }}
+                    {{ provider.description|safe|linebreaks }}
                 </div>
             </div>
             <div class="services">
