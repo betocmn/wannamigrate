@@ -173,6 +173,7 @@ EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_NEW_ORDER = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY = 'humberto@wannamigrate.com'
 
 
 

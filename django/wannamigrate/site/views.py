@@ -715,6 +715,14 @@ def view_conversation( request, id ):
             # Updates the conversation status for the other user
             csu = ConversationStatus_User.objects.filter( conversation = conversation ).exclude( user = request.user ).update( status_id = settings.CORE_CONVERSATION_STATUS_INBOX_ID, has_updates = True )
 
+            # Data for email notification
+            from_user = request.user
+            to_user = conversation.to_user if from_user.id == conversation.from_user_id else conversation.from_user
+
+            # Sends Notification to User
+            # TODO Change this to a celery/signal background task
+            Mailer.send_inbox_notification( from_user, to_user )
+
             return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
 
     template_data = {}
@@ -773,6 +781,10 @@ def start_conversation( request, to_user_id ):
             msg.is_read = False
             msg.content = form.cleaned_data[ "content" ]
             msg.save()
+
+            # Sends Notification to User
+            # TODO Change this to a celery/signal background task
+            Mailer.send_inbox_notification( conversation.from_user, conversation.to_user )
 
             return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
 
@@ -1048,6 +1060,7 @@ def dashboard( request ):
         # Gets 5 most related questions (page 0 by default)
         template_data['questions'] = questions
 
+
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
 
@@ -1068,12 +1081,12 @@ def set_lang( request, language_code ):
     :return Sets the desired language and redirects the user to '/' or to a next page defined via GET.
     """
 
-    # Checks if next paramters is set.
+    # Checks if next parameters is set.
     next = '/'
     if request.GET[ "next" ]:
         next = request.GET[ "next" ]
 
-
+    # Activates language
     translation.activate( language_code )
     request.session[translation.LANGUAGE_SESSION_KEY] = language_code
 

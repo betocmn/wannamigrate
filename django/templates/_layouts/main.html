@@ -57,6 +57,10 @@
                                     <div class="thumb">
                                         <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="photo" />
                                     </div>
+                                {% else %}
+                                    <div class="thumb">
+                                        <img src="{% static 'site/img/thumb-account.png' %}" alt="photo" />
+                                    </div>
                                 {% endif %}
                                 <span>{% trans 'My Profile' %}</span>
                             </a>
@@ -64,7 +68,7 @@
                                 <ul class="box">
                                     <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'Edit Profile' %}</a></li>
                                     <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Contracts' %}</a></li>
-                                    <li><a class="bt-pricing" href="#">{% trans 'My Messages' %}</a></li>
+                                    <li><a class="bt-pricing" href="{% url 'site:list_conversations' %}">{% trans 'My Messages' %}</a></li>
                                     <li><a class="bt-logout" href="{% url 'site:logout' %}">{% trans 'Logout' %}</a></li>
                                 </ul>
                             </div>
