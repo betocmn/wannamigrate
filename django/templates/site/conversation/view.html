@@ -40,7 +40,11 @@
                             {% for message in messages %}
                                 <div class="dialogue {{message.custom_class}}">
                                     <div class="thumb">
-                                        <img src="{{ message.owner.userpersonal.avatar.thumbnail.url }}" alt="">
+                                        {% if message.owner.userpersonal.avatar %}
+                                            <img src="{{ message.owner.userpersonal.avatar.thumbnail.url }}" alt="photo" />
+                                        {% else %}
+                                            <img src="{% static 'site/img/thumb-account.png' %}" alt="photo" />
+                                        {% endif %}
                                     </div>
                                     <p class="text">{{message.content}}</p>
                                     <strong class="author">{{message.owner.name}}</strong>

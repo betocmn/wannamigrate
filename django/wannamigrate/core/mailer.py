@@ -227,3 +227,17 @@ class Mailer( object ):
         }
         body = Mailer.build_body_from_template( 'emails/order_confirmation_provider.html', template_data )
         return Mailer.send( 'Service Requested', body, provider_user.email )
+
+
+    @staticmethod
+    def send_inbox_notification( from_user, to_user ):
+        """
+        Sends e-mail from site notifying an user of a new inbox message received.
+
+        :param: email
+        :param: name
+        :param: message
+        """
+        template_data = { 'from_user': from_user, 'to_user': to_user }
+        body = Mailer.build_body_from_template( 'emails/inbox_notification.html', template_data )
+        return Mailer.send( _( 'New Message Received' ), body, to_user.email, None, None, settings.EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY )
