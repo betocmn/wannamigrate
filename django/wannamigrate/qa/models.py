@@ -72,15 +72,24 @@ class IndexableContentManager( models.Manager ):
 class QuestionsManager( IndexableContentManager ):
     def get_listing( self, *args, **kwargs ):
         # Extracts arguments
-        related_topics_ids = kwargs.pop( "related_topics_ids", [] )
-        related_countries_ids = kwargs.pop( "related_countries_ids", [] )  # The ids of the related countries
-        related_goals_ids = kwargs.pop( "related_goals_ids", [] )  # The ids of the related goals
+        related_topics_ids = kwargs.pop( "related_topics_ids", None )
+        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
+        language_ids = kwargs.pop( "language_ids", None )
 
-        self = self.filter( related_topics__in = related_topics_ids ) | self.filter( related_topics__country__id__in = related_countries_ids ) | self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        # Apply filters
+        if related_topics_ids:  # BY TOPIC
+            self = self.filter( related_topics__in = related_topics_ids )
+        if related_countries_ids:   # BY RELATED COUNTRIES
+            self = self.filter( related_topics__country__id__in = related_countries_ids )
+        if related_goals_ids:   # BY RELATED GOALS
+            self = self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        if language_ids:    # BY LANGUAGE
+            self = self.filter( language__in = language_ids )
+
 
         self = self.prefetch_related(
             "related_topics",
-            "comments",
             Prefetch(
                 "answers",
                 queryset=Answer.objects.order_by( "-total_upvotes", "total_downvotes", "-created_date" )
@@ -94,15 +103,24 @@ class QuestionsManager( IndexableContentManager ):
 class BlogPostsManager( IndexableContentManager ):
     def get_listing( self, *args, **kwargs ):
         # Extracts arguments
-        related_topics_ids = kwargs.pop( "related_topics_ids", [] )
-        related_countries_ids = kwargs.pop( "related_countries_ids", [] )  # The ids of the related countries
-        related_goals_ids = kwargs.pop( "related_goals_ids", [] )  # The ids of the related goals
+        related_topics_ids = kwargs.pop( "related_topics_ids", None )
+        related_countries_ids = kwargs.pop( "related_countries_ids", None )  # The ids of the related countries
+        related_goals_ids = kwargs.pop( "related_goals_ids", None )  # The ids of the related goals
+        language_ids = kwargs.pop( "language_ids", None )
 
-        self = self.filter( related_topics__in = related_topics_ids ) | self.filter( related_topics__country__id__in = related_countries_ids ) | self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        # Apply filters
+        if related_topics_ids:  # BY TOPIC
+            self = self.filter( related_topics__in = related_topics_ids )
+        if related_countries_ids:   # BY RELATED COUNTRIES
+            self = self.filter( related_topics__country__id__in = related_countries_ids )
+        if related_goals_ids:   # BY RELATED GOALS
+            self = self.filter( related_topics__related_goals__id__in = related_goals_ids )
+        if language_ids:    # BY LANGUAGE
+            self = self.filter( language__in = language_ids )
+
 
         self = self.prefetch_related(
             "related_topics",
-            "comments",
         )
 
         return self.distinct().order_by( '-last_activity_date' )
@@ -116,6 +134,8 @@ class IndexableContent( models.Model ):
     slug = models.SlugField( max_length = 200, unique = True )
     # The body of the content.
     body = models.TextField( default = "" )
+    # The language of the content
+    language = models.ForeignKey( Language, related_name = "related_%(class)s" )
     # The last activity on the post (answer, edition, etc).
     last_activity_date = models.DateTimeField()
     # The topics related to this content.

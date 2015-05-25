@@ -18,7 +18,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
 from django.utils.translation import ugettext as _
-from wannamigrate.core.models import User
+from wannamigrate.core.models import User, Language
 from wannamigrate.qa.wm_editor import WMEditorParser
 
 
@@ -34,28 +34,39 @@ class AddQuestionForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = Question
-        fields = [ "title", "is_anonymous", "related_topics" ]
+        fields = [ "title", "is_anonymous", "related_topics", "language" ]
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
-
-        # Extracts arguments from kwargs
+        # Extracts the owner from args
         owner = kwargs.pop( "owner" )
-        language_code = kwargs.pop( "language_code" )
+        # Extracts the language from args
+        language = kwargs.pop( "language" )
 
         # Calls the constructor
         super( AddQuestionForm, self ).__init__( *args, **kwargs )
 
-        # Initialize pre-defined data.
-        self.instance.owner = owner
-
         # Overrides the choices to the related_topics field.
         self.fields[ "title" ].widget = forms.Textarea()
         self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Type your question here..." )
-        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language__code = language_code ).values_list( "topic_id", "name" )
+
+        # Get topics relative to the language passed.
+        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language = language ).values_list( "topic_id", "name" )
         self.fields[ "related_topics" ].required = True
         self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
+        # Set the class of the is_anonymous widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
+        # Gets the languages options and translates them
+        languages = Language.objects.filter( code__in = [ x[0] for x in settings.LANGUAGES ] ).values_list( "id", "name" )
+        translated = [ ( x[0], _( x[1] ) ) for x in languages ]
+        self.fields[ "language" ].choices = languages
+        self.fields[ "language" ].widget.attrs[ "class" ] = "default-select"
+
+        # Sets the owner of the question
+        self.instance.owner = owner
+        # Sets the default value for language field.
+        self.initial[ "language" ] = language
 
 
     def clean( self, *args, **kwargs ):
@@ -91,30 +102,38 @@ class AddBlogPostForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = BlogPost
-        fields = [ "title", "body", "is_anonymous", "related_topics" ]
+        fields = [ "title", "body", "is_anonymous", "related_topics", "language"  ]
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
-
-        # Extracts arguments from kwargs
+        # Extracts the owner from args
         owner = kwargs.pop( "owner" )
-        language_code = kwargs.pop( "language_code" )
+        # Extracts the language from args
+        language = kwargs.pop( "language" )
 
         # Calls the constructor
         super( AddBlogPostForm, self ).__init__( *args, **kwargs )
 
-        # Initialize pre-defined data.
-        self.instance.owner = owner
-
         # Overrides the choices to the related_topics field.
         self.fields[ "title" ].widget = forms.Textarea()
         self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Ex: How to take your pet to Canada" ) + "..."
-        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language__code = language_code ).values_list( "topic_id", "name" )
+        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language = language ).values_list( "topic_id", "name" )
         self.fields[ "body" ].required = True
         self.fields[ "body" ].widget.attrs[ "placeholder" ] = _( "Ex: The first step is" ) + "..."
         self.fields[ "related_topics" ].required = True
         self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
+        # Gets the languages options and translates them
+        languages = Language.objects.filter( code__in = [ x[0] for x in settings.LANGUAGES ] ).values_list( "id", "name" )
+        translated = [ ( x[0], _( x[1] ) ) for x in languages ]
+        self.fields[ "language" ].choices = languages
+        self.fields[ "language" ].widget.attrs[ "class" ] = "default-select"
+
+        # Sets the owner of the question
+        self.instance.owner = owner
+        # Sets the default value for language field.
+        self.initial[ "language" ] = language
 
 
     def clean( self, *args, **kwargs ):

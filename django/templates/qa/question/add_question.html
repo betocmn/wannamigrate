@@ -32,6 +32,13 @@
                         {{ form.title.errors }}
                         <!-- textarea>Type your question here...</textarea-->
                     </div>
+
+                    <div class="want-know">
+                        <h2 class="title">{% trans 'Select the language of your question' %}</h2>
+                        {{ form.language }}
+                        {{ form.language.errors }}
+                    </div>
+
                     <h2 class="title">{% trans 'Add topics to your question' %}</h2>
                     {{ form.related_topics }}
                     {{ form.related_topics.errors }}

@@ -35,7 +35,7 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User
+    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User, Language
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
@@ -1005,6 +1005,10 @@ def dashboard( request ):
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
 
+    # Gets the user language
+    language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
+
+
     # If situation is defined, we load questions and professionals related to it
     if 'situation' in request.session and 'from_country' in request.session['situation']:
 
@@ -1039,8 +1043,9 @@ def dashboard( request ):
 
         filter_params = {}
         # Fills the topics related to user's situation
-        filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+        filter_params[ "related_countries_ids" ] = [ to_country.id ]
         filter_params[ "related_goals_ids" ] = [ goal.id ]
+        filter_params[ "language_ids" ] = [ language.id ]
 
         # Get questions per step
         questions = get_questions_by_step( request, filter_params, 0, 5 )

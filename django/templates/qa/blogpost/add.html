@@ -45,6 +45,11 @@
                         {{ form.body }}
                         {{ form.body.errors }}
                     </div>
+                    <div class="say">
+                        <h2 class="title">{% trans 'Select the language of your post' %}</h2>
+                        {{ form.language }}
+                        {{ form.language.errors }}
+                    </div>
                     <h2 class="title">{% trans 'Add topics to your post' %}</h2>
                     <!--input type="text" placeholder="Ex. Brasil"-->
                     {{ form.related_topics }}

@@ -24,7 +24,7 @@ from wannamigrate.qa.forms import (
 )
 from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic, TopicTranslation
 from wannamigrate.core.models import(
-    User, UserStats
+    User, UserStats, Language
 )
 from django.conf import settings
 from django.utils.translation import ugettext as _
@@ -51,18 +51,20 @@ def list_all( request, *args, **kwargs ):
     # SET UP THE STEP AND THE TOTAL OF STEPS
     step = 0    # starts from the begining
     results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+    # Gets the language
+    language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
 
     # PROCESS FILTERS
     filter_params = {}
 
     # Fills up the situation
-    from_country = request.session['situation']['from_country']
     to_country = request.session['situation']['to_country']
     goal = request.session['situation']['goal']
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_countries_ids" ] = [ to_country.id ]
     filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
     questions = get_questions_by_step( request, filter_params, step, results_per_step )
@@ -104,13 +106,14 @@ def list_questions( request, *args, **kwargs ):
     filter_params = {}
 
     # Fills up the situation
-    from_country = request.session['situation']['from_country']
     to_country = request.session['situation']['to_country']
     goal = request.session['situation']['goal']
+    language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_countries_ids" ] = [ to_country.id ]
     filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
     questions = get_questions_by_step( request, filter_params, step, results_per_step )
@@ -139,7 +142,7 @@ def add_question( request ):
     """
 
     # Instantiate FORM
-    form = AddQuestionForm( request.POST or None, owner = request.user, language_code = request.LANGUAGE_CODE )
+    form = AddQuestionForm( request.POST or None, owner = request.user,  language = Language.objects.filter( code = request.LANGUAGE_CODE ).get() )
 
 
     # If form was submitted, it tries to validate and save data
@@ -155,7 +158,7 @@ def add_question( request ):
             question.save()
             user_stats.save()
 
-            messages.success( request, 'Post successfully created.' )
+            messages.success( request, 'Question successfully created.' )
             # Redirect with success message
             return HttpResponseRedirect( reverse( 'qa:view_question', args = ( question.slug, ) ) )
 
@@ -281,13 +284,14 @@ def list_blogposts( request, *args, **kwargs ):
     filter_params = {}
 
     # Fills up the situation
-    from_country = request.session['situation']['from_country']
     to_country = request.session['situation']['to_country']
     goal = request.session['situation']['goal']
+    language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ from_country.id, to_country.id ]
+    filter_params[ "related_countries_ids" ] = [ to_country.id ]
     filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
     blogposts = get_blogposts_by_step( request, filter_params, step, results_per_step )
@@ -315,7 +319,7 @@ def add_blogpost( request ):
     """
 
     # Instantiate FORM
-    form = AddBlogPostForm( request.POST or None, owner = request.user, language_code = request.LANGUAGE_CODE )
+    form = AddBlogPostForm( request.POST or None, owner = request.user, language = Language.objects.filter( code = request.LANGUAGE_CODE ).get() )
 
 
     # If form was submitted, it tries to validate and save data
@@ -433,12 +437,16 @@ def view_topic( request, slug ):
     # SET UP THE STEP AND THE TOTAL OF STEPS
     step = 0    # starts from the begining
     results_per_step = settings.QA_QUESTIONS_PER_STEP # The number of questions to load per step
+    # Gets the language
+    language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
+
 
     # PROCESS FILTERS
     filter_params = {}
 
     # Fills up the filter with the topic id
     filter_params[ "related_topics_ids" ] = [ topic.id ]
+    filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
     questions = get_questions_by_step( request, filter_params, step, results_per_step )
@@ -477,7 +485,7 @@ def ajax_load_questions( request ):
         raise Http404( "Not found." )
 
     # Get filters
-    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids" ]
+    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids", "language_ids" ]
     for filter_name in allowed_filters_names:
         if filter_name in request.GET:
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
@@ -509,7 +517,7 @@ def ajax_load_blogposts( request ):
         raise Http404( "Not found." )
 
     # Get filters
-    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids" ]
+    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids", "language_ids" ]
     for filter_name in allowed_filters_names:
         if filter_name in request.GET:
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
@@ -541,7 +549,7 @@ def ajax_load_all( request ):
         raise Http404( "Not found." )
 
     # Get filters
-    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids" ]
+    allowed_filters_names = [ "related_topics_ids", "related_countries_ids", "related_goals_ids", "language_ids" ]
     for filter_name in allowed_filters_names:
         if filter_name in request.GET:
             filter_params[ filter_name ] = request.GET.getlist( filter_name )
