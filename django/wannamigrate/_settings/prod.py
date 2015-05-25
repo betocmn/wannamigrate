@@ -31,6 +31,8 @@ IS_PROD = True
 
 DEBUG = False
 
+SQL_DEBUG = False
+
 TEMPLATE_DEBUG = False
 
 
@@ -49,7 +51,7 @@ ALLOWED_HOSTS = [
 INTERNAL_IPS = (
     '127.0.0.1',
     '187.40.54.219',
-    '187.180.19.7'
+    '177.193.11.202',
 )
 
 

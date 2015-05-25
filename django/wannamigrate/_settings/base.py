@@ -128,8 +128,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
-    'wannamigrate.core.context_processors.add_prod_setting',
-    'wannamigrate.core.context_processors.add_base_url',
+    'wannamigrate.core.context_processors.add_global_template_data',
 )
 
 
@@ -174,6 +173,7 @@ EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_NEW_ORDER = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY = 'humberto@wannamigrate.com'
 
 
 
