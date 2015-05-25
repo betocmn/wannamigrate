@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-23 04:31-0300\n"
+"POT-Creation-Date: 2015-05-25 17:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,102 +38,102 @@ msgstr "Extras"
 msgid "Search"
 msgstr "Busca"
 
-#: templates/_layouts/main.html:61
+#: templates/_layouts/main.html:65
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/_layouts/main.html:65
+#: templates/_layouts/main.html:69
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: templates/_layouts/main.html:66
+#: templates/_layouts/main.html:70
 msgid "My Contracts"
 msgstr "Meus Contratos"
 
-#: templates/_layouts/main.html:67
+#: templates/_layouts/main.html:71
 msgid "My Messages"
 msgstr "Mensagens"
 
-#: templates/_layouts/main.html:68
+#: templates/_layouts/main.html:72
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/_layouts/main.html:72 templates/site/home/home.html:33
+#: templates/_layouts/main.html:76 templates/site/home/home.html:33
 #: templates/site/login/login.html:26 templates/site/login/login.html.py:38
 msgid "Login"
 msgstr "Login"
 
-#: templates/_layouts/main.html:106 templates/_layouts/main.html.py:124
+#: templates/_layouts/main.html:110 templates/_layouts/main.html.py:128
 #: templates/site/home/home.html:44
 msgid "I'm from"
 msgstr "Sou do(a)"
 
-#: templates/_layouts/main.html:109 templates/_layouts/main.html.py:128
+#: templates/_layouts/main.html:113 templates/_layouts/main.html.py:132
 #: templates/site/home/home.html:48
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:111
+#: templates/_layouts/main.html:115
 msgid "And other"
 msgstr "E outro(s)"
 
-#: templates/_layouts/main.html:111
+#: templates/_layouts/main.html:115
 msgid "user(s)"
 msgstr "usuário(s)"
 
-#: templates/_layouts/main.html:115 templates/_layouts/main.html.py:132
+#: templates/_layouts/main.html:119 templates/_layouts/main.html.py:136
 msgid "in"
 msgstr "no(a)"
 
-#: templates/_layouts/main.html:117
+#: templates/_layouts/main.html:121
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
 
-#: templates/_layouts/main.html:136
+#: templates/_layouts/main.html:140
 msgid "Change"
 msgstr "Mudar"
 
-#: templates/_layouts/main.html:154
+#: templates/_layouts/main.html:158
 msgid "How It Works"
 msgstr "Como Funciona"
 
-#: templates/_layouts/main.html:155
+#: templates/_layouts/main.html:159
 msgid "Terms &amp; Conditions"
 msgstr "Termos de Uso"
 
-#: templates/_layouts/main.html:156
+#: templates/_layouts/main.html:160
 msgid "Privacy Police"
 msgstr "Políticas de Privacidade"
 
-#: templates/_layouts/main.html:157 templates/site/contact/contact.html:21
+#: templates/_layouts/main.html:161 templates/site/contact/contact.html:21
 msgid "Contact Us"
 msgstr "Contato"
 
-#: templates/_layouts/main.html:160
+#: templates/_layouts/main.html:164
 msgid "Find a Professional"
 msgstr "Encontre um Profissional"
 
-#: templates/_layouts/main.html:161
+#: templates/_layouts/main.html:165
 msgid "Ask a Question"
 msgstr "Faça uma Pergunta"
 
-#: templates/_layouts/main.html:162
+#: templates/_layouts/main.html:166
 #: templates/points/dashboard/dashboard.html:18
 #: templates/site/tools/tools.html:12
 msgid "Immigration Points Calculator"
 msgstr "Calculadora de Pontos de Imigração"
 
-#: templates/_layouts/main.html:163
+#: templates/_layouts/main.html:167
 #: templates/site/about/service_providers.html:27
 #: wannamigrate/site/forms.py:252
 msgid "Become a Service Provider"
 msgstr "Torne-se um Prestador de Serviços"
 
-#: templates/_layouts/main.html:176
+#: templates/_layouts/main.html:180
 msgid "All Rights Reserved"
 msgstr "Todos os Direitos Reservados"
 
-#: templates/_layouts/main.html:241
+#: templates/_layouts/main.html:245
 msgid "No results found."
 msgstr "Sem resultados."
 
@@ -5774,6 +5774,35 @@ msgstr "Investidores"
 msgid "Buy Property"
 msgstr "Comprar Imóvel"
 
+#: templates/emails/inbox_notification.html:14 wannamigrate/core/mailer.py:243
+msgid "New Message Received"
+msgstr "Nova Mensagem Recebida"
+
+#: templates/emails/inbox_notification.html:19
+#: templates/emails/order_confirmation_user.html:19
+#: templates/emails/reset_password.html:19
+#: templates/emails/welcome_provider.html:19
+#: templates/emails/welcome_user.html:19
+msgid "Hello,"
+msgstr "Olá,"
+
+#: templates/emails/inbox_notification.html:22
+msgid "You received a new message on Wanna Migrate's Inbox."
+msgstr "Você recebeu uma nova mensagem no site Wanna Migrate"
+
+#: templates/emails/inbox_notification.html:24
+msgid ""
+"Login to your account and go to 'Inbox' under 'My Account' or click the "
+"button below"
+msgstr ""
+"Faça login em sua conta e clique em 'Mensagens' dentro de 'Minha Conta' ou "
+"clique no botão abaixo"
+
+#: templates/emails/inbox_notification.html:32
+#: templates/emails/inbox_notification.html:36
+msgid "View Message"
+msgstr "Ver Mensagem"
+
 #: templates/emails/order_confirmation_provider.html:145
 #: templates/emails/order_confirmation_user.html:142
 msgid "Subtotal"
@@ -5796,13 +5825,6 @@ msgstr "Total"
 #: templates/emails/order_confirmation_user.html:14
 msgid "Your Order Request"
 msgstr "Seu Pedido"
-
-#: templates/emails/order_confirmation_user.html:19
-#: templates/emails/reset_password.html:19
-#: templates/emails/welcome_provider.html:19
-#: templates/emails/welcome_user.html:19
-msgid "Hello,"
-msgstr "Olá,"
 
 #: templates/emails/order_confirmation_user.html:30
 #: templates/emails/order_confirmation_user.html:34
@@ -8682,19 +8704,19 @@ msgstr "Minha Conta - Wanna Migrate"
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:804
+#: wannamigrate/site/views.py:816
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:890
+#: wannamigrate/site/views.py:902
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:944
+#: wannamigrate/site/views.py:956
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:962
+#: wannamigrate/site/views.py:974
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
