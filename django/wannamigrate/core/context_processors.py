@@ -24,14 +24,16 @@ def add_global_template_data( request ):
     template_data = {}
 
     # Determine if we are in PROD server or not
-    template_data['is_prod'] = settings.IS_PROD
+    template_data['is_prod'] = getattr( settings, 'IS_PROD', False )
 
     # Base URL
     protocol = 'https://' if request.is_secure else 'http://'
     template_data['base_url'] = protocol + request.get_host()
 
+    sql_debug_on = getattr( settings, 'SQL_DEBUG', False )
+
     # SQL Debug Mode (Get all executed SQL Queries)
-    if settings.SQL_DEBUG:
+    if sql_debug_on:
         from django.db import connection
         queries_text = ''
         for query in connection.queries:
