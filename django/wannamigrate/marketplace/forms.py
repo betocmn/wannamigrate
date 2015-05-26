@@ -46,6 +46,7 @@ class PaymentForm( BaseForm ):
 
     # Form elements
     token = forms.CharField( required = False, widget = forms.HiddenInput() )
+    payment_type = forms.CharField( required = False, widget = forms.HiddenInput() )
 
     def __init__( self, *args, **kwargs ):
         """

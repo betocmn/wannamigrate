@@ -2730,6 +2730,28 @@ select {
   width: 150px;
   margin: 10px 0 0;
 }
+.dashboard .content.payment .billet .data {
+  display: block;
+}
+.dashboard .content.payment .billet .data strong {
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+  font-size: 14px;
+}
+.dashboard .content.payment .billet .data .field {
+  width: 285px;
+  height: 50px;
+  line-height: 40px;
+}
+.dashboard .content.payment .billet .data .field input {
+  float: left;
+  display: block;
+}
+.dashboard .content.payment .billet .data .field label {
+  padding-left: 5px;
+}
+
+
 .dashboard.show-hire .content.home {
   display: none;
 }
@@ -3463,10 +3485,6 @@ select {
   }
   .dashboard .wrapper .content.payment .interactions .interaction-list {
     width: 100%;
-  }
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
-    display: none;
   }
   .dashboard .wrapper .content.payment .credit-card .data .card-flags {
     width: 170px;
@@ -9186,10 +9204,6 @@ select {
   }
   .dashboard .wrapper .content.payment .interactions .interaction-list {
     width: 100%;
-  }
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
-    display: none;
   }
   .dashboard .wrapper .content.payment .credit-card .data .card-flags {
     width: 170px;

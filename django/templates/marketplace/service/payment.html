@@ -49,22 +49,24 @@
 
                 <!--
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-paypal">{% trans 'Boleto' %}</a>
+                    <a href="#" class="interaction-link bt-billet">{% trans 'Boleto' %}</a>
                 </li>
 
+
                 <li class="interaction-item">
-                    <a href="#" class="interaction-link bt-billet">{% trans 'Paypal' %}</a>
+                    <a href="#" class="interaction-link bt-paypal">{% trans 'Paypal' %}</a>
                 </li>
                 -->
             </ul>
-            <div class="credit-card">
+            <div class="credit-card" id="credit-card">
 
                 {% include "site/_common/status.html" %}
 
-                <form id="payment_form" method="post" action="{% url 'marketplace:payment' %}#payment_form">
+                <form id="payment_credit_card_form" class="payment-form" method="post" action="{% url 'marketplace:payment' %}#payment_credit_card_form">
 
                     {% csrf_token %}
                     {{ form.token }}
+                    {{ form.payment_type }}
 
                     <!--
                     <fieldset class="address">
@@ -152,6 +154,37 @@
                     </fieldset>
                 </form>
             </div>
+
+            <div class="credit-card billet" id="billet" style="display: none;">
+
+                {% include "site/_common/status.html" %}
+
+                <form id="payment_boleto_form" class="payment-form" method="post" action="{% url 'marketplace:payment' %}#payment_boleto_form">
+
+                    {% csrf_token %}
+
+                    {{ form.token }}
+
+                    {{ form.payment_type }}
+
+                    <fieldset class="data">
+
+                        <strong>{% trans 'The confirmation can take up to 3 days after the payment.' %}</strong>
+
+                        <div class="same field">
+                            <input type="checkbox" disabled="disabled" checked="checked" />
+                            <label for="id_is_boleto">{% trans 'I want to pay by Boleto' %}</label>
+                        </div>
+
+                        <button class="bt-pay button" id="pay_button" type="submit">{% trans 'Pay Now' %}</button>
+
+                    </fieldset>
+
+
+
+                </form>
+
+            </div>
         </div>
     </div>
 
@@ -184,10 +217,21 @@
             Iugu.setup();
 
             // JS FORM Submission
-            $( "#payment_form" ).submit( function() {
+            $( ".payment-form" ).submit( function() {
 
                 // Hide payment button to avoid double order
                 $( "#pay_button").hide();
+
+                // Checks payment type
+                var payment_type = $( "#id_payment_type" );
+                if ( payment_type.val() == '' ){
+                    payment_type.val( 'credit-card' )
+                }
+
+                // If type is boleto, there's nothing to validate
+                if ( payment_type.val() == 'boleto' ){
+                    return true;
+                }
 
                 // JS required fields validation
                 var required = 'number,full_name,expiry_month,expiry_year,verification_value';
@@ -254,7 +298,7 @@
                 }
             });
 
-            // Credit Card Selection
+            // Credit Card Flag Selection
             $('.card-flags li').click(function(event) {
                 event.preventDefault()
                 $('.card-flags li').removeClass('active');
@@ -279,31 +323,21 @@
                 }
             });
 
-
-            /*
-            var  $scope = {
-                interactions : {
-                    this : $('.hiring .interactions'),
-                    interactionLink : $('.hiring .interaction-link'),
-                    interaction : $('.hiring .interaction')
+            // Payment Method Change
+            $( '.interaction-link' ).click( function( event ) {
+                event.preventDefault()
+                $( '.interaction-link' ).removeClass( 'active' );
+                $( this ).addClass( 'active' );
+                if ( $( this ).hasClass( 'bt-card' ) ) {
+                    $('#credit-card').show();
+                    $('#billet').hide();
+                    $( "#id_payment_type" ).val( 'credit-card' );
+                } else if ($(this).hasClass( 'bt-billet' ) ) {
+                    $('#credit-card').hide();
+                    $('#billet').show();
+                    $( "#id_payment_type" ).val( 'boleto' );
                 }
-            }
-
-            $scope.interactions.interactionLink.click(function(event) {
-                event.preventDefault();
-                // $scope.interactions.in.addClass('active');
-                $scope.interactions.interactionLink.removeClass('active');
-                $(this).addClass('active');
-
-                var interactionName = $(this).attr('class').split(' ')[1];
-                var currentInteraction = "." + interactionName.replace('bt-', '');
-
-                $scope.interactions.interaction.fadeOut();
-                $scope.interactions.this.find(currentInteraction).fadeIn();
             });
-
-            */
-
 
         });
 

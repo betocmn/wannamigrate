@@ -537,7 +537,10 @@ form .errorlist {
     margin-top: 75px;
 }
 .dashboard .content.hiring .professional .send-message .button {
-    width: 175px;
+    width: 155px;
+    height: 40px;
+    font-size: 14px;
+
 }
 .dashboard .content.hiring .professional .description {
     margin-top: 0px;
