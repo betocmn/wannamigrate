@@ -484,6 +484,15 @@ class StartConversationForm( BaseModelForm ):
         self.instance.from_user = owner
         self.instance.to_user = to_user
 
+    def clean( self, *args, **kwargs ):
+        cleaned_data = super( StartConversationForm, self ).clean( *args, **kwargs )
+
+        # Removes all extra spaces from content string
+        stripped_content = ' '.join( cleaned_data[ "content" ].split() )
+        cleaned_data[ "content" ] = stripped_content
+
+        return cleaned_data
+
 
 
 class ReplyConversationForm( BaseModelForm ):
@@ -509,3 +518,12 @@ class ReplyConversationForm( BaseModelForm ):
         self.instance.conversation = conversation
         self.instance.owner = owner
         self.instance.is_read = False
+
+    def clean( self, *args, **kwargs ):
+        cleaned_data = super( ReplyConversationForm, self ).clean( *args, **kwargs )
+
+        # Removes all extra spaces from content string
+        stripped_content = ' '.join( cleaned_data[ "content" ].split() )
+        cleaned_data[ "content" ] = stripped_content
+
+        return cleaned_data

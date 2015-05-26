@@ -46,7 +46,7 @@
                                             <img src="{% static 'site/img/thumb-account.png' %}" alt="photo" />
                                         {% endif %}
                                     </div>
-                                    <p class="text">{{message.content}}</p>
+                                    <p class="text">{{message.content|remove_contact_info}}</p>
                                     <strong class="author">{{message.owner.name}}</strong>
                                     <span class="when">{{ message.created_date|date:"d b H:i" }}</span>
                                 </div>

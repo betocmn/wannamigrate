@@ -33,7 +33,9 @@
                                     {% with question.answers.all|first as first_answer %}
                                         {% if first_answer.body %}
                                         <p class="answer">
-                                            {{ first_answer.body|striptags|truncate_smart:250 }}
+                                            {% autoescape off %}
+                                                {{ first_answer.body|striptags|truncate_smart:250 }}
+                                            {% endautoescape %}
                                         </p>
                                         {% endif %}
                                     {% endwith %}

@@ -15,11 +15,13 @@
                 <h3 class="title-question">{{ question.title }}</h3>
                 <p class="answer">
                     {% with question.answers.all|first as first_answer %}
-                        {% if first_answer.body %}
-                            {{ first_answer.body|striptags|truncate_smart:250 }}
-                        {% else %}
-                            {{ question.body|striptags|truncate_smart:250 }}
-                        {% endif %}
+                        {% autoescape off %}
+                            {% if first_answer.body %}
+                                {{ first_answer.body|striptags|truncate_smart:250 }}
+                            {% else %}
+                                {{ question.body|striptags|truncate_smart:250 }}
+                            {% endif %}
+                        {% endautoescape %}
                     {% endwith %}
                 </p>
             </a>

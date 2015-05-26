@@ -8,6 +8,8 @@
 # Imports
 ##########################
 from django import template
+import re
+from django.utils.translation import ugettext as _
 
 
 
@@ -106,3 +108,24 @@ def kmi( value ):
             return "{0:.1f} k".format( float( temp / K ) )
     else:
         return str( temp )
+
+
+@register.filter( name = 'remove_contact_info' )
+def remove_contact_info( value ):
+    """ Removes contact information (e-mail, phone number) on a string.
+    :param value: The search string.
+    :return: The string with its contact info replaced.
+    """
+    result = value
+
+    # TODO: match str with spaces between characters
+    email_pattern = "[\w\-][\w\-\.]+@[\w\-][\w\-\.]+[a-zA-Z]{1,4}"
+    phone_pattern = "(00|\+)?(\d{0,3}\-?\d{1})?.?\(?(\d{2,3})\)?.?\d{3,5}.?\d{2}.?\d{2}"
+
+    replaced_email_message = '(' + _( "e-mail address" ) + ')'
+    replaced_phone_message = '(' + _( "phone number" ) + ')'
+
+    result = re.sub( email_pattern, replaced_email_message, result )
+    result = re.sub( phone_pattern, replaced_phone_message, result )
+
+    return result
