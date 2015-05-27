@@ -166,15 +166,15 @@ class Mailer( object ):
         # Defines order message accordingly to status
         message = ''
         if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
-            message = _( "Your payment was received and will be processed soon." )
+            message = _( "Your order was received and will be processed soon." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-            message = _( "Your payment was approved." )
+            message = _( "Your order was approved." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
-            message = _( "Your payment was denied." )
+            message = _( "Your order was denied." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
-            message = _( "Your payment was cancelled." )
+            message = _( "Your order was cancelled." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
-            message = _( "Your payment was refunded." )
+            message = _( "Your order was refunded." )
 
         template_data = {
             'boleto_url': order_info['url'] if order_info['payment_type'] == 'boleto' else '',
@@ -205,15 +205,15 @@ class Mailer( object ):
         # Defines order message accordingly to status
         message = ''
         if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
-            message = "The payment was received and will be processed soon."
+            message = "The order was received and will be processed soon."
         elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-            message = "The payment was approved."
+            message = "The order was approved."
         elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
-            message = "The payment was denied."
+            message = "The order was denied."
         elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
-            message = "The payment was cancelled."
+            message = "The order was cancelled."
         elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
-            message = "The payment was refunded."
+            message = "The order was refunded."
 
         provider_user = provider.user
         template_data = {

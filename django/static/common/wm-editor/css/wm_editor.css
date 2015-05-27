@@ -78,7 +78,7 @@
 
 
 .wm-html-content { color: #555; font-size: 14px; }
-.wm-html-content * { margin:0; padding:0; text-decoration:none; color: #555; font-size: 14px; }
+.wm-html-content * { margin:0; padding:0; text-decoration:none; color: #555; font-size: 14px; line-height: 1.4em }
 .wm-html-content p { font-family:"open_sansregular"; font-size:14px; }
 .wm-html-content b { font-family:"open_sansblightold"; font-size:14px; }
 .wm-html-content h1 { font-family:"open_sansblightold"; font-size:18px; }

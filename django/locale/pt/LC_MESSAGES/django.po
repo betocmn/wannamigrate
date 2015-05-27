@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-26 21:05-0300\n"
+"POT-Creation-Date: 2015-05-27 17:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6852,9 +6852,9 @@ msgstr "Escrito em"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/qa/blogpost/view.html:112 templates/qa/question/view.html:181
-msgid "Related Questions"
-msgstr "Perguntas Relacionadas"
+#: templates/qa/blogpost/view.html:112
+msgid "Related Posts"
+msgstr "Posts Relacionados"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:12
@@ -6971,6 +6971,10 @@ msgstr "Anônimo"
 #: templates/qa/question/view.html:149
 msgid "Written in"
 msgstr "Escrito em"
+
+#: templates/qa/question/view.html:181
+msgid "Related Questions"
+msgstr "Perguntas Relacionadas"
 
 #: templates/qa/topic/list.html:38
 msgid "Add interest..."
@@ -7591,24 +7595,24 @@ msgid "Professional Help Requested"
 msgstr "Ajuda Profissional Solicitada"
 
 #: wannamigrate/core/mailer.py:169
-msgid "Your payment was received and will be processed soon."
-msgstr "Seu pagamento foi recebido e está sendo processado."
+msgid "Your order was received and will be processed soon."
+msgstr "Seu pedido foi recebido e está sendo processado."
 
 #: wannamigrate/core/mailer.py:171
-msgid "Your payment was approved."
-msgstr "Seu pagamento foi aprovado."
+msgid "Your order was approved."
+msgstr "Seu pedido foi aprovado."
 
 #: wannamigrate/core/mailer.py:173
-msgid "Your payment was denied."
-msgstr "Seu pagamento foi negado."
+msgid "Your order was denied."
+msgstr "Seu pedido foi recusado."
 
 #: wannamigrate/core/mailer.py:175
-msgid "Your payment was cancelled."
-msgstr "Seu pagamento foi cancelado."
+msgid "Your order was cancelled."
+msgstr "Seu pedido foi cancelado."
 
 #: wannamigrate/core/mailer.py:177
-msgid "Your payment was refunded."
-msgstr "Seu pagamento foi devolvido."
+msgid "Your order was refunded."
+msgstr "Seu pedido foi devolvido."
 
 #: wannamigrate/core/mailer.py:190
 msgid "Your Order Details"
@@ -8756,6 +8760,15 @@ msgstr "Redefinir Senha - Wanna Migrate"
 #: wannamigrate/site/views.py:979
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
+
+#~ msgid "Your payment was approved."
+#~ msgstr "Seu pagamento foi aprovado."
+
+#~ msgid "Your payment was denied."
+#~ msgstr "Seu pagamento foi negado."
+
+#~ msgid "Your payment was refunded."
+#~ msgstr "Seu pagamento foi devolvido."
 
 #~ msgid "Get Help"
 #~ msgstr "Obter Ajuda"
