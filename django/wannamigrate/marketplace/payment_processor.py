@@ -52,7 +52,7 @@ class PaymentProcessor( object ):
             self.api_key = settings.PAYMENT_API_KEY_TEST
 
 
-    def charge_credit_card( self, **kwargs ):
+    def charge( self, **kwargs ):
         """
         Makes a credit-card or boleto payment
 
@@ -72,16 +72,27 @@ class PaymentProcessor( object ):
             }
             items.append( temp )
 
+        # Defines if we send 'token' (Credit-card) or 'method' (Boleto)
+        if 'method' in kwargs and kwargs.get( 'method' ):
+            param = 'method'
+            value = kwargs.get( 'method' )
+        else:
+            param = 'token'
+            value = kwargs.get( 'token' )
+
         # formats request data
         data = {
-            'token': kwargs.get( 'token' ),
+            param: value,
             'email': kwargs.get( 'email' ),
             'discount_cents': kwargs.get( 'discount' ),
             'items': items
         }
 
+        # Status is pending if successful, but boleto as payment type
+        status_on_success = settings.ID_ORDER_STATUS_PENDING if param == 'method' else settings.ID_ORDER_STATUS_APPROVED
+
         # makes API request call
-        return self.send_request( url, 'POST', settings.ID_ORDER_STATUS_APPROVED, data )
+        return self.send_request( url, 'POST', status_on_success, data )
 
 
     def send_request( self, url, method, status_on_success, data = {} ):
@@ -214,6 +225,10 @@ class PaymentProcessor( object ):
         # If there is an external code
         if 'invoice_id' in api_result and api_result['invoice_id']:
             response['external_code'] = api_result['invoice_id']
+
+        # If there's an URL
+        if 'url' in api_result and api_result['url']:
+            response['url'] = api_result['url']
 
         return response
 

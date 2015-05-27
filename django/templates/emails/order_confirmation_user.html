@@ -22,20 +22,40 @@
                     <strong>{{ message }}</strong>
                 </td>
               </tr>
+
               <tr>
                 <td class="button">
-                  <div><!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ base_url }}{% url 'site:contracts' %}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#28b187">
-                      <w:anchorlock/>
-                      <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">{% trans 'View Order' %}</center>
-                    </v:roundrect>
-                  <![endif]-->
-                      <a class="button-mobile" href="{{ base_url }}{% url 'site:contracts' %}" style="background-color:#28b187;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">
-                        {% trans 'View Order' %}
-                      </a>
+
+                    {% if boleto_url %}
+                        <div>
+                            <!--[if mso]>
+                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ boleto_url }}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#28b187">
+                              <w:anchorlock/>
+                              <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">{% trans 'View Boleto' %}</center>
+                            </v:roundrect>
+                            <![endif]-->
+                            <a class="button-mobile" href="{{ boleto_url }}" style="background-color:#28b187;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">
+                                {% trans 'View Boleto' %}
+                            </a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <!--[if mso]>
+                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ base_url }}{% url 'site:contracts' %}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#28b187">
+                              <w:anchorlock/>
+                              <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">{% trans 'View Order' %}</center>
+                            </v:roundrect>
+                            <![endif]-->
+                            <a class="button-mobile" href="{{ base_url }}{% url 'site:contracts' %}" style="background-color:#28b187;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">
+                                {% trans 'View Order' %}
+                            </a>
+                        </div>
+                    {% endif %}
+
                   </div>
                 </td>
               </tr>
+
               <tr>
                 <td class="w320">
                   <table cellpadding="0" cellspacing="0" width="100%">

@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url( r'^payment/$', views.payment, name = 'payment' ),
 
     # Order Confirmation Page
-    url( r'^confirmation/(?P<order_id>\d+)$', views.confirmation, name = 'confirmation' ),
+    url( r'^confirmation/$', views.confirmation, name = 'confirmation' ),
 
 
 )

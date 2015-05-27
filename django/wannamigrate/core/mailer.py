@@ -177,6 +177,7 @@ class Mailer( object ):
             message = _( "Your payment was refunded." )
 
         template_data = {
+            'boleto_url': order_info['url'] if order_info['payment_type'] == 'boleto' else '',
             'provider_service_type': order_info['provider_service_type'],
             'order': order,
             'service_type': order_info['service_type'],

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-25 17:12-0300\n"
+"POT-Creation-Date: 2015-05-26 21:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr "Email do Wanna Migrate"
 msgid "Q&A"
 msgstr "Tira-Dúvidas"
 
-#: templates/_layouts/main.html:40 templates/site/dashboard/dashboard.html:70
+#: templates/_layouts/main.html:40 templates/site/dashboard/dashboard.html:72
 msgid "Professionals"
 msgstr "Profissionais"
 
@@ -5774,7 +5774,7 @@ msgstr "Investidores"
 msgid "Buy Property"
 msgstr "Comprar Imóvel"
 
-#: templates/emails/inbox_notification.html:14 wannamigrate/core/mailer.py:243
+#: templates/emails/inbox_notification.html:14 wannamigrate/core/mailer.py:244
 msgid "New Message Received"
 msgstr "Nova Mensagem Recebida"
 
@@ -5804,19 +5804,19 @@ msgid "View Message"
 msgstr "Ver Mensagem"
 
 #: templates/emails/order_confirmation_provider.html:145
-#: templates/emails/order_confirmation_user.html:142
+#: templates/emails/order_confirmation_user.html:162
 msgid "Subtotal"
 msgstr "Total Parcial"
 
 #: templates/emails/order_confirmation_provider.html:146
-#: templates/emails/order_confirmation_user.html:143
+#: templates/emails/order_confirmation_user.html:163
 msgid "Discount"
 msgstr "Desconto"
 
 #: templates/emails/order_confirmation_provider.html:147
-#: templates/emails/order_confirmation_user.html:105
-#: templates/emails/order_confirmation_user.html:144
-#: templates/marketplace/service/payment.html:84
+#: templates/emails/order_confirmation_user.html:125
+#: templates/emails/order_confirmation_user.html:164
+#: templates/marketplace/service/payment.html:88
 #: templates/site/account/contracts.html:21
 #: templates/site/account/contracts.html:46
 msgid "Total"
@@ -5826,31 +5826,36 @@ msgstr "Total"
 msgid "Your Order Request"
 msgstr "Seu Pedido"
 
-#: templates/emails/order_confirmation_user.html:30
 #: templates/emails/order_confirmation_user.html:34
+#: templates/emails/order_confirmation_user.html:38
+msgid "View Boleto"
+msgstr "Ver Boleto"
+
+#: templates/emails/order_confirmation_user.html:46
+#: templates/emails/order_confirmation_user.html:50
 msgid "View Order"
 msgstr "Ver Pedido"
 
-#: templates/emails/order_confirmation_user.html:50
+#: templates/emails/order_confirmation_user.html:70
 msgid "Professional"
 msgstr "Profissional"
 
-#: templates/emails/order_confirmation_user.html:69
+#: templates/emails/order_confirmation_user.html:89
 msgid "Order Date"
 msgstr "Data do Pedido"
 
-#: templates/emails/order_confirmation_user.html:72
+#: templates/emails/order_confirmation_user.html:92
 msgid "Order Number"
 msgstr "Número do Pedido"
 
-#: templates/emails/order_confirmation_user.html:99
+#: templates/emails/order_confirmation_user.html:119
 #: templates/marketplace/service/payment.html:41
 #: templates/site/account/contracts.html:18
 #: templates/site/account/contracts.html:43
 msgid "Service"
 msgstr "Serviço"
 
-#: templates/emails/order_confirmation_user.html:102
+#: templates/emails/order_confirmation_user.html:122
 msgid "Qty"
 msgstr "Qtd"
 
@@ -5891,9 +5896,9 @@ msgstr "Por enquanto, comece a construir sua reputação ao responder algumas"
 #: templates/emails/welcome_provider.html:23
 #: templates/marketplace/professionals/list.html:41
 #: templates/qa/common/list_group_all.html:83
-#: templates/qa/question/list_group.html:35
-#: templates/site/dashboard/dashboard.html:47
-#: templates/site/dashboard/dashboard.html:105
+#: templates/qa/question/list_group.html:37
+#: templates/site/dashboard/dashboard.html:49
+#: templates/site/dashboard/dashboard.html:107
 msgid "answers"
 msgstr "respostas"
 
@@ -5966,14 +5971,14 @@ msgstr "Consiga seu visto mais rápido e seguro com um expert"
 #: templates/marketplace/professionals/list.html:42
 #: templates/qa/blogpost/list_group.html:25
 #: templates/qa/common/list_group_all.html:27
-#: templates/qa/question/list_group.html:36
-#: templates/site/dashboard/dashboard.html:48
-#: templates/site/dashboard/dashboard.html:106
+#: templates/qa/question/list_group.html:38
+#: templates/site/dashboard/dashboard.html:50
+#: templates/site/dashboard/dashboard.html:108
 msgid "views"
 msgstr "cliques"
 
 #: templates/marketplace/professionals/list.html:43
-#: templates/site/dashboard/dashboard.html:107
+#: templates/site/dashboard/dashboard.html:109
 msgid "Joined"
 msgstr "Desde"
 
@@ -5986,9 +5991,9 @@ msgstr "Ver"
 #: templates/qa/blogpost/list_group.html:44
 #: templates/qa/common/list_group_all.html:46
 #: templates/qa/common/list_group_all.html:92
-#: templates/qa/question/list_group.html:44 templates/qa/question/view.html:92
-#: templates/site/dashboard/dashboard.html:54
-#: templates/site/dashboard/dashboard.html:113
+#: templates/qa/question/list_group.html:46 templates/qa/question/view.html:92
+#: templates/site/dashboard/dashboard.html:56
+#: templates/site/dashboard/dashboard.html:115
 msgid "View"
 msgstr "Ver"
 
@@ -5997,21 +6002,21 @@ msgstr "Ver"
 #: templates/qa/blogpost/view.html:101
 #: templates/qa/common/list_group_all.html:47
 #: templates/qa/common/list_group_all.html:93
-#: templates/qa/question/list_group.html:45 templates/qa/question/view.html:93
+#: templates/qa/question/list_group.html:47 templates/qa/question/view.html:93
 #: templates/qa/question/view.html:168
-#: templates/site/dashboard/dashboard.html:55
-#: templates/site/dashboard/dashboard.html:114
+#: templates/site/dashboard/dashboard.html:57
+#: templates/site/dashboard/dashboard.html:116
 msgid "Report"
 msgstr "Denuncie"
 
 #: templates/marketplace/professionals/list.html:70
-#: templates/site/dashboard/dashboard.html:64
-#: templates/site/dashboard/dashboard.html:123
+#: templates/site/dashboard/dashboard.html:66
+#: templates/site/dashboard/dashboard.html:125
 msgid "View More"
 msgstr "Ver Mais"
 
 #: templates/marketplace/professionals/list.html:103
-#: templates/site/dashboard/dashboard.html:160
+#: templates/site/dashboard/dashboard.html:162
 msgid "see more"
 msgstr "veja mais"
 
@@ -6042,7 +6047,11 @@ msgstr "Respostas"
 msgid "Your order was received"
 msgstr "Seu pedido foi recebido."
 
-#: templates/marketplace/service/confirmation.html:14
+#: templates/marketplace/service/confirmation.html:15
+msgid "Your Boleto Link:"
+msgstr "Link do seu Boleto:"
+
+#: templates/marketplace/service/confirmation.html:17
 msgid "You will receive an email confirmation with all the details."
 msgstr "Você receberá um email confirmando todos os detalhes."
 
@@ -6058,87 +6067,95 @@ msgstr "Cartão de Crédito"
 msgid "Boleto"
 msgstr "Boleto"
 
-#: templates/marketplace/service/payment.html:56
+#: templates/marketplace/service/payment.html:57
 msgid "Paypal"
 msgstr "Paypal"
 
-#: templates/marketplace/service/payment.html:95
-#: templates/marketplace/service/payment.html:213
+#: templates/marketplace/service/payment.html:99
+#: templates/marketplace/service/payment.html:246
 msgid "Card Number"
 msgstr "Número do Cartão"
 
-#: templates/marketplace/service/payment.html:99
-#: templates/marketplace/service/payment.html:216
+#: templates/marketplace/service/payment.html:103
+#: templates/marketplace/service/payment.html:249
 msgid "Cardholder Name"
 msgstr "Nome Impresso no Cartão"
 
-#: templates/marketplace/service/payment.html:103
-#: templates/marketplace/service/payment.html:220
+#: templates/marketplace/service/payment.html:107
+#: templates/marketplace/service/payment.html:253
 msgid "Expiry Date"
 msgstr "Data de Validade"
 
-#: templates/marketplace/service/payment.html:106
+#: templates/marketplace/service/payment.html:110
 msgid "January"
 msgstr "Janeiro"
 
-#: templates/marketplace/service/payment.html:107
+#: templates/marketplace/service/payment.html:111
 msgid "February"
 msgstr "Fevereiro"
 
-#: templates/marketplace/service/payment.html:108
+#: templates/marketplace/service/payment.html:112
 msgid "March"
 msgstr "Março"
 
-#: templates/marketplace/service/payment.html:109
+#: templates/marketplace/service/payment.html:113
 msgid "April"
 msgstr "Abril"
 
-#: templates/marketplace/service/payment.html:110
+#: templates/marketplace/service/payment.html:114
 msgid "May"
 msgstr "Maio"
 
-#: templates/marketplace/service/payment.html:111
+#: templates/marketplace/service/payment.html:115
 msgid "June"
 msgstr "Junho"
 
-#: templates/marketplace/service/payment.html:112
+#: templates/marketplace/service/payment.html:116
 msgid "July"
 msgstr "Julho"
 
-#: templates/marketplace/service/payment.html:113
+#: templates/marketplace/service/payment.html:117
 msgid "August"
 msgstr "Agosto"
 
-#: templates/marketplace/service/payment.html:114
+#: templates/marketplace/service/payment.html:118
 msgid "September"
 msgstr "Setembro"
 
-#: templates/marketplace/service/payment.html:115
+#: templates/marketplace/service/payment.html:119
 msgid "October"
 msgstr "Outubro"
 
-#: templates/marketplace/service/payment.html:116
+#: templates/marketplace/service/payment.html:120
 msgid "November"
 msgstr "Novembro"
 
-#: templates/marketplace/service/payment.html:117
+#: templates/marketplace/service/payment.html:121
 msgid "Dezember"
 msgstr "Dezembro"
 
-#: templates/marketplace/service/payment.html:139
-#: templates/marketplace/service/payment.html:223
+#: templates/marketplace/service/payment.html:143
+#: templates/marketplace/service/payment.html:256
 msgid "Security Code (CVV)"
 msgstr "Cód. de Segurança"
 
-#: templates/marketplace/service/payment.html:151
+#: templates/marketplace/service/payment.html:159
+msgid "The confirmation can take up to 3 days after the payment."
+msgstr "A confirmação pode demorar até 3 dias após o pagamento."
+
+#: templates/marketplace/service/payment.html:163
+msgid "I want to pay by Boleto"
+msgstr "Quero pagar com Boleto"
+
+#: templates/marketplace/service/payment.html:169
 msgid "Pay Now"
 msgstr "Pagar"
 
-#: templates/marketplace/service/payment.html:208
+#: templates/marketplace/service/payment.html:241
 msgid "Error Savind Credit Card"
 msgstr "Erro ao Salvar Cartão de Crédito"
 
-#: templates/marketplace/service/payment.html:209
+#: templates/marketplace/service/payment.html:242
 msgid "Invalid Information:"
 msgstr "Dados Inválidos:"
 
@@ -6741,17 +6758,21 @@ msgstr "Do que você irá falar?"
 msgid "Write what you have to say"
 msgstr "Escreva o que deseja"
 
-#: templates/qa/blogpost/add.html:48
+#: templates/qa/blogpost/add.html:49
+msgid "Select the language of your post"
+msgstr ""
+
+#: templates/qa/blogpost/add.html:53
 msgid "Add topics to your post"
 msgstr "Adicione tópicos relacionados"
 
-#: templates/qa/blogpost/add.html:60
-#: templates/qa/question/add_question.html:43
+#: templates/qa/blogpost/add.html:65
+#: templates/qa/question/add_question.html:50
 #: templates/qa/question/view.html:112
 msgid "Make Anonymous"
 msgstr "Tornar Anônimo"
 
-#: templates/qa/blogpost/add.html:62 templates/qa/blogpost/list.html:29
+#: templates/qa/blogpost/add.html:67 templates/qa/blogpost/list.html:29
 msgctxt "button"
 msgid "Write Post"
 msgstr "Criar Post"
@@ -6769,8 +6790,8 @@ msgstr "comentários"
 #: templates/qa/blogpost/list_group.html:26
 #: templates/qa/common/list_group_all.html:28
 #: templates/qa/common/list_group_all.html:85
-#: templates/qa/question/list_group.html:37
-#: templates/site/dashboard/dashboard.html:49
+#: templates/qa/question/list_group.html:39
+#: templates/site/dashboard/dashboard.html:51
 msgid "Last activity in"
 msgstr "Última atividade"
 
@@ -6778,10 +6799,10 @@ msgstr "Última atividade"
 #: templates/qa/blogpost/view.html:105
 #: templates/qa/common/list_group_all.html:50
 #: templates/qa/common/list_group_all.html:96
-#: templates/qa/question/list_group.html:48 templates/qa/question/view.html:96
+#: templates/qa/question/list_group.html:50 templates/qa/question/view.html:96
 #: templates/qa/question/view.html:171
-#: templates/site/dashboard/dashboard.html:58
-#: templates/site/dashboard/dashboard.html:110
+#: templates/site/dashboard/dashboard.html:60
+#: templates/site/dashboard/dashboard.html:112
 msgid "Options"
 msgstr "Opções"
 
@@ -6912,13 +6933,17 @@ msgstr "Seguindo"
 msgid "What do you want to know?"
 msgstr "O que deseja saber?"
 
-#: templates/qa/question/add_question.html:35
+#: templates/qa/question/add_question.html:37
+msgid "Select the language of your question"
+msgstr ""
+
+#: templates/qa/question/add_question.html:42
 msgid "Add topics to your question"
 msgstr "Adicione tópicos relacionados"
 
-#: templates/qa/question/add_question.html:45
+#: templates/qa/question/add_question.html:52
 #: templates/qa/question/list.html:29
-#: templates/site/dashboard/dashboard.html:65
+#: templates/site/dashboard/dashboard.html:67
 msgctxt "button"
 msgid "Add Question"
 msgstr "Fazer Pergunta"
@@ -6976,7 +7001,7 @@ msgid "My contracts"
 msgstr "Meus contratos"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:665
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:670
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -7303,7 +7328,7 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:667
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:672
 msgid "Sent"
 msgstr "Enviadas"
 
@@ -7316,7 +7341,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:669
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:674
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -7349,7 +7374,7 @@ msgctxt "Button"
 msgid "Add Question"
 msgstr "Fazer Pergunta"
 
-#: templates/site/dashboard/dashboard.html:61
+#: templates/site/dashboard/dashboard.html:63
 msgid "No content found"
 msgstr "Sem conteúdo"
 
@@ -7585,7 +7610,7 @@ msgstr "Seu pagamento foi cancelado."
 msgid "Your payment was refunded."
 msgstr "Seu pagamento foi devolvido."
 
-#: wannamigrate/core/mailer.py:189
+#: wannamigrate/core/mailer.py:190
 msgid "Your Order Details"
 msgstr "Detalhes do Seu Pedido"
 
@@ -7881,6 +7906,14 @@ msgstr "empresa"
 msgid "Duration of Employment"
 msgstr "Duração do Emprego"
 
+#: wannamigrate/core/templatetags/string_extras.py:125
+msgid "e-mail address"
+msgstr "e-mail"
+
+#: wannamigrate/core/templatetags/string_extras.py:126
+msgid "phone number"
+msgstr "número de telefone"
+
 #: wannamigrate/core/util.py:225
 msgid "6 months"
 msgstr "6 meses"
@@ -7902,11 +7935,15 @@ msgstr "%s anos"
 msgid "Select Duration"
 msgstr "Selecione Duração"
 
-#: wannamigrate/marketplace/forms.py:78
+#: wannamigrate/marketplace/forms.py:79
 msgid "Payment information missing."
 msgstr "Informações de pagamento inexistentes."
 
-#: wannamigrate/marketplace/forms.py:109
+#: wannamigrate/marketplace/forms.py:83
+msgid "Invalid Payment Method."
+msgstr ""
+
+#: wannamigrate/marketplace/forms.py:114
 msgid "Payment not authorized."
 msgstr "Pagamento não autorizado."
 
@@ -8059,12 +8096,12 @@ msgstr "categoria"
 msgid "Select Service"
 msgstr "Selecione Serviço"
 
-#: wannamigrate/marketplace/views.py:48
+#: wannamigrate/marketplace/views.py:49
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:49 wannamigrate/marketplace/views.py:180
-#: wannamigrate/marketplace/views.py:268
+#: wannamigrate/marketplace/views.py:50 wannamigrate/marketplace/views.py:181
+#: wannamigrate/marketplace/views.py:279
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -8072,7 +8109,7 @@ msgstr ""
 "Tome decisões mais rápidas e seguras no planejamento de mudar de país.  "
 "Obtenha ajuda de um experts em imigração no Wanna Migrate."
 
-#: wannamigrate/marketplace/views.py:138
+#: wannamigrate/marketplace/views.py:139
 msgid ""
 "can be hired through Wanna Migrate. Sign-up to connect with thousands of "
 "experts in immigration and related."
@@ -8080,33 +8117,33 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:179
+#: wannamigrate/marketplace/views.py:180
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:267
+#: wannamigrate/marketplace/views.py:278
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:276
-msgid "Your payment was <span>received</span> and will be processed soon."
-msgstr "Seu pagamento foi <span>recebido</span> e está sendo processado."
+#: wannamigrate/marketplace/views.py:287
+msgid "Your order was <span>received</span> and will be processed soon."
+msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:279
-msgid "Your payment was <span>approved</span>."
-msgstr "Seu pagamento foi <span>aprovado</span>."
+#: wannamigrate/marketplace/views.py:290
+msgid "Your order was <span>approved</span>."
+msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:282
-msgid "Your payment was <span>denied</span>."
-msgstr "Seu pagamento foi <span>recusado</span>."
+#: wannamigrate/marketplace/views.py:293
+msgid "Your order was <span>denied</span>."
+msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:285
-msgid "Your payment was <span>cancelled</span>."
-msgstr "Seu pagamento foi <span>cancelado</span>."
+#: wannamigrate/marketplace/views.py:296
+msgid "Your order was <span>cancelled</span>."
+msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:288
-msgid "Your payment was <span>refunded</span>."
-msgstr "Seu pagamento foi <span>devolvido</span>.."
+#: wannamigrate/marketplace/views.py:299
+msgid "Your order was <span>refunded</span>."
+msgstr "Seu pedido foi <span>devolvido</span>.."
 
 #: wannamigrate/points/forms.py:42
 msgid "Country of Citizenship"
@@ -8473,56 +8510,56 @@ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/qa/forms.py:54
+#: wannamigrate/qa/forms.py:51
 msgid "Type your question here..."
 msgstr "Escreva sua pergunta aqui..."
 
-#: wannamigrate/qa/forms.py:57 wannamigrate/qa/forms.py:116
+#: wannamigrate/qa/forms.py:56 wannamigrate/qa/forms.py:124
 msgid "Ex: Brazil, Canada, Student visa, Work visa, General immigration"
 msgstr ""
 "Ex: Brasil, Canadá, Visto de Estudante, Visto de Trabalho, Imigração em Geral"
 
-#: wannamigrate/qa/forms.py:68 wannamigrate/qa/forms.py:127
+#: wannamigrate/qa/forms.py:79 wannamigrate/qa/forms.py:146
 msgid "Select at least one country as topic."
 msgstr "Selecione ao menos um país como tópico."
 
-#: wannamigrate/qa/forms.py:111
+#: wannamigrate/qa/forms.py:119
 msgid "Ex: How to take your pet to Canada"
 msgstr "Ex: Como levar seu cachorro para o Canadá"
 
-#: wannamigrate/qa/forms.py:114
+#: wannamigrate/qa/forms.py:122
 msgid "Ex: The first step is"
 msgstr "Ex: o primeiro passo é"
 
-#: wannamigrate/qa/forms.py:185
+#: wannamigrate/qa/forms.py:204
 msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
-#: wannamigrate/qa/views.py:81
+#: wannamigrate/qa/views.py:83
 msgid "Knowledge - Wanna Migrate"
 msgstr "Conhecimento - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:121
+#: wannamigrate/qa/views.py:124
 msgid "Questions & Answers - Wanna Migrate"
 msgstr "Perguntas e Respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:165
+#: wannamigrate/qa/views.py:168
 msgid "Add Question - Wanna Migrate"
 msgstr "Pergunte - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:206
+#: wannamigrate/qa/views.py:209
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:298
+#: wannamigrate/qa/views.py:302
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:341
+#: wannamigrate/qa/views.py:345
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:421
+#: wannamigrate/qa/views.py:425
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
@@ -8631,51 +8668,51 @@ msgstr "Você possui países duplicados para dar suporte."
 msgid "You must choose different services for supported services."
 msgstr "Você possui serviços duplicados para dar suporte."
 
-#: wannamigrate/site/views.py:181
+#: wannamigrate/site/views.py:186
 msgid "Login - Wanna Migrate"
 msgstr "Login - Wanna Migrate"
 
-#: wannamigrate/site/views.py:200
+#: wannamigrate/site/views.py:205
 msgid "Invalid login. Please try again."
 msgstr "Login inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:242
+#: wannamigrate/site/views.py:247
 msgid "Sign Up - Wanna Migrate"
 msgstr "Cadastre-se - Wanna Migrate"
 
-#: wannamigrate/site/views.py:314
+#: wannamigrate/site/views.py:319
 msgid "Recover Password - Wanna Migrate"
 msgstr "Recupere sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:332
+#: wannamigrate/site/views.py:337
 msgid "Password reset instructions were successfully sent to your e-mail."
 msgstr "As instruções para redefinição de senha foram enviados por e-mail."
 
-#: wannamigrate/site/views.py:366
+#: wannamigrate/site/views.py:371
 msgid "Reset Password - Wanna Migrate"
 msgstr "Redefina sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:379
+#: wannamigrate/site/views.py:384
 msgid "Password successfully updated."
 msgstr "Senha alterada com sucesso."
 
-#: wannamigrate/site/views.py:406
+#: wannamigrate/site/views.py:411
 msgid "Contact Us - Wanna Migrate"
 msgstr "Contato - Wanna Migrate"
 
-#: wannamigrate/site/views.py:422
+#: wannamigrate/site/views.py:427
 msgid "Your message was successfully sent."
 msgstr "Sua mensagem foi enviada com sucesso."
 
-#: wannamigrate/site/views.py:449
+#: wannamigrate/site/views.py:454
 msgid "How it Works - Wanna Migrate"
 msgstr "Como Funciona - Wanna Migrate"
 
-#: wannamigrate/site/views.py:474
+#: wannamigrate/site/views.py:479
 msgid "Become a Service Provider - Wanna Migrate"
 msgstr "Torne-se um Prestador de Serviços - Wanna Migrate"
 
-#: wannamigrate/site/views.py:475
+#: wannamigrate/site/views.py:480
 msgid ""
 "Wanna Migrate brings online clients to you. We are specialized in attracting "
 "people planning to migrate to another country, temporarily or permanently."
@@ -8684,39 +8721,39 @@ msgstr ""
 "pessoas planejando migrar para um novo país, de forma temporária ou "
 "permanente."
 
-#: wannamigrate/site/views.py:499
+#: wannamigrate/site/views.py:504
 msgid "Extra Tools - Wanna Migrate"
 msgstr "Ferramentas Extras - Wanna Migrate"
 
-#: wannamigrate/site/views.py:526
+#: wannamigrate/site/views.py:531
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:544
+#: wannamigrate/site/views.py:549
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:569
+#: wannamigrate/site/views.py:574
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:600
+#: wannamigrate/site/views.py:605
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:816
+#: wannamigrate/site/views.py:821
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:902
+#: wannamigrate/site/views.py:907
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:956
+#: wannamigrate/site/views.py:961
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:974
+#: wannamigrate/site/views.py:979
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 

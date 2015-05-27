@@ -47,22 +47,22 @@
                     <a href="#" class="interaction-link bt-card active">{% trans 'Credit Card' %}</a>
                 </li>
 
-                <!--
+
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-billet">{% trans 'Boleto' %}</a>
                 </li>
 
-
+                <!--
                 <li class="interaction-item">
                     <a href="#" class="interaction-link bt-paypal">{% trans 'Paypal' %}</a>
                 </li>
                 -->
             </ul>
-            <div class="credit-card" id="credit-card">
+            <div class="credit-card">
 
                 {% include "site/_common/status.html" %}
 
-                <form id="payment_credit_card_form" class="payment-form" method="post" action="{% url 'marketplace:payment' %}#payment_credit_card_form">
+                <form id="payment_form" method="post" action="{% url 'marketplace:payment' %}#payment_form">
 
                     {% csrf_token %}
                     {{ form.token }}
@@ -83,108 +83,95 @@
                     -->
                     <fieldset class="data">
 
-                        <div class="total-price">{% trans 'Total' %}: R$ {{ total_price }}</div>
+                        <div id="credit-card">
 
-                        <div class="card-flags">
-                            <ul>
-                                <li class="visa active">Visa</li>
-                                <li class="mastercard">Mastercard</li>
-                                <li class="diners">Diners Club</li>
-                                <li class="american">American Express</li>
-                            </ul>
-                        </div>
-                        <div class="card-number field error-element">
-                            <label for="id_credit_card_number">{% trans 'Card Number' %}</label>
-                            <input data-iugu="number" id="number" type="text" value="" autocomplete="off" />
-                        </div>
-                        <div class="name field error-element">
-                            <label for="id_credit_card_name">{% trans 'Cardholder Name' %}</label>
-                            <input data-iugu="full_name" id="full_name" type="text" value="" autocomplete="off" />
-                        </div>
-                        <div class="expiration-date field error-element">
-                            <label for="expiration-date">{% trans 'Expiry Date' %}</label>
-                            <div class="month error-element">
-                                <select id="expiry_month" class="default-select small">
-                                    <option value="01">01 - {% trans 'January' %}</option>
-                                    <option value="02">02 - {% trans 'February' %}</option>
-                                    <option value="03">03 - {% trans 'March' %}</option>
-                                    <option value="04">04 - {% trans 'April' %}</option>
-                                    <option value="05">05 - {% trans 'May' %}</option>
-                                    <option value="06">06 - {% trans 'June' %}</option>
-                                    <option value="07">07 - {% trans 'July' %}</option>
-                                    <option value="08">08 - {% trans 'August' %}</option>
-                                    <option value="09">09 - {% trans 'September' %}</option>
-                                    <option value="10">10 - {% trans 'October' %}</option>
-                                    <option value="11">11 - {% trans 'November' %}</option>
-                                    <option value="12">12 - {% trans 'Dezember' %}</option>
-                                </select>
-                                <input data-iugu="expiration" id="expiration" type="hidden" />
+                            <div class="total-price">{% trans 'Total' %}: R$ {{ total_price }}</div>
+
+                            <div class="card-flags">
+                                <ul>
+                                    <li class="visa active">Visa</li>
+                                    <li class="mastercard">Mastercard</li>
+                                    <li class="diners">Diners Club</li>
+                                    <li class="american">American Express</li>
+                                </ul>
                             </div>
-                            <div class="year error-element">
-                                <select id="expiry_year" class="default-select small">
-                                    <option value="2015">2015</option>
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2017</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
+                            <div class="card-number field error-element">
+                                <label for="id_credit_card_number">{% trans 'Card Number' %}</label>
+                                <input data-iugu="number" id="number" type="text" value="" autocomplete="off" />
+                            </div>
+                            <div class="name field error-element">
+                                <label for="id_credit_card_name">{% trans 'Cardholder Name' %}</label>
+                                <input data-iugu="full_name" id="full_name" type="text" value="" autocomplete="off" />
+                            </div>
+                            <div class="expiration-date field error-element">
+                                <label for="expiration-date">{% trans 'Expiry Date' %}</label>
+                                <div class="month error-element">
+                                    <select id="expiry_month" class="default-select small">
+                                        <option value="01">01 - {% trans 'January' %}</option>
+                                        <option value="02">02 - {% trans 'February' %}</option>
+                                        <option value="03">03 - {% trans 'March' %}</option>
+                                        <option value="04">04 - {% trans 'April' %}</option>
+                                        <option value="05">05 - {% trans 'May' %}</option>
+                                        <option value="06">06 - {% trans 'June' %}</option>
+                                        <option value="07">07 - {% trans 'July' %}</option>
+                                        <option value="08">08 - {% trans 'August' %}</option>
+                                        <option value="09">09 - {% trans 'September' %}</option>
+                                        <option value="10">10 - {% trans 'October' %}</option>
+                                        <option value="11">11 - {% trans 'November' %}</option>
+                                        <option value="12">12 - {% trans 'Dezember' %}</option>
+                                    </select>
+                                    <input data-iugu="expiration" id="expiration" type="hidden" />
+                                </div>
+                                <div class="year error-element">
+                                    <select id="expiry_year" class="default-select small">
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2017</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="security-code field error-element">
+                                <label for="id_credit_card_cvv">{% trans 'Security Code (CVV)' %}</label>
+                                <input data-iugu="verification_value" id="verification_value" type="text" value="" autocomplete="off" maxlength="5" />
+                            </div>
+                            <!--
+                            <div class="hire-purchase field">
+                                <label for="hire-purchase">Número de parcelas</label>
+                                <select name="" id="" class="custom-select">
+                                    <option value="1x">1x de R$ 90,00 sem juros</option>
+                                    <option value="2x">2x de R$ 45,00 sem juros</option>
                                 </select>
                             </div>
+                            -->
                         </div>
-                        <div class="security-code field error-element">
-                            <label for="id_credit_card_cvv">{% trans 'Security Code (CVV)' %}</label>
-                            <input data-iugu="verification_value" id="verification_value" type="text" value="" autocomplete="off" maxlength="5" />
+
+                        <div id="billet" class="billet" style="display: none;">
+
+                            <strong>{% trans 'The confirmation can take up to 3 days after the payment.' %}</strong>
+
+                            <div class="same field">
+                                <input type="checkbox" disabled="disabled" checked="checked" />
+                                <label for="id_is_boleto">{% trans 'I want to pay by Boleto' %}</label>
+                            </div>
+
                         </div>
-                        <!--
-                        <div class="hire-purchase field">
-                            <label for="hire-purchase">Número de parcelas</label>
-                            <select name="" id="" class="custom-select">
-                                <option value="1x">1x de R$ 90,00 sem juros</option>
-                                <option value="2x">2x de R$ 45,00 sem juros</option>
-                            </select>
-                        </div>
-                        -->
-                        <button class="bt-pay button" id="pay_button" type="submit">{% trans 'Pay Now' %}</button>
-                    </fieldset>
-                </form>
-            </div>
 
-            <div class="credit-card billet" id="billet" style="display: none;">
-
-                {% include "site/_common/status.html" %}
-
-                <form id="payment_boleto_form" class="payment-form" method="post" action="{% url 'marketplace:payment' %}#payment_boleto_form">
-
-                    {% csrf_token %}
-
-                    {{ form.token }}
-
-                    {{ form.payment_type }}
-
-                    <fieldset class="data">
-
-                        <strong>{% trans 'The confirmation can take up to 3 days after the payment.' %}</strong>
-
-                        <div class="same field">
-                            <input type="checkbox" disabled="disabled" checked="checked" />
-                            <label for="id_is_boleto">{% trans 'I want to pay by Boleto' %}</label>
-                        </div>
 
                         <button class="bt-pay button" id="pay_button" type="submit">{% trans 'Pay Now' %}</button>
 
                     </fieldset>
-
-
-
                 </form>
-
             </div>
+
         </div>
     </div>
 
@@ -217,10 +204,8 @@
             Iugu.setup();
 
             // JS FORM Submission
-            $( ".payment-form" ).submit( function() {
+            $( "#payment_form" ).submit( function() {
 
-                // Hide payment button to avoid double order
-                $( "#pay_button").hide();
 
                 // Checks payment type
                 var payment_type = $( "#id_payment_type" );
@@ -230,6 +215,7 @@
 
                 // If type is boleto, there's nothing to validate
                 if ( payment_type.val() == 'boleto' ){
+                    $( "#pay_button").hide();
                     return true;
                 }
 
@@ -238,6 +224,9 @@
                 if ( !validate_empty_fields( this, required ) ) {
                     return false;
                 }
+
+                // Hide payment button to avoid double order
+                $( "#pay_button").hide();
 
                 // Set expiry date in the format 'mm/yyyy'
                 $( "#expiration").val( $( "#expiry_month" ).val() + '/' + $( "#expiry_year" ).val() );

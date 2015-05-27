@@ -78,9 +78,14 @@ class PaymentForm( BaseForm ):
         if not hasattr( self, 'payment_info' ) or not self.payment_info:
             raise forms.ValidationError( _( "Payment information missing." ) )
 
+        # If no payment-method was selected
+        if not cleaned_data['payment_type'] or cleaned_data['payment_type'] not in ['boleto', 'credit-card']:
+            raise forms.ValidationError( _( "Invalid Payment Method." ) )
+
         # makes payment
         payment_processor = PaymentProcessor()
-        payment_api_result = payment_processor.charge_credit_card(
+        payment_api_result = payment_processor.charge(
+            method = 'bank_slip' if cleaned_data['payment_type'] == 'boleto' else '',
             token = self.payment_info['token'],
             email = self.payment_info['user'].email,
             discount = 0,
@@ -89,7 +94,6 @@ class PaymentForm( BaseForm ):
                        'price': self.payment_info['provider_service_type'].price
             }]
         )
-        #raise forms.ValidationError( payment_api_result['_text'] )
 
         # Passes result to private attribute
         self.payment_api_result = payment_api_result
