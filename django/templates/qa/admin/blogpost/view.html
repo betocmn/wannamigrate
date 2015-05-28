@@ -1,0 +1,176 @@
+{% extends "_layouts/admin.html" %}
+{% load string_extras %}
+{% load staticfiles %}
+{% load i18n %}
+{% block head %}
+    {{ block.super }}
+    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
+    <script type="text/javascript">
+        /** JQuery onload */
+        $(document).ready(function() {
+        });
+    </script>
+{% endblock head %}
+
+{% block content %}
+
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">BlogPost details</h1>
+                </div>
+            </div>
+            
+            {% include "admin/_common/status.html" %}
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            BlogPost ID# {{ blogpost.id }}
+                        </div>
+                                                
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                
+                                    <dl class="dl-horizontal">
+                                        
+                                        <dt>Owner:</dt>
+                                        <dd>
+                                            <a href="{% url 'admin:core:admin_user_details' blogpost.owner.id %}">{{ blogpost.owner.email }}</a>
+                                        </dd>
+
+                                        <dt>Title:</dt>
+                                        <dd>{{ blogpost.title|str_or_dash }}</dd>
+
+                                        <dt>Language:</dt>
+                                        <dd>{% trans blogpost.language.name|str_or_dash %}</dd>
+
+                                        <dt>Slug:</dt>
+                                        <dd>{{ blogpost.slug|str_or_dash }}</dd>
+
+                                        <dt>Body:</dt>
+                                        {% autoescape off %}
+                                            <dd class="wm-editor-content">
+                                                {{ blogpost.body|str_or_dash }}
+                                            </dd>
+                                        {% endautoescape %}
+
+                                        <dt>Is Anonymous?</dt>
+                                        <dd>
+                                            {{ blogpost.is_anonymous|yes_or_no }}
+                                        </dd>
+
+                                        <dt>Related topics: </dt>
+                                        <dd>
+                                            {% with related_topics=blogpost.related_topics.all %}
+                                                {% if related_topics %}
+                                                    {% for topic in related_topics %}
+                                                        <a href="{% url 'admin:qa:view_topic' topic.id %}">
+                                                            [{{ topic.name }}] 
+                                                        </a>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            {% endwith %}
+                                        </dd>
+
+                                        <dt>Views count:</dt>
+                                        <dd>
+                                            {{ blogpost.total_views|kmi }}
+                                        </dd>
+                                        <dt>Followers count:</dt>
+                                        <dd>
+                                            {{ blogpost.total_followers|kmi }}
+                                        </dd>
+                                        <dt>Answers count:</dt>
+                                        <dd>
+                                            {{ blogpost.total_answers|kmi }}
+                                        </dd>
+
+                                        <dt>Last activity date:</dt>
+                                        <dd>
+                                            {{ blogpost.last_activity_date }}
+                                        </dd>
+                                    </dl>
+                                    
+                                    <div class="text-center buttons">
+                                        <a href="{% url 'admin:qa:list_blogposts' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+                                        <a href="{% url 'admin:qa:edit_blogpost' blogpost.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+                                        <a href="#" onclick="confirm_delete( '{% url 'admin:qa:delete_blogpost' blogpost.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                        <!--a href="{% url 'admin:qa:add_answer' blogpost.id %}" class="btn btn-success"><i class="fa fa-plus"></i>Answer</a-->
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                   
+                    </div>
+                    
+                </div>
+            
+            </div>
+
+            <!-- History -->
+            <div class="row">            
+                <div class="col-lg-12">
+                    <h1 class="page-header">History</h1>
+                </div>
+            </div>
+
+            {% for history in edition_history %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                BlogPost History ID# {{ history.id }}
+                            </div>
+                                                    
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    
+                                        <dl class="dl-horizontal">
+                                            
+                                            <dt>Title:</dt>
+                                            <dd>{{ history.title|str_or_dash }}</dd>
+
+                                            <dt>Body:</dt>
+                                            {% autoescape off %}
+                                                <dd>{{ history.body|str_or_dash }}</dd>
+                                            {% endautoescape %}
+
+                                            <dt>Created in:</dt>
+                                            <dd>{{ history.parent_created_date}}</dd>
+
+                                            <dt>Updated in:</dt>
+                                            <dd>{{ history.modified_date }}</dd>
+                                        </dl>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            {% empty %}
+                The post has no history of edition.
+            {% endfor %}
+
+{% endblock content %}
+
+
+
+
+
+
+

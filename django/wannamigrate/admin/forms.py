@@ -13,12 +13,14 @@ from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from wannamigrate.core.forms import BaseForm, BaseModelForm
-from wannamigrate.core.models import Country
+from wannamigrate.core.models import Country, Language
 from wannamigrate.points.models import Question, Answer, CountryPoints, Occupation, OccupationCategory
 from wannamigrate.qa.models import Topic, TopicTranslation
+from wannamigrate.qa import models as qa
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
+from django.utils.translation import ugettext as _
 
 
 
@@ -318,11 +320,49 @@ class AddAnswerForm( BaseModelForm ):
     """
     pass
 
-class EditPostForm( BaseModelForm ):
+
+class EditQuestionForm( BaseModelForm ):
     """
     Form to edit qa post on admin.
     """
-    pass
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = qa.Question
+        fields = [ "title", "is_anonymous" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        super( EditQuestionForm, self ).__init__( *args, **kwargs )
+
+        # Overrides the choices to the related_topics field.
+        self.fields[ "title" ].widget = forms.Textarea()
+        self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "Type your question here..." )
+
+        # Set the class of the is_anonymous widget
+        self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
+
+
+class EditBlogPostForm( BaseModelForm ):
+    """
+    Form to edit qa post on admin.
+    """
+    class Meta:
+        """ Meta class describing the model and the fields required on this form. """
+        model = qa.BlogPost
+        fields = [ "title", "body", "is_anonymous" ]
+
+    # Initalizing the form
+    def __init__( self, *args, **kwargs ):
+        super( EditBlogPostForm, self ).__init__( *args, **kwargs )
+
+        # Overrides the choices to the related_topics field.
+        self.fields[ "title" ].widget = forms.Textarea()
+        self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "BlogPost title..." )
+
+        # Set the class of the is_anonymous widget
+        self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
 
 
 # Topics

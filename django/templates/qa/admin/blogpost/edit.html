@@ -49,7 +49,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Edit {{ post_type }}</h1>
+                    <h1 class="page-header">Edit Question</h1>
                 </div>
             </div>
             
@@ -59,15 +59,16 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         
-                        <div class="panel-heading">
-                            {{ post_type }} Details
-                        </div>
-                        
                         <div class="panel-body">
                             <form action="{{ action_url|default:'' }}" method="post" id="main_form">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-lg-6">
+                                        <div class="form-group {% if form.owner.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.owner.id_for_label }}">{{ form.owner.label }}</label>
+                                            {{ form.owner }}
+                                            {{ form.owner.errors }}
+                                        </div>
                                         <!-- Title -->
                                         <div class="form-group {% if form.title.errors %}has-error{% endif %}">
                                             <label class="control-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
@@ -85,12 +86,6 @@
                                             <label class="control-label" for="{{ form.is_anonymous.id_for_label }}">{{ form.is_anonymous.label }}</label>
                                             {{ form.is_anonymous }}
                                             {{ form.is_anonymous.errors }}
-                                        </div>
-                                        <!-- Topics -->
-                                        <div class="form-group {% if form.related_topics.errors %}has-error{% endif %}">
-                                            <label class="control-label" for="{{ form.related_topics.id_for_label }}">{{ form.related_topics.label }}</label>
-                                            {{ form.related_topics }}
-                                            {{ form.related_topics.errors }}
                                         </div>
                                     </div>
                                 </div>

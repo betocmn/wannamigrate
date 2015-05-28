@@ -108,7 +108,10 @@
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Q&A<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{% url 'admin:qa:list_post' %}">Posts</a>
+                                    <a href="{% url 'admin:qa:list_questions' %}">Questions</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'admin:qa:list_blogposts' %}">BlogPosts</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'admin:qa:list_topic' %}">Topics</a>
@@ -118,9 +121,6 @@
                                 </li>
                                 <li>
                                     <a href="#">Communities</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'admin:qa:list_reported_post' %}">Reported content</a>
                                 </li>
                             </ul>
                         </li>

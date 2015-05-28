@@ -36,7 +36,6 @@ class BaseContent( BaseModel ):
         abstract = True
 
 
-
 class FavoritableContent( models.Model ):
     # The readers of this content.
     readers = models.ManyToManyField( User, related_name = "favourite_%(class)s" )
@@ -149,21 +148,24 @@ class IndexableContent( models.Model ):
     class Meta:
         abstract = True
 
+    def generate_slug( self ):
+        # Calculates the slug handling repetition
+        max_length = self._meta.get_field( 'slug' ).max_length
+        self.slug = orig = slugify( self.title )[:max_length]
+
+        for x in itertools.count(1):
+            if not self.__class__.objects.filter( slug = self.slug ).exists():
+                break
+            # Truncate the original slug dynamically. Minus 1 for the hyphen.
+            self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
+
     def save( self, *args, **kwargs ):
 
         # Sets the last activity date of the content
         self.last_activity_date = timezone.now()
 
         if not self.slug:
-            # Calculates the slug handling repetition
-            max_length = self._meta.get_field( 'slug' ).max_length
-            self.slug = orig = slugify( self.title )[:max_length]
-
-            for x in itertools.count(1):
-                if not self.__class__.objects.filter( slug = self.slug ).exists():
-                    break
-                # Truncate the original slug dynamically. Minus 1 for the hyphen.
-                self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
+            self.generate_slug()
 
         super( IndexableContent, self ).save( *args, **kwargs )
 
@@ -194,7 +196,6 @@ class CommentableContent( models.Model ):
     # META CLASS.
     class Meta:
         abstract = True
-
 
 
 class BlogPost( BaseContent, IndexableContent, FollowableContent, VotableContent, CommentableContent ):
@@ -231,6 +232,40 @@ class Question( BaseContent, IndexableContent, FollowableContent, VotableContent
         )
 
 
+class QuestionHistory( BaseModel ):
+    parent = models.ForeignKey( "Question", related_name = "edition_history" )
+    title = models.CharField( max_length = 200 )
+    body = models.TextField( default = "" )
+    parent_created_date = models.DateTimeField()
+
+    # META CLASS
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_question_history", "[ADMIN] Can add question history" ),
+            ( "admin_edit_question_history", "[ADMIN] Can edit question history" ),
+            ( "admin_delete_question_history", "[ADMIN] Can delete question history" ),
+            ( "admin_view_question_history", "[ADMIN] Can view question history" ),
+            ( "admin_list_question_history", "[ADMIN] Can list question history" ),
+        )
+
+
+class BlogPostHistory( BaseModel ):
+    parent = models.ForeignKey( "BlogPost", related_name = "edition_history" )
+    title = models.CharField( max_length = 200 )
+    body = models.TextField( default = "" )
+    parent_created_date = models.DateTimeField()
+
+    # META CLASS
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_blogpost_history", "[ADMIN] Can add blogpost history" ),
+            ( "admin_edit_blogpost_history", "[ADMIN] Can edit blogpost history" ),
+            ( "admin_delete_blogpost_history", "[ADMIN] Can delete blogpost history" ),
+            ( "admin_view_blogpost_history", "[ADMIN] Can view blogpost history" ),
+            ( "admin_list_blogpost_history", "[ADMIN] Can list blogpost history" ),
+        )
 
 class Answer( BaseContent, VotableContent, CommentableContent  ):
     # votes, comments

@@ -2,18 +2,18 @@
 # Imports
 ##########################
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from wannamigrate.admin.forms import (
-    AddPostForm, AddAnswerForm, EditPostForm,
+    AddPostForm, AddAnswerForm, EditQuestionForm, EditBlogPostForm,
     AddTopicForm, AddTopicTranslationForm
 )
 from wannamigrate.core.decorators import restrict_internal_ips
-from wannamigrate.qa.models import Topic, Vote, TopicTranslation
+from wannamigrate.qa.models import Topic, Vote, TopicTranslation, Question, QuestionHistory, Answer, BlogPost, BlogPostHistory
 from wannamigrate.core.models import Language
 from wannamigrate.admin.views import admin_check
 from django.db import transaction
@@ -27,41 +27,43 @@ from django.db import transaction
 #################################
 # Posts
 @restrict_internal_ips
-@permission_required( 'qa.admin_list_post', login_url = 'admin:login' )
+@permission_required( 'qa.admin_list_questions', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-def list_post( request, reported = None ):
+def list_questions( request, reported = False ):
     """
     Lists Questions and BlogPosts with pagination.
 
     :param: request
     :return: String
     """
-    if reported:    # Should list all reported content
-        reported_post_ids = Vote.objects.filter( vote_type__id = settings.QA_VOTE_TYPE_REPORT_ID ).values( "post_id" )
-        posts = Post.objects.filter( id__in = reported_post_ids )
-    else:
-        posts = Post.objects.filter( post_type_id__in = [ settings.QA_POST_TYPE_BLOGPOST_ID,settings.QA_POST_TYPE_QUESTION_ID ] )
 
-    paginator = Paginator( posts, settings.DEFAULT_LISTING_ITEMS_PER_PAGE )
+    # Extracts get parameters
+    order_by = request.GET.get( 'order_by', "created_date" )
+    page = request.GET.get( 'page' )
 
-    context = {
-        "posts" : posts,
-        "reported" : True if reported else False
-    }
 
+    questions = Question.objects.order_by( order_by ).all()
+
+    paginator = Paginator( questions, settings.DEFAULT_LISTING_ITEMS_PER_PAGE )
 
     # Checks if the page number was passed.
-    page = request.GET.get( 'page' )
     try:
-        posts = paginator.page( page )
+        questions = paginator.page( page )
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
-        posts = paginator.page( 1 )
+        questions = paginator.page( 1 )
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
-        posts = paginator.page( paginator.num_pages )
+        questions = paginator.page( paginator.num_pages )
 
-    return render( request, "qa/admin/post/list.html", context )
+
+    context = {}
+    context[ "questions" ] = questions
+    context[ "order_by" ] = order_by
+    context[ "page" ] = page
+
+
+    return render( request, "qa/admin/question/list.html", context )
 
 
 @restrict_internal_ips
@@ -84,7 +86,7 @@ def add_post( request ):
         post = form.save()
         messages.success( request, 'Post successfully created.' )
         # Redirect with success message
-        return HttpResponseRedirect( reverse( 'admin:qa:view_post', args = ( post.id, ) ) )
+        return HttpResponseRedirect( reverse( 'admin:qa:view_question', args = ( post.id, ) ) )
 
     # Template data
     context = {
@@ -129,7 +131,7 @@ def add_answer( request, parent_id ):
 
             messages.success( request, '{0} successfully created.'.format( post.post_type.name ) )
             # Redirect with success message
-            return HttpResponseRedirect( reverse( 'admin:qa:view_post', args = ( parent_id, ) ) )
+            return HttpResponseRedirect( reverse( 'admin:qa:view_question', args = ( parent_id, ) ) )
 
     # Template data
     context = {
@@ -142,9 +144,9 @@ def add_answer( request, parent_id ):
 
 
 @restrict_internal_ips
-@permission_required( 'qa.admin_view_post', login_url = 'admin:login' )
+@permission_required( 'qa.admin_view_question', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-def view_post( request, post_id ):
+def view_question( request, id ):
     """
     Lists all posts with pagination, order by, search, etc. using www.datatables.net
 
@@ -153,19 +155,18 @@ def view_post( request, post_id ):
     """
 
     context = {
-        'post' : Post.objects.get( id = post_id ),
-        'answers' : Post.objects.filter( parent__id = post_id, post_type__id = settings.QA_POST_TYPE_ANSWER_ID ),
-        'post_history' : PostHistory.objects.filter( original_post__id = post_id ),
-        'answers' : Post.objects.filter( parent__id = post_id ),
+        'question' : Question.objects.get( id = id ),
+        'edition_history' : QuestionHistory.objects.filter( parent__id = id ),
+        'answers' : Answer.objects.filter( question__id = id ),
     }
 
-    return render( request, 'qa/admin/post/view.html', context )
+    return render( request, 'qa/admin/question/view.html', context )
 
 
 @restrict_internal_ips
-@permission_required( 'qa.admin_edit_post', login_url = 'admin:login' )
+@permission_required( 'qa.admin_edit_question', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-def edit_post( request, post_id ):
+def edit_question( request, id ):
     """
     Edit a post. It should create an entry on the PostHistory and edit the content of the given post.
 
@@ -173,36 +174,37 @@ def edit_post( request, post_id ):
     :return: String
     """
     # Gets the information about the post being edited
-    post_to_edit = Post.objects.get( pk = post_id )
+    question = Question.objects.get( pk = id )
+    edition = QuestionHistory( parent = question, title = question.title, body = question.body, parent_created_date = question.modified_date )
 
     # Fill up the form with post data
-    form = EditPostForm( instance = post_to_edit )
+    form = EditQuestionForm( request.POST or None, instance = question )
 
-    # if data submitted, fill form
-    if request.POST:
-        form = EditPostForm( request.POST, instance = post_to_edit )
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+        with transaction.atomic():
+            question = form.save( commit = False )
+            question.generate_slug()
+            question.save()
+            edition.save()
 
-        # If form was submitted, it tries to validate and save data
-        if form.is_valid():
-            post = form.save()
-            messages.success( request, 'Post successfully updated.' )
+            messages.success( request, 'Question successfully updated.' )
             # Redirect with success message
-            return HttpResponseRedirect( reverse( 'admin:qa:view_post', args = ( post.id, ) ) )
+            return HttpResponseRedirect( reverse( 'admin:qa:view_question', args = ( question.id, ) ) )
 
 
     context = {
         'form' : form,
-        'post_type' : post_to_edit.post_type.name,
-        'cancel_url': reverse( 'admin:qa:list_post' ),
+        'cancel_url': reverse( 'admin:qa:list_questions' ),
     }
 
-    return render( request, 'qa/admin/post/edit.html', context )
+    return render( request, 'qa/admin/question/edit.html', context )
 
 
 @restrict_internal_ips
-@permission_required( 'qa.admin_delete_post', login_url = 'admin:login' )
+@permission_required( 'qa.admin_delete_question', login_url = 'admin:login' )
 @user_passes_test( admin_check )
-def delete_post( request, post_id ):
+def delete_question( request, id ):
     """
     Lists all posts with pagination, order by, search, etc. using www.datatables.net
 
@@ -210,23 +212,150 @@ def delete_post( request, post_id ):
     :return: String
     """
 
-    post = Post.objects.filter( pk = post_id )
-    if post.exists():
+    question = Question.objects.filter( pk = id )
+    if question.exists():
         with transaction.atomic():
-            post = post.get()
-            if post.post_type.id == settings.QA_POST_TYPE_ANSWER_ID:
-                post.parent.answers_count -= 1
-                post.parent.save()
+            question = question.get()
 
-            post.delete()
-            messages.success( request, "Post(id = {0}) successfully deleted.".format( post_id ) )
+            question.delete()
+            messages.success( request, "Question (id = {0}) successfully deleted.".format( id ) )
     else:
-        messages.error( request, "Post(id = {0}) not found.".format( post_id ) )
+        messages.error( request, "Question (id = {0}) not found.".format( id ) )
 
-    return HttpResponseRedirect( reverse( "admin:qa:list_post" ) )
+    return HttpResponseRedirect( reverse( "admin:qa:list_questions" ) )
 
 
+
+
+
+#########################
+# Blogposts
+#########################
+@restrict_internal_ips
+@permission_required( 'qa.admin_list_blogpost', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def list_blogposts( request, reported = False ):
+    """
+    Lists BlogPosts with pagination.
+
+    :param: request
+    :return: String
+    """
+
+    # Extracts get parameters
+    order_by = request.GET.get( 'order_by', "created_date" )
+    page = request.GET.get( 'page' )
+
+
+    blogposts = BlogPost.objects.order_by( order_by ).all()
+
+    paginator = Paginator( blogposts, settings.DEFAULT_LISTING_ITEMS_PER_PAGE )
+
+    # Checks if the page number was passed.
+    try:
+        blogposts = paginator.page( page )
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        blogposts = paginator.page( 1 )
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        blogposts = paginator.page( paginator.num_pages )
+
+
+    context = {}
+    context[ "blogposts" ] = blogposts
+    context[ "order_by" ] = order_by
+    context[ "page" ] = page
+
+
+    return render( request, "qa/admin/blogpost/list.html", context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_view_blogpost', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def view_blogpost( request, id ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    context = {
+        'blogpost' : BlogPost.objects.get( id = id ),
+        'edition_history' : BlogPostHistory.objects.filter( parent__id = id ),
+    }
+
+    return render( request, 'qa/admin/blogpost/view.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_edit_blogpost', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def edit_blogpost( request, id ):
+    """
+    Edit a post. It should create an entry on the PostHistory and edit the content of the given post.
+
+    :param: request
+    :return: String
+    """
+    # Gets the information about the post being edited
+    blogpost = BlogPost.objects.get( pk = id )
+    edition = BlogPostHistory( parent = blogpost, title = blogpost.title, body = blogpost.body, parent_created_date = blogpost.modified_date )
+
+    # Fill up the form with post data
+    form = EditBlogPostForm( request.POST or None, instance = blogpost )
+
+    # If form was submitted, it tries to validate and save data
+    if form.is_valid():
+        with transaction.atomic():
+            blogpost = form.save( commit = False )
+            blogpost.generate_slug()
+            blogpost.save()
+            edition.save()
+
+            messages.success( request, 'BlogPost successfully updated.' )
+            # Redirect with success message
+            return HttpResponseRedirect( reverse( 'admin:qa:view_blogpost', args = ( blogpost.id, ) ) )
+
+
+    context = {
+        'form' : form,
+        'cancel_url': reverse( 'admin:qa:list_blogposts' ),
+    }
+
+    return render( request, 'qa/admin/blogpost/edit.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'qa.admin_delete_blogpost', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def delete_blogpost( request, id ):
+    """
+    Lists all posts with pagination.
+
+    :param: request
+    :return: String
+    """
+
+    blogpost = BlogPost.objects.filter( pk = id )
+    if blogpost.exists():
+        blogpost = blogpost.get()
+        blogpost.delete()
+        messages.success( request, "Blogpost (id = {0}) successfully deleted.".format( id ) )
+    else:
+        messages.error( request, "Blogpost (id = {0}) not found.".format( id ) )
+
+    return HttpResponseRedirect( reverse( "admin:qa:list_blogposts" ) )
+
+
+
+
+
+########################
 # Topics
+########################
 @restrict_internal_ips
 @permission_required( 'qa.admin_list_topic', login_url = 'admin:login' )
 @user_passes_test( admin_check )
