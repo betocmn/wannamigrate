@@ -87,6 +87,7 @@ class SituationLocaleMiddleware( object ):
                 from_country = Country.objects.get( pk = settings.ID_COUNTRY_BRAZIL )
     
             # Sets Session
+            request.session['situation'] = {}
             request.session['situation']['from_country'] = from_country
             request.session['situation']['goal'] = goal
             request.session['situation']['to_country'] = to_country

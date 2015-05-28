@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, user_passes_test
 from django.contrib.auth import get_user_model
+from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from wannamigrate.admin.forms import (
     AdminUserForm, GroupForm, UserForm
 )
@@ -141,6 +142,31 @@ def user_details( request, user_id ):
 
     # Print Template
     return render( request, 'core/admin/user/details.html', context )
+
+
+@restrict_internal_ips
+@permission_required( 'core.admin_view_user', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def login_as_user( request, user_id ):
+    """
+    View  USER page
+
+    :param: request
+    :param: user_id
+    :return: String
+    """
+
+    # Identify database record
+    user = get_object_or_404( get_user_model(), pk = user_id )
+
+    # logs out current user
+    auth_logout( request )
+
+    # Logs user in
+    user = authenticate( email = user.email, id = user.id, password_hash = user.password )
+    auth_login( request, user )
+    return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
 
 
 @restrict_internal_ips
