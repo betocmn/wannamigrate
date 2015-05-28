@@ -65,9 +65,10 @@
 		                            </dl>
 
                                     <div class="text-center buttons">
-		                            	<a href="{% url 'admin:core:admin_users' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
-		                                <a href="{% url 'admin:core:admin_user_edit' user.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
-		                                <a href="#" onclick="confirm_delete( '{% url 'admin:core:admin_user_delete' user.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+		                            	<a href="{% url 'admin:core:users' %}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+		                                <a href="{% url 'admin:core:user_edit' user.id %}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+		                                <a href="{% url 'admin:core:login_as_user' user.id %}" class="btn btn-default"><i class="fa fa-user-secret"></i>Login as User</a>
+		                                <a href="#" onclick="confirm_delete( '{% url 'admin:core:user_delete' user.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
 									</div>
                                     
                                 </div>

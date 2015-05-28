@@ -234,6 +234,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GooglePlusAuth',
     #'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
+    'wannamigrate.core.auth_backends.AdminBackend',
 )
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/dashboard/'

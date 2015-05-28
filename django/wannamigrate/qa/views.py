@@ -34,6 +34,9 @@ import json
 import urllib
 from django.db.models import F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
+from django.templatetags.static import static
+
+
 
 
 
@@ -352,7 +355,6 @@ def add_blogpost( request ):
     return render( request, 'qa/blogpost/add.html', template_data )
 
 
-@login_required
 def view_blogpost( request, slug ):
     """
     BlogPost view. Shows a blogpost and its comments.
@@ -362,9 +364,15 @@ def view_blogpost( request, slug ):
     """
     template_data = {}
 
+    # Identifies blog post and increments number of views
     blogpost = get_object_or_404( BlogPost.objects.prefetch_related( "related_topics"), slug = slug )
     blogpost.total_views += 1
     blogpost.save()
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate.png' )
+
+
 
     ###############################
     # Process topic translation

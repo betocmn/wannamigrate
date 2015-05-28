@@ -25,6 +25,7 @@ from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
 from django.conf import settings
 from django.db.models import F
+from django.db import transaction
 
 
 
@@ -187,6 +188,7 @@ def payment( request ):
 
         # Passes order info for for
         payment_info = {
+            'payment_type': request.POST.get( 'payment_type', '' ),
             'token': request.POST.get( 'token', '' ),
             'user': request.user,
             'provider': request.session['payment']['provider'],
@@ -198,23 +200,34 @@ def payment( request ):
         form = PaymentForm( request.POST, payment_info = payment_info )
 
         # if payment was authorized
-        if form.is_valid():
+        with transaction.atomic():
+            if form.is_valid():
 
-            # Saves all order info
-            order = form.save()
+                # Saves all order info
+                order = form.save()
 
-            # Sends Order Confirmation email to USER
-            # TODO Change this to a celery/signal background task
-            service_type = request.session['payment']['provider_service_type'].service_type
-            Mailer.send_order_confirmation_user( request.user, order, payment_info )
+                # Adds additional data to payment_info
+                payment_info['order'] = order
+                if 'url' in form.payment_api_result:
+                    payment_info['url'] = form.payment_api_result['url']
 
-            # Sends Order Confirmation email to PROVIDER
-            # TODO Change this to a celery/signal background task
-            Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order, payment_info )
+                # Sends Order Confirmation email to USER
+                # TODO Change this to a celery/signal background task
+                service_type = request.session['payment']['provider_service_type'].service_type
+                Mailer.send_order_confirmation_user( request.user, order, payment_info )
 
-            # Redirect to confirmation page
-            request.session['payment'] = {}
-            return HttpResponseRedirect( reverse( 'marketplace:confirmation', args = ( order.id, ) ) )
+                # Sends Order Confirmation email to PROVIDER
+                # TODO Change this to a celery/signal background task
+                Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order, payment_info )
+
+                # Redirect to confirmation page
+                request.session['payment'] = {}
+                request.session['order_confirmation'] = {
+                    'order_id': order.id,
+                    'payment_type': payment_info['payment_type'],
+                    'url': form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
+                }
+                return HttpResponseRedirect( reverse( 'marketplace:confirmation' ) )
 
     else:
         form = PaymentForm()
@@ -231,15 +244,6 @@ def payment( request ):
     # Prints Template
     return render( request, 'marketplace/service/payment.html', template_data )
 
-    """
-    # Print SQL Queries
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str( query['sql'] )
-    return HttpResponse( queries_text )
-    """
-
 
 
 
@@ -248,17 +252,24 @@ def payment( request ):
 # ORDER CONFIRMATION
 #######################
 @login_required
-def confirmation( request, order_id ):
+def confirmation( request ):
     """
     Confirmation page after a payment was made
 
     :param: request
-    :param: order_id
     :return: String - The html page rendered
     """
 
-    # Identify database record
-    order = get_object_or_404( Order, pk = order_id, user_id = request.user.id )
+    # Identify an active session
+    if 'order_confirmation' not in request.session or not request.session['order_confirmation']:
+        return HttpResponseRedirect( reverse( 'site:dashboard' ) )
+
+    # Save session and kills it, allowing 1 access only
+    order_info = request.session['order_confirmation']
+    request.session['order_confirmation'] = {}
+    
+    # Gets order detail
+    order = get_object_or_404( Order, pk = order_info['order_id'] )
 
     # Initializes template data dictionary
     template_data = {}
@@ -273,20 +284,24 @@ def confirmation( request, order_id ):
 
     # Defines message and status
     if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
-        template_data['message_text'] = _( "Your payment was <span>received</span> and will be processed soon." )
+        template_data['message_text'] = _( "Your order was <span>received</span> and will be processed soon." )
         template_data['message_css_class'] = ""
     elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-        template_data['message_text'] = _( "Your payment was <span>approved</span>." )
+        template_data['message_text'] = _( "Your order was <span>approved</span>." )
         template_data['message_css_class'] = "approved"
     elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
-        template_data['message_text'] = _( "Your payment was <span>denied</span>." )
+        template_data['message_text'] = _( "Your order was <span>denied</span>." )
         template_data['message_css_class'] = "denied"
     elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
-        template_data['message_text'] = _( "Your payment was <span>cancelled</span>." )
+        template_data['message_text'] = _( "Your order was <span>cancelled</span>." )
         template_data['message_css_class'] = "denied"
     elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
-        template_data['message_text'] = _( "Your payment was <span>refunded</span>." )
+        template_data['message_text'] = _( "Your order was <span>refunded</span>." )
         template_data['message_css_class'] = "approved"
+
+    # If there's a URL for boleto
+    if order_info['payment_type'] == 'boleto':
+        template_data['boleto_url'] = order_info['url']
 
     # Prints Template
     return render( request, 'marketplace/service/confirmation.html', template_data )

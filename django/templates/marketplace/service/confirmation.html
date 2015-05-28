@@ -11,6 +11,9 @@
             </div>
             <div class="message">
                 <p class="{{ message_css_class }}">{{ message_text|safe }}</p>
+                {% if boleto_url %}
+                    <p>{% trans 'Your Boleto Link:' %} <a href="{{ boleto_url }}">{{ boleto_url }}</a></p>
+                {% endif %}
                 <p>{% trans 'You will receive an email confirmation with all the details.' %}</p>
             </div>
         </div>

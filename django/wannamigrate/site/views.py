@@ -117,6 +117,11 @@ def change_situation( request ):
         request.session['situation']['goal'] = situation.goal
         request.session['situation']['total_users'] = situation.total_users
 
+        # Set portuguese language if from_country uses it as native language
+        if situation.from_country.code.lower() in settings.COUNTRIES_BY_LANGUAGE['pt']:
+            translation.activate( 'pt' )
+            request.session[translation.LANGUAGE_SESSION_KEY] = 'pt'
+
     # Redirects to dashboard
     return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 

@@ -518,6 +518,17 @@ form .errorlist {
   color: #555;
 }
 
+.dashboard .content.payment .confirmation .message p a {
+    text-decoration: none;
+    text-align: left;
+    color: #4f9276;
+    font-weight: bold;
+}
+
+.dashboard .content.payment .confirmation .message p a:hover {
+    text-decoration: underline;
+}
+
 .dashboard .content.payment .confirmation .message p span {
   font-weight: bold;
 }
@@ -537,7 +548,10 @@ form .errorlist {
     margin-top: 75px;
 }
 .dashboard .content.hiring .professional .send-message .button {
-    width: 175px;
+    width: 155px;
+    height: 40px;
+    font-size: 14px;
+
 }
 .dashboard .content.hiring .professional .description {
     margin-top: 0px;

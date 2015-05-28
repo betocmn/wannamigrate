@@ -2730,6 +2730,28 @@ select {
   width: 150px;
   margin: 10px 0 0;
 }
+.dashboard .content.payment .data .billet {
+  display: block;
+}
+.dashboard .content.payment .data .billet strong {
+  font-family: 'open_sanssemibold';
+  font-weight: normal;
+  font-size: 14px;
+}
+.dashboard .content.payment .data .billet .field {
+  width: 285px;
+  height: 50px;
+  line-height: 40px;
+}
+.dashboard .content.payment .data .billet .field input {
+  float: left;
+  display: block;
+}
+.dashboard .content.payment .data .billet .field label {
+  padding-left: 5px;
+}
+
+
 .dashboard.show-hire .content.home {
   display: none;
 }
@@ -3463,10 +3485,6 @@ select {
   }
   .dashboard .wrapper .content.payment .interactions .interaction-list {
     width: 100%;
-  }
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
-    display: none;
   }
   .dashboard .wrapper .content.payment .credit-card .data .card-flags {
     width: 170px;
@@ -4474,7 +4492,7 @@ select {
   padding: 0 0 0 18px;
 }
 .content.social .content .data .data-item .data-link.bt-follow span:before,
-.content.social .content .data .data-item .data-link.bt-upvote span:before {
+.content.social .content .data .data-item .data-link.bt-upvote span.count:before {
   content: '';
   position: absolute;
   left: 0;
@@ -5178,18 +5196,39 @@ select {
 }
 .content.social .content .question-postView .question .data .data-item .bt-upvote,
 .content.social .content .question-postList .question .data .data-item .bt-upvote {
-  width: 108px;
-  height: 32px;
-  padding: 0 18px 0 18px;
+  width: 115px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  display: block;
+
 }
 .content.social .content .question-postView .question .data .data-item .bt-upvote span,
 .content.social .content .question-postList .question .data .data-item .bt-upvote span {
   padding: 0;
+  position: relative;
+}
+.content.social .content .question-postView .question .data .data-item .bt-upvote span.name,
+.content.social .content .question-postList .question .data .data-item .bt-upvote span.name {
+  float: left;
+}
+.content.social .content .question-postView .question .data .data-item .bt-upvote span.count,
+.content.social .content .question-postList .question .data .data-item .bt-upvote span.count {
   float: right;
 }
-.content.social .content .question-postView .question .data .data-item .bt-upvote span:before,
-.content.social .content .question-postList .question .data .data-item .bt-upvote span:before {
-  display: none;
+.content.social .content .question-postView .question .data .data-item .bt-upvote span.count:before,
+.content.social .content .question-postList .question .data .data-item .bt-upvote span.count:before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 9px;
+  width: 16px;
+  height: 10px;
+  display: block;
+  border: 0;
+  background: transparent url( "../img/icon-data.png" ) no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
 }
 .content.social .content .question-postView .answers,
 .content.social .content .question-postList .answers {
@@ -9186,10 +9225,6 @@ select {
   }
   .dashboard .wrapper .content.payment .interactions .interaction-list {
     width: 100%;
-  }
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(2),
-  .dashboard .wrapper .content.payment .interactions .interaction-list .interaction-item:nth-child(3) {
-    display: none;
   }
   .dashboard .wrapper .content.payment .credit-card .data .card-flags {
     width: 170px;
