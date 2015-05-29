@@ -217,22 +217,15 @@ SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
     ('public-profile-url', 'public_profile_url'),
 ]
 
-# Twitter APP Key
-SOCIAL_AUTH_TWITTER_KEY = 'LIK43CXqkCJjEDKmP4LsqPLD7'
-# Twitter APP Secret
-SOCIAL_AUTH_TWITTER_SECRET = 'BpK70KSeb3RePk6WXoFumG6jMV2sRLY623hzpkHVdXr85eq7sD'
-
 # Google APP Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '90947248109-nvu6v5d6rvpav60ps1sgrtplt5vlinhp.apps.googleusercontent.com'
 # Google APP Secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4I7fFTTrlVfoHLbPNn6lviCK'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jVNjZUUzV-Ck0AFo8-vwsAVB'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.linkedin.LinkedinOAuth',
     'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GooglePlusAuth',
-    #'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
     'wannamigrate.core.auth_backends.AdminBackend',
 )
