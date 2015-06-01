@@ -993,6 +993,7 @@ def edit_password( request ):
 #######################
 # DASHBOARD VIEWS
 #######################
+@login_required
 def dashboard( request ):
     """
     Process the dashboard page.

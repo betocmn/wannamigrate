@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-27 17:28-0300\n"
+"POT-Creation-Date: 2015-05-29 21:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5999,7 +5999,7 @@ msgstr "Ver"
 
 #: templates/marketplace/professionals/list.html:60
 #: templates/qa/blogpost/list_group.html:45
-#: templates/qa/blogpost/view.html:101
+#: templates/qa/blogpost/view.html:102
 #: templates/qa/common/list_group_all.html:47
 #: templates/qa/common/list_group_all.html:93
 #: templates/qa/question/list_group.html:47 templates/qa/question/view.html:93
@@ -6831,26 +6831,21 @@ msgstr "Comentários"
 msgid "Followers"
 msgstr "Seguidores"
 
-#: templates/qa/blogpost/view.html:58 templates/qa/blogpost/view.html:100
-#: templates/qa/question/view.html:60
+#: templates/qa/blogpost/view.html:59 templates/qa/question/view.html:60
 msgid "Share"
 msgstr "Compartilhar"
 
-#: templates/qa/blogpost/view.html:61 templates/qa/question/view.html:63
+#: templates/qa/blogpost/view.html:62 templates/qa/question/view.html:63
 msgid "Twitter"
 msgstr "Twitter"
 
-#: templates/qa/blogpost/view.html:64 templates/qa/question/view.html:66
+#: templates/qa/blogpost/view.html:65 templates/qa/question/view.html:66
 msgid "Facebook"
 msgstr "Facebook"
 
-#: templates/qa/blogpost/view.html:82 templates/qa/question/view.html:80
+#: templates/qa/blogpost/view.html:84 templates/qa/question/view.html:80
 msgid "Writen in"
 msgstr "Escrito em"
-
-#: templates/qa/blogpost/view.html:102
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: templates/qa/blogpost/view.html:112
 msgid "Related Posts"
@@ -7400,8 +7395,8 @@ msgstr "No(a)"
 
 #: templates/site/home/home.html:56
 msgctxt "landing_call_to_action"
-msgid "Start Now!"
-msgstr "Comece Já!"
+msgid "Start now! It's free"
+msgstr "Comece gratuitamente"
 
 #: templates/site/home/home.html:63
 msgid "Terms & Conditions"
@@ -7577,6 +7572,14 @@ msgstr "E-Books"
 #: templates/site/tools/tools.html:26
 msgid "Download our complete step-by-step immigration guides."
 msgstr "Faça o download de nossos guias de imigração"
+
+#: wannamigrate/admin/forms.py:339 wannamigrate/qa/forms.py:51
+msgid "Type your question here..."
+msgstr "Escreva sua pergunta aqui..."
+
+#: wannamigrate/admin/forms.py:361
+msgid "BlogPost title..."
+msgstr "Título do Post..."
 
 #: wannamigrate/core/mailer.py:103
 msgid "Welcome to Wanna Migrate"
@@ -8514,10 +8517,6 @@ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/qa/forms.py:51
-msgid "Type your question here..."
-msgstr "Escreva sua pergunta aqui..."
-
 #: wannamigrate/qa/forms.py:56 wannamigrate/qa/forms.py:124
 msgid "Ex: Brazil, Canada, Student visa, Work visa, General immigration"
 msgstr ""
@@ -8539,31 +8538,31 @@ msgstr "Ex: o primeiro passo é"
 msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
-#: wannamigrate/qa/views.py:83
+#: wannamigrate/qa/views.py:86
 msgid "Knowledge - Wanna Migrate"
 msgstr "Conhecimento - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:124
+#: wannamigrate/qa/views.py:127
 msgid "Questions & Answers - Wanna Migrate"
 msgstr "Perguntas e Respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:168
+#: wannamigrate/qa/views.py:171
 msgid "Add Question - Wanna Migrate"
 msgstr "Pergunte - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:209
+#: wannamigrate/qa/views.py:212
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:302
+#: wannamigrate/qa/views.py:305
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:345
+#: wannamigrate/qa/views.py:348
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:425
+#: wannamigrate/qa/views.py:433
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
@@ -8760,6 +8759,13 @@ msgstr "Redefinir Senha - Wanna Migrate"
 #: wannamigrate/site/views.py:979
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgctxt "landing_call_to_action"
+#~ msgid "Start Now!"
+#~ msgstr "Comece Já!"
 
 #~ msgid "Your payment was approved."
 #~ msgstr "Seu pagamento foi aprovado."
