@@ -17,6 +17,7 @@ from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
 import math
 from wannamigrate._settings.base import LANGUAGES
+from django.db import transaction
 import pytz
 
 
@@ -703,3 +704,66 @@ class UserWorkExperience( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+
+class NotificationUser( BaseModel ):
+    notification = models.ForeignKey( "Notification", related_name = "notifications_users" )
+    user = models.ForeignKey( "User", related_name= "notifications_users" )
+    is_read = models.BooleanField( default = False )
+
+
+    # META Options
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_notification_user", "ADMIN: Can add notification user" ),
+            ( "admin_change_notification_user", "ADMIN: Can change notification user" ),
+            ( "admin_delete_notification_user", "ADMIN: Can delete notification user" ),
+            ( "admin_view_notification_user", "ADMIN: Can view notification user" ),
+        )
+
+
+
+class Notification( BaseModel ):
+    message = models.CharField( max_length = 100 )
+    url = models.CharField( max_length = 255 )
+
+
+    @staticmethod
+    def add( message, url, users ):
+        with transaction.atomic():
+            notification = Notification( message = message, url = url )
+            notification.save()
+
+            nu = []
+            for user in users:
+                nu.append( NotificationUser( notification = notification, user = user ) )
+
+            # Save once (bulk)
+            NotificationUser.objects.bulk_create( nu )
+
+        return True
+
+
+    @staticmethod
+    def get_news_for( user ):
+
+        nu = NotificationUser.objects.filter( user = user, is_read = False ).prefetch_related( "notification" ).order_by( "-created_date" ).all()
+        return [ x.notification for x in nu ]
+
+
+    @staticmethod
+    def mark_as_read_for( user ):
+        NotificationUser.objects.filter( user = user, is_read = False ).update( is_read = True )
+
+
+    # META Options
+    class Meta:
+        default_permissions = []
+        permissions = (
+            ( "admin_add_notification", "ADMIN: Can add notification" ),
+            ( "admin_change_notification", "ADMIN: Can change notification" ),
+            ( "admin_delete_notification", "ADMIN: Can delete notification" ),
+            ( "admin_view_notification", "ADMIN: Can view notification" ),
+        )

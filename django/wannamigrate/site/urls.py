@@ -67,8 +67,7 @@ urlpatterns = patterns('',
     # Set language
     url( r'^set_lang/(?P<language_code>[a-z_\-]+)/$', views.set_lang, name = 'set_lang' ),
 
-    # AJAX - List more posts
-    url( r'^load/posts/', views.load_posts, name = "load_posts" ),
-    #url( r'^load/posts/(?P<results_per_page>\d+)/(?P<page>\d+)/', views.load_posts, name = "load_posts" ),
+    # AJAX Notifications
+    url( r'^x/consume/notifications/$', views.ajax_consume_notifications, name = "ajax_consume_notifications" ),
 
 )

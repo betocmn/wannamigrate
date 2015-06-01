@@ -35,7 +35,7 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User, Language
+    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User, Language, Notification
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
@@ -53,7 +53,7 @@ from django.utils import timezone, translation
 import pytz
 from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
-
+from wannamigrate.core.decorators import ajax_login_required
 
 
 
@@ -1111,35 +1111,11 @@ def set_lang( request, language_code ):
 #########################
 # AJAX / DYNAMIC VIEWS
 #########################
-def load_posts( request ):
+@ajax_login_required
+def ajax_consume_notifications( request ):
     """
-    Dynamically loads the next results of the listing method of a model and returns a JSON
-    representation of the objects.
-
-    :param: request Default request param.
-    :return JSON containing the results of calling the given method.
+    Set all unread notifications for the authenticated user as read.
     """
+    Notification.mark_as_read_for( request.user )
+    return HttpResponse( "" )
 
-    # Gets extra filters
-    related_topics = []
-
-    # If situation is defined, we load questions and professionals related to it
-    if 'situation' in request.session and 'from_country' in request.session['situation']:
-
-        from_country = request.session['situation']['from_country']
-        to_country = request.session['situation']['to_country']
-        goal = request.session['situation']['goal']
-
-        # Fills the topics related to user's situation
-        related_topics.extend( from_country.related_topics.values() )
-        related_topics.extend( to_country.related_topics.values() )
-        related_topics.extend( goal.related_topics.values() )
-
-
-    # Gets pagination parameters
-    results_per_page = int( request.GET[ "results_per_page" ] ) or 0
-    page = int( request.GET[ "page" ] ) or 0
-
-    result = serializers.serialize( "json", Post.get_ranked( related_topics, results_per_page, page ) )
-
-    return JsonResponse( result, safe = False )
