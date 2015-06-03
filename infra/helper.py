@@ -427,6 +427,12 @@ def config( args ):
         # Enabling SSL on apache
         remote_commands.append( "sudo a2enmod ssl" )
 
+        # Changes the owner and group of all project's folders
+        remote_commands.extend([
+            "sudo chown -R {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_ROOT ),
+            "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_ROOT ),
+        ])
+
         # Restarting apache
         remote_commands.append( "sudo service apache2 restart" )
 
@@ -510,7 +516,8 @@ def update( args ):
             remote_commands = [
                 "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
                 "python {0}/manage.py migrate".format( DJANGO_ROOT ),
-                "deactivate"
+                "deactivate",
+                "sudo service apache2 restart",
             ]
             
             return cmd( commands, remote_commands, vagrant=True )
@@ -524,7 +531,8 @@ def update( args ):
                 "rm -R infra",
                 "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
                 "python {0}/manage.py migrate".format( DJANGO_ROOT ),
-                "deactivate"
+                "deactivate",
+                "sudo service apache2 restart",
             ]
             
             return cmd( commands, remote_commands )
@@ -553,7 +561,9 @@ def copy( args ):
     # Check if the minimal number of arguments was passed.
     if not re.match( usage_pattern, cmd_str ):
         print
-        print( "usage: python {0} {1} <file> [-r] from <server> to <local_path>".format( __file__, copy.__name__ ) )
+        print( "[REMOTE to LOCAL]")
+        print( "    usage: python {0} {1} <file> [-r] from <server> to <local_path>".format( __file__, copy.__name__ ) )
+        print( "[LOCAL to REMOTE]")
         print( "usage: python {0} {1} <file> [-r] to <server> into <remote_path>".format( __file__, copy.__name__ ) )
         print
         print( "Params explanation:")
@@ -580,7 +590,7 @@ def copy( args ):
         ################################
         if from_to == "from":   
             # The scp command with params set.
-            commands = [ "scp", "-r", "-i", SERVERS[ server ][ "KEYPAIR" ], "{0}@{1}:{2}".format( SERVERS[ server ][ "DEFAULT_USER_GROUP" ], SERVERS[ server ][ "IP" ], src ), dest ]
+            commands = [ "scp", "-r", "-i", SERVERS[ server ][ "KEYPAIR" ], "{0}@{1}:{2}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], src ), dest ]
             if not recursive:
                 commands.remove( "-r" )
             
@@ -591,14 +601,14 @@ def copy( args ):
         ################################
         else:
             if recursive:   # Recursive? (src and dest are folders)
-                commands = [ "scp", "-r", "-i", SERVERS[ server ][ "KEYPAIR" ], src, "{0}@{1}:{2}".format( SERVERS[ server ][ "DEFAULT_USER_GROUP" ], SERVERS[ server ][ "IP" ], dest ) ]
+                commands = [ "scp", "-r", "-i", SERVERS[ server ][ "KEYPAIR" ], src, "{0}@{1}:{2}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], dest ) ]
             else:
                 # Extracts the filename from source
                 filename = path_leaf( src )
                 if not dest.endswith( '/' ):
                     filename = '/' + filename
 
-                commands = [ "scp", "-i", SERVERS[ server ][ "KEYPAIR" ], src,  "{0}@{1}:{2}{3}".format( SERVERS[ server ][ "DEFAULT_USER_GROUP" ], SERVERS[ server ][ "IP" ], dest, filename ) ]
+                commands = [ "scp", "-i", SERVERS[ server ][ "KEYPAIR" ], src,  "{0}@{1}:{2}{3}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], dest, filename ) ]
             
                 return cmd( " ".join( commands ) )
 
