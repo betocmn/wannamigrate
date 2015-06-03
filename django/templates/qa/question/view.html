@@ -95,6 +95,7 @@
                 </div><!--
                 <a href="#" class="bt-options">{% trans "Options" %}</a> -->
             </div>
+            {% if is_authenticated %}
             <div class="comment">
                 <form action="{{ action_url|default:'' }}" method="post" id="main_form" class="add-answer">
                     {% csrf_token %}
@@ -119,6 +120,7 @@
                     <input type="submit" class="button bt-write" value="{% trans "Write answer" %}">
                 </form>
             </div>
+            {% endif %}
             <div class="answers">
                 {% for ans in answers %}
                     <div class="answer" id="answer_{{ans.id}}">

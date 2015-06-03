@@ -178,7 +178,7 @@ def add_question( request ):
     return render( request, 'qa/question/add_question.html', template_data )
 
 
-@login_required
+#@login_required
 def view_question( request, slug ):
     """
     Question view. Shows a question and its answers.
@@ -206,11 +206,12 @@ def view_question( request, slug ):
             t.slug = translations[ t.id ].slug
 
     # Gets the answer form
-    answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
-    if answer_form.is_valid():
-        answer = answer_form.save()
-        messages.success( request, _( 'Answer successfully created.' ) )
-        return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
+    if request.user.is_authenticated():
+        answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
+        if answer_form.is_valid():
+            answer = answer_form.save()
+            messages.success( request, _( 'Answer successfully created.' ) )
+            return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
 
     # Get related contents
     related_content = Question.objects.filter( related_topics__in = question.related_topics.all() )\
@@ -224,45 +225,50 @@ def view_question( request, slug ):
         .prefetch_related( "owner__provider_set", "owner__userpersonal" )\
         .order_by( "-total_upvotes", "total_downvotes", "-created_date" )
 
-    answers_ids = list( answer.id for answer in answers )
+    if request.user.is_authenticated():
+        answers_ids = list( answer.id for answer in answers )
 
-    # Get upvoted answers
-    upvoted_answers_ids = Vote.objects.filter(
-        object_id__in = answers_ids,
-        content_type = ContentType.objects.get_for_model( Answer ),
-        user_id = request.user.id,
-        vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
-    ).values_list( "object_id", flat = True )
+        # Get upvoted answers
+        upvoted_answers_ids = Vote.objects.filter(
+            object_id__in = answers_ids,
+            content_type = ContentType.objects.get_for_model( Answer ),
+            user_id = request.user.id,
+            vote_type__id = settings.QA_VOTE_TYPE_UPVOTE_ID
+        ).values_list( "object_id", flat = True )
 
-    # Get downvoted answers
-    downvoted_answers_ids = Vote.objects.filter(
-        object_id__in = answers_ids,
-        content_type = ContentType.objects.get_for_model( Answer ),
-        user_id = request.user.id,
-        vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
-    ).values_list( "object_id", flat = True )
+        # Get downvoted answers
+        downvoted_answers_ids = Vote.objects.filter(
+            object_id__in = answers_ids,
+            content_type = ContentType.objects.get_for_model( Answer ),
+            user_id = request.user.id,
+            vote_type__id = settings.QA_VOTE_TYPE_DOWNVOTE_ID
+        ).values_list( "object_id", flat = True )
 
-    # extra processing
+        # extra processing
+        for answer in answers:
+            if answer.id in upvoted_answers_ids:
+                answer.is_upvoted = True
+            if answer.id in downvoted_answers_ids:
+                answer.is_downvoted = True
+
+        # Checks if the user is following the post
+        if question.followers.filter( id = request.user.id ).exists():
+            question.is_followed = True
+        else:
+            question.is_followed = False
+
+
     for answer in answers:
-        if answer.id in upvoted_answers_ids:
-            answer.is_upvoted = True
-        if answer.id in downvoted_answers_ids:
-            answer.is_downvoted = True
         answer.klass = "" if answer.owner.provider_set.exists() else "commom"
 
-    # Checks if the user is following the post
-
-    if question.followers.filter( id = request.user.id ).exists():
-        question.is_followed = True
-    else:
-        question.is_followed = False
 
     # Fills template data
     template_data['situation_form'] = get_situation_form( request )
     template_data['meta_title'] = question.title
     template_data[ "answers" ] = answers
     template_data[ "related_content" ] = related_content
-    template_data[ "answer_form" ] = answer_form
+    template_data[ "is_authenticated" ] = request.user.is_authenticated()
+    template_data[ "answer_form" ] = answer_form if request.user.is_authenticated() else None
     template_data[ "question" ] = question
 
     # Print Template
