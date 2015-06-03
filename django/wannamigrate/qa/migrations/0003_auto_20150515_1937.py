@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='topic',
             name='slug',
-            field=models.SlugField(max_length=100, default='', unique=True),
+            field=models.SlugField(max_length=100, default='', unique=False),
             preserve_default=False,
         ),
 
@@ -64,4 +64,11 @@ class Migration(migrations.Migration):
         ),
 
         migrations.RunPython( update_slug ),
+
+        migrations.AlterField(
+            model_name='topic',
+            name='slug',
+            field=models.SlugField(max_length=100, default='', unique=True),
+            preserve_default=True,
+        ),
     ]

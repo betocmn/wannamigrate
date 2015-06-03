@@ -60,24 +60,20 @@ INSTALL_PACKAGES = [
 
 
 # Virtualenv packages
-VIRTUALENV_PACKAGES = [ 
-    "defusedxml==0.4.1",
-    "Django==1.7.5",
-    "django-debug-toolbar==1.2.2",
-    "django-stdimage==1.2.2",
-    "mysql-connector-python==1.2.3",
-    "oauthlib==0.7.2",
-    "Pillow==2.8.1",
-    "progressbar==2.2",
-    "progressbar2==2.7.3",
-    "PyJWT==1.3.0",
+VIRTUALENV_PACKAGES = [
+
+    "django==1.7.5",
+    "https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz",
     "python-social-auth==0.2.9",
-    "python3-openid==3.0.5",
+    "pillow==2.8.1",
+    "django-stdimage==1.2.2",
     "pytz==2015.4",
+    "defusedxml==0.4.1",
+    "progressbar==2.2",
+    "python3-openid==3.0.5",
     "requests==2.7.0",
-    "requests-oauthlib==0.5.0",
-    "six==1.9.0",
     "sqlparse==0.1.14",
+
 ]
 
 
@@ -376,17 +372,24 @@ def config( args ):
                     "git clone {0} temp".format( GIT_REPO ),
                     "shopt -s dotglob",
                     "mv temp/* {0}".format( PROJECT_ROOT ),
-                    "rm -R infra"
+                    "git checkout {0}".format( SERVERS[ server ][ "BRANCH" ] ),
+                    "rm -R temp",
+                    "rm -R infra",
                 ])
+
 
             # Installing and configuring virtualenv
             remote_commands.extend([
                 "virtualenv {0}".format( PROJECT_VIRTUALENV ),
                 "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
+                "sudo chmod 777 {0}".format( PROJECT_VIRTUALENV ),
             ])
             for package in VIRTUALENV_PACKAGES:
                 remote_commands.append( "pip install {0}".format( package ) )
-            remote_commands.append( "deactivate" )
+            remote_commands.extend([
+                "deactivate",
+                "sudo chmod 755 {0}".format( PROJECT_VIRTUALENV ),
+            ])
 
             # Cleaning apache's default conf.
             remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
@@ -404,8 +407,8 @@ def config( args ):
                 http_port = SERVERS[ server ][ "HTTP_PORT" ],
                 https_port = SERVERS[ server ][ "HTTPS_PORT" ],
                 https_forwarded_port = SERVERS[ server ][ "HTTPS_FORWARDED_PORT" ],
-                www_domain = SERVERS[ server ][ "DOMAIN" ] if server == "local" else "www.{0}".format( SERVERS[ server ][ "DOMAIN" ] ),
-                pt_domain = SERVERS[ server ][ "DOMAIN" ] if server == "local" else "pt.{0}".format( SERVERS[ server ][ "DOMAIN" ] ),
+                www_domain = "www.{0}".format( SERVERS[ server ][ "DOMAIN" ] ) if server == "prod" else SERVERS[ server ][ "DOMAIN" ],
+                pt_domain = "pt.{0}".format( SERVERS[ server ][ "DOMAIN" ] ) if server == "prod" else SERVERS[ server ][ "DOMAIN" ],
                 django_root = DJANGO_ROOT,
                 app_name = APP_NAME,
             )
@@ -505,7 +508,7 @@ def update( args ):
             commands = [ "vagrant ssh" ]
 
             remote_commands = [
-                "source {0}/bin/activate".format( VIRTUALENV_ROOT ),
+                "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
                 "python {0}/manage.py migrate".format( DJANGO_ROOT ),
                 "deactivate"
             ]
@@ -519,7 +522,7 @@ def update( args ):
                 "git checkout {0}".format( SERVERS[ server ][ "BRANCH" ] ),
                 "git pull origin {0}".format( SERVERS[ server ][ "BRANCH" ] ),
                 "rm -R infra",
-                "source {0}/bin/activate".format( VIRTUALENV_ROOT ),
+                "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
                 "python {0}/manage.py migrate".format( DJANGO_ROOT ),
                 "deactivate"
             ]
