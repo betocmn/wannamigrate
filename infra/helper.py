@@ -563,8 +563,9 @@ def copy( args ):
         print
         print( "[REMOTE to LOCAL]")
         print( "    usage: python {0} {1} <file> [-r] from <server> to <local_path>".format( __file__, copy.__name__ ) )
+        print
         print( "[LOCAL to REMOTE]")
-        print( "usage: python {0} {1} <file> [-r] to <server> into <remote_path>".format( __file__, copy.__name__ ) )
+        print( "    usage: python {0} {1} <file> [-r] to <server> into <remote_path>".format( __file__, copy.__name__ ) )
         print
         print( "Params explanation:")
         print( "    {0}{1}".format( "file".ljust( N_DEFAULT_HELP_SPACING ), "The file or folder to be copied." ) )
