@@ -12,6 +12,7 @@ Also you can create custom form fields or methods
 # Imports
 ##########################
 from django import forms
+from wannamigrate.core.models import Country
 from wannamigrate.core.forms import BaseForm, BaseModelForm
 from wannamigrate.qa.models import Question, BlogPost, Topic, Answer, TopicTranslation
 from django.conf import settings
@@ -72,11 +73,13 @@ class AddQuestionForm( BaseModelForm ):
     def clean( self, *args, **kwargs ):
         cleaned_data = super( AddQuestionForm, self ).clean( *args, **kwargs )
 
-        # The user should select one country as topic
+        # The user should select at least Canada or Australia as topic.
         if "related_topics" in cleaned_data:
-            country_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ] ).exclude( country__isnull = True ).exists()
-            if not country_topic_selected:
-                self.add_error( 'related_topics', _( "Select at least one country as topic." ) )
+            # country_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ] ).exclude( country__isnull = True ).exists()
+            immigration_enabled_countries = Country.objects.filter( immigration_enabled = True ).values_list( "id", flat = True )
+            immigration_enabled_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ], country__id__in = immigration_enabled_countries  ).exists()
+            if not immigration_enabled_topic_selected:
+                self.add_error( 'related_topics', _( "Select at least one country with immigration enabled as topic. Ex: Canada, Australia." ) )
 
         return cleaned_data
 

@@ -209,9 +209,13 @@ def view_question( request, slug ):
     if request.user.is_authenticated():
         answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
         if answer_form.is_valid():
-            answer = answer_form.save()
-            messages.success( request, _( 'Answer successfully created.' ) )
-            return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
+            with transaction.atomic():
+                user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+                user_stats.total_answers += 1
+                answer = answer_form.save()
+                user_stats.save()
+                messages.success( request, _( 'Answer successfully created.' ) )
+                return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )
 
     # Get related contents
     related_content = Question.objects.filter( related_topics__in = question.related_topics.all() )\
