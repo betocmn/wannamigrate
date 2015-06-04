@@ -1861,7 +1861,7 @@ select {
   width: 40%;
 }
 .dashboard .content.hire .professionals .professional .identity .data-professional {
-  width: 80%;
+  width: 90%;
 }
 .dashboard .content.hire .professionals .professional .description {
   float: left;
@@ -1906,7 +1906,7 @@ select {
   clear: both;
   width: 100%;
   height: 25px;
-  padding-top: 20px;
+  margin-top: 16%;
 }
 .dashboard .content.hire .professionals .professional .tags .tag {
   float: left;
