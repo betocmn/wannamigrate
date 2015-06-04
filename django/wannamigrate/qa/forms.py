@@ -79,7 +79,7 @@ class AddQuestionForm( BaseModelForm ):
             immigration_enabled_countries = Country.objects.filter( immigration_enabled = True ).values_list( "id", flat = True )
             immigration_enabled_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ], country__id__in = immigration_enabled_countries  ).exists()
             if not immigration_enabled_topic_selected:
-                self.add_error( 'related_topics', _( "Select at least one country with immigration enabled as topic. Ex: Canada, Australia." ) )
+                self.add_error( 'related_topics', _( "You need to select at least one of these countries: Australia, Canada." ) )
 
         return cleaned_data
 
