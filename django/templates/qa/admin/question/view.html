@@ -204,7 +204,7 @@
                                         </dl>
                                         <div class="text-center buttons">
                                             <a href="#" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
-                                            <a href="#" onclick="confirm_delete( '#' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+                                            <a href="#" onclick="confirm_delete( '{% url 'admin:qa:delete_answer' answer.id %}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
                                         </div>
                                     </div>
 

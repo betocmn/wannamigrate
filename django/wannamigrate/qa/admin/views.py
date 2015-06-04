@@ -144,6 +144,30 @@ def add_answer( request, parent_id ):
 
 
 @restrict_internal_ips
+@permission_required( 'qa.admin_delete_answer', login_url = 'admin:login' )
+@user_passes_test( admin_check )
+def delete_answer( request, id ):
+    """
+    Lists all posts with pagination, order by, search, etc. using www.datatables.net
+
+    :param: request
+    :return: String
+    """
+
+    answer = Answer.objects.filter( pk = id )
+    if answer.exists():
+        with transaction.atomic():
+            answer = answer.get()
+
+            answer.delete()
+            messages.success( request, "Answer (id = {0}) successfully deleted.".format( id ) )
+    else:
+        messages.error( request, "Answer (id = {0}) not found.".format( id ) )
+
+    return HttpResponseRedirect( request.META.get('HTTP_REFERER') )
+
+
+@restrict_internal_ips
 @permission_required( 'qa.admin_view_question', login_url = 'admin:login' )
 @user_passes_test( admin_check )
 def view_question( request, id ):
