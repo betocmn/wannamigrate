@@ -28,6 +28,9 @@ urlpatterns = patterns('',
     url( r'^edit/question/(?P<id>\d+)$', views.edit_question, name = "edit_question" ),
     url( r'^delete/question/(?P<id>\d+)$', views.delete_question, name = "delete_question" ),
 
+    # Answers
+    url( r'^delete/answer/(?P<id>\d+)$', views.delete_answer, name = "delete_answer" ),
+
     # BlogPosts
     url( r'^blogposts$', views.list_blogposts, name = "list_blogposts" ),
     url( r'^view/blogpost/(?P<id>\d+)$', views.view_blogpost, name = "view_blogpost" ),
