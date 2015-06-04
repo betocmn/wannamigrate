@@ -79,7 +79,7 @@
 
                     <div class="professional category">
                         <div class="thumb">
-                            <a class="contract" href="{{ view_professional_url }}">
+                            <a class="contract" href="{{ view_professional_url }}" title="{{ provider.display_name }}">
                                 {% if provider.user.userpersonal.avatar %}
                                     <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
                                 {% else %}
@@ -88,8 +88,8 @@
                             </a>
                         </div>
                         <div class="data-professional">
-                            <a class="contract" href="{{ view_professional_url }}">
-                                <strong class="name">{{ provider.display_name }}</strong>
+                            <a class="contract" title="{{ provider.display_name }}" href="{{ view_professional_url }}">
+                                <strong class="name">{{ provider.display_name|truncatechars_html:41 }}</strong>
                                 <p class="expert">{{ provider.headline }}</p>
                             </a>
                             <div class="rate" data-score="{{ provider.review_score }}">
@@ -162,7 +162,7 @@
                 fill: '&hellip; <a class="more-services read-more" href="#">{% trans "see more" %}</a>'
             });
             $( '.read-more' ).on( 'click', function() {
-              $( this ).parent().trunk8('revert');
+              $( this ).parent().trunk8( 'revert' );
               return false;
             });
 
