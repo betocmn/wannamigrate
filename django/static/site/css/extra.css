@@ -1088,3 +1088,95 @@ form .errorlist {
 
 
 }
+
+
+
+a.bt-notifications
+{
+    position: relative;
+    z-index: 1;
+    display: none;
+    width: 48px;
+    height: 48px;
+    float:right;
+    margin-right:5px;
+}
+a.bt-notifications:hover
+{
+    background: rgba( 255, 255, 255, 0.1 );
+}
+
+@media(min-width:769px){
+    a.bt-notifications { display:inline-block; width: 80px; height: 80px; margin-left: 15px; }
+    a.bt-notifications span.notifications-icon
+    {
+        top:0;
+        left:0;
+        text-align:center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        line-height: 80px;
+        color: white;
+        z-index:1;
+    }
+
+    a.bt-notifications span.notifications-counter
+    {
+        position: absolute;
+        background: red;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        color: #fff;
+        font-family: "open_sansbold";
+        text-align: center;
+        line-height: 20px;
+        border-radius: 4px;
+        top: 44px;
+        left: 44px;
+        z-index: 2;
+    }
+}
+
+ul.notifications-view
+{
+    display:block;
+    width:100%;
+    margin-top:30px;
+}
+
+ul.notifications-view li.notifications-item
+{
+    display:block;
+
+}
+
+ul.notifications-view li.notification-item a.notification-link
+{
+    margin-top:5px;
+    display:block;
+    min-height:70px;
+    background:#FFF;
+    text-decoration:none;
+    padding-left:20px;
+
+}
+ul.notifications-view li.notification-item a.notification-link.new { border-left: 3px solid #FFCE80; }
+ul.notifications-view li.notification-item a.notification-link:hover{ background: #F0EBF2; }
+
+ul.notifications-view li.notification-item a.notification-link span
+{
+    position: relative;
+    display:block;
+    float:left;
+}
+ul.notifications-view li.notification-item a.notification-link span.message { margin-top: 22px; }
+ul.notifications-view li.notification-item a.notification-link span.date
+{
+    font-size: 12px;
+    margin-top: 8px;
+    padding-bottom:10px;
+    color: #999;
+}

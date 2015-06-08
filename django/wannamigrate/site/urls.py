@@ -46,6 +46,7 @@ urlpatterns = patterns('',
 
     # My Account
     url( r'^account/$', views.account, name = 'account' ),
+    url( r'^notifications/$', views.notifications, name = 'notifications' ),
     url( r'^contracts/$', views.contracts, name = 'contracts' ),
     url( r'^edit_account/$', views.edit_account, name = 'edit_account' ),
     url( r'^edit_password/$', views.edit_password, name = 'edit_password' ),

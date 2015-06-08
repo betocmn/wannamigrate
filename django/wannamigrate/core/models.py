@@ -748,10 +748,18 @@ class Notification( BaseModel ):
 
     @staticmethod
     def get_news_for( user ):
-
         nu = NotificationUser.objects.filter( user = user, is_read = False ).prefetch_related( "notification" ).order_by( "-created_date" ).all()
         return [ x.notification for x in nu ]
 
+    @staticmethod
+    def get_all_notifications_for( user ):
+        nu = NotificationUser.objects.filter( user = user ).prefetch_related( "notification" ).order_by( "-created_date" ).all()
+
+        notifications = []
+        for x in nu:
+            x.notification.is_read = x.is_read
+            notifications.append( x.notification )
+        return notifications
 
     @staticmethod
     def mark_as_read_for( user ):

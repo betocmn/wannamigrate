@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 from django.conf import settings
 import pytz
 from django.utils import timezone, translation
-from wannamigrate.core.models import Situation, Country, Goal
-
+from wannamigrate.core.models import Situation, Country, Goal, Notification
 
 
 
@@ -25,6 +24,8 @@ from wannamigrate.core.models import Situation, Country, Goal
 class SituationLocaleMiddleware( object ):
 
     def process_request( self, request ):
+
+
 
         # If a language subdomain was forced (eg: 'https://pt.wannamigrate.com' - SEO
         subdomain = request.get_host().split( '.', 2 )[0]
@@ -100,3 +101,7 @@ class SituationLocaleMiddleware( object ):
                 request.session['situation']['total_users'] = situation.total_users
             except Situation.DoesNotExist:
                 request.session['situation']['total_users'] = 0
+
+        if request.user.is_authenticated():
+            news = Notification.get_news_for( request.user )
+            request.session[ "news" ] = news

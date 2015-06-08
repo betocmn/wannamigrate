@@ -616,6 +616,32 @@ def contracts( request ):
 
 
 @login_required
+def notifications( request ):
+    """
+    Displays "My contracts" page with list of hired services
+
+    :param: request
+    :return String - HTML from my account page.
+    """
+
+    # Initial template
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'My Notifications - Wanna Migrate' )
+
+    # Gets Situation Form
+    template_data['situation_form'] = get_situation_form( request )
+
+    # Gets Situation Form
+    template_data['notifications'] = Notification.get_all_notifications_for( request.user )
+    Notification.mark_as_read_for( request.user )
+
+    # Renders the page
+    return render( request, 'site/account/notifications.html', template_data )
+
+
+@login_required
 def list_conversations( request, conversation_status_id ):
     """
     Displays "inbox" page.

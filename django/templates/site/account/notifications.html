@@ -1,0 +1,53 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block content %}
+
+    <div class="content myaccount">
+        <h2 class="title">{% trans 'Notifications' %}</h2>
+        <div class="interactions">
+            <div class="my-contracts">
+                <ul class="notifications-view">
+                    {% for notification in notifications %}
+                        <li class="notification-item">
+
+                            <a class="notification-link {% if not notification.is_read %}new{% endif %}" href="{{ notification.url }}">
+
+                                <span class="message">{{ notification.message }}</span>
+                                <div class="clearfix"></div>
+                                <span class="date">{{ notification.created_date }}</span>
+                                <div class="clearfix"></div>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="no-notifications">{% trans "No notifications." %}</li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}
