@@ -1152,7 +1152,13 @@ ul.notifications-view li.notifications-item
     display:block;
 
 }
-
+ul.notifications-view li.no-notification
+{
+    margin-top:5px;
+    display:block;
+    min-height:70px;
+    padding-left:20px;
+}
 ul.notifications-view li.notification-item a.notification-link
 {
     margin-top:5px;
