@@ -726,7 +726,7 @@ class NotificationUser( BaseModel ):
 
 
 class Notification( BaseModel ):
-    message = models.CharField( max_length = 100 )
+    message = models.TextField()
     url = models.CharField( max_length = 255 )
 
 

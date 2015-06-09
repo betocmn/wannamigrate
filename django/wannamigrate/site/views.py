@@ -671,13 +671,6 @@ def list_conversations( request, conversation_status_id ):
         entry.other_user = entry.conversation.to_user if ( entry.conversation.from_user == request.user ) else entry.conversation.from_user
 
 
-
-
-
-
-
-
-
     # Initial template
     template_data = {}
 
@@ -750,6 +743,13 @@ def view_conversation( request, id ):
             from_user = request.user
             to_user = conversation.to_user if from_user.id == conversation.from_user_id else conversation.from_user
 
+            # Adds a notification to the destination user
+            Notification.add(
+                _( "New message from " ) + from_user.name,
+                reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
+                [ to_user ]
+            )
+
             # Sends Notification to User
             # TODO Change this to a celery/signal background task
             Mailer.send_inbox_notification( from_user, to_user )
@@ -812,6 +812,13 @@ def start_conversation( request, to_user_id ):
             msg.is_read = False
             msg.content = form.cleaned_data[ "content" ]
             msg.save()
+
+            # Adds a notification to the destination user
+            Notification.add(
+                _( "New message from " ) + conversation.from_user.name,
+                reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
+                [ conversation.to_user ]
+            )
 
             # Sends Notification to User
             # TODO Change this to a celery/signal background task
