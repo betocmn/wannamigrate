@@ -665,7 +665,7 @@ def list_conversations( request, conversation_status_id ):
     entries = ConversationStatus_User.objects.filter(
         user__id = request.user.id,
         status__id = conversation_status_id
-    ).select_related( "conversation", "conversation__from_user", "conversation__to_user" ).only( "conversation", "has_updates" )
+    ).select_related( "conversation", "conversation__from_user", "conversation__to_user" ).only( "conversation", "has_updates" ).order_by( "-conversation__modified_date" )
 
     for entry in entries:
         entry.other_user = entry.conversation.to_user if ( entry.conversation.from_user == request.user ) else entry.conversation.from_user
