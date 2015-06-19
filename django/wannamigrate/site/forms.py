@@ -248,11 +248,11 @@ class ContactForm( BaseForm ):
     """
     SUBJECTS = (
         ( '', _( 'Select Subject' ) ),
-        ( '', _( 'General Questions' ) ),
-        ( '', _( 'Become a Service Provider' ) ),
-        ( '', _( 'Website Errors' ) ),
-        ( '', _( 'Payment Problems' ) ),
-        ( '', _( 'Report User or Content' ) )
+        ( 'General Questions', _( 'General Questions' ) ),
+        ( 'Become a Service Provider', _( 'Become a Service Provider' ) ),
+        ( 'Website Errors', _( 'Website Errors' ) ),
+        ( 'Payment Problems', _( 'Payment Problems' ) ),
+        ( 'Report User or Content', _( 'Report User or Content' ) )
     )
     subject = forms.ChoiceField( required = True, label = _( "Subject" ), choices = SUBJECTS, widget = forms.Select( attrs = { 'class' : '' } )  )
     name = forms.CharField( required = True, label = _( "Name" ), widget = forms.TextInput( attrs = { 'class' : '' } ) )
