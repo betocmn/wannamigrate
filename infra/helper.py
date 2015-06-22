@@ -223,7 +223,7 @@ DJANGO_CONF = """
 ########################################################################
 # PUBLIC METHODS
 # If you want to add a new method, please follow the pattern existant
-# in other methods (Regex to check usage at beginning, method help if 
+# in other methods (Regex to check usage at beginning, method help if
 # usage wont match, etc).
 ########################################################################
 def config( args ):
@@ -270,6 +270,11 @@ def config( args ):
             commands = [ "ssh", "-i", SERVERS[ server ][ "KEYPAIR" ], "{0}@{1}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ] ) ]
 
         # Creates the user group and adds server's and apache's user to it.
+        remote_commands.append( "echo \" \"" )
+        remote_commands.append( "echo \"##############################\"" )
+        remote_commands.append( "echo \"# CONFIG. GROUP PERMISSIONS  #\"" )
+        remote_commands.append( "echo \"##############################\"" )
+        remote_commands.append( "echo \" \"" )
         remote_commands.extend( [
             "sudo groupadd {0}".format( DEFAULT_USER_GROUP ),
             "sudo usermod -a -G {0} {1}".format( DEFAULT_USER_GROUP, SERVERS[ server ][ "DEFAULT_USER"] ),
@@ -277,9 +282,19 @@ def config( args ):
         ] )
 
         # Updates apt-get
+        remote_commands.append( "echo \" \"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \"# UPDATING APT-GET      #\"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \" \"" )
         remote_commands.append( "sudo apt-get update" )
 
         # Install packages
+        remote_commands.append( "echo \" \"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \"# INSTALLING PACKAGES   #\"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \" \"" )
         for package in INSTALL_PACKAGES:
             remote_commands.append( "sudo apt-get install {0} --yes".format( package ) )
 
@@ -298,6 +313,11 @@ def config( args ):
                     return
 
                 # Add commands to install the mysql-server
+                remote_commands.append( "echo \" \"" )
+                remote_commands.append( "echo \"############################\"" )
+                remote_commands.append( "echo \"# INSTALLING MYSQL-SERVER  #\"" )
+                remote_commands.append( "echo \"############################\"" )
+                remote_commands.append( "echo \" \"" )
                 remote_commands.extend( [
                     "echo mysql-server mysql-server/root_password password {0} | sudo debconf-set-selections".format( root_password ),
                     "echo mysql-server mysql-server/root_password_again password {0} | sudo debconf-set-selections".format( root_password ),
@@ -306,6 +326,11 @@ def config( args ):
 
 
         # Creating the project's root folder
+        remote_commands.append( "echo \" \"" )
+        remote_commands.append( "echo \"########################\"" )
+        remote_commands.append( "echo \"# CREATING ROOT FOLDER #\"" )
+        remote_commands.append( "echo \"########################\"" )
+        remote_commands.append( "echo \" \"" )
         remote_commands.extend([
             "sudo mkdir -p {0}".format( PROJECT_ROOT ),
             "sudo chown {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_ROOT ),
@@ -317,6 +342,11 @@ def config( args ):
         # Configuring Wiki on remote.
         ######################################
         if "wiki" in args:
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"#########################\"" )
+            remote_commands.append( "echo \"# DOWNLOADING MEDIAWIKI #\"" )
+            remote_commands.append( "echo \"#########################\"" )
+            remote_commands.append( "echo \" \"" )
             remote_commands.extend([
                 "cd {0}".format( PROJECT_ROOT ),
                 "wget http://releases.wikimedia.org/mediawiki/1.23/mediawiki-1.23.2.tar.gz",
@@ -335,6 +365,11 @@ def config( args ):
                 wiki_root = WIKI_ROOT
             )
 
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"#############################\"" )
+            remote_commands.append( "echo \"# GENERATING WIKI.CONF FILE #\"" )
+            remote_commands.append( "echo \"#############################\"" )
+            remote_commands.append( "echo \" \"" )
             # Creates the conf file containing the virtualhosts for the wiki on apache sites-enabled folder.
             remote_commands.extend([
                 "sudo touch {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),
@@ -348,7 +383,11 @@ def config( args ):
         # Configuring Django on remote.
         ################################
         elif "site" in args:
-
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"#################################\"" )
+            remote_commands.append( "echo \"# CREATING DIRECTORY STRUCTURE  #\"" )
+            remote_commands.append( "echo \"#################################\"" )
+            remote_commands.append( "echo \" \"" )
             # Creating folder structure
             remote_commands.extend([
                 "sudo mkdir -p {0}".format( PROJECT_VIRTUALENV ),
@@ -356,6 +395,12 @@ def config( args ):
                 "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_VIRTUALENV ),
             ])
 
+
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"##################################\"" )
+            remote_commands.append( "echo \"# INSTALLING PIP AND VIRTUALENV  #\"" )
+            remote_commands.append( "echo \"##################################\"" )
+            remote_commands.append( "echo \" \"" )
             # Installing pip using python3 and virtualenv
             remote_commands.extend([
                 "cd {0}".format( PROJECT_VIRTUALENV ),
@@ -367,6 +412,11 @@ def config( args ):
 
             # Downloading git code.
             if server != "local":
+                remote_commands.append( "echo \" \"" )
+                remote_commands.append( "echo \"#########################\"" )
+                remote_commands.append( "echo \"# DOWNLOADING CODE      #\"" )
+                remote_commands.append( "echo \"#########################\"" )
+                remote_commands.append( "echo \" \"" )
                 remote_commands.extend([
                     "cd {0}".format( PROJECT_ROOT ),
                     "git clone {0} temp".format( GIT_REPO ),
@@ -377,7 +427,11 @@ def config( args ):
                     "rm -R infra",
                 ])
 
-
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"###########################\"" )
+            remote_commands.append( "echo \"# CONFIGURING VIRTUALENV  #\"" )
+            remote_commands.append( "echo \"###########################\"" )
+            remote_commands.append( "echo \" \"" )
             # Installing and configuring virtualenv
             remote_commands.extend([
                 "virtualenv {0}".format( PROJECT_VIRTUALENV ),
@@ -391,6 +445,11 @@ def config( args ):
                 "sudo chmod 755 {0}".format( PROJECT_VIRTUALENV ),
             ])
 
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"#########################\"" )
+            remote_commands.append( "echo \"# GENERATING CONF FILES #\"" )
+            remote_commands.append( "echo \"#########################\"" )
+            remote_commands.append( "echo \" \"" )
             # Cleaning apache's default conf.
             remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
 
@@ -422,12 +481,17 @@ def config( args ):
             ])
 
 
+        remote_commands.append( "echo \" \"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \"# ENABLING SSL, REWRITE #\"" )
+        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \" \"" )
         # Enabling mode rewrite on apache
         remote_commands.append( "sudo a2enmod rewrite" )
         # Enabling SSL on apache
         remote_commands.append( "sudo a2enmod ssl" )
 
-        # Changes the owner and group of all project's folders
+        # Reinforce the owner and group of all project's folders
         remote_commands.extend([
             "sudo chown -R {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_ROOT ),
             "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_ROOT ),
@@ -436,24 +500,32 @@ def config( args ):
         # Restarting apache
         remote_commands.append( "sudo service apache2 restart" )
 
-        # Call
-        if server == "local":
-            cmd( commands, remote_commands, vagrant = True )
-        else:
-            cmd( commands, remote_commands )
+        call_by_cloning_script( server, remote_commands )
 
         # Print ending hints
-        print
-        print( "Installation DONE. But you should configure some DATABASE settings manually." )
-        print( "Please refer our Wiki to get extra help.")
+        print()
+        print()
+        print( "###############################################")
+        print( "# Installation DONE. But you should configure #")
+        print( "# some DATABASE settings manually. Please     #")
+        print( "# refer our Wiki to get extra help.           #")
+        print( "###############################################")
+        print()
+        print( "1. Connect to the server." )
+        print( "     python helper.py connect <server>" )
+        print( "2. Access mysql as root (you will be prompted to insert your root's password)." )
+        print( "     mysql -u root -p" )
+        print( "3. Create the database." )
+        print( "     create database <database>;" )
+        print( "4. Create the user for this database." )
+        print( "     create user <username>@localhost identified by <password>;" )
+        print( "5. Grant all privilegies to the user on the database. " )
+        print( "     grant all on <database>.* to <username>@localhost;" )
         if "site" in args:
-            print( "1. Create the database \"{0}\".".format( APP_NAME ) )
-            print( "2. Create the user \"{0}\" granting all privilegies over \"{0}\" database.".format( APP_NAME ) )
-            print( "3. Run \"python helper.py update\" to populate the database on the remote server." )
+            print( "6. Exit MySQL and SSH and run \"update\" to populate the database." )
+            print( "     python helper.py update <server>" )
         elif "wiki" in args:
-            print( "1. Create the database \"{0}\".".format( WIKI_ALIAS ) )
-            print( "2. Create the user \"{0}\" granting all privilegies over \"{0}\" database.".format( WIKI_ALIAS ) )
-            print( "3. After that, you should access http://{0}:{1}/mw-config/index.php to configure wiki.".format( SERVERS[ server ][ "IP" ], WIKI_LISTENING_PORT ) )
+            print( "6. Access http://{0}:{1}/mw-config/index.php to configure the wiki.".format( SERVERS[ server ][ "IP" ], WIKI_LISTENING_PORT ) )
 
 
 
@@ -509,22 +581,19 @@ def update( args ):
         # Configuring the params and the commands to call.
         server = args[0]
 
+        remote_commands = []
         # Connects to the server.
         if server == "local":
-            commands = [ "vagrant ssh" ]
-
             remote_commands = [
                 "source {0}/bin/activate".format( PROJECT_VIRTUALENV ),
                 "python {0}/manage.py migrate".format( DJANGO_ROOT ),
                 "deactivate",
                 "sudo service apache2 restart",
             ]
-            
-            return cmd( commands, remote_commands, vagrant=True )
+
         else:
-            commands = [ "ssh", "-i", SERVERS[ server ][ "KEYPAIR" ], "{0}@{1}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ] ) ]
             # Configuring the remote commands.
-            remote_commands = [ 
+            remote_commands = [
                 "cd {0}".format( PROJECT_ROOT ),
                 "git checkout {0}".format( SERVERS[ server ][ "BRANCH" ] ),
                 "git pull origin {0}".format( SERVERS[ server ][ "BRANCH" ] ),
@@ -534,9 +603,9 @@ def update( args ):
                 "deactivate",
                 "sudo service apache2 restart",
             ]
-            
-            return cmd( commands, remote_commands )
-        
+
+        return call_by_cloning_script( server, remote_commands )
+
 
 ###########################################################
 # Utility function to extract the filename from a string.
@@ -561,11 +630,8 @@ def copy( args ):
     # Check if the minimal number of arguments was passed.
     if not re.match( usage_pattern, cmd_str ):
         print
-        print( "[REMOTE to LOCAL]")
-        print( "    usage: python {0} {1} <file> [-r] from <server> to <local_path>".format( __file__, copy.__name__ ) )
-        print
-        print( "[LOCAL to REMOTE]")
-        print( "    usage: python {0} {1} <file> [-r] to <server> into <remote_path>".format( __file__, copy.__name__ ) )
+        print( "usage: python {0} {1} <file> [-r] from <server> to <local_path>".format( __file__, copy.__name__ ) )
+        print( "usage: python {0} {1} <file> [-r] to <server> into <remote_path>".format( __file__, copy.__name__ ) )
         print
         print( "Params explanation:")
         print( "    {0}{1}".format( "file".ljust( N_DEFAULT_HELP_SPACING ), "The file or folder to be copied." ) )
@@ -576,7 +642,7 @@ def copy( args ):
         print( "    {0}{1}".format( "remote_path".ljust( N_DEFAULT_HELP_SPACING ), "The directory on your remote to put the file." ) )
     else:
         # Extracts the recursive param
-        recursive = ["-r", "-R"] in args
+        recursive = ( "-r" in args or "-R" in args )
         if recursive:
             del args[1]
 
@@ -589,12 +655,12 @@ def copy( args ):
         ################################
         # Copying from server to local.
         ################################
-        if from_to == "from":   
+        if from_to == "from":
             # The scp command with params set.
             commands = [ "scp", "-r", "-i", SERVERS[ server ][ "KEYPAIR" ], "{0}@{1}:{2}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], src ), dest ]
             if not recursive:
                 commands.remove( "-r" )
-            
+
             return cmd( commands )
 
         ################################
@@ -606,12 +672,12 @@ def copy( args ):
             else:
                 # Extracts the filename from source
                 filename = path_leaf( src )
-                if not dest.endswith( '/' ):
-                    filename = '/' + filename
+                if not dest.endswith( os.pathsep ):
+                    filename = os.pathsep + filename
 
                 commands = [ "scp", "-i", SERVERS[ server ][ "KEYPAIR" ], src,  "{0}@{1}:{2}{3}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], dest, filename ) ]
-            
-                return cmd( " ".join( commands ) )
+
+            return cmd( commands )
 
 
 
@@ -655,7 +721,7 @@ def h():
         Displays info about the helper's methods.
     """
 
-    # A big list of dictionaries mapping available methods names 
+    # A big list of dictionaries mapping available methods names
     # and its respectives descriptions
     METHODS_HELP = [
         {
@@ -686,30 +752,54 @@ def h():
 
 
 
-def cmd( commands, remote_commands = None, vagrant = False ):
+def cmd( commands ):
     """
         Internal function. Used to call command line methods and pass input to it.
     """
-    
+
     # Converts commands to string
     if type( commands ) is list:
-        commands = " ".join( commands ) 
+        commands = " ".join( commands )
 
-    # Appends the commands that should be executed on host machine.
-    if remote_commands:
-        if vagrant:
-            commands += " -c '"
-        else:
-            commands += " -t '"
-        commands += " \n ".join( remote_commands ) + "'"
-
-    
     # Calls the command
     shell = subprocess.call( commands, shell = True )
 
 
 
+def call_by_cloning_script( server, commands ):
 
+    # Generates the script file.
+    script_filename = "cs-{0}.sh".format( time.time() )
+    with open( script_filename, "wb" ) as script:
+        script.write( bytes( "\n".join( commands ).replace( "\r", '' ), "UTF-8" ) )
+
+
+    # Sending and executing the script
+    if server == "local":
+        cmd( "vagrant ssh -c 'bash /vagrant/{0};'".format( script_filename ) )
+    else:
+        home_folder = "/home/" + SERVERS[ server ][ "DEFAULT_USER" ]
+        copy( [ script_filename, "to", server, "into", home_folder ] )
+
+        # Generates the ssh command for the given server
+        ssh_command = "ssh -i {0} {1}@{2} -t".format(
+            SERVERS[ server ][ "KEYPAIR" ],
+            SERVERS[ server ][ "DEFAULT_USER" ],
+            SERVERS[ server ][ "IP" ]
+        )
+
+        # The full path to the script on the remote server
+        script_remote_path = home_folder + '/' + script_filename
+
+        # Call the script
+        callcmd = "{0} 'bash {0};'".format( ssh_command, script_remote_path )
+        cmd( callcmd )
+
+        # Removes the script on remote.
+        cmd( "{0} 'sudo rm {1}'".format( ssh_command, script_remote_path ) )
+
+    # Removes the generated file
+    cmd( "rm {0}".format( script_filename ) )
 
 # Calls the initial method and exit.
 init()
