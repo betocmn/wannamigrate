@@ -102,6 +102,8 @@ class SituationLocaleMiddleware( object ):
             except Situation.DoesNotExist:
                 request.session['situation']['total_users'] = 0
 
+        # Get notifications for the logged user
         if request.user.is_authenticated():
             news = Notification.get_news_for( request.user )
-            request.session[ "news" ] = news
+            if news:
+                request.session['news'] = news
