@@ -791,12 +791,9 @@ def call_by_cloning_script( server, commands ):
         # The full path to the script on the remote server
         script_remote_path = home_folder + '/' + script_filename
 
-        # Call the script
-        callcmd = "{0} 'bash {0};'".format( ssh_command, script_remote_path )
+        # Call the script and removes it
+        callcmd = "{0} 'bash {1}; sudo rm {1};'".format( ssh_command, script_remote_path )
         cmd( callcmd )
-
-        # Removes the script on remote.
-        cmd( "{0} 'sudo rm {1}'".format( ssh_command, script_remote_path ) )
 
     # Removes the generated file
     cmd( "rm {0}".format( script_filename ) )
