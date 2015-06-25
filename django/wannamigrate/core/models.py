@@ -732,6 +732,10 @@ class Notification( BaseModel ):
 
     @staticmethod
     def add( message, url, users ):
+
+        if not isinstance( users, list ):
+            users = [ users ]
+
         with transaction.atomic():
             notification = Notification( message = message, url = url )
             notification.save()
