@@ -759,10 +759,9 @@ def copy( args ):
                 # Extracts the filename from source
                 filename = path_leaf( src )
                 if not dest.endswith( os.pathsep ):
-                    filename = os.pathsep + filename
+                    filename = '/' + filename
 
                 commands = [ "scp", "-i", SERVERS[ server ][ "KEYPAIR" ], src,  "{0}@{1}:{2}{3}".format( SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ], dest, filename ) ]
-
             return cmd( commands )
 
 
