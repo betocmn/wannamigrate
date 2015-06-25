@@ -55,7 +55,8 @@ APP_NAME = "wannamigrate"                                       # Current projec
 INSTALL_PACKAGES = [ 
     "python3-dev", "git", "apache2", "libapache2-mod-wsgi-py3",
     "libapache2-mod-php5", "php5-mysql", "libmysqlclient-dev",
-    "mysql-client", "gettext", "libjpeg-dev"
+    "mysql-client", "gettext", "libjpeg-dev", "rabbitmq-server",
+    "supervisor",
 ]
 
 
@@ -73,7 +74,8 @@ VIRTUALENV_PACKAGES = [
     "python3-openid==3.0.5",
     "requests==2.7.0",
     "sqlparse==0.1.14",
-
+    "celery==3.1.18",
+    "django-celery==3.1.16",
 ]
 
 
@@ -217,6 +219,38 @@ DJANGO_CONF = """
     </VirtualHost>
 """
 
+
+CELERY_CONF = """
+; ==================================
+;  celery worker supervisor example
+; ==================================
+
+[program:celery]
+; Set full path to celery program if using virtualenv
+command=/wannavenv/bin/celery worker -A wannamigrate --loglevel=INFO
+
+user=nobody
+directory=/wanna/django
+numprocs=1
+stdout_logfile=/var/log/celery/worker.log
+stderr_logfile=/var/log/celery/worker.log
+autostart=true
+autorestart=true
+startsecs=10
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs = 600
+
+; When resorting to send SIGKILL to the program to terminate it
+; send SIGKILL to its whole process group instead,
+; taking care of its children as well.
+killasgroup=true
+
+; if rabbitmq is supervised, set its priority higher
+; so it starts first
+priority=998
+"""
 
 
 
@@ -480,6 +514,18 @@ def config( args ):
                 "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, DJANGO_ALIAS ),
             ])
 
+            # Generates celery.conf
+            remote_commands.extend([
+                "sudo mkdir /var/log/celery",
+                "sudo touch /var/log/celery/worker.log",
+                "sudo touch /etc/supervisor/conf.d/celery.conf",
+                "sudo chmod 777 /etc/supervisor/conf.d/celery.conf",
+                "echo \"{0}\" > /etc/supervisor/conf.d/celery.conf".format( CELERY_CONF ),
+                "sudo chmod 644 /etc/supervisor/conf.d/celery.conf",
+                "sudo service supervisor restart"
+            ])
+
+
 
         remote_commands.append( "echo \" \"" )
         remote_commands.append( "echo \"#########################\"" )
@@ -557,6 +603,46 @@ def connect( args ):
             return cmd( "vagrant ssh" )
         else:
             return cmd( "ssh -i {0} {1}@{2}".format( SERVERS[ server ][ "KEYPAIR" ], SERVERS[ server ][ "DEFAULT_USER" ], SERVERS[ server ][ "IP" ] ) )
+
+
+def restart( args ):
+    """
+        Restarts the required services running on the server.
+        :args: A string indicating the server to restart.
+    """
+
+    # The usage regex.
+    usage_pattern = "(local|dev|prod)"
+    cmd_str = " ".join( args )
+
+    # Checks if the user typed the command correctly
+    if not re.match( usage_pattern, cmd_str ):
+        print
+        print( "usage: python {0} {1} {2}".format( __file__, restart.__name__, usage_pattern ) )
+        print
+        print( "Params explanation:")
+        print( "    {0}{1}".format( "local".ljust( N_DEFAULT_HELP_SPACING ), "Restarts the services on the local instance (vagrant)." ) )
+        print( "    {0}{1}".format( "dev".ljust( N_DEFAULT_HELP_SPACING ), "Restarts the services on the development instance." ) )
+        print( "    {0}{1}".format( "prod".ljust( N_DEFAULT_HELP_SPACING ), "Restarts the services on the production instance." ) )
+    else:
+        # Gets the server name
+        server = args[0]
+        services = [ "mysql", "supervisor", "apache2" ]
+
+        cmd_str = ""
+        for service in services:
+            cmd_str += "sudo service {0} restart; ".format( service )
+
+        if server == "local":
+            cmd( "vagrant ssh -c '{0}'".format( cmd_str ) )
+        else:
+            # Generates the ssh command for the given server
+            ssh_command = "ssh -i {0} {1}@{2} -t".format(
+                SERVERS[ server ][ "KEYPAIR" ],
+                SERVERS[ server ][ "DEFAULT_USER" ],
+                SERVERS[ server ][ "IP" ]
+            )
+            cmd( "{0} '{1}'".format( ssh_command, cmd_str ) )
 
 
 def update( args ):
@@ -740,6 +826,10 @@ def h():
         {
             "name": copy.__name__,
             "description": "Copy files from/to remote server."
+        },
+        {
+            "name": restart.__name__,
+            "description": "Restarts the services running on the server."
         },
     ]
     print
