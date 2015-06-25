@@ -31,7 +31,8 @@ class Order( BaseModel ):
     promo_code = models.ForeignKey( 'PromoCode', verbose_name = _( 'promo code' ), blank = True, null = True )
     description = models.CharField( _( "description" ), max_length = 100 )
     order_status = models.ForeignKey( 'OrderStatus', verbose_name = _( 'order status' ) )
-    service = models.ForeignKey( 'Service', verbose_name = _( 'service' ) )
+    service = models.ForeignKey( 'Service', verbose_name = _( 'service' ), blank = True, null = True )
+    product = models.ForeignKey( 'Product', verbose_name = _( 'product' ), blank = True, null = True )
     history = models.ManyToManyField( 'OrderStatus', through = 'OrderHistory', related_name = 'history' )
     gross_total = models.DecimalField( _( "gross total" ), max_digits = 6, decimal_places = 2 )
     net_total = models.DecimalField( _( "net total" ), max_digits = 6, decimal_places = 2 )
@@ -44,6 +45,55 @@ class Order( BaseModel ):
     class Meta:
         default_permissions = []
 
+    # Class Methods
+    @staticmethod
+    def get_listing( type = 'all', user_id = None, is_provider = False ):
+        """
+        Query used to search for reviews listings
+
+        :param: type ('all', 'product', 'service')
+        :param: user_id
+        :return: Objects
+        """
+
+        orders = Order.objects.select_related(
+            'order_status', 'service', 'user', 'service__service_status', 'service__provider'
+        )
+        if user_id:
+            if is_provider:
+                orders = orders.filter( service__provider__user_id = user_id, )
+            else:
+                orders = orders.filter( user_id = user_id, )
+        if type == 'product':
+            orders = orders.filter( product_id__isnull = False, )
+        elif type == 'service':
+            orders = orders.filter( service_id__isnull = False, )
+        orders = orders.only(
+            'id', 'created_date', 'description', 'gross_total', 'net_total', 'discount',
+            'order_status', 'service', 'user', 'service__service_status', 'service__provider'
+        ).order_by(
+            '-created_date'
+        )
+
+        return orders
+
+        """
+        services = Service.objects.select_related(
+            'service_status', 'user', 'provider'
+        )
+        if user_id:
+            if is_provider:
+                services = services.filter( provider__user_id = user_id, )
+            else:
+                services = services.filter( user_id = user_id, )
+        services = services.only(
+            'id', 'created_date', 'user', 'service_status', 'provider'
+        ).order_by(
+            '-created_date'
+        )
+
+        return services
+        """
 
 
 class OrderHistory( BaseModel ):
@@ -70,6 +120,53 @@ class OrderStatus( BaseModel ):
 
     # Model Attributes
     name = models.CharField( _( "name" ), max_length = 45 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+class Product( BaseModel ):
+    """
+    Products - 'Guide - How to move to Canada', etc...
+    """
+
+    # Model Attributes
+    product_category = models.ForeignKey( 'ProductCategory', verbose_name = _( 'category' ) )
+    name = models.CharField( _( "name" ), max_length = 120 )
+    description = models.TextField( _( "description" ) )
+    is_active = models.BooleanField( _( "is active" ), default = True )
+    icon_css_class = models.CharField( _( "name" ), max_length = 30 )
+    price = models.DecimalField( _( "price" ), max_digits = 6, decimal_places = 2 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+    @staticmethod
+    def get_translated_tuple( **kwargs ):
+        """
+        Returns a tuple of records ordered by name, after translation.
+        It's used on dropdowns on forms
+
+        :return: String
+        """
+        products = Product.objects.filter( **kwargs ).order_by( 'product_category_id', 'name' )
+        result = []
+        for product in products:
+            result.append( ( product.id, _( product.name ) ) )
+        return tuple( [( '', _( 'Select Product' ) )] + result  )
+
+
+
+class ProductCategory( BaseModel ):
+    """
+    Product Category - A parent group for products. ("ebooks", ...)
+    """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 40 )
 
     # META Options
     class Meta:
@@ -345,32 +442,6 @@ class Service( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
-
-    # Class Methods
-    @staticmethod
-    def get_listing( user_id, is_provider ):
-        """
-        Query used to search for reviews listings
-
-        :param: user_id
-        :param: is_provider
-        :return: Objects
-        """
-
-        services = Service.objects.select_related(
-            'service_status', 'service_type', 'user', 'provider'
-        )
-        if is_provider:
-            services = services.filter( provider__user_id = user_id, )
-        else:
-            services = services.filter( user_id = user_id, )
-        services = services.only(
-            'id', 'service_price', 'created_date', 'user', 'service_status', 'service_type', 'provider'
-        ).order_by(
-            '-created_date'
-        )
-
-        return services
 
 
 

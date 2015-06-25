@@ -49,7 +49,7 @@
                         <li class="tooltip service-item {{ provider_service_type.service_type.icon_css_class }}" title="{% trans provider_service_type.service_type.description %}">
                             <strong class="title-service">{% trans provider_service_type.service_type.name %}</strong>
                             <span class="price">R$ {{ provider_service_type.price }}</span>
-                            <a href="#" onclick="javascript: hire_service( '{{ provider_service_type.service_type_id }}' );" class="bt-hire button">{% trans 'Hire' context 'expert_view_page' %}</a>
+                            <a href="#" data-servicetypeid="{{ provider_service_type.service_type_id }}" class="bt-hire button">{% trans 'Hire' context 'expert_view_page' %}</a>
                         </li>
                     {% endfor %}
 
@@ -135,6 +135,13 @@
 
         $( document ).ready( function() {
 
+            // submit form for each button (from services)
+            $( '.services-list .service-item .button' ).click( function( event ) {
+                event.preventDefault();
+                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
+                $( "#service_form" ).submit();
+            });
+
             // Activate tooltips
             $( '.tooltip' ).tooltipster( {
                 maxWidth: 300,
@@ -177,11 +184,6 @@
 
         });
 
-        // Sets service and submit form to payment page
-        function hire_service( service_type_id ){
-            $( "#service_type_id" ).val( service_type_id );
-            $( "#service_form").submit();
-        }
 
     </script>
 

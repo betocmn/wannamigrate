@@ -38,7 +38,8 @@ from wannamigrate.core.models import (
     Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User, Language, Notification
 )
 from wannamigrate.marketplace.models import (
-    Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType
+    Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType, Product, ProductCategory,
+    Order, OrderStatus
 )
 from wannamigrate.qa.models import(
     Question, Topic
@@ -238,6 +239,8 @@ def signup( request, type = 'user' ):
 
     # Checks if the user is already authenticated.
     if request.user.is_authenticated():
+        if 'next' in request.GET:
+            return HttpResponseRedirect( request.GET.get( 'next' ) )
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # Initializes template data dictionary
@@ -271,7 +274,7 @@ def signup( request, type = 'user' ):
             # Saves session to indicate this is a new fresh user
             request.session['new_sign_up'] = True
 
-            # If it's a service provider, saves extra info and redirect to further edition
+            # If it's a service provider, saves extra info and redirects to further edition
             is_provider = False
             if 'type' in request.POST and request.POST['type'] == 'service-provider':
                 is_provider = True
@@ -288,7 +291,9 @@ def signup( request, type = 'user' ):
             # TODO Change this to a celery/signal background task
             Mailer.send_welcome_email( user, type )
 
-            if is_provider:
+            if 'next' in request.GET:
+                return HttpResponseRedirect( request.GET.get( 'next' ) )
+            elif is_provider:
                 return HttpResponseRedirect( reverse( 'site:edit_account' ) )
             else:
                 return HttpResponseRedirect( reverse( 'site:dashboard' ) )
@@ -487,7 +492,83 @@ def service_providers( request ):
 
 
 #######################
-# SERVICE PROVIDERS VIEWS
+# GUIDE - STEP BY STEP - VIEWS
+#######################
+def guide( request, country_name ):
+    """
+    Step-by-step guide to migrate to a destination country
+
+    :param: request
+    :param: country_name
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Gets country and overwrites meta title and description (for SEO)
+    if country_name == 'australia':
+        template_data['meta_title'] = _( 'Step-by-Step to Immigrate to Australia - Wanna Migrate' )
+        template_data['meta_description'] = _( 'A step-by-step initial guide to let you know your options to migrate to Australia' )
+    elif country_name == 'canada':
+        template_data['meta_title'] = _( 'Step-by-Step to Immigrate to Canada - Wanna Migrate' )
+        template_data['meta_description'] = _( 'A step-by-step initial guide to let you know your options to migrate to Canada' )
+    else:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Passes additional data to template
+    template_data['situation_form'] = get_situation_form( request )
+    template_data['country_name'] = country_name
+
+    # Print Template
+    return render( request, 'site/guide/guide.html', template_data )
+
+
+
+
+
+#######################
+# EBOOKS - VIEWS
+#######################
+def ebook( request ):
+    """
+    List all e-boks available
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
+        if not product:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # saves details to session
+        request.session['payment'] = {
+            'product': product
+        }
+
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
+
+    # Print Template
+    return render( request, 'site/ebook/ebook.html', template_data )
+
+
+
+
+
+#######################
+# TOOLS VIEWS
 #######################
 def tools( request ):
     """
@@ -501,7 +582,8 @@ def tools( request ):
     template_data = {}
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Extra Tools - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Immigration Tools - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Use our tools to help you with your immigration plan. You can use an immigration calculator, download immigration guides and more.' )
 
     # Gets Situation Form
     template_data['situation_form'] = get_situation_form( request )
@@ -608,11 +690,13 @@ def contracts( request ):
     template_data['situation_form'] = get_situation_form( request )
 
     # Passes services to template
-    template_data['user_services'] = Service.get_listing( request.user.id, False )
-    template_data['provider_services'] = Service.get_listing( request.user.id, True )
+    template_data['provider_order_services'] = Order.get_listing( 'service', request.user.id, True )
+    template_data['user_order_services'] = Order.get_listing( 'service', request.user.id )
+    template_data['user_order_products'] = Order.get_listing( 'product', request.user.id )
 
     # Renders the page
     return render( request, 'site/account/contracts.html', template_data )
+
 
 
 @login_required

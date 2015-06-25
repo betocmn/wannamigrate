@@ -30,5 +30,7 @@ urlpatterns = patterns('',
     # Order Confirmation Page
     url( r'^confirmation/$', views.confirmation, name = 'confirmation' ),
 
+    # Download Order page
+    url( r'^order/download/(?P<order_id_64>[0-9A-Za-z_\-]+)/(?P<user_id_64>[0-9A-Za-z_\-]+)/(?P<product_id_64>[0-9A-Za-z_\-]+)/(?P<external_code_64>[0-9A-Za-z_\-]+)/$', views.order_download, name = 'order_download' ),
 
 )

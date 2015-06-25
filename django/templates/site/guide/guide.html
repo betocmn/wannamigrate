@@ -1,0 +1,328 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "common/jquery-ui/css/ui-wannamigrate/jquery-ui.css" %}" />
+
+{% endblock head %}
+
+
+{% block content %}
+
+    <section class="step-by-step">
+
+        {% if country_name == 'canada' %}
+
+            <div class="top">
+                <div class="top_left">
+                    <div class="title">
+                        {% blocktrans %}
+                            Step-by-Step to Canada
+                        {% endblocktrans %}
+                    </div>
+                    <div class="text">
+                        {% blocktrans %}
+                            <span>Canada</span> receives around 250 thousand new immigrants
+                            every year. It is a rich and big country with a small population, so immigration
+                            is very well organized and encouraged.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <img src="{% static 'site/img/canada-step-by-step.jpg' %}" alt="{% trans "Canada" %}">
+            </div>
+            <div class="clearfix"></div>
+            <div class="steps">
+                <div class="title">
+                    {% trans "1 - Define your goal:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        First of all you need to decide what you want to do in Canada:
+                        <ul>
+                            <li>To work and live permanently</li>
+                            <li>To study abroad</li>
+                            <li>To work temporarily</li>
+                            <li>To do business</li>
+                        </ul>
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "2 - Identify the appropriate visa type for your situation:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        If you want to <span>live permanently in Canada</span> you have the following options:
+                        <ul>
+                            <li>Skilled Immigrants</li>
+                            <li>Skilled Immigrants (Quebec only)</li>
+                            <li>Caregivers</li>
+                            <li>Business (Self-Employed, Start-up Visa or Investors)</li>
+                            <li>Family sponsorship</li>
+                            <li>Provincial nominees</li>
+                        </ul>
+                        If you are going <span>to study in Canada</span> you will need a study permit.  You may be able to get the permit to work 20 hours per week.
+                        <br /><br />
+                        If you need to <span>work or do business temporarily</span>, you will just need to apply for a temporary visa which lets you do your work while in Canada.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "3 - Get the documents to prove your education degree:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        To validate you education degree in Canada you need to do an <span>ECA – Education Credential Assessment</span>.
+                        <br /><br />
+                        This will demonstrate that your studies are equivalent and recognized in Canada.
+                        <br /><br />
+                        You will need your academic records and certifications.  These need to be translated to English or French.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "4 - Get your foreign language certificate:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Unless you are going as a student to learn <span>English or French</span>, you will need to prove
+                        your skills in one of the two languages.
+                        <br /><br />
+                        This is done by providing a certificate with your test results for one of the following exams:
+                        <ul>
+                            <li>Celpip (English)</li>
+                            <li>IELTS (English)</li>
+                            <li>TEF (French)</li>
+                        </ul>
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "5 - Get the documents to prove your work experience:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        In some immigration applications you will need to prove your work experience time.
+                        <br /><br />
+                        This is done by providing official <span>letters from the companies you worked for</span>, which should
+                        have the period you worked there, your exact occupation, duties and a full description.
+                        <br /><br />
+                        Each letter should also have the contact details of the company and the person who wrote it.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "6 - Get other documents:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Additionally you will need:
+                        <ul>
+                            <li>Passport & Photos</li>
+                            <li>Spouse or De-Facto Relationship proofs (if any)</li>
+                            <li>Proof of funds (bank statements, etc...)</li>
+                            <li>Medical and Police certificates</li>
+                        </ul>
+                        All documents need to be translated to either English or French.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "7 - Make your visa application:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Once you have all the above complete, you can send your application.
+                        <br /><br />
+                        Most of the applications can be done online or by paper.
+                        <br /><br />
+                        Start your application: <a href="http://www.cic.gc.ca/english/immigrate/apply.asp" target="_blank">http://www.cic.gc.ca/english/immigrate/apply.asp</a>
+                    {% endblocktrans %}
+                </div>
+            </div>
+
+        {% elif country_name == 'australia' %}
+
+            <div class="top">
+                <div class="top_left">
+                    <div class="title">
+                        {% blocktrans %}
+                            Step-by-Step to Australia
+                        {% endblocktrans %}
+                    </div>
+                    <div class="text">
+                        {% blocktrans %}
+                            <span>Australia</span> is known for its high quality of life and its paradise
+                            scenarios. The country has a strong economy but a shortage of professionals, that's
+                            why new immigrants are more than welcome!
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <img src="{% static 'site/img/australia-step-by-step.jpg' %}" alt="{% trans "Australia" %}">
+            </div>
+            <div class="clearfix"></div>
+            <div class="steps">
+
+                <div class="title">
+                    {% trans "Information coming soon!" %}
+                </div>
+                <div class="text">
+                    {% trans "We are updating this section. Come back in 24 hours." %}
+                </div>
+
+                <!--
+                <div class="title">
+                    {% trans "1 - Define your goal:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        First of all you need to decide what you want to do in Canada:
+                        <ul>
+                            <li>To work and live permanently</li>
+                            <li>To study abroad</li>
+                            <li>To work temporarily</li>
+                            <li>To do business</li>
+                        </ul>
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "2 - Identify the appropriate visa type for your situation:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        If you want to <span>live permanently in Canada</span> you have the following options:
+                        <ul>
+                            <li>Skilled Immigrants</li>
+                            <li>Skilled Immigrants (Quebec only)</li>
+                            <li>Caregivers</li>
+                            <li>Business (Self-Employed, Start-up Visa or Investors)</li>
+                            <li>Family sponsorship</li>
+                            <li>Provincial nominees</li>
+                        </ul>
+                        If you are going <span>to study in Canada</span> you will need a study permit.  You may be able to get the permit to work 20 hours per week.
+                        <br /><br />
+                        If you need to <span>work or do business temporarily</span>, you will just need to apply for a temporary visa which lets you do your work while in Canada.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "3 - Get the documents to prove your education degree:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        To validate you education degree in Canada you need to do an <span>ECA – Education Credential Assessment</span>.
+                        <br /><br />
+                        This will demonstrate that your studies are equivalent and recognized in Canada.
+                        <br /><br />
+                        You will need your academic records and certifications.  These need to be translated to English or French.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "4 - Get your foreign language certificate:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Unless you are going as a student to learn <span>English or French</span>, you will need to prove
+                        your skills in one of the two languages.
+                        <br /><br />
+                        This is done by providing a certificate with your test results for one of the following exams:
+                        <ul>
+                            <li>Celpip (English)</li>
+                            <li>IELTS (English)</li>
+                            <li>TEF (French)</li>
+                        </ul>
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "5 - Get the documents to prove your work experience:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        In some immigration applications you will need to prove your work experience time.
+                        <br /><br />
+                        This is done by providing official <span>letters from the companies you worked for</span>, which should
+                        have the period you worked there, your exact occupation, duties and a full description.
+                        <br /><br />
+                        Each letter should also have the contact details of the company and the person who wrote it.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "6 - Get other documents:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Additionally you will need:
+                        <ul>
+                            <li>Passport & Photos</li>
+                            <li>Spouse or De-Facto Relationship proofs (if any)</li>
+                            <li>Proof of funds (bank statements, etc...)</li>
+                            <li>Medical and Police certificates</li>
+                        </ul>
+                        All documents need to be translated to either English or French.
+                    {% endblocktrans %}
+                </div>
+
+                <div class="title">
+                    {% trans "7 - Make your visa application:" %}
+                </div>
+                <div class="text">
+                    {% blocktrans %}
+                        Once you have all the above complete, you can send your application.
+                        <br /><br />
+                        Most of the applications can be done online or by paper.
+                        <br /><br />
+                        Start your application: <a href="http://www.cic.gc.ca/english/immigrate/apply.asp" target="_blank">http://www.cic.gc.ca/english/immigrate/apply.asp</a>
+                    {% endblocktrans %}
+                </div>
+                -->
+
+            </div>
+
+
+        {% endif %}
+
+        <div class="back">
+            <a href="{% url 'site:dashboard' %}">{% trans 'Go back to dashboard' %}</a>
+        </div>
+
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // accordion (tabs in horizontal)
+            $( "div.steps" ).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

@@ -16,31 +16,44 @@
 {% block content %}
 
     <div class="content payment">
-        <div class="professional">
-            <div class="top">
-                <h2 class="title">{% trans 'Hiring Professional' %}</h2>
-            </div>
-            <div class="identity">
-                <div class="thumb">
-                    {% if provider.user.userpersonal.avatar %}
-                        <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
-                    {% else %}
-                        <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
-                    {% endif %}
+
+        {% if is_service %}
+
+            <div class="professional">
+                <div class="top">
+                    <h2 class="title">{% trans 'Hiring Professional' %}</h2>
                 </div>
-                <div class="data-professional">
-                    <strong class="name">{{ provider.display_name }}</strong>
-                    <p class="expert">{{ provider.headline }}</p>
-                    <div class="rate" data-score="{{ provider.review_score }}">
-                        <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
+                <div class="identity">
+                    <div class="thumb">
+                        {% if provider.user.userpersonal.avatar %}
+                            <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
+                        {% else %}
+                            <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
+                        {% endif %}
+                    </div>
+                    <div class="data-professional">
+                        <strong class="name">{{ provider.display_name }}</strong>
+                        <p class="expert">{{ provider.headline }}</p>
+                        <div class="rate" data-score="{{ provider.review_score }}">
+                            <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="services tooltip" title="{% trans service_type.description %}">
-            <h2 class="title">{% trans 'Service' %}</h2>
-            <strong class="service {{ service_type.icon_css_class }}">{% trans service_type.name %}</strong>
-        </div>
+            <div class="services tooltip" title="{% trans service_type.description %}">
+                <h2 class="title">{% trans 'Service' %}</h2>
+                <strong class="service {{ service_type.icon_css_class }}">{% trans service_type.name %}</strong>
+            </div>
+
+        {% else %}
+
+            <div class="services tooltip" title="{% trans product.description %}">
+                <h2 class="title">{% trans 'Product' %}</h2>
+                <strong class="service {{ product.icon_css_class }}">{% trans product.name %}</strong>
+            </div>
+
+        {% endif %}
+
         <div class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">

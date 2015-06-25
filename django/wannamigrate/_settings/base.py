@@ -100,6 +100,10 @@ UPLOAD_USER_PICTURE_FOLDER = 'user_pictures'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join( BASE_DIR, '..', 'static' )
 
+# Products for download
+DOWNLOAD_PRODUCT_ROOT = os.path.join( STATIC_ROOT, 'download', 'product' )
+DOWNLOAD_PRODUCT_FOLDER = 'product'
+
 # Templates
 TEMPLATE_DIRS = (
     os.path.join( BASE_DIR, '..', 'templates' ),
