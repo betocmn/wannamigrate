@@ -270,6 +270,7 @@ DEFAULT_APPS = (
 THIRD_PARTY_APPS = (
     'social.apps.django_app.default',
     'stdimage',
+    'djcelery',
 )
 LOCAL_APPS = (
     'wannamigrate.core',
@@ -439,3 +440,12 @@ ID_SERVICE_STATUS_CANCELLED = 4
 CORE_CONVERSATION_STATUS_INBOX_ID = 1
 CORE_CONVERSATION_STATUS_OUTBOX_ID = 2
 CORE_CONVERSATION_STATUS_ARCHIVE_ID = 3
+
+
+
+
+########################################
+# Celery settings
+#######################################
+CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+CELERY_RESULT_BACKEND='djcelery.backends.cache:CacheBackend'
