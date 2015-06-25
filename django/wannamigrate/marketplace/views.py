@@ -10,7 +10,7 @@ the templates on the marketplace app
 ##########################
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
@@ -26,6 +26,13 @@ from wannamigrate.site.views import get_situation_form
 from django.conf import settings
 from django.db.models import F
 from django.db import transaction
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.utils.http import urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.core.servers.basehttp import FileWrapper
+import datetime
 
 
 
@@ -159,7 +166,7 @@ def profile( request, user_id, name ):
 #######################
 # PAYMENT PAGE
 #######################
-@login_required
+@login_required( login_url = 'site:signup' )
 def payment( request ):
     """
     Payment page for hiring a professional
@@ -168,10 +175,13 @@ def payment( request ):
     :return: String - The html page rendered
     """
 
-    # Only allows if coming from form submission on view professional page
+    # Only allows if coming from form submission on a page that set a session
     if ( 'payment' not in request.session or not request.session['payment'] ) \
-        or ( 'service' not in request.session['payment'] or not request.session['payment']['service'] ):
+        or ( 'service' not in request.session['payment'] and 'product' not in request.session['payment'] ):
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # defines if it's a service or product
+    is_service = 'service' in request.session['payment']
 
     # Initializes template data dictionary
     template_data = {}
@@ -186,17 +196,24 @@ def payment( request ):
     # If form was submitted
     if request.method == 'POST':
 
-        # Passes order info for for
+        # Creates order information dictionary (will be used on form)
         payment_info = {
             'payment_type': request.POST.get( 'payment_type', '' ),
             'token': request.POST.get( 'token', '' ),
             'user': request.user,
-            'provider': request.session['payment']['provider'],
-            'service_type': request.session['payment']['service_type'],
-            'provider_service_type': request.session['payment']['provider_service_type'],
-            'service': request.session['payment']['service'],
-            'service_type_category': request.session['payment']['service_type'].service_type_category
+            'is_service': is_service
         }
+        if is_service:
+            payment_info['provider'] = request.session['payment']['provider']
+            payment_info['service_type'] = request.session['payment']['service_type']
+            payment_info['provider_service_type'] = request.session['payment']['provider_service_type']
+            payment_info['service'] = request.session['payment']['service']
+            payment_info['service_type_category'] = request.session['payment']['service_type'].service_type_category
+        else:
+            payment_info['product'] = request.session['payment']['product']
+            payment_info['product_category'] = request.session['payment']['product'].product_category
+
+        # Instantiates form passing the payment info
         form = PaymentForm( request.POST, payment_info = payment_info )
 
         # if payment was authorized
@@ -208,24 +225,16 @@ def payment( request ):
 
                 # Adds additional data to payment_info
                 payment_info['order'] = order
-                if 'url' in form.payment_api_result:
-                    payment_info['url'] = form.payment_api_result['url']
+                payment_info['url'] = form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
 
-                # Sends Order Confirmation email to USER
-                # TODO Change this to a celery/signal background task
-                service_type = request.session['payment']['provider_service_type'].service_type
-                Mailer.send_order_confirmation_user( request.user, order, payment_info )
-
-                # Sends Order Confirmation email to PROVIDER
-                # TODO Change this to a celery/signal background task
-                Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order, payment_info )
-
-                # Redirect to confirmation page
+                # Redirects to confirmation page
                 request.session['payment'] = {}
                 request.session['order_confirmation'] = {
-                    'order_id': order.id,
+                    'order': order,
+                    'is_service': is_service,
+                    'payment_info': payment_info,
                     'payment_type': payment_info['payment_type'],
-                    'url': form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
+                    'boleto_url': form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
                 }
                 return HttpResponseRedirect( reverse( 'marketplace:confirmation' ) )
 
@@ -234,15 +243,20 @@ def payment( request ):
 
     # passes data to template
     template_data['form'] = form
+    template_data['is_service'] = is_service
     template_data['situation_form'] = get_situation_form( request )
-    template_data['total_price'] = request.session['payment']['provider_service_type'].price
-    template_data['provider'] = request.session['payment']['provider']
-    template_data['service_type'] = request.session['payment']['service_type']
     template_data['payment_api_account_id'] = settings.PAYMENT_API_ACCOUNT_ID
     template_data['payment_api_test_mode'] = True if settings.PAYMENT_API_MODE != 'LIVE' else False
+    if is_service:
+        template_data['total_price'] = request.session['payment']['provider_service_type'].price
+        template_data['provider'] = request.session['payment']['provider']
+        template_data['service_type'] = request.session['payment']['service_type']
+    else:
+        template_data['total_price'] = request.session['payment']['product'].price
+        template_data['product'] = request.session['payment']['product']
 
     # Prints Template
-    return render( request, 'marketplace/service/payment.html', template_data )
+    return render( request, 'marketplace/order/payment.html', template_data )
 
 
 
@@ -267,10 +281,21 @@ def confirmation( request ):
     # Save session and kills it, allowing 1 access only
     order_info = request.session['order_confirmation']
     request.session['order_confirmation'] = {}
-    
-    # Gets order detail
-    order = get_object_or_404( Order, pk = order_info['order_id'] )
 
+    # Sends Order Confirmation email to USER
+    # TODO Change this to a celery/signal background task
+    Mailer.send_order_confirmation_user( request.user, order_info['order'], order_info['payment_info'] )
+
+    # Sends Order Confirmation email to PROVIDER
+    # TODO Change this to a celery/signal background task
+    if order_info['is_service']:
+        Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order_info['order'], order_info['payment_info'] )
+
+    # Sends Order download link to USER (if it's a product)
+    # TODO Change this to a celery/signal background task
+    if not order_info['is_service'] and order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+        Mailer.send_order_download_link( request.user, order_info['order'] )
+    
     # Initializes template data dictionary
     template_data = {}
 
@@ -280,28 +305,85 @@ def confirmation( request ):
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_order_received'] = True
-    template_data['track_conversion_value'] = float( order.net_total ) * float( 0.05 )
+    template_data['track_conversion_value'] = float( order_info['order'].net_total ) * float( 0.05 )
 
     # Defines message and status
-    if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
+    if order_info['order'].order_status_id == settings.ID_ORDER_STATUS_PENDING:
         template_data['message_text'] = _( "Your order was <span>received</span> and will be processed soon." )
         template_data['message_css_class'] = ""
-    elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
         template_data['message_text'] = _( "Your order was <span>approved</span>." )
         template_data['message_css_class'] = "approved"
-    elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
+    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_DENIED:
         template_data['message_text'] = _( "Your order was <span>denied</span>." )
         template_data['message_css_class'] = "denied"
-    elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
+    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
         template_data['message_text'] = _( "Your order was <span>cancelled</span>." )
         template_data['message_css_class'] = "denied"
-    elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
+    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
         template_data['message_text'] = _( "Your order was <span>refunded</span>." )
         template_data['message_css_class'] = "approved"
 
-    # If there's a URL for boleto
+    # If there's an URL for boleto
     if order_info['payment_type'] == 'boleto':
-        template_data['boleto_url'] = order_info['url']
+        template_data['boleto_url'] = order_info['boleto_url']
+
+    # If there's a product with approved order, we add the download link
+    if not order_info['is_service'] and order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+        base_secure_url = settings.BASE_URL_SECURE
+        order_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].pk ) )
+        user_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].user_id ) )
+        product_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].product_id ) )
+        external_code_64 = urlsafe_base64_encode( force_bytes( order_info['order'].external_code ) )
+        template_data['download_url'] = base_secure_url + reverse( 'marketplace:order_download', args = ( order_id_64, user_id_64, product_id_64, external_code_64 ) )
 
     # Prints Template
-    return render( request, 'marketplace/service/confirmation.html', template_data )
+    return render( request, 'marketplace/order/confirmation.html', template_data )
+
+
+
+@sensitive_post_parameters()
+@never_cache
+def order_download( request, order_id_64, user_id_64, product_id_64, external_code_64 ):
+    """
+    Page to download a PDF (product) ordered. Users receive this link in an email, after
+    a successful order.
+
+    It should be valid for 72 hours after the last update date of the order.
+
+    :param: request
+    :param: order_id_64
+    :param: user_id_64
+    :param: product_id_64
+    :param: external_code_64
+    :return: String - The html page rendered
+    """
+
+    # Tries to find user by the uid given
+    order_id = urlsafe_base64_decode( order_id_64 )
+    user_id = urlsafe_base64_decode( user_id_64 )
+    product_id = urlsafe_base64_decode( product_id_64 )
+    external_code = urlsafe_base64_decode( external_code_64 )
+
+    # Searches for order
+    order = Order.objects.filter(
+        pk = order_id,
+        order_status_id = settings.ID_ORDER_STATUS_APPROVED,
+        user_id = user_id,
+        product_id = product_id,
+        external_code = external_code,
+        modified_date__range = ( datetime.date.today(), datetime.date.today() + datetime.timedelta( days = 4 ) ) #we put 4 here because it uses 00:00:00 of the last day
+    ).first()
+    if not order:
+        raise Http404
+
+    # Gets file from the purchased product_id
+    product_folder = str( order.product_id )
+    path = settings.DOWNLOAD_PRODUCT_ROOT + '/' + product_folder + '/ebook.zip'
+    download_file = open( path, 'rb' )
+    download_file = FileWrapper( download_file )
+
+    # gives the file for download to the browser
+    response = HttpResponse( download_file, content_type = 'application/force-download' )
+    response['Content-Disposition'] = 'attachment; filename="%s"' % 'ebook.zip'
+    return response

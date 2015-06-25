@@ -111,11 +111,11 @@ class Mailer( object ):
         :param: user
         """
 
-        # create token
+        # creates token
         token_generator = PasswordResetTokenGenerator()
         token = token_generator.make_token( user )
 
-        # build link
+        # builds link
         base_secure_url = settings.BASE_URL_SECURE
         uid = urlsafe_base64_encode( force_bytes( user.pk ) )
         link = base_secure_url + reverse( 'site:reset_password', args = ( uid, token, ) )
@@ -176,16 +176,13 @@ class Mailer( object ):
         elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
             message = _( "Your order was refunded." )
 
-        template_data = {
-            'boleto_url': order_info['url'] if order_info['payment_type'] == 'boleto' else '',
-            'provider_service_type': order_info['provider_service_type'],
-            'order': order,
-            'service_type': order_info['service_type'],
-            'service_type_category': order_info['service_type_category'],
-            'provider': order_info['provider'],
-            'message': message,
-            'user': user,
-        }
+        # passes data to template
+        template_data = order_info
+        template_data['boleto_url'] = order_info['url'] if order_info['payment_type'] == 'boleto' else ''
+        template_data['order'] = order
+        template_data['message'] = message
+        template_data['user'] = user
+
         body = Mailer.build_body_from_template( 'emails/order_confirmation_user.html', template_data )
         return Mailer.send( _( 'Your Order Details' ), body, user.email, None, None, settings.EMAIL_NOTIFICATION_NEW_ORDER )
 
@@ -228,6 +225,32 @@ class Mailer( object ):
         }
         body = Mailer.build_body_from_template( 'emails/order_confirmation_provider.html', template_data )
         return Mailer.send( 'Service Requested', body, provider_user.email )
+
+
+    @staticmethod
+    def send_order_download_link( user, order ):
+        """
+        Sends order download link to user
+
+        :param: user
+        :param: order
+        """
+
+        # passes data to template
+        template_data = {}
+        template_data['order'] = order
+        template_data['user'] = user
+
+        # Creates the download link
+        base_secure_url = settings.BASE_URL_SECURE
+        order_id_64 = urlsafe_base64_encode( force_bytes( order.pk ) )
+        user_id_64 = urlsafe_base64_encode( force_bytes( order.user_id ) )
+        product_id_64 = urlsafe_base64_encode( force_bytes( order.product_id ) )
+        external_code_64 = urlsafe_base64_encode( force_bytes( order.external_code ) )
+        template_data['download_link'] = base_secure_url + reverse( 'marketplace:order_download', args = ( order_id_64, user_id_64, product_id_64, external_code_64 ) )
+
+        body = Mailer.build_body_from_template( 'emails/order_download_link.html', template_data )
+        return Mailer.send( _( 'Your Download Link' ), body, user.email, None, None, settings.EMAIL_NOTIFICATION_NEW_ORDER )
 
 
     @staticmethod

@@ -1,0 +1,46 @@
+{% extends "_layouts/email.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+
+    <tr>
+        <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
+          <center>
+            <table cellspacing="0" cellpadding="0" width="600" class="w320">
+              <tr>
+                <td class="header-lg">
+                  {% trans 'Your Download Link' %}</td>
+              </tr>
+              <tr>
+                <td class="free-text">
+                    {% if user.name %}
+                        {% trans 'Hello,' %} {{ user.name|capfirst }}.
+                    {% endif %}
+                    <br />
+                    <strong>{% trans "This is your download link for your recent order on Wanna Migrate." %}</strong>
+                    <br />
+                    {% trans "It will be valid for 3 days. Click the button below or copy this URL:" %} {{ download_link }}
+                </td>
+              </tr>
+              <tr>
+                <td class="button">
+                  <div><!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ download_link }}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#28b187">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">{% trans 'Download Now' %}</center>
+                    </v:roundrect>
+                  <![endif]-->
+                      <a class="button-mobile" href="{{ download_link }}" style="background-color:#28b187;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">
+                        {% trans 'Download Now' %}
+                      </a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </center>
+        </td>
+    </tr>
+
+{% endblock content %}

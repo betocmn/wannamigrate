@@ -4,7 +4,7 @@
         <a href="{% url 'site:account' %}" class="interaction-link bt-profile {% if account_menu_selected %}active{% endif %}">{% trans 'My profile' %}</a>
     </li>
     <li class="interaction-item">
-        <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts {% if contracts_menu_selected %}active{% endif %}">{% trans 'My contracts' %}</a>
+        <a href="{% url 'site:contracts' %}" class="interaction-link bt-contracts {% if contracts_menu_selected %}active{% endif %}">{% trans 'My orders' %}</a>
     </li>
     <li class="interaction-item">
         <a href="{% url 'site:list_conversations' %}" class="interaction-link bt-inbox {% if inbox_menu_selected %}active{% endif %}">{% trans 'Inbox' %}</a>

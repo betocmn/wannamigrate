@@ -38,10 +38,12 @@ $(function() {
     // $scope is an object that references the elements in the implementation of the DOM structure.
     var $scope = {
         html : $('html'),
+        body : $('body'),
         header : $('header'),
         logo : $('.logo'),
         shadow : $('.shadow'),
         btMyAccount : $('.my-account.options'),
+        btNotify : $('.my-notification.options'),
 
         nav: {
             this: $('.nav'),
@@ -93,6 +95,7 @@ $(function() {
 
         situations: {
             situation: $('.situation'),
+            situationOptions: $('.situation-options'),
             changeSituation: $('.change-situation')
         }
     }
@@ -301,11 +304,15 @@ $(function() {
         events: function(){
             $scope.boxOptions.btOptions.click(function(event) {
                 event.preventDefault();
-
                 dashboard.boxOptions.showBox($(this));
             });
 
             $scope.btMyAccount.click(function(event) {
+                event.preventDefault();
+                dashboard.boxOptions.showBox($(this));
+            });
+
+            $scope.btNotify.click(function(event) {
                 event.preventDefault();
                 dashboard.boxOptions.showBox($(this));
             });
@@ -347,6 +354,8 @@ $(function() {
         events: function(){
             $scope.changeSituation.btChangeSituation.click(function(event) {
                 event.preventDefault();
+                $scope.body.addClass('full');
+                $scope.situations.situationOptions.fadeOut();
                 $scope.situations.situation.fadeOut();
                 $scope.situations.changeSituation.fadeIn();
 

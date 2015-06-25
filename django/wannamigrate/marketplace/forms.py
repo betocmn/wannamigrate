@@ -82,6 +82,18 @@ class PaymentForm( BaseForm ):
         if not cleaned_data['payment_type'] or cleaned_data['payment_type'] not in ['boleto', 'credit-card']:
             raise forms.ValidationError( _( "Invalid Payment Method." ) )
 
+        # Build items list
+        if self.payment_info['is_service']:
+            items = [{ 'description': self.payment_info['service_type'].name,
+                       'quantity': 1,
+                       'price': self.payment_info['provider_service_type'].price
+            }]
+        else:
+            items = [{ 'description': self.payment_info['product'].name,
+                       'quantity': 1,
+                       'price': self.payment_info['product'].price
+            }]
+
         # makes payment
         payment_processor = PaymentProcessor()
         payment_api_result = payment_processor.charge(
@@ -89,25 +101,25 @@ class PaymentForm( BaseForm ):
             token = self.payment_info['token'],
             email = self.payment_info['user'].email,
             discount = 0,
-            items = [{ 'description': self.payment_info['service_type'].name,
-                       'quantity': 1,
-                       'price': self.payment_info['provider_service_type'].price
-            }]
+            items = items
         )
 
         # Passes result to private attribute
         self.payment_api_result = payment_api_result
 
-        # updates service status
-        self.payment_info['service'].service_status_id = ServiceStatus.get_status_from_order_status( payment_api_result['order_status_id'] )
-        self.payment_info['service'].save()
+        # If it's a service, do some required actions
+        if self.payment_info['is_service']:
 
-        # inserts first service_history
-        service_history = ServiceHistory()
-        service_history.service_id = self.payment_info['service'].id
-        service_history.service_status_id = self.payment_info['service'].service_status_id
-        service_history.user_id = self.payment_info['service'].user_id
-        service_history.save()
+            # updates service status
+            self.payment_info['service'].service_status_id = ServiceStatus.get_status_from_order_status( payment_api_result['order_status_id'] )
+            self.payment_info['service'].save()
+
+            # inserts first service_history
+            service_history = ServiceHistory()
+            service_history.service_id = self.payment_info['service'].id
+            service_history.service_status_id = self.payment_info['service'].service_status_id
+            service_history.user_id = self.payment_info['service'].user_id
+            service_history.save()
 
         # If payment was not authorized, raise ERROR
         if not payment_api_result['success']:
@@ -124,18 +136,28 @@ class PaymentForm( BaseForm ):
         :return: Dictionary
         """
 
+        # Configure variables for service or product
+        if self.payment_info['is_service']:
+            price = self.payment_info['provider_service_type'].price
+            description = self.payment_info['service_type'].name
+        else:
+            price = self.payment_info['product'].price
+            description = self.payment_info['product'].name
 
         # inserts details on order table
         order = Order()
-        order.gross_total = self.payment_info['provider_service_type'].price
-        order.net_total = self.payment_info['provider_service_type'].price
-        order.description = self.payment_info['service_type'].name
+        order.gross_total = price
+        order.net_total = price
+        order.description = description
         order.discount = 0
         order.fees = 0
         order.installments = 1
         order.external_code = self.payment_api_result['external_code']
         order.order_status_id = self.payment_api_result['order_status_id']
-        order.service = self.payment_info['service']
+        if self.payment_info['is_service']:
+            order.service = self.payment_info['service']
+        else:
+            order.product = self.payment_info['product']
         order.user = self.payment_info['user']
         order.save()
 

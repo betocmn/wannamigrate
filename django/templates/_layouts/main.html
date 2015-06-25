@@ -12,7 +12,6 @@
 
             <!-- Css files -->
             <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
-            <link rel="stylesheet" href="{% static "site/css/extra.css"%}" />
             <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/dd.css"%}" />
             <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/flags.css"%}" />
             <link rel="stylesheet" href="{% static "common/font-awesome/css/font-awesome.css" %}" />
@@ -30,69 +29,71 @@
 
             {% block background %}{% endblock background %}
 
-            {% block header %}
             <header>
-                <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
-                <a href="#" class="bt-nav">Menu</a>
-                <div class="interaction">
-                    <nav class="nav nav-dashboard">
-                        <ul>
-                            <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Q&A" %}</a></li>
-                            <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'site:tools' %}">{% trans "Extra Tools" %}</a></li>
-                        </ul>
-                    </nav>
-                    <form action="" class="search">
-                        <a href="#" class="bt-back"></a>
-                        <fieldset>
-                            <label for="search">{% trans "Search" %}</label>
-                            <input class="search-input" type="text" placeholder="{% trans "Search" %}">
-                            <button class="bt-search">{% trans "Search" %}</button>
-                        </fieldset>
-                    </form>
-                    <div class="account category">
 
-                        {% if user.is_authenticated %}
-                            <a href="#" class="my-account options">
-                                {% if user.userpersonal.avatar %}
-                                    <div class="thumb">
-                                        <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="photo" />
-                                    </div>
-                                {% else %}
-                                    <div class="thumb">
-                                        <img src="{% static 'site/img/thumb-account.png' %}" alt="photo" />
-                                    </div>
-                                {% endif %}
-                                <span>{% trans 'My Profile' %}</span>
+                {% block header %}
+                    <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
+                    <a href="#" class="bt-nav">Menu</a>
+                    <div class="interaction">
+                        <nav class="nav nav-dashboard">
+                            <ul>
+                                <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Q&A" %}</a></li>
+                                <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'marketplace:professionals' %}">{% trans "Professionals" %}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'site:tools' %}">{% trans "Immi Box" %}</a></li>
+                            </ul>
+                        </nav>
+                        <form action="" class="search">
+                            <a href="#" class="bt-back"></a>
+                            <fieldset>
+                                <label for="search">{% trans "Search" %}</label>
+                                <input class="search-input" type="text" placeholder="{% trans "Search" %}">
+                                <button class="bt-search">{% trans "Search" %}</button>
+                            </fieldset>
+                        </form>
+                        <div class="account category">
+
+                            {% if user.is_authenticated %}
+                                <a href="#" class="my-account options">
+                                    {% if user.userpersonal.avatar %}
+                                        <div class="thumb">
+                                            <img src="{{ user.userpersonal.avatar.thumbnail.url }}" alt="{% trans 'user-avatar' %}" />
+                                        </div>
+                                    {% else %}
+                                        <div class="thumb">
+                                            <img src="{% static 'site/img/thumb-account.png' %}" alt="{% trans 'user-avatar' %}" />
+                                        </div>
+                                    {% endif %}
+                                    <span>{% trans 'My Profile' %}</span>
+                                </a>
+                                <div class="box-options box-account">
+                                    <ul class="box">
+                                        <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'Edit Profile' %}</a></li>
+                                        <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Orders' %}</a></li>
+                                        <li><a class="bt-pricing" href="{% url 'site:list_conversations' %}">{% trans 'My Messages' %}</a></li>
+                                        <li><a class="bt-logout" href="{% url 'site:logout' %}">{% trans 'Logout' %}</a></li>
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <a href="{% url 'site:login' %}" class="my-account login"><span>{% trans 'Login' %}</span></a>
+                            {% endif %}
+                        </div>
+                        <div class="notification category">
+                            <a title="{% trans "View notifications" %}" href="{% url "site:notifications" %}" class="my-notification">
+                                <div class="thumb">
+                                    <img src="{% static 'site/img/notify.png' %}" alt="{% trans 'notifications' %}" />
+                                    {% if user.is_authenticated and request.session.news|length %}
+                                        <p class="notify-qty">{{ request.session.news|length }}</p>
+                                    {% endif %}
+                                </div>
                             </a>
-                            <div class="box-options box-account">
-                                <ul class="box">
-                                    <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'Edit Profile' %}</a></li>
-                                    <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Contracts' %}</a></li>
-                                    <li><a class="bt-pricing" href="{% url 'site:list_conversations' %}">{% trans 'My Messages' %}</a></li>
-                                    <li><a class="bt-logout" href="{% url 'site:logout' %}">{% trans 'Logout' %}</a></li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <a href="{% url 'site:login' %}" class="my-account login"><span>{% trans 'Login' %}</span></a>
-                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                {% if user.is_authenticated %}
-                <a title="{% trans "View notifications" %}" href="{% url "site:notifications" %}" class="bt-notifications">
-                    <span class="notifications-icon fa fa-user"></span>
-                    {% if request.session.news|length %}
-                        <span class="notifications-counter">
-                            {{ request.session.news|length }}
-                        </span>
-                    {% endif %}
-                </a>
-                {% endif %}
+
+                {% endblock header %}
             </header>
+
             <section id="sticky-list" class="topics">
                 <ul>
-
-
                     <li>
                         <strong>A</strong>
                         <ul>
@@ -112,24 +113,51 @@
 
                 </ul>
             </section>
-            {% endblock header %}
 
             {% block situation %}
                 <section class="situations">
                     <div class="situation">
                         <div class="from field">
-                            <p>{% trans "I'm from" %} <i class="flag from-flag {{ request.session.situation.from_country.code.lower }}"></i> <strong class="country from-country">{{ request.session.situation.from_country }}</strong></p>
+                            <p><i class="flag from-flag {{ request.session.situation.from_country.code.lower }}"></i> <strong class="country from-country">{{ request.session.situation.from_country }}</strong></p>
                         </div>
                         <div class="want field">
-                            <p>{% trans "I wanna" %} <strong>{{ request.session.situation.goal }}</strong></p>
+                            <p><strong>{{ request.session.situation.goal }}</strong></p>
                             {% if request.session.situation.total_users > 0 %}
                                 <span class="other-people">{% trans "And other" %} {{ request.session.situation.total_users|kmi }} {% trans "user(s)" %}</span>
                             {% endif %}
                         </div>
                         <div class="to field">
-                            <p>{% trans "in" %} <i class="flag to-flag {{ request.session.situation.to_country.code.lower }}"></i><strong class="country to-country">{{ request.session.situation.to_country }}</strong></p>
+                            <p><i class="flag to-flag {{ request.session.situation.to_country.code.lower }}"></i><strong class="country to-country">{{ request.session.situation.to_country }}</strong></p>
                         </div>
-                        <a href="#" class="bt-change-situation button-transparent">{% trans "Change Situation" %}</a>
+                        <a href="#" class="bt-change-situation button-transparent__edit">{% trans "Change Situation" %}</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="situation-options">
+                        <div class="line"></div>
+                        <div class="situation-options-block">
+                            <a href="{% url 'site:guide' request.session.situation.to_country.name.lower %}" class="left">
+                                <img src="{% static 'site/img/step_1.png' %}" alt="" />
+                                <div class="title">
+                                    {% trans 'Step-by-Step' %}
+                                </div>
+                                <div class="text">
+                                    {% blocktrans %}
+                                    Start here to understand the <br />options you have.
+                                    {% endblocktrans %}
+                                </div>
+                            </a>
+                            <a href="{% url 'site:tools' %}" class="right">
+                                <img src="{% static 'site/img/step_2.png' %}" alt="" />
+                                <div class="title">
+                                    {% trans 'Immi Box' %}
+                                </div>
+                                <div class="text">
+                                    {% blocktrans %}
+                                    Tools to help you with<br />your immigration plan.
+                                    {% endblocktrans %}
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div class="change-situation">
                         <form action="{% url 'site:change_situation' %}" method="post" id="situation_form">
