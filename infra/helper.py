@@ -21,9 +21,9 @@ SERVERS = {
     },
 
     "dev" : {
-        "IP" : "54.213.143.121",         # The IP address of the server.
+        "IP" : "52.24.31.142",         # The IP address of the server.
         "DOMAIN" : "dev.wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "dev.pem",             # The keypair file used to connect to the server.
+        "KEYPAIR" : "development.pem",             # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,         # The HTTP port on the server.
         "HTTPS_PORT" : 443,        # The HTTPS port on the server.
@@ -33,9 +33,21 @@ SERVERS = {
     },
 
     "prod" : {
-        "IP" : "54.148.167.28",         # The IP address of the server.
+        "IP" : "52.27.96.133",         # The IP address of the server.
         "DOMAIN" : "wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "prod.pem",             # The keypair file used to connect to the server.
+        "KEYPAIR" : "production.pem",             # The keypair file used to connect to the server.
+        "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
+        "HTTP_PORT" : 80,         # The HTTP port on the server.
+        "HTTPS_PORT" : 443,        # The HTTPS port on the server.
+        "HTTP_FORWARDED_PORT" : 80,   # The HTTP forwarded port
+        "HTTPS_FORWARDED_PORT" : 443,  # The HTTPS forwarded port
+        "BRANCH" : "master",            # Vagrant server doesn't require git
+    },
+
+    "sup" : {
+        "IP" : "52.24.200.156",         # The IP address of the server.
+        "DOMAIN" : "wannamigrate.com",     # Server's domain name.
+        "KEYPAIR" : "support.pem",             # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,         # The HTTP port on the server.
         "HTTPS_PORT" : 443,        # The HTTPS port on the server.
@@ -584,7 +596,7 @@ def connect( args ):
     """
 
     # The usage regex.
-    usage_pattern = "(local|dev|prod)"
+    usage_pattern = "(local|dev|prod|sup)"
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
@@ -614,7 +626,7 @@ def restart( args ):
     """
 
     # The usage regex.
-    usage_pattern = "(local|dev|prod)"
+    usage_pattern = "(local|dev|prod|sup)"
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
