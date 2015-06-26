@@ -561,7 +561,7 @@ def ebook( request ):
 
     # if language is english, we show warning that only portuguese guides are available for now
     if translation.get_language() == "en":
-        messages.warning( request, "All e-book are in portuguese for now. We will soon release the english versions." )
+        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
 
     # Print Template
     return render( request, 'site/ebook/ebook.html', template_data )
