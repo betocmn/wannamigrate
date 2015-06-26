@@ -47,6 +47,12 @@
         {% csrf_token %}
         <input type="hidden" name="product_id" id="product_id" value="" />
     </form>
+
+    {% if LANGUAGE_CODE == 'en' %}
+        <section class="books_block">
+            {% include "site/_common/status.html" %}
+        </section>
+    {% endif %}
     
     <section class="books_block">
         <div class="left">

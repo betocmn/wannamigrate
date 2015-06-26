@@ -8898,19 +8898,19 @@ msgstr ""
 
 #: wannamigrate/points/views.py:156
 msgid "Edit Personal - Immigration Calculator - Wanna Migrate"
-msgstr "Editar Pessoal - Calculadora de Imigração - Wanna MIgrate"
+msgstr "Editar Pessoal - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:232
 msgid "Edit Language - Immigration Calculator - Wanna Migrate"
-msgstr "Editar Línguas - Calculadora de Imigração - Wanna MIgrate"
+msgstr "Editar Línguas - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:315
 msgid "Edit Education - Immigration Calculator - Wanna Migrate"
-msgstr "Editar Escolaridade - Calculadora de Imigração - Wanna MIgrate"
+msgstr "Editar Escolaridade - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:398
 msgid "Edit Work - Immigration Calculator - Wanna Migrate"
-msgstr "Editar Trabalho - Calculadora de Imigração - Wanna MIgrate"
+msgstr "Editar Trabalho - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:503
 msgid "Select Occupation"
@@ -9311,7 +9311,7 @@ msgstr ""
 
 #: wannamigrate/site/views.py:559
 msgid "E-Books - Immigration Guides - Wanna Migrate"
-msgstr "E-Books - Guias de Imigração - Wanna MIgrate"
+msgstr "E-Books - Guias de Imigração - Wanna Migrate"
 
 #: wannamigrate/site/views.py:560
 msgid ""

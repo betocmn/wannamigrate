@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -24,7 +24,6 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.forms.models import inlineformset_factory
-import math
 from wannamigrate.core.util import (
     get_object_or_false
 )
@@ -35,21 +34,14 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    Country, UserSituation, Goal, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, User, Language, Notification
+    UserSituation, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, Language, Notification
 )
 from wannamigrate.marketplace.models import (
-    Provider, ProviderServiceType, Service, ProviderCountry, ProviderServiceType, Product, ProductCategory,
-    Order, OrderStatus
-)
-from wannamigrate.qa.models import(
-    Question, Topic
+    Provider, ProviderCountry, ProviderServiceType, Product,
+    Order
 )
 from wannamigrate.core.mailer import Mailer
-from django.utils import translation
-from django.core import serializers
 import time
-from PIL import Image
-from django.core.files.base import ContentFile
 from django.utils import timezone, translation
 import pytz
 from django.db.models import Prefetch, Count, F
@@ -563,6 +555,13 @@ def ebook( request ):
 
     # Sets image as preview for sharing (as for facebook, twitter, etc.)
     template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_ebooks'] = True
+
+    # if language is english, we show warning that only portuguese guides are available for now
+    if translation.get_language() == "en":
+        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
 
     # Print Template
     return render( request, 'site/ebook/ebook.html', template_data )
