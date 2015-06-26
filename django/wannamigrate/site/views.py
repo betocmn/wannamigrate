@@ -55,6 +55,7 @@ import pytz
 from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
 from wannamigrate.core.decorators import ajax_login_required
+from django.templatetags.static import static
 
 
 
@@ -559,6 +560,9 @@ def ebook( request ):
     # Overwrites meta title and description (for SEO)
     template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
     template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
 
     # Print Template
     return render( request, 'site/ebook/ebook.html', template_data )
