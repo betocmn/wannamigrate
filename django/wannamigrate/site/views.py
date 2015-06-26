@@ -293,6 +293,7 @@ def signup( request, type = 'user' ):
 
     # passes form to template Forms
     template_data['form'] = form
+    template_data['next'] = request.GET.get( 'next' )
 
     # Prints Template
     return render( request, "site/login/signup.html", template_data )
