@@ -14,7 +14,7 @@ from django.core.management.base import BaseCommand, CommandError
 from wannamigrate.core.models import Country, Language, Goal
 from wannamigrate.points.models import Answer, Occupation, OccupationCategory
 from wannamigrate.qa.models import Topic
-from wannamigrate.marketplace.models import ServiceType, ServiceTypeCategory
+from wannamigrate.marketplace.models import ServiceType, ServiceTypeCategory, Product
 from django.core.files import File
 from django.conf import settings
 import os
@@ -50,6 +50,9 @@ class Command( BaseCommand ):
                 possible_fields = [ 'name' ]
             elif table_name == 'marketplace_servicetype':
                 model = ServiceType
+                possible_fields = [ 'name', 'description' ]
+            elif table_name == 'marketplace_product':
+                model = Product
                 possible_fields = [ 'name', 'description' ]
             elif table_name == 'marketplace_servicetypecategory':
                 model = ServiceTypeCategory

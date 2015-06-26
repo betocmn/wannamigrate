@@ -59,7 +59,7 @@
                     </div>
                     <div class="clear"></div>
 
-                    <a class="switcher button" href="{% url 'site:signup' %}">
+                    <a class="switcher button" href="{% url 'site:signup' %}{% if next %}?next={{next}}{% endif %}">
                         {% trans "Don't have an account? Sign-Up" %}
                     </a>
 
