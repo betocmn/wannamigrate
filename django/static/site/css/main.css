@@ -4199,6 +4199,10 @@ sup{ vertical-align:super; }
   .dashboard .wrapper .content.social .content .question-postList .answers .answer .post {
     width: 100%;
   }
+  .dashboard .wrapper .content.social .aside {
+      margin-top: 20px;
+      margin-left: 140px;
+  }
   .dashboard .wrapper footer {
     display: none;
     overflow: hidden;
@@ -6019,6 +6023,14 @@ sup{ vertical-align:super; }
 .content.social .aside .related-content,
 .content.social .aside .related-professionals {
   padding: 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.content.social .aside .banner-advertising {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -11265,6 +11277,19 @@ ul.notifications-view li.notification-item a.notification-link span.date
   font-family: "open_sansregular";
   font-size: 20px;
   line-height: 32px;
+}
+.dashboard .step-by-step .top .top_left .text.download {
+  color: #87807c;
+  font-size: 16px;
+  margin-top: 15px;
+  font-family: "open_sansbold";
+}
+.dashboard .step-by-step .top .top_left .text.download a {
+  text-decoration: none;
+  color: #4f9276;
+}
+.dashboard .step-by-step .top .top_left .text.download a:hover {
+  text-decoration: underline;
 }
 .dashboard .step-by-step .top .top_left .text span,
 .dashboard .step-by-step .steps .text span{
