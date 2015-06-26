@@ -106,4 +106,10 @@ class SituationLocaleMiddleware( object ):
         if request.user.is_authenticated():
             news = Notification.get_news_for( request.user )
             if news:
+<<<<<<< HEAD
                 request.session['news'] = news
+=======
+                request.session['news'] = news
+            else:
+                request.session['news'] = None
+>>>>>>> dev

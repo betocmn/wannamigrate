@@ -19,7 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 from wannamigrate.core.models import UserPersonal
 from django.http import HttpResponse
 from django.db import models
-
+from django.db.models.query import QuerySet
 
 
 
@@ -350,7 +350,7 @@ def get_internal_section_progress_css_class( percentage ):
 ###########################
 # DEBUGGING FUNCTIONS 
 ###########################
-def dbg( var ):
+def dbg( var, depth = 0 ):
     """
     Show all 'var' content.
     :param: var The variable to be debugged.
@@ -359,33 +359,39 @@ def dbg( var ):
     # Predefined constants
     NEWLINE =  "<br>"
     TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-    
-    debug_str = ''
-    
-    # is an instance of a django model?
+
+    result = ''
+
+    # MODEL
     if isinstance( var, models.Model ):
-
         # Get all members of the class excluding functions and __etc__.
-        members = [ attr for attr in dir(var) if not callable(attr) and not attr.startswith("__") ]
+        fields = [ ( field.name, getattr( var, field.name ) ) for field in var._meta.fields ]
+        result += "{0}[ {1} ( {2} attributes ) ]:{3}".format( ( TAB * depth ), var.__class__.__name__, len( fields ), NEWLINE )
+        result += dbg( fields, depth + 1 )
 
-        debug_str = "[ {0} ( {1} attributes ) ] :{2}".format( var.__class__.__name__, len( members ), NEWLINE )
+    # LIST
+    elif isinstance( var, list ) or isinstance( var, QuerySet ):
+        result += "{0}[ {1} ( {2} items ) ]:{3}".format( ( TAB * depth ), var.__class__.__name__, len( var ), NEWLINE )
+        for m in var:
+            result += dbg( m, depth + 1 )
 
-        for m in members:
-            debug_str += TAB + m + NEWLINE
-    
-    # is list, tuple, dict or set?
-    elif type( var ) in ( list, tuple, dict, set ):
-
-        debug_str = "[ {0} ( {1} attributes ) ] :{2}".format( var.__class__.__name__, len( var ), NEWLINE )
+    # DICT, SET
+    elif isinstance( var, dict ):
+        result += "{0}[ {1} ( {2} attributes ) ]:{3}".format( ( TAB * depth ), var.__class__.__name__, len( var ), NEWLINE )
 
         # Shows all key-values of var.
-        for k,v in var.items():
-            debug_str += "{0}[ {1} ] : {2}{3}".format( TAB, k, v, NEWLINE )
-    # is a primitive...
-    else:
-        debug_str += "({0}) {1}".format( type(var), str( var ) )
+        for k, v in var.items():
+            result += "{0}[ {1} ]: {2}{3}".format( ( TAB * ( depth + 1 ) ), k, dbg( v, depth + 1 ), NEWLINE )
 
-    return HttpResponse( debug_str )
+    # TUPLE
+    elif isinstance( var, tuple ):
+        result += "{0}[ {1} ] : {2}{3}".format( ( TAB * depth ), var[0], dbg( var[1], depth +1 ), NEWLINE )
+
+    # PRIMITIVE
+    else:
+        result += "({0}) {1}".format( var.__class__.__name__, str( var ) ) + NEWLINE
+
+    return result
 
 
 def debug_sql():

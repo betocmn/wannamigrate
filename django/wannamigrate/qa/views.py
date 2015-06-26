@@ -220,7 +220,7 @@ def view_question( request, slug ):
                 Notification.add(
                     _( "New answer to the question " ) + '"' + question.title + '"',
                     reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ),
-                    question.followers.all()
+                    list( question.followers.all() )
                 )
 
                 return HttpResponseRedirect( reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ) )

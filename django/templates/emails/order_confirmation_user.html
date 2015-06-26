@@ -67,11 +67,19 @@
                               <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse:separate !important;">
                                 <tr>
                                   <td class="mini-block">
-                                    <span class="header-sm">{% trans 'Professional' %}</span><br />
-                                    {{ provider.display_name }} <br />
-                                    {{ provider.headline }}<br />
-                                    <br />
-                                    <br />
+                                    {% if is_service %}
+                                        <span class="header-sm">{% trans 'Professional' %}</span><br />
+                                        {{ provider.display_name }} <br />
+                                        {{ provider.headline }}<br />
+                                        <br />
+                                        <br />
+                                    {% else %}
+                                        <span class="header-sm">{% trans 'Download' %}</span><br />
+                                        {% trans "You will receive another email with a download link." %}
+                                        <br />
+                                        <br />
+                                        <br />
+                                    {% endif %}
                                   </td>
                                 </tr>
                               </table>
@@ -116,7 +124,7 @@
                     <table cellspacing="0" cellpadding="0" width="100%">
                       <tr>
                         <td class="title-dark" width="300">
-                           {% trans 'Service' %}
+                           {% trans 'Service/Product' %}
                         </td>
                         <td class="title-dark" width="163">
                            {% trans 'Qty' %}
@@ -127,26 +135,53 @@
                       </tr>
 
 
-                      <tr>
-                        <td class="item-col item">
-                          <table cellspacing="0" cellpadding="0" width="100%">
-                            <tr>
-                              <td class="mobile-hide-img">
-                                <span style="color: #4d4d4d; font-weight:bold;">{% trans service_type_category.name %}</span>
-                                <br />
-                                {% trans service_type.name %}
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="item-col quantity">
-                          1
-                        </td>
-                        <td class="item-col">
-                          R$ {{ provider_service_type.price }}
-                        </td>
-                      </tr>
+                      {% if is_service %}
 
+                          <tr>
+                            <td class="item-col item">
+                              <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="mobile-hide-img">
+
+                                    <span style="color: #4d4d4d; font-weight:bold;">{% trans service_type_category.name %}</span>
+                                    <br />
+                                    {% trans service_type.name %}
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td class="item-col quantity">
+                              1
+                            </td>
+                            <td class="item-col">
+                              R$ {{ provider_service_type.price }}
+                            </td>
+                          </tr>
+
+                      {% else %}
+
+                          <tr>
+                            <td class="item-col item">
+                              <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="mobile-hide-img">
+
+                                    <span style="color: #4d4d4d; font-weight:bold;">{% trans product_category.name %}</span>
+                                    <br />
+                                    {% trans product.name %}
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td class="item-col quantity">
+                              1
+                            </td>
+                            <td class="item-col">
+                              R$ {{ product.price }}
+                            </td>
+                          </tr>
+
+                      {% endif %}
 
                       <tr>
                         <td class="item-col item mobile-row-padding"></td>
@@ -164,9 +199,9 @@
                           <span class="total-space" style="font-weight: bold; color: #4d4d4d">{% trans 'Total' %}</span>
                         </td>
                         <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
-                          <span class="total-space">R$ {{ provider_service_type.price }}</span> <br />
-                          <span class="total-space">R$ 0</span><br />
-                          <span class="total-space" style="font-weight:bold; color: #4d4d4d">R$ {{ provider_service_type.price }}</span>
+                          <span class="total-space">R$ {{ order.gross_total }}</span> <br />
+                          <span class="total-space">R$ {{ order.discount }}</span><br />
+                          <span class="total-space" style="font-weight:bold; color: #4d4d4d">R$ {{ order.net_total }}</span>
                         </td>
                       </tr>
                     </table>

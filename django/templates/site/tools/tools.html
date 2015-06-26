@@ -5,26 +5,33 @@
 {% block content %}
 
     <div class="content extra-tools">
-        <h2 class="title">{% trans 'Extra Tools' context 'Page Title' %}</h2>
+        <h2 class="title">{% trans 'Immi Box' context 'Page Title' %}</h2>
         <div class="tools">
             <div class="tool calculator">
                 <a href="{% url 'points:dashboard' %}">
+                    <img src="{% static 'site/img/tool-imigration-calculator.jpg' %}" alt="{% trans 'immigration calculator' %}" />
                     <h3 class="title-tool">{% trans 'Immigration Points Calculator' %}</h3>
                     <p class="text">{% trans 'Find out if you qualify for a visa to work and live in Canada, Australia and New Zealand.' %}</p>
                 </a>
             </div>
+            <div class="tool ebooks">
+                <a href="{% url 'site:ebook' %}">
+                    <img src="{% static 'site/img/tool-ebooks.jpg' %}" alt="{% trans 'immigration guides' %}" />
+                    <h3 class="title-tool">{% trans 'Immigration Guides' %}</h3>
+                    <p class="text">{% trans 'Download our complete step-by-step immigration guides.' %}</p>
+                </a>
+            </div>
             <div class="tool unavailable find-jobs">
+                <img src="{% static 'site/img/tool-find-jobs.jpg' %}" alt="{% trans 'find jobs' %}" />
                 <h3 class="title-tool">{% trans 'Find Jobs Overseas' %}</h3>
                 <p class="text">{% trans 'Get exposed to international employers and receive notifications about new job openings.' %}</p>
             </div>
             <div class="tool unavailable genius">
+                <img src="{% static 'site/img/tool-genius.jpg' %}" alt="{% trans 'immigration genius' %}" />
                 <h3 class="title-tool">{% trans 'Immigration Genius' %}</h3>
                 <p class="text">{% trans 'Answer some questions and get a final destination where you should live and can get a visa.' %}</p>
             </div>
-            <div class="tool unavailable ebooks">
-                <h3 class="title-tool">{% trans 'E-Books' %}</h3>
-                <p class="text">{% trans 'Download our complete step-by-step immigration guides.' %}</p>
-            </div>
+
         </div>
     </div>
 
