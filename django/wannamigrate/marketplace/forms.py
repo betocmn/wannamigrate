@@ -10,7 +10,7 @@ Form definitions used by views/templates from the site app
 from django import forms
 from django.forms import TextInput, PasswordInput
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
 from wannamigrate.marketplace.models import (
     Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType
@@ -84,12 +84,12 @@ class PaymentForm( BaseForm ):
 
         # Build items list
         if self.payment_info['is_service']:
-            items = [{ 'description': self.payment_info['service_type'].name,
+            items = [{ 'description': ugettext( self.payment_info['service_type'].name ),
                        'quantity': 1,
                        'price': self.payment_info['provider_service_type'].price
             }]
         else:
-            items = [{ 'description': self.payment_info['product'].name,
+            items = [{ 'description': ugettext( self.payment_info['product'].name ),
                        'quantity': 1,
                        'price': self.payment_info['product'].price
             }]
@@ -148,7 +148,7 @@ class PaymentForm( BaseForm ):
         order = Order()
         order.gross_total = price
         order.net_total = price
-        order.description = description
+        order.description = ugettext( description )
         order.discount = 0
         order.fees = 0
         order.installments = 1
