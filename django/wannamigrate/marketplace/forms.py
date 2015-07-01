@@ -10,7 +10,7 @@ Form definitions used by views/templates from the site app
 from django import forms
 from django.forms import TextInput, PasswordInput
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
 from wannamigrate.marketplace.models import (
     Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType
@@ -46,7 +46,7 @@ class PaymentForm( BaseForm ):
 
     # Form elements
     token = forms.CharField( required = False, widget = forms.HiddenInput() )
-    payment_type = forms.CharField( required = False, widget = forms.HiddenInput() )
+    payment_type_id = forms.IntegerField( required = False, widget = forms.HiddenInput() )
 
     def __init__( self, *args, **kwargs ):
         """
@@ -79,17 +79,17 @@ class PaymentForm( BaseForm ):
             raise forms.ValidationError( _( "Payment information missing." ) )
 
         # If no payment-method was selected
-        if not cleaned_data['payment_type'] or cleaned_data['payment_type'] not in ['boleto', 'credit-card']:
+        if not cleaned_data['payment_type_id'] or cleaned_data['payment_type_id'] not in [ 1, 2 ]:
             raise forms.ValidationError( _( "Invalid Payment Method." ) )
 
         # Build items list
         if self.payment_info['is_service']:
-            items = [{ 'description': self.payment_info['service_type'].name,
+            items = [{ 'description': ugettext( self.payment_info['service_type'].name ),
                        'quantity': 1,
                        'price': self.payment_info['provider_service_type'].price
             }]
         else:
-            items = [{ 'description': self.payment_info['product'].name,
+            items = [{ 'description': ugettext( self.payment_info['product'].name ),
                        'quantity': 1,
                        'price': self.payment_info['product'].price
             }]
@@ -97,7 +97,7 @@ class PaymentForm( BaseForm ):
         # makes payment
         payment_processor = PaymentProcessor()
         payment_api_result = payment_processor.charge(
-            method = 'bank_slip' if cleaned_data['payment_type'] == 'boleto' else '',
+            method = 'bank_slip' if cleaned_data['payment_type_id'] == 2 else '',
             token = self.payment_info['token'],
             email = self.payment_info['user'].email,
             discount = 0,
@@ -123,6 +123,7 @@ class PaymentForm( BaseForm ):
 
         # If payment was not authorized, raise ERROR
         if not payment_api_result['success']:
+            #raise forms.ValidationError( _( "Payment not authorized. " + payment_api_result['full_api_response'] ) )
             raise forms.ValidationError( _( "Payment not authorized." ) )
 
         return cleaned_data
@@ -148,7 +149,7 @@ class PaymentForm( BaseForm ):
         order = Order()
         order.gross_total = price
         order.net_total = price
-        order.description = description
+        order.description = ugettext( description )
         order.discount = 0
         order.fees = 0
         order.installments = 1
@@ -159,6 +160,8 @@ class PaymentForm( BaseForm ):
         else:
             order.product = self.payment_info['product']
         order.user = self.payment_info['user']
+        order.payment_type_id = self.payment_info['payment_type_id']
+        order.boleto_url = self.payment_api_result['url'] if self.cleaned_data['payment_type_id'] == 2 and 'url' in self.payment_api_result else ''
         order.save()
 
         # inserts first order_history

@@ -183,6 +183,32 @@ class PaymentProcessor( object ):
         return int( result )
 
 
+    def get_order_status_id( self, api_status ):
+        """
+        Returns order_status_id accordingly to the API status passed
+
+        :param: api_status
+        :return: Int
+        """
+        # Creates URL with the correct action
+        if api_status == 'pending':
+            order_status_id = settings.ID_ORDER_STATUS_PENDING
+        elif api_status == 'paid':
+            order_status_id = settings.ID_ORDER_STATUS_APPROVED
+        elif api_status == 'canceled':
+            order_status_id = settings.ID_ORDER_STATUS_CANCELLED
+        elif api_status == 'partially_paid':
+            order_status_id = settings.ID_ORDER_STATUS_PENDING
+        elif api_status == 'refunded':
+            order_status_id = settings.ID_ORDER_STATUS_REFUNDED
+        elif api_status == 'expired':
+            order_status_id = settings.ID_ORDER_STATUS_CANCELLED
+        else:
+            order_status_id = settings.ID_ORDER_STATUS_PENDING
+
+        return order_status_id
+
+
     def format_response( self, text, status_on_success ):
         """
         Receives UTF-8 json-text response, proccess it, formates it and return as

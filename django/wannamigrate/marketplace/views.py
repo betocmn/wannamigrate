@@ -23,6 +23,7 @@ from wannamigrate.marketplace.models import (
 from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
+from wannamigrate.marketplace.payment_processor import PaymentProcessor
 from django.conf import settings
 from django.db.models import F
 from django.db import transaction
@@ -32,6 +33,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.servers.basehttp import FileWrapper
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 
@@ -121,6 +123,7 @@ def profile( request, user_id, name ):
 
         # Cleans payment session
         request.session['payment'] = {}
+        del request.session['payment']
 
         # Identify database record
         provider = Provider.get_profile( user_id )
@@ -181,7 +184,7 @@ def payment( request ):
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # defines if it's a service or product
-    is_service = 'service' in request.session['payment']
+    is_service = True if 'service' in request.session['payment'] else False
 
     # Initializes template data dictionary
     template_data = {}
@@ -198,7 +201,7 @@ def payment( request ):
 
         # Creates order information dictionary (will be used on form)
         payment_info = {
-            'payment_type': request.POST.get( 'payment_type', '' ),
+            'payment_type_id': int( request.POST.get( 'payment_type_id', '' ) ),
             'token': request.POST.get( 'token', '' ),
             'user': request.user,
             'is_service': is_service
@@ -223,19 +226,14 @@ def payment( request ):
                 # Saves all order info
                 order = form.save()
 
-                # Adds additional data to payment_info
-                payment_info['order'] = order
-                payment_info['url'] = form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
-
                 # Redirects to confirmation page
+                del request.session['payment']
                 request.session['payment'] = {}
-                request.session['order_confirmation'] = {
-                    'order': order,
-                    'is_service': is_service,
-                    'payment_info': payment_info,
-                    'payment_type': payment_info['payment_type'],
-                    'boleto_url': form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
-                }
+                request.session['order_confirmation'] = {}
+                request.session['order_confirmation']['order_id'] = order.id
+                request.session['order_confirmation']['is_service'] = is_service
+                request.session['order_confirmation']['payment_type_id'] = payment_info['payment_type_id']
+                request.session['order_confirmation']['url'] = form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
                 return HttpResponseRedirect( reverse( 'marketplace:confirmation' ) )
 
     else:
@@ -274,28 +272,19 @@ def confirmation( request ):
     :return: String - The html page rendered
     """
 
-    # Identify an active session
+    # Identifies an active session
     if 'order_confirmation' not in request.session or not request.session['order_confirmation']:
         return HttpResponseRedirect( reverse( 'site:dashboard' ) )
 
-    # Save session and kills it, allowing 1 access only
+    # Identifies order
+    order = get_object_or_false( Order, pk = request.session['order_confirmation']['order_id'] )
+    if not order:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Saves session and kills it, allowing 1 access only
     order_info = request.session['order_confirmation']
     request.session['order_confirmation'] = {}
 
-    # Sends Order Confirmation email to USER
-    # TODO Change this to a celery/signal background task
-    Mailer.send_order_confirmation_user( request.user, order_info['order'], order_info['payment_info'] )
-
-    # Sends Order Confirmation email to PROVIDER
-    # TODO Change this to a celery/signal background task
-    if order_info['is_service']:
-        Mailer.send_order_confirmation_provider( request.session['payment']['provider'], order_info['order'], order_info['payment_info'] )
-
-    # Sends Order download link to USER (if it's a product)
-    # TODO Change this to a celery/signal background task
-    if not order_info['is_service'] and order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-        Mailer.send_order_download_link( request.user, order_info['order'] )
-    
     # Initializes template data dictionary
     template_data = {}
 
@@ -305,36 +294,36 @@ def confirmation( request ):
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_order_received'] = True
-    template_data['track_conversion_value'] = float( order_info['order'].net_total ) * float( 0.05 )
+    template_data['track_conversion_value'] = float( order.net_total ) * float( 0.05 )
 
     # Defines message and status
-    if order_info['order'].order_status_id == settings.ID_ORDER_STATUS_PENDING:
+    if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
         template_data['message_text'] = _( "Your order was <span>received</span> and will be processed soon." )
         template_data['message_css_class'] = ""
-    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
         template_data['message_text'] = _( "Your order was <span>approved</span>." )
         template_data['message_css_class'] = "approved"
-    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_DENIED:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
         template_data['message_text'] = _( "Your order was <span>denied</span>." )
         template_data['message_css_class'] = "denied"
-    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
         template_data['message_text'] = _( "Your order was <span>cancelled</span>." )
         template_data['message_css_class'] = "denied"
-    elif order_info['order'].order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
+    elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
         template_data['message_text'] = _( "Your order was <span>refunded</span>." )
         template_data['message_css_class'] = "approved"
 
     # If there's an URL for boleto
-    if order_info['payment_type'] == 'boleto':
-        template_data['boleto_url'] = order_info['boleto_url']
+    if order_info['payment_type_id'] == 2:
+        template_data['boleto_url'] = order_info['url']
 
     # If there's a product with approved order, we add the download link
-    if not order_info['is_service'] and order_info['order'].order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+    if not order_info['is_service'] and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
         base_secure_url = settings.BASE_URL_SECURE
-        order_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].pk ) )
-        user_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].user_id ) )
-        product_id_64 = urlsafe_base64_encode( force_bytes( order_info['order'].product_id ) )
-        external_code_64 = urlsafe_base64_encode( force_bytes( order_info['order'].external_code ) )
+        order_id_64 = urlsafe_base64_encode( force_bytes( order.pk ) )
+        user_id_64 = urlsafe_base64_encode( force_bytes( order.user_id ) )
+        product_id_64 = urlsafe_base64_encode( force_bytes( order.product_id ) )
+        external_code_64 = urlsafe_base64_encode( force_bytes( order.external_code ) )
         template_data['download_url'] = base_secure_url + reverse( 'marketplace:order_download', args = ( order_id_64, user_id_64, product_id_64, external_code_64 ) )
 
     # Prints Template
@@ -342,6 +331,69 @@ def confirmation( request ):
 
 
 
+#######################
+# UPDATE ORDER STATUS
+#######################
+@csrf_exempt
+def payment_api_update( request ):
+    """
+    When there's a trigger (update) the payment API sends
+    the data to this view, which needs to run some actions
+    inside.
+
+    :param: request
+    :return: Boolean
+    """
+
+    # If form was submitted
+    if request.method == 'POST' and 'event' in request.POST:
+
+        if 'event' in request.POST and request.POST['event'] == 'invoice.status_changed':
+
+            # gets post data from API request
+            invoice_id = request.POST['data[id]']
+            status = request.POST['data[status]']
+
+            # identifies order by invoice ID
+            order = get_object_or_false( Order, external_code = invoice_id )
+            if not order:
+                return HttpResponse( False )
+
+            # updates status
+            payment_processor = PaymentProcessor()
+            order.order_status_id = payment_processor.get_order_status_id( status )
+            order.save()
+
+            # Gets user and provider from order
+            user = order.user
+            if order.service_id:
+                provider = order.service.provider
+            else:
+                provider = None
+
+            # Sends Order Confirmation email to USER
+            # TODO Change this to a celery/signal background task
+            Mailer.send_order_confirmation_user( user, order, provider )
+
+            # Sends Order Confirmation email to PROVIDER
+            # TODO Change this to a celery/signal background task
+            if order.service_id:
+                Mailer.send_order_confirmation_provider( user, order, provider )
+
+            # Sends Order download link to USER (if it's a product)
+            # TODO Change this to a celery/signal background task
+            if order.product_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+                Mailer.send_order_download_link( user, order )
+
+            return HttpResponse( True )
+
+    return HttpResponse( False )
+
+
+
+#######################
+# ORDER DOWNLOAD
+#######################
 @sensitive_post_parameters()
 @never_cache
 def order_download( request, order_id_64, user_id_64, product_id_64, external_code_64 ):

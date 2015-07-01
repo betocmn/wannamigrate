@@ -154,13 +154,13 @@ class Mailer( object ):
 
 
     @staticmethod
-    def send_order_confirmation_user( user, order, order_info ):
+    def send_order_confirmation_user( user, order, provider = None ):
         """
         Sends order confirmation to user
 
         :param: user
         :param: order
-        :param: order_info
+        :param: provider
         """
         
         # Defines order message accordingly to status
@@ -177,26 +177,28 @@ class Mailer( object ):
             message = _( "Your order was refunded." )
 
         # passes data to template
-        template_data = order_info
-        template_data['boleto_url'] = order_info['url'] if order_info['payment_type'] == 'boleto' else ''
+        template_data = {}
         template_data['order'] = order
         template_data['message'] = message
         template_data['user'] = user
+        template_data['provider'] = provider
+        if order.order_status_id == settings.ID_ORDER_STATUS_PENDING and order.boleto_url:
+            template_data['boleto_url'] = order.boleto_url
 
         body = Mailer.build_body_from_template( 'emails/order_confirmation_user.html', template_data )
         return Mailer.send( _( 'Your Order Details' ), body, user.email, None, None, settings.EMAIL_NOTIFICATION_NEW_ORDER )
 
 
     @staticmethod
-    def send_order_confirmation_provider( provider, order, order_info ):
+    def send_order_confirmation_provider( user, order, provider ):
         """
         Sends order confirmation to provider.
 
         We do NOT use translation here so that it will always be in english
 
-        :param: provider
+        :param: user
         :param: order
-        :param: order_info
+        :param: provider
         """
 
         # Defines order message accordingly to status
@@ -212,19 +214,14 @@ class Mailer( object ):
         elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
             message = "The order was refunded."
 
-        provider_user = provider.user
         template_data = {
-            'provider_service_type': order_info['provider_service_type'],
             'order': order,
-            'service_type': order_info['service_type'],
-            'service_type_category': order_info['service_type_category'],
-            'provider': order_info['provider'],
+            'provider': provider,
             'message': message,
-            'provider_user': provider_user,
-            'user': order_info['user']
+            'user': user,
         }
         body = Mailer.build_body_from_template( 'emails/order_confirmation_provider.html', template_data )
-        return Mailer.send( 'Service Requested', body, provider_user.email )
+        return Mailer.send( 'Service Requested', body, provider.user.email )
 
 
     @staticmethod

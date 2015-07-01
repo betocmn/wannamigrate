@@ -28,6 +28,7 @@ class Order( BaseModel ):
 
     # Model Attributes
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
+    payment_type = models.ForeignKey( 'PaymentType', verbose_name = _( 'payment type' ) )
     promo_code = models.ForeignKey( 'PromoCode', verbose_name = _( 'promo code' ), blank = True, null = True )
     description = models.CharField( _( "description" ), max_length = 100 )
     order_status = models.ForeignKey( 'OrderStatus', verbose_name = _( 'order status' ) )
@@ -40,6 +41,7 @@ class Order( BaseModel ):
     fees = models.DecimalField( _( "fees" ), max_digits = 6, decimal_places = 2 )
     installments = models.SmallIntegerField( _( "installments" ), default = 1 )
     external_code = models.CharField( _( "external code" ), max_length = 100 )
+    boleto_url = models.CharField( _( "boleto url" ), max_length = 200, blank = True, null = True )
 
     # META Options
     class Meta:
@@ -124,6 +126,20 @@ class OrderStatus( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+
+class PaymentType( BaseModel ):
+    """
+    Payment Type - 'credit card', 'boleto', etc..
+    """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 45 )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
 
 
 class Product( BaseModel ):
