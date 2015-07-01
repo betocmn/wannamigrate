@@ -169,7 +169,8 @@ def edit_personal( request ):
     if user_personal:
         user_personal_form = UserPersonalForm( request.POST or None, instance = user_personal )
     else:
-        user_personal_form = UserPersonalForm( request.POST or None, user = request.user )
+        initial_data = { 'australian_regional_immigration': False, 'family_overseas': False }
+        user_personal_form = UserPersonalForm( request.POST or None, user = request.user, initial = initial_data )
 
     # Instantiate UserPersonalFamily Formset
     UserPersonalFamilyInlineFormset = inlineformset_factory( User, UserPersonalFamily, form = UserPersonalFamilyForm, formset = BaseUserPersonalFamilyFormSet, extra = 0, can_delete = True, validate_min = True, min_num = 1 )
@@ -245,7 +246,8 @@ def edit_language( request ):
     if user_language:
         user_language_form = UserLanguageForm( request.POST or None, instance = user_language )
     else:
-        user_language_form = UserLanguageForm( request.POST or None, user = request.user )
+        initial_data = { 'partner_english_level_answer': 896, 'partner_french_level_answer': 900 }
+        user_language_form = UserLanguageForm( request.POST or None, user = request.user, initial = initial_data )
 
     # search for language proficiency
     try:
@@ -328,7 +330,8 @@ def edit_education( request ):
     if user_education:
         user_education_form = UserEducationForm( request.POST or None, instance = user_education )
     else:
-        user_education_form = UserEducationForm( request.POST or None, user = request.user )
+        initial_data = { 'regional_australia_study': False, 'partner_education_level_answer': 904 }
+        user_education_form = UserEducationForm( request.POST or None, user = request.user, initial = initial_data )
 
     # search for education history
     try:
@@ -411,7 +414,12 @@ def edit_work( request ):
     if user_work:
         user_work_form = UserWorkForm( request.POST or None, instance = user_work )
     else:
-        user_work_form = UserWorkForm( request.POST or None, user = request.user )
+        initial_data = {
+            'partner_skills': False, 'willing_to_invest': False, 'canadian_startup_letter': False,
+            'australian_professional_year': False, 'canadian_partner_work_study_experience': False,
+            'work_offer': False
+        }
+        user_work_form = UserWorkForm( request.POST or None, user = request.user, initial = initial_data )
 
     # search for education history
     try:
@@ -531,7 +539,8 @@ def calculate_points( request ):
     immigration_calculator = ImmigrationCalculator( request.user )
 
     # First we get every country with immigration support enabled
-    countries = Country.objects.filter( immigration_enabled = True )
+    countries_list = [settings.ID_COUNTRY_AUSTRALIA, settings.ID_COUNTRY_CANADA, settings.ID_COUNTRY_NEW_ZEALAND]
+    countries = Country.objects.filter( id__in = countries_list )
     for country in countries:
 
         # calculate points for this country

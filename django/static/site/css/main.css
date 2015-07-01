@@ -7537,7 +7537,7 @@ sup{ vertical-align:super; }
 }
 .content.choose-destiny .steps .step.step-three .choose-country p {
   display: block;
-  padding: 20px 0 0 60px;
+  padding: 30px 0 0 60px;
   font-family: 'open_sanslight';
   font-size: 22px;
   color: #888;
@@ -8436,7 +8436,7 @@ sup{ vertical-align:super; }
 .dashboard-edit-forms .content.edit-forms .details {
   width: 28%;
   height: auto;
-  padding: 170px 0 120px;
+  padding: 137px 0 120px;
   margin: 0 auto;
   min-height: 530px;
 }
@@ -8502,10 +8502,9 @@ sup{ vertical-align:super; }
   height: auto;
 }
 .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member strong {
-  display: block;
   height: 42px;
   line-height: 42px;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 0px;
   font-weight: normal;
   font-size: 14px;
   color: #888;
@@ -8551,7 +8550,7 @@ sup{ vertical-align:super; }
   padding: 0 0 5px;
 }
 .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country select {
-  width: 120px;
+  width: 300px;
   padding: 0;
 }
 .dashboard-edit-forms .content.edit-forms .details fieldset .field.family-member .countries .country .bt-delete {
@@ -8976,7 +8975,6 @@ sup{ vertical-align:super; }
 .dashboard-edit-forms .content.edit-forms .details fieldset .field.hinterland .option,
 .dashboard-edit-forms .content.edit-forms .details fieldset .field.commom .option {
   float: left;
-  width: 80px;
   height: 42px;
   line-height: 42px;
 }
@@ -8998,6 +8996,10 @@ sup{ vertical-align:super; }
   font-size: 14px;
   color: #888;
 }
+.dashboard-edit-forms .content.edit-forms .details .question-title {
+  font-family: 'open_sanssemibold';
+  color: #845996 !important;
+}
 .dashboard-edit-forms .content.edit-forms .details fieldset input[type="checkbox"],
 .dashboard-edit-forms .content.edit-forms .details fieldset input[type="radio"] {
   display: block;
@@ -9015,9 +9017,10 @@ sup{ vertical-align:super; }
   bottom: 0;
   padding: 0;
   background-color: #252525;
+  height: 71px;
 }
 .dashboard-edit-forms footer .options-list {
-  width: 405px;
+  width: 450px;
   height: 70px;
   margin: 0 auto;
 }

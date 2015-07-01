@@ -2,6 +2,16 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block body %}
     <body class="dashboard choose dashboard-edit-forms">
 {% endblock body %}
@@ -45,7 +55,7 @@
 
                     <fieldset>
                         <div class="field languages-field">
-                            <strong>{% trans "What languages do you speak (including your native one)?" %}</strong>
+                            <strong class="question-title">{% trans "What languages do you speak (including your native one)?" %}</strong>
                             <div class="languages">
 
                                 {{ user_language_proficiency_formset.management_form }}
@@ -73,12 +83,12 @@
 
                         </div>
                         <div class="field married error-element{% if user_language_form.partner_english_level_answer.errors %} has-error{% endif %}">
-                            <label for="{{ user_language_form.id_for_label }}">{{ user_language_form.partner_english_level_answer.label }}?</label>
+                            <label for="{{ user_language_form.id_for_label }}" class="question-title">{{ user_language_form.partner_english_level_answer.label }}?</label>
                             {{ user_language_form.partner_english_level_answer }}
                             {{ user_language_form.partner_english_level_answer.errors }}
                         </div>
                         <div class="field married error-element{% if user_language_form.partner_french_level_answer.errors %} has-error{% endif %}">
-                            <label for="{{ user_language_form.partner_french_level_answer.id_for_label }}">{{ user_language_form.partner_french_level_answer.label }}?</label>
+                            <label for="{{ user_language_form.partner_french_level_answer.id_for_label }}" class="question-title">{{ user_language_form.partner_french_level_answer.label }}?</label>
                             {{ user_language_form.partner_french_level_answer }}
                             {{ user_language_form.partner_french_level_answer.errors }}
                         </div>
@@ -109,8 +119,8 @@
     {{ block.super }}
 
     <!-- JS Custom Scripts -->
-    <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
     <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -120,9 +130,6 @@
 		 *
 		 */
         $( document ).ready( function() {
-
-            // create custom dropdown for situatino countries
-            $( "div.edit-forms .custom-select" ).msDropdown();
 
             // Submit form when navigating through action links
             $( ".submit-form" ).click( function() {
@@ -153,6 +160,14 @@
                 deleteCssClass: 'bt-delete',
                 addText: '{% trans "add another" %}',
                 deleteText: ''
+            });
+
+            // Activates tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'left',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
             });
 
         });

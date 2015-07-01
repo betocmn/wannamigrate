@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 00:03-0300\n"
+"POT-Creation-Date: 2015-07-01 13:58-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1229,8 +1229,8 @@ msgstr "Samoa Americana"
 #: templates/db_translations/core_country.html:118
 #: templates/db_translations/qa_topic.html:7
 #: templates/points/dashboard/dashboard.html:88
-#: templates/site/guide/guide.html:169 wannamigrate/points/views.py:608
-#: wannamigrate/points/views.py:796 wannamigrate/points/views.py:836
+#: templates/site/guide/guide.html:169 wannamigrate/points/views.py:617
+#: wannamigrate/points/views.py:805 wannamigrate/points/views.py:845
 msgid "Australia"
 msgstr "Austrália"
 
@@ -1290,8 +1290,8 @@ msgstr "Nova Caledônia"
 #: templates/db_translations/core_country.html:132
 #: templates/db_translations/qa_topic.html:9
 #: templates/points/dashboard/dashboard.html:106
-#: wannamigrate/points/views.py:628 wannamigrate/points/views.py:806
-#: wannamigrate/points/views.py:846
+#: wannamigrate/points/views.py:637 wannamigrate/points/views.py:815
+#: wannamigrate/points/views.py:855
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -1598,8 +1598,8 @@ msgstr "Ilhas Virgens Britânicas"
 #: templates/db_translations/core_country.html:205
 #: templates/db_translations/qa_topic.html:8
 #: templates/points/dashboard/dashboard.html:97
-#: templates/site/guide/guide.html:39 wannamigrate/points/views.py:618
-#: wannamigrate/points/views.py:801 wannamigrate/points/views.py:841
+#: templates/site/guide/guide.html:39 wannamigrate/points/views.py:627
+#: wannamigrate/points/views.py:810 wannamigrate/points/views.py:850
 msgid "Canada"
 msgstr "Canadá"
 
@@ -5896,7 +5896,9 @@ msgstr "Download"
 msgid ""
 "You will receive another email with a download link, when the payment is "
 "approved."
-msgstr "Você receberá outro email com o link de download, após a aprovação do pagamento."
+msgstr ""
+"Você receberá outro email com o link de download, após a aprovação do "
+"pagamento."
 
 #: templates/emails/order_confirmation_user.html:97
 msgid "Order Date"
@@ -6745,83 +6747,84 @@ msgstr "Aplicar ao visto"
 msgid "Hire a professional"
 msgstr "Contrate um expert"
 
-#: templates/points/user/edit_education.html:21
+#: templates/points/user/edit_education.html:31
 msgid "Education Details"
 msgstr "Dados de Escolaridade"
 
-#: templates/points/user/edit_education.html:22
-#: templates/points/user/edit_language.html:22
-#: templates/points/user/edit_personal.html:22
-#: templates/points/user/edit_work.html:22
+#: templates/points/user/edit_education.html:32
+#: templates/points/user/edit_language.html:32
+#: templates/points/user/edit_personal.html:32
+#: templates/points/user/edit_work.html:32
 msgid "We need all this information to calculate your points."
 msgstr "Precisamos dessas informações para calcular seus pontos."
 
-#: templates/points/user/edit_education.html:24
-#: templates/points/user/edit_language.html:24
-#: templates/points/user/edit_personal.html:24
-#: templates/points/user/edit_work.html:24
+#: templates/points/user/edit_education.html:34
+#: templates/points/user/edit_language.html:34
+#: templates/points/user/edit_personal.html:34
+#: templates/points/user/edit_work.html:34
 msgid "Save and Exit"
 msgstr "Salvar e Sair"
 
-#: templates/points/user/edit_education.html:35
-#: templates/points/user/edit_language.html:35
-#: templates/points/user/edit_personal.html:35
-#: templates/points/user/edit_work.html:35
+#: templates/points/user/edit_education.html:45
+#: templates/points/user/edit_language.html:45
+#: templates/points/user/edit_personal.html:45
+#: templates/points/user/edit_work.html:45
 msgid "Errors Found!"
 msgstr "Erros Encontrados!"
 
-#: templates/points/user/edit_education.html:48
+#: templates/points/user/edit_education.html:58
 msgid "What are your education degrees?"
 msgstr "Quais diplomas de escolaridade você possui?"
 
-#: templates/points/user/edit_education.html:118
-#: templates/points/user/edit_language.html:97
-#: templates/points/user/edit_personal.html:122
-#: templates/points/user/edit_work.html:202
+#: templates/points/user/edit_education.html:128
+#: templates/points/user/edit_language.html:107
+#: templates/points/user/edit_personal.html:143
+#: templates/points/user/edit_work.html:208
 msgid "PERSONAL"
 msgstr "PESSOAL"
 
-#: templates/points/user/edit_education.html:119
-#: templates/points/user/edit_language.html:98
-#: templates/points/user/edit_personal.html:123
-#: templates/points/user/edit_work.html:203
+#: templates/points/user/edit_education.html:129
+#: templates/points/user/edit_language.html:108
+#: templates/points/user/edit_personal.html:144
+#: templates/points/user/edit_work.html:209
 msgid "LANGUAGE"
 msgstr "LÍNGUAS"
 
-#: templates/points/user/edit_education.html:120
-#: templates/points/user/edit_language.html:99
-#: templates/points/user/edit_personal.html:124
-#: templates/points/user/edit_work.html:204
+#: templates/points/user/edit_education.html:130
+#: templates/points/user/edit_language.html:109
+#: templates/points/user/edit_personal.html:145
+#: templates/points/user/edit_work.html:210
 msgid "EDUCATION"
 msgstr "ESCOLARIDADE"
 
-#: templates/points/user/edit_education.html:121
-#: templates/points/user/edit_language.html:100
-#: templates/points/user/edit_personal.html:125
-#: templates/points/user/edit_work.html:205
+#: templates/points/user/edit_education.html:131
+#: templates/points/user/edit_language.html:110
+#: templates/points/user/edit_personal.html:146
+#: templates/points/user/edit_work.html:211
 msgid "WORK"
 msgstr "TRABALHO"
 
-#: templates/points/user/edit_education.html:175
-#: templates/points/user/edit_language.html:154
-#: templates/points/user/edit_personal.html:156
-#: templates/points/user/edit_work.html:262
+#: templates/points/user/edit_education.html:182
+#: templates/points/user/edit_language.html:161
+#: templates/points/user/edit_personal.html:177
+#: templates/points/user/edit_work.html:242
+#: templates/points/user/edit_work.html:286
 msgid "add another"
 msgstr "adicionar outro"
 
-#: templates/points/user/edit_language.html:21
+#: templates/points/user/edit_language.html:31
 msgid "Language Details"
 msgstr "Dados de Línguas"
 
-#: templates/points/user/edit_language.html:48
+#: templates/points/user/edit_language.html:58
 msgid "What languages do you speak (including your native one)?"
 msgstr "Que línguas você fala (incluindo a sua nativa)?"
 
-#: templates/points/user/edit_personal.html:21
+#: templates/points/user/edit_personal.html:31
 msgid "Personal Details"
 msgstr "Dados Pessoais"
 
-#: templates/points/user/edit_personal.html:81
+#: templates/points/user/edit_personal.html:102
 msgid ""
 "If you have a close family member in either Australia, Canada or New "
 "Zealand, you can get extra points"
@@ -6829,13 +6832,21 @@ msgstr ""
 "Se você tiver um parente próximo na Austrália, Canadá ou Nova Zelândia, "
 "poderá receber pontos extras"
 
-#: templates/points/user/edit_work.html:21
+#: templates/points/user/edit_work.html:31
 msgid "Work Details"
 msgstr "Dados de Trabalho"
 
-#: templates/points/user/edit_work.html:62
+#: templates/points/user/edit_work.html:72
 msgid "Add below your work experiences"
 msgstr "Adicione abaixo suas experiências de trabalho"
+
+#: templates/points/user/edit_work.html:155
+msgid ""
+"Proved Skills: Under 50 yeard old. Competent English. Same skilled "
+"occupation as you."
+msgstr ""
+"Menos de 50 anos de idade. Inglês intermediário. Mesma ocupação "
+"qualificada que a sua."
 
 #: templates/qa/blogpost/add.html:31
 #: templates/qa/question/add_question.html:23
@@ -8786,6 +8797,10 @@ msgstr ""
 msgid "Select Degree"
 msgstr "Selecione Nível"
 
+#: wannamigrate/points/forms.py:353 wannamigrate/points/forms.py:354
+msgid "Select Year"
+msgstr "Selecione Ano"
+
 #: wannamigrate/points/forms.py:364 wannamigrate/points/forms.py:461
 #: wannamigrate/site/forms.py:377
 msgid "Country"
@@ -8916,9 +8931,9 @@ msgstr ""
 "Nova Zelândia - Wanna Migrate"
 
 #: wannamigrate/points/views.py:82 wannamigrate/points/views.py:157
-#: wannamigrate/points/views.py:233 wannamigrate/points/views.py:316
-#: wannamigrate/points/views.py:399 wannamigrate/points/views.py:584
-#: wannamigrate/points/views.py:786 wannamigrate/points/views.py:830
+#: wannamigrate/points/views.py:234 wannamigrate/points/views.py:318
+#: wannamigrate/points/views.py:402 wannamigrate/points/views.py:593
+#: wannamigrate/points/views.py:795 wannamigrate/points/views.py:839
 msgid ""
 "Check your chances of obtaining a permanent visa to move to Canada, "
 "Australia or New Zealand."
@@ -8930,55 +8945,55 @@ msgstr ""
 msgid "Edit Personal - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Pessoal - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:232
+#: wannamigrate/points/views.py:233
 msgid "Edit Language - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Línguas - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:315
+#: wannamigrate/points/views.py:317
 msgid "Edit Education - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Escolaridade - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:398
+#: wannamigrate/points/views.py:401
 msgid "Edit Work - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Trabalho - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:503
+#: wannamigrate/points/views.py:511
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
 
-#: wannamigrate/points/views.py:583
+#: wannamigrate/points/views.py:592
 msgid "Situation - Immigration Calculator - Wanna Migrate"
 msgstr "Situação - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:595
+#: wannamigrate/points/views.py:604
 msgid "You don’t have enough points"
 msgstr "Você não tem pontos suficientes"
 
-#: wannamigrate/points/views.py:659
+#: wannamigrate/points/views.py:668
 msgid "Enough points"
 msgstr "Pontos suficientes"
 
-#: wannamigrate/points/views.py:662
+#: wannamigrate/points/views.py:671
 msgid "Not enough points"
 msgstr "Pontuação Insuficiente"
 
-#: wannamigrate/points/views.py:665
+#: wannamigrate/points/views.py:674
 msgid "Occupation not in demand"
 msgstr "Profissão fora da lista de demanda"
 
-#: wannamigrate/points/views.py:668
+#: wannamigrate/points/views.py:677
 msgid "Age not allowed"
 msgstr "Idade não permitida"
 
-#: wannamigrate/points/views.py:671
+#: wannamigrate/points/views.py:680
 msgid "Language requirements not met"
 msgstr "Requisitos de língua insuficientes"
 
-#: wannamigrate/points/views.py:674
+#: wannamigrate/points/views.py:683
 msgid "Work experience not enough"
 msgstr "Experiência de trabalho insuficiente"
 
-#: wannamigrate/points/views.py:715
+#: wannamigrate/points/views.py:724
 msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
@@ -8988,7 +9003,7 @@ msgstr ""
 "tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
 "naati.com.au/' target='blank'>NAATI</a>"
 
-#: wannamigrate/points/views.py:718
+#: wannamigrate/points/views.py:727
 msgid ""
 "If you can get a job offer from an Australia Employer (<a href='http://www."
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
@@ -8999,7 +9014,7 @@ msgstr ""
 "deverá solicitar que seu empregador faça a requisição do seu visto "
 "patrocinado.  Será mais rápido e barato."
 
-#: wannamigrate/points/views.py:721
+#: wannamigrate/points/views.py:730
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
@@ -9007,7 +9022,7 @@ msgstr ""
 "Você pode receber 5 pontos extras se tiver um esposo(a) (ou união estável) e "
 "ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
 
-#: wannamigrate/points/views.py:724
+#: wannamigrate/points/views.py:733
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
@@ -9015,8 +9030,8 @@ msgstr ""
 "Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
 "no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
-#: wannamigrate/points/views.py:727 wannamigrate/points/views.py:747
-#: wannamigrate/points/views.py:761
+#: wannamigrate/points/views.py:736 wannamigrate/points/views.py:756
+#: wannamigrate/points/views.py:770
 msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
@@ -9024,7 +9039,7 @@ msgstr ""
 "Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
 "para um visto de investidor."
 
-#: wannamigrate/points/views.py:732
+#: wannamigrate/points/views.py:741
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
@@ -9032,7 +9047,7 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha um nível básico de inglês ou francês."
 
-#: wannamigrate/points/views.py:735
+#: wannamigrate/points/views.py:744
 msgid ""
 "You can get 5 extra points if you or your partner/espouse (stable union) "
 "complete any studies or have a past job in Canada."
@@ -9040,11 +9055,11 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha estudado ou trabalho no Canadá."
 
-#: wannamigrate/points/views.py:738
+#: wannamigrate/points/views.py:747
 msgid "You can get 5 extra points if you have a close family member in Canada."
 msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
 
-#: wannamigrate/points/views.py:741
+#: wannamigrate/points/views.py:750
 msgid ""
 "You can get 15 extra points if you can get a job offer from an Canada "
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
@@ -9054,7 +9069,7 @@ msgstr ""
 "uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
 "target='blank'>Procure por Emprego Aqui</a>)."
 
-#: wannamigrate/points/views.py:744
+#: wannamigrate/points/views.py:753
 msgid ""
 "Each state of canada has its own additional immigration program, usually "
 "easier to get in. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
@@ -9064,13 +9079,13 @@ msgstr ""
 "normalmente são mais facilitados. (<a href='http://www.immigration-quebec."
 "gouv.qc.ca/en/' target='blank'>Confira a do estado de Québec</a>)."
 
-#: wannamigrate/points/views.py:752
+#: wannamigrate/points/views.py:761
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
 msgstr ""
 "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
-#: wannamigrate/points/views.py:755
+#: wannamigrate/points/views.py:764
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
@@ -9078,7 +9093,7 @@ msgstr ""
 "Você pode receber 20 pontos extras se seu esposo(a) (ou união estável) tiver "
 "uma profissãoqualificada ou uma proposta de trabalho."
 
-#: wannamigrate/points/views.py:758
+#: wannamigrate/points/views.py:767
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."
@@ -9086,17 +9101,17 @@ msgstr ""
 "Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de "
 "emprego) em uma parte interiorana da Nova Zelândia."
 
-#: wannamigrate/points/views.py:764
+#: wannamigrate/points/views.py:773
 msgid ""
 "<strong>Congratulations!</strong> You have enough points to apply for a visa"
 msgstr ""
 "<strong>Parabéns!</strong> Você tem pontos suficientes para aplicar ao visto"
 
-#: wannamigrate/points/views.py:785
+#: wannamigrate/points/views.py:794
 msgid "Visa Application - Immigration Calculator - Wanna Migrate"
 msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:829
+#: wannamigrate/points/views.py:838
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
