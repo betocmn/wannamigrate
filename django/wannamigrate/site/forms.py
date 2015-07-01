@@ -81,9 +81,9 @@ class SituationForm( BaseModelForm ):
     Form for visitors or logged users on landing-page and top of dashboard
     """
 
-    from_country = CountryChoiceField( queryset = Country.objects.all(), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country' } ) )
-    to_country = CountryImmigrationChoiceField( queryset = Country.objects.filter( immigration_enabled = True ), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country' } ) )
-    goal = GoalChoiceField( queryset = Goal.objects.filter( is_active = True ), empty_label = _( 'Select Goal' ), widget = forms.Select( attrs = { 'class': 'custom-select' } ) )
+    from_country = CountryChoiceField( queryset = Country.objects.all(), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country', 'autocomplete': 'off' } ) )
+    to_country = CountryImmigrationChoiceField( queryset = Country.objects.filter( immigration_enabled = True ), empty_label = _( 'Select Country' ), widget = forms.Select( attrs = { 'class': 'custom-select country', 'autocomplete': 'off' } ) )
+    goal = GoalChoiceField( queryset = Goal.objects.filter( is_active = True ), empty_label = _( 'Select Goal' ), widget = forms.Select( attrs = { 'class': 'custom-select', 'autocomplete': 'off' } ) )
 
     class Meta:
         model = Situation

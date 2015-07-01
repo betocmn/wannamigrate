@@ -59,7 +59,7 @@ os.environ['wsgi.url_scheme'] = 'https'
 #########################################
 LANGUAGES = (
     ( 'en', _( 'English' ) ),
-    ( 'pt', 'Português' ),
+    ( 'pt', _( 'Portuguese' ) ),
 )
 
 LANGUAGE_CODE = 'en'
