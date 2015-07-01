@@ -34,6 +34,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.servers.basehttp import FileWrapper
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone, translation
 import datetime
 
 
@@ -370,6 +371,10 @@ def payment_api_update( request ):
                 provider = order.service.provider
             else:
                 provider = None
+
+            # sets user language
+            translation.activate( user.preferred_language )
+            request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
 
             # Sends Order Confirmation email to USER
             # TODO Change this to a celery/signal background task

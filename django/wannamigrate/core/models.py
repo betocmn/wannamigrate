@@ -243,7 +243,7 @@ class UserManager( BaseUserManager ):
     User Manager - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
     """
 
-    def create_user( self, email, name = None, password = None ):
+    def create_user( self, email, name = None, password = None, language = None, timezone = None ):
         """
         Creates and saves a User with the given email, name and password.
 
@@ -264,6 +264,8 @@ class UserManager( BaseUserManager ):
 
         # inserts user
         user.set_password( password )
+        user.preferred_language = language
+        user.preferred_timezone = timezone
         user.is_superuser = False
         user.is_admin = False
         user.is_active = True

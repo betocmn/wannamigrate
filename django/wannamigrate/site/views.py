@@ -111,10 +111,19 @@ def change_situation( request ):
         request.session['situation']['goal'] = situation.goal
         request.session['situation']['total_users'] = situation.total_users
 
-        # Set portuguese language if from_country uses it as native language
+        # Sets language accordingly to FROM Country
         if situation.from_country.code.lower() in settings.COUNTRIES_BY_LANGUAGE['pt']:
-            translation.activate( 'pt' )
-            request.session[translation.LANGUAGE_SESSION_KEY] = 'pt'
+            language = 'pt'
+        else:
+            language = 'en'
+
+        # Updates current and preferred language
+        if language != translation.get_language():
+            translation.activate( language )
+            request.session[translation.LANGUAGE_SESSION_KEY] = language
+            if request.user.is_authenticated():
+                request.user.preferred_language = language
+                request.user.save()
 
     # Redirects to dashboard
     return HttpResponseRedirect( reverse( 'site:dashboard' ) )
@@ -256,7 +265,13 @@ def signup( request, type = 'user' ):
         password = form.cleaned_data['password']
 
         # Creates user
-        user = get_user_model().objects.create_user( email, name = name, password = password )
+        user = get_user_model().objects.create_user(
+            email,
+            name = name,
+            password = password,
+            language = translation.get_language(),
+            timezone = 'America/Sao_Paulo'
+        )
 
         if user is not None:
 
@@ -1221,6 +1236,11 @@ def set_lang( request, language_code ):
     # Activates language
     translation.activate( language_code )
     request.session[translation.LANGUAGE_SESSION_KEY] = language_code
+
+    # If user is logged-in, we update his preferred language
+    if request.user.is_authenticated():
+        request.user.preferred_language = language_code
+        request.user.save()
 
     return redirect( settings.BASE_URL_SECURE + next )
 
