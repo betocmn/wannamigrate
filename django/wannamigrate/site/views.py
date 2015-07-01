@@ -201,6 +201,8 @@ def login( request ):
         if user is not None and user.is_active:
             # Login Successfully
             auth_login( request, user )
+            translation.activate( user.preferred_language )
+            request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
             if 'next' in request.GET:
                 return HttpResponseRedirect( request.GET.get( 'next' ) )
             return HttpResponseRedirect( reverse( "site:dashboard" ) )

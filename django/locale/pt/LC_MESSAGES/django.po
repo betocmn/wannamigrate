@@ -6328,7 +6328,7 @@ msgstr "de"
 #: templates/points/dashboard/dashboard.html:41
 #: templates/site/account/view.html:53
 msgid "Language"
-msgstr "Línguas"
+msgstr "Idioma"
 
 #: templates/points/country/situation.html:57
 #: templates/points/dashboard/dashboard.html:54
@@ -6814,11 +6814,11 @@ msgstr "adicionar outro"
 
 #: templates/points/user/edit_language.html:31
 msgid "Language Details"
-msgstr "Dados de Línguas"
+msgstr "Dados de Idioma"
 
 #: templates/points/user/edit_language.html:58
 msgid "What languages do you speak (including your native one)?"
-msgstr "Que línguas você fala (incluindo a sua nativa)?"
+msgstr "Que idiomas você fala (incluindo a sua nativa)?"
 
 #: templates/points/user/edit_personal.html:31
 msgid "Personal Details"
@@ -6863,7 +6863,7 @@ msgstr "Escreva o que deseja"
 
 #: templates/qa/blogpost/add.html:49
 msgid "Select the language of your post"
-msgstr "Selecione a língua do post"
+msgstr "Selecione o idioma do post"
 
 #: templates/qa/blogpost/add.html:53
 msgid "Add topics to your post"
@@ -7042,7 +7042,7 @@ msgstr "O que deseja saber?"
 
 #: templates/qa/question/add_question.html:37
 msgid "Select the language of your question"
-msgstr "Selecione a língua da sua pergunta"
+msgstr "Selecione o idioma da sua pergunta"
 
 #: templates/qa/question/add_question.html:42
 msgid "Add topics to your question"
@@ -8336,7 +8336,7 @@ msgstr "idioma"
 
 #: wannamigrate/core/models.py:495
 msgid "language level"
-msgstr "nível na língua"
+msgstr "nível no idioma"
 
 #: wannamigrate/core/models.py:510
 msgid "is logout"
@@ -8384,7 +8384,7 @@ msgstr "porcentagem - pessoal"
 
 #: wannamigrate/core/models.py:606
 msgid "percentage language"
-msgstr "porcentagem - línguas"
+msgstr "porcentagem - idioma"
 
 #: wannamigrate/core/models.py:607
 msgid "percentage education"
@@ -8777,7 +8777,7 @@ msgstr ""
 #: wannamigrate/points/forms.py:212
 msgctxt "Singular"
 msgid "Language"
-msgstr "Língua"
+msgstr "Idioma"
 
 #: wannamigrate/points/forms.py:219 wannamigrate/points/forms.py:357
 msgid "Level"
@@ -8785,7 +8785,7 @@ msgstr "Nível"
 
 #: wannamigrate/points/forms.py:297
 msgid "You must choose different languages."
-msgstr "Você precisa escolher línguas diferentes."
+msgstr "Você precisa escolher idiomas diferentes."
 
 #: wannamigrate/points/forms.py:311
 msgid "If you have a partner/spouse, what is his/her highest Degree"
@@ -8858,7 +8858,7 @@ msgstr "máx de pontos - pessoal"
 
 #: wannamigrate/points/models.py:49
 msgid "max language points"
-msgstr "máx de pontos - línguas"
+msgstr "máx de pontos - idioma"
 
 #: wannamigrate/points/models.py:50 wannamigrate/points/models.py:51
 msgid "max education points"
@@ -8912,7 +8912,7 @@ msgstr "pontuação - pessoal"
 
 #: wannamigrate/points/models.py:201
 msgid "score language"
-msgstr "pontuação - línguas"
+msgstr "pontuação - idioma"
 
 #: wannamigrate/points/models.py:202
 msgid "score education"
@@ -8947,7 +8947,7 @@ msgstr "Editar Pessoal - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:233
 msgid "Edit Language - Immigration Calculator - Wanna Migrate"
-msgstr "Editar Línguas - Calculadora de Imigração - Wanna Migrate"
+msgstr "Editar Idioma - Calculadora de Imigração - Wanna Migrate"
 
 #: wannamigrate/points/views.py:317
 msgid "Edit Education - Immigration Calculator - Wanna Migrate"
@@ -8987,7 +8987,7 @@ msgstr "Idade não permitida"
 
 #: wannamigrate/points/views.py:680
 msgid "Language requirements not met"
-msgstr "Requisitos de língua insuficientes"
+msgstr "Requisitos de idioma insuficientes"
 
 #: wannamigrate/points/views.py:683
 msgid "Work experience not enough"
