@@ -348,7 +348,7 @@ def payment_api_update( request ):
     # If form was submitted
     if request.method == 'POST' and 'event' in request.POST:
 
-        if 'event' in request.POST and request.POST['event'] == 'invoice.status_changed':
+        if 'event' in request.POST and request.POST['event'] in ['invoice.status_changed', 'invoice.created']:
 
             # gets post data from API request
             invoice_id = request.POST['data[id]']
