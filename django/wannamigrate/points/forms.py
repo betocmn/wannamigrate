@@ -49,7 +49,7 @@ class UserPersonalForm( BaseModelForm ):
         model = UserPersonal
         fields = [ 'birth_date', 'australian_regional_immigration', 'gender', 'country', 'family_overseas' ]
         widgets = {
-            'birth_date': SelectDateWidget( years = range( 1940, date.today().year - 15 ), attrs = { 'class': 'custom-select' } ),
+            'birth_date': SelectDateWidget( years = range( 1940, date.today().year - 15 ), attrs = { 'class': 'default-select' } ),
             'gender': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'australian_regional_immigration': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
             'family_overseas': RadioSelect( attrs = { 'class': 'css-checkbox' } ),
@@ -164,14 +164,14 @@ class UserLanguageForm( BaseModelForm ):
         label = _( "If you have a partner/spouse, what is his/her ENGLISH Level" ),
         queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_ENGLISH ),
         empty_label = _( 'Select Level' ),
-        widget = forms.Select( attrs = { 'class' : 'custom-select' } )
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
     )
     partner_french_level_answer = ModelChoiceField(
         required = False,
         label = _( "If you have a partner/spouse, what is his/her FRENCH Level" ),
         queryset = Answer.objects.filter( question_id = settings.ID_QUESTION_PARTNER_FRENCH ),
         empty_label = _( 'Select Level' ),
-        widget = forms.Select( attrs = { 'class' : 'custom-select' } )
+        widget = forms.Select( attrs = { 'class' : 'default-select' } )
     )
 
     class Meta:
@@ -350,8 +350,8 @@ class UserEducationHistoryForm( BaseModelForm ):
     Form for USER EDUCATION HISTORY data (degrees of education)
     """
 
-    YEARS_START = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
-    YEARS_END = ( ( '', 'Select Year' ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 5 ) )
+    YEARS_START = ( ( '', _( 'Select Year' ) ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 1 ) )
+    YEARS_END = ( ( '', _( 'Select Year' ) ), ) + tuple( ( str( n ), str( n ) ) for n in range( 1960, date.today().year + 5 ) )
 
     education_level_answer = ModelChoiceField(
         required = True, label = _( "Level" ),

@@ -2,6 +2,16 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block body %}
     <body class="dashboard choose dashboard-edit-forms">
 {% endblock body %}
@@ -55,7 +65,7 @@
                         </div>
                         -->
                         <div class="field gender error-element{% if user_personal_form.gender.errors %} has-error{% endif %}">
-                            <span>{{ user_personal_form.gender.label }}:</span>
+                            <span class="question-title">{{ user_personal_form.gender.label }}:</span>
                             {% for radio in user_personal_form.gender %}
                                 {% if radio.choice_label != '---------' %}
                                     <div class="{% if forloop.last %}female{% else %}male{% endif %}">
@@ -67,19 +77,29 @@
                             {{ user_personal_form.gender.errors }}
                         </div>
                         <div class="field birth error-element{% if user_personal_form.birth_date.errors %} has-error{% endif %}">
-                            <label for="{{ user_personal_form.birth_date.id_for_label }}">{{ user_personal_form.birth_date.label }}:</label>
+                            <label for="{{ user_personal_form.birth_date.id_for_label }}" class="question-title">{{ user_personal_form.birth_date.label }}:</label>
                             {{ user_personal_form.birth_date }}
                             {{ user_personal_form.birth_date.errors }}
                         </div>
                         <div class="field country error-element{% if user_personal_form.country.errors %} has-error{% endif %}">
-                            <label for="{{ user_personal_form.country.id_for_label }}">{{ user_personal_form.country.label }}:</label>
+                            <label for="{{ user_personal_form.country.id_for_label }}" class="question-title">{{ user_personal_form.country.label }}:</label>
                             {{ user_personal_form.country }}
                             {{ user_personal_form.country.errors }}
                         </div>
+                        <div class="field hinterland error-element{% if user_personal_form.australian_regional_immigration.errors %} has-error{% endif %}">
+                            <span class="question-title">{{ user_personal_form.australian_regional_immigration.label }}?</span>
+                            {% for radio in user_personal_form.australian_regional_immigration %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_personal_form.australian_regional_immigration.errors }}
+                        </div>
                         <div class="field family-member error-element{% if user_personal_form.family_overseas.errors %} has-error{% endif %}">
-                            <strong>{{ user_personal_form.family_overseas.label }}?</strong>
-                            &nbsp;<i class="hint fa fa-question-circle" title="{% trans "If you have a close family member in either Australia, Canada or New Zealand, you can get extra points" %}"></i>
-
+                            <strong class="question-title">{{ user_personal_form.family_overseas.label }}?&nbsp;&nbsp;<i class="tooltip hint fa fa-question-circle" title="{% trans "If you have a close family member in either Australia, Canada or New Zealand, you can get extra points" %}"></i></strong>
                             <div class="clear"></div>
 
                             {% for radio in user_personal_form.family_overseas %}
@@ -107,6 +127,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </fieldset>
                 </div>
             </form>
@@ -134,8 +155,8 @@
     {{ block.super }}
 
     <!-- JS Custom Scripts -->
-    <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
     <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -167,9 +188,6 @@
 		 */
         $( document ).ready( function() {
 
-            // create custom dropdown for situatino countries
-            $( "div.edit-forms .custom-select" ).msDropdown();
-
             // Submit form when navigating through action links
             $( ".submit-form" ).click( function() {
 
@@ -189,7 +207,6 @@
                 // submit form
                 $( '#main_form').submit();
 
-
 			});
 
             // Hide or Show personal family overseas options
@@ -197,6 +214,14 @@
                 toggle_family_overseas_container();
             });
             toggle_family_overseas_container()
+
+            // Activates tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'left',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
+            });
 
         });
 

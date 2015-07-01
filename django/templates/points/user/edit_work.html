@@ -2,6 +2,16 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom JS Libraries -->
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/tooltipster.css"%}" />
+    <link rel="stylesheet" type="text/css" href="{% static "common/jquery-tooltipster/css/themes/tooltipster-wannamigrate.css"%}" />
+
+{% endblock head %}
+
 {% block body %}
     <body class="dashboard choose dashboard-edit-forms">
 {% endblock body %}
@@ -45,7 +55,7 @@
 
                     <fieldset>
                         <div class="field occupation-field error-element{% if user_work_form.occupation.errors %} has-error{% endif %}">
-                            <strong>{{ user_work_form.occupation.label }}?</strong>
+                            <strong class="question-title">{{ user_work_form.occupation.label }}?</strong>
                             <div class="occupation">
                                 <label for="{{ user_work_form.occupation_category.id_for_label }}">Category</label>
                                 {{ user_work_form.occupation_category }}
@@ -59,7 +69,7 @@
                         </div>
 
                         <div class="field works-field">
-                            <strong>{% trans "Add below your work experiences" %}:</strong>
+                            <strong class="question-title">{% trans "Add below your work experiences" %}:</strong>
 
                             <div class="works">
 
@@ -91,7 +101,7 @@
                         </div>
 
                         <div class="field commom error-element{% if user_work_form.willing_to_invest.errors %} has-error{% endif %}">
-                            <span>{{ user_work_form.willing_to_invest.label }}?</span>
+                            <span class="question-title">{{ user_work_form.willing_to_invest.label }}?</span>
                             {% for radio in user_work_form.willing_to_invest %}
                                 {% if radio.choice_label != '---------' %}
                                     <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
@@ -103,7 +113,7 @@
                             {{ user_work_form.willing_to_invest.errors }}
                         </div>
                         <div class="field commom error-element{% if user_work_form.canadian_startup_letter.errors %} has-error{% endif %}">
-                            <span>{{ user_work_form.canadian_startup_letter.label }}?</span>
+                            <span class="question-title">{{ user_work_form.canadian_startup_letter.label }}?</span>
                             {% for radio in user_work_form.canadian_startup_letter %}
                                 {% if radio.choice_label != '---------' %}
                                     <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
@@ -115,7 +125,7 @@
                             {{ user_work_form.canadian_startup_letter.errors }}
                         </div>
                         <div class="field commom error-element{% if user_work_form.australian_professional_year.errors %} has-error{% endif %}">
-                            <span>{{ user_work_form.australian_professional_year.label }}?</span>
+                            <span class="question-title">{{ user_work_form.australian_professional_year.label }}?</span>
                             {% for radio in user_work_form.australian_professional_year %}
                                 {% if radio.choice_label != '---------' %}
                                     <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
@@ -126,10 +136,37 @@
                             {% endfor %}
                             {{ user_work_form.australian_professional_year.errors }}
                         </div>
-                        <div class="field family-member error-element{% if user_work_form.work_offer.errors %} has-error{% endif %}">
-                            <strong style="padding-left: 0px;">{{ user_work_form.work_offer.label }}?</strong>
 
-                            <div class="clear"></div>
+                        <div class="field commom error-element{% if user_work_form.canadian_partner_work_study_experience.errors %} has-error{% endif %}">
+                            <span class="question-title">{{ user_work_form.canadian_partner_work_study_experience.label }}?</span>
+                            {% for radio in user_work_form.canadian_partner_work_study_experience %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.canadian_partner_work_study_experience.errors }}
+                        </div>
+                        <div class="field commom error-element{% if user_work_form.partner_skills.errors %} has-error{% endif %}">
+                            <span class="question-title">
+                                <strong>
+                                {{ user_work_form.partner_skills.label }}?&nbsp;&nbsp;<i class="tooltip hint fa fa-question-circle" title="{% trans "Proved Skills: Under 50 yeard old. Competent English. Same skilled occupation as you." %}"></i>
+                                </strong>
+                            </span>
+                            {% for radio in user_work_form.partner_skills %}
+                                {% if radio.choice_label != '---------' %}
+                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ user_work_form.partner_skills.errors }}
+                        </div>
+                        <div class="field commom family-member error-element{% if user_work_form.work_offer.errors %} has-error{% endif %}">
+                            <span class="question-title">{{ user_work_form.work_offer.label }}?</span>
 
                             {% for radio in user_work_form.work_offer %}
                                 {% if radio.choice_label != '---------' %}
@@ -141,10 +178,8 @@
                             {% endfor %}
                             {{ user_work_form.work_offer.errors }}
 
-                            <div class="clear"></div>
-
                             <div class="countries">
-                                <div id="user_work_offer_container" style="display: none; margin-bottom: 15px;">
+                                <div id="user_work_offer_container" style="display: none;">
                                     {{ user_work_offer_formset.management_form }}
                                     {% for user_work_offer_form in user_work_offer_formset %}
                                         <div class="country error-element{% if user_work_offer_form.country.errors %} has-error{% endif %}">
@@ -157,35 +192,6 @@
                                     {% endfor %}
                                 </div>
                             </div>
-
-                            <div class="clear"></div>
-
-                        </div>
-
-
-                        <div class="field commom error-element{% if user_work_form.canadian_partner_work_study_experience.errors %} has-error{% endif %}">
-                            <span>{{ user_work_form.canadian_partner_work_study_experience.label }}?</span>
-                            {% for radio in user_work_form.canadian_partner_work_study_experience %}
-                                {% if radio.choice_label != '---------' %}
-                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
-                                        {{ radio.tag }}
-                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            {{ user_work_form.canadian_partner_work_study_experience.errors }}
-                        </div>
-                        <div class="field commom error-element{% if user_work_form.partner_skills.errors %} has-error{% endif %}">
-                            <span>{{ user_work_form.partner_skills.label }}?</span>
-                            {% for radio in user_work_form.partner_skills %}
-                                {% if radio.choice_label != '---------' %}
-                                    <div class="option {% if forloop.last %}no{% else %}yes{% endif %}">
-                                        {{ radio.tag }}
-                                        <label for="{{ radio.id_for_label }}" class="css-label">{{ radio.choice_label }}</label>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            {{ user_work_form.partner_skills.errors }}
                         </div>
                     </fieldset>
                 </div>
@@ -214,12 +220,33 @@
     {{ block.super }}
 
     <!-- JS Custom Scripts -->
-    <script type="text/javascript" src="{% static 'common/circle-progress/js/circle-progress.js' %}"></script>
     <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-tooltipster/js/jquery.tooltipster.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
+        /**
+		 * Hide/Show personal family overseas options
+		 *
+		 */
+        function toggle_work_offer_container(){
+            var radio_value = $( "input[name='work_offer']:checked" ).val();
+            if ( radio_value == 'True' ) {
+                $( "#user_work_offer_container" ).slideDown();
+                if ( $( "#user_work_offer_container .dynamic-form" ).length == 0 ){
+                    $( '#main_form div.countries div.country' ).formset({
+                        prefix: '{{ user_work_offer_formset.prefix }}',
+                        addCssClass: 'bt-add',
+                        deleteCssClass: 'bt-delete',
+                        addText: '{% trans "add another" %}',
+                        deleteText: ''
+                    });
+                }
+            } else
+                $( "#user_work_offer_container" ).slideUp();
+        }
+        
         /**
 		 * Jquery On Load
 		 *
@@ -228,9 +255,6 @@
 
             // include CSRF protection on all ajax calls
             csrf_ajax_setup();
-
-            // create custom dropdown for situatino countries
-            $( "div.edit-forms .custom-select" ).msDropdown();
 
             // Submit form when navigating through action links
             $( ".submit-form" ).click( function() {
@@ -255,7 +279,7 @@
 			});
 
             // Load Formset for Work Experience
-            $( '#main_form div.works-field div.works' ).formset({
+            $( '#main_form div.works-field div.works div.work' ).formset({
                 prefix: '{{ user_work_experience_formset.prefix }}',
                 addCssClass: 'bt-add',
                 deleteCssClass: 'bt-delete',
@@ -263,22 +287,11 @@
                 deleteText: ''
             });
 
-            // Load Formset for Job Offers Overseas
-            $( '#main_form div.countries div.country' ).formset({
-                prefix: '{{ user_work_offer_formset.prefix }}',
-                addCssClass: 'bt-add',
-                deleteCssClass: 'bt-delete',
-                deleteText: ''
-            });
-
-            //Hide/Show personal family overseas options
+            // Hide or Show personal family overseas options
             $( 'input[name^=work_offer]' ).click( function(){
-                var radio_value = $( "input[name='work_offer']:checked" ).val();
-                if ( radio_value == 'True' ) {
-                    $( "#user_work_offer_container" ).slideDown();
-                } else
-                    $( "#user_work_offer_container" ).slideUp();
+                toggle_work_offer_container();
             });
+            toggle_work_offer_container()
 
             // Load occupations after category is selected
 			$( "#id_occupation_category" ).change( function() {
@@ -289,6 +302,14 @@
                 );
 
 			});
+
+            // Activates tooltips
+            $( '.tooltip' ).tooltipster( {
+                maxWidth: 300,
+                position: 'left',
+                theme: 'tooltipster-wannamigrate',
+                touchDevices: false
+            });
 
         });
 
