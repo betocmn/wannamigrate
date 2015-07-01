@@ -79,7 +79,7 @@
 
                     {% csrf_token %}
                     {{ form.token }}
-                    {{ form.payment_type }}
+                    {{ form.payment_type_id }}
 
                     <!--
                     <fieldset class="address">
@@ -221,13 +221,13 @@
 
 
                 // Checks payment type
-                var payment_type = $( "#id_payment_type" );
+                var payment_type = $( "#id_payment_type_id" );
                 if ( payment_type.val() == '' ){
-                    payment_type.val( 'credit-card' )
+                    payment_type.val( '1' )
                 }
 
                 // If type is boleto, there's nothing to validate
-                if ( payment_type.val() == 'boleto' ){
+                if ( payment_type.val() == '2' ){
                     $( "#pay_button").hide();
                     return true;
                 }
@@ -284,7 +284,7 @@
 
             });
 
-            // Automatically set credit card flag by number
+            // Automatically sets credit card flag by number
             $( '#number').keyup( function( event ) {
                 var flag = Iugu.utils.getBrandByCreditCardNumber( $(this).val() );
                 if ( flag ){
@@ -333,11 +333,11 @@
                 if ( $( this ).hasClass( 'bt-card' ) ) {
                     $('#credit-card').show();
                     $('#billet').hide();
-                    $( "#id_payment_type" ).val( 'credit-card' );
+                    $( "#id_payment_type_id" ).val( 1 );
                 } else if ($(this).hasClass( 'bt-billet' ) ) {
                     $('#credit-card').hide();
                     $('#billet').show();
-                    $( "#id_payment_type" ).val( 'boleto' );
+                    $( "#id_payment_type_id" ).val( 2 );
                 }
             });
 

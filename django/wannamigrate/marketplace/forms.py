@@ -46,7 +46,7 @@ class PaymentForm( BaseForm ):
 
     # Form elements
     token = forms.CharField( required = False, widget = forms.HiddenInput() )
-    payment_type = forms.CharField( required = False, widget = forms.HiddenInput() )
+    payment_type_id = forms.IntegerField( required = False, widget = forms.HiddenInput() )
 
     def __init__( self, *args, **kwargs ):
         """
@@ -79,7 +79,7 @@ class PaymentForm( BaseForm ):
             raise forms.ValidationError( _( "Payment information missing." ) )
 
         # If no payment-method was selected
-        if not cleaned_data['payment_type'] or cleaned_data['payment_type'] not in ['boleto', 'credit-card']:
+        if not cleaned_data['payment_type_id'] or cleaned_data['payment_type_id'] not in [ 1, 2 ]:
             raise forms.ValidationError( _( "Invalid Payment Method." ) )
 
         # Build items list
@@ -97,7 +97,7 @@ class PaymentForm( BaseForm ):
         # makes payment
         payment_processor = PaymentProcessor()
         payment_api_result = payment_processor.charge(
-            method = 'bank_slip' if cleaned_data['payment_type'] == 'boleto' else '',
+            method = 'bank_slip' if cleaned_data['payment_type_id'] == 2 else '',
             token = self.payment_info['token'],
             email = self.payment_info['user'].email,
             discount = 0,
@@ -123,6 +123,7 @@ class PaymentForm( BaseForm ):
 
         # If payment was not authorized, raise ERROR
         if not payment_api_result['success']:
+            #raise forms.ValidationError( _( "Payment not authorized. " + payment_api_result['full_api_response'] ) )
             raise forms.ValidationError( _( "Payment not authorized." ) )
 
         return cleaned_data
@@ -159,6 +160,8 @@ class PaymentForm( BaseForm ):
         else:
             order.product = self.payment_info['product']
         order.user = self.payment_info['user']
+        order.payment_type_id = self.payment_info['payment_type_id']
+        order.boleto_url = self.payment_api_result['url'] if self.cleaned_data['payment_type_id'] == 2 and 'url' in self.payment_api_result else ''
         order.save()
 
         # inserts first order_history

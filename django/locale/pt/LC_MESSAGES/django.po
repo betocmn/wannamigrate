@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-26 19:57-0300\n"
+"POT-Creation-Date: 2015-07-01 00:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5820,7 +5820,7 @@ msgstr "Investidores"
 msgid "Buy Property"
 msgstr "Comprar Imóvel"
 
-#: templates/emails/inbox_notification.html:14 wannamigrate/core/mailer.py:267
+#: templates/emails/inbox_notification.html:14 wannamigrate/core/mailer.py:264
 msgid "New Message Received"
 msgstr "Nova Mensagem Recebida"
 
@@ -5850,19 +5850,19 @@ msgstr ""
 msgid "View Message"
 msgstr "Ver Mensagem"
 
-#: templates/emails/order_confirmation_provider.html:145
-#: templates/emails/order_confirmation_user.html:197
+#: templates/emails/order_confirmation_provider.html:144
+#: templates/emails/order_confirmation_user.html:170
 msgid "Subtotal"
 msgstr "Total Parcial"
 
-#: templates/emails/order_confirmation_provider.html:146
-#: templates/emails/order_confirmation_user.html:198
+#: templates/emails/order_confirmation_provider.html:145
+#: templates/emails/order_confirmation_user.html:171
 msgid "Discount"
 msgstr "Desconto"
 
-#: templates/emails/order_confirmation_provider.html:147
+#: templates/emails/order_confirmation_provider.html:146
 #: templates/emails/order_confirmation_user.html:133
-#: templates/emails/order_confirmation_user.html:199
+#: templates/emails/order_confirmation_user.html:172
 #: templates/marketplace/order/payment.html:101
 #: templates/site/account/contracts.html:21
 #: templates/site/account/contracts.html:46
@@ -5893,8 +5893,10 @@ msgid "Download"
 msgstr "Download"
 
 #: templates/emails/order_confirmation_user.html:78
-msgid "You will receive another email with a download link."
-msgstr "Você receberá outro email com o link de download."
+msgid ""
+"You will receive another email with a download link, when the payment is "
+"approved."
+msgstr "Você receberá outro email com o link de download, após a aprovação do pagamento."
 
 #: templates/emails/order_confirmation_user.html:97
 msgid "Order Date"
@@ -5913,7 +5915,7 @@ msgid "Qty"
 msgstr "Qtd"
 
 #: templates/emails/order_download_link.html:14
-#: wannamigrate/core/mailer.py:253
+#: wannamigrate/core/mailer.py:250
 msgid "Your Download Link"
 msgstr "Link para Download"
 
@@ -5966,13 +5968,8 @@ msgid "In the meantime, start building your reputation by answering some"
 msgstr "Por enquanto, comece a construir sua reputação ao responder algumas"
 
 #: templates/emails/welcome_provider.html:23
-#: templates/marketplace/professionals/list.html:41
-#: templates/qa/common/list_group_all.html:83
-#: templates/qa/question/list_group.html:37
-#: templates/site/dashboard/dashboard.html:53
-#: templates/site/dashboard/dashboard.html:111
-msgid "answers"
-msgstr "respostas"
+msgid "questions"
+msgstr "perguntas"
 
 #: templates/emails/welcome_provider.html:23
 msgid "from our users"
@@ -6170,6 +6167,14 @@ msgstr "Erro ao Salvar Cartão de Crédito"
 #: templates/marketplace/order/payment.html:255
 msgid "Invalid Information:"
 msgstr "Dados Inválidos:"
+
+#: templates/marketplace/professionals/list.html:41
+#: templates/qa/common/list_group_all.html:83
+#: templates/qa/question/list_group.html:37
+#: templates/site/dashboard/dashboard.html:53
+#: templates/site/dashboard/dashboard.html:111
+msgid "answers"
+msgstr "respostas"
 
 #: templates/marketplace/professionals/list.html:42
 #: templates/qa/blogpost/list_group.html:25
@@ -8167,7 +8172,7 @@ msgstr "Seu pedido foi cancelado."
 msgid "Your order was refunded."
 msgstr "Seu pedido foi devolvido."
 
-#: wannamigrate/core/mailer.py:187
+#: wannamigrate/core/mailer.py:189
 msgid "Your Order Details"
 msgstr "Detalhes do Seu Pedido"
 
@@ -8181,16 +8186,17 @@ msgstr "data de modificação"
 
 #: wannamigrate/core/models.py:51 wannamigrate/core/models.py:68
 #: wannamigrate/core/models.py:108 wannamigrate/core/models.py:143
-#: wannamigrate/core/models.py:328 wannamigrate/marketplace/models.py:122
-#: wannamigrate/marketplace/models.py:136
-#: wannamigrate/marketplace/models.py:139
-#: wannamigrate/marketplace/models.py:169
-#: wannamigrate/marketplace/models.py:278
-#: wannamigrate/marketplace/models.py:381
-#: wannamigrate/marketplace/models.py:470
-#: wannamigrate/marketplace/models.py:505
-#: wannamigrate/marketplace/models.py:508
-#: wannamigrate/marketplace/models.py:537 wannamigrate/points/models.py:180
+#: wannamigrate/core/models.py:328 wannamigrate/marketplace/models.py:124
+#: wannamigrate/marketplace/models.py:137
+#: wannamigrate/marketplace/models.py:152
+#: wannamigrate/marketplace/models.py:155
+#: wannamigrate/marketplace/models.py:185
+#: wannamigrate/marketplace/models.py:294
+#: wannamigrate/marketplace/models.py:397
+#: wannamigrate/marketplace/models.py:486
+#: wannamigrate/marketplace/models.py:521
+#: wannamigrate/marketplace/models.py:524
+#: wannamigrate/marketplace/models.py:553 wannamigrate/points/models.py:180
 msgid "name"
 msgstr "nome"
 
@@ -8199,7 +8205,7 @@ msgid "continent"
 msgstr "continente"
 
 #: wannamigrate/core/models.py:70 wannamigrate/core/models.py:144
-#: wannamigrate/marketplace/models.py:365
+#: wannamigrate/marketplace/models.py:381
 msgid "code"
 msgstr "código"
 
@@ -8216,8 +8222,8 @@ msgid "Select Country"
 msgstr "Selecione País"
 
 #: wannamigrate/core/models.py:109 wannamigrate/core/models.py:329
-#: wannamigrate/marketplace/models.py:138
-#: wannamigrate/marketplace/models.py:507
+#: wannamigrate/marketplace/models.py:154
+#: wannamigrate/marketplace/models.py:523
 msgid "is active"
 msgstr "está ativo"
 
@@ -8268,8 +8274,8 @@ msgstr "Idioma de Preferência"
 #: wannamigrate/core/models.py:604 wannamigrate/core/models.py:637
 #: wannamigrate/core/models.py:684 wannamigrate/core/models.py:699
 #: wannamigrate/marketplace/models.py:30
-#: wannamigrate/marketplace/models.py:183
-#: wannamigrate/marketplace/models.py:434 wannamigrate/points/models.py:196
+#: wannamigrate/marketplace/models.py:199
+#: wannamigrate/marketplace/models.py:450 wannamigrate/points/models.py:196
 msgid "user"
 msgstr "usuário"
 
@@ -8283,7 +8289,7 @@ msgstr "escolaridade do(a) esposo(a) (ou união estável)"
 
 #: wannamigrate/core/models.py:433 wannamigrate/core/models.py:579
 #: wannamigrate/core/models.py:685 wannamigrate/core/models.py:700
-#: wannamigrate/marketplace/models.py:293 wannamigrate/points/models.py:46
+#: wannamigrate/marketplace/models.py:309 wannamigrate/points/models.py:46
 #: wannamigrate/points/models.py:66 wannamigrate/points/models.py:179
 #: wannamigrate/points/models.py:197
 msgid "country"
@@ -8313,7 +8319,7 @@ msgstr "nível de inglês do(a) esposo(a) (ou união estável)"
 msgid "partner/spouse french level"
 msgstr "nível de francês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:494 wannamigrate/marketplace/models.py:309
+#: wannamigrate/core/models.py:494 wannamigrate/marketplace/models.py:325
 msgid "language"
 msgstr "idioma"
 
@@ -8505,179 +8511,187 @@ msgstr "Informações de pagamento inexistentes."
 msgid "Invalid Payment Method."
 msgstr "Método de Pagamento Inválido"
 
-#: wannamigrate/marketplace/forms.py:126
+#: wannamigrate/marketplace/forms.py:127
 msgid "Payment not authorized."
 msgstr "Pagamento não autorizado."
 
 #: wannamigrate/marketplace/models.py:31
+msgid "payment type"
+msgstr ""
+
+#: wannamigrate/marketplace/models.py:32
 msgid "promo code"
 msgstr "código de promoção"
 
-#: wannamigrate/marketplace/models.py:32
-#: wannamigrate/marketplace/models.py:137
-#: wannamigrate/marketplace/models.py:189
-#: wannamigrate/marketplace/models.py:435
-#: wannamigrate/marketplace/models.py:506
+#: wannamigrate/marketplace/models.py:33
+#: wannamigrate/marketplace/models.py:153
+#: wannamigrate/marketplace/models.py:205
+#: wannamigrate/marketplace/models.py:451
+#: wannamigrate/marketplace/models.py:522
 msgid "description"
 msgstr "descrição"
 
-#: wannamigrate/marketplace/models.py:33
-#: wannamigrate/marketplace/models.py:106
+#: wannamigrate/marketplace/models.py:34
+#: wannamigrate/marketplace/models.py:108
 msgid "order status"
 msgstr "status do pedido"
 
-#: wannamigrate/marketplace/models.py:34
-#: wannamigrate/marketplace/models.py:454
+#: wannamigrate/marketplace/models.py:35
+#: wannamigrate/marketplace/models.py:470
 msgid "service"
 msgstr "serviço"
 
-#: wannamigrate/marketplace/models.py:35
+#: wannamigrate/marketplace/models.py:36
 msgid "product"
 msgstr ""
 
-#: wannamigrate/marketplace/models.py:37
+#: wannamigrate/marketplace/models.py:38
 msgid "gross total"
 msgstr "total bruto"
 
-#: wannamigrate/marketplace/models.py:38
+#: wannamigrate/marketplace/models.py:39
 msgid "net total"
 msgstr "total líquido"
 
-#: wannamigrate/marketplace/models.py:39
-#: wannamigrate/marketplace/models.py:184
-#: wannamigrate/marketplace/models.py:366
+#: wannamigrate/marketplace/models.py:40
+#: wannamigrate/marketplace/models.py:200
+#: wannamigrate/marketplace/models.py:382
 msgid "discount"
 msgstr "desconto"
 
-#: wannamigrate/marketplace/models.py:40
+#: wannamigrate/marketplace/models.py:41
 msgid "fees"
 msgstr "taxas"
 
-#: wannamigrate/marketplace/models.py:41
+#: wannamigrate/marketplace/models.py:42
 msgid "installments"
 msgstr "parcelas"
 
-#: wannamigrate/marketplace/models.py:42
+#: wannamigrate/marketplace/models.py:43
 msgid "external code"
 msgstr "código externo"
 
-#: wannamigrate/marketplace/models.py:105
+#: wannamigrate/marketplace/models.py:44
+msgid "boleto url"
+msgstr "url do boleto"
+
+#: wannamigrate/marketplace/models.py:107
 msgid "order"
 msgstr "pedido"
 
-#: wannamigrate/marketplace/models.py:107
+#: wannamigrate/marketplace/models.py:109
 msgid "transaction code"
 msgstr "código da transação"
 
-#: wannamigrate/marketplace/models.py:108
+#: wannamigrate/marketplace/models.py:110
 msgid "full API response"
 msgstr "resposta completa da API"
 
-#: wannamigrate/marketplace/models.py:135
-#: wannamigrate/marketplace/models.py:504 wannamigrate/points/models.py:111
+#: wannamigrate/marketplace/models.py:151
+#: wannamigrate/marketplace/models.py:520 wannamigrate/points/models.py:111
 msgid "category"
 msgstr "categoria"
 
-#: wannamigrate/marketplace/models.py:140
-#: wannamigrate/marketplace/models.py:326
+#: wannamigrate/marketplace/models.py:156
+#: wannamigrate/marketplace/models.py:342
 msgid "price"
 msgstr "preço"
 
-#: wannamigrate/marketplace/models.py:159
+#: wannamigrate/marketplace/models.py:175
 msgid "Select Product"
 msgstr "Selecione Produto"
 
-#: wannamigrate/marketplace/models.py:185
+#: wannamigrate/marketplace/models.py:201
 msgid "status"
 msgstr "status"
 
-#: wannamigrate/marketplace/models.py:186
+#: wannamigrate/marketplace/models.py:202
 msgid "regulator"
 msgstr "regulador"
 
-#: wannamigrate/marketplace/models.py:187
+#: wannamigrate/marketplace/models.py:203
 msgid "professional display name"
 msgstr "nome comercial"
 
-#: wannamigrate/marketplace/models.py:188
+#: wannamigrate/marketplace/models.py:204
 msgid "headline"
 msgstr "título profissional"
 
-#: wannamigrate/marketplace/models.py:190
+#: wannamigrate/marketplace/models.py:206
 msgid "skype ID"
 msgstr "ID do skype"
 
-#: wannamigrate/marketplace/models.py:191
+#: wannamigrate/marketplace/models.py:207
 msgid "paypal email"
 msgstr "email do paypal"
 
-#: wannamigrate/marketplace/models.py:192
-#: wannamigrate/marketplace/models.py:382
+#: wannamigrate/marketplace/models.py:208
+#: wannamigrate/marketplace/models.py:398
 msgid "website"
 msgstr "website"
 
-#: wannamigrate/marketplace/models.py:292
 #: wannamigrate/marketplace/models.py:308
-#: wannamigrate/marketplace/models.py:325
+#: wannamigrate/marketplace/models.py:324
+#: wannamigrate/marketplace/models.py:341
 msgid "provider"
 msgstr "prestador"
 
-#: wannamigrate/marketplace/models.py:324
-#: wannamigrate/marketplace/models.py:437
+#: wannamigrate/marketplace/models.py:340
+#: wannamigrate/marketplace/models.py:453
 msgid "service type"
 msgstr "tipo de serviço"
 
-#: wannamigrate/marketplace/models.py:327
+#: wannamigrate/marketplace/models.py:343
 msgid "is top service"
 msgstr "é serviço principal"
 
-#: wannamigrate/marketplace/models.py:367
+#: wannamigrate/marketplace/models.py:383
 msgid "date"
 msgstr "data"
 
-#: wannamigrate/marketplace/models.py:396
+#: wannamigrate/marketplace/models.py:412
 msgid "from user"
 msgstr "usuário de origem"
 
-#: wannamigrate/marketplace/models.py:397
+#: wannamigrate/marketplace/models.py:413
 msgid "to user"
 msgstr "usuário de destino"
 
-#: wannamigrate/marketplace/models.py:398
+#: wannamigrate/marketplace/models.py:414
 msgid "review score"
 msgstr "nota de avaliações"
 
-#: wannamigrate/marketplace/models.py:399
+#: wannamigrate/marketplace/models.py:415
 msgid "comment"
 msgstr "comentário"
 
-#: wannamigrate/marketplace/models.py:436
+#: wannamigrate/marketplace/models.py:452
 msgid "service provider"
 msgstr "prestador de serviços"
 
-#: wannamigrate/marketplace/models.py:438
-#: wannamigrate/marketplace/models.py:455
+#: wannamigrate/marketplace/models.py:454
+#: wannamigrate/marketplace/models.py:471
 msgid "service status"
 msgstr "status do serviço"
 
-#: wannamigrate/marketplace/models.py:439
+#: wannamigrate/marketplace/models.py:455
 msgid "service price"
 msgstr "preço do serviço"
 
-#: wannamigrate/marketplace/models.py:456
+#: wannamigrate/marketplace/models.py:472
 msgid "changed by user"
 msgstr "alterado pelo usuário"
 
-#: wannamigrate/marketplace/models.py:527 wannamigrate/site/forms.py:417
+#: wannamigrate/marketplace/models.py:543 wannamigrate/site/forms.py:417
 msgid "Select Service"
 msgstr "Selecione Serviço"
 
-#: wannamigrate/marketplace/views.py:56
+#: wannamigrate/marketplace/views.py:58
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:57 wannamigrate/marketplace/views.py:191
-#: wannamigrate/marketplace/views.py:304
+#: wannamigrate/marketplace/views.py:59 wannamigrate/marketplace/views.py:194
+#: wannamigrate/marketplace/views.py:293
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -8685,7 +8699,7 @@ msgstr ""
 "Tome decisões mais rápidas e seguras no planejamento de mudar de país.  "
 "Obtenha ajuda de um experts em imigração no Wanna Migrate."
 
-#: wannamigrate/marketplace/views.py:146
+#: wannamigrate/marketplace/views.py:149
 msgid ""
 "can be hired through Wanna Migrate. Sign-up to connect with thousands of "
 "experts in immigration and related."
@@ -8693,31 +8707,31 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:190
+#: wannamigrate/marketplace/views.py:193
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:303
+#: wannamigrate/marketplace/views.py:292
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:312
+#: wannamigrate/marketplace/views.py:301
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:315
+#: wannamigrate/marketplace/views.py:304
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:318
+#: wannamigrate/marketplace/views.py:307
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:321
+#: wannamigrate/marketplace/views.py:310
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:324
+#: wannamigrate/marketplace/views.py:313
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 

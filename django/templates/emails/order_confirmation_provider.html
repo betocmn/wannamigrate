@@ -15,8 +15,8 @@
               </tr>
               <tr>
                 <td class="free-text">
-                    {% if provider_user.name %}
-                        Hello, {{ provider_user.name|capfirst }}.
+                    {% if provider.display_name %}
+                        Hello, {{ provider.display_name|capfirst }}.
                     {% endif %}
                     You received a service request.
                     <br /><br />
@@ -115,9 +115,8 @@
                           <table cellspacing="0" cellpadding="0" width="100%">
                             <tr>
                               <td class="mobile-hide-img">
-                                <span style="color: #4d4d4d; font-weight:bold;">{% trans service_type_category.name %}</span>
+                                <span style="color: #4d4d4d; font-weight:bold;">{% trans order.description %}</span>
                                 <br />
-                                {% trans service_type.name %}
                               </td>
                             </tr>
                           </table>
@@ -126,7 +125,7 @@
                           1
                         </td>
                         <td class="item-col">
-                          R$ {{ provider_service_type.price }}
+                          R$ {{ order.gross_total }}
                         </td>
                       </tr>
 
@@ -147,9 +146,9 @@
                           <span class="total-space" style="font-weight: bold; color: #4d4d4d">{% trans 'Total' %}</span>
                         </td>
                         <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
-                          <span class="total-space">R$ {{ provider_service_type.price }}</span> <br />
-                          <span class="total-space">R$ 0</span><br />
-                          <span class="total-space" style="font-weight:bold; color: #4d4d4d">R$ {{ provider_service_type.price }}</span>
+                          <span class="total-space">R$ {{ order.gross_total }}</span> <br />
+                          <span class="total-space">R$ {{ order.discount }}</span><br />
+                          <span class="total-space" style="font-weight:bold; color: #4d4d4d">R$ {{ order.net_total }}</span>
                         </td>
                       </tr>
                     </table>
