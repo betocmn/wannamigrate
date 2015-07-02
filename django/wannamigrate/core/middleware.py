@@ -115,3 +115,18 @@ class SituationLocaleMiddleware( object ):
                 request.session['news'] = news
             #else:
                 #request.session['news'] = None
+
+
+
+
+
+
+##########################
+# Class definitions
+##########################
+class MaintenceMiddleware( object ):
+
+    def process_request( self, request ):
+        from django.shortcuts import render
+        return render( request, "site/home/maintence.html" )
+

@@ -13,14 +13,7 @@ import os
 
 # set the default Django settings module for the 'celery' program.
 # We check if there' a local settings file, if so, we are in dev
-BASE_DIR = os.path.dirname( __file__ )
-settings_file_path = os.path.join( BASE_DIR, 'wannamigrate', '_settings', 'local.py' )
-if os.path.isfile( settings_file_path ):
-    settings_file = 'wannamigrate._settings.local'
-else:
-    settings_file = 'wannamigrate._settings.prod'
-os.environ.setdefault( 'DJANGO_SETTINGS_MODULE', settings_file )
-
+os.environ.setdefault( "DJANGO_SETTINGS_MODULE", 'wannamigrate._settings.custom' )
 
 app = Celery('wannamigrate')
 

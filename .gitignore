@@ -4,7 +4,8 @@
 */.idea/*
 infra/.vagrant
 wiki/*
-django/wannamigrate/_settings/local.py
+django/wannamigrate/_settings/custom.py
 django/upload/*
 infra/production.pem
 infra/support.pem
+infra/sa-east-production.pem

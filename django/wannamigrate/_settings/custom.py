@@ -27,12 +27,9 @@ BASE_URL_SECURE = 'https://www.wannamigrate.com'
 #########################################
 # DEBUG AND ENVIRONMENT SETTINGS
 #########################################
-IS_PROD = True
-
+IS_PROD = False
 DEBUG = False
-
 SQL_DEBUG = False
-
 TEMPLATE_DEBUG = False
 
 
@@ -43,14 +40,13 @@ TEMPLATE_DEBUG = False
 # ACCESS RESTRICTIONS
 #########################################
 ALLOWED_HOSTS = [
-    "54.148.167.28",
-    ".compute.amazonaws.com",
-    ".wannamigrate.com"
+    "localhost",
+    "127.0.0.1",
 ]
 
 INTERNAL_IPS = (
-    '127.0.0.1',
-    '177.47.45.156'
+    "localhost",
+    "127.0.0.1",
 )
 
 
