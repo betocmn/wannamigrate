@@ -33,6 +33,18 @@ SERVERS = {
     },
 
     "prod" : {
+        "IP" : "54.94.209.35",         # The IP address of the server.
+        "DOMAIN" : "wannamigrate.com",     # Server's domain name.
+        "KEYPAIR" : "sa-east-production.pem",             # The keypair file used to connect to the server.
+        "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
+        "HTTP_PORT" : 80,         # The HTTP port on the server.
+        "HTTPS_PORT" : 443,        # The HTTPS port on the server.
+        "HTTP_FORWARDED_PORT" : 80,   # The HTTP forwarded port
+        "HTTPS_FORWARDED_PORT" : 443,  # The HTTPS forwarded port
+        "BRANCH" : "master",            # Vagrant server doesn't require git
+    },
+
+    "prod_old" : {
         "IP" : "52.27.96.133",         # The IP address of the server.
         "DOMAIN" : "wannamigrate.com",     # Server's domain name.
         "KEYPAIR" : "production.pem",             # The keypair file used to connect to the server.
