@@ -143,6 +143,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # MIDDLEWARES
 #########################################
 MIDDLEWARE_CLASSES = (
+    #'wannamigrate.core.middleware.MaintenceMiddleware',    # Uncomment this line to put site under maintenance
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
