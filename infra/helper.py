@@ -79,7 +79,7 @@ APP_NAME = "wannamigrate"                                       # Current projec
 
 # Server packages
 INSTALL_PACKAGES = [ 
-    "python3-dev", "git", "apache2", "libapache2-mod-wsgi-py3",
+    "python3-dev", "git", "apache2", "apache2-dev",
     "libapache2-mod-php5", "php5-mysql", "libmysqlclient-dev",
     "mysql-client", "gettext", "libjpeg-dev", "rabbitmq-server",
     "supervisor",
@@ -102,6 +102,7 @@ VIRTUALENV_PACKAGES = [
     "sqlparse==0.1.14",
     "celery==3.1.18",
     "django-celery==3.1.16",
+    "mod-wsgi==4.4.13"
 ]
 
 
@@ -122,7 +123,7 @@ PROJECT_VIRTUALENV = VIRTUALENV_ROOT + '/' + PROJECT_ALIAS + "venv"
 # Aliases for django, wiki and wsgi
 DJANGO_ALIAS = "django"
 WIKI_ALIAS = "wiki"
-WSGI_ALIAS = "wsgi"
+WSGI_ALIAS = "wsgi_express"
 
 # PORTS
 DJANGO_LISTENING_PORT = 80
@@ -141,14 +142,14 @@ WIKI_ROOT = PROJECT_ROOT + '/' + WIKI_ALIAS
 # Apache configurations folder
 APACHE_SITES_ENABLED_PATH = "/etc/apache2/sites-enabled"    # Sites enabled folder on Apache
 APACHE_MODS_ENABLED_PATH = "/etc/apache2/mods-enabled"      # Mods enabled folder on Apache
+APACHE_MODS_AVAILABLE_PATH = "/etc/apache2/mods-available"      # Mods available folder on Apache
 
 # Spacing for help messages.
 N_DEFAULT_HELP_SPACING = 15
 
 WSGI_CONF = """
-<IfModule mod_wsgi.c>
-    WSGIPythonPath {django_root}:/{virtualenv}/lib/python3.4:/{virtualenv}/lib/python3.4/site-packages
-</IfModule>
+WSGIPythonHome {virtualenv}
+WSGIPythonPath {django_root}:/{virtualenv}/lib/python3.4:/{virtualenv}/lib/python3.4/site-packages
 """.format( django_root = DJANGO_ROOT, virtualenv = PROJECT_VIRTUALENV )
 
 # Requires formatting on the fly. Params:
@@ -513,12 +514,19 @@ def config( args ):
             # Cleaning apache's default conf.
             remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
 
-            # Generates wsgi.conf
+            # Generates wsgi_express.load and wsgi_express.conf
+            # a2enmod wsgi_express is activated later on the script
             remote_commands.extend([
-                "sudo touch {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
-                "sudo chmod 777 {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
-                "echo \"{0}\" > {1}/{2}.conf".format( WSGI_CONF, APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
-                "sudo chmod 644 {0}/{1}.conf".format( APACHE_MODS_ENABLED_PATH, WSGI_ALIAS ),
+                # wsgi load file
+                "sudo touch {0}/{1}.load".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "sudo chmod 777 {0}/{1}.load".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "sudo {0}/bin/mod_wsgi-express install-module | sed -n 1p > {1}/{2}.load".format( PROJECT_VIRTUALENV, APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "sudo chmod 644 {0}/{1}.load".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                # wsgi conf file
+                "sudo touch {0}/{1}.conf".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "sudo chmod 777 {0}/{1}.conf".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "echo \"{0}\" > {1}/{2}.conf".format( WSGI_CONF, APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
+                "sudo chmod 644 {0}/{1}.conf".format( APACHE_MODS_AVAILABLE_PATH, WSGI_ALIAS ),
             ])
 
             # Formats the conf file for the given server
@@ -554,14 +562,16 @@ def config( args ):
 
 
         remote_commands.append( "echo \" \"" )
-        remote_commands.append( "echo \"#########################\"" )
-        remote_commands.append( "echo \"# ENABLING SSL, REWRITE #\"" )
-        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \"###############################\"" )
+        remote_commands.append( "echo \"# ENABLING SSL, REWRITE, WSGI #\"" )
+        remote_commands.append( "echo \"###############################\"" )
         remote_commands.append( "echo \" \"" )
         # Enabling mode rewrite on apache
         remote_commands.append( "sudo a2enmod rewrite" )
         # Enabling SSL on apache
         remote_commands.append( "sudo a2enmod ssl" )
+        # Enabling WSGI express
+        remote_commands.append( "sudo a2enmod {0}".format( WSGI_ALIAS ) )
 
         # Reinforce the owner and group of all project's folders
         remote_commands.extend([
