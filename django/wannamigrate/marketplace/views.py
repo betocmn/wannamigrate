@@ -9,7 +9,7 @@ the templates on the marketplace app
 # Imports
 ##########################
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,7 @@ from wannamigrate.core.util import get_object_or_false
 from wannamigrate.marketplace.forms import PaymentForm
 from wannamigrate.marketplace.models import (
     Provider, Review, ServiceType, ProviderServiceType, Order,
-    Service, ServiceStatus
+    Service, ServiceStatus, Product
 )
 from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
@@ -34,7 +34,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.servers.basehttp import FileWrapper
 from django.views.decorators.csrf import csrf_exempt
-from django.utils import timezone, translation
+from django.utils import translation
+from django.templatetags.static import static
 import datetime
 
 
@@ -162,6 +163,121 @@ def profile( request, user_id, name ):
 
         # Prints Template
         return render( request, 'marketplace/professionals/profile.html', template_data )
+
+
+
+
+
+#######################
+# EBOOKS - VIEWS
+#######################
+def ebook( request ):
+    """
+    List all e-boks available
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
+        if not product:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # saves details to session
+        request.session['payment'] = {
+            'product': product
+        }
+
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_ebooks'] = True
+
+    # if language is english, we show warning that only portuguese guides are available for now
+    if translation.get_language() == "en":
+        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
+
+    # Print Template
+    return render( request, 'marketplace/ebook/ebook.html', template_data )
+
+
+
+
+
+#######################
+# INTERNATIONAL CV - VIEWS
+#######################
+def international_cv( request ):
+    """
+    Sales page for the service 'international CV'
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        provider = get_object_or_false( Provider, pk = 13 )
+        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
+        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
+        if not provider or not service_type or not provider_service_type:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # saves service
+        service = Service()
+        service.service_price = provider_service_type.price
+        service.description = service_type.name
+        service.user = request.user
+        service.provider = provider
+        service.service_type = service_type
+        service.service_status_id = ServiceStatus.get_status_from_order_status()
+        service.save()
+
+        # saves details to session
+        request.session['payment'] = {
+            'provider': provider,
+            'service_type': service_type,
+            'provider_service_type': provider_service_type,
+            'service': service
+        }
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    else:
+        # Cleans payment session
+        request.session['payment'] = {}
+        del request.session['payment']
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Build your International CV - Wanna Migrate' )
+    template_data['meta_description'] = _( 'We will help you out by creating your international CV, cover letter and Linkedin profile.' )
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/international-cv-preview-1.jpg' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_international_cv'] = True
+
+    # Print Template
+    return render( request, 'marketplace/international_cv/international_cv.html', template_data )
 
 
 

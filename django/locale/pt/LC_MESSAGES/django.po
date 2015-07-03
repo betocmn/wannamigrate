@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:58-0300\n"
+"POT-Creation-Date: 2015-07-02 21:43-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,8 +210,8 @@ msgstr "Wanna Migrate - More no exterior. Mude de vida."
 #: templates/db_translations/core_answer.html:184
 #: templates/db_translations/core_answer.html:186
 #: templates/db_translations/core_answer.html:208
-#: wannamigrate/core/models.py:386 wannamigrate/core/models.py:531
-#: wannamigrate/core/models.py:634
+#: wannamigrate/core/models.py:388 wannamigrate/core/models.py:533
+#: wannamigrate/core/models.py:636
 msgid "Yes"
 msgstr "Sim"
 
@@ -226,8 +226,8 @@ msgstr "Sim"
 #: templates/db_translations/core_answer.html:185
 #: templates/db_translations/core_answer.html:187
 #: templates/db_translations/core_answer.html:209
-#: wannamigrate/core/models.py:387 wannamigrate/core/models.py:532
-#: wannamigrate/core/models.py:635
+#: wannamigrate/core/models.py:389 wannamigrate/core/models.py:534
+#: wannamigrate/core/models.py:637
 msgid "No"
 msgstr "Não"
 
@@ -2245,6 +2245,7 @@ msgid "Polish"
 msgstr ""
 
 #: templates/db_translations/core_language.html:108
+#: wannamigrate/_settings/base.py:62
 msgid "Portuguese"
 msgstr ""
 
@@ -2781,6 +2782,19 @@ msgstr "Visto de Estudante"
 #: templates/db_translations/marketplace_servicetype.html:22
 msgid "Assistance for the student visa application."
 msgstr "Assistência para obtenção de visto de estudante."
+
+#: templates/db_translations/marketplace_servicetype.html:23
+#: templates/site/tools/tools.html:27
+msgid "Package - International CV"
+msgstr "Pacote - CV Internacional"
+
+#: templates/db_translations/marketplace_servicetype.html:23
+msgid ""
+"You will receive an international CV in english, cover letter and help to "
+"build your Linkedin Profile."
+msgstr ""
+"Ajudaremos você a criar o seu currículo internacional, carta de apresentação "
+"e perfil do Linkedin."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -6039,6 +6053,213 @@ msgstr "Contrate um Expert"
 msgid "Get a visa faster and safer with the help of a professional"
 msgstr "Consiga seu visto mais rápido e seguro com um expert"
 
+#: templates/marketplace/ebook/ebook.html:28
+msgid "E-Books"
+msgstr "E-Books"
+
+#: templates/marketplace/ebook/ebook.html:31
+msgid "Get ready for your dream country"
+msgstr "Prepare-se para o país dos seus sonhos"
+
+#: templates/marketplace/ebook/ebook.html:34
+msgid "For future immigrants - Made by real immigrants"
+msgstr "Para futuros imigrantes - Feito por imigrantes reais"
+
+#: templates/marketplace/ebook/ebook.html:37
+msgid "arrow-bottom"
+msgstr "descer"
+
+#: templates/marketplace/ebook/ebook.html:60
+#: templates/marketplace/ebook/ebook.html:87
+#: templates/marketplace/ebook/ebook.html:90
+#: templates/marketplace/ebook/ebook.html:93
+#: templates/marketplace/ebook/ebook.html:96
+#: templates/marketplace/ebook/ebook.html:99
+#: templates/marketplace/ebook/ebook.html:102
+#: templates/marketplace/ebook/ebook.html:105
+#: templates/qa/blogpost/view.html:125 templates/qa/question/view.html:196
+#: templates/site/guide/guide.html:36
+msgid "Guide - How to move to Canada"
+msgstr "Guia - Como mudar para o Canadá"
+
+#: templates/marketplace/ebook/ebook.html:63
+msgid ""
+"The perfect guide if you want to live in Canada and don't know where to "
+"begin. You will learn:"
+msgstr ""
+"O guia perfeito para quem deseja morar no Canadá e não sabe por onde "
+"começar. Você irá aprender:"
+
+#: templates/marketplace/ebook/ebook.html:65
+#: templates/marketplace/ebook/ebook.html:123
+msgid "Why Canada and your immigration options"
+msgstr "Por que o Canadá e suas opções de imigração"
+
+#: templates/marketplace/ebook/ebook.html:66
+#: templates/marketplace/ebook/ebook.html:124
+msgid "How to start and execute your plan"
+msgstr "Como iniciar e executar o seu plano"
+
+#: templates/marketplace/ebook/ebook.html:67
+#: templates/marketplace/ebook/ebook.html:125
+msgid "How to study, work and do business in Canada"
+msgstr "Como estudar, trabalhar e fazer negócios no Canadá"
+
+#: templates/marketplace/ebook/ebook.html:68
+#: templates/marketplace/ebook/ebook.html:126
+msgid "How to take your family to Canada"
+msgstr "Como levar sua família para o Canadá"
+
+#: templates/marketplace/ebook/ebook.html:70
+msgid "You will receive a link to download the ebook in PDF."
+msgstr "Você receberá um link para baixar o ebook em PDF."
+
+#: templates/marketplace/ebook/ebook.html:77
+#: templates/marketplace/ebook/ebook.html:136
+msgid "Buy Guide"
+msgstr "Comprar"
+
+#: templates/marketplace/ebook/ebook.html:80
+msgid "preview book"
+msgstr "preview do ebook"
+
+#: templates/marketplace/ebook/ebook.html:117
+#: templates/marketplace/ebook/ebook.html:142
+msgid "Guide - How to move to Australia"
+msgstr "Guia - Como mudar para a Austrália"
+
+#: templates/marketplace/ebook/ebook.html:120
+msgid "Coming soon!"
+msgstr "Em breve!"
+
+#: templates/marketplace/ebook/ebook.html:154
+#: templates/marketplace/ebook/ebook.html:173
+msgid "What our readers say"
+msgstr "Opinião de quem já leu"
+
+#: templates/marketplace/ebook/ebook.html:157
+#: templates/marketplace/ebook/ebook.html:176
+msgid "quotes"
+msgstr "depoimentos"
+
+#: templates/marketplace/ebook/ebook.html:160
+msgid ""
+"You guys built a very rich content, with excellent hints. This book could "
+"easily save months of research of information."
+msgstr ""
+"O site conseguiu criar um conteúdo super rico, com dicas geniais. O livro "
+"pode facilmente economizar meses de trabalho de busca por informação."
+
+#: templates/marketplace/ebook/ebook.html:164
+msgid "testmonial-tania-antonieli"
+msgstr "depoimento-tania-antonieli"
+
+#: templates/marketplace/ebook/ebook.html:166
+msgid "Project Manager"
+msgstr "Gerente de Projetos"
+
+#: templates/marketplace/ebook/ebook.html:179
+msgid ""
+"I had no idea I had most of the requirements to get a visa to live in Canada "
+"until I read this book."
+msgstr ""
+"Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
+"este livro. Agora, esta é uma das minhas possibilidades para os próximos "
+"anos."
+
+#: templates/marketplace/ebook/ebook.html:183
+msgid "testmonial-igor-freitas"
+msgstr "depoimento-igor-freitas"
+
+#: templates/marketplace/ebook/ebook.html:185
+msgid "Personal Trainer and Musician"
+msgstr "Personal Trainer e Músico"
+
+#: templates/marketplace/ebook/ebook.html:195
+msgid "Sign-up and get more help"
+msgstr "Cadastre-se e obtenha ajuda"
+
+#: templates/marketplace/ebook/ebook.html:198
+msgid "Start now. It's free"
+msgstr "Comece gratuitamente"
+
+#: templates/marketplace/ebook/ebook.html:244
+msgid "First pages"
+msgstr "Primeiras páginas"
+
+#: templates/marketplace/international_cv/international_cv.html:27
+msgid ""
+"\n"
+"                        Package - International CV\n"
+"                    "
+msgstr ""
+"\n"
+"                        Pacote - CV Internacional\n"
+"                    "
+
+#: templates/marketplace/international_cv/international_cv.html:33
+msgid ""
+"\n"
+"                        Start <span>getting in touch with foreign employers</"
+"span>. We will help you to look good with a professional CV, cover letter "
+"and Linkedin profile.\n"
+"                    "
+msgstr ""
+"\n"
+"                        Comece a <span>contactar empregadores estrangeiros"
+"</span>. Demonstre qualidade através de um currículo profissional, "
+"carta de apresentação e perfil no Linkedin.\n"
+"                    "
+
+#: templates/marketplace/international_cv/international_cv.html:38
+msgid ""
+"\n"
+"                        We will work with you to build your international "
+"résumé focused in countries such as Canada, Australia and USA.\n"
+"                    "
+msgstr ""
+"\n"
+"                        Trabalharemos com você para criar seu currículo "
+"internacional, em inglês e focado em países como Canadá, Austrália e EUA.\n"
+"                    "
+
+#: templates/marketplace/international_cv/international_cv.html:44
+msgid "Package International CV"
+msgstr "Pacote CV Internacional"
+
+#: templates/marketplace/international_cv/international_cv.html:51
+msgid "Receive an international CV from your current one"
+msgstr "Receba um CV internacional a partir do seu atual"
+
+#: templates/marketplace/international_cv/international_cv.html:52
+msgid "Get help to write an attractive cover letter"
+msgstr "Receba ajuda para escrever uma carta de apresentação atrativa"
+
+#: templates/marketplace/international_cv/international_cv.html:53
+msgid "Let us help you with your Linkedin Profile"
+msgstr "Deixe-nos lhe ajudar com o seu perfil no Linkedin"
+
+#: templates/marketplace/international_cv/international_cv.html:54
+msgid "Get hints about how to approach employers"
+msgstr "Receba dicas de como abordar os empregadores"
+
+#: templates/marketplace/international_cv/international_cv.html:56
+msgid ""
+"After the payment, you will receive a confirmation email and the deadline is "
+"4 days."
+msgstr ""
+"Após o pagamento, você receberá um e-mail de confirmação e o prazo é de 4 "
+"dias."
+
+#: templates/marketplace/international_cv/international_cv.html:63
+msgid "Buy Package"
+msgstr "Comprar"
+
+#: templates/marketplace/international_cv/international_cv.html:71
+#: templates/site/guide/guide.html:297
+msgid "Go back to dashboard"
+msgstr "Voltar ao painel principal"
+
 #: templates/marketplace/order/confirmation.html:10
 msgid "Your order was received"
 msgstr "Seu pedido foi recebido."
@@ -6845,8 +7066,8 @@ msgid ""
 "Proved Skills: Under 50 yeard old. Competent English. Same skilled "
 "occupation as you."
 msgstr ""
-"Menos de 50 anos de idade. Inglês intermediário. Mesma ocupação "
-"qualificada que a sua."
+"Menos de 50 anos de idade. Inglês intermediário. Mesma ocupação qualificada "
+"que a sua."
 
 #: templates/qa/blogpost/add.html:31
 #: templates/qa/question/add_question.html:23
@@ -6953,15 +7174,6 @@ msgstr "Escrito em"
 #: templates/qa/blogpost/view.html:112
 msgid "Related Posts"
 msgstr "Posts Relacionados"
-
-#: templates/qa/blogpost/view.html:125 templates/qa/question/view.html:196
-#: templates/site/ebook/ebook.html:60 templates/site/ebook/ebook.html.py:87
-#: templates/site/ebook/ebook.html:90 templates/site/ebook/ebook.html.py:93
-#: templates/site/ebook/ebook.html:96 templates/site/ebook/ebook.html.py:99
-#: templates/site/ebook/ebook.html:102 templates/site/ebook/ebook.html:105
-#: templates/site/guide/guide.html:36
-msgid "Guide - How to move to Canada"
-msgstr "Guia - Como mudar para o Canadá"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:12
@@ -7112,7 +7324,7 @@ msgid "My orders"
 msgstr "Minhas Compras"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:777
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:744
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -7425,7 +7637,7 @@ msgstr "Senha"
 msgid "Change Password"
 msgstr "Mudar Senha"
 
-#: templates/site/account/view.html:58 wannamigrate/core/models.py:333
+#: templates/site/account/view.html:58 wannamigrate/core/models.py:335
 msgid "Timezone"
 msgstr "Fuso-horário"
 
@@ -7457,7 +7669,7 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:779
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:746
 msgid "Sent"
 msgstr "Enviadas"
 
@@ -7470,7 +7682,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:781
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:748
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -7506,119 +7718,6 @@ msgstr "Fazer Pergunta"
 #: templates/site/dashboard/dashboard.html:67
 msgid "No content found"
 msgstr "Sem conteúdo"
-
-#: templates/site/ebook/ebook.html:28
-msgid "E-Books"
-msgstr "E-Books"
-
-#: templates/site/ebook/ebook.html:31
-msgid "Get ready for your dream country"
-msgstr "Prepare-se para o país dos seus sonhos"
-
-#: templates/site/ebook/ebook.html:34
-msgid "For future immigrants - Made by real immigrants"
-msgstr "Para futuros imigrantes - Feito por imigrantes reais"
-
-#: templates/site/ebook/ebook.html:37
-msgid "arrow-bottom"
-msgstr "descer"
-
-#: templates/site/ebook/ebook.html:63
-msgid ""
-"The perfect guide if you want to live in Canada and don't know where to "
-"begin. You will learn:"
-msgstr ""
-"O guia perfeito para quem deseja morar no Canadá e não sabe por onde "
-"começar. Você irá aprender:"
-
-#: templates/site/ebook/ebook.html:65 templates/site/ebook/ebook.html:123
-msgid "Why Canada and your immigration options"
-msgstr "Por que o Canadá e suas opções de imigração"
-
-#: templates/site/ebook/ebook.html:66 templates/site/ebook/ebook.html:124
-msgid "How to start and execute your plan"
-msgstr "Como iniciar e executar o seu plano"
-
-#: templates/site/ebook/ebook.html:67 templates/site/ebook/ebook.html:125
-msgid "How to study, work and do business in Canada"
-msgstr "Como estudar, trabalhar e fazer negócios no Canadá"
-
-#: templates/site/ebook/ebook.html:68 templates/site/ebook/ebook.html:126
-msgid "How to take your family to Canada"
-msgstr "Como levar sua família para o Canadá"
-
-#: templates/site/ebook/ebook.html:70
-msgid "You will receive a link to download the ebook in PDF."
-msgstr "Você receberá um link para baixar o ebook em PDF."
-
-#: templates/site/ebook/ebook.html:77 templates/site/ebook/ebook.html:136
-msgid "Buy Guide"
-msgstr "Comprar"
-
-#: templates/site/ebook/ebook.html:80
-msgid "preview book"
-msgstr "preview do ebook"
-
-#: templates/site/ebook/ebook.html:117 templates/site/ebook/ebook.html:142
-msgid "Guide - How to move to Australia"
-msgstr "Guia - Como mudar para a Austrália"
-
-#: templates/site/ebook/ebook.html:120
-msgid "Coming soon!"
-msgstr "Em breve!"
-
-#: templates/site/ebook/ebook.html:154 templates/site/ebook/ebook.html:173
-msgid "What our readers say"
-msgstr "Opinião de quem já leu"
-
-#: templates/site/ebook/ebook.html:157 templates/site/ebook/ebook.html:176
-msgid "quotes"
-msgstr "depoimentos"
-
-#: templates/site/ebook/ebook.html:160
-msgid ""
-"You guys built a very rich content, with excellent hints. This book could "
-"easily save months of research of information."
-msgstr ""
-"O site conseguiu criar um conteúdo super rico, com dicas geniais. O livro "
-"pode facilmente economizar meses de trabalho de busca por informação."
-
-#: templates/site/ebook/ebook.html:164
-msgid "testmonial-tania-antonieli"
-msgstr "depoimento-tania-antonieli"
-
-#: templates/site/ebook/ebook.html:166
-msgid "Project Manager"
-msgstr "Gerente de Projetos"
-
-#: templates/site/ebook/ebook.html:179
-msgid ""
-"I had no idea I had most of the requirements to get a visa to live in Canada "
-"until I read this book."
-msgstr ""
-"Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
-"este livro. Agora, esta é uma das minhas possibilidades para os próximos "
-"anos."
-
-#: templates/site/ebook/ebook.html:183
-msgid "testmonial-igor-freitas"
-msgstr "depoimento-igor-freitas"
-
-#: templates/site/ebook/ebook.html:185
-msgid "Personal Trainer and Musician"
-msgstr "Personal Trainer e Músico"
-
-#: templates/site/ebook/ebook.html:195
-msgid "Sign-up and get more help"
-msgstr "Cadastre-se e obtenha ajuda"
-
-#: templates/site/ebook/ebook.html:198
-msgid "Start now. It's free"
-msgstr "Comece gratuitamente"
-
-#: templates/site/ebook/ebook.html:244
-msgid "First pages"
-msgstr "Primeiras páginas"
 
 #: templates/site/guide/guide.html:24
 msgid ""
@@ -7923,10 +8022,6 @@ msgstr "Informação disponível em breve!"
 msgid "We are updating this section. Come back in 24 hours."
 msgstr "Estamos atualizando esta seção."
 
-#: templates/site/guide/guide.html:297
-msgid "Go back to dashboard"
-msgstr "Voltar ao painel principal"
-
 #: templates/site/home/home.html:30
 msgid "How it works?"
 msgstr "Como funciona?"
@@ -8107,15 +8202,37 @@ msgstr "Guias de Imigração"
 msgid "Download our complete step-by-step immigration guides."
 msgstr "Faça o download de nossos guias completos de imigração."
 
-#: templates/site/tools/tools.html:25
+#: templates/site/tools/tools.html:26
+msgid "package international cv"
+msgstr ""
+
+#: templates/site/tools/tools.html:28
+msgid ""
+"We help you with all the resources to start talking to international "
+"employers. CV, Cover letter, Linkedin, website..."
+msgstr ""
+
+#: templates/site/tools/tools.html:33
+msgid "IELTS preparation course"
+msgstr ""
+
+#: templates/site/tools/tools.html:34
+msgid "IELTS Preparation Course"
+msgstr ""
+
+#: templates/site/tools/tools.html:35
+msgid "Enroll in our online course and be ready for the certification exam."
+msgstr ""
+
+#: templates/site/tools/tools.html:39
 msgid "find jobs"
 msgstr "encontre empregos"
 
-#: templates/site/tools/tools.html:26
+#: templates/site/tools/tools.html:40
 msgid "Find Jobs Overseas"
 msgstr "Encontre Empregos no Exterior"
 
-#: templates/site/tools/tools.html:27
+#: templates/site/tools/tools.html:41
 msgid ""
 "Get exposed to international employers and receive notifications about new "
 "job openings."
@@ -8123,15 +8240,15 @@ msgstr ""
 "Seja visto por empregadores internacionais e receba alertas de novas vagas "
 "em aberto em sua área."
 
-#: templates/site/tools/tools.html:30
+#: templates/site/tools/tools.html:44
 msgid "immigration genius"
 msgstr "gênio da imigração"
 
-#: templates/site/tools/tools.html:31
+#: templates/site/tools/tools.html:45
 msgid "Immigration Genius"
 msgstr "Gênio da Imigração"
 
-#: templates/site/tools/tools.html:32
+#: templates/site/tools/tools.html:46
 msgid ""
 "Answer some questions and get a final destination where you should live and "
 "can get a visa."
@@ -8197,7 +8314,7 @@ msgstr "data de modificação"
 
 #: wannamigrate/core/models.py:51 wannamigrate/core/models.py:68
 #: wannamigrate/core/models.py:108 wannamigrate/core/models.py:143
-#: wannamigrate/core/models.py:328 wannamigrate/marketplace/models.py:124
+#: wannamigrate/core/models.py:330 wannamigrate/marketplace/models.py:124
 #: wannamigrate/marketplace/models.py:137
 #: wannamigrate/marketplace/models.py:152
 #: wannamigrate/marketplace/models.py:155
@@ -8232,7 +8349,7 @@ msgstr "imigração ativada"
 msgid "Select Country"
 msgstr "Selecione País"
 
-#: wannamigrate/core/models.py:109 wannamigrate/core/models.py:329
+#: wannamigrate/core/models.py:109 wannamigrate/core/models.py:331
 #: wannamigrate/marketplace/models.py:154
 #: wannamigrate/marketplace/models.py:523
 msgid "is active"
@@ -8266,222 +8383,222 @@ msgstr "total de usuários"
 msgid "total visitors"
 msgstr "total de visitantes"
 
-#: wannamigrate/core/models.py:327
+#: wannamigrate/core/models.py:329
 msgid "e-mail"
 msgstr "e-mail"
 
-#: wannamigrate/core/models.py:330
+#: wannamigrate/core/models.py:332
 msgid "is admin"
 msgstr "é admin"
 
-#: wannamigrate/core/models.py:332
+#: wannamigrate/core/models.py:334
 msgid "Preferred Language"
 msgstr "Idioma de Preferência"
 
-#: wannamigrate/core/models.py:389 wannamigrate/core/models.py:432
-#: wannamigrate/core/models.py:451 wannamigrate/core/models.py:493
-#: wannamigrate/core/models.py:509 wannamigrate/core/models.py:535
-#: wannamigrate/core/models.py:578 wannamigrate/core/models.py:593
-#: wannamigrate/core/models.py:604 wannamigrate/core/models.py:637
-#: wannamigrate/core/models.py:684 wannamigrate/core/models.py:699
+#: wannamigrate/core/models.py:391 wannamigrate/core/models.py:434
+#: wannamigrate/core/models.py:453 wannamigrate/core/models.py:495
+#: wannamigrate/core/models.py:511 wannamigrate/core/models.py:537
+#: wannamigrate/core/models.py:580 wannamigrate/core/models.py:595
+#: wannamigrate/core/models.py:606 wannamigrate/core/models.py:639
+#: wannamigrate/core/models.py:686 wannamigrate/core/models.py:701
 #: wannamigrate/marketplace/models.py:30
 #: wannamigrate/marketplace/models.py:199
 #: wannamigrate/marketplace/models.py:450 wannamigrate/points/models.py:196
 msgid "user"
 msgstr "usuário"
 
-#: wannamigrate/core/models.py:390
+#: wannamigrate/core/models.py:392
 msgid "Did you complete any studies in a regional part of Australia"
 msgstr "Você completou algum curso em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:391
+#: wannamigrate/core/models.py:393
 msgid "partner/spouse education level"
 msgstr "escolaridade do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:433 wannamigrate/core/models.py:579
-#: wannamigrate/core/models.py:685 wannamigrate/core/models.py:700
+#: wannamigrate/core/models.py:435 wannamigrate/core/models.py:581
+#: wannamigrate/core/models.py:687 wannamigrate/core/models.py:702
 #: wannamigrate/marketplace/models.py:309 wannamigrate/points/models.py:46
 #: wannamigrate/points/models.py:66 wannamigrate/points/models.py:179
 #: wannamigrate/points/models.py:197
 msgid "country"
 msgstr "país"
 
-#: wannamigrate/core/models.py:434
+#: wannamigrate/core/models.py:436
 msgid "education level"
 msgstr "nível de escolaridade"
 
-#: wannamigrate/core/models.py:435
+#: wannamigrate/core/models.py:437
 msgid "school/university"
 msgstr "escola/universidade"
 
-#: wannamigrate/core/models.py:436
+#: wannamigrate/core/models.py:438
 msgid "start year"
 msgstr "ano de início"
 
-#: wannamigrate/core/models.py:437
+#: wannamigrate/core/models.py:439
 msgid "end year"
 msgstr "ano de término"
 
-#: wannamigrate/core/models.py:452
+#: wannamigrate/core/models.py:454
 msgid "partner/spouse english level"
 msgstr "nível de inglês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:453
+#: wannamigrate/core/models.py:455
 msgid "partner/spouse french level"
 msgstr "nível de francês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:494 wannamigrate/marketplace/models.py:325
+#: wannamigrate/core/models.py:496 wannamigrate/marketplace/models.py:325
 msgid "language"
 msgstr "idioma"
 
-#: wannamigrate/core/models.py:495
+#: wannamigrate/core/models.py:497
 msgid "language level"
 msgstr "nível no idioma"
 
-#: wannamigrate/core/models.py:510
+#: wannamigrate/core/models.py:512
 msgid "is logout"
 msgstr "é logout"
 
-#: wannamigrate/core/models.py:527
+#: wannamigrate/core/models.py:529
 msgid "Female"
 msgstr "Feminino"
 
-#: wannamigrate/core/models.py:528
+#: wannamigrate/core/models.py:530
 msgid "Male"
 msgstr "Masculino"
 
-#: wannamigrate/core/models.py:536
+#: wannamigrate/core/models.py:538
 msgid "country of citizenship"
 msgstr "país de cidadania"
 
-#: wannamigrate/core/models.py:537
+#: wannamigrate/core/models.py:539
 msgid "avatar"
 msgstr "avatar"
 
-#: wannamigrate/core/models.py:543
+#: wannamigrate/core/models.py:545
 msgid "birth date"
 msgstr "data de nascimento"
 
-#: wannamigrate/core/models.py:544
+#: wannamigrate/core/models.py:546
 msgid "gender"
 msgstr "sexo"
 
-#: wannamigrate/core/models.py:545
+#: wannamigrate/core/models.py:547
 msgid "Would you be willing to live in Regional Australia"
 msgstr "Você aceitaria morar em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:546
+#: wannamigrate/core/models.py:548
 msgid "Any family members who are citizens in other countries"
 msgstr "Algum parente que é cidadão em outros países"
 
-#: wannamigrate/core/models.py:594
+#: wannamigrate/core/models.py:596
 msgid "situation"
 msgstr "situação"
 
-#: wannamigrate/core/models.py:605
+#: wannamigrate/core/models.py:607
 msgid "percentage personal"
 msgstr "porcentagem - pessoal"
 
-#: wannamigrate/core/models.py:606
+#: wannamigrate/core/models.py:608
 msgid "percentage language"
 msgstr "porcentagem - idioma"
 
-#: wannamigrate/core/models.py:607
+#: wannamigrate/core/models.py:609
 msgid "percentage education"
 msgstr "porcentagem - escolaridade"
 
-#: wannamigrate/core/models.py:608
+#: wannamigrate/core/models.py:610
 msgid "percentage work"
 msgstr "porcetangem - trabalho"
 
-#: wannamigrate/core/models.py:609
+#: wannamigrate/core/models.py:611
 msgid "updating now"
 msgstr "atualizando agora"
 
-#: wannamigrate/core/models.py:610
+#: wannamigrate/core/models.py:612
 msgid "total answers"
 msgstr "Total de respostas"
 
-#: wannamigrate/core/models.py:611
+#: wannamigrate/core/models.py:613
 msgid "total questions"
 msgstr "total de perguntas"
 
-#: wannamigrate/core/models.py:612
+#: wannamigrate/core/models.py:614
 msgid "total profile views"
 msgstr "total de visualizações"
 
-#: wannamigrate/core/models.py:613
+#: wannamigrate/core/models.py:615
 msgid "total contracts"
 msgstr "total de contratos"
 
-#: wannamigrate/core/models.py:614
+#: wannamigrate/core/models.py:616
 msgid "total reviews"
 msgstr "total de avaliações"
 
-#: wannamigrate/core/models.py:615
+#: wannamigrate/core/models.py:617
 msgid "total topics following"
 msgstr "total de tópicos seguindo"
 
-#: wannamigrate/core/models.py:616
+#: wannamigrate/core/models.py:618
 msgid "total questions following"
 msgstr "total de perguntas seguindo"
 
-#: wannamigrate/core/models.py:617
+#: wannamigrate/core/models.py:619
 msgid "total blogposts following"
 msgstr "total de posts seguindo"
 
-#: wannamigrate/core/models.py:618
+#: wannamigrate/core/models.py:620
 msgid "total users following"
 msgstr "Total de usuários seguindo"
 
-#: wannamigrate/core/models.py:619
+#: wannamigrate/core/models.py:621
 msgid "total users followers"
 msgstr "total de seguidores"
 
-#: wannamigrate/core/models.py:620
+#: wannamigrate/core/models.py:622
 msgid "total favorite questions"
 msgstr "total de perguntas favoritas"
 
-#: wannamigrate/core/models.py:621
+#: wannamigrate/core/models.py:623
 msgid "total favorite blogposts"
 msgstr "total de posts favoritos"
 
-#: wannamigrate/core/models.py:638
+#: wannamigrate/core/models.py:640
 msgid "occupation"
 msgstr "profissão"
 
-#: wannamigrate/core/models.py:639
+#: wannamigrate/core/models.py:641
 msgid "Do you have a partner/spouse with proved skills"
 msgstr ""
 "Você tem um(a) esposo(a) (ou união estável) com Habilidades Comprovadas"
 
-#: wannamigrate/core/models.py:640
+#: wannamigrate/core/models.py:642
 msgid "are you willing to invest money on the country of destination"
 msgstr "Você pretende investir dinheiro no país de destino"
 
-#: wannamigrate/core/models.py:641
+#: wannamigrate/core/models.py:643
 msgid "do you have a startup recommendation letter approved by canada"
 msgstr "Você tem uma carta de recomendação de sua startup aprovada pelo Canadá"
 
-#: wannamigrate/core/models.py:642
+#: wannamigrate/core/models.py:644
 msgid "Did you complete a Professional Year Course in Australia"
 msgstr "Você fez um curso de 'Professional Year' na Austrália"
 
-#: wannamigrate/core/models.py:643
+#: wannamigrate/core/models.py:645
 msgid "If you have a partner/spouse, has he/she worked or studied in Canada"
 msgstr ""
 "Se você tem um(a) esposo(a) (ou união estável), ele(a) já trabalhou ou "
 "estudou no Canadá"
 
-#: wannamigrate/core/models.py:644
+#: wannamigrate/core/models.py:646
 msgid "Do you have a work offer overseas"
 msgstr "Você tem uma proposta de trabalho no exterior"
 
-#: wannamigrate/core/models.py:701
+#: wannamigrate/core/models.py:703
 msgid "company"
 msgstr "empresa"
 
-#: wannamigrate/core/models.py:702
+#: wannamigrate/core/models.py:704
 msgid "Duration of Employment"
 msgstr "Duração do Emprego"
 
@@ -8697,12 +8814,12 @@ msgstr "alterado pelo usuário"
 msgid "Select Service"
 msgstr "Selecione Serviço"
 
-#: wannamigrate/marketplace/views.py:58
+#: wannamigrate/marketplace/views.py:60
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:59 wannamigrate/marketplace/views.py:194
-#: wannamigrate/marketplace/views.py:293
+#: wannamigrate/marketplace/views.py:61 wannamigrate/marketplace/views.py:311
+#: wannamigrate/marketplace/views.py:410
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -8710,7 +8827,7 @@ msgstr ""
 "Tome decisões mais rápidas e seguras no planejamento de mudar de país.  "
 "Obtenha ajuda de um experts em imigração no Wanna Migrate."
 
-#: wannamigrate/marketplace/views.py:149
+#: wannamigrate/marketplace/views.py:151
 msgid ""
 "can be hired through Wanna Migrate. Sign-up to connect with thousands of "
 "experts in immigration and related."
@@ -8718,31 +8835,55 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:193
+#: wannamigrate/marketplace/views.py:201
+msgid "E-Books - Immigration Guides - Wanna Migrate"
+msgstr "E-Books - Guias de Imigração - Wanna Migrate"
+
+#: wannamigrate/marketplace/views.py:202
+msgid ""
+"Download our complete guides about immigrating to Canada, immigration to "
+"Australia and others."
+msgstr ""
+"Faça o download de nossos guias completos de Imigração para o Canadá, "
+"Imigração para a Austrália e outros."
+
+#: wannamigrate/marketplace/views.py:270
+msgid "Build your International CV - Wanna Migrate"
+msgstr "Crie seu Currículo Internacional - Wanna Migrate"
+
+#: wannamigrate/marketplace/views.py:271
+msgid ""
+"We will help you out by creating your international CV, cover letter and "
+"Linkedin profile."
+msgstr ""
+"Ajudaremos você a criar o seu currículo internacional, carta de apresentação "
+"e perfil do Linkedin."
+
+#: wannamigrate/marketplace/views.py:310
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:292
+#: wannamigrate/marketplace/views.py:409
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:301
+#: wannamigrate/marketplace/views.py:418
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:304
+#: wannamigrate/marketplace/views.py:421
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:307
+#: wannamigrate/marketplace/views.py:424
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:310
+#: wannamigrate/marketplace/views.py:427
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:313
+#: wannamigrate/marketplace/views.py:430
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 
@@ -9277,51 +9418,51 @@ msgstr "Você possui países duplicados para dar suporte."
 msgid "You must choose different services for supported services."
 msgstr "Você possui serviços duplicados para dar suporte."
 
-#: wannamigrate/site/views.py:180
+#: wannamigrate/site/views.py:188
 msgid "Login - Wanna Migrate"
 msgstr "Login - Wanna Migrate"
 
-#: wannamigrate/site/views.py:199
+#: wannamigrate/site/views.py:207
 msgid "Invalid login. Please try again."
 msgstr "Login inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:243
+#: wannamigrate/site/views.py:254
 msgid "Sign Up - Wanna Migrate"
 msgstr "Cadastre-se - Wanna Migrate"
 
-#: wannamigrate/site/views.py:318
+#: wannamigrate/site/views.py:335
 msgid "Recover Password - Wanna Migrate"
 msgstr "Recupere sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:336
+#: wannamigrate/site/views.py:353
 msgid "Password reset instructions were successfully sent to your e-mail."
 msgstr "As instruções para redefinição de senha foram enviados por e-mail."
 
-#: wannamigrate/site/views.py:370
+#: wannamigrate/site/views.py:387
 msgid "Reset Password - Wanna Migrate"
 msgstr "Redefina sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:383
+#: wannamigrate/site/views.py:400
 msgid "Password successfully updated."
 msgstr "Senha alterada com sucesso."
 
-#: wannamigrate/site/views.py:410
+#: wannamigrate/site/views.py:427
 msgid "Contact Us - Wanna Migrate"
 msgstr "Contato - Wanna Migrate"
 
-#: wannamigrate/site/views.py:426
+#: wannamigrate/site/views.py:443
 msgid "Your message was successfully sent."
 msgstr "Sua mensagem foi enviada com sucesso."
 
-#: wannamigrate/site/views.py:453
+#: wannamigrate/site/views.py:470
 msgid "How it Works - Wanna Migrate"
 msgstr "Como Funciona - Wanna Migrate"
 
-#: wannamigrate/site/views.py:478
+#: wannamigrate/site/views.py:495
 msgid "Become a Service Provider - Wanna Migrate"
 msgstr "Torne-se um Prestador de Serviços - Wanna Migrate"
 
-#: wannamigrate/site/views.py:479
+#: wannamigrate/site/views.py:496
 msgid ""
 "Wanna Migrate brings online clients to you. We are specialized in attracting "
 "people planning to migrate to another country, temporarily or permanently."
@@ -9330,11 +9471,11 @@ msgstr ""
 "pessoas planejando migrar para um novo país, de forma temporária ou "
 "permanente."
 
-#: wannamigrate/site/views.py:505
+#: wannamigrate/site/views.py:522
 msgid "Step-by-Step to Immigrate to Australia - Wanna Migrate"
 msgstr "Passo-a-Passo para Imigrar para a Austrália - Wanna Migrate"
 
-#: wannamigrate/site/views.py:506
+#: wannamigrate/site/views.py:523
 msgid ""
 "A step-by-step initial guide to let you know your options to migrate to "
 "Australia"
@@ -9342,11 +9483,11 @@ msgstr ""
 "Um passo-a-passo inicial para lhe informar suas opções de migrar para a "
 "Austrália"
 
-#: wannamigrate/site/views.py:508
+#: wannamigrate/site/views.py:525
 msgid "Step-by-Step to Immigrate to Canada - Wanna Migrate"
 msgstr "Passo-a-Passo para Imigrar para o Canadá - Wanna Migrate"
 
-#: wannamigrate/site/views.py:509
+#: wannamigrate/site/views.py:526
 msgid ""
 "A step-by-step initial guide to let you know your options to migrate to "
 "Canada"
@@ -9354,23 +9495,11 @@ msgstr ""
 "Um passo-a-passo inicial para lhe informar suas opções de migrar para o "
 "Canadá"
 
-#: wannamigrate/site/views.py:554
-msgid "E-Books - Immigration Guides - Wanna Migrate"
-msgstr "E-Books - Guias de Imigração - Wanna Migrate"
-
-#: wannamigrate/site/views.py:555
-msgid ""
-"Download our complete guides about immigrating to Canada, immigration to "
-"Australia and others."
-msgstr ""
-"Faça o download de nossos guias completos de Imigração para o Canadá, "
-"Imigração para a Austrália e outros."
-
-#: wannamigrate/site/views.py:589
+#: wannamigrate/site/views.py:556
 msgid "Immigration Tools - Wanna Migrate"
 msgstr "Ferramentas para Imigração - Wanna Migrate"
 
-#: wannamigrate/site/views.py:590
+#: wannamigrate/site/views.py:557
 msgid ""
 "Use our tools to help you with your immigration plan. You can use an "
 "immigration calculator, download immigration guides and more."
@@ -9379,43 +9508,43 @@ msgstr ""
 "pode usar a calculadora de imigração, fazer download de guias de imigração e "
 "muito mais."
 
-#: wannamigrate/site/views.py:617
+#: wannamigrate/site/views.py:584
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:635
+#: wannamigrate/site/views.py:602
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:660
+#: wannamigrate/site/views.py:627
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:691
+#: wannamigrate/site/views.py:658
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:719
+#: wannamigrate/site/views.py:686
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:836 wannamigrate/site/views.py:906
+#: wannamigrate/site/views.py:803 wannamigrate/site/views.py:873
 msgid "New message from "
 msgstr "Nova mensagem de "
 
-#: wannamigrate/site/views.py:942
+#: wannamigrate/site/views.py:909
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1028
+#: wannamigrate/site/views.py:995
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1082
+#: wannamigrate/site/views.py:1049
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1100
+#: wannamigrate/site/views.py:1067
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
