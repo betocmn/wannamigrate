@@ -219,6 +219,56 @@ def ebook( request ):
 
 
 #######################
+# IELTS COURSE - VIEWS
+#######################
+def ielts( request ):
+    """
+    Sales page for IELTS Course
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
+        if not product:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # saves details to session
+        request.session['payment'] = {
+            'product': product
+        }
+
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_ebooks'] = True
+
+    # if language is english, we show warning that only portuguese guides are available for now
+    if translation.get_language() == "en":
+        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
+
+    # Print Template
+    return render( request, 'marketplace/ielts/ielts.html', template_data )
+
+
+
+
+
+#######################
 # INTERNATIONAL CV - VIEWS
 #######################
 def international_cv( request ):
@@ -242,23 +292,28 @@ def international_cv( request ):
         if not provider or not service_type or not provider_service_type:
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-        # saves service
-        service = Service()
-        service.service_price = provider_service_type.price
-        service.description = service_type.name
-        service.user = request.user
-        service.provider = provider
-        service.service_type = service_type
-        service.service_status_id = ServiceStatus.get_status_from_order_status()
-        service.save()
-
-        # saves details to session
-        request.session['payment'] = {
+        # order information
+        payment_info = {
             'provider': provider,
             'service_type': service_type,
             'provider_service_type': provider_service_type,
-            'service': service
         }
+
+        # saves service
+        if request.user.is_authenticated():
+            service = Service()
+            service.service_price = provider_service_type.price
+            service.description = service_type.name
+            service.user = request.user
+            service.provider = provider
+            service.service_type = service_type
+            service.service_status_id = ServiceStatus.get_status_from_order_status()
+            service.save()
+            payment_info['service'] = service
+
+        # saves details to session
+        request.session['payment'] = payment_info
+
         return HttpResponseRedirect( reverse( "marketplace:payment" ) )
 
     else:
@@ -297,11 +352,23 @@ def payment( request ):
 
     # Only allows if coming from form submission on a page that set a session
     if ( 'payment' not in request.session or not request.session['payment'] ) \
-        or ( 'service' not in request.session['payment'] and 'product' not in request.session['payment'] ):
+        or ( 'service_type' not in request.session['payment'] and 'product' not in request.session['payment'] ):
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # defines if it's a service or product
-    is_service = True if 'service' in request.session['payment'] else False
+    is_service = True if 'service_type' in request.session['payment'] else False
+
+    # If it's a service and it was not saved yet
+    if is_service and 'service' not in request.session['payment']:
+        service = Service()
+        service.service_price = request.session['payment']['provider_service_type'].price
+        service.description = request.session['payment']['service_type'].name
+        service.user = request.user
+        service.provider = request.session['payment']['provider']
+        service.service_type = request.session['payment']['service_type']
+        service.service_status_id = ServiceStatus.get_status_from_order_status()
+        service.save()
+        request.session['payment']['service'] = service
 
     # Initializes template data dictionary
     template_data = {}
@@ -502,7 +569,7 @@ def payment_api_update( request ):
 
             # Sends Order Confirmation email to PROVIDER
             # TODO Change this to a celery/signal background task
-            if order.service_id:
+            if order.service_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
                 Mailer.send_order_confirmation_provider( user, order, provider )
 
             # Sends Order download link to USER (if it's a product)

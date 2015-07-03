@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     # E-books
     url( r'^ebooks/$', views.ebook, name = 'ebook' ),
 
+    # Course IELTS
+    url( r'^course/ielts/$', views.ielts, name = 'ielts' ),
+
     # International CV
     url( r'^international-cv/$', views.international_cv, name = 'international_cv' ),
 

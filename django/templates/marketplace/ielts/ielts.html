@@ -1,0 +1,257 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "common/jquery-flexslider/css/flexslider.css" %}" />
+    <link rel="stylesheet" href="{% static "common/light-gallery/css/lightGallery.css" %}" />
+
+{% endblock head %}
+
+{% block body %}
+    <body class="dashboard e-books">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block header %}
+    {{ block.super }}
+    <div class="clearfix"></div>
+    <div class="content_e_book">
+        <div class="title">
+            {% trans 'IELTS Course' %}
+        </div>
+        <div class="text">
+            {% trans 'Study online for your English Exam' %}
+        </div>
+        <div class="text2">
+            {% trans 'Made by specialists' %}
+        </div>
+        <a href="#" class="scroll-down">
+            <img src="{% static 'site/img/arrow_bottom.png' %}" alt="{% trans 'arrow-bottom' %}" />
+        </a>
+    </div>
+{% endblock header %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <form id="product_form" method="post" action="">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" id="product_id" value="" />
+    </form>
+
+    {% if LANGUAGE_CODE == 'en' %}
+        <section class="books_block">
+            {% include "site/_common/status.html" %}
+        </section>
+    {% endif %}
+    
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Guide - How to move to Canada' %}
+            </div>
+            <div class="text">
+                {% trans "The perfect guide if you want to live in Canada and don't know where to begin. You will learn:" %}
+                <ul>
+                    <li>{% trans "Why Canada and your immigration options" %}</li>
+                    <li>{% trans "How to start and execute your plan" %}</li>
+                    <li>{% trans "How to study, work and do business in Canada" %}</li>
+                    <li>{% trans "How to take your family to Canada" %}</li>
+                </ul>
+                <span class="small">{% trans "You will receive a link to download the ebook in PDF." %}</span>
+            </div>
+            <div class="books_bottom">
+                <div class="price">
+                    R$ <span>19,00<sup></sup><!--<sup>90</sup>--></span>
+                </div>
+                <div class="but">
+                    <a href="#" data-productid="1" class="bt-edit button">{% trans "Buy Guide" %}</a>
+                </div>
+                <div class="preview">
+                    <a href="#" class="open-gallery">{% trans "preview book" %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul class="gallery">
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-2.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-3.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-4.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-5.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-6.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-7.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+    <div class="line"></div>
+
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Guide - How to move to Australia' %}
+            </div>
+            <div class="text">
+                {% trans "Coming soon!" %}
+                <!--
+                <ul>
+                    <li>{% trans "Why Canada and your immigration options" %}</li>
+                    <li>{% trans "How to start and execute your plan" %}</li>
+                    <li>{% trans "How to study, work and do business in Canada" %}</li>
+                    <li>{% trans "How to take your family to Canada" %}</li>
+                </ul>
+                -->
+            </div>
+            <div class="books_bottom">
+                <!--
+                <div class="price">
+                    R$ <span>19,00<sup></sup></span>
+                </div>
+                <div class="but">
+                    <a href="#" class="bt-edit button">{% trans "Buy Guide" %}</a>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="right">
+            <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <div class="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our readers say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "You guys built a very rich content, with excellent hints. This book could easily save months of research of information." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-tania.png' %}" alt="{% trans 'testmonial-tania-antonieli' %}" />
+                        </div>
+                        <div class="text2">Tânia Antonieli<br /><span>{% trans "Project Manager" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our readers say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "I had no idea I had most of the requirements to get a visa to live in Canada until I read this book." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-igor.png' %}" alt="{% trans 'testmonial-igor-freitas' %}" />
+                        </div>
+                        <div class="text2">Igor Freitas<br /><span>{% trans "Personal Trainer and Musician" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="call_to_action">
+        <div class="left">
+            {% trans "Sign-up and get more help" %}
+        </div>
+        <div class="but">
+            <a href="{% url 'site:dashboard' %}" class="bt-edit button">{% trans "Start now. It's free" %}</a>
+        </div>
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-flexslider/js/jquery.flexslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/light-gallery/js/lightGallery.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // submits form for each button (from books)
+            $( '.books_bottom .but .button' ).click( function( event ) {
+                event.preventDefault();
+                $( "#product_id" ).val( $( this ).attr( 'data-productid' ) );
+                $( "#product_form" ).submit();
+            });
+
+            // plugin for testmonials slides
+            $( '.flexslider' ).flexslider({
+                animation: "slide"
+            });
+
+            // scrolls down arrow effect
+            $( 'a.scroll-down' ).click( function( event ) {
+                event.preventDefault();
+                $('html,body').animate({
+                  scrollTop: $( ".books_block").first().offset().top
+                }, 1000);
+            });
+
+            // makes arrow bounce
+            $( "a.scroll-down img" ).effect( "bounce", { distance: 40, times: 10 }, 3400 );
+
+            // Image gallery
+            $( ".gallery" ).lightGallery({
+                lang: { allPhotos: '{% trans "First pages" %}' }
+            });
+            $( 'a.open-gallery' ).click( function( event ) {
+                event.preventDefault();
+                $( ".gallery li" ).first().trigger( "click" );
+            });
+
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}
