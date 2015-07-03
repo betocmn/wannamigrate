@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-03 15:56-0300\n"
+"POT-Creation-Date: 2015-07-03 19:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2795,6 +2795,39 @@ msgid ""
 msgstr ""
 "Ajudaremos você a criar o seu currículo internacional, carta de apresentação "
 "e perfil do Linkedin."
+
+#: templates/db_translations/marketplace_servicetype.html:24
+msgid "IELTS Express Online Course"
+msgstr "Curso Online IELTS Express"
+
+#: templates/db_translations/marketplace_servicetype.html:24
+msgid ""
+"IELTS Express is a fast online preparation course for the IELTS test. Our "
+"easy to use, step by step course covers all four IELTS modules. With over "
+"100 activities and approximately 200 study pages, IELTS Express will boost "
+"your confidence and help improve your IELTS score."
+msgstr ""
+"IELTS Express é uma preparação online rápida para a prova IELTS. "
+"Nosso curso intuitivo, em formato de passo-a-passo, cobre todos os quatro "
+"módulos. Com mais de 100 atividades e aproximadamente 200 páginas para estudo, IELTS Express "
+"irá deixá-lo confiante e pronto para melhorar sua nota no IELTS."
+
+#: templates/db_translations/marketplace_servicetype.html:25
+msgid "IELTS Master Online Course"
+msgstr "Curso Online IELTS Master"
+
+#: templates/db_translations/marketplace_servicetype.html:25
+msgid ""
+"IELTS Master is a comprehensive online preparation course for the IELTS "
+"test. You get 3 months access to our easy to use, step by step course. With "
+"four practice tests, recording tools to practice your speaking and online "
+"tutors, IELTS Master will boost your confidence and help improve your IELTS "
+"score."
+msgstr ""
+"IELTS Master é um curso online abrangente para a prova IELTS. "
+"Você terá 3 meses de acesso ao nosso curso intuitivo, em formato de passo-a-passo. "
+"Com quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master irá "
+"deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -6078,21 +6111,12 @@ msgstr "descer"
 #: templates/marketplace/ebook/ebook.html:99
 #: templates/marketplace/ebook/ebook.html:102
 #: templates/marketplace/ebook/ebook.html:105
-#: templates/marketplace/ielts/ielts.html:60
-#: templates/marketplace/ielts/ielts.html:87
-#: templates/marketplace/ielts/ielts.html:90
-#: templates/marketplace/ielts/ielts.html:93
-#: templates/marketplace/ielts/ielts.html:96
-#: templates/marketplace/ielts/ielts.html:99
-#: templates/marketplace/ielts/ielts.html:102
-#: templates/marketplace/ielts/ielts.html:105
 #: templates/qa/blogpost/view.html:125 templates/qa/question/view.html:196
 #: templates/site/guide/guide.html:36
 msgid "Guide - How to move to Canada"
 msgstr "Guia - Como mudar para o Canadá"
 
 #: templates/marketplace/ebook/ebook.html:63
-#: templates/marketplace/ielts/ielts.html:63
 msgid ""
 "The perfect guide if you want to live in Canada and don't know where to "
 "begin. You will learn:"
@@ -6102,126 +6126,114 @@ msgstr ""
 
 #: templates/marketplace/ebook/ebook.html:65
 #: templates/marketplace/ebook/ebook.html:123
-#: templates/marketplace/ielts/ielts.html:65
-#: templates/marketplace/ielts/ielts.html:123
 msgid "Why Canada and your immigration options"
 msgstr "Por que o Canadá e suas opções de imigração"
 
 #: templates/marketplace/ebook/ebook.html:66
 #: templates/marketplace/ebook/ebook.html:124
-#: templates/marketplace/ielts/ielts.html:66
-#: templates/marketplace/ielts/ielts.html:124
 msgid "How to start and execute your plan"
 msgstr "Como iniciar e executar o seu plano"
 
 #: templates/marketplace/ebook/ebook.html:67
 #: templates/marketplace/ebook/ebook.html:125
-#: templates/marketplace/ielts/ielts.html:67
-#: templates/marketplace/ielts/ielts.html:125
 msgid "How to study, work and do business in Canada"
 msgstr "Como estudar, trabalhar e fazer negócios no Canadá"
 
 #: templates/marketplace/ebook/ebook.html:68
 #: templates/marketplace/ebook/ebook.html:126
-#: templates/marketplace/ielts/ielts.html:68
-#: templates/marketplace/ielts/ielts.html:126
 msgid "How to take your family to Canada"
 msgstr "Como levar sua família para o Canadá"
 
 #: templates/marketplace/ebook/ebook.html:70
-#: templates/marketplace/ielts/ielts.html:70
 msgid "You will receive a link to download the ebook in PDF."
 msgstr "Você receberá um link para baixar o ebook em PDF."
 
 #: templates/marketplace/ebook/ebook.html:77
 #: templates/marketplace/ebook/ebook.html:136
-#: templates/marketplace/ielts/ielts.html:77
-#: templates/marketplace/ielts/ielts.html:136
 msgid "Buy Guide"
 msgstr "Comprar"
 
 #: templates/marketplace/ebook/ebook.html:80
-#: templates/marketplace/ielts/ielts.html:80
 msgid "preview book"
 msgstr "preview do ebook"
 
 #: templates/marketplace/ebook/ebook.html:117
 #: templates/marketplace/ebook/ebook.html:142
-#: templates/marketplace/ielts/ielts.html:117
-#: templates/marketplace/ielts/ielts.html:142
 msgid "Guide - How to move to Australia"
 msgstr "Guia - Como mudar para a Austrália"
 
 #: templates/marketplace/ebook/ebook.html:120
-#: templates/marketplace/ielts/ielts.html:120
 msgid "Coming soon!"
 msgstr "Em breve!"
 
 #: templates/marketplace/ebook/ebook.html:154
-#: templates/marketplace/ebook/ebook.html:173
-#: templates/marketplace/ielts/ielts.html:154
-#: templates/marketplace/ielts/ielts.html:173
-msgid "What our readers say"
-msgstr "Opinião de quem já leu"
+#: templates/marketplace/ielts/ielts.html:160
+msgid "What our users say"
+msgstr "O que nossos usuários falam"
 
 #: templates/marketplace/ebook/ebook.html:157
 #: templates/marketplace/ebook/ebook.html:176
-#: templates/marketplace/ielts/ielts.html:157
-#: templates/marketplace/ielts/ielts.html:176
+#: templates/marketplace/ielts/ielts.html:163
+#: templates/marketplace/ielts/ielts.html:182
 msgid "quotes"
 msgstr "depoimentos"
 
 #: templates/marketplace/ebook/ebook.html:160
-#: templates/marketplace/ielts/ielts.html:160
+#: templates/marketplace/ielts/ielts.html:166
 msgid ""
-"You guys built a very rich content, with excellent hints. This book could "
+"You guys built a very rich content, with excellent hints. This guide could "
 "easily save months of research of information."
 msgstr ""
-"O site conseguiu criar um conteúdo super rico, com dicas geniais. O livro "
+"O site conseguiu criar um conteúdo super rico, com dicas geniais. Este guia "
 "pode facilmente economizar meses de trabalho de busca por informação."
 
 #: templates/marketplace/ebook/ebook.html:164
-#: templates/marketplace/ielts/ielts.html:164
+#: templates/marketplace/ielts/ielts.html:170
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
 #: templates/marketplace/ebook/ebook.html:166
-#: templates/marketplace/ielts/ielts.html:166
+#: templates/marketplace/ielts/ielts.html:172
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
-#: templates/marketplace/ebook/ebook.html:179
+#: templates/marketplace/ebook/ebook.html:173
 #: templates/marketplace/ielts/ielts.html:179
+msgid "What our readers say"
+msgstr "Opinião de quem já leu"
+
+#: templates/marketplace/ebook/ebook.html:179
+#: templates/marketplace/ielts/ielts.html:185
 msgid ""
 "I had no idea I had most of the requirements to get a visa to live in Canada "
-"until I read this book."
+"until I read the e-book."
 msgstr ""
 "Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
-"este livro. Agora, esta é uma das minhas possibilidades para os próximos "
+"o e-book. Agora, esta é uma das minhas possibilidades para os próximos "
 "anos."
 
 #: templates/marketplace/ebook/ebook.html:183
-#: templates/marketplace/ielts/ielts.html:183
+#: templates/marketplace/ielts/ielts.html:189
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
 #: templates/marketplace/ebook/ebook.html:185
-#: templates/marketplace/ielts/ielts.html:185
+#: templates/marketplace/ielts/ielts.html:191
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
 
 #: templates/marketplace/ebook/ebook.html:195
-#: templates/marketplace/ielts/ielts.html:195
+#: templates/marketplace/ielts/ielts.html:201
 msgid "Sign-up and get more help"
 msgstr "Cadastre-se e obtenha ajuda"
 
 #: templates/marketplace/ebook/ebook.html:198
-#: templates/marketplace/ielts/ielts.html:198
+#: templates/marketplace/ielts/ielts.html:204
 msgid "Start now. It's free"
 msgstr "Comece gratuitamente"
 
 #: templates/marketplace/ebook/ebook.html:244
-#: templates/marketplace/ielts/ielts.html:244
+#: templates/marketplace/ielts/ielts.html:251
 msgid "First pages"
 msgstr "Primeiras páginas"
 
@@ -6236,6 +6248,128 @@ msgstr "Estude online para a prova de Inglês"
 #: templates/marketplace/ielts/ielts.html:34
 msgid "Made by specialists"
 msgstr "Feito por especialistas"
+
+#: templates/marketplace/ielts/ielts.html:54
+#: templates/marketplace/ielts/ielts.html:106
+msgid "Online Course - IELTS Express"
+msgstr "Curso Online - IELTS Express"
+
+#: templates/marketplace/ielts/ielts.html:57
+msgid ""
+"IELTS Express is a <span>fast</span> online preparation course for the IELTS "
+"test. Our easy to use, step by step course covers all four IELTS modules. "
+"With over 100 activities and approximately 200 study pages, IELTS Express "
+"will boost your confidence and help improve your IELTS score. You will get:"
+msgstr ""
+"IELTS Express é uma preparação online <span>rápida</span> para a prova IELTS. "
+"Nosso curso intuitivo, em formato de passo-a-passo, cobre todos os quatro "
+"módulos. Com mais de 100 atividades e aproximadamente 200 páginas para estudo, IELTS Express "
+"irá deixá-lo confiante e pronto para melhorar sua nota no IELTS. Você receberá:"
+
+#: templates/marketplace/ielts/ielts.html:59
+#: templates/marketplace/ielts/ielts.html:111
+msgid "Skype call for a course introduction"
+msgstr "Sessão no Skype para uma apresentação do curso"
+
+#: templates/marketplace/ielts/ielts.html:60
+msgid "45 days access"
+msgstr "45 dias de acesso"
+
+#: templates/marketplace/ielts/ielts.html:61
+msgid "Over 100 interactive activities"
+msgstr "Mais de 100 atividades interativas"
+
+#: templates/marketplace/ielts/ielts.html:62
+msgid "Answers for all activities"
+msgstr "Respostas para todas as atividades"
+
+#: templates/marketplace/ielts/ielts.html:63
+msgid "Clear explanations and examples for each strategy and skill"
+msgstr "Explicações claras e exemplos de estratégias para a prova"
+
+#: templates/marketplace/ielts/ielts.html:64
+msgid "IELTS test tips and study strategies"
+msgstr "Dicas para a prova IELTS e estratégias de estudo"
+
+#: templates/marketplace/ielts/ielts.html:65
+msgid "Definitions of unfamiliar words"
+msgstr "Definições de palavras não familiares"
+
+#: templates/marketplace/ielts/ielts.html:66
+msgid "Personal feedback on 1 writing task"
+msgstr "Feedback individual para 1 atividade de escrita"
+
+#: templates/marketplace/ielts/ielts.html:68
+#: templates/marketplace/ielts/ielts.html:120
+msgid ""
+"After the payment, we will contact you to schedule a skype call to give you "
+"all the instructions."
+msgstr ""
+"Após o pagamento, entraremos em contato para agendar uma ligação por skype e lhe fornecer "
+"o treinamento inicial."
+
+#: templates/marketplace/ielts/ielts.html:75
+msgid "Buy Course"
+msgstr "Comprar"
+
+#: templates/marketplace/ielts/ielts.html:78
+#: templates/marketplace/ielts/ielts.html:130
+msgid "preview course"
+msgstr "preview do curso"
+
+#: templates/marketplace/ielts/ielts.html:85
+#: templates/marketplace/ielts/ielts.html:88
+#: templates/marketplace/ielts/ielts.html:91
+#: templates/marketplace/ielts/ielts.html:94
+#: templates/marketplace/ielts/ielts.html:137
+#: templates/marketplace/ielts/ielts.html:140
+#: templates/marketplace/ielts/ielts.html:143
+#: templates/marketplace/ielts/ielts.html:146
+msgid "Online Course IELTS Express"
+msgstr "Curso Online IELTS Express"
+
+#: templates/marketplace/ielts/ielts.html:109
+msgid ""
+"IELTS Master is a comprehensive online preparation course for the IELTS "
+"test. You get <span>3 months</span> access to our easy to use, step by step "
+"course. With four practice tests, recording tools to practice your speaking "
+"and online tutors, IELTS Master will boost your confidence and help improve "
+"your IELTS score. You will get:"
+msgstr ""
+"IELTS Master é um curso online abrangente para a prova IELTS. "
+"Você terá <span>3 meses</span> de acesso ao nosso curso intuitivo, em formato de passo-a-passo. "
+"Com quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master irá "
+"deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS.  Você receberá: "
+
+#: templates/marketplace/ielts/ielts.html:112
+msgid "3 months access"
+msgstr "3 meses de acesso"
+
+#: templates/marketplace/ielts/ielts.html:113
+msgid ""
+"Practice tests in all 4 modules - Reading, Writing, Listening and Speaking."
+msgstr ""
+"Testes práticos em todos os 4 módulos - Reading, Writing, Listening e Speaking."
+
+#: templates/marketplace/ielts/ielts.html:114
+msgid "More than 260 activities in over 1000 study pages of content"
+msgstr "Mais de 260 atividades em mais de 1000 páginas para estudo"
+
+#: templates/marketplace/ielts/ielts.html:115
+msgid "500 pages of teaching material"
+msgstr "500 páginas de material de ensino"
+
+#: templates/marketplace/ielts/ielts.html:116
+msgid "Over 5 hours of audio recordings"
+msgstr "Mais de 5 horas de gravações em áudio"
+
+#: templates/marketplace/ielts/ielts.html:117
+msgid "Test tips and study strategies in all modules"
+msgstr "Dicas para a prova e estratégias de estudo em todos os módulos"
+
+#: templates/marketplace/ielts/ielts.html:118
+msgid "Personal feedback on 2 writing tasks"
+msgstr "Feedback individual para 2 atividades de escrita"
 
 #: templates/marketplace/international_cv/international_cv.html:27
 msgid ""
@@ -8268,29 +8402,30 @@ msgstr ""
 "Ajudamos você com todos os recursos para começar a entrar em contato com "
 "empregadores estrangeiros. CV, Carta de Apresentação e Linkedin."
 
-#: templates/site/tools/tools.html:32
+#: templates/site/tools/tools.html:33
 msgid "IELTS preparation course"
 msgstr "Curso preparatório IELTS"
 
-#: templates/site/tools/tools.html:33
+#: templates/site/tools/tools.html:34
 msgid "IELTS Preparation Course"
 msgstr "Curso Preparatório IELTS"
 
-#: templates/site/tools/tools.html:34
+#: templates/site/tools/tools.html:35
 msgid ""
 "Enroll in our online course and be ready for the English certification exam."
 msgstr ""
-"Matricule-se em nosso curso online e prepare-se para a prova de certificação de Inglês."
+"Matricule-se em nosso curso online e prepare-se para a prova de certificação "
+"de Inglês."
 
-#: templates/site/tools/tools.html:37
+#: templates/site/tools/tools.html:39
 msgid "find jobs"
 msgstr "encontre empregos"
 
-#: templates/site/tools/tools.html:38
+#: templates/site/tools/tools.html:40
 msgid "Find Jobs Overseas"
 msgstr "Encontre Empregos no Exterior"
 
-#: templates/site/tools/tools.html:39
+#: templates/site/tools/tools.html:41
 msgid ""
 "Get exposed to international employers and receive notifications about new "
 "job openings."
@@ -8298,15 +8433,15 @@ msgstr ""
 "Seja visto por empregadores internacionais e receba alertas de novas vagas "
 "em aberto em sua área."
 
-#: templates/site/tools/tools.html:42
+#: templates/site/tools/tools.html:44
 msgid "immigration genius"
 msgstr "gênio da imigração"
 
-#: templates/site/tools/tools.html:43
+#: templates/site/tools/tools.html:45
 msgid "Immigration Genius"
 msgstr "Gênio da Imigração"
 
-#: templates/site/tools/tools.html:44
+#: templates/site/tools/tools.html:46
 msgid ""
 "Answer some questions and get a final destination where you should live and "
 "can get a visa."
@@ -8876,8 +9011,8 @@ msgstr "Selecione Serviço"
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:61 wannamigrate/marketplace/views.py:378
-#: wannamigrate/marketplace/views.py:477
+#: wannamigrate/marketplace/views.py:61 wannamigrate/marketplace/views.py:394
+#: wannamigrate/marketplace/views.py:493
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -8893,11 +9028,11 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:201 wannamigrate/marketplace/views.py:251
+#: wannamigrate/marketplace/views.py:201
 msgid "E-Books - Immigration Guides - Wanna Migrate"
 msgstr "E-Books - Guias de Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:202 wannamigrate/marketplace/views.py:252
+#: wannamigrate/marketplace/views.py:202
 msgid ""
 "Download our complete guides about immigrating to Canada, immigration to "
 "Australia and others."
@@ -8905,11 +9040,21 @@ msgstr ""
 "Faça o download de nossos guias completos de Imigração para o Canadá, "
 "Imigração para a Austrália e outros."
 
-#: wannamigrate/marketplace/views.py:325
+#: wannamigrate/marketplace/views.py:270
+msgid "IELTS Online Course - Wanna Migrate"
+msgstr "Curso Online IELTS - Wanna Migrate"
+
+#: wannamigrate/marketplace/views.py:271
+msgid ""
+"Get ready for the English Exam for immigration with IELTS Online course."
+msgstr ""
+"Prepare-se para a prova de Inglês para Imigração com o curso IELTS Online."
+
+#: wannamigrate/marketplace/views.py:341
 msgid "Build your International CV - Wanna Migrate"
 msgstr "Crie seu Currículo Internacional - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:326
+#: wannamigrate/marketplace/views.py:342
 msgid ""
 "We will help you out by creating your international CV, cover letter and "
 "Linkedin profile."
@@ -8917,31 +9062,31 @@ msgstr ""
 "Ajudaremos você a criar o seu currículo internacional, carta de apresentação "
 "e perfil do Linkedin."
 
-#: wannamigrate/marketplace/views.py:377
+#: wannamigrate/marketplace/views.py:393
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:476
+#: wannamigrate/marketplace/views.py:492
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:485
+#: wannamigrate/marketplace/views.py:501
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:488
+#: wannamigrate/marketplace/views.py:504
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:491
+#: wannamigrate/marketplace/views.py:507
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:494
+#: wannamigrate/marketplace/views.py:510
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:497
+#: wannamigrate/marketplace/views.py:513
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 
