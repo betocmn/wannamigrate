@@ -13,7 +13,7 @@
 {% endblock head %}
 
 {% block body %}
-    <body class="dashboard e-books">
+    <body class="dashboard generic-product ielts-course">
 {% endblock body %}
 
 {% block background %}
@@ -43,66 +43,55 @@
 
 {% block content %}
 
-    <form id="product_form" method="post" action="">
+    <form id="service_type_form" method="post" action="">
         {% csrf_token %}
-        <input type="hidden" name="product_id" id="product_id" value="" />
+        <input type="hidden" name="service_type_id" id="service_type_id" value="" />
     </form>
-
-    {% if LANGUAGE_CODE == 'en' %}
-        <section class="books_block">
-            {% include "site/_common/status.html" %}
-        </section>
-    {% endif %}
     
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Guide - How to move to Canada' %}
+                {% trans 'Online Course - IELTS Express' %}
             </div>
             <div class="text">
-                {% trans "The perfect guide if you want to live in Canada and don't know where to begin. You will learn:" %}
+                {% trans "IELTS Express is a <span>fast</span> online preparation course for the IELTS test. Our easy to use, step by step course covers all four IELTS modules. With over 100 activities and approximately 200 study pages, IELTS Express will boost your confidence and help improve your IELTS score. You will get:" %}
                 <ul>
-                    <li>{% trans "Why Canada and your immigration options" %}</li>
-                    <li>{% trans "How to start and execute your plan" %}</li>
-                    <li>{% trans "How to study, work and do business in Canada" %}</li>
-                    <li>{% trans "How to take your family to Canada" %}</li>
+                    <li>{% trans "Skype call for a course introduction" %}</li>
+                    <li>{% trans "45 days access" %}</li>
+                    <li>{% trans "Over 100 interactive activities" %}</li>
+                    <li>{% trans "Answers for all activities" %}</li>
+                    <li>{% trans "Clear explanations and examples for each strategy and skill" %}</li>
+                    <li>{% trans "IELTS test tips and study strategies" %}</li>
+                    <li>{% trans "Definitions of unfamiliar words" %}</li>
+                    <li>{% trans "Personal feedback on 1 writing task" %}</li>
                 </ul>
-                <span class="small">{% trans "You will receive a link to download the ebook in PDF." %}</span>
+                <span class="small">{% trans "After the payment, we will contact you to schedule a skype call to give you all the instructions." %}</span>
             </div>
             <div class="books_bottom">
                 <div class="price">
-                    R$ <span>19,00<sup></sup><!--<sup>90</sup>--></span>
+                    R$ <span>135,00<sup></sup><!--<sup>90</sup>--></span>
                 </div>
                 <div class="but">
-                    <a href="#" data-productid="1" class="bt-edit button">{% trans "Buy Guide" %}</a>
+                    <a href="#" data-servicetypeid="23" class="bt-edit button">{% trans "Buy Course" %}</a>
                 </div>
                 <div class="preview">
-                    <a href="#" class="open-gallery">{% trans "preview book" %}</a>
+                    <a href="#" class="open-gallery ielts-express">{% trans "preview course" %}</a>
                 </div>
             </div>
         </div>
         <div class="right">
-            <ul class="gallery">
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+            <ul class="gallery ielts-express">
+                <li data-src="{% static 'site/img/ielts-courses-ielts-express-preview-1.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-express.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
                 </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-2.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                <li data-src="{% static 'site/img/ielts-courses-ielts-express-preview-2.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-express.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
                 </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-3.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                <li data-src="{% static 'site/img/ielts-courses-ielts-express-preview-3.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-express.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
                 </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-4.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-5.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-6.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-7.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
+                <li data-src="{% static 'site/img/ielts-courses-ielts-express-preview-4.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-express.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
                 </li>
             </ul>
         </div>
@@ -114,32 +103,49 @@
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Guide - How to move to Australia' %}
+                {% trans 'Online Course - IELTS Express' %}
             </div>
             <div class="text">
-                {% trans "Coming soon!" %}
-                <!--
+                {% trans "IELTS Master is a comprehensive online preparation course for the IELTS test. You get <span>3 months</span> access to our easy to use, step by step course. With four practice tests, recording tools to practice your speaking and online tutors, IELTS Master will boost your confidence and help improve your IELTS score. You will get:" %}
                 <ul>
-                    <li>{% trans "Why Canada and your immigration options" %}</li>
-                    <li>{% trans "How to start and execute your plan" %}</li>
-                    <li>{% trans "How to study, work and do business in Canada" %}</li>
-                    <li>{% trans "How to take your family to Canada" %}</li>
+                    <li>{% trans "Skype call for a course introduction" %}</li>
+                    <li>{% trans "3 months access" %}</li>
+                    <li>{% trans "Practice tests in all 4 modules - Reading, Writing, Listening and Speaking." %}</li>
+                    <li>{% trans "More than 260 activities in over 1000 study pages of content" %}</li>
+                    <li>{% trans "500 pages of teaching material" %}</li>
+                    <li>{% trans "Over 5 hours of audio recordings" %}</li>
+                    <li>{% trans "Test tips and study strategies in all modules" %}</li>
+                    <li>{% trans "Personal feedback on 2 writing tasks" %}</li>
                 </ul>
-                -->
+                <span class="small">{% trans "After the payment, we will contact you to schedule a skype call to give you all the instructions." %}</span>
             </div>
             <div class="books_bottom">
-                <!--
                 <div class="price">
-                    R$ <span>19,00<sup></sup></span>
+                    R$ <span>250,00<sup></sup><!--<sup>90</sup>--></span>
                 </div>
                 <div class="but">
-                    <a href="#" class="bt-edit button">{% trans "Buy Guide" %}</a>
+                    <a href="#" data-servicetypeid="24" class="bt-edit button">{% trans "Buy Course" %}</a>
                 </div>
-                -->
+                <div class="preview">
+                    <a href="#" class="open-gallery ielts-master">{% trans "preview course" %}</a>
+                </div>
             </div>
         </div>
         <div class="right">
-            <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+            <ul class="gallery ielts-master">
+                <li data-src="{% static 'site/img/ielts-courses-ielts-master-preview-1.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-master.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
+                </li>
+                <li data-src="{% static 'site/img/ielts-courses-ielts-master-preview-2.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-master.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
+                </li>
+                <li data-src="{% static 'site/img/ielts-courses-ielts-master-preview-3.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-master.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
+                </li>
+                <li data-src="{% static 'site/img/ielts-courses-ielts-master-preview-4.jpg' %}">
+                    <img src="{% static 'site/img/ielts-courses-ielts-master.png' %}" alt="{% trans 'Online Course IELTS Express' %}" />
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -151,13 +157,13 @@
                 <li>
                     <div class="flex-caption">
                     <div class="title">
-                        {% trans "What our readers say" %}
+                        {% trans "What our users say" %}
                     </div>
                     <div class="img">
                         <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
                     </div>
                     <div class="text">
-                        {% trans "You guys built a very rich content, with excellent hints. This book could easily save months of research of information." %}
+                        {% trans "You guys built a very rich content, with excellent hints. This guide could easily save months of research of information." %}
                     </div>
                     <div class="bottom">
                         <div class="img">
@@ -176,7 +182,7 @@
                         <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
                     </div>
                     <div class="text">
-                        {% trans "I had no idea I had most of the requirements to get a visa to live in Canada until I read this book." %}
+                        {% trans "I had no idea I had most of the requirements to get a visa to live in Canada until I read the e-book." %}
                     </div>
                     <div class="bottom">
                         <div class="img">
@@ -216,12 +222,13 @@
 
         $( document ).ready( function() {
 
-            // submits form for each button (from books)
-            $( '.books_bottom .but .button' ).click( function( event ) {
+            // submits form for each button
+            $( '.books_block .books_bottom .but a' ).click( function( event ) {
                 event.preventDefault();
-                $( "#product_id" ).val( $( this ).attr( 'data-productid' ) );
-                $( "#product_form" ).submit();
+                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
+                $( "#service_type_form" ).submit();
             });
+
 
             // plugin for testmonials slides
             $( '.flexslider' ).flexslider({
@@ -243,9 +250,13 @@
             $( ".gallery" ).lightGallery({
                 lang: { allPhotos: '{% trans "First pages" %}' }
             });
-            $( 'a.open-gallery' ).click( function( event ) {
+            $( 'a.open-gallery.ielts-express' ).click( function( event ) {
                 event.preventDefault();
-                $( ".gallery li" ).first().trigger( "click" );
+                $( ".gallery.ielts-express li" ).first().trigger( "click" );
+            });
+            $( 'a.open-gallery.ielts-master' ).click( function( event ) {
+                event.preventDefault();
+                $( ".gallery.ielts-master li" ).first().trigger( "click" );
             });
 
         });

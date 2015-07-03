@@ -10995,22 +10995,22 @@ ul.notifications-view li.notification-item a.notification-link span.date
 
 
 
-/* E-Books */
-.dashboard.e-books header {
+/* Landing-Page for Generic Products (E-Books, etc..) */
+.dashboard.generic-product header {
     width: 100%;
     min-height: 610px;
     background: url("../img/landing-bg3.jpg") no-repeat;
     background-size: cover;
     padding-bottom: 40px;
 }
-.dashboard.e-books header .content_e_book {
+.dashboard.generic-product header .content_e_book {
     text-align: center;
     padding-top: 170px;
 }
-.dashboard.e-books .clearfix {
+.dashboard.generic-product .clearfix {
 	clear: both;
 }
-.dashboard.e-books header .content_e_book .title {
+.dashboard.generic-product header .content_e_book .title {
     color: #FFCF01;
     font-size: 28px;
     text-transform: uppercase;
@@ -11018,7 +11018,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     line-height: 56px;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books header .content_e_book .text {
+.dashboard.generic-product header .content_e_book .text {
     color: #FFF;
     font-size: 48px;
     text-transform: uppercase;
@@ -11026,7 +11026,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     line-height: 56px;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books header .content_e_book .text2 {
+.dashboard.generic-product header .content_e_book .text2 {
     color: #FFF;
     font-size: 22px;
     text-shadow: 0 1px 1px rgba(0, 0, 1, 0.19);
@@ -11034,23 +11034,23 @@ ul.notifications-view li.notification-item a.notification-link span.date
     padding-bottom: 165px;
     font-family: 'open_sanslight';
 }
-.dashboard.e-books header .content_e_book a.scroll-down {
+.dashboard.generic-product header .content_e_book a.scroll-down {
     position: absolute;
 }
-.dashboard.e-books .books_block {
+.dashboard.generic-product .books_block {
 	text-align: center;
 	padding: 20px;
 }
-.dashboard.e-books .books_block .right ul.gallery {
+.dashboard.generic-product .books_block .right ul.gallery {
     cursor: pointer;
 }
-.dashboard.e-books .books_block .right ul.gallery li {
+.dashboard.generic-product .books_block .right ul.gallery li {
     display: none;
 }
-.dashboard.e-books .books_block .right ul.gallery li:first-child {
+.dashboard.generic-product .books_block .right ul.gallery li:first-child {
     display: block;
 }
-.dashboard.e-books .books_block .but {
+.dashboard.generic-product .books_block .but {
     float: left;
     min-width: 130px;
     max-width: 155px;
@@ -11058,43 +11058,46 @@ ul.notifications-view li.notification-item a.notification-link span.date
     padding-bottom: 5px;
     text-transform: uppercase;
 }
-.dashboard.e-books .books_block .preview {
+.dashboard.generic-product .books_block .preview {
     float: left;
     line-height: 107px;
     margin-left: 7px;
     font-size: 14px;
 }
-.dashboard.e-books .books_block .preview a {
+.dashboard.generic-product .books_block .preview a {
     color: #4f9276;
     text-decoration: none;
 }
-.dashboard.e-books .books_block .preview a:hover {
+.dashboard.generic-product .books_block .preview a:hover {
     text-decoration: underline;
 }
-.dashboard.e-books .books_block .title{
+.dashboard.generic-product .books_block .title{
 	color: #232323;
     font-size: 28px;
     padding-bottom: 28px;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books .books_block .text{
+.dashboard.generic-product .books_block .text{
     color: #555;
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
 }
-.dashboard.e-books .books_block .text .small{
+.dashboard.generic-product .books_block .text span{
+    font-family: 'open_sansbold';
+}
+.dashboard.generic-product .books_block .text .small{
     color: #555;
     font-size: 14px;
 }
-.dashboard.e-books .books_block .text ul {
+.dashboard.generic-product .books_block .text ul {
 	list-style-image: url("../img/icon_li.png");
     text-align: left;
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.dashboard.e-books .books_block .price {
+.dashboard.generic-product .books_block .price {
     color: #555;
     font-size: 16px;
     font-weight: 700;
@@ -11102,78 +11105,78 @@ ul.notifications-view li.notification-item a.notification-link span.date
     line-height: 86px;
 }
 
-.dashboard.e-books .books_block .price span sup {
+.dashboard.generic-product .books_block .price span sup {
     font-size: 22px;
 }
-.dashboard.e-books .books_block .price span{
+.dashboard.generic-product .books_block .price span{
     color: #555;
     font-size: 32px;
     line-height: 86px;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books .line{
+.dashboard.generic-product .line{
     background-color: #000;
     opacity: 0.1;
     height: 1px;
     width: 100%;
 }
-.dashboard.e-books .books_block img {
+.dashboard.generic-product .books_block img {
   max-width: 100%;
   height: auto;
 }
-.dashboard.e-books .call_to_action {
+.dashboard.generic-product .call_to_action {
   padding: 0 20px 20px 20px;
   text-align: center;
 }
-.dashboard.e-books .call_to_action .left {
+.dashboard.generic-product .call_to_action .left {
     color: #68347E;
     font-size: 36px;
     font-weight: 400;
 }
-.dashboard.e-books .call_to_action .but {
+.dashboard.generic-product .call_to_action .but {
     max-width: 195px;
     margin: 0 auto;
     padding-top: 10px;
 }
-.dashboard.e-books .flex-caption {
+.dashboard.generic-product .flex-caption {
   left: 0;
   bottom: 0;
   text-align: center;
   padding-bottom: 20%;
 }
-.dashboard.e-books .flexslider {
+.dashboard.generic-product .flexslider {
     overflow: hidden;
 }
-.dashboard.e-books .flexslider {
+.dashboard.generic-product .flexslider {
     background: url("../img/bg_slider.jpg") no-repeat;
     background-size: cover;
     border: none;
     border-radius: 0;
 }
-.dashboard.e-books .flex-caption .img {
+.dashboard.generic-product .flex-caption .img {
   width: 33px;
   height: 30px;
   margin: 0 auto;
 }
-.dashboard.e-books .flex-caption .bottom img {
+.dashboard.generic-product .flex-caption .bottom img {
   width: 75px;
   height: 75px;
   float: left;
   padding-right: 25px;
   padding-top: 15px;
 }
-.dashboard.e-books .flex-caption .bottom {
+.dashboard.generic-product .flex-caption .bottom {
   text-align: center;
   padding-right: 100px;
 }
-.dashboard.e-books .flex-caption .title {
+.dashboard.generic-product .flex-caption .title {
     color: #FFF;
     font-size: 18px;
     text-transform: uppercase;
     line-height: 86px;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books .flex-caption .text {
+.dashboard.generic-product .flex-caption .text {
     color: #FFF;
     font-size: 32px;
     font-weight: 300;
@@ -11185,74 +11188,83 @@ ul.notifications-view li.notification-item a.notification-link span.date
     padding-right: 15%;
     font-family: 'open_sanslight';
 }
-.dashboard.e-books .flex-caption .bottom .text2 {
+.dashboard.generic-product .flex-caption .bottom .text2 {
     color: #FFF;
     font-size: 14px;
     line-height: 16px;
     text-align: left;
     font-family: 'open_sansbold';
 }
-.dashboard.e-books .flex-caption .bottom .text2 span {
+.dashboard.generic-product .flex-caption .bottom .text2 span {
     font-family: 'open_sanslight';
 }
-.dashboard.e-books .flex-control-nav {
+.dashboard.generic-product .flex-control-nav {
     bottom: 40px;
 }
 @media(min-width: 768px) {
-    .dashboard.e-books .books_block {
+    .dashboard.generic-product .books_block {
         padding: 70px;
         text-align: left;
     }
-    .dashboard.e-books .books_block .left {
+    .dashboard.generic-product .books_block .left {
         width: 50%;
         float: left;
     }
-    .dashboard.e-books .books_block .right {
+    .dashboard.generic-product .books_block .right {
         width: 50%;
         float: right;
         text-align: center;
     }
-    .dashboard.e-books .books_block img {
+    .dashboard.generic-product .books_block img {
       margin: 0 auto;
     }
-    .dashboard.e-books .books_block .price {
+    .dashboard.generic-product .books_block .price {
         float: left;
     }
-    .dashboard.e-books .books_block .but {
+    .dashboard.generic-product .books_block .but {
         padding-top: 22px;
     }
-    .dashboard.e-books .books_bottom {
+    .dashboard.generic-product .books_bottom {
         text-align: left;
     }
-    .dashboard.e-books .line {
+    .dashboard.generic-product .line {
         margin-top: 50px;
     }
-    .dashboard.e-books .call_to_action {
+    .dashboard.generic-product .call_to_action {
         padding: 0 70px 70px 70px;
         text-align: center;
     }
-    .dashboard.e-books .call_to_action .left {
+    .dashboard.generic-product .call_to_action .left {
         width: 590px;
         float: left;
         margin-left: 80px;
     }
-    .dashboard.e-books .call_to_action .but {
+    .dashboard.generic-product .call_to_action .but {
         width: 35%;
         float: left;
         padding-bottom: 70px;
         padding-top: 0;
     }
-    .dashboard.e-books .flex-caption .bottom {
+    .dashboard.generic-product .flex-caption .bottom {
       padding-right: 150px;
     }
-    .dashboard.e-books .flex-caption {
+    .dashboard.generic-product .flex-caption {
       padding-bottom: 10%;
     }
-    .dashboard.e-books .flex-caption .bottom .text2 {
+    .dashboard.generic-product .flex-caption .bottom .text2 {
         line-height: 26px;
     }
 }
 
+
+/* IELTS Course page */
+.dashboard.generic-product.ielts-course header {
+    width: 100%;
+    min-height: 610px;
+    background: url("../img/landing-bg-ielts-course.jpg") no-repeat;
+    background-size: cover;
+    padding-bottom: 40px;
+}
 
 
 /* Guides - Step-by-Step */
