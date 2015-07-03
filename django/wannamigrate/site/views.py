@@ -37,7 +37,7 @@ from wannamigrate.core.models import (
     UserSituation, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, Language, Notification
 )
 from wannamigrate.marketplace.models import (
-    Provider, ProviderCountry, ProviderServiceType, Product,
+    Provider, ProviderCountry, ProviderServiceType,
     Order
 )
 from wannamigrate.core.mailer import Mailer
@@ -47,7 +47,6 @@ import pytz
 from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
 from wannamigrate.core.decorators import ajax_login_required
-from django.templatetags.static import static
 
 
 
@@ -534,56 +533,6 @@ def guide( request, country_name ):
 
     # Print Template
     return render( request, 'site/guide/guide.html', template_data )
-
-
-
-
-
-#######################
-# EBOOKS - VIEWS
-#######################
-def ebook( request ):
-    """
-    List all e-boks available
-
-    :param: request
-    :return String - HTML from The dashboard page.
-    """
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
-        if not product:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # saves details to session
-        request.session['payment'] = {
-            'product': product
-        }
-
-        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
-
-    # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_ebooks'] = True
-
-    # if language is english, we show warning that only portuguese guides are available for now
-    if translation.get_language() == "en":
-        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
-
-    # Print Template
-    return render( request, 'site/ebook/ebook.html', template_data )
 
 
 

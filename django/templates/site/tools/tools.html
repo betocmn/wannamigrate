@@ -15,10 +15,24 @@
                 </a>
             </div>
             <div class="tool ebooks">
-                <a href="{% url 'site:ebook' %}">
+                <a href="{% url 'marketplace:ebook' %}">
                     <img src="{% static 'site/img/tool-ebooks.jpg' %}" alt="{% trans 'immigration guides' %}" />
                     <h3 class="title-tool">{% trans 'Immigration Guides' %}</h3>
                     <p class="text">{% trans 'Download our complete step-by-step immigration guides.' %}</p>
+                </a>
+            </div>
+            <div class="tool calculator">
+                <a href="{% url 'marketplace:international_cv' %}">
+                    <img src="{% static 'site/img/tool-international-cv.jpg' %}" alt="{% trans 'package international cv' %}" />
+                    <h3 class="title-tool">{% trans 'Package - International CV' %}</h3>
+                    <p class="text">{% trans 'We help you with all the resources to start talking to international employers. CV, Cover letter, Linkedin, website...' %}</p>
+                </a>
+            </div>
+            <div class="tool unavailable find-jobs">
+                <a href="{% url 'marketplace:ebook' %}">
+                    <img src="{% static 'site/img/tool-ielts.jpg' %}" alt="{% trans 'IELTS preparation course' %}" />
+                    <h3 class="title-tool">{% trans 'IELTS Preparation Course' %}</h3>
+                    <p class="text">{% trans 'Enroll in our online course and be ready for the certification exam.' %}</p>
                 </a>
             </div>
             <div class="tool unavailable find-jobs">

@@ -24,6 +24,12 @@ urlpatterns = patterns('',
     # List professionals
     url( r'^professionals/$', views.professionals, name = 'professionals' ),
 
+    # E-books
+    url( r'^ebooks/$', views.ebook, name = 'ebook' ),
+
+    # International CV
+    url( r'^international-cv/$', views.international_cv, name = 'international_cv' ),
+
     # Payment Page
     url( r'^payment/$', views.payment, name = 'payment' ),
 
