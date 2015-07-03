@@ -8204,25 +8204,27 @@ msgstr "Faça o download de nossos guias completos de imigração."
 
 #: templates/site/tools/tools.html:26
 msgid "package international cv"
-msgstr ""
+msgstr "pacote cv internacional"
 
 #: templates/site/tools/tools.html:28
 msgid ""
 "We help you with all the resources to start talking to international "
 "employers. CV, Cover letter, Linkedin, website..."
 msgstr ""
+"Ajudamos você com todos os recursos para começar a entrar em contato "
+"com empregadores estrangeiros. CV, Carta de Apresentação e Linkedin."
 
 #: templates/site/tools/tools.html:33
 msgid "IELTS preparation course"
-msgstr ""
+msgstr "Curso preparatório IELTS"
 
 #: templates/site/tools/tools.html:34
 msgid "IELTS Preparation Course"
-msgstr ""
+msgstr "Curso Preparatório IELTS"
 
 #: templates/site/tools/tools.html:35
 msgid "Enroll in our online course and be ready for the certification exam."
-msgstr ""
+msgstr "Matricule-se em nosso curso online e prepare-se para a prova de certificação."
 
 #: templates/site/tools/tools.html:39
 msgid "find jobs"
