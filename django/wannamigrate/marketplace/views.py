@@ -236,30 +236,46 @@ def ielts( request ):
     if request.method == 'POST':
 
         # Identifies database records
-        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
-        if not product:
+        provider = get_object_or_false( Provider, pk = 13 )
+        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
+        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
+        if not provider or not service_type or not provider_service_type:
             return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
-        # saves details to session
-        request.session['payment'] = {
-            'product': product
+        # order information
+        payment_info = {
+            'provider': provider,
+            'service_type': service_type,
+            'provider_service_type': provider_service_type,
         }
+
+        # saves service
+        if request.user.is_authenticated():
+            service = Service()
+            service.service_price = provider_service_type.price
+            service.description = service_type.name
+            service.user = request.user
+            service.provider = provider
+            service.service_type = service_type
+            service.service_status_id = ServiceStatus.get_status_from_order_status()
+            service.save()
+            payment_info['service'] = service
+
+        # saves details to session
+        request.session['payment'] = payment_info
 
         return HttpResponseRedirect( reverse( "marketplace:payment" ) )
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
+    template_data['meta_title'] = _( 'IELTS Online Course - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Get ready for the English Exam for immigration with IELTS Online course.' )
 
     # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/ielts-course-preview-image.jpg' )
 
     # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_ebooks'] = True
+    template_data['track_conversion_view_ielts_course'] = True
 
-    # if language is english, we show warning that only portuguese guides are available for now
-    if translation.get_language() == "en":
-        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
 
     # Print Template
     return render( request, 'marketplace/ielts/ielts.html', template_data )

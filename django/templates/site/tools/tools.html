@@ -28,10 +28,12 @@
                     <p class="text">{% trans 'We help you with all the resources to start talking to international employers. CV, Cover letter, Linkedin, website...' %}</p>
                 </a>
             </div>
-            <div class="tool unavailable ielts">
+            <div class="tool ielts">
+                 <a href="{% url 'marketplace:ielts' %}">
                     <img src="{% static 'site/img/tool-ielts.jpg' %}" alt="{% trans 'IELTS preparation course' %}" />
                     <h3 class="title-tool">{% trans 'IELTS Preparation Course' %}</h3>
                     <p class="text">{% trans 'Enroll in our online course and be ready for the English certification exam.' %}</p>
+                 </a>
             </div>
             <div class="tool unavailable find-jobs">
                 <img src="{% static 'site/img/tool-find-jobs.jpg' %}" alt="{% trans 'find jobs' %}" />
