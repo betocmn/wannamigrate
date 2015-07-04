@@ -1104,7 +1104,6 @@ def dashboard( request ):
         is_new_signup = False
 
     # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_dashboard'] = True
     if is_new_signup:
         template_data['track_conversion_sign_up'] = True
 
