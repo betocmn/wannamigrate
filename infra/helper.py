@@ -21,9 +21,9 @@ SERVERS = {
     },
 
     "dev" : {
-        "IP" : "52.24.31.142",         # The IP address of the server.
+        "IP" : "52.11.204.125",         # The IP address of the server.
         "DOMAIN" : "dev.wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "development.pem",             # The keypair file used to connect to the server.
+        "KEYPAIR" : "us-west-development.pem", # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,         # The HTTP port on the server.
         "HTTPS_PORT" : 443,        # The HTTPS port on the server.
@@ -44,51 +44,41 @@ SERVERS = {
         "BRANCH" : "master",            # Vagrant server doesn't require git
     },
 
-    "prod_old" : {
-        "IP" : "52.27.96.133",         # The IP address of the server.
+    "wiki" : {
+        "IP" : "52.11.240.236",         # The IP address of the server.
         "DOMAIN" : "wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "production.pem",             # The keypair file used to connect to the server.
-        "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
-        "HTTP_PORT" : 80,         # The HTTP port on the server.
-        "HTTPS_PORT" : 443,        # The HTTPS port on the server.
-        "HTTP_FORWARDED_PORT" : 80,   # The HTTP forwarded port
-        "HTTPS_FORWARDED_PORT" : 443,  # The HTTPS forwarded port
-        "BRANCH" : "master",            # Vagrant server doesn't require git
-    },
-
-    "sup" : {
-        "IP" : "52.24.200.156",         # The IP address of the server.
-        "DOMAIN" : "wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "support.pem",             # The keypair file used to connect to the server.
+        "KEYPAIR" : "us-west-wiki.pem",             # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,               # The HTTP port on the server.
         "HTTPS_PORT" : 443,             # The HTTPS port on the server.
         "HTTP_FORWARDED_PORT" : 80,   # The HTTP forwarded port
         "HTTPS_FORWARDED_PORT" : 443,  # The HTTPS forwarded port
-        "BRANCH" : "master",            # Vagrant server doesn't require git
+        "BRANCH" : "",            # Vagrant/Wiki server doesn't require git
     },
 }
 
-
+# Global settings
 GIT_REPO = "https://github.com/humbertomn/wannamigrate.git"     # Git repository
 DEPLOYMENT_ROOT = ""                                            # Root folder for deploying web projects (Leave empty for a single project)
 VIRTUALENV_ROOT = ""                                            # Root folder for virtualenvs  (Leave empty for a single project)
 PROJECT_ALIAS = "wanna"                                        # Current project alias
 APP_NAME = "wannamigrate"                                       # Current project main application
 
-
-# Server packages
-INSTALL_PACKAGES = [ 
+# Packages to be installed for django applications
+DJANGO_PACKAGES = [
     "python3-dev", "git", "apache2", "apache2-dev",
-    "libapache2-mod-php5", "php5-mysql", "libmysqlclient-dev",
-    "mysql-client", "gettext", "libjpeg-dev", "rabbitmq-server",
+    "libmysqlclient-dev", "mysql-client", "gettext", "libjpeg-dev", "rabbitmq-server",
     "supervisor",
 ]
 
+# Packages to be installed for wiki application
+WIKI_PACKAGES = [
+    "apache2", "libapache2-mod-php5", "php5-mysql",
+    "libmysqlclient-dev", "mysql-client"
+]
 
 # Virtualenv packages
 VIRTUALENV_PACKAGES = [
-
     "django==1.7.5",
     "https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.tar.gz",
     "python-social-auth==0.2.9",
@@ -116,6 +106,9 @@ VIRTUALENV_PACKAGES = [
 # PRE-CALCULATED CONFIGURATIONS (NOT RECOMMENDED TO MODIFY)
 #############################################
 
+# Pre-calculate the available servers regex pattern
+AVAILABLE_SERVERS_PATTERN = '(' + '|'.join( sorted( SERVERS.keys() ) ) + ')'
+
 # Project root and virtualenv
 PROJECT_ROOT = DEPLOYMENT_ROOT + '/' + PROJECT_ALIAS
 PROJECT_VIRTUALENV = VIRTUALENV_ROOT + '/' + PROJECT_ALIAS + "venv"
@@ -124,10 +117,6 @@ PROJECT_VIRTUALENV = VIRTUALENV_ROOT + '/' + PROJECT_ALIAS + "venv"
 DJANGO_ALIAS = "django"
 WIKI_ALIAS = "wiki"
 WSGI_ALIAS = "wsgi_express"
-
-# PORTS
-DJANGO_LISTENING_PORT = 80
-WIKI_LISTENING_PORT = 81
 
 # Apache's default user
 APACHE_DEFAULT_USER = "www-data"
@@ -147,15 +136,16 @@ APACHE_MODS_AVAILABLE_PATH = "/etc/apache2/mods-available"      # Mods available
 # Spacing for help messages.
 N_DEFAULT_HELP_SPACING = 15
 
+
+
 WSGI_CONF = """
-WSGIPythonHome {virtualenv}
-WSGIPythonPath {django_root}:/{virtualenv}/lib/python3.4:/{virtualenv}/lib/python3.4/site-packages
+    WSGIPythonHome {virtualenv}
+    WSGIPythonPath {django_root}:/{virtualenv}/lib/python3.4:/{virtualenv}/lib/python3.4/site-packages
 """.format( django_root = DJANGO_ROOT, virtualenv = PROJECT_VIRTUALENV )
 
 # Requires formatting on the fly. Params:
 # http_port, wiki_alias, domain, wiki_root.
 WIKI_CONF = """
-    Listen {http_port}
     <VirtualHost *:{http_port}>
         ServerName {wiki_alias}.{domain}
         DocumentRoot {wiki_root}
@@ -248,37 +238,36 @@ DJANGO_CONF = """
 
 
 CELERY_CONF = """
-; ==================================
-;  celery worker supervisor example
-; ==================================
+    ; ==================================
+    ;  celery worker supervisor example
+    ; ==================================
 
-[program:celery]
-; Set full path to celery program if using virtualenv
-command=/wannavenv/bin/celery worker -A wannamigrate --loglevel=INFO
+    [program:celery]
+    ; Set full path to celery program if using virtualenv
+    command=/wannavenv/bin/celery worker -A wannamigrate --loglevel=INFO
 
-user=nobody
-directory=/wanna/django
-numprocs=1
-stdout_logfile=/var/log/celery/worker.log
-stderr_logfile=/var/log/celery/worker.log
-autostart=true
-autorestart=true
-startsecs=10
+    user=nobody
+    directory=/wanna/django
+    numprocs=1
+    stdout_logfile=/var/log/celery/worker.log
+    stderr_logfile=/var/log/celery/worker.log
+    autostart=true
+    autorestart=true
+    startsecs=10
 
-; Need to wait for currently executing tasks to finish at shutdown.
-; Increase this if you have very long running tasks.
-stopwaitsecs = 600
+    ; Need to wait for currently executing tasks to finish at shutdown.
+    ; Increase this if you have very long running tasks.
+    stopwaitsecs = 600
 
-; When resorting to send SIGKILL to the program to terminate it
-; send SIGKILL to its whole process group instead,
-; taking care of its children as well.
-killasgroup=true
+    ; When resorting to send SIGKILL to the program to terminate it
+    ; send SIGKILL to its whole process group instead,
+    ; taking care of its children as well.
+    killasgroup=true
 
-; if rabbitmq is supervised, set its priority higher
-; so it starts first
-priority=998
+    ; if rabbitmq is supervised, set its priority higher
+    ; so it starts first
+    priority=998
 """
-
 
 
 ########################################################################
@@ -295,7 +284,7 @@ def config( args ):
     """
 
     # The usage regex.
-    usage_pattern = "^(site|wiki) on (local|dev|prod)( with database)?$"
+    usage_pattern = "^(site|wiki) on {0}( with database)?$".format( AVAILABLE_SERVERS_PATTERN )
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
@@ -341,6 +330,7 @@ def config( args ):
             "sudo usermod -a -G {0} {1}".format( DEFAULT_USER_GROUP, SERVERS[ server ][ "DEFAULT_USER"] ),
             "sudo usermod -a -G {0} {1}".format( DEFAULT_USER_GROUP, APACHE_DEFAULT_USER ),
         ] )
+        remote_commands.append( "echo \"   ...DONE!\"" )
 
         # Updates apt-get
         remote_commands.append( "echo \" \"" )
@@ -349,20 +339,26 @@ def config( args ):
         remote_commands.append( "echo \"#########################\"" )
         remote_commands.append( "echo \" \"" )
         remote_commands.append( "sudo apt-get update" )
+        remote_commands.append( "echo \"   ...DONE!\"" )
 
         # Install packages
         remote_commands.append( "echo \" \"" )
-        remote_commands.append( "echo \"#########################\"" )
-        remote_commands.append( "echo \"# INSTALLING PACKAGES   #\"" )
-        remote_commands.append( "echo \"#########################\"" )
+        remote_commands.append( "echo \"##################################\"" )
+        remote_commands.append( "echo \"# INSTALLING REQUIRED PACKAGES   #\"" )
+        remote_commands.append( "echo \"##################################\"" )
         remote_commands.append( "echo \" \"" )
+
+        INSTALL_PACKAGES = DJANGO_PACKAGES if app == "site" else WIKI_PACKAGES
         for package in INSTALL_PACKAGES:
             remote_commands.append( "sudo apt-get install {0} --yes".format( package ) )
+        remote_commands.append( "echo \"   ...DONE!\"" )
 
-        # There is more things to install?
+
+        # Checks for the WITH param to know if
+        # there is more features to install, like database.
         if "with" in args:
 
-            # Should I install a local database?
+            # LOCAL DATABASE required?
             if "database" in args:
                 # Asks for root password
                 root_password = input( "Please type the root's password for MySQL: " )
@@ -384,6 +380,7 @@ def config( args ):
                     "echo mysql-server mysql-server/root_password_again password {0} | sudo debconf-set-selections".format( root_password ),
                     "sudo apt-get -y install mysql-server",
                 ] )
+                remote_commands.append( "echo \"   ...DONE!\"" )
 
 
         # Creating the project's root folder
@@ -397,6 +394,7 @@ def config( args ):
             "sudo chown {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_ROOT ),
             "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_ROOT ),
         ])
+        remote_commands.append( "echo \"   ...DONE!\"" )
 
 
         ######################################
@@ -417,10 +415,11 @@ def config( args ):
                 "sudo chown -R {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, WIKI_ROOT ),
                 "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, WIKI_ROOT ),
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
             # Formats the conf file for the given server
             wiki_conf = WIKI_CONF.format(
-                http_port = WIKI_LISTENING_PORT,
+                http_port = SERVERS[ server ][ "HTTP_PORT" ],
                 wiki_alias = WIKI_ALIAS,
                 domain = SERVERS[ server ][ "DOMAIN" ],
                 wiki_root = WIKI_ROOT
@@ -438,6 +437,7 @@ def config( args ):
                 "echo \"{0}\" > {1}/{2}.conf".format( wiki_conf, APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),
                 "sudo chmod 644 {0}/{1}.conf".format( APACHE_SITES_ENABLED_PATH, WIKI_ALIAS ),
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
 
         ################################
@@ -455,6 +455,7 @@ def config( args ):
                 "sudo chown {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_VIRTUALENV ),
                 "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_VIRTUALENV ),
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
 
             remote_commands.append( "echo \" \"" )
@@ -470,6 +471,7 @@ def config( args ):
                 "sudo pip install virtualenv",
                 "sudo rm get-pip.py",
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
             # Downloading git code.
             if server != "local":
@@ -487,6 +489,7 @@ def config( args ):
                     "rm -R temp",
                     "rm -R infra",
                 ])
+                remote_commands.append( "echo \"   ...DONE!\"" )
 
             remote_commands.append( "echo \" \"" )
             remote_commands.append( "echo \"###########################\"" )
@@ -505,14 +508,13 @@ def config( args ):
                 "deactivate",
                 "sudo chmod 755 {0}".format( PROJECT_VIRTUALENV ),
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
             remote_commands.append( "echo \" \"" )
             remote_commands.append( "echo \"#########################\"" )
             remote_commands.append( "echo \"# GENERATING CONF FILES #\"" )
             remote_commands.append( "echo \"#########################\"" )
             remote_commands.append( "echo \" \"" )
-            # Cleaning apache's default conf.
-            remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
 
             # Generates wsgi_express.load and wsgi_express.conf
             # a2enmod wsgi_express is activated later on the script
@@ -558,22 +560,31 @@ def config( args ):
                 "sudo chmod 644 /etc/supervisor/conf.d/celery.conf",
                 "sudo service supervisor restart"
             ])
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
 
+            remote_commands.append( "echo \" \"" )
+            remote_commands.append( "echo \"#################################\"" )
+            remote_commands.append( "echo \"# ENABLING SSL and WSGI_EXPRESS #\"" )
+            remote_commands.append( "echo \"#################################\"" )
+            remote_commands.append( "echo \" \"" )
+            # Enabling SSL on apache
+            remote_commands.append( "sudo a2enmod ssl" )
+            # Enabling WSGI express
+            remote_commands.append( "sudo a2enmod {0}".format( WSGI_ALIAS ) )
+            remote_commands.append( "echo \"   ...DONE!\"" )
 
-        remote_commands.append( "echo \" \"" )
-        remote_commands.append( "echo \"###############################\"" )
-        remote_commands.append( "echo \"# ENABLING SSL, REWRITE, WSGI #\"" )
-        remote_commands.append( "echo \"###############################\"" )
-        remote_commands.append( "echo \" \"" )
+
         # Enabling mode rewrite on apache
+        remote_commands.append( "echo \"Enabling mode rewrite\"" )
         remote_commands.append( "sudo a2enmod rewrite" )
-        # Enabling SSL on apache
-        remote_commands.append( "sudo a2enmod ssl" )
-        # Enabling WSGI express
-        remote_commands.append( "sudo a2enmod {0}".format( WSGI_ALIAS ) )
+
+        # Clears apache's default conf.
+        remote_commands.append( "echo \"Removing apache's default conf file\"" )
+        remote_commands.append( "sudo rm {0}/000-default.conf".format( APACHE_SITES_ENABLED_PATH ) )
 
         # Reinforce the owner and group of all project's folders
+        remote_commands.append( "echo \"Reinforcing owner and group over all project's folders\"" )
         remote_commands.extend([
             "sudo chown -R {0}:{1} {2}".format( SERVERS[ server ][ "DEFAULT_USER" ], DEFAULT_USER_GROUP, PROJECT_ROOT ),
             "sudo chgrp -R {0} {1}".format( DEFAULT_USER_GROUP, PROJECT_ROOT ),
@@ -603,11 +614,11 @@ def config( args ):
         print( "     create user <username>@localhost identified by <password>;" )
         print( "5. Grant all privilegies to the user on the database. " )
         print( "     grant all on <database>.* to <username>@localhost;" )
-        if "site" in args:
+        if app == "site":
             print( "6. Exit MySQL and SSH and run \"update\" to populate the database." )
             print( "     python helper.py update <server>" )
-        elif "wiki" in args:
-            print( "6. Access http://{0}:{1}/mw-config/index.php to configure the wiki.".format( SERVERS[ server ][ "IP" ], WIKI_LISTENING_PORT ) )
+        elif app == "wiki":
+            print( "6. Access http://{0}:{1}/mw-config/index.php to configure the wiki.".format( SERVERS[ server ][ "IP" ], SERVERS[ server ][ "HTTP_PORT" ] ) )
 
 
 
@@ -618,7 +629,7 @@ def connect( args ):
     """
 
     # The usage regex.
-    usage_pattern = "(local|dev|prod|sup)"
+    usage_pattern = "{0}".format( AVAILABLE_SERVERS_PATTERN )
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
@@ -648,7 +659,7 @@ def restart( args ):
     """
 
     # The usage regex.
-    usage_pattern = "(local|dev|prod|sup)"
+    usage_pattern = "{0}".format( AVAILABLE_SERVERS_PATTERN )
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
@@ -687,7 +698,7 @@ def update( args ):
         :args: A string indicating the server to run the update.
     """
     # The usage regex.
-    usage_pattern = "(local|dev|prod)"
+    usage_pattern = "{0}".format( AVAILABLE_SERVERS_PATTERN )
     cmd_str = " ".join( args )
 
     # Checks if the user typed the command correctly
@@ -746,7 +757,7 @@ def copy( args ):
     recursive option.
     """
     # The usage regex.
-    usage_pattern = "[^ ]+( -[rR])? (from|to) (dev|prod) (to|into) [^ ]+"
+    usage_pattern = "[^ ]+( -[rR])? (from|to) {0} (to|into) [^ ]+".format( AVAILABLE_SERVERS_PATTERN )
     cmd_str = " ".join( args )
 
     # Check if the minimal number of arguments was passed.
