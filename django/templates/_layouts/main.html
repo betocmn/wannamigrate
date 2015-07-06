@@ -81,8 +81,8 @@
                             <a title="{% trans "View notifications" %}" href="{% url "site:notifications" %}" class="my-notification">
                                 <div class="thumb">
                                     <img src="{% static 'site/img/notify.png' %}" alt="{% trans 'notifications' %}" />
-                                    {% if user.is_authenticated and request.session.news|length %}
-                                        <p class="notify-qty">{{ request.session.news|length }}</p>
+                                    {% if user.is_authenticated and request.session.news_count > 0 %}
+                                        <p class="notify-qty">{{ request.session.news_count }}</p>
                                     {% endif %}
                                 </div>
                             </a>
@@ -91,28 +91,6 @@
 
                 {% endblock header %}
             </header>
-
-            <section id="sticky-list" class="topics">
-                <ul>
-                    <li>
-                        <strong>A</strong>
-                        <ul>
-                            <li>Amostra</li>
-                            <li>Ananindeua</li>
-                            <li>Avião branco do céu</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>B</strong>
-                        <ul>
-                            <li>Banana</li>
-                            <li>Bolacha</li>
-                            <li>Buchada</li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </section>
 
             {% block situation %}
                 <section class="situations">

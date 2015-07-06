@@ -25,7 +25,6 @@ class SituationLocaleMiddleware( object ):
 
     def process_request( self, request ):
 
-
         # If user just logged in, we set his preferred language
         if request.user.is_authenticated() and 'just_logged_in' in request.session and request.session['just_logged_in']:
             translation.activate( request.user.preferred_language )
@@ -108,24 +107,31 @@ class SituationLocaleMiddleware( object ):
             except Situation.DoesNotExist:
                 request.session['situation']['total_users'] = 0
 
-        # Get notifications for the logged user
-        if request.user.is_authenticated():
-            news = Notification.get_news_for( request.user )
-            if news:
-                request.session['news'] = news
-            #else:
-                #request.session['news'] = None
-
-
-
 
 
 
 ##########################
 # Class definitions
 ##########################
+class NotificationMiddleware( object ):
+    def process_request( self, request ):
+        request.session.news_count = 0
+        if request.user.is_authenticated():
+            request.session.news_count = Notification.get_news_count_for( request.user )
+
+
+
+
+
+
 class MaintenceMiddleware( object ):
 
     def process_request( self, request ):
         from django.shortcuts import render
         return render( request, "site/home/maintence.html" )
+
+
+
+
+
+
