@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-03 19:38-0300\n"
+"POT-Creation-Date: 2015-07-06 22:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "Tira-Dúvidas"
 msgid "Professionals"
 msgstr "Profissionais"
 
-#: templates/_layouts/main.html:42 templates/_layouts/main.html.py:152
+#: templates/_layouts/main.html:42 templates/_layouts/main.html.py:130
 msgid "Immi Box"
 msgstr "Immi Box"
 
@@ -75,23 +75,23 @@ msgstr "Ver notificações"
 msgid "notifications"
 msgstr "notificações"
 
-#: templates/_layouts/main.html:126
+#: templates/_layouts/main.html:104
 msgid "And other"
 msgstr "E outro(s)"
 
-#: templates/_layouts/main.html:126
+#: templates/_layouts/main.html:104
 msgid "user(s)"
 msgstr "usuário(s)"
 
-#: templates/_layouts/main.html:132
+#: templates/_layouts/main.html:110
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
 
-#: templates/_layouts/main.html:141
+#: templates/_layouts/main.html:119
 msgid "Step-by-Step"
 msgstr "Passo-a-Passo"
 
-#: templates/_layouts/main.html:144
+#: templates/_layouts/main.html:122
 msgid ""
 "\n"
 "                                    Start here to understand the <br /"
@@ -103,7 +103,7 @@ msgstr ""
 "que você tem.\n"
 "                                    "
 
-#: templates/_layouts/main.html:155
+#: templates/_layouts/main.html:133
 msgid ""
 "\n"
 "                                    Tools to help you with<br />your "
@@ -115,63 +115,63 @@ msgstr ""
 "processo de imigração.\n"
 "                                    "
 
-#: templates/_layouts/main.html:167 templates/site/home/home.html:43
+#: templates/_layouts/main.html:145 templates/site/home/home.html:43
 msgid "I'm from"
 msgstr "Sou do(a)"
 
-#: templates/_layouts/main.html:171 templates/site/home/home.html:47
+#: templates/_layouts/main.html:149 templates/site/home/home.html:47
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:175
+#: templates/_layouts/main.html:153
 msgid "in"
 msgstr "no(a)"
 
-#: templates/_layouts/main.html:179
+#: templates/_layouts/main.html:157
 msgid "Change"
 msgstr "Mudar"
 
-#: templates/_layouts/main.html:197
+#: templates/_layouts/main.html:175
 msgid "How It Works"
 msgstr "Como Funciona"
 
-#: templates/_layouts/main.html:198
+#: templates/_layouts/main.html:176
 msgid "Terms &amp; Conditions"
 msgstr "Termos de Uso"
 
-#: templates/_layouts/main.html:199
+#: templates/_layouts/main.html:177
 msgid "Privacy Police"
 msgstr "Políticas de Privacidade"
 
-#: templates/_layouts/main.html:200 templates/site/contact/contact.html:21
+#: templates/_layouts/main.html:178 templates/site/contact/contact.html:21
 msgid "Contact Us"
 msgstr "Contato"
 
-#: templates/_layouts/main.html:203
+#: templates/_layouts/main.html:181
 msgid "Find a Professional"
 msgstr "Encontre um Profissional"
 
-#: templates/_layouts/main.html:204
+#: templates/_layouts/main.html:182
 msgid "Ask a Question"
 msgstr "Faça uma Pergunta"
 
-#: templates/_layouts/main.html:205
+#: templates/_layouts/main.html:183
 #: templates/points/dashboard/dashboard.html:18
 #: templates/site/tools/tools.html:13
 msgid "Immigration Points Calculator"
 msgstr "Calculadora de Pontos de Imigração"
 
-#: templates/_layouts/main.html:206
+#: templates/_layouts/main.html:184
 #: templates/site/about/service_providers.html:27
 #: wannamigrate/site/forms.py:252
 msgid "Become a Service Provider"
 msgstr "Torne-se um Prestador de Serviços"
 
-#: templates/_layouts/main.html:219
+#: templates/_layouts/main.html:197
 msgid "All Rights Reserved"
 msgstr "Todos os Direitos Reservados"
 
-#: templates/_layouts/main.html:284
+#: templates/_layouts/main.html:262
 msgid "No results found."
 msgstr "Sem resultados."
 
@@ -2807,10 +2807,10 @@ msgid ""
 "100 activities and approximately 200 study pages, IELTS Express will boost "
 "your confidence and help improve your IELTS score."
 msgstr ""
-"IELTS Express é uma preparação online rápida para a prova IELTS. "
-"Nosso curso intuitivo, em formato de passo-a-passo, cobre todos os quatro "
-"módulos. Com mais de 100 atividades e aproximadamente 200 páginas para estudo, IELTS Express "
-"irá deixá-lo confiante e pronto para melhorar sua nota no IELTS."
+"IELTS Express é uma preparação online rápida para a prova IELTS. Nosso curso "
+"intuitivo, em formato de passo-a-passo, cobre todos os quatro módulos. Com "
+"mais de 100 atividades e aproximadamente 200 páginas para estudo, IELTS "
+"Express irá deixá-lo confiante e pronto para melhorar sua nota no IELTS."
 
 #: templates/db_translations/marketplace_servicetype.html:25
 msgid "IELTS Master Online Course"
@@ -2824,10 +2824,10 @@ msgid ""
 "tutors, IELTS Master will boost your confidence and help improve your IELTS "
 "score."
 msgstr ""
-"IELTS Master é um curso online abrangente para a prova IELTS. "
-"Você terá 3 meses de acesso ao nosso curso intuitivo, em formato de passo-a-passo. "
-"Com quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master irá "
-"deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS."
+"IELTS Master é um curso online abrangente para a prova IELTS. Você terá 3 "
+"meses de acesso ao nosso curso intuitivo, em formato de passo-a-passo. Com "
+"quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master "
+"irá deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -6209,8 +6209,7 @@ msgid ""
 "until I read the e-book."
 msgstr ""
 "Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
-"o e-book. Agora, esta é uma das minhas possibilidades para os próximos "
-"anos."
+"o e-book. Agora, esta é uma das minhas possibilidades para os próximos anos."
 
 #: templates/marketplace/ebook/ebook.html:183
 #: templates/marketplace/ielts/ielts.html:189
@@ -6250,7 +6249,6 @@ msgid "Made by specialists"
 msgstr "Feito por especialistas"
 
 #: templates/marketplace/ielts/ielts.html:54
-#: templates/marketplace/ielts/ielts.html:106
 msgid "Online Course - IELTS Express"
 msgstr "Curso Online - IELTS Express"
 
@@ -6261,10 +6259,11 @@ msgid ""
 "With over 100 activities and approximately 200 study pages, IELTS Express "
 "will boost your confidence and help improve your IELTS score. You will get:"
 msgstr ""
-"IELTS Express é uma preparação online <span>rápida</span> para a prova IELTS. "
-"Nosso curso intuitivo, em formato de passo-a-passo, cobre todos os quatro "
-"módulos. Com mais de 100 atividades e aproximadamente 200 páginas para estudo, IELTS Express "
-"irá deixá-lo confiante e pronto para melhorar sua nota no IELTS. Você receberá:"
+"IELTS Express é uma preparação online <span>rápida</span> para a prova "
+"IELTS. Nosso curso intuitivo, em formato de passo-a-passo, cobre todos os "
+"quatro módulos. Com mais de 100 atividades e aproximadamente 200 páginas "
+"para estudo, IELTS Express irá deixá-lo confiante e pronto para melhorar sua "
+"nota no IELTS. Você receberá:"
 
 #: templates/marketplace/ielts/ielts.html:59
 #: templates/marketplace/ielts/ielts.html:111
@@ -6305,10 +6304,11 @@ msgid ""
 "After the payment, we will contact you to schedule a skype call to give you "
 "all the instructions."
 msgstr ""
-"Após o pagamento, entraremos em contato para agendar uma ligação por skype e lhe fornecer "
-"o treinamento inicial."
+"Após o pagamento, entraremos em contato para agendar uma ligação por skype e "
+"lhe fornecer o treinamento inicial."
 
 #: templates/marketplace/ielts/ielts.html:75
+#: templates/marketplace/ielts/ielts.html:127
 msgid "Buy Course"
 msgstr "Comprar"
 
@@ -6328,6 +6328,10 @@ msgstr "preview do curso"
 msgid "Online Course IELTS Express"
 msgstr "Curso Online IELTS Express"
 
+#: templates/marketplace/ielts/ielts.html:106
+msgid "Online Course - IELTS Master"
+msgstr "Curso Online - IELTS Master"
+
 #: templates/marketplace/ielts/ielts.html:109
 msgid ""
 "IELTS Master is a comprehensive online preparation course for the IELTS "
@@ -6336,10 +6340,11 @@ msgid ""
 "and online tutors, IELTS Master will boost your confidence and help improve "
 "your IELTS score. You will get:"
 msgstr ""
-"IELTS Master é um curso online abrangente para a prova IELTS. "
-"Você terá <span>3 meses</span> de acesso ao nosso curso intuitivo, em formato de passo-a-passo. "
-"Com quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master irá "
-"deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS.  Você receberá: "
+"IELTS Master é um curso online abrangente para a prova IELTS. Você terá "
+"<span>3 meses</span> de acesso ao nosso curso intuitivo, em formato de passo-"
+"a-passo. Com quatro testes práticos, ferramentas de áudio e tutores online, "
+"IELTS Master irá deixá-lo confiante e lhe ajudará a melhorar sua nota no "
+"IELTS.  Você receberá: "
 
 #: templates/marketplace/ielts/ielts.html:112
 msgid "3 months access"
@@ -6349,7 +6354,8 @@ msgstr "3 meses de acesso"
 msgid ""
 "Practice tests in all 4 modules - Reading, Writing, Listening and Speaking."
 msgstr ""
-"Testes práticos em todos os 4 módulos - Reading, Writing, Listening e Speaking."
+"Testes práticos em todos os 4 módulos - Reading, Writing, Listening e "
+"Speaking."
 
 #: templates/marketplace/ielts/ielts.html:114
 msgid "More than 260 activities in over 1000 study pages of content"

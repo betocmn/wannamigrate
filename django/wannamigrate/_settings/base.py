@@ -154,6 +154,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
     'wannamigrate.core.middleware.SituationLocaleMiddleware',
+    'wannamigrate.core.middleware.NotificationMiddleware',
 )
 
 

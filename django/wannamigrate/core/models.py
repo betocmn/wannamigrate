@@ -751,6 +751,10 @@ class Notification( BaseModel ):
 
         return True
 
+    @staticmethod
+    def get_news_count_for( user ):
+        nu = NotificationUser.objects.filter( user = user, is_read = False ).prefetch_related( "notification" ).order_by( "-created_date" )
+        return nu.count()
 
     @staticmethod
     def get_news_for( user ):
