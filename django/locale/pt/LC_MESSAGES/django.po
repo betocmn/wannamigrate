@@ -7326,11 +7326,11 @@ msgstr "Voltar aos BlogPosts"
 
 #: templates/qa/blogpost/view.html:34
 msgid "BlogPost Topics"
-msgstr "Tópicos BlogPost"
+msgstr "Tópicos"
 
 #: templates/qa/blogpost/view.html:44
 msgid "BlogPost Stats"
-msgstr "Statísticas BlogPost"
+msgstr "Estatísticas"
 
 #: templates/qa/blogpost/view.html:47 templates/qa/question/view.html:47
 msgid "Views"
