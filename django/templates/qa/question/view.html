@@ -183,9 +183,11 @@
             <h3 class="title">{% trans "Related Questions" %}</h3>
             <ul>
                 {% for related_question in related_content %}
-                <li class="related">
-                    <a href="{% url "qa:view_question" related_question.slug %}">{{ related_question.title|truncate_smart:50 }}</a>
-                </li>
+                    {% ifchanged %}
+                        <li class="related">
+                            <a href="{% url "qa:view_question" related_question.slug %}">{{ related_question.title|truncate_smart:50 }}...</a>
+                        </li>
+                    {% endifchanged %}
                 {% endfor %}
             </ul>
         </div>

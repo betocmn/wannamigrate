@@ -112,9 +112,11 @@
             <h3 class="title">{% trans "Related Posts" %}</h3>
             <ul>
                 {% for related_post in related_content %}
-                <li class="related">
-                    <a href="{% url "qa:view_blogpost" related_post.slug %}">{{ related_post.title|truncate_smart:50 }}</a>
-                </li>
+                    {% ifchanged %}
+                        <li class="related">
+                            <a href="{% url "qa:view_blogpost" related_post.slug %}">{{ related_post.title|truncate_smart:50 }}...</a>
+                        </li>
+                    {% endifchanged %}
                 {% endfor %}
             </ul>
         </div>
@@ -144,6 +146,9 @@
         -->
 
     </section>
+
+    <div class="clearfix"></div>
+
 </div>
 
 
