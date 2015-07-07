@@ -7330,7 +7330,7 @@ msgstr "Tópicos BlogPost"
 
 #: templates/qa/blogpost/view.html:44
 msgid "BlogPost Stats"
-msgstr "Statísticas BlogPost"
+msgstr "Estatísticas BlogPost"
 
 #: templates/qa/blogpost/view.html:47 templates/qa/question/view.html:47
 msgid "Views"
