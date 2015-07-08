@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 22:03-0300\n"
+"POT-Creation-Date: 2015-07-08 16:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6111,7 +6111,7 @@ msgstr "descer"
 #: templates/marketplace/ebook/ebook.html:99
 #: templates/marketplace/ebook/ebook.html:102
 #: templates/marketplace/ebook/ebook.html:105
-#: templates/qa/blogpost/view.html:125 templates/qa/question/view.html:196
+#: templates/qa/blogpost/view.html:66 templates/qa/question/view.html:198
 #: templates/site/guide/guide.html:36
 msgid "Guide - How to move to Canada"
 msgstr "Guia - Como mudar para o Canadá"
@@ -6620,7 +6620,6 @@ msgstr "Ver"
 
 #: templates/marketplace/professionals/list.html:60
 #: templates/qa/blogpost/list_group.html:45
-#: templates/qa/blogpost/view.html:102
 #: templates/qa/common/list_group_all.html:47
 #: templates/qa/common/list_group_all.html:93
 #: templates/qa/question/list_group.html:47 templates/qa/question/view.html:93
@@ -7310,7 +7309,6 @@ msgid "Last activity in"
 msgstr "Última atividade"
 
 #: templates/qa/blogpost/list_group.html:48
-#: templates/qa/blogpost/view.html:105
 #: templates/qa/common/list_group_all.html:50
 #: templates/qa/common/list_group_all.html:96
 #: templates/qa/question/list_group.html:50 templates/qa/question/view.html:96
@@ -7320,83 +7318,58 @@ msgstr "Última atividade"
 msgid "Options"
 msgstr "Opções"
 
-#: templates/qa/blogpost/view.html:31
+#: templates/qa/blogpost/view.html:19 templates/qa/blogpost/view.html.py:72
 msgid "Back to BlogPosts"
 msgstr "Voltar aos BlogPosts"
 
-#: templates/qa/blogpost/view.html:34
-msgid "BlogPost Topics"
-msgstr "Tópicos"
+#: templates/qa/blogpost/view.html:23 templates/qa/blogpost/view.html.py:25
+msgid "Written by"
+msgstr "Escrito por"
 
-#: templates/qa/blogpost/view.html:44
-msgid "BlogPost Stats"
-msgstr "Estatísticas"
+#: templates/qa/blogpost/view.html:23
+msgid "Anonymous User"
+msgstr "Anônimo"
 
-#: templates/qa/blogpost/view.html:47 templates/qa/question/view.html:47
-msgid "Views"
-msgstr "Cliques"
+#: templates/qa/blogpost/view.html:48
+msgid "See also..."
+msgstr "Veja também..."
 
-#: templates/qa/blogpost/view.html:50
-msgid "Comments"
-msgstr "Comentários"
-
-#: templates/qa/blogpost/view.html:53 templates/qa/common/side_menu.html:43
-#: templates/qa/question/view.html:53
-msgid "Followers"
-msgstr "Seguidores"
-
-#: templates/qa/blogpost/view.html:59 templates/qa/question/view.html:60
-msgid "Share"
-msgstr "Compartilhar"
-
-#: templates/qa/blogpost/view.html:62 templates/qa/question/view.html:63
-msgid "Twitter"
-msgstr "Twitter"
-
-#: templates/qa/blogpost/view.html:65 templates/qa/question/view.html:66
-msgid "Facebook"
-msgstr "Facebook"
-
-#: templates/qa/blogpost/view.html:84 templates/qa/question/view.html:80
-msgid "Writen in"
-msgstr "Escrito em"
-
-#: templates/qa/blogpost/view.html:112
+#: templates/qa/blogpost/view.html:51
 msgid "Related Posts"
 msgstr "Posts Relacionados"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:12
 msgid "Downvote"
-msgstr "Downvote"
+msgstr "Irrelevante"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:10
 msgid "Downvoted (Undo)"
-msgstr "Downvoted (Desfazer)"
+msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
 msgid "Follow"
-msgstr "Follow"
+msgstr "Seguir"
 
 #: templates/qa/buttons/toggle_follow.html:7
 msgid "UnFollow"
-msgstr "UnFollow"
+msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
 msgid "Unfollow"
-msgstr "Unfollow"
+msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_upvote.html:7
 #: templates/qa/buttons/toggle_upvote.html:12
 msgid "Upvote"
-msgstr "Upvote"
+msgstr "Curtir"
 
 #: templates/qa/buttons/toggle_upvote.html:7
 #: templates/qa/buttons/toggle_upvote.html:10
 msgid "Upvoted"
-msgstr "Upvoted"
+msgstr "Descurtir"
 
 #: templates/qa/common/list_group_all.html:84
 msgid "viewers"
@@ -7438,6 +7411,10 @@ msgstr "Social"
 msgid "Following"
 msgstr "Seguindo"
 
+#: templates/qa/common/side_menu.html:43 templates/qa/question/view.html:53
+msgid "Followers"
+msgstr "Seguidores"
+
 #: templates/qa/question/add_question.html:30
 msgid "What do you want to know?"
 msgstr "O que deseja saber?"
@@ -7468,6 +7445,26 @@ msgstr "Tópicos"
 #: templates/qa/question/view.html:44
 msgid "Question Stats"
 msgstr "Estatísticas"
+
+#: templates/qa/question/view.html:47
+msgid "Views"
+msgstr "Cliques"
+
+#: templates/qa/question/view.html:60
+msgid "Share"
+msgstr "Compartilhar"
+
+#: templates/qa/question/view.html:63
+msgid "Twitter"
+msgstr "Twitter"
+
+#: templates/qa/question/view.html:66
+msgid "Facebook"
+msgstr "Facebook"
+
+#: templates/qa/question/view.html:80
+msgid "Writen in"
+msgstr "Escrito em"
 
 #: templates/qa/question/view.html:120
 msgid "Write answer"
@@ -9518,7 +9515,7 @@ msgstr "Blogs Posts - Wanna Migrate"
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:451
+#: wannamigrate/qa/views.py:455
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
@@ -9756,6 +9753,15 @@ msgstr "Redefinir Senha - Wanna Migrate"
 #: wannamigrate/site/views.py:1067
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
+
+#~ msgid "BlogPost Topics"
+#~ msgstr "Tópicos"
+
+#~ msgid "BlogPost Stats"
+#~ msgstr "Estatísticas"
+
+#~ msgid "Comments"
+#~ msgstr "Comentários"
 
 #~ msgid "36 years, Monreal"
 #~ msgstr "36 anos, Monreal"
