@@ -127,6 +127,8 @@
                                             {{ provider_service_type_form.DELETE }}
                                             {{ provider_service_type_form.service_type }}
                                             &nbsp;&nbsp;&nbsp;R$&nbsp;{{ provider_service_type_form.price }}
+                                            {{ provider_service_type_form.service_type.errors }}
+                                            {{ provider_service_type_form.price.errors }}
                                         </li>
                                     {% endfor %}
                                 </ul>
