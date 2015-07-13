@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 16:29-0300\n"
+"POT-Creation-Date: 2015-07-13 17:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2828,6 +2828,76 @@ msgstr ""
 "meses de acesso ao nosso curso intuitivo, em formato de passo-a-passo. Com "
 "quatro testes práticos, ferramentas de áudio e tutores online, IELTS Master "
 "irá deixá-lo confiante e lhe ajudará a melhorar sua nota no IELTS."
+
+#: templates/db_translations/marketplace_servicetype.html:26
+msgid "Study Abroad - Australia I"
+msgstr "Intercâmbio - Austrália I"
+
+#: templates/db_translations/marketplace_servicetype.html:26
+msgid ""
+"Study English abroad in Melbourne, Australia. School: Impact English "
+"College. The package includes 24 weeks of english classes, with 20 hours per "
+"week, enrollment fees, health insurance for 28 weeks, course material, 4 "
+"weeks of accommodation in a family house, individual room, breakfast, "
+"dinner, accommodation reservation fee, EdukBrasil fee and visa assessment."
+msgstr ""
+"Intercâmbio em Melbourne, Austrália. Escola: Impact English College. O "
+"pacote inclui 24 semanas de aulas de Inglês, com 20 horas por semana, taxa "
+"de matrícula, seguro-saúde por 28 semanas, material do curso, 4 semanas de "
+"acomodação em casa de família, quarto individual, café da manhã, jantar, "
+"taxa de reserva da acomodação, taxa EdukBrasil e assessoria ao visto."
+
+#: templates/db_translations/marketplace_servicetype.html:27
+msgid "Study Abroad - New Zealand I"
+msgstr "Intercâmbio - Nova Zelândia I"
+
+#: templates/db_translations/marketplace_servicetype.html:27
+msgid ""
+"Study English abroad in Auckland or Wellington, New Zealand. School: New "
+"Zealand Language Centres. The package includes 24 weeks of english classes, "
+"with 25 hours per week, enrollment fees, 4 weeks of accommodation in a "
+"family house, individual room, breakfast, dinner, accommodation reservation "
+"fee, EdukBrasil fee and visa assessment."
+msgstr ""
+"Intercâmbio em Auckland ou Wellington, Nova Zelândia. Escola: New Zealand "
+"Language Centres. O pacote inclui 24 semanas de aulas de Inglês, com 25 "
+"horas por semana, taxa de matrícula, 4 semanas de acomodação em casa de "
+"família, quarto individual, café da manhã, jantar, taxa de reserva da "
+"acomodação, taxa EdukBrasil e assessoria ao visto."
+
+#: templates/db_translations/marketplace_servicetype.html:28
+msgid "Study Abroad - Ireland I"
+msgstr "Intercâmbio - Irlanda I"
+
+#: templates/db_translations/marketplace_servicetype.html:28
+msgid ""
+"Study English abroad in Dublin, Ireland. School: CES – Centre of English "
+"Studies. The package includes 25 weeks of english classes, with 20 hours per "
+"week, enrollment fees, 2 weeks of student accommodation, double room, "
+"accommodation reservation fee, EdukBrasil fee and public health insurance."
+msgstr ""
+"Intercâmbio em Dublin, Irlanda. Escola: CES - Centre of English. O pacote "
+"inclui 25 semanas de aulas de Inglês, com 20 horas por semana, taxa de "
+"matrícula, 2 semanas de acomodação estudantil, quarto duplo, taxa de reserva "
+"da acomodação, taxa EdukBrasil e assessoria ao visto."
+
+#: templates/db_translations/marketplace_servicetype.html:29
+msgid "Study Abroad - Canada I"
+msgstr "Intercâmbio - Canadá I"
+
+#: templates/db_translations/marketplace_servicetype.html:29
+msgid ""
+"Study English abroad in Toronto or Vancouver, Canada. School: ILAC. The "
+"package includes 24 weeks of english classes, with 30 lessons per week, "
+"enrollment fees, 4 weeks of accommodation in a family house, individual "
+"room, breakfast, lunch, dinner, accommodation reservation fee, EdukBrasil "
+"fee and visa assessment."
+msgstr ""
+"Intercâmbio em Toronto ou Vancouver, Canadá. Escola: ILAC. O pacote inclui "
+"24 semanas de aulas de Inglês, com 30 lições por semana, taxa de matrícula, "
+"4 semanas de acomodação em casa de família, quarto individual, café da "
+"manhã, almoço, jantar, taxa de reserva da acomodação, taxa EdukBrasil e "
+"assessoria ao visto."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -7806,6 +7876,10 @@ msgstr "Notificações"
 #: templates/site/account/notifications.html:25
 msgid "No notifications."
 msgstr "Sem notificações."
+
+#: templates/site/account/view.html:28
+msgid "Edit Information"
+msgstr "Editar Dados"
 
 #: templates/site/account/view.html:32
 msgid "Profile photo"
