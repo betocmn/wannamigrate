@@ -54,6 +54,23 @@
 
         {% endif %}
 
+        <div class="promo">
+            <div class="text">
+                <a href="#">{% trans "Click here" %}</a> {% trans 'to add a promo code' %}.
+            </div>
+            <div class="container" style="display: none;">
+                {% trans "Promo Code:" %}
+                <input type="text" name="promo_code" id="promo_code" />
+                <button class="bt-apply button" type="button">{% trans 'Apply' %}</button>
+            </div>
+            <div class="message error" style="display: none;">
+                {% trans "invalid code!" %}
+            </div>
+            <div class="message success" style="display: none;">
+                {% trans "discount applied" %}: <span id="discount_percentage">0</span>%
+            </div>
+        </div>
+
         <div class="interactions">
             <ul class="interaction-list">
                 <li class="interaction-item">
@@ -80,6 +97,7 @@
                     {% csrf_token %}
                     {{ form.token }}
                     {{ form.payment_type_id }}
+                    {{ form.promo_code }}
 
                     <!--
                     <fieldset class="address">
@@ -98,7 +116,12 @@
 
                         <div id="credit-card">
 
-                            <div class="total-price">{% trans 'Total' %}: R$ {{ total_price }}</div>
+                            <div class="total-price">
+                                <div class="old-price" style="display: none;">
+                                    R$ <span id="old_price"></span>
+                                </div>
+                                {% trans 'Total' %}: R$ <span id="total_price">{{ total_price }}</span>
+                            </div>
 
                             <div class="card-flags">
                                 <ul>
@@ -177,7 +200,6 @@
                             </div>
 
                         </div>
-
 
                         <button class="bt-pay button" id="pay_button" type="submit">{% trans 'Pay Now' %}</button>
 
@@ -339,6 +361,40 @@
                     $('#billet').show();
                     $( "#id_payment_type_id" ).val( 2 );
                 }
+            });
+
+            // Promo code
+            csrf_ajax_setup();
+            $( '.promo a' ).click( function( event ) {
+                event.preventDefault()
+                $( this ).parent().hide();
+                $( '.promo .container' ).show();
+                $( '#promo_code').focus();
+            });
+            $( '.bt-apply' ).click( function() {
+                var promo_code = $( '#promo_code' ).val();
+                if ( promo_code == '' ){
+                    $( ".promo .message.error").show();
+                    $( ".promo .message.success").hide();
+                    return false;
+                }
+                $.post( "{% url 'marketplace:get_promo_discount' %}", { promo_code: promo_code } ).done( function( discount ) {
+                    if ( discount == '' || discount == 0 ){
+                        $( ".promo .message.error").show();
+                        $( ".promo .message.success").hide();
+                    } else {
+                        $( "#discount_percentage").html( number_format( discount, 0 ) );
+                        $( ".promo .message.error").hide();
+                        $( ".promo .message.success").show();
+                        var total_price_original = $( "#total_price").html();
+                        var total_price = clean_float( total_price_original );
+                        var new_total_price = total_price - ( total_price * ( parseFloat( discount ) / 100 ) );
+                        $( "#total_price" ).html( number_format( new_total_price, 2, ',', '.' ) );
+                        $( "#old_price" ).html( total_price_original );
+                        $( ".old-price" ).show();
+                        $( "#id_promo_code").val( promo_code );
+                    }
+                });
             });
 
         });

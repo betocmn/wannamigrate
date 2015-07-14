@@ -13,10 +13,12 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext, ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
 from wannamigrate.marketplace.models import (
-    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType
+    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType, PromoCode
 )
 from django.forms import ModelChoiceField
 from wannamigrate.marketplace.payment_processor import PaymentProcessor
+from wannamigrate.core.util import get_object_or_false
+import datetime
 
 
 
@@ -47,6 +49,7 @@ class PaymentForm( BaseForm ):
     # Form elements
     token = forms.CharField( required = False, widget = forms.HiddenInput() )
     payment_type_id = forms.IntegerField( required = False, widget = forms.HiddenInput() )
+    promo_code = forms.CharField( required = False, widget = forms.HiddenInput() )
 
     def __init__( self, *args, **kwargs ):
         """
@@ -57,7 +60,10 @@ class PaymentForm( BaseForm ):
 
         self.payment_api_result = {}
         self.payment_info = {}
-        self.service = None
+        self.discount_percentage = None
+        self.discount_total = None
+        self.gross_total = None
+        self.net_total = None
 
         if 'payment_info' in kwargs:
             self.payment_info = kwargs.pop( "payment_info" )
@@ -82,16 +88,33 @@ class PaymentForm( BaseForm ):
         if not cleaned_data['payment_type_id'] or cleaned_data['payment_type_id'] not in [ 1, 2 ]:
             raise forms.ValidationError( _( "Invalid Payment Method." ) )
 
+        # If promo code was passed, validates it
+        if cleaned_data['promo_code']:
+            promo_code = get_object_or_false( PromoCode, name = cleaned_data['promo_code'], expiry_date__gte = datetime.date.today() )
+            if promo_code:
+                self.discount_percentage = promo_code.discount
+            else:
+                raise forms.ValidationError( _( "Invalid Promo Code." ) )
+
+        # Sets total price
+        total_price = self.payment_info['provider_service_type'].price if self.payment_info['is_service'] else self.payment_info['product'].price
+        self.gross_total = total_price
+        self.net_total = total_price
+        self.discount_total = 0
+        if self.discount_percentage:
+            self.discount_total = ( total_price * ( self.discount_percentage / 100 ) )
+            self.net_total = total_price - self.discount_total
+
         # Build items list
         if self.payment_info['is_service']:
             items = [{ 'description': ugettext( self.payment_info['service_type'].name ),
                        'quantity': 1,
-                       'price': self.payment_info['provider_service_type'].price
+                       'price': self.net_total
             }]
         else:
             items = [{ 'description': ugettext( self.payment_info['product'].name ),
                        'quantity': 1,
-                       'price': self.payment_info['product'].price
+                       'price': self.net_total
             }]
 
         # makes payment
@@ -139,18 +162,16 @@ class PaymentForm( BaseForm ):
 
         # Configure variables for service or product
         if self.payment_info['is_service']:
-            price = self.payment_info['provider_service_type'].price
             description = self.payment_info['service_type'].name
         else:
-            price = self.payment_info['product'].price
             description = self.payment_info['product'].name
 
         # inserts details on order table
         order = Order()
-        order.gross_total = price
-        order.net_total = price
+        order.gross_total = self.gross_total
+        order.net_total = self.net_total
         order.description = ugettext( description )
-        order.discount = 0
+        order.discount = self.discount_total
         order.fees = 0
         order.installments = 1
         order.external_code = self.payment_api_result['external_code']

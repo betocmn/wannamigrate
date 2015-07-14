@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-13 17:47-0300\n"
+"POT-Creation-Date: 2015-07-14 16:06-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5980,7 +5980,7 @@ msgstr "Desconto"
 #: templates/emails/order_confirmation_provider.html:146
 #: templates/emails/order_confirmation_user.html:133
 #: templates/emails/order_confirmation_user.html:172
-#: templates/marketplace/order/payment.html:101
+#: templates/marketplace/order/payment.html:123
 #: templates/site/account/contracts.html:21
 #: templates/site/account/contracts.html:46
 #: templates/site/account/contracts.html:71
@@ -6549,105 +6549,129 @@ msgstr "Serviço"
 #: templates/marketplace/order/payment.html:51
 #: templates/site/account/contracts.html:68
 msgid "Product"
-msgstr ""
+msgstr "Produto"
 
-#: templates/marketplace/order/payment.html:60
+#: templates/marketplace/order/payment.html:59
+msgid "Click here"
+msgstr "Clique aqui"
+
+#: templates/marketplace/order/payment.html:59
+msgid "to add a promo code"
+msgstr "para incluir um código promocional"
+
+#: templates/marketplace/order/payment.html:62
+msgid "Promo Code:"
+msgstr "Código Promocional:"
+
+#: templates/marketplace/order/payment.html:64
+msgid "Apply"
+msgstr "Aplicar"
+
+#: templates/marketplace/order/payment.html:67
+msgid "invalid code!"
+msgstr "código inválido!"
+
+#: templates/marketplace/order/payment.html:70
+msgid "discount applied"
+msgstr "desconto aplicado"
+
+#: templates/marketplace/order/payment.html:77
 msgid "Credit Card"
 msgstr "Cartão de Crédito"
 
-#: templates/marketplace/order/payment.html:65
+#: templates/marketplace/order/payment.html:82
 msgid "Boleto"
 msgstr "Boleto"
 
-#: templates/marketplace/order/payment.html:70
+#: templates/marketplace/order/payment.html:87
 msgid "Paypal"
 msgstr "Paypal"
 
-#: templates/marketplace/order/payment.html:112
-#: templates/marketplace/order/payment.html:259
+#: templates/marketplace/order/payment.html:135
+#: templates/marketplace/order/payment.html:281
 msgid "Card Number"
 msgstr "Número do Cartão"
 
-#: templates/marketplace/order/payment.html:116
-#: templates/marketplace/order/payment.html:262
+#: templates/marketplace/order/payment.html:139
+#: templates/marketplace/order/payment.html:284
 msgid "Cardholder Name"
 msgstr "Nome Impresso no Cartão"
 
-#: templates/marketplace/order/payment.html:120
-#: templates/marketplace/order/payment.html:266
+#: templates/marketplace/order/payment.html:143
+#: templates/marketplace/order/payment.html:288
 msgid "Expiry Date"
 msgstr "Data de Validade"
 
-#: templates/marketplace/order/payment.html:123
+#: templates/marketplace/order/payment.html:146
 msgid "January"
 msgstr "Janeiro"
 
-#: templates/marketplace/order/payment.html:124
+#: templates/marketplace/order/payment.html:147
 msgid "February"
 msgstr "Fevereiro"
 
-#: templates/marketplace/order/payment.html:125
+#: templates/marketplace/order/payment.html:148
 msgid "March"
 msgstr "Março"
 
-#: templates/marketplace/order/payment.html:126
+#: templates/marketplace/order/payment.html:149
 msgid "April"
 msgstr "Abril"
 
-#: templates/marketplace/order/payment.html:127
+#: templates/marketplace/order/payment.html:150
 msgid "May"
 msgstr "Maio"
 
-#: templates/marketplace/order/payment.html:128
+#: templates/marketplace/order/payment.html:151
 msgid "June"
 msgstr "Junho"
 
-#: templates/marketplace/order/payment.html:129
+#: templates/marketplace/order/payment.html:152
 msgid "July"
 msgstr "Julho"
 
-#: templates/marketplace/order/payment.html:130
+#: templates/marketplace/order/payment.html:153
 msgid "August"
 msgstr "Agosto"
 
-#: templates/marketplace/order/payment.html:131
+#: templates/marketplace/order/payment.html:154
 msgid "September"
 msgstr "Setembro"
 
-#: templates/marketplace/order/payment.html:132
+#: templates/marketplace/order/payment.html:155
 msgid "October"
 msgstr "Outubro"
 
-#: templates/marketplace/order/payment.html:133
+#: templates/marketplace/order/payment.html:156
 msgid "November"
 msgstr "Novembro"
 
-#: templates/marketplace/order/payment.html:134
+#: templates/marketplace/order/payment.html:157
 msgid "Dezember"
 msgstr "Dezembro"
 
-#: templates/marketplace/order/payment.html:156
-#: templates/marketplace/order/payment.html:269
+#: templates/marketplace/order/payment.html:179
+#: templates/marketplace/order/payment.html:291
 msgid "Security Code (CVV)"
 msgstr "Cód. de Segurança"
 
-#: templates/marketplace/order/payment.html:172
+#: templates/marketplace/order/payment.html:195
 msgid "The confirmation can take up to 3 days after the payment."
 msgstr "A confirmação pode demorar até 3 dias após o pagamento."
 
-#: templates/marketplace/order/payment.html:176
+#: templates/marketplace/order/payment.html:199
 msgid "I want to pay by Boleto"
 msgstr "Quero pagar com Boleto"
 
-#: templates/marketplace/order/payment.html:182
+#: templates/marketplace/order/payment.html:204
 msgid "Pay Now"
 msgstr "Pagar"
 
-#: templates/marketplace/order/payment.html:254
+#: templates/marketplace/order/payment.html:276
 msgid "Error Savind Credit Card"
 msgstr "Erro ao Salvar Cartão de Crédito"
 
-#: templates/marketplace/order/payment.html:255
+#: templates/marketplace/order/payment.html:277
 msgid "Invalid Information:"
 msgstr "Dados Inválidos:"
 
@@ -7822,7 +7846,7 @@ msgstr "Empresa/Profissional"
 
 #: templates/site/account/contracts.html:65
 msgid "My Products"
-msgstr ""
+msgstr "Meus Produtos"
 
 #: templates/site/account/contracts.html:69
 msgid "Company"
@@ -7836,7 +7860,7 @@ msgstr "Editar Minha Conta"
 msgid "Please correct fhe following errors:"
 msgstr "Favor corrigir os seguintes erros:"
 
-#: templates/site/account/edit.html:44 templates/site/account/edit.html:137
+#: templates/site/account/edit.html:44 templates/site/account/edit.html:139
 msgid "Save Information"
 msgstr "Salvar Dados"
 
@@ -7856,7 +7880,7 @@ msgstr "Configuração de Serviços"
 msgid "Supported countries:"
 msgstr "Países que dou suporte:"
 
-#: templates/site/account/edit.html:178 templates/site/account/edit.html:189
+#: templates/site/account/edit.html:180 templates/site/account/edit.html:191
 msgid "+ Add another"
 msgstr "+ Adicionar outro"
 
@@ -8901,25 +8925,29 @@ msgstr "%s anos"
 msgid "Select Duration"
 msgstr "Selecione Duração"
 
-#: wannamigrate/marketplace/forms.py:79
+#: wannamigrate/marketplace/forms.py:85
 msgid "Payment information missing."
 msgstr "Informações de pagamento inexistentes."
 
-#: wannamigrate/marketplace/forms.py:83
+#: wannamigrate/marketplace/forms.py:89
 msgid "Invalid Payment Method."
 msgstr "Método de Pagamento Inválido"
 
-#: wannamigrate/marketplace/forms.py:127
+#: wannamigrate/marketplace/forms.py:97
+msgid "Invalid Promo Code."
+msgstr "Código Promocional Inválido."
+
+#: wannamigrate/marketplace/forms.py:150
 msgid "Payment not authorized."
 msgstr "Pagamento não autorizado."
 
 #: wannamigrate/marketplace/models.py:31
 msgid "payment type"
-msgstr ""
+msgstr "método de pagamento"
 
 #: wannamigrate/marketplace/models.py:32
 msgid "promo code"
-msgstr "código de promoção"
+msgstr "código promocional"
 
 #: wannamigrate/marketplace/models.py:33
 #: wannamigrate/marketplace/models.py:153
@@ -9089,7 +9117,7 @@ msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
 #: wannamigrate/marketplace/views.py:61 wannamigrate/marketplace/views.py:394
-#: wannamigrate/marketplace/views.py:493
+#: wannamigrate/marketplace/views.py:514
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -9143,27 +9171,27 @@ msgstr ""
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:492
+#: wannamigrate/marketplace/views.py:513
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:501
+#: wannamigrate/marketplace/views.py:522
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:504
+#: wannamigrate/marketplace/views.py:525
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:507
+#: wannamigrate/marketplace/views.py:528
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:510
+#: wannamigrate/marketplace/views.py:531
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:513
+#: wannamigrate/marketplace/views.py:534
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 

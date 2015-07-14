@@ -2730,7 +2730,7 @@ sup{ vertical-align:super; }
   width: 600px;
   height: 40px;
   padding: 30px;
-  margin: 22px 0 75px;
+  margin: 22px 0 25px;
   background-color: #f9f9f9;
 }
 .dashboard .content.payment .services .title {
@@ -2789,6 +2789,48 @@ sup{ vertical-align:super; }
   background: transparent url("../img/icon-services.png") no-repeat 0 0;
   text-indent: -9999px;
   overflow: hidden;
+}
+.dashboard .content.payment .promo {
+    width: 600px;
+    height: 20px;
+    padding: 30px;
+    margin-bottom: 75px;
+    background-color: #f9f9f9;
+
+}
+.dashboard .content.payment .promo a {
+    text-decoration: none;
+    color: #4f9276;
+}
+.dashboard .content.payment .promo a:hover {
+    text-decoration: underline;
+}
+.dashboard .content.payment .promo .container {
+    width: 405px;
+    float: left;
+}
+.dashboard .content.payment .promo .container input {
+    display: inline;
+    color: #888888;
+    font-size: 12px;
+    width: 130px;
+}
+.dashboard .content.payment .promo .container .bt-apply {
+    display: inline;
+    font-family: 'open_sanssemibold';
+    font-size: 14px;
+    padding: 8px 0;
+    width: 100px;
+}
+.dashboard .content.payment .promo .message {
+    float: left;
+    padding-top: 6px;
+}
+.dashboard .content.payment .promo .message.error {
+    color: #a94442;
+}
+.dashboard .content.payment .promo .message.success {
+    color: #3c763d;
 }
 .dashboard .content.payment .interactions {
   position: relative;
@@ -2933,6 +2975,11 @@ sup{ vertical-align:super; }
 .dashboard .content.payment .credit-card .data .total-price {
     float: right;
     font-weight: bold;
+}
+.dashboard .content.payment .credit-card .data .old-price {
+    text-align: right;
+    text-decoration: line-through;
+    color: #CECDCD;
 }
 .dashboard .content.payment .credit-card .data .name input {
   width: 350px;
@@ -9753,6 +9800,14 @@ sup{ vertical-align:super; }
     width: 100%;
     padding: 30px 0 30px 15px;
     height: 100px;
+  }
+  .dashboard .content.payment .promo {
+    height: 70px;
+  }
+  .dashboard .content.payment .promo .message {
+    float: none;
+    margin-top: 50px;
+    clear: both;
   }
   .dashboard .wrapper .content.payment .interactions {
     display: block;

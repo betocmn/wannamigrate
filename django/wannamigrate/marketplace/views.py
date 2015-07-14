@@ -18,7 +18,7 @@ from wannamigrate.core.util import get_object_or_false
 from wannamigrate.marketplace.forms import PaymentForm
 from wannamigrate.marketplace.models import (
     Provider, Review, ServiceType, ProviderServiceType, Order,
-    Service, ServiceStatus, Product
+    Service, ServiceStatus, Product, PromoCode
 )
 from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
@@ -456,6 +456,27 @@ def payment( request ):
     # Prints Template
     return render( request, 'marketplace/order/payment.html', template_data )
 
+
+
+def get_promo_discount( request ):
+    """
+    Returns discount (in percent) from a promo code
+
+    :param: request
+    :return String
+    """
+
+    result = 0
+
+    if request.is_ajax() and request.method == 'POST':
+
+        code = request.POST['promo_code']
+
+        promo_code = get_object_or_false( PromoCode, name = code, expiry_date__gte = datetime.date.today() )
+        if promo_code:
+            result = promo_code.discount
+
+    return HttpResponse( result )
 
 
 
