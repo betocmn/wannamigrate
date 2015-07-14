@@ -19,6 +19,7 @@ import math
 from wannamigrate._settings.base import LANGUAGES
 from django.db import transaction
 from django.template.defaultfilters import slugify
+import itertools
 import pytz
 
 
