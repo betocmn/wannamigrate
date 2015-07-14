@@ -35,10 +35,10 @@ class Order( BaseModel ):
     service = models.ForeignKey( 'Service', verbose_name = _( 'service' ), blank = True, null = True )
     product = models.ForeignKey( 'Product', verbose_name = _( 'product' ), blank = True, null = True )
     history = models.ManyToManyField( 'OrderStatus', through = 'OrderHistory', related_name = 'history' )
-    gross_total = models.DecimalField( _( "gross total" ), max_digits = 6, decimal_places = 2 )
-    net_total = models.DecimalField( _( "net total" ), max_digits = 6, decimal_places = 2 )
-    discount = models.DecimalField( _( "discount" ), max_digits = 6, decimal_places = 2 )
-    fees = models.DecimalField( _( "fees" ), max_digits = 6, decimal_places = 2 )
+    gross_total = models.DecimalField( _( "gross total" ), max_digits = 7, decimal_places = 2 )
+    net_total = models.DecimalField( _( "net total" ), max_digits = 7, decimal_places = 2 )
+    discount = models.DecimalField( _( "discount" ), max_digits = 7, decimal_places = 2 )
+    fees = models.DecimalField( _( "fees" ), max_digits = 7, decimal_places = 2 )
     installments = models.SmallIntegerField( _( "installments" ), default = 1 )
     external_code = models.CharField( _( "external code" ), max_length = 100 )
     boleto_url = models.CharField( _( "boleto url" ), max_length = 200, blank = True, null = True )
@@ -153,7 +153,7 @@ class Product( BaseModel ):
     description = models.TextField( _( "description" ) )
     is_active = models.BooleanField( _( "is active" ), default = True )
     icon_css_class = models.CharField( _( "name" ), max_length = 30 )
-    price = models.DecimalField( _( "price" ), max_digits = 6, decimal_places = 2 )
+    price = models.DecimalField( _( "price" ), max_digits = 7, decimal_places = 2 )
 
     # META Options
     class Meta:
@@ -339,7 +339,7 @@ class ProviderServiceType( BaseModel ):
     # Model Attributes
     service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ) )
     provider = models.ForeignKey( 'Provider', verbose_name = _( 'provider' ) )
-    price = models.DecimalField( _( "price" ), max_digits = 6, decimal_places = 2 )
+    price = models.DecimalField( _( "price" ), max_digits = 7, decimal_places = 2 )
     is_top = models.BooleanField( _( "is top service" ), default = False )
 
     # META Options
@@ -379,8 +379,10 @@ class PromoCode( BaseModel ):
 
     # Model Attributes
     name = models.CharField( _( "code" ), max_length = 15 )
-    discount = models.DecimalField( _( "discount" ), max_digits = 6, decimal_places = 2 )
+    discount = models.DecimalField( _( "discount" ), max_digits = 7, decimal_places = 2 )
     expiry_date = models.DateField( _( 'date' ) )
+    service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ), blank = True, null = True )
+    product = models.ForeignKey( 'Product', verbose_name = _( 'product' ), blank = True, null = True )
 
     # META Options
     class Meta:
@@ -452,7 +454,7 @@ class Service( BaseModel ):
     provider = models.ForeignKey( 'Provider', verbose_name = _( 'service provider' ) )
     service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ) )
     service_status = models.ForeignKey( 'ServiceStatus', verbose_name = _( 'service status' ) )
-    service_price = models.DecimalField( _( "service price" ), max_digits = 6, decimal_places = 2 )
+    service_price = models.DecimalField( _( "service price" ), max_digits = 7, decimal_places = 2 )
     history = models.ManyToManyField( 'ServiceStatus', through = 'ServiceHistory', related_name = 'history' )
 
     # META Options

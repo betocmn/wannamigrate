@@ -36,6 +36,9 @@ urlpatterns = patterns('',
     # Payment Page
     url( r'^payment/$', views.payment, name = 'payment' ),
 
+    # Promo Discount (ajax)
+    url( r'^promo_discount/$', views.get_promo_discount, name = 'get_promo_discount' ),
+
     # Order Confirmation Page
     url( r'^confirmation/$', views.confirmation, name = 'confirmation' ),
 
