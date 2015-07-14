@@ -381,6 +381,8 @@ class PromoCode( BaseModel ):
     name = models.CharField( _( "code" ), max_length = 15 )
     discount = models.DecimalField( _( "discount" ), max_digits = 7, decimal_places = 2 )
     expiry_date = models.DateField( _( 'date' ) )
+    service_type = models.ForeignKey( 'ServiceType', verbose_name = _( 'service type' ), blank = True, null = True )
+    product = models.ForeignKey( 'Product', verbose_name = _( 'product' ), blank = True, null = True )
 
     # META Options
     class Meta:
