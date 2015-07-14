@@ -56,7 +56,7 @@ urlpatterns = patterns('',
     url( r'^upload_avatar/$', views.upload_avatar, name = 'upload_avatar' ),
 
     # Messages
-    url( r'^start/conversation/(?P<to_user_id>\d+)/$', views.start_conversation, name = 'start_conversation' ),
+    url( r'^start/conversation/(?P<to_user_slug>[-\w]+)/$', views.start_conversation, name = 'start_conversation' ),
     url( r'^conversation/(?P<id>\d+)/$', views.view_conversation, name = 'view_conversation' ),
     url( r'^conversations/$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_INBOX_ID }, name = 'list_conversations' ),
     url( r'^conversations/sent$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_OUTBOX_ID }, name = 'list_conversations_sent' ),
@@ -74,4 +74,14 @@ urlpatterns = patterns('',
     # AJAX Notifications
     url( r'^x/consume/notifications/$', views.ajax_consume_notifications, name = "ajax_consume_notifications" ),
 
+    # User's Profile
+    url( r'^user/(?P<slug>[-\w]+)/$', views.user_profile, name = 'user_profile' ),
+
+    # Profile ajax
+    url( r'^x/follow/user/(?P<slug>[-\w]+)$', views.ajax_toggle_follow_user, name = "ajax_toggle_follow_user" ),
+    url( r'^x/get/questions/(?P<slug>[-\w]+)$', views.ajax_get_user_questions, name = "ajax_get_user_questions" ),
+    url( r'^x/get/posts/(?P<slug>[-\w]+)$', views.ajax_get_user_posts, name = "ajax_get_user_posts" ),
+    url( r'^x/get/answers/(?P<slug>[-\w]+)$', views.ajax_get_user_answers, name = "ajax_get_user_answers" ),
+    url( r'^x/get/followers/(?P<slug>[-\w]+)$', views.ajax_get_user_followers, name = "ajax_get_user_followers" ),
+    url( r'^x/get/following/(?P<slug>[-\w]+)$', views.ajax_get_user_following, name = "ajax_get_user_following" ),
 )

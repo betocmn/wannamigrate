@@ -488,8 +488,9 @@ class StartConversationForm( BaseModelForm ):
         cleaned_data = super( StartConversationForm, self ).clean( *args, **kwargs )
 
         # Removes all extra spaces from content string
-        stripped_content = ' '.join( cleaned_data[ "content" ].split() )
-        cleaned_data[ "content" ] = stripped_content
+        if "content" in cleaned_data:
+            stripped_content = ' '.join( cleaned_data[ "content" ].split() )
+            cleaned_data[ "content" ] = stripped_content
 
         return cleaned_data
 
