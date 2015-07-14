@@ -90,7 +90,21 @@ class PaymentForm( BaseForm ):
 
         # If promo code was passed, validates it
         if cleaned_data['promo_code']:
-            promo_code = get_object_or_false( PromoCode, name = cleaned_data['promo_code'], expiry_date__gte = datetime.date.today() )
+            if self.payment_info['is_service']:
+                promo_code = get_object_or_false(
+                    PromoCode,
+                    name = cleaned_data['promo_code'],
+                    expiry_date__gte = datetime.date.today(),
+                    service_type_id = self.payment_info['service_type'].id
+                )
+            else:
+                promo_code = get_object_or_false(
+                    PromoCode,
+                    name = cleaned_data['promo_code'],
+                    expiry_date__gte = datetime.date.today(),
+                    product_id = self.payment_info['product'].id
+                )
+
             if promo_code:
                 self.discount_percentage = promo_code.discount
             else:
