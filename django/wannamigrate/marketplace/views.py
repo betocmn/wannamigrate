@@ -619,8 +619,11 @@ def payment_api_update( request ):
                 provider = None
 
             # sets user language
-            translation.activate( user.preferred_language )
-            request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+            preferred_language = user.preferred_language
+            if not preferred_language:
+                preferred_language = 'en'
+            translation.activate( preferred_language )
+            request.session[translation.LANGUAGE_SESSION_KEY] = preferred_language
 
             # Sends Order Confirmation email to USER
             # TODO Change this to a celery/signal background task
