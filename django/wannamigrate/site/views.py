@@ -8,11 +8,12 @@ the templates on site app
 ##########################
 # Imports
 ##########################
+from django.template.loader import render_to_string
 from django.contrib import messages
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -34,7 +35,7 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    UserSituation, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, Language, Notification
+    User, UserStats, UserSituation, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, Language, Notification
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderCountry, ProviderServiceType,
@@ -47,6 +48,7 @@ import pytz
 from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
 from wannamigrate.core.decorators import ajax_login_required
+from wannamigrate.qa.models import Answer, Question, BlogPost
 
 
 
@@ -821,7 +823,7 @@ def view_conversation( request, id ):
 
 
 @login_required
-def start_conversation( request, to_user_id ):
+def start_conversation( request, to_user_slug ):
     """
     Displays "inbox" page.
     Obs: for now, the destination should be specified
@@ -831,8 +833,7 @@ def start_conversation( request, to_user_id ):
     """
 
     # Make sure that the destination is a service provider
-    provider = get_object_or_404( Provider, user_id = to_user_id )
-    to_user = provider.user
+    to_user = get_object_or_404( User, slug = to_user_slug )
 
     # Avoid auto-messaging.
     if to_user == request.user:
@@ -1158,7 +1159,6 @@ def dashboard( request ):
         # Gets 5 most related questions (page 0 by default)
         template_data['questions'] = questions
 
-
     # Print Template
     return render( request, 'site/dashboard/dashboard.html', template_data )
 
@@ -1201,6 +1201,60 @@ def set_lang( request, language_code ):
 
 
 
+#######################
+# User Profile view
+#######################
+@login_required
+def user_profile( request, slug ):
+    """
+    Displays "User's profile" page
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Gets the requested user
+    requested_user = get_object_or_404( User.objects.prefetch_related( "userstats" ), slug = slug )
+
+    # If the requested user is a service provider, redirects to service provider profile page
+    provider = Provider.objects.filter( user = requested_user ).first()
+    if provider:
+        return HttpResponseRedirect( reverse( 'marketplace:profile', kwargs={ "user_id" : provider.user_id, "name" : slugify( provider.display_name ) } ) )
+
+    # Gets the situation of the requested user and formats it to display on the template.
+    situation = UserSituation.objects.filter( user = requested_user ).select_related( "situation" ).get().situation
+    situation_description = "{0} {1} {2} {3} {4} {5} {6}".format(
+        _( "I'm from" ),
+        _( situation.from_country.name ),
+        _( "and" ).lower(),
+        _( "I wanna" ).lower(),
+        _( situation.goal.name ).lower(),
+        _( "in" ).lower(),
+        _( situation.to_country.name )
+    )
+
+    # Initializes template data dictionary
+    template_data = {
+        "requested_user" : requested_user,
+        "meta_title" : "{0} - ".format( requested_user.name ) +  _( "Profile - Wanna Migrate" ),
+        "questions_count" : Question.objects.filter( owner = requested_user, is_anonymous = False ).count(),
+        "answers_count" : Answer.objects.filter( owner = requested_user, is_anonymous = False ).count(),
+        "posts_count" : BlogPost.objects.filter( owner = requested_user, is_anonymous = False ).count(),
+        "followers_count" : requested_user.userstats.total_users_followers,
+        "following_count" : requested_user.userstats.total_users_following,
+        "is_followed" : request.user.following.filter( id = requested_user.id ).exists(),
+        "hide_buttons" : ( request.user == requested_user ),
+        "situation_description" : situation_description,
+    }
+
+
+    # Print Template
+    return render( request, 'site/profile/view.html', template_data )
+
+
+
+
+
 #########################
 # AJAX / DYNAMIC VIEWS
 #########################
@@ -1212,3 +1266,128 @@ def ajax_consume_notifications( request ):
     Notification.mark_as_read_for( request.user )
     return HttpResponse( "" )
 
+
+
+
+@ajax_login_required
+def ajax_toggle_follow_user( request, slug ):
+
+    # Gets the stats of the logged user
+    user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
+
+    # Gets the stats of the requested user
+    requested_user = get_object_or_404( User.objects, slug = slug )
+    requested_user_stats, created = UserStats.objects.get_or_create( user_id = requested_user.id )
+
+
+    if request.user.id == requested_user.id:
+        return JsonResponse( {
+        "action" : _( "Follow" ),
+        "total" : requested_user_stats.total_users_followers
+    } )
+
+    is_followed = False   # flag indicating if the user is following the user
+
+
+    with transaction.atomic():
+        if not request.user.following.filter( id = requested_user.id ).exists():
+            # If the logged user isn't following the requested user, follows him.
+            request.user.following.add( requested_user )
+            user_stats.total_users_following += 1
+            requested_user_stats.total_users_followers += 1
+
+            user_stats.save()
+            requested_user_stats.save()
+
+            # Set a flag indicating that the user is following the FollowableInstance.
+            is_followed = True
+        else:
+            # If the logged user isn't following the requested user, follows him.
+            request.user.following.remove( requested_user )
+            user_stats.total_users_following -= 1
+            requested_user_stats.total_users_followers -= 1
+
+            user_stats.save()
+            requested_user_stats.save()
+
+            # Set a flag indicating that the user is following the FollowableInstance.
+            is_followed = False
+
+    # Creates a response to the call
+    response = {
+        "action" : _( "Unfollow" ) if is_followed else _( "Follow" ),
+        "total" : requested_user_stats.total_users_followers
+    }
+
+    return JsonResponse( response )
+
+
+@ajax_login_required
+def ajax_get_user_questions( request, slug ):
+
+    user = get_object_or_404( User.objects, slug = slug )
+
+    questions = Question.objects.filter( owner = user, is_anonymous = False ).all()
+
+    processed_questions = [ { "title" : x.title, "body" : "", "url" : reverse( "qa:view_question", kwargs={ "slug" : x.slug } ) } for x in questions ]
+
+    html = render_to_string( "site/profile/user-content-post.html", { "contents": processed_questions } )
+    return HttpResponse( html )
+
+
+@ajax_login_required
+def ajax_get_user_answers( request, slug ):
+
+    user = get_object_or_404( User.objects, slug = slug )
+
+    answers = Answer.objects.filter( owner = user, is_anonymous = False ).prefetch_related( "question" ).all()
+
+    processed_answers = [ { "title" : x.question.title, "body" : x.body, "url" : reverse( "qa:view_question", kwargs={ "slug" : x.question.slug } )  } for x in answers ]
+
+    html = render_to_string( "site/profile/user-content-post.html", { "contents": processed_answers } )
+    return HttpResponse( html )
+
+
+@ajax_login_required
+def ajax_get_user_posts( request, slug ):
+
+    user = get_object_or_404( User.objects, slug = slug )
+
+    posts = BlogPost.objects.filter( owner = user, is_anonymous = False ).all()
+
+    processed_posts = [ { "title" : x.title, "body" : x.body, "url" : reverse( "qa:view_blogpost", kwargs={ "slug" : x.slug } ) } for x in posts ]
+
+    html = render_to_string( "site/profile/user-content-post.html", { "contents": processed_posts } )
+    return HttpResponse( html )
+
+
+@ajax_login_required
+def ajax_get_user_followers( request, slug ):
+
+    user = get_object_or_404( User.objects.prefetch_related(
+        Prefetch(
+                "followers",
+                queryset=User.objects.select_related( "userpersonal" )
+            ) ), slug = slug )
+
+    followers = user.followers.all()
+    processed_followers = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in followers ]
+
+    html = render_to_string( "site/profile/user-content-people.html", { "contents": processed_followers } )
+    return HttpResponse( html )
+
+
+@ajax_login_required
+def ajax_get_user_following( request, slug ):
+
+    user = get_object_or_404( User.objects.prefetch_related(
+        Prefetch(
+                "following",
+                queryset=User.objects.select_related( "userpersonal" )
+            ) ), slug = slug )
+
+    following = user.following.all()
+    processed_following = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in following ]
+
+    html = render_to_string( "site/profile/user-content-people.html", { "contents": processed_following } )
+    return HttpResponse( html )

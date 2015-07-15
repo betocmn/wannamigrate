@@ -31,7 +31,7 @@
                                 {% for entry in entries %}
                                     <tr class="{% if entry.has_updates %}not-read{% else %}read{% endif %}">
                                         <td class="author">
-                                            <a href="{% url "site:view_conversation" entry.conversation.id %}" class="message-link">
+                                            <a href="{% url "site:user_profile" entry.other_user.slug %}" class="message-link">
                                                 {{ entry.other_user.name|truncate_smart:15 }} <!--span>(3)</span-->
                                             </a>
                                         </td>

@@ -1,0 +1,288 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+{% load tz %}
+
+{% block head %}
+    {{ block.super }}
+    <style>
+        section#profile{ padding:50px 0 100px 0; }
+        section#profile div.wrapper{ margin:0 auto; text-align:center; max-width: 600px; }
+        section#profile div#user-info{ margin: 30px 0 0px 0; }
+        section#profile div#user-info img.user-info-image
+        {
+            width: 170px;
+            height: 170px;
+            display: block;
+            margin: 0 auto;
+            border: solid 1px #68347E;
+            padding:1px;
+            -webkit-border-radius: 170px;
+            -moz-border-radius: 170px;
+            border-radius: 170px;
+        }
+        section#profile div#user-info h1#user-info-name
+        {
+            font-size:20px;
+            color:#68347E;
+            margin:15px 0 10px;
+
+        }
+
+        section#profile div#user-info a#user-info-bt-follow
+        {
+            display:inline-block;
+            width:auto;
+            height: auto;
+            padding:15px 20px;
+            margin:30px 0 0;
+            background: #68347E;
+            font-size:16px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            text-decoration:none;
+
+            -webkit-box-shadow: inset 0 -4px 4px #5b2e6f;
+	        -moz-box-shadow: inset 0 -4px 4px #5b2e6f;
+	        box-shadow: inset 0 -4px 4px #5b2e6f;
+        }
+        span#user-info-bt-follow-name
+        {
+            color:white;
+            font-weight: bold;
+        }
+
+
+        section#profile div#user-info a#user-info-bt-message
+        {
+            display:inline-block;
+            width:auto;
+            height: auto;
+            padding:15px 20px;
+            margin:30px 0 0;
+            background: #EEE;
+            font-size:16px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            text-decoration:none;
+
+            -webkit-box-shadow: inset 0 -4px 4px #DDD;
+	        -moz-box-shadow: inset 0 -4px 4px #DDD;
+	        box-shadow: inset 0 -4px 4px #DDD;
+        }
+        span#user-info-bt-message-name
+        {
+            color: #333;
+            font-weight: bold;
+        }
+
+
+        span#user-info-bt-follow-count
+        {
+            color:#FFCE80;
+            font-weight: bold;
+        }
+        section#profile div.wrapper div#user-stats
+        {
+            border-top: solid 1px #ccc;
+            border-bottom: solid 1px #ccc;
+            padding:5px 0 5px;
+            margin-top: 30px;
+        }
+
+        section#profile div.wrapper div#user-stats ul#user-stats-list { text-align: center; }
+        section#profile div.wrapper div#user-stats ul#user-stats-list li.user-stats-list-item {
+            display:inline-block;
+            margin: 10px 10px 10px 0;
+            padding:5px;
+        }
+        section#profile div.wrapper div#user-stats ul#user-stats-list li.user-stats-list-item:last-child
+        {
+            margin-right: none;
+        }
+        section#profile div.wrapper div#user-stats ul#user-stats-list li.user-stats-list-item a {
+            display: block;
+            text-decoration: none;
+            color:#888;
+            font-size:16px;
+        }
+        section#profile div.wrapper div#user-stats ul#user-stats-list li.user-stats-list-item.active
+        {
+            background:#EEE;
+        }
+        section#profile div.wrapper div#user-stats ul#user-stats-list li.user-stats-list-item a:hover
+        {
+            text-decoration:underline;
+        }
+        ul#user-stats-content-post li.user-stats-content-post-item
+        {
+            margin-top:30px;
+            margin-left:15px;
+            margin-bottom:25px;
+        }
+        ul#user-stats-content-post li.user-stats-content-post-item a
+        {
+            text-decoration:none;
+            text-align: left;
+        }
+        ul#user-stats-content-post li.user-stats-content-post-item  a h3.user-stats-content-post-item-link-title
+        {
+            display: block;
+            padding: 0px 0px 10px;
+            line-height: 1.3em;
+            font-family: "open_sansbold";
+            font-weight: normal;
+            font-size: 18px;
+            color: #68347E;
+        }
+        ul#user-stats-content-post li.user-stats-content-post-item  a p.user-stats-content-post-item-link-description
+        {
+            display: block;
+            line-height: 22px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        ul#user-stats-content-people-list{ text-align: left; }
+        ul#user-stats-content-people-list li.user-stats-content-people-item
+        {
+            width:260px;
+            height: 80px;
+            border:solid 1px #eee;
+            display:inline-block;
+            margin:10px;
+        }
+        ul#user-stats-content-people-list li.user-stats-content-people-item:hover
+        {
+            background:#EFEFEF;
+        }
+        
+        ul#user-stats-content-people-list li.user-stats-content-people-item a img.user-stats-content-people-link-image
+        {
+            float:left;
+            width:60px;
+            height:60px;
+            -webkit-border-radius: 60px;
+            -moz-border-radius: 60px;
+            border-radius: 60px;
+            margin-top:10px;
+            margin-left:10px;
+        }
+
+        ul#user-stats-content-people-list li.user-stats-content-people-item a p.user-stats-content-people-link-name
+        {
+            width:170px;
+            float:left;
+            height: 80px;
+            line-height: 80px;
+            font-weight: bold;
+            margin-left:10px;
+            color:#333;
+        }
+
+        li.empty
+        {
+            width:100%;
+            padding:30px;
+            text-align: left;
+        }
+        
+
+
+    </style>
+{% endblock head %}
+
+{% block content %}
+<section id="profile">
+    <div class="wrapper">
+        <div id="user-info">
+            {% if requested_user.userpersonal.avatar %}
+                <img src="{{ requested_user.userpersonal.avatar.size170x170.url }}" alt="{{ provider.display_name }}" class="user-info-image" />
+            {% else %}
+                <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" class="user-info-image" />
+            {% endif %}
+            <h1 id="user-info-name">{{ requested_user.name }}</h1>
+            <p id="user-info-description">{{ situation_description }}</p>
+            {% if not hide_buttons %}
+                <a href="{% url 'site:start_conversation' requested_user.slug %}" id="user-info-bt-message">
+                    <span id="user-info-bt-message-name">
+                        {% trans "Send Message" %}
+                    </span>
+                </a>
+                <br/>
+                <a href="{% url 'site:ajax_toggle_follow_user' requested_user.slug %}" id="user-info-bt-follow">
+                    <span id="user-info-bt-follow-name">
+                        {% if is_followed %}
+                            {% trans "Unfollow" %}
+                        {% else %}
+                            {% trans "Follow" %}
+                        {% endif %}
+                    </span>
+                    <span id="user-info-bt-follow-count">{{ followers_count|kmi }}</span>
+                </a>
+            {% endif %}
+
+        </div>
+        <div id="user-stats">
+            <ul id="user-stats-list">
+                <li class="user-stats-list-item active"><a href="{% url 'site:ajax_get_user_questions' requested_user.slug %}" id="user-stats-item-link-questions" class="user-stats-item-link">{% trans "Questions" %} {{ questions_count|kmi }}</a></li>
+                <li class="user-stats-list-item"><a href="{% url 'site:ajax_get_user_answers' requested_user.slug %}" id="user-stats-item-link-answers" class="user-stats-item-link">{% trans "Answers" %} {{ answers_count|kmi }}</a></li>
+                <li class="user-stats-list-item"><a href="{% url 'site:ajax_get_user_posts' requested_user.slug %}" id="user-stats-item-link-posts" class="user-stats-item-link">{% trans "Posts" %} {{ posts_count|kmi }}</a></li>
+                <li class="user-stats-list-item"><a href="{% url 'site:ajax_get_user_followers' requested_user.slug %}" id="user-stats-item-link-followers" class="user-stats-item-link">{% trans "Followers" %} {{ followers_count|kmi }}</a></li>
+                <li class="user-stats-list-item"><a href="{% url 'site:ajax_get_user_following' requested_user.slug %}" id="user-stats-item-link-following" class="user-stats-item-link">{% trans "Following" %} {{ following_count|kmi }}</a></li>
+            </ul>
+        </div>
+        <div id="user-stats-content">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+    <!-- INLINE JS -->
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+    <script type="text/javascript">
+
+        default_content_url = $( "#user-stats-item-link-questions").attr( "href" )
+        $( "#user-stats-content").html( "{% trans 'Loading' %}" );
+        $( "#user-stats-content" ).load( default_content_url );
+        $( "#user-stats-item-link-questions" ).closest( "li" ).addClass( "active" );
+
+
+        $( document ).ready( function() {
+            $( "a.user-stats-item-link").click( function(e){
+                e.preventDefault();
+
+                $( "li.user-stats-list-item").removeClass( "active" );
+                $(this).closest( "li" ).addClass( "active" );
+
+                $( "#user-stats-content").html( "{% trans 'Loading' %}" );
+                $( "#user-stats-content" ).load( $(this).attr( "href" ) );
+            });
+
+             $( "a#user-info-bt-follow").click( function(e) {
+                 e.preventDefault();
+
+                 $.get( $(this).attr( "href" ), { "_": $.now() }, function( data ){
+
+                    followers_count = to_kmi( data.total );
+                    $("#user-info-bt-follow-name").text( data.action );
+                    $("#user-info-bt-follow-count").text( followers_count );
+                    $( "#user-stats-item-link-followers").text( '{% trans "Followers" %} ' + followers_count )
+                });
+
+             });
+        });
+
+    </script>
+
+    {% include "_layouts/analytics.html" %}
+
+{% endblock scripts %}

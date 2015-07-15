@@ -597,13 +597,13 @@ def payment_api_update( request ):
             invoice_id = request.POST['data[id]']
             status = request.POST['data[status]']
 
-            # If it's an approved order on created method, we stop it here and let the 'update' method run the actions
-            if request.POST['event'] == 'invoice.created' and status == 'paid':
-                return HttpResponse( False )
-
             # identifies order by invoice ID
             order = get_object_or_false( Order, external_code = invoice_id )
             if not order:
+                return HttpResponse( False )
+
+            # If it's an approval update of an order which was already approved, we stop it here
+            if request.POST['event'] == 'invoice.status_changed' and status == 'paid' and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
                 return HttpResponse( False )
 
             # updates status

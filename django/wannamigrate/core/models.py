@@ -18,6 +18,8 @@ from stdimage.utils import UploadToUUID
 import math
 from wannamigrate._settings.base import LANGUAGES
 from django.db import transaction
+from django.template.defaultfilters import slugify
+import itertools
 import pytz
 
 
@@ -327,12 +329,14 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
 
     # Model Attributes
     email = models.EmailField( _( "e-mail" ), max_length = 255, unique = True )
-    name = models.CharField( _( "name" ), max_length = 120, null = True, default = '' )
+    name = models.CharField( _( "name" ), max_length = 120, blank = False, default = '' )
+    slug = models.SlugField( max_length = 200, unique = True )
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'points.UserResult' )
     preferred_language = models.CharField( _( "Preferred Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
     preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, choices = TIMEZONES, null = True, blank = True )
+    following = models.ManyToManyField( "User", related_name = "followers" )
 
     # META Options
     class Meta:
@@ -375,6 +379,25 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
         """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+    def generate_slug( self ):
+        # Calculates the slug handling repetition
+        max_length = self._meta.get_field( 'slug' ).max_length
+        self.slug = orig = slugify( self.name )[:max_length]
+
+        for x in itertools.count(1):
+            if not self.__class__.objects.filter( slug = self.slug ).exists():
+                break
+            # Truncate the original slug dynamically. Minus 1 for the hyphen.
+            self.slug = "{0}-{1}".format( orig[ : max_length - len( str( x ) ) - 1 ], x )
+
+
+    def save( self, *args, **kwargs ):
+        if not self.slug:
+            self.generate_slug()
+
+        super( User, self ).save( *args, **kwargs )
 
 
 
@@ -541,6 +564,7 @@ class UserPersonal( BaseModel ):
         'thumbnail': ( 40, 40, True ),
         'medium': ( 300, 200 ),
         'size100x100': ( 100, 100, True ),
+        'size170x170': ( 170, 170, True ),
     })
     birth_date = models.DateField( _( "birth date" ), blank = True, null = True  )
     gender = models.CharField( _( "gender" ), max_length = 1, choices = GENDERS, blank = True, null = True, default = None )
