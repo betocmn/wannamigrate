@@ -43,7 +43,8 @@ urlpatterns = patterns('',
     url( r'^confirmation/$', views.confirmation, name = 'confirmation' ),
 
     # Update order status
-    url( r'^payment_api_update/$', views.payment_api_update, name = 'payment_api_update' ),
+    url( r'^payment_api_created/$', views.payment_api_created, name = 'payment_api_created' ),
+    url( r'^payment_api_updated/$', views.payment_api_updated, name = 'payment_api_updated' ),
 
     # Download Order page
     url( r'^order/download/(?P<order_id_64>[0-9A-Za-z_\-]+)/(?P<user_id_64>[0-9A-Za-z_\-]+)/(?P<product_id_64>[0-9A-Za-z_\-]+)/(?P<external_code_64>[0-9A-Za-z_\-]+)/$', views.order_download, name = 'order_download' ),
