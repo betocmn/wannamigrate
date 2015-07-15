@@ -578,9 +578,11 @@ def confirmation( request ):
 # UPDATE ORDER STATUS
 #######################
 @csrf_exempt
-def payment_api_update( request ):
+@sensitive_post_parameters()
+@never_cache
+def payment_api_created( request ):
     """
-    When there's a trigger (update) the payment API sends
+    When there's a trigger 'created' the payment API sends
     the data to this view, which needs to run some actions
     inside.
 
@@ -589,59 +591,124 @@ def payment_api_update( request ):
     """
 
     # If form was submitted
-    if request.method == 'POST' and 'event' in request.POST:
+    if request.method == 'POST' and 'event' in request.POST and request.POST['event'] == 'invoice.created':
 
-        if 'event' in request.POST and request.POST['event'] in ['invoice.status_changed', 'invoice.created']:
 
-            # gets post data from API request
-            invoice_id = request.POST['data[id]']
-            status = request.POST['data[status]']
+        # gets post data from API request
+        payment_processor = PaymentProcessor()
+        external_code = request.POST['data[id]']
+        order_status_id = payment_processor.get_order_status_id( request.POST['data[status]'] )
 
-            # identifies order by invoice ID
-            order = get_object_or_false( Order, external_code = invoice_id )
-            if not order:
-                return HttpResponse( False )
+        # identifies order by external code (invoice ID)
+        order = get_object_or_false( Order, external_code = external_code )
+        if not order:
+            return HttpResponse( 'False' )
 
-            # If it's an approval update of an order which was already approved, we stop it here
-            if request.POST['event'] == 'invoice.status_changed' and status == 'paid' and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-                return HttpResponse( False )
+        # updates status
+        order.order_status_id = order_status_id
+        order.save()
 
-            # updates status
-            payment_processor = PaymentProcessor()
-            order.order_status_id = payment_processor.get_order_status_id( status )
-            order.save()
+        # Gets user and provider from order
+        user = order.user
+        if order.service_id:
+            provider = order.service.provider
+        else:
+            provider = None
 
-            # Gets user and provider from order
-            user = order.user
-            if order.service_id:
-                provider = order.service.provider
-            else:
-                provider = None
+        # sets user language
+        preferred_language = user.preferred_language
+        if not preferred_language:
+            preferred_language = 'en'
+        translation.activate( preferred_language )
+        request.session[translation.LANGUAGE_SESSION_KEY] = preferred_language
 
-            # sets user language
-            preferred_language = user.preferred_language
-            if not preferred_language:
-                preferred_language = 'en'
-            translation.activate( preferred_language )
-            request.session[translation.LANGUAGE_SESSION_KEY] = preferred_language
-
-            # Sends Order Confirmation email to USER
-            # TODO Change this to a celery/signal background task
+        # Sends Order Confirmation email to USER
+        # TODO Change this to a celery/signal background task
+        if order_status_id in [settings.ID_ORDER_STATUS_APPROVED, settings.ID_ORDER_STATUS_PENDING, settings.ID_ORDER_STATUS_REFUNDED]:
             Mailer.send_order_confirmation_user( user, order, provider )
 
-            # Sends Order Confirmation email to PROVIDER
-            # TODO Change this to a celery/signal background task
-            if order.service_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-                Mailer.send_order_confirmation_provider( user, order, provider )
+        # Sends Order Confirmation email to PROVIDER
+        # TODO Change this to a celery/signal background task
+        if order.service_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            Mailer.send_order_confirmation_provider( user, order, provider )
 
-            # Sends Order download link to USER (if it's a product)
-            # TODO Change this to a celery/signal background task
-            if order.product_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-                Mailer.send_order_download_link( user, order )
+        # Sends Order download link to USER (if it's a product)
+        # TODO Change this to a celery/signal background task
+        if order.product_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            Mailer.send_order_download_link( user, order )
 
-            return HttpResponse( True )
+        return HttpResponse( 'True' )
 
-    return HttpResponse( False )
+    return HttpResponse( 'False' )
+
+
+
+@csrf_exempt
+@sensitive_post_parameters()
+@never_cache
+def payment_api_updated( request ):
+    """
+    When there's a trigger 'updated' the payment API sends
+    the data to this view, which needs to run some actions
+    inside.
+
+    :param: request
+    :return: Boolean
+    """
+
+    # If form was submitted
+    if request.method == 'POST' and 'event' in request.POST and request.POST['event'] == 'invoice.status_changed':
+
+        # gets post data from API request
+        payment_processor = PaymentProcessor()
+        external_code = request.POST['data[id]']
+        order_status_id = payment_processor.get_order_status_id( request.POST['data[status]'] )
+
+        # identifies order by external code (invoice ID)
+        order = get_object_or_false( Order, external_code = external_code )
+        if not order:
+            return HttpResponse( 'False' )
+
+        # If it's an approval update of an order which was already approved, we stop it here
+        if order_status_id == settings.ID_ORDER_STATUS_APPROVED and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            return HttpResponse( 'False' )
+
+        # updates status
+        order.order_status_id = order_status_id
+        order.save()
+
+        # Gets user and provider from order
+        user = order.user
+        if order.service_id:
+            provider = order.service.provider
+        else:
+            provider = None
+
+        # sets user language
+        preferred_language = user.preferred_language
+        if not preferred_language:
+            preferred_language = 'en'
+        translation.activate( preferred_language )
+        request.session[translation.LANGUAGE_SESSION_KEY] = preferred_language
+
+        # Sends Order Confirmation email to USER
+        # TODO Change this to a celery/signal background task
+        if order_status_id in [settings.ID_ORDER_STATUS_APPROVED, settings.ID_ORDER_STATUS_PENDING, settings.ID_ORDER_STATUS_REFUNDED]:
+            Mailer.send_order_confirmation_user( user, order, provider )
+
+        # Sends Order Confirmation email to PROVIDER
+        # TODO Change this to a celery/signal background task
+        if order.service_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            Mailer.send_order_confirmation_provider( user, order, provider )
+
+        # Sends Order download link to USER (if it's a product)
+        # TODO Change this to a celery/signal background task
+        if order.product_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            Mailer.send_order_download_link( user, order )
+
+        return HttpResponse( 'True' )
+
+    return HttpResponse( 'False' )
 
 
 
