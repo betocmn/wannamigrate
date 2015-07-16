@@ -145,7 +145,7 @@
                                 {% if ans.is_anonymous %}
                                     <span class="name">{% trans 'Anonymous' %}</span>
                                 {% else %}
-                                    <a class="name" href="{% url 'site:user_profile' ans.owner.slug %}">{{ans.owner.name}}</a>
+                                    <a style="text-transform: capitalize;" class="name" href="{% url 'site:user_profile' ans.owner.slug %}">{{ans.owner.name}}</a>
                                 {% endif %}
                                 <span class="info"></span>
                             </div>
