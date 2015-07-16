@@ -26,6 +26,14 @@ div#reader-content {
     line-height: 1.6em;
 }
 
+div#reader-content ul {
+    list-style: disc outside none;
+}
+
+div#reader-content ul li {
+    margin-left: 35px;
+}
+
 div#reader-content a{ color:#68347E; }
 
 div#reader-feedback
