@@ -211,6 +211,7 @@ def view_question( request, slug ):
     # Gets the answer form
     if request.user.is_authenticated():
         answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
+
         if answer_form.is_valid():
             with transaction.atomic():
                 user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
