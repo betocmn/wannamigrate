@@ -390,10 +390,12 @@ def view_blogpost( request, slug ):
     # Sets image as preview for sharing (as for facebook, twitter, etc.)
     # TODO: This is "gambiarra". After image support is added to posts, change this code to
     # automatically get one image from the HTML posted (if any).
-    if blogpost.id == 2:
-        template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-2.jpg' )
-    else:
+    if blogpost.id == 1:
         template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate.png' )
+    elif blogpost.id == 2:
+        template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-2.jpg' )
+    elif blogpost.id == 3:
+        template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-3.jpg' )
 
 
     ###############################
