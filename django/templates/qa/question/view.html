@@ -21,6 +21,7 @@
         {
             height:50px;
         }
+        .hide{ display:none !important; }
 
     </style>
 {% endblock head %}
@@ -114,17 +115,18 @@
                                 <img id="answer_user_picture" src="{% static 'site/img/thumb-account.png' %}" alt="user photo">
                             {% endif %}
                         </i>
-                        <span id="answer_user_name" class="name">{{ user.name }}</span><br>
-                        <!--span class="info">Designer at humbertolandia.com</span-->
-                            <label class="make-anonymous" for="id_is_anonymous">
-                                {{ answer_form.is_anonymous }} <span>{% trans "Make Anonymous" %}</span>
-                            </label>
+                        <span id="answer_user_name" class="name">{{ user.name }}</span>
+                        <a class="answer-question-link" href="#">{% trans 'Write an answer' %}...</a>
+                        <label class="make-anonymous hide" for="{{answer_form.id_is_anonymous}}">
+                            {{ answer_form.is_anonymous }} <span>{% trans "Make Anonymous" %}</span>
+                        </label>
                     </div>
-                    <div style="position:relative; float:left;">
+                    <div style="position:relative; float:left;" class="answer-body hide">
                         {{ answer_form.body }}
                         {{ answer_form.body.errors }}
                     </div>
-                    <input type="submit" class="button bt-write" value="{% trans "Write answer" %}">
+                    <input type="submit" class="button bt-write hide" value="{% trans "Write answer" %}">
+
                 </form>
             </div>
             {% endif %}
@@ -244,7 +246,7 @@
         {
             if ( $( "#{{ answer_form.is_anonymous.id_for_label }}" ).is( ":checked" ) ) {
                 $( "#answer_user_picture" ).attr( "src", "{% static 'site/img/thumb-account.png' %}" );
-                $( "#answer_user_name" ).text( "Anonymous" );
+                $( "#answer_user_name" ).text( "{% trans 'Anonymous' %}" );
             }
             else {
                 {% if user.userpersonal.avatar %}
@@ -254,20 +256,26 @@
             }
         }
 
+            function on_answer_link_clicked()
+            {
+                $( "a.answer-question-link" ).remove();
+                $( "label.make-anonymous").removeClass( "hide" );
+                $( "div.answer-body").removeClass( "hide" );
+                $( "input.bt-write").removeClass( "hide" );
+                $( "#{{ answer_form.body.id_for_label }}" ).focus();
+            }
+
         $( document ).ready( function() {
 
             // XToggleButton Handler
             $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
 
+            $("#{{ answer_form.body.id_for_label }}").wm_editor();
 
-            {% if answer_form.body.value|length == 0 %}
-                $("#{{ answer_form.body.id_for_label }}").focus(function(){
-                    $("#{{ answer_form.body.id_for_label }}").wm_editor();
-                    $(this).unbind( "focus" );
-                    $("#{{ answer_form.body.id_for_label }}").focus();
-                });
-            {% else %}
-                $("#{{ answer_form.body.id_for_label }}").wm_editor();
+            $( "a.answer-question-link" ).click( on_answer_link_clicked );
+
+            {% if answer_form.errors|length > 0 %}
+                on_answer_link_clicked();
             {% endif %}
 
             onAnonymousChange();

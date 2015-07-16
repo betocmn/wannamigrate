@@ -60,7 +60,8 @@
 
 
             $( window ).scroll( function(){
-                var reached_bottom = $( window ).scrollTop() == $( document ).height() - $( window ).height();
+                var GAP = 300; /* 300pxs gap */
+                var reached_bottom = $( window ).scrollTop() >= ( $( document ).height() - $( window ).height() - GAP );
 
                 if ( ! request_locked && ! loading_ended && reached_bottom )
                 {
