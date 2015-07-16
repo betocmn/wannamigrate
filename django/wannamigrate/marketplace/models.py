@@ -252,8 +252,8 @@ class Provider( BaseModel ):
         ).only(
             'id', 'display_name', 'user', 'headline', 'review_score'
         ).order_by(
-            '-user__userstats__total_reviews', '-user__userstats__total_contracts',
-            '-user__userstats__total_answers', '-user__last_login'
+            '-review_score', '-user__userstats__total_contracts',
+            '-user__userstats__total_answers', 'user__id'
         )[limit_from:limit_to]
 
         return providers
