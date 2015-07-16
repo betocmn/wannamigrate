@@ -79,7 +79,7 @@
                 <div class="data-question">
                     <h3 class="title-question">{{ question.title }}</h3>
                     <div class="data-item">
-                        {% trans "Written in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong> {% trans "by" %}
+                        {% trans "Written in" %} <strong>{{ question.created_date|date:"b d" }}</strong> {% trans "by" %}
                         {% if question.is_anonymous %}
                             {% trans "Anonymous User" %}
                         {% else %}
