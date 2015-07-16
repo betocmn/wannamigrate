@@ -43,7 +43,6 @@ urlpatterns = patterns('',
     url( r'^confirmation/$', views.confirmation, name = 'confirmation' ),
 
     # Update order status
-    url( r'^payment_api_created/$', views.payment_api_created, name = 'payment_api_created' ),
     url( r'^payment_api_updated/$', views.payment_api_updated, name = 'payment_api_updated' ),
 
     # Download Order page

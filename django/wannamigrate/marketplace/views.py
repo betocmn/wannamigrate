@@ -24,6 +24,7 @@ from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
 from wannamigrate.marketplace.payment_processor import PaymentProcessor
+from wannamigrate.marketplace.tasks import send_order_confirmation_user
 from django.conf import settings
 from django.db.models import F
 from django.db import transaction
@@ -407,12 +408,14 @@ def payment( request ):
             'is_service': is_service
         }
         if is_service:
-            payment_info['provider'] = request.session['payment']['provider']
+            provider = request.session['payment']['provider']
+            payment_info['provider'] = provider
             payment_info['service_type'] = request.session['payment']['service_type']
             payment_info['provider_service_type'] = request.session['payment']['provider_service_type']
             payment_info['service'] = request.session['payment']['service']
             payment_info['service_type_category'] = request.session['payment']['service_type'].service_type_category
         else:
+            provider = None
             payment_info['product'] = request.session['payment']['product']
             payment_info['product_category'] = request.session['payment']['product'].product_category
 
@@ -425,6 +428,24 @@ def payment( request ):
 
                 # Saves all order info
                 order = form.save()
+
+                # Add celery background tasks to send out confirmation emails
+                # @TODO Change emails below for celery task
+                #send_order_confirmation_user.delay( request.user, order, provider )
+
+                # Sends Order Confirmation email to USER
+                # TODO Change this to a celery/signal background task
+                Mailer.send_order_confirmation_user( request.user, order, provider )
+
+                # Sends Order Confirmation email to PROVIDER
+                # TODO Change this to a celery/signal background task
+                if order.service_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+                    Mailer.send_order_confirmation_provider( request.user, order, provider )
+
+                # Sends Order download link to USER (if it's a product)
+                # TODO Change this to a celery/signal background task
+                if order.product_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+                    Mailer.send_order_download_link( request.user, order )
 
                 # Redirects to confirmation page
                 del request.session['payment']
@@ -577,72 +598,6 @@ def confirmation( request ):
 #######################
 # UPDATE ORDER STATUS
 #######################
-@csrf_exempt
-@sensitive_post_parameters()
-@never_cache
-def payment_api_created( request ):
-    """
-    When there's a trigger 'created' the payment API sends
-    the data to this view, which needs to run some actions
-    inside.
-
-    :param: request
-    :return: Boolean
-    """
-
-    # If form was submitted
-    if request.method == 'POST' and 'event' in request.POST and request.POST['event'] == 'invoice.created':
-
-
-        # gets post data from API request
-        payment_processor = PaymentProcessor()
-        external_code = request.POST['data[id]']
-        order_status_id = payment_processor.get_order_status_id( request.POST['data[status]'] )
-
-        # identifies order by external code (invoice ID)
-        order = get_object_or_false( Order, external_code = external_code )
-        if not order:
-            return HttpResponse( 'False' )
-
-        # updates status
-        order.order_status_id = order_status_id
-        order.save()
-
-        # Gets user and provider from order
-        user = order.user
-        if order.service_id:
-            provider = order.service.provider
-        else:
-            provider = None
-
-        # sets user language
-        preferred_language = user.preferred_language
-        if not preferred_language:
-            preferred_language = 'en'
-        translation.activate( preferred_language )
-        request.session[translation.LANGUAGE_SESSION_KEY] = preferred_language
-
-        # Sends Order Confirmation email to USER
-        # TODO Change this to a celery/signal background task
-        if order_status_id in [settings.ID_ORDER_STATUS_APPROVED, settings.ID_ORDER_STATUS_PENDING, settings.ID_ORDER_STATUS_REFUNDED]:
-            Mailer.send_order_confirmation_user( user, order, provider )
-
-        # Sends Order Confirmation email to PROVIDER
-        # TODO Change this to a celery/signal background task
-        if order.service_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-            Mailer.send_order_confirmation_provider( user, order, provider )
-
-        # Sends Order download link to USER (if it's a product)
-        # TODO Change this to a celery/signal background task
-        if order.product_id and order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-            Mailer.send_order_download_link( user, order )
-
-        return HttpResponse( 'True' )
-
-    return HttpResponse( 'False' )
-
-
-
 @csrf_exempt
 @sensitive_post_parameters()
 @never_cache
