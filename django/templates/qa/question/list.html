@@ -26,7 +26,16 @@
         {% include "qa/common/side_menu.html" %}
         <section class="content">
             <div class="questions-answers">
-                <a href="{% url "qa:add_question" %}" class="button bt-addQuestion">{% trans 'Add Question' context 'button' %}</a>
+                <!--a href="{% url "qa:add_question" %}" class="button bt-addQuestion">{% trans 'Add Question' context 'button' %}</a-->
+
+                <div class="add-question" style="padding:20px; background:#efefef;">
+                    <div class="want-know" style="padding-bottom:20px !important;">
+                        <h2 class="title">{% trans 'What do you want to know?' %}</h2>
+                        <textarea style="background:white;" cols="40" id="question-title-form" name="title" placeholder="{% trans 'Type your question here...' %}" rows="10"></textarea>
+                    </div>
+                    <button class="button bt-add-question">{% trans 'Add Question' context 'button' %}</button>
+                </div>
+
                 <div class="content-questionsAnswers">
                     {% include "qa/question/list_group.html" with questions=questions %}
                     <div id="loading-gif"></div>
@@ -57,9 +66,20 @@
             // XToggleButton Handler
             $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
 
+            $( "button.bt-add-question" ).click(function(){
+                question = $( "textarea#question-title-form" ).val().toString();
+                if ( question.length == 0 ) {
+                    alert("{% trans 'Ask something' %}");
+                    $( "textarea#question-title-form" ).focus();
+                }
+                else
+                    window.location = "{% url 'qa:add_question' %}?q=" + question;
+            });
+
 
             $( window ).scroll( function(){
-                var reached_bottom = $( window ).scrollTop() == $( document ).height() - $( window ).height();
+                var GAP = 300; /* 300pxs gap */
+                var reached_bottom = $( window ).scrollTop() >= ( $( document ).height() - $( window ).height() - GAP );
 
                 if ( ! request_locked && ! loading_ended && reached_bottom )
                 {

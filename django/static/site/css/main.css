@@ -5410,6 +5410,7 @@ sup{ vertical-align:super; }
   font-size: 10px;
   text-transform: uppercase;
 }
+.content.social .content .question-view .question .data-item a.user-profile { color:#68367D; }
 .content.social .content .question-view .question .data-item strong {
   font-family: 'open_sansbold';
   font-weight: normal;
@@ -5432,6 +5433,14 @@ sup{ vertical-align:super; }
   color: #000;
   font-size: 14px;
   font-family: 'open_sanssemibold';
+}
+.content.social .content .question-view .comment .user .answer-question-link
+{
+  float:left;
+  font-family: 'open_sanssemibold';
+  font-size:14px;
+  margin-top:5px;
+  color:#68367D;
 }
 .content.social .content .question-view .comment .user .info,
 .content.social .content .question-view .answers .user .info {

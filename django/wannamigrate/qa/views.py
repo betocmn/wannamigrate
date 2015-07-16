@@ -144,9 +144,12 @@ def add_question( request ):
     :return: A template rendered
     """
 
-    # Instantiate FORM
-    form = AddQuestionForm( request.POST or None, owner = request.user,  language = Language.objects.filter( code = request.LANGUAGE_CODE ).get() )
+    defaults = {}
+    if "q" in request.GET:
+        defaults['title'] = request.GET['q']
 
+    # Instantiate FORM
+    form = AddQuestionForm( request.POST or None, owner = request.user, initial = defaults, language = Language.objects.filter( code = request.LANGUAGE_CODE ).get() )
 
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
@@ -208,6 +211,7 @@ def view_question( request, slug ):
     # Gets the answer form
     if request.user.is_authenticated():
         answer_form = AddAnswerForm( request.POST or None, owner = request.user, question = question )
+
         if answer_form.is_valid():
             with transaction.atomic():
                 user_stats, created = UserStats.objects.get_or_create( user_id = request.user.id )
