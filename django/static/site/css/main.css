@@ -5410,6 +5410,7 @@ sup{ vertical-align:super; }
   font-size: 10px;
   text-transform: uppercase;
 }
+.content.social .content .question-view .question .data-item a.user-profile { color:#68367D; }
 .content.social .content .question-view .question .data-item strong {
   font-family: 'open_sansbold';
   font-weight: normal;

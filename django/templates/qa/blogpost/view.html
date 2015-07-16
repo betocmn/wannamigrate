@@ -22,7 +22,7 @@
                 {% if blogpost.is_anonymous %}
                     <div id="reader-author" class="author">{% trans "Written by" %} {% trans "Anonymous User" %}.{{ blogpost.last_activity_date|date:"F Y" }}.</div>
                 {% else %}
-                    <div id="reader-author" class="author">{% trans "Written by" %} {{ blogpost.owner.name }}. {{ blogpost.last_activity_date|date:"F Y" }}.</div>
+                    <div id="reader-author" class="author">{% trans "Written by" %} <a href="{% url 'site:user_profile' blogpost.owner.slug %}">{{ blogpost.owner.name }}</a>. {{ blogpost.last_activity_date|date:"F Y" }}.</div>
                 {% endif %}
             </div>
 

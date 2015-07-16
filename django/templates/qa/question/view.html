@@ -77,7 +77,14 @@
             <div class="question">
                 <div class="data-question">
                     <h3 class="title-question">{{ question.title }}</h3>
-                    <a class="data-item">{% trans "Writen in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong></a>
+                    <div class="data-item">
+                        {% trans "Written in" %} <strong>{{ question.last_activity_date|date:"b d" }}</strong> {% trans "by" %}
+                        {% if question.is_anonymous %}
+                            {% trans "Anonymous User" %}
+                        {% else %}
+                            <a class="user-profile" href="{%url 'site:user_profile' question.owner.slug %}">{{ question.owner.name }}</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="data">
                     <ul class="data-list">
@@ -133,13 +140,11 @@
                         </i>
                         <div class="post {{ ans.klass }}">
                             <div class="user">
-                                <span class="name">
-                                    {% if ans.is_anonymous %}
-                                        {% trans 'Anonymous' %}
-                                    {% else %}
-                                        {{ans.owner.name}}
-                                    {% endif %}
-                                </span>
+                                {% if ans.is_anonymous %}
+                                    <span class="name">{% trans 'Anonymous' %}</span>
+                                {% else %}
+                                    <a class="name" href="{% url 'site:user_profile' ans.owner.slug %}">{{ans.owner.name}}</a>
+                                {% endif %}
                                 <span class="info"></span>
                             </div>
                             <span class="text-post wm-html-content">
