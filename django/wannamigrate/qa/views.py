@@ -22,6 +22,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
     AddQuestionForm, AddBlogPostForm, AddAnswerForm
 )
+from wannamigrate.core.tasks import add_notification
 from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic, TopicTranslation
 from wannamigrate.core.models import(
     User, UserStats, Language, Notification
@@ -216,9 +217,11 @@ def view_question( request, slug ):
                 user_stats.save()
                 messages.success( request, _( 'Answer successfully created.' ) )
 
-                # Adds a notification to the users following the question
-                Notification.add(
-                    _( "New answer to the question " ) + '"' + question.title + '"',
+                # Adds a notification to the users following the question, using a CELERY task
+                translate_this = _( "New answer to the question" ) # hack to have this on translations (fix this later)
+                add_notification.delay(
+                    "New answer to the question",
+                    '"' + question.title + '"',
                     reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ),
                     list( question.followers.all() )
                 )
