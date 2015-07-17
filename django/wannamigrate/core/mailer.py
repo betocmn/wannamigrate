@@ -44,8 +44,8 @@ class Mailer( object ):
         :return: String
         """
 
-        #if not settings.IS_PROD:
-            #return True
+        if not settings.IS_PROD:
+            return True
 
         email = EmailMessage()
         email.content_subtype = "html"
