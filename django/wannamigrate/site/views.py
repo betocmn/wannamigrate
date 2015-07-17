@@ -50,6 +50,7 @@ from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
 from wannamigrate.core.decorators import ajax_login_required
 from wannamigrate.qa.models import Answer, Question, BlogPost
+from wannamigrate.core.tasks import add_notification
 
 
 
@@ -809,16 +810,14 @@ def view_conversation( request, id ):
             from_user = request.user
             to_user = conversation.to_user if from_user.id == conversation.from_user_id else conversation.from_user
 
-            # Adds a notification to the destination user
-            Notification.add(
-                _( "New message from " ) + from_user.name,
+            # CELERY TASK to add a notification to the destination user
+            translate_this = _( "New message from" ) # hack to have this on translations (fix this later)
+            add_notification.delay(
+                "New message from",
+                from_user.name,
                 reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
                 [ to_user ]
             )
-
-            # Sends Notification to User
-            # TODO Change this to a celery/signal background task
-            Mailer.send_inbox_notification( from_user, to_user )
 
             return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
 
@@ -878,16 +877,14 @@ def start_conversation( request, to_user_slug ):
             msg.content = form.cleaned_data[ "content" ]
             msg.save()
 
-            # Adds a notification to the destination user
-            Notification.add(
-                _( "New message from " ) + conversation.from_user.name,
+            # CELERY TASK to add a notification to the destination user
+            translate_this = _( "New message from" ) # hack to have this on translations (fix this later)
+            add_notification.delay(
+                "New message from",
+                conversation.from_user.name,
                 reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
                 [ conversation.to_user ]
             )
-
-            # Sends Notification to User
-            # TODO Change this to a celery/signal background task
-            Mailer.send_inbox_notification( conversation.from_user, conversation.to_user )
 
             return HttpResponseRedirect( reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ) )
 

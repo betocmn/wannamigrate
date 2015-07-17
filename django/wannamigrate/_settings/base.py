@@ -178,7 +178,7 @@ EMAIL_PORT = 587
 EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_NEW_ORDER = 'humberto.mn@gmail.com'
-EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY = 'humberto.mn@gmail.com'
+EMAIL_NOTIFICATION_ACTIVITY = 'humberto.mn@gmail.com'
 
 
 

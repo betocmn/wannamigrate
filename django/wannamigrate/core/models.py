@@ -16,11 +16,13 @@ from django.conf import settings
 from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
 import math
-from wannamigrate._settings.base import LANGUAGES
+from django.conf import settings
+from wannamigrate.core.mailer import Mailer
 from django.db import transaction
 from django.template.defaultfilters import slugify
 import itertools
 import pytz
+from django.utils import translation
 
 
 
@@ -334,7 +336,7 @@ class User( AbstractBaseUser, PermissionsMixin, BaseModel ):
     is_active = models.BooleanField( _( "is active" ), default = True )
     is_admin = models.BooleanField( _( "is admin" ), default = False )
     results = models.ManyToManyField( Country, through = 'points.UserResult' )
-    preferred_language = models.CharField( _( "Preferred Language" ), max_length = 6, choices = LANGUAGES, default = 'en' )
+    preferred_language = models.CharField( _( "Preferred Language" ), max_length = 6, choices = settings.LANGUAGES, default = 'en' )
     preferred_timezone = models.CharField( _( "Timezone" ), max_length = 100, choices = TIMEZONES, null = True, blank = True )
     following = models.ManyToManyField( "User", related_name = "followers" )
 
@@ -757,18 +759,41 @@ class Notification( BaseModel ):
 
 
     @staticmethod
-    def add( message, url, users ):
+    def add( message_translation, message_no_translation, url, users ):
+        """
+        Inserts a notification of each of the given users in their preferred language
+
+        :param: message_translation
+        :param: message_no_translation
+        :param: url
+        :param: users
+        :return: Int
+        """
 
         if not isinstance( users, list ):
             users = [ users ]
 
         with transaction.atomic():
-            notification = Notification( message = message, url = url )
-            notification.save()
 
             nu = []
+            notification_per_language = {}
             for user in users:
-                nu.append( NotificationUser( notification = notification, user = user ) )
+
+                # inserts notification just once per language spoken by given users
+                user_language = user.preferred_language if user.preferred_language else 'en'
+                translation.activate( user_language )
+                if user_language not in notification_per_language:
+
+                    # inserts notification
+                    notification = Notification( message = _( message_translation ) + ' ' + message_no_translation, url = url )
+                    notification.save()
+                    notification_per_language[user_language] = notification
+
+                # appends on list to do a bulk notificaton_user insert in the end
+                nu.append( NotificationUser( notification = notification_per_language[user_language], user = user ) )
+
+                # sends email
+                Mailer.send_notification( user, notification_per_language[user_language] )
 
             # Save once (bulk)
             NotificationUser.objects.bulk_create( nu )

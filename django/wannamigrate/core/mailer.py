@@ -44,8 +44,8 @@ class Mailer( object ):
         :return: String
         """
 
-        if not settings.IS_PROD:
-            return True
+        #if not settings.IS_PROD:
+            #return True
 
         email = EmailMessage()
         email.content_subtype = "html"
@@ -251,14 +251,13 @@ class Mailer( object ):
 
 
     @staticmethod
-    def send_inbox_notification( from_user, to_user ):
+    def send_notification( user, notification ):
         """
-        Sends e-mail from site notifying an user of a new inbox message received.
+        Sends e-mail from site notifying an user of a relevant update
 
-        :param: email
-        :param: name
-        :param: message
+        :param: user
+        :param: notification
         """
-        template_data = { 'from_user': from_user, 'to_user': to_user }
-        body = Mailer.build_body_from_template( 'emails/inbox_notification.html', template_data )
-        return Mailer.send( _( 'New Message Received' ), body, to_user.email, None, None, settings.EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY )
+        template_data = { 'user': user, 'notification': notification }
+        body = Mailer.build_body_from_template( 'emails/notification.html', template_data )
+        return Mailer.send( notification.message, body, user.email, None, None, settings.EMAIL_NOTIFICATION_ACTIVITY )
