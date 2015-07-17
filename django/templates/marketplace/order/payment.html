@@ -25,8 +25,8 @@
                 </div>
                 <div class="identity">
                     <div class="thumb">
-                        {% if provider.user.userpersonal.avatar %}
-                            <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
+                        {% if provider_user.userpersonal.avatar %}
+                            <img src="{{ provider_user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
                         {% else %}
                             <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
                         {% endif %}
@@ -35,7 +35,7 @@
                         <strong class="name">{{ provider.display_name }}</strong>
                         <p class="expert">{{ provider.headline }}</p>
                         <div class="rate" data-score="{{ provider.review_score }}">
-                            <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
+                            <span class="count">({{ provider_user.userstats.total_reviews|kmi }})</span>
                         </div>
                     </div>
                 </div>

@@ -61,12 +61,10 @@ def list_all( request, *args, **kwargs ):
     filter_params = {}
 
     # Fills up the situation
-    to_country = request.session['situation']['to_country']
-    goal = request.session['situation']['goal']
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ to_country.id ]
-    filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "related_countries_ids" ] = [ request.session['situation']['to_country']['id'] ]
+    filter_params[ "related_goals_ids" ] = [ request.session['situation']['goal']['id'] ]
     filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
@@ -109,13 +107,11 @@ def list_questions( request, *args, **kwargs ):
     filter_params = {}
 
     # Fills up the situation
-    to_country = request.session['situation']['to_country']
-    goal = request.session['situation']['goal']
     language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ to_country.id ]
-    filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "related_countries_ids" ] = [ request.session['situation']['to_country']['id'] ]
+    filter_params[ "related_goals_ids" ] = [ request.session['situation']['goal']['id'] ]
     filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
@@ -309,13 +305,11 @@ def list_blogposts( request, *args, **kwargs ):
     filter_params = {}
 
     # Fills up the situation
-    to_country = request.session['situation']['to_country']
-    goal = request.session['situation']['goal']
     language = Language.objects.filter( code = request.LANGUAGE_CODE ).get()
 
     # Fills the topics related to user's situation
-    filter_params[ "related_countries_ids" ] = [ to_country.id ]
-    filter_params[ "related_goals_ids" ] = [ goal.id ]
+    filter_params[ "related_countries_ids" ] = [ request.session['situation']['to_country']['id'] ]
+    filter_params[ "related_goals_ids" ] = [ request.session['situation']['goal']['id'] ]
     filter_params[ "language_ids" ] = [ language.id ]
 
     # Get questions per step
