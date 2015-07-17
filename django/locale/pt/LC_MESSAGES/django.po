@@ -7580,10 +7580,9 @@ msgstr "Escrito em"
 
 #: templates/qa/question/view.html:82
 msgid "by"
-msgstr ""
+msgstr "por"
 
 #: templates/qa/question/view.html:119
-#| msgid "Write answer"
 msgid "Write an answer"
 msgstr "Escrever uma resposta"
 
