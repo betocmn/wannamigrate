@@ -95,14 +95,14 @@ class PaymentForm( BaseForm ):
                     PromoCode,
                     name = cleaned_data['promo_code'],
                     expiry_date__gte = datetime.date.today(),
-                    service_type_id = self.payment_info['service_type'].id
+                    service_type_id = self.payment_info['service_type']['id']
                 )
             else:
                 promo_code = get_object_or_false(
                     PromoCode,
                     name = cleaned_data['promo_code'],
                     expiry_date__gte = datetime.date.today(),
-                    product_id = self.payment_info['product'].id
+                    product_id = self.payment_info['product']['id']
                 )
 
             if promo_code:
@@ -111,7 +111,7 @@ class PaymentForm( BaseForm ):
                 raise forms.ValidationError( _( "Invalid Promo Code." ) )
 
         # Sets total price
-        total_price = self.payment_info['provider_service_type'].price if self.payment_info['is_service'] else self.payment_info['product'].price
+        total_price = self.payment_info['provider_service_type']['price'] if self.payment_info['is_service'] else self.payment_info['product']['price']
         self.gross_total = total_price
         self.net_total = total_price
         self.discount_total = 0
@@ -121,12 +121,12 @@ class PaymentForm( BaseForm ):
 
         # Build items list
         if self.payment_info['is_service']:
-            items = [{ 'description': ugettext( self.payment_info['service_type'].name ),
+            items = [{ 'description': ugettext( self.payment_info['service_type']['name'] ),
                        'quantity': 1,
                        'price': self.net_total
             }]
         else:
-            items = [{ 'description': ugettext( self.payment_info['product'].name ),
+            items = [{ 'description': ugettext( self.payment_info['product']['name'] ),
                        'quantity': 1,
                        'price': self.net_total
             }]
@@ -148,14 +148,15 @@ class PaymentForm( BaseForm ):
         if self.payment_info['is_service']:
 
             # updates service status
-            self.payment_info['service'].service_status_id = ServiceStatus.get_status_from_order_status( payment_api_result['order_status_id'] )
-            self.payment_info['service'].save()
+            service = Service.objects.get( pk = self.payment_info['service']['id'] )
+            service.service_status_id = ServiceStatus.get_status_from_order_status( payment_api_result['order_status_id'] )
+            service.save()
 
             # inserts first service_history
             service_history = ServiceHistory()
-            service_history.service_id = self.payment_info['service'].id
-            service_history.service_status_id = self.payment_info['service'].service_status_id
-            service_history.user_id = self.payment_info['service'].user_id
+            service_history.service_id = service.id
+            service_history.service_status_id = service.service_status_id
+            service_history.user_id = service.user_id
             service_history.save()
 
         # If payment was not authorized, raise ERROR
@@ -176,9 +177,9 @@ class PaymentForm( BaseForm ):
 
         # Configure variables for service or product
         if self.payment_info['is_service']:
-            description = self.payment_info['service_type'].name
+            description = self.payment_info['service_type']['name']
         else:
-            description = self.payment_info['product'].name
+            description = self.payment_info['product']['name']
 
         # inserts details on order table
         order = Order()
@@ -191,9 +192,9 @@ class PaymentForm( BaseForm ):
         order.external_code = self.payment_api_result['external_code']
         order.order_status_id = self.payment_api_result['order_status_id']
         if self.payment_info['is_service']:
-            order.service = self.payment_info['service']
+            order.service_id = self.payment_info['service']['id']
         else:
-            order.product = self.payment_info['product']
+            order.product_id = self.payment_info['product']['id']
         order.user = self.payment_info['user']
         order.payment_type_id = self.payment_info['payment_type_id']
         order.boleto_url = self.payment_api_result['url'] if self.cleaned_data['payment_type_id'] == 2 and 'url' in self.payment_api_result else ''

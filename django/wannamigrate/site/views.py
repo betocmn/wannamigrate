@@ -35,7 +35,8 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    User, UserStats, UserSituation, Situation, UserPersonal, Conversation, ConversationMessage, ConversationStatus_User, Language, Notification
+    User, UserStats, UserSituation, Situation, UserPersonal, Conversation, ConversationMessage,
+    ConversationStatus_User, Language, Notification, Country, Goal
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderCountry, ProviderServiceType,
@@ -76,9 +77,9 @@ def get_situation_form( request ):
 
     # Checks if there's an active session from this visitor/users
     if 'situation' in request.session and 'from_country' in request.session['situation']:
-        initial_data['from_country'] = request.session['situation']['from_country']
-        initial_data['to_country'] = request.session['situation']['to_country']
-        initial_data['goal'] = request.session['situation']['goal']
+        initial_data['from_country'] = Country.objects.get( pk = request.session['situation']['from_country']['id'] )
+        initial_data['to_country'] = Country.objects.get( pk = request.session['situation']['to_country']['id'] )
+        initial_data['goal'] = Goal.objects.get( pk = request.session['situation']['goal']['id'] )
 
     # Returns filled form
     if request.user.is_authenticated():
@@ -106,14 +107,22 @@ def change_situation( request ):
         situation = form.save()
 
         # Saves this information in the session
-        request.session['situation'] = {}
-        request.session['situation']['from_country'] = situation.from_country
-        request.session['situation']['to_country'] = situation.to_country
-        request.session['situation']['goal'] = situation.goal
+        from_country = situation.from_country
+        to_country = situation.to_country
+        goal = situation.goal
+        request.session['situation'] = { 'from_country': {}, 'goal': {}, 'to_country': {} }
+        request.session['situation']['from_country']['id'] = from_country.id
+        request.session['situation']['from_country']['name'] = from_country.name
+        request.session['situation']['from_country']['code'] = from_country.code
+        request.session['situation']['goal']['id'] = goal.id
+        request.session['situation']['goal']['name'] = goal.name
+        request.session['situation']['to_country']['id'] = to_country.id
+        request.session['situation']['to_country']['name'] = to_country.name
+        request.session['situation']['to_country']['code'] = to_country.code
         request.session['situation']['total_users'] = situation.total_users
 
         # Sets language accordingly to FROM Country
-        if situation.from_country.code.lower() in settings.COUNTRIES_BY_LANGUAGE['pt']:
+        if from_country.code.lower() in settings.COUNTRIES_BY_LANGUAGE['pt']:
             language = 'pt'
         else:
             language = 'en'
@@ -1118,22 +1127,18 @@ def dashboard( request ):
     # If situation is defined, we load questions and professionals related to it
     if 'situation' in request.session and 'from_country' in request.session['situation']:
 
-        from_country = request.session['situation']['from_country']
-        to_country = request.session['situation']['to_country']
-        goal = request.session['situation']['goal']
-
         # Saves user situation from session if it's a new signup
         if is_new_signup:
             situation, created = Situation.objects.get_or_create(
-                from_country = from_country,
-                to_country = to_country,
-                goal = goal,
+                from_country_id = request.session['situation']['from_country']['id'],
+                to_country_id = request.session['situation']['to_country']['id'],
+                goal_id = request.session['situation']['goal']['id'],
                 defaults = {
                     'total_users': 1,
                     'total_visitors': 0,
-                    'from_country': from_country,
-                    'to_country': to_country,
-                    'goal': goal
+                    'from_country_id': request.session['situation']['from_country']['id'],
+                    'to_country_id': request.session['situation']['to_country']['id'],
+                    'goal_id': request.session['situation']['goal']['id']
                 }
             )
             if not created:
@@ -1145,12 +1150,12 @@ def dashboard( request ):
             user_situation.save()
 
         # Gets 5 most related service providers
-        template_data['providers'] = Provider.get_listing( to_country.id, 0, 5 )
+        template_data['providers'] = Provider.get_listing( request.session['situation']['to_country']['id'], 0, 5 )
 
         filter_params = {}
         # Fills the topics related to user's situation
-        filter_params[ "related_countries_ids" ] = [ to_country.id ]
-        filter_params[ "related_goals_ids" ] = [ goal.id ]
+        filter_params[ "related_countries_ids" ] = [ request.session['situation']['to_country']['id'] ]
+        filter_params[ "related_goals_ids" ] = [ request.session['situation']['goal']['id'] ]
         filter_params[ "language_ids" ] = [ language.id ]
 
         # Get questions per step

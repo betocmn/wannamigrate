@@ -175,9 +175,8 @@ EMAIL_HOST_PASSWORD = 'ju829sj'
 EMAIL_PORT = 587
 
 # Email to receive contact form messages
-EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto.mn@gmail.com'
-EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto.mn@gmail.com'
-EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto.mn@gmail.com'
+EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
+EMAIL_NOTIFICATION_PROVIDER_SIGNUP = 'humberto@wannamigrate.com'
 EMAIL_NOTIFICATION_NEW_ORDER = 'humberto.mn@gmail.com'
 EMAIL_NOTIFICATION_CONVERSATION_ACTIVITY = 'humberto.mn@gmail.com'
 
@@ -453,5 +452,4 @@ CORE_CONVERSATION_STATUS_ARCHIVE_ID = 3
 ########################################
 # Celery settings
 #######################################
-CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
-CELERY_RESULT_BACKEND='djcelery.backends.cache:CacheBackend'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'

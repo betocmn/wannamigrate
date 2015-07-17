@@ -24,7 +24,10 @@ from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
 from wannamigrate.site.views import get_situation_form
 from wannamigrate.marketplace.payment_processor import PaymentProcessor
-from wannamigrate.marketplace.tasks import send_order_confirmation_user
+from wannamigrate.marketplace.tasks import (
+    send_order_confirmation_user, send_order_confirmation_provider,
+    send_order_download_link
+)
 from django.conf import settings
 from django.db.models import F
 from django.db import transaction
@@ -65,14 +68,10 @@ def professionals( request ):
     template_data['situation_form'] = get_situation_form( request )
 
     # If situation is defined, we load professionals related to it
-    if 'situation' in request.session and 'from_country' in request.session['situation']:
-
-        from_country = request.session['situation']['from_country']
-        to_country = request.session['situation']['to_country']
-        goal = request.session['situation']['goal']
+    if 'situation' in request.session and 'to_country' in request.session['situation']:
 
         # Gets 5 most related service providers
-        template_data['providers'] = Provider.get_listing( to_country.id, 0, 20 )
+        template_data['providers'] = Provider.get_listing( request.session['situation']['to_country']['id'], 0, 20 )
 
     # Print Template
     return render( request, 'marketplace/professionals/list.html', template_data )
@@ -115,10 +114,10 @@ def profile( request, user_id, name ):
 
         # saves details to session
         request.session['payment'] = {
-            'provider': provider,
-            'service_type': service_type,
-            'provider_service_type': provider_service_type,
-            'service': service
+            'provider': { 'id': provider.id, 'name': provider.display_name },
+            'service_type': { 'id': service_type.id, 'name': service_type.name },
+            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
+            'service': { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
         }
         return HttpResponseRedirect( reverse( "marketplace:payment" ) )
 
@@ -193,7 +192,7 @@ def ebook( request ):
 
         # saves details to session
         request.session['payment'] = {
-            'product': product
+            'product': { 'id': product.id, 'name': product.name, 'price': product.price }
         }
 
         return HttpResponseRedirect( reverse( "marketplace:payment" ) )
@@ -245,9 +244,9 @@ def ielts( request ):
 
         # order information
         payment_info = {
-            'provider': provider,
-            'service_type': service_type,
-            'provider_service_type': provider_service_type,
+            'provider': { 'id': provider.id, 'name': provider.display_name },
+            'service_type': { 'id': service_type.id, 'name': service_type.name },
+            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
         }
 
         # saves service
@@ -260,7 +259,7 @@ def ielts( request ):
             service.service_type = service_type
             service.service_status_id = ServiceStatus.get_status_from_order_status()
             service.save()
-            payment_info['service'] = service
+            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
 
         # saves details to session
         request.session['payment'] = payment_info
@@ -311,9 +310,9 @@ def international_cv( request ):
 
         # order information
         payment_info = {
-            'provider': provider,
-            'service_type': service_type,
-            'provider_service_type': provider_service_type,
+            'provider': { 'id': provider.id, 'name': provider.display_name },
+            'service_type': { 'id': service_type.id, 'name': service_type.name },
+            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
         }
 
         # saves service
@@ -326,7 +325,7 @@ def international_cv( request ):
             service.service_type = service_type
             service.service_status_id = ServiceStatus.get_status_from_order_status()
             service.save()
-            payment_info['service'] = service
+            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
 
         # saves details to session
         request.session['payment'] = payment_info
@@ -378,14 +377,14 @@ def payment( request ):
     # If it's a service and it was not saved yet
     if is_service and 'service' not in request.session['payment']:
         service = Service()
-        service.service_price = request.session['payment']['provider_service_type'].price
-        service.description = request.session['payment']['service_type'].name
+        service.service_price = request.session['payment']['provider_service_type']['price']
+        service.description = request.session['payment']['service_type']['name']
         service.user = request.user
-        service.provider = request.session['payment']['provider']
-        service.service_type = request.session['payment']['service_type']
+        service.provider_id = request.session['payment']['provider']['id']
+        service.service_type_id = request.session['payment']['service_type']['id']
         service.service_status_id = ServiceStatus.get_status_from_order_status()
         service.save()
-        request.session['payment']['service'] = service
+        request.session['payment']['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
 
     # Initializes template data dictionary
     template_data = {}
@@ -408,16 +407,14 @@ def payment( request ):
             'is_service': is_service
         }
         if is_service:
-            provider = request.session['payment']['provider']
+            provider = Provider.objects.get( pk = request.session['payment']['provider']['id'] )
             payment_info['provider'] = provider
             payment_info['service_type'] = request.session['payment']['service_type']
             payment_info['provider_service_type'] = request.session['payment']['provider_service_type']
             payment_info['service'] = request.session['payment']['service']
-            payment_info['service_type_category'] = request.session['payment']['service_type'].service_type_category
         else:
             provider = None
             payment_info['product'] = request.session['payment']['product']
-            payment_info['product_category'] = request.session['payment']['product'].product_category
 
         # Instantiates form passing the payment info
         form = PaymentForm( request.POST, payment_info = payment_info )
@@ -429,32 +426,22 @@ def payment( request ):
                 # Saves all order info
                 order = form.save()
 
-                # Add celery background tasks to send out confirmation emails
-                # @TODO Change emails below for celery task
-                #send_order_confirmation_user.delay( request.user, order, provider )
-
-                # Sends Order Confirmation email to USER
-                # TODO Change this to a celery/signal background task
-                Mailer.send_order_confirmation_user( request.user, order, provider )
-
-                # Sends Order Confirmation email to PROVIDER
-                # TODO Change this to a celery/signal background task
-                if order.service_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-                    Mailer.send_order_confirmation_provider( request.user, order, provider )
-
-                # Sends Order download link to USER (if it's a product)
-                # TODO Change this to a celery/signal background task
-                if order.product_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-                    Mailer.send_order_download_link( request.user, order )
-
-                # Redirects to confirmation page
+                # Cleans out session and set just enough for confirmation page
                 del request.session['payment']
-                request.session['payment'] = {}
                 request.session['order_confirmation'] = {}
                 request.session['order_confirmation']['order_id'] = order.id
                 request.session['order_confirmation']['is_service'] = is_service
                 request.session['order_confirmation']['payment_type_id'] = payment_info['payment_type_id']
                 request.session['order_confirmation']['url'] = form.payment_api_result['url'] if 'url' in form.payment_api_result else ''
+
+                # Add celery background tasks to send out confirmation emails
+                send_order_confirmation_user.delay( request.user, order, provider )
+                if order.service_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+                    send_order_confirmation_provider.delay( request.user, order, provider )
+                if order.product_id and order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+                    send_order_download_link.delay( request.user, order )
+
+                # Redirects to confirmation page
                 return HttpResponseRedirect( reverse( 'marketplace:confirmation' ) )
 
     else:
@@ -467,12 +454,13 @@ def payment( request ):
     template_data['payment_api_account_id'] = settings.PAYMENT_API_ACCOUNT_ID
     template_data['payment_api_test_mode'] = True if settings.PAYMENT_API_MODE != 'LIVE' else False
     if is_service:
-        template_data['total_price'] = request.session['payment']['provider_service_type'].price
-        template_data['provider'] = request.session['payment']['provider']
-        template_data['service_type'] = request.session['payment']['service_type']
+        template_data['total_price'] = request.session['payment']['provider_service_type']['price']
+        template_data['provider'] = Provider.objects.get( pk = request.session['payment']['provider']['id'] )
+        template_data['provider_user'] = template_data['provider'].user
+        template_data['service_type'] = ServiceType.objects.get( pk = request.session['payment']['service_type']['id'] )
     else:
-        template_data['total_price'] = request.session['payment']['product'].price
-        template_data['product'] = request.session['payment']['product']
+        template_data['total_price'] = request.session['payment']['product']['price']
+        template_data['product'] = Product.objects.get( pk = request.session['payment']['product']['id'] )
 
     # Prints Template
     return render( request, 'marketplace/order/payment.html', template_data )
