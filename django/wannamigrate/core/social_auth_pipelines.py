@@ -20,6 +20,7 @@ from PIL import Image
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.core.models import UserPersonal
 from wannamigrate.core.mailer import Mailer
+from wannamigrate.core.tasks import send_welcome_email
 
 
 
@@ -80,9 +81,8 @@ def save_extra_data( backend, details, response, user = None, is_new = False, *a
             image_name = '%s%s.jpg' % ( int( time.time() ), image_basename )
             user_personal.avatar.save( image_name, ContentFile( avatar.read() ) )
 
-        # Sends Welcome Email to User
-        # TODO Change this to a celery/signal background task
-        Mailer.send_welcome_email( user )
+        # CELERY TASK to send Welcome Email to User
+        send_welcome_email.delay( user )
 
     except ( URLError, HTTPError ):
         pass
