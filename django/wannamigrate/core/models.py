@@ -247,7 +247,7 @@ class UserManager( BaseUserManager ):
     User Manager - part of custom auth: https://docs.djangoproject.com/en/dev/topics/auth/customizing/
     """
 
-    def create_user( self, email, name = None, password = None, language = None, timezone = None ):
+    def create_user( self, email, name = None, password = None, language = 'pt', timezone = 'America/Sao_Paulo' ):
         """
         Creates and saves a User with the given email, name and password.
 
@@ -257,6 +257,8 @@ class UserManager( BaseUserManager ):
         :return: User Object
         """
 
+        if not name:
+            name = email.split( '@' )[0]
 
         # Validates and identify user
         if not email:
