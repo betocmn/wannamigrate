@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-17 17:56-0300\n"
+"POT-Creation-Date: 2015-07-20 13:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,8 +212,8 @@ msgstr "Wanna Migrate - More no exterior. Mude de vida."
 #: templates/db_translations/core_answer.html:184
 #: templates/db_translations/core_answer.html:186
 #: templates/db_translations/core_answer.html:208
-#: wannamigrate/core/models.py:413 wannamigrate/core/models.py:558
-#: wannamigrate/core/models.py:662
+#: wannamigrate/core/models.py:415 wannamigrate/core/models.py:560
+#: wannamigrate/core/models.py:664
 msgid "Yes"
 msgstr "Sim"
 
@@ -228,8 +228,8 @@ msgstr "Sim"
 #: templates/db_translations/core_answer.html:185
 #: templates/db_translations/core_answer.html:187
 #: templates/db_translations/core_answer.html:209
-#: wannamigrate/core/models.py:414 wannamigrate/core/models.py:559
-#: wannamigrate/core/models.py:663
+#: wannamigrate/core/models.py:416 wannamigrate/core/models.py:561
+#: wannamigrate/core/models.py:665
 msgid "No"
 msgstr "Não"
 
@@ -6182,7 +6182,7 @@ msgstr "descer"
 #: templates/marketplace/ebook/ebook.html:99
 #: templates/marketplace/ebook/ebook.html:102
 #: templates/marketplace/ebook/ebook.html:105
-#: templates/qa/blogpost/view.html:66 templates/qa/question/view.html:205
+#: templates/qa/blogpost/view.html:64 templates/qa/question/view.html:205
 #: templates/site/guide/guide.html:36
 msgid "Guide - How to move to Canada"
 msgstr "Guia - Como mudar para o Canadá"
@@ -7404,23 +7404,23 @@ msgstr "Última atividade"
 msgid "Options"
 msgstr "Opções"
 
-#: templates/qa/blogpost/view.html:19 templates/qa/blogpost/view.html.py:72
+#: templates/qa/blogpost/view.html:17 templates/qa/blogpost/view.html.py:70
 msgid "Back to BlogPosts"
 msgstr "Voltar aos BlogPosts"
 
-#: templates/qa/blogpost/view.html:23 templates/qa/blogpost/view.html.py:25
+#: templates/qa/blogpost/view.html:21 templates/qa/blogpost/view.html.py:23
 msgid "Written by"
 msgstr "Escrito por"
 
-#: templates/qa/blogpost/view.html:23 templates/qa/question/view.html:84
+#: templates/qa/blogpost/view.html:21 templates/qa/question/view.html:84
 msgid "Anonymous User"
 msgstr "Anônimo"
 
-#: templates/qa/blogpost/view.html:48
+#: templates/qa/blogpost/view.html:46
 msgid "See also..."
 msgstr "Veja também..."
 
-#: templates/qa/blogpost/view.html:51
+#: templates/qa/blogpost/view.html:49
 msgid "Related Posts"
 msgstr "Posts Relacionados"
 
@@ -7532,7 +7532,7 @@ msgstr "Escreva sua pergunta aqui..."
 
 #: templates/qa/question/list.html:72
 msgid "Ask something"
-msgstr ""
+msgstr "Pergunte algo"
 
 #: templates/qa/question/view.html:32
 msgid "Back to Questions"
@@ -7932,7 +7932,7 @@ msgstr "Senha"
 msgid "Change Password"
 msgstr "Mudar Senha"
 
-#: templates/site/account/view.html:58 wannamigrate/core/models.py:340
+#: templates/site/account/view.html:58 wannamigrate/core/models.py:342
 msgid "Timezone"
 msgstr "Fuso-horário"
 
@@ -8628,7 +8628,7 @@ msgstr "data de modificação"
 
 #: wannamigrate/core/models.py:55 wannamigrate/core/models.py:72
 #: wannamigrate/core/models.py:112 wannamigrate/core/models.py:147
-#: wannamigrate/core/models.py:334 wannamigrate/marketplace/models.py:124
+#: wannamigrate/core/models.py:336 wannamigrate/marketplace/models.py:124
 #: wannamigrate/marketplace/models.py:137
 #: wannamigrate/marketplace/models.py:152
 #: wannamigrate/marketplace/models.py:155
@@ -8663,7 +8663,7 @@ msgstr "imigração ativada"
 msgid "Select Country"
 msgstr "Selecione País"
 
-#: wannamigrate/core/models.py:113 wannamigrate/core/models.py:336
+#: wannamigrate/core/models.py:113 wannamigrate/core/models.py:338
 #: wannamigrate/marketplace/models.py:154
 #: wannamigrate/marketplace/models.py:525
 msgid "is active"
@@ -8697,222 +8697,222 @@ msgstr "total de usuários"
 msgid "total visitors"
 msgstr "total de visitantes"
 
-#: wannamigrate/core/models.py:333
+#: wannamigrate/core/models.py:335
 msgid "e-mail"
 msgstr "e-mail"
 
-#: wannamigrate/core/models.py:337
+#: wannamigrate/core/models.py:339
 msgid "is admin"
 msgstr "é admin"
 
-#: wannamigrate/core/models.py:339
+#: wannamigrate/core/models.py:341
 msgid "Preferred Language"
 msgstr "Idioma de Preferência"
 
-#: wannamigrate/core/models.py:416 wannamigrate/core/models.py:459
-#: wannamigrate/core/models.py:478 wannamigrate/core/models.py:520
-#: wannamigrate/core/models.py:536 wannamigrate/core/models.py:562
-#: wannamigrate/core/models.py:606 wannamigrate/core/models.py:621
-#: wannamigrate/core/models.py:632 wannamigrate/core/models.py:665
-#: wannamigrate/core/models.py:712 wannamigrate/core/models.py:727
+#: wannamigrate/core/models.py:418 wannamigrate/core/models.py:461
+#: wannamigrate/core/models.py:480 wannamigrate/core/models.py:522
+#: wannamigrate/core/models.py:538 wannamigrate/core/models.py:564
+#: wannamigrate/core/models.py:608 wannamigrate/core/models.py:623
+#: wannamigrate/core/models.py:634 wannamigrate/core/models.py:667
+#: wannamigrate/core/models.py:714 wannamigrate/core/models.py:729
 #: wannamigrate/marketplace/models.py:30
 #: wannamigrate/marketplace/models.py:199
 #: wannamigrate/marketplace/models.py:452 wannamigrate/points/models.py:196
 msgid "user"
 msgstr "usuário"
 
-#: wannamigrate/core/models.py:417
+#: wannamigrate/core/models.py:419
 msgid "Did you complete any studies in a regional part of Australia"
 msgstr "Você completou algum curso em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:418
+#: wannamigrate/core/models.py:420
 msgid "partner/spouse education level"
 msgstr "escolaridade do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:460 wannamigrate/core/models.py:607
-#: wannamigrate/core/models.py:713 wannamigrate/core/models.py:728
+#: wannamigrate/core/models.py:462 wannamigrate/core/models.py:609
+#: wannamigrate/core/models.py:715 wannamigrate/core/models.py:730
 #: wannamigrate/marketplace/models.py:309 wannamigrate/points/models.py:46
 #: wannamigrate/points/models.py:66 wannamigrate/points/models.py:179
 #: wannamigrate/points/models.py:197
 msgid "country"
 msgstr "país"
 
-#: wannamigrate/core/models.py:461
+#: wannamigrate/core/models.py:463
 msgid "education level"
 msgstr "nível de escolaridade"
 
-#: wannamigrate/core/models.py:462
+#: wannamigrate/core/models.py:464
 msgid "school/university"
 msgstr "escola/universidade"
 
-#: wannamigrate/core/models.py:463
+#: wannamigrate/core/models.py:465
 msgid "start year"
 msgstr "ano de início"
 
-#: wannamigrate/core/models.py:464
+#: wannamigrate/core/models.py:466
 msgid "end year"
 msgstr "ano de término"
 
-#: wannamigrate/core/models.py:479
+#: wannamigrate/core/models.py:481
 msgid "partner/spouse english level"
 msgstr "nível de inglês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:480
+#: wannamigrate/core/models.py:482
 msgid "partner/spouse french level"
 msgstr "nível de francês do(a) esposo(a) (ou união estável)"
 
-#: wannamigrate/core/models.py:521 wannamigrate/marketplace/models.py:325
+#: wannamigrate/core/models.py:523 wannamigrate/marketplace/models.py:325
 msgid "language"
 msgstr "idioma"
 
-#: wannamigrate/core/models.py:522
+#: wannamigrate/core/models.py:524
 msgid "language level"
 msgstr "nível no idioma"
 
-#: wannamigrate/core/models.py:537
+#: wannamigrate/core/models.py:539
 msgid "is logout"
 msgstr "é logout"
 
-#: wannamigrate/core/models.py:554
+#: wannamigrate/core/models.py:556
 msgid "Female"
 msgstr "Feminino"
 
-#: wannamigrate/core/models.py:555
+#: wannamigrate/core/models.py:557
 msgid "Male"
 msgstr "Masculino"
 
-#: wannamigrate/core/models.py:563
+#: wannamigrate/core/models.py:565
 msgid "country of citizenship"
 msgstr "país de cidadania"
 
-#: wannamigrate/core/models.py:564
+#: wannamigrate/core/models.py:566
 msgid "avatar"
 msgstr "avatar"
 
-#: wannamigrate/core/models.py:571
+#: wannamigrate/core/models.py:573
 msgid "birth date"
 msgstr "data de nascimento"
 
-#: wannamigrate/core/models.py:572
+#: wannamigrate/core/models.py:574
 msgid "gender"
 msgstr "sexo"
 
-#: wannamigrate/core/models.py:573
+#: wannamigrate/core/models.py:575
 msgid "Would you be willing to live in Regional Australia"
 msgstr "Você aceitaria morar em uma parte interiorana da Austrália"
 
-#: wannamigrate/core/models.py:574
+#: wannamigrate/core/models.py:576
 msgid "Any family members who are citizens in other countries"
 msgstr "Algum parente que é cidadão em outros países"
 
-#: wannamigrate/core/models.py:622
+#: wannamigrate/core/models.py:624
 msgid "situation"
 msgstr "situação"
 
-#: wannamigrate/core/models.py:633
+#: wannamigrate/core/models.py:635
 msgid "percentage personal"
 msgstr "porcentagem - pessoal"
 
-#: wannamigrate/core/models.py:634
+#: wannamigrate/core/models.py:636
 msgid "percentage language"
 msgstr "porcentagem - idioma"
 
-#: wannamigrate/core/models.py:635
+#: wannamigrate/core/models.py:637
 msgid "percentage education"
 msgstr "porcentagem - escolaridade"
 
-#: wannamigrate/core/models.py:636
+#: wannamigrate/core/models.py:638
 msgid "percentage work"
 msgstr "porcetangem - trabalho"
 
-#: wannamigrate/core/models.py:637
+#: wannamigrate/core/models.py:639
 msgid "updating now"
 msgstr "atualizando agora"
 
-#: wannamigrate/core/models.py:638
+#: wannamigrate/core/models.py:640
 msgid "total answers"
 msgstr "Total de respostas"
 
-#: wannamigrate/core/models.py:639
+#: wannamigrate/core/models.py:641
 msgid "total questions"
 msgstr "total de perguntas"
 
-#: wannamigrate/core/models.py:640
+#: wannamigrate/core/models.py:642
 msgid "total profile views"
 msgstr "total de visualizações"
 
-#: wannamigrate/core/models.py:641
+#: wannamigrate/core/models.py:643
 msgid "total contracts"
 msgstr "total de contratos"
 
-#: wannamigrate/core/models.py:642
+#: wannamigrate/core/models.py:644
 msgid "total reviews"
 msgstr "total de avaliações"
 
-#: wannamigrate/core/models.py:643
+#: wannamigrate/core/models.py:645
 msgid "total topics following"
 msgstr "total de tópicos seguindo"
 
-#: wannamigrate/core/models.py:644
+#: wannamigrate/core/models.py:646
 msgid "total questions following"
 msgstr "total de perguntas seguindo"
 
-#: wannamigrate/core/models.py:645
+#: wannamigrate/core/models.py:647
 msgid "total blogposts following"
 msgstr "total de posts seguindo"
 
-#: wannamigrate/core/models.py:646
+#: wannamigrate/core/models.py:648
 msgid "total users following"
 msgstr "Total de usuários seguindo"
 
-#: wannamigrate/core/models.py:647
+#: wannamigrate/core/models.py:649
 msgid "total users followers"
 msgstr "total de seguidores"
 
-#: wannamigrate/core/models.py:648
+#: wannamigrate/core/models.py:650
 msgid "total favorite questions"
 msgstr "total de perguntas favoritas"
 
-#: wannamigrate/core/models.py:649
+#: wannamigrate/core/models.py:651
 msgid "total favorite blogposts"
 msgstr "total de posts favoritos"
 
-#: wannamigrate/core/models.py:666
+#: wannamigrate/core/models.py:668
 msgid "occupation"
 msgstr "profissão"
 
-#: wannamigrate/core/models.py:667
+#: wannamigrate/core/models.py:669
 msgid "Do you have a partner/spouse with proved skills"
 msgstr ""
 "Você tem um(a) esposo(a) (ou união estável) com Habilidades Comprovadas"
 
-#: wannamigrate/core/models.py:668
+#: wannamigrate/core/models.py:670
 msgid "are you willing to invest money on the country of destination"
 msgstr "Você pretende investir dinheiro no país de destino"
 
-#: wannamigrate/core/models.py:669
+#: wannamigrate/core/models.py:671
 msgid "do you have a startup recommendation letter approved by canada"
 msgstr "Você tem uma carta de recomendação de sua startup aprovada pelo Canadá"
 
-#: wannamigrate/core/models.py:670
+#: wannamigrate/core/models.py:672
 msgid "Did you complete a Professional Year Course in Australia"
 msgstr "Você fez um curso de 'Professional Year' na Austrália"
 
-#: wannamigrate/core/models.py:671
+#: wannamigrate/core/models.py:673
 msgid "If you have a partner/spouse, has he/she worked or studied in Canada"
 msgstr ""
 "Se você tem um(a) esposo(a) (ou união estável), ele(a) já trabalhou ou "
 "estudou no Canadá"
 
-#: wannamigrate/core/models.py:672
+#: wannamigrate/core/models.py:674
 msgid "Do you have a work offer overseas"
 msgstr "Você tem uma proposta de trabalho no exterior"
 
-#: wannamigrate/core/models.py:729
+#: wannamigrate/core/models.py:731
 msgid "company"
 msgstr "empresa"
 
-#: wannamigrate/core/models.py:730
+#: wannamigrate/core/models.py:732
 msgid "Duration of Employment"
 msgstr "Duração do Emprego"
 
@@ -9613,7 +9613,7 @@ msgstr "Escreva sua resposta"
 
 #: wannamigrate/qa/forms.py:214
 msgid "You can only answer a question once."
-msgstr ""
+msgstr "Você só pode responder uma pergunta uma vez."
 
 #: wannamigrate/qa/views.py:85
 msgid "Knowledge - Wanna Migrate"
@@ -9639,6 +9639,11 @@ msgstr "Nova resposta para a pergunta"
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
+#: wannamigrate/qa/views.py:360
+#| msgid "Answer successfully created."
+msgid "Post successfully created."
+msgstr "Postagem criada com sucesso."
+
 #: wannamigrate/qa/views.py:367
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
@@ -9647,15 +9652,15 @@ msgstr "Criar Blog Post - Wanna Migrate"
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
-#: wannamigrate/qa/wm_editor.py:91
+#: wannamigrate/qa/wm_editor.py:94
 msgid "Your content has some invalid tags."
 msgstr "O conteúdo tem algumas tags inválidas."
 
-#: wannamigrate/qa/wm_editor.py:95
+#: wannamigrate/qa/wm_editor.py:98
 msgid "Please provide a body to your content."
 msgstr "Forneça um body ao seu conteúdo."
 
-#: wannamigrate/qa/wm_editor.py:99
+#: wannamigrate/qa/wm_editor.py:102
 msgid "Your content has a invalid markup."
 msgstr "O conteúdo tem dados inválidos."
 

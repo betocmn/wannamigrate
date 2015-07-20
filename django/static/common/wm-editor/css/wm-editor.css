@@ -1,0 +1,86 @@
+/** WM Editor fonts */
+@font-face {
+  font-family: 'open_sansregular';
+  src: url("../../../site/fonts/opensans-regular-webfont.eot");
+  src: url("../../../site/fonts/opensans-regular-webfont.eot?#iefix") format('embedded-opentype'), url("../../../site/fonts/opensans-regular-webfont.woff2") format('woff2'), url("../../../site/fonts/opensans-regular-webfont.woff") format('woff'), url("../../../site/fonts/opensans-regular-webfont.ttf") format('truetype'), url("../../../site/fonts/opensans-regular-webfont.svg#open_sansregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sanssemibold';
+  src: url("../../../site/fonts/opensans-semibold-webfont.eot");
+  src: url("../../../site/fonts/opensans-semibold-webfont.eot?#iefix") format('embedded-opentype'), url("../../../site/fonts/opensans-semibold-webfont.woff2") format('woff2'), url("../../../site/fonts/opensans-semibold-webfont.woff") format('woff'), url("../../../site/fonts/opensans-semibold-webfont.ttf") format('truetype'), url("../../../site/fonts/opensans-semibold-webfont.svg#open_sanssemibold") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sansextrabold';
+  src: url("../../../site/fonts/opensans-extrabold-webfont.eot");
+  src: url("../../../site/fonts/opensans-extrabold-webfont.eot?#iefix") format('embedded-opentype'), url("../../../site/fonts/opensans-extrabold-webfont.woff2") format('woff2'), url("../../../site/fonts/opensans-extrabold-webfont.woff") format('woff'), url("../../../site/fonts/opensans-extrabold-webfont.ttf") format('truetype'), url("../../../site/fonts/opensans-extrabold-webfont.svg#open_sansextrabold") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sansbold';
+  src: url("../../../site/fonts/opensans-bold-webfont.eot");
+  src: url("../../../site/fonts/opensans-bold-webfont.eot?#iefix") format('embedded-opentype'), url("../../../site/fonts/opensans-bold-webfont.woff2") format('woff2'), url("../../../site/fonts/opensans-bold-webfont.woff") format('woff'), url("../../../site/fonts/opensans-bold-webfont.ttf") format('truetype'), url("../../../site/fonts/opensans-bold-webfont.svg#open_sansbold") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sanslight';
+  src: url("../../../site/fonts/opensans-light-webfont.eot");
+  src: url("../../../site/fonts/opensans-light-webfont.eot?#iefix") format('embedded-opentype'), url("../../../site/fonts/opensans-light-webfont.woff2") format('woff2'), url("../../../site/fonts/opensans-light-webfont.woff") format('woff'), url("../../../site/fonts/opensans-light-webfont.ttf") format('truetype'), url("../../../site/fonts/opensans-light-webfont.svg#open_sanslight") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/** WM Editor styles for Posts */
+.wm-html-content.wm-post { font-size: 1em; line-height: 1.6em; }
+.wm-html-content.wm-post h1{ font-size:1.3em; margin: 15px 0 8px 0; }
+.wm-html-content.wm-post strong, .wm-html-content.wm-post b { font-size:1em; font-weight: bold; }
+.wm-html-content.wm-post ul { list-style: disc outside none; }
+.wm-html-content.wm-post ul li, .wm-editor-content.wm-post ol li { margin-left: 35px; }
+.wm-html-content.wm-post a{ color:#68347E; }
+
+
+
+/** WM Editor styles for Answers */
+.wm-editor-content.wm-answer
+{
+    width: 100%;
+    min-height: 150px;
+    padding: 8px;
+    box-shadow: 0px 2px 3px -3px rgba(200, 200, 200, 0.5) inset;
+    background-color:white;
+
+    outline: medium none;
+    font-family: "open_sansregular";
+
+    font-size: 14px;
+    color: #555;
+    line-height: 20px;
+
+
+    border: 1px solid #D0B4DA;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: none !important;
+}
+.wm-editor-content.wm-answer:focus { outline: 0px solid transparent; }
+
+.wm-html-content.wm-answer { color: #555; font-size: 14px; }
+.wm-html-content.wm-answer * { margin:0; padding:0; text-decoration:none; color: #555; font-size: 14px; line-height: 1.4em; font-family: "open_sansregular"; }
+.wm-html-content.wm-answer p, .wm-html-content.wm-answer span { font-family:"open_sansregular"; font-size:14px; }
+.wm-html-content.wm-answer b, .wm-html-content.wm-answer strong { font-family:"open_sansbold"; font-size:14px; }
+.wm-html-content.wm-answer h1 { font-family:"open_sansbold"; font-size:18px; }
+.wm-html-content.wm-answer ol { list-style-type:decimal; padding-left: 30px; margin: 0px; }
+.wm-html-content.wm-answer ul { list-style-type: square; padding-left: 30px; margin: 0px; }
+.wm-html-content.wm-answer ol li, .wm-html-content.wm-answer ul li { padding-left: 3px; }
+.wm-html-content.wm-answer u { text-decoration:underline; }
+.wm-html-content.wm-answer a { text-decoration:underline !important; color:#4f9276; font-family:"open_sanssemibold"; }
+.wm-html-content.wm-answer a:hover{ text-decoration:underline !important; color: #05926C; font-family:"open_sanssemibold"; }
+.wm-html-content.wm-answer blockquote { background: #f9f9f9; border-left: 10px solid #ccc; margin: 1.5em 10px; padding: 0.5em 10px; quotes: "\201C""\201D""\2018""\2019"; }
+.wm-html-content.wm-answer blockquote:before { color: #ccc; content: open-quote; font-size: 4em; line-height: 0.1em; margin-right: 0.25em; vertical-align: -0.4em; }
+.wm-html-content.wm-answer blockquote p { display: inline; }

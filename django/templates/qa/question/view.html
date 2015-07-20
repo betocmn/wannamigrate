@@ -238,7 +238,7 @@
     <!-- JS REQUIRED BY THIS PAGE -->
     <script type="text/javascript" src="{% static 'common/trunk8/js/trunk8.js' %}"></script>
     <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
-    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/tinymce/tinymce.min.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
@@ -256,21 +256,49 @@
             }
         }
 
-            function on_answer_link_clicked()
-            {
-                $( "a.answer-question-link" ).remove();
-                $( "label.make-anonymous").removeClass( "hide" );
-                $( "div.answer-body").removeClass( "hide" );
-                $( "input.bt-write").removeClass( "hide" );
-                $( "#{{ answer_form.body.id_for_label }}" ).focus();
-            }
+        function on_answer_link_clicked()
+        {
+            $( "a.answer-question-link" ).remove();
+            $( "label.make-anonymous").removeClass( "hide" );
+            $( "div.answer-body").removeClass( "hide" );
+            $( "input.bt-write").removeClass( "hide" );
+            $( "#{{ answer_form.body.id_for_label }}" ).focus();
+        }
+
+
+
+        function init_editor()
+        {
+            tinymce.PluginManager.add('customh1', function(editor, url) {
+                // Add a button that opens a window
+                editor.addButton('customh1', {
+                    text: "H",
+                    title: "Header",
+                    icon: false,
+                    onclick:  function() { editor.execCommand( 'mceToggleFormat', false, "h1" ); }
+                });
+            });
+
+
+            tinymce.init({
+                selector: "#{{ answer_form.body.id_for_label }}",
+                plugins: [
+                    "autolink lists link image charmap anchor hr customh1",
+                ],
+                menubar: false,
+                statusbar: false,
+                toolbar: [ "customh1 bold italic underline strikethrough blockquote | justifyleft justifycenter justifyright justifyfull | bullist numlist | hr link image" ],
+                body_class: "wm-html-content wm-answer",
+                content_css: "{% static 'common/wm-editor/css/wm-editor.css' %}",
+            });
+        }
 
         $( document ).ready( function() {
 
             // XToggleButton Handler
             $( document ).on( "click", ".x-toggle-button", { redirect_url : "{% url "site:login" %}" }, onXToggleButtonClicked );
 
-            $("#{{ answer_form.body.id_for_label }}").wm_editor();
+            init_editor();
 
             $( "a.answer-question-link" ).click( on_answer_link_clicked );
 

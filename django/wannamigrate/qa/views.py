@@ -357,7 +357,7 @@ def add_blogpost( request ):
             blogpost.save()
             user_stats.save()
 
-            messages.success( request, 'Post successfully created.' )
+            messages.success( request, _( 'Post successfully created.' ) )
             # Redirect with success message
             return HttpResponseRedirect( reverse( 'qa:view_blogpost', args = ( blogpost.slug, ) ) )
 

@@ -9,7 +9,10 @@ class WMEditorParser( HTMLParser ):
         validation, cleaning, etc. """
 
     # List of available tags
-    whitelist = [ "p", "b", "h1", "i", "br", "div", "u", "ol", "ul", "li", "a", "blockquote", "img" ]
+    whitelist = [ "a", "b", "blockquote", "code", "del", "div",
+                  "dd", "dl", "dt", "em", "h1", "h2", "h3", "i", "img",
+                  "kbd", "li", "ol", "p", "pre", "s", "sup", "sub",
+                  "span", "strong", "strike", "ul", "br", "hr" ]
 
     # Errors list
     errors = []

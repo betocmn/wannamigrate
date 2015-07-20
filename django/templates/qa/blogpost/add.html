@@ -8,19 +8,8 @@
 
     <link href="{% static 'common/jquery-ui/css/ui-lightness/jquery-ui.css' %}" rel="stylesheet">
     <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
-    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
-    <style>
-        input.checkbox {
-            width:10px !important;
-            height:10px !important;
-        }
-        /*
-        .ui-autocomplete-input
-        {
-            width: 200px !important;
-        }
-        */
-    </style>
+    <link href="{% static 'site/css/blogpost.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm-editor.css' %}" rel="stylesheet">
 {% endblock head %}
 
 {% block content %}
@@ -84,11 +73,38 @@
     <script src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
     <script src="{% static 'common/custom-combobox/js/custom-combobox.js' %}"></script>
     <script src="{% static 'common/auto-topics/js/autotopics.js' %}"></script>
-<script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
-    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/tinymce/tinymce.min.js' %}"></script>
+
 
     <!-- INLINE JS -->
     <script type="text/javascript">
+
+        function init_editor()
+        {
+            tinymce.PluginManager.add('customh1', function(editor, url) {
+                // Add a button that opens a window
+                editor.addButton('customh1', {
+                    text: "H",
+                    title: "Header",
+                    icon: false,
+                    onclick:  function() { editor.execCommand( 'mceToggleFormat', false, "h1" ); }
+                });
+            });
+
+
+            tinymce.init({
+                selector: "textarea#{{ form.body.id_for_label }}",
+                plugins: [
+                    "autolink lists link image charmap anchor hr customh1",
+                ],
+                menubar: false,
+                statusbar: false,
+                toolbar: [ "customh1 bold italic underline strikethrough blockquote | justifyleft justifycenter justifyright justifyfull | bullist numlist | hr link image" ],
+                body_class: "wm-html-content wm-post",
+                content_css: "{% static 'common/wm-editor/css/wm-editor.css' %}",
+            });
+        }
 
         $( document ).ready( function() {
             $("#{{ form.related_topics.id_for_label }}").autotopics( {
@@ -97,16 +113,8 @@
                 wrapper_class : "tag",
             } );
 
+            init_editor();
 
-            {% if form.body.value|length == 0 %}
-                $("#{{ form.body.id_for_label }}").focus(function(){
-                    $("#{{ form.body.id_for_label }}").wm_editor();
-                    $(this).unbind( "focus" );
-                    $("#{{ form.body.id_for_label }}").focus();
-                });
-            {% else %}
-                $("#{{ form.body.id_for_label }}").wm_editor();
-            {% endif %}
         });
     </script>
 

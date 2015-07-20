@@ -7,26 +7,25 @@
     {{ block.super }}
     <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'site/css/blogpost.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm-editor.css' %}" rel="stylesheet">
 {% endblock head %}
 
 {% block content %}
     <section class="post light sans-serif">
-        {% include "site/_common/status.html" %}
-
-
         <div id="container" class="container font-size5">
+            {% include "site/_common/status.html" %}
             <div style="display: block;" id="reader-header" class="header">
                 <a href="/blogposts" class="bt-back">&laquo; {% trans "Back to BlogPosts" %}</a>
                 <div class="domain-border"></div>
                 <h1 id="reader-title">{{ blogpost.title }}</h1>
                 {% if blogpost.is_anonymous %}
-                    <div id="reader-author" class="author">{% trans "Written by" %} {% trans "Anonymous User" %}.{{ blogpost.created_date|date:"F Y" }}.</div>
+                    <div id="reader-author" class="author">{% trans "Written by" %} {% trans "Anonymous User" %}. {{ blogpost.created_date|date:"F Y" }}.</div>
                 {% else %}
                     <div id="reader-author" class="author">{% trans "Written by" %} <a href="{% url 'site:user_profile' blogpost.owner.slug %}">{{ blogpost.owner.name }}</a>. {{ blogpost.last_activity_date|date:"F Y" }}.</div>
                 {% endif %}
             </div>
 
-            <div id="reader-content">
+            <div id="reader-content" class="wm-html-content wm-post">
                 {% autoescape off %}
                     {{ blogpost.body }}
                 {% endautoescape %}
