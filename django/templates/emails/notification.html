@@ -4,43 +4,94 @@
 
 {% block content %}
 
+    <div class="block">
+       <!-- start textbox-with-title -->
+       <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="fulltext">
+          <tbody>
+             <tr>
+                <td>
+                   <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                      <tbody>
+                         <!-- Spacing -->
+                         <tr>
+                            <td width="100%" height="30"></td>
+                         </tr>
+                         <!-- Spacing -->
+                         <tr>
+                            <td>
+                               <table width="540" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
+                                  <tbody>
+                                     <!-- Title -->
+                                     <tr>
+                                        <td style="font-family: Helvetica, arial, sans-serif; font-size: 18px; color: #333333; text-align:center;line-height: 20px;" st-title="fulltext-title">
 
-    <tr>
-        <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
-          <center>
-            <table cellspacing="0" cellpadding="0" width="600" class="w320">
-              <tr>
-                <td class="header-lg">
-                  {% trans 'You have a notification' %}</td>
-              </tr>
-              <tr>
-                <td class="free-text">
-                    {% if user.name %}
-                        {% trans 'Hello,' %} {{ user.name|capfirst }}.
-                    {% endif %}
-                    <br />
-                    <strong>{{ notification.message }}</strong>
-                    <br />
-                    {% trans "Click the button below to check it." %}
+                                            {% trans 'You have a notification' %}
+
+                                        </td>
+                                     </tr>
+                                     <!-- End of Title -->
+                                     <!-- spacing -->
+                                     <tr>
+                                        <td height="5"></td>
+                                     </tr>
+                                     <!-- End of spacing -->
+                                     <!-- content -->
+                                     <tr>
+                                        <td style="font-family: Helvetica, arial, sans-serif; font-size: 14px; color: #95a5a6; text-align:center;line-height: 30px;" st-content="fulltext-paragraph">
+
+                                            {% if user.name %}
+                                                {% trans 'Hello,' %} {{ user.name|capfirst }}.
+                                            {% endif %}
+                                            <br />
+                                            {{ notification.message }}
+                                            <br />
+                                            {% trans "Click the button below to check it." %}
+
+                                        </td>
+                                     </tr>
+                                     <!-- End of content -->
+                                     <!-- Spacing -->
+                                     <tr>
+                                        <td width="100%" height="10"></td>
+                                     </tr>
+                                     <!-- Spacing -->
+                                     <!-- button -->
+                                     <tr>
+                                        <td>
+                                           <table height="36" align="center" valign="middle" border="0" cellpadding="0" cellspacing="0" class="tablet-button" st-button="edit">
+                                              <tbody>
+                                                 <tr>
+                                                    <td width="auto" align="center" valign="middle" height="36" style=" background-color:#68347e; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:13px; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;">
+
+                                                       <span style="color: #ffffff; font-weight: 300;">
+                                                          <a style="color: #ffffff; text-align:center;text-decoration: none;" href="{{ base_url }}{{ notification.url }}">
+                                                              {% trans 'View' %}
+                                                          </a>
+                                                       </span>
+                                                    </td>
+                                                 </tr>
+                                              </tbody>
+                                           </table>
+                                        </td>
+                                     </tr>
+                                     <!-- /button -->
+                                     <!-- Spacing -->
+                                     <tr>
+                                        <td width="100%" height="30"></td>
+                                     </tr>
+                                     <!-- Spacing -->
+                                  </tbody>
+                               </table>
+                            </td>
+                         </tr>
+                      </tbody>
+                   </table>
                 </td>
-              </tr>
-              <tr>
-                <td class="button">
-                  <div><!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ base_url }}{{ notification.url }}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#28b187">
-                      <w:anchorlock/>
-                      <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">{% trans 'View' %}</center>
-                    </v:roundrect>
-                  <![endif]-->
-                      <a class="button-mobile" href="{{ base_url }}{{ notification.url }}" style="background-color:#28b187;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">
-                        {% trans 'View' %}
-                      </a>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </center>
-        </td>
-    </tr>
+             </tr>
+          </tbody>
+       </table>
+       <!-- end of textbox-with-title -->
+    </div>
+
 
 {% endblock content %}
