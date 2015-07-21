@@ -21,20 +21,6 @@ section.light { color: #333; background-color: #FFF; }
     font-style: italic;
     color: #666;
 }
-div#reader-content {
-    font-size: 1em;
-    line-height: 1.6em;
-}
-
-div#reader-content ul {
-    list-style: disc outside none;
-}
-
-div#reader-content ul li {
-    margin-left: 35px;
-}
-
-div#reader-content a{ color:#68347E; }
 
 div#reader-feedback
 {
@@ -145,3 +131,6 @@ div.recommended-content > h1 {
 }
 
 .related-content ul li a:hover { text-decoration:underline; }
+
+
+input.checkbox { width:10px !important; height:10px !important; }

@@ -623,6 +623,29 @@ class UserSituation( BaseModel ):
     user = models.OneToOneField( User, verbose_name = _( 'user' ) )
     situation = models.ForeignKey( 'Situation', verbose_name =  _( "situation" ) )
 
+    # Class Methods
+    @staticmethod
+    def get_details( user_id ):
+        """
+        Get user situation details
+
+        :param: user_id
+        :return: Objects
+        """
+
+        try:
+            result = UserSituation.objects.select_related(
+                'situation'
+            ).filter(
+                user_id = user_id,
+            ).only(
+                'id', 'situation__from_country_id', 'situation__to_country_id',
+                'situation__goal_id', 'situation__total_users', 'situation__id'
+            ).get()
+            return result
+        except UserSituation.DoesNotExist:
+           return False
+
 
 
 class UserStats( BaseModel ):

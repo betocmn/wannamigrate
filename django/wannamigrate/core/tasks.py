@@ -20,5 +20,5 @@ def add_notification( message_translation, message_no_translation, url, users ):
 
 
 @shared_task
-def send_welcome_email( user ):
-    return Mailer.send_welcome_email( user )
+def send_welcome_email( user, type = 'user' ):
+    return Mailer.send_welcome_email( user, type )

@@ -143,7 +143,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # MIDDLEWARES
 #########################################
 MIDDLEWARE_CLASSES = (
-    #'wannamigrate.core.middleware.MaintenceMiddleware',    # Uncomment this line to put site under maintenance
+    #'wannamigrate.core.middleware.MaintenanceMiddleware',    # Uncomment this line to put site under maintenance
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -153,7 +153,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
-    'wannamigrate.core.middleware.SituationLocaleMiddleware',
+    'wannamigrate.core.middleware.LocaleMiddleware',
+    'wannamigrate.core.middleware.SituationMiddleware',
     'wannamigrate.core.middleware.NotificationMiddleware',
 )
 
