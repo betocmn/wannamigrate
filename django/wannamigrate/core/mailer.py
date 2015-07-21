@@ -44,8 +44,8 @@ class Mailer( object ):
         :return: String
         """
 
-        if not settings.IS_PROD:
-            return True
+        #if not settings.IS_PROD:
+            #return True
 
         email = EmailMessage()
         email.content_subtype = "html"
@@ -204,15 +204,15 @@ class Mailer( object ):
         # Defines order message accordingly to status
         message = ''
         if order.order_status_id == settings.ID_ORDER_STATUS_PENDING:
-            message = "The order was received and will be processed soon."
+            message = _( "The order was received and will be processed soon." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_APPROVED:
-            message = "The order was approved."
+            message = _( "The order was approved." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_DENIED:
-            message = "The order was denied."
+            message = _( "The order was denied." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_CANCELLED:
-            message = "The order was cancelled."
+            message = _( "The order was cancelled." )
         elif order.order_status_id == settings.ID_ORDER_STATUS_REFUNDED:
-            message = "The order was refunded."
+            message = _( "The order was refunded." )
 
         template_data = {
             'order': order,
@@ -221,7 +221,7 @@ class Mailer( object ):
             'user': user,
         }
         body = Mailer.build_body_from_template( 'emails/order_confirmation_provider.html', template_data )
-        return Mailer.send( 'Service Requested', body, provider.user.email )
+        return Mailer.send( _( 'Service Requested' ), body, provider.user.email )
 
 
     @staticmethod
