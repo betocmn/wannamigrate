@@ -11,89 +11,117 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 # Imports
 ##########################
 from django.conf import settings
-import pytz
-from django.utils import timezone, translation
-from wannamigrate.core.models import Situation, Country, Goal, Notification
+from django.utils import translation
+from wannamigrate.core.models import Situation, Country, Goal, Notification, Language, UserSituation
+from wannamigrate.core.util import get_object_or_false
+from django.http import HttpResponse
+from django.db.models import F
+
 
 
 
 
 ##########################
-# Class definitions
+# Locale Midlleware
 ##########################
-class SituationLocaleMiddleware( object ):
+class LocaleMiddleware( object ):
 
     def process_request( self, request ):
 
-        # If user just logged in, we set his preferred language
-        if request.user.is_authenticated() and 'just_logged_in' in request.session and request.session['just_logged_in']:
-            translation.activate( request.user.preferred_language )
-            request.session[translation.LANGUAGE_SESSION_KEY] = request.user.preferred_language
-            del request.session['just_logged_in']
-        else:
-            # If a language subdomain was forced (eg: 'https://pt.wannamigrate.com' - SEO)
-            subdomain = request.get_host().split( '.', 2 )[0]
-            if subdomain not in [ 'www', 'dev' ] and subdomain in settings.COUNTRIES_BY_LANGUAGE:
-                if subdomain != translation.get_language():
+        # if language was still not set
+        if 'language' not in request.session:
+
+            if request.user.is_authenticated():
+
+                # activates current preferred language set by user
+                translation.activate( request.user.preferred_language )
+                request.session[translation.LANGUAGE_SESSION_KEY] = request.user.preferred_language
+
+            else:
+
+                # searches for a language subdomain (eg: 'https://pt.wannamigrate.com')
+                subdomain = request.get_host().split( '.', 2 )[0]
+                if subdomain not in [ 'www', 'dev' ] \
+                    and subdomain in settings.COUNTRIES_BY_LANGUAGE \
+                    and subdomain != translation.get_language():
                     translation.activate( subdomain )
                     request.session[translation.LANGUAGE_SESSION_KEY] = subdomain
 
-        # if this is a guest visitor's first visit we try to get their country
-        if not request.user.is_authenticated() and 'situation' not in request.session:
+            # Gets language ID from DB and saves in session
+            language = Language.objects.get( code = translation.get_language() )
+            request.session['language'] = {
+                'id': language.id,
+                'name': language.name,
+                'code': language.code
+            }
 
-            request.session['situation'] = {}
-            request.session['situation']['country_code'] = 'br'
 
-            #TODO - When we install the geoIP library, just uncommnet the code below and erase the above
 
-            """
-            from django.contrib.gis.geoip import GeoIP
 
-            # Gets country code from IP address of user
-            x_forwarded_for = request.META.get( 'HTTP_X_FORWARDED_FOR' )
-            if x_forwarded_for:
-                ip = x_forwarded_for.split(',')[0]
+##########################
+# Situation Midlleware
+##########################
+class SituationMiddleware( object ):
+
+    def process_request( self, request ):
+
+        # Default data
+        populate_situation_session = False
+        default_situation_id = 35
+
+        # If it's first time access
+        if 'situation' not in request.session:
+            populate_situation_session = True
+            situation = Situation.objects.get( pk = default_situation_id )
+
+        # if user just logged in or signed up, we need to adjust the situation
+        elif request.user.is_authenticated() and 'login_or_signup_started' in request.session:
+            del request.session['login_or_signup_started']
+            user_situation = UserSituation.get_details( request.user.id )
+            if not user_situation:
+                request.session['conversion_new_signup'] = True # this will be used for marketing conversion pixels
+                situation, created = Situation.objects.get_or_create(
+                    from_country_id = request.session['situation']['from_country']['id'],
+                    to_country_id = request.session['situation']['to_country']['id'],
+                    goal_id = request.session['situation']['goal']['id'],
+                    defaults = {
+                        'total_users': 1,
+                        'total_visitors': 0,
+                        'from_country_id': request.session['situation']['from_country']['id'],
+                        'to_country_id': request.session['situation']['to_country']['id'],
+                        'goal_id': request.session['situation']['goal']['id']
+                    }
+                )
+                if not created:
+                    situation.total_users = F( 'total_users' ) + 1
+                    situation.save()
+                user_situation = UserSituation()
+                user_situation.user = request.user
+                user_situation.situation = situation
+                user_situation.save()
+                populate_situation_session = True
+
             else:
-                ip = request.META.get( 'REMOTE_ADDR' )
-            geo_ip = GeoIP()
-            result = geo_ip.country( ip )
-            if not settings.IS_PROD:
-                result = geo_ip.country( '191.189.150.101' )
-            country_code = result['country_code']
 
-            # stores country_code in session to be used on views
-            request.session['situation'] = {}
-            request.session['situation']['country_code'] = country_code
+                if 'situation_updated' in request.session:
+                    del request.session['situation_updated']
+                    if user_situation.situation.id != request.session['situation']['id']:
+                        user_situation.situation_id = request.session['situation']['id']
+                        user_situation.save()
+                else:
+                    situation = user_situation.situation
+                    populate_situation_session = True
 
-            # sets language
-            lower_country_code = country_code.lower()
-            for language in settings.COUNTRIES_BY_LANGUAGE:
-                if lower_country_code in settings.COUNTRIES_BY_LANGUAGE[language]:
-                    translation.activate( language )
-                    request.session[translation.LANGUAGE_SESSION_KEY] = language
+        # populate session with situation details
+        if populate_situation_session:
 
-            # sets timezone
-            timezone_name = pytz.country_timezones[country_code.lower()][0]
-            if timezone_name:
-                timezone.activate( pytz.timezone( timezone_name ) )
-                request.session['django_timezone'] = timezone_name
-            else:
-                timezone.deactivate()
-            """
+            # gets situation details from the DB
+            from_country = Country.objects.get( pk = situation.from_country_id )
+            to_country = Country.objects.get( pk = situation.to_country_id )
+            goal = Goal.objects.get( pk = situation.goal_id )
 
-        # If there's no situation session, sets one with default values
-        if 'situation' not in request.session or 'from_country' not in request.session['situation']:
-
-            # Defaults to country by IP and other default values
-            to_country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-            goal = Goal.objects.get( pk = 1 )
-            if 'situation' in request.session and 'country_code' in request.session['situation'] and request.session['situation']['country_code']:
-                from_country = Country.objects.get( code = request.session['situation']['country_code'] )
-            else:
-                from_country = Country.objects.get( pk = settings.ID_COUNTRY_BRAZIL )
-    
             # Sets Session
-            request.session['situation'] = { 'from_country': {}, 'goal': {}, 'to_country': {} }
+            request.session['situation'] = { 'id': situation.id, 'from_country': {}, 'goal': {}, 'to_country': {} }
             request.session['situation']['from_country']['id'] = from_country.id
             request.session['situation']['from_country']['name'] = from_country.name
             request.session['situation']['from_country']['code'] = from_country.code
@@ -102,21 +130,14 @@ class SituationLocaleMiddleware( object ):
             request.session['situation']['to_country']['id'] = to_country.id
             request.session['situation']['to_country']['name'] = to_country.name
             request.session['situation']['to_country']['code'] = to_country.code
-            try:
-                situation = Situation.objects.get(
-                    from_country = from_country,
-                    to_country = to_country,
-                    goal = goal
-                )
-                request.session['situation']['total_users'] = situation.total_users
-            except Situation.DoesNotExist:
-                request.session['situation']['total_users'] = 0
+            request.session['situation']['total_users'] = situation.total_users
+
 
 
 
 
 ##########################
-# Class definitions
+# Notifications Middleware
 ##########################
 class NotificationMiddleware( object ):
     def process_request( self, request ):
@@ -129,11 +150,14 @@ class NotificationMiddleware( object ):
 
 
 
-class MaintenceMiddleware( object ):
+##########################
+# Maintainance Midlleware
+##########################
+class MaintenanceMiddleware( object ):
 
     def process_request( self, request ):
         from django.shortcuts import render
-        return render( request, "site/home/maintence.html" )
+        return render( request, "site/home/maintenance.html" )
 
 
 

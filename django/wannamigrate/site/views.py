@@ -50,7 +50,7 @@ from django.db.models import Prefetch, Count, F
 from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
 from wannamigrate.core.decorators import ajax_login_required
 from wannamigrate.qa.models import Answer, Question, BlogPost
-from wannamigrate.core.tasks import add_notification
+from wannamigrate.core.tasks import add_notification, send_welcome_email
 
 
 
@@ -111,7 +111,7 @@ def change_situation( request ):
         from_country = situation.from_country
         to_country = situation.to_country
         goal = situation.goal
-        request.session['situation'] = { 'from_country': {}, 'goal': {}, 'to_country': {} }
+        request.session['situation'] = { 'id': situation.id, 'from_country': {}, 'goal': {}, 'to_country': {} }
         request.session['situation']['from_country']['id'] = from_country.id
         request.session['situation']['from_country']['name'] = from_country.name
         request.session['situation']['from_country']['code'] = from_country.code
@@ -124,17 +124,26 @@ def change_situation( request ):
 
         # Sets language accordingly to FROM Country
         if from_country.code.lower() in settings.COUNTRIES_BY_LANGUAGE['pt']:
-            language = 'pt'
+            language_code = 'pt'
         else:
-            language = 'en'
+            language_code = 'en'
 
         # Updates current and preferred language
-        if language != translation.get_language():
-            translation.activate( language )
-            request.session[translation.LANGUAGE_SESSION_KEY] = language
+        if language_code != translation.get_language():
+            translation.activate( language_code )
+            request.session[translation.LANGUAGE_SESSION_KEY] = language_code
             if request.user.is_authenticated():
-                request.user.preferred_language = language
+                request.user.preferred_language = language_code
                 request.user.save()
+            language = Language.objects.get( code = language_code )
+            request.session['language'] = {
+                'id': language.id,
+                'name': language.name,
+                'code': language.code
+            }
+
+        # Session used in middleware
+        request.session['situation_updated'] = True
 
     # Redirects to dashboard
     return HttpResponseRedirect( reverse( 'site:dashboard' ) )
@@ -193,6 +202,9 @@ def login( request ):
     if request.user.is_authenticated():
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
+    # Saves session to indicate this is a new registration
+    request.session['login_or_signup_started'] = True
+
     # Initializes template data dictionary
     template_data = {}
 
@@ -221,9 +233,6 @@ def login( request ):
     # passes form to template Forms
     template_data['form'] = form
     template_data['next'] = request.GET.get( 'next' )
-
-    # Sets login session
-    request.session['just_logged_in'] = True
 
     # Prints Template
     return render( request, "site/login/login.html", template_data )
@@ -259,6 +268,9 @@ def signup( request, type = 'user' ):
             return HttpResponseRedirect( request.GET.get( 'next' ) )
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
+    # Saves session to indicate this is a new registration
+    request.session['login_or_signup_started'] = True
+
     # Initializes template data dictionary
     template_data = {}
 
@@ -293,9 +305,6 @@ def signup( request, type = 'user' ):
             user = authenticate( email = email, password = password )
             auth_login( request, user )
 
-            # Saves session to indicate this is a new fresh user
-            request.session['new_sign_up'] = True
-
             # If it's a service provider, saves extra info and redirects to further edition
             is_provider = False
             if 'type' in request.POST and request.POST['type'] == 'service-provider':
@@ -309,9 +318,8 @@ def signup( request, type = 'user' ):
                 provider.save()
 
 
-            # Sends Welcome Email to User
-            # TODO Change this to a celery/signal background task
-            Mailer.send_welcome_email( user, type )
+            # CELERY TASK to send Welcome Email to User
+            send_welcome_email.delay( user, type )
 
             if 'next' in request.GET:
                 return HttpResponseRedirect( request.GET.get( 'next' ) )
@@ -992,6 +1000,12 @@ def edit_account( request ):
                 if user.preferred_language:
                     translation.activate( user.preferred_language )
                     request.session[translation.LANGUAGE_SESSION_KEY] = user.preferred_language
+                    language = Language.objects.get( code = user.preferred_language )
+                    request.session['language'] = {
+                        'id': language.id,
+                        'name': language.name,
+                        'code': language.code
+                    }
 
                 # Updates the active timezone
                 if user.preferred_timezone:
@@ -1100,13 +1114,14 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
+    #return HttpResponse( Goal.objects.get( pk = request.session['situation']['goal']['id'] ) )
     # Initial template
     template_data = {}
 
     # Checks if its a new signup
-    if 'new_sign_up' in request.session and request.session['new_sign_up']:
+    if 'conversion_new_signup' in request.session and request.session['conversion_new_signup']:
         is_new_signup = True
-        request.session['new_sign_up'] = False
+        del request.session['conversion_new_signup']
     else:
         is_new_signup = False
 
@@ -1123,28 +1138,6 @@ def dashboard( request ):
 
     # If situation is defined, we load questions and professionals related to it
     if 'situation' in request.session and 'from_country' in request.session['situation']:
-
-        # Saves user situation from session if it's a new signup
-        if is_new_signup:
-            situation, created = Situation.objects.get_or_create(
-                from_country_id = request.session['situation']['from_country']['id'],
-                to_country_id = request.session['situation']['to_country']['id'],
-                goal_id = request.session['situation']['goal']['id'],
-                defaults = {
-                    'total_users': 1,
-                    'total_visitors': 0,
-                    'from_country_id': request.session['situation']['from_country']['id'],
-                    'to_country_id': request.session['situation']['to_country']['id'],
-                    'goal_id': request.session['situation']['goal']['id']
-                }
-            )
-            if not created:
-                situation.total_users = F( 'total_users' ) + 1
-                situation.save()
-            user_situation = UserSituation()
-            user_situation.user = request.user
-            user_situation.situation = situation
-            user_situation.save()
 
         # Gets 5 most related service providers
         template_data['providers'] = Provider.get_listing( request.session['situation']['to_country']['id'], 0, 5 )
@@ -1194,6 +1187,14 @@ def set_lang( request, language_code ):
     if request.user.is_authenticated():
         request.user.preferred_language = language_code
         request.user.save()
+
+    # Gets language ID from DB and saves in session
+    language = Language.objects.get( code = language_code )
+    request.session['language'] = {
+        'id': language.id,
+        'name': language.name,
+        'code': language.code
+    }
 
     return redirect( settings.BASE_URL_SECURE + next )
 

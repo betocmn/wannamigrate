@@ -155,9 +155,6 @@ $(function() {
                 alternateShadow = false;
             });
 
-            $(window).load(function() {
-                dashboard.changeSituation.changeFlags();
-            });
         },
 
         init: function() {
@@ -331,25 +328,6 @@ $(function() {
     dashboard.changeSituation = {
         // Methods
         // ---------
-
-        changeFlags: function(){
-            from = $('.from .selected').find('.flag').attr('class');
-            to = $('.to .selected').find('.flag').attr('class');
-
-            if ( from && to ){
-
-                from = from.split(' ')[1];
-                to = to.split(' ')[1];
-
-                textFrom = $('.from .selected').find('.ddlabel').text();
-                textTo = $('.to .selected').find('.ddlabel').text();
-
-                $scope.changeSituation.flag.from.addClass(from);
-                $scope.changeSituation.flag.to.addClass(to);
-                $scope.changeSituation.country.from.text(textFrom);
-                $scope.changeSituation.country.to.text(textTo);
-            }
-        },
 
         events: function(){
             $scope.changeSituation.btChangeSituation.click(function(event) {

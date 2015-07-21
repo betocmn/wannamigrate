@@ -41,22 +41,25 @@
                         <button id="signup_button_submit" type="submit" class="button bt-login">{% trans "Sign-Up" %}</button>
                     </form>
 
-                    <div id="login-social-container" class="login_item signup_item">
-                        <div class="f14 regular dark-grey text-center">
-                            {% trans "Alternatively, you can sign up using:" %}
+                    {% if type != 'service-provider' %}
+                        <div id="login-social-container" class="login_item signup_item">
+                            <div class="f14 regular dark-grey text-center">
+                                {% trans "Alternatively, you can sign up using:" %}
+                            </div>
+                            <div id="social-login-buttons-container">
+                                <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-login facebook f16">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-login linkedin f16">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-login google f16">
+                                    <i class="fa fa-google"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div id="social-login-buttons-container">
-                            <a title="{% trans "Login with Facebook" %}" href="{% url 'social:begin' 'facebook' %}" class="social-login facebook f16">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            <a title="{% trans "Login with Linkedin" %}" href="{% url 'social:begin' 'linkedin' %}" class="social-login linkedin f16">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                            <a title="{% trans "Login with Google" %}" href="{% url 'social:begin' 'google-oauth2' %}" class="social-login google f16">
-                                <i class="fa fa-google"></i>
-                            </a>
-                        </div>
-                    </div>
+                    {% endif %}
+
                     <div class="clear"></div>
 
                     <a class="switcher button" href="{% url 'site:login' %}{% if next %}?next={{next}}{% endif %}">

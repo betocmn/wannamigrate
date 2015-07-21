@@ -96,16 +96,16 @@
                 <section class="situations">
                     <div class="situation">
                         <div class="from field">
-                            <p><i class="flag from-flag {{ request.session.situation.from_country.code.lower }}"></i> <strong class="country from-country">{{ request.session.situation.from_country.name }}</strong></p>
+                            <p><i class="flag from-flag {{ request.session.situation.from_country.code.lower }}"></i> <strong class="country from-country">{% trans request.session.situation.from_country.name %}</strong></p>
                         </div>
                         <div class="want field">
-                            <p><strong>{{ request.session.situation.goal.name }}</strong></p>
+                            <p><strong>{% trans request.session.situation.goal.name %}</strong></p>
                             {% if request.session.situation.total_users > 0 %}
                                 <span class="other-people">{% trans "And other" %} {{ request.session.situation.total_users|kmi }} {% trans "user(s)" %}</span>
                             {% endif %}
                         </div>
                         <div class="to field">
-                            <p><i class="flag to-flag {{ request.session.situation.to_country.code.lower }}"></i><strong class="country to-country">{{ request.session.situation.to_country.name }}</strong></p>
+                            <p><i class="flag to-flag {{ request.session.situation.to_country.code.lower }}"></i><strong class="country to-country">{% trans request.session.situation.to_country.name %}</strong></p>
                         </div>
                         <a href="#" class="bt-change-situation button-transparent__edit">{% trans "Change Situation" %}</a>
                         <div class="clearfix"></div>
