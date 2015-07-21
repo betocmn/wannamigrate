@@ -10,6 +10,7 @@ the templates on qa app
 ##########################
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
+from django.utils.text import Truncator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -221,7 +222,7 @@ def view_question( request, slug ):
                 translate_this = _( "New answer to the question" ) # hack to have this on translations (fix this later)
                 add_notification.delay(
                     "New answer to the question",
-                    '"' + question.title + '"',
+                    '"' + Truncator( question.title ).words( 6 ) + '"',
                     reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ),
                     list( question.followers.all() )
                 )

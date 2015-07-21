@@ -35,7 +35,7 @@ def send_order_confirmation_user( user, order, provider ):
 def send_order_confirmation_provider( user, order, provider ):
 
     # sets user language
-    preferred_language = user.preferred_language
+    preferred_language = provider.user.preferred_language
     if not preferred_language:
         preferred_language = 'en'
     translation.activate( preferred_language )
