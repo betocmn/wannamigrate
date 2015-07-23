@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 17:11-0300\n"
+"POT-Creation-Date: 2015-07-23 13:22-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2717,7 +2717,7 @@ msgid ""
 "CV, cover letter, LinkedIn and Portfolio. Additionaly you will be introduced "
 "to possible employers, some language preparation and hints."
 msgstr ""
-"Pacote incluindo assessoria completa de carreira no país de destion, "
+"Pacote incluindo assessoria completa de carreira no país de destino, "
 "incluindo reuniões no skype, planejamento estratégico, avaliação de mercado, "
 "criação de CV, carta de apresentação, LinkedIn e Portfólio. Adicionalmente, "
 "você será apresentado a possíveis empregadores e receberá ajuda na língua "
@@ -2900,6 +2900,45 @@ msgstr ""
 "4 semanas de acomodação em casa de família, quarto individual, café da "
 "manhã, almoço, jantar, taxa de reserva da acomodação, taxa EdukBrasil e "
 "assessoria ao visto."
+
+#: templates/db_translations/marketplace_servicetype.html:30
+msgid "Cultural Training"
+msgstr "Treinamento Cultural"
+
+#: templates/db_translations/marketplace_servicetype.html:30
+msgid ""
+"The goal is to prepare you and your family for the cultural changes you will "
+"face while moving to a new country."
+msgstr ""
+"O objetivo é preparar o cliente e sua família culturalmente para sua adaptação plena "
+"no processo de mudança para o novo país."
+
+#: templates/db_translations/marketplace_servicetype.html:31
+msgid "Career Coaching"
+msgstr "Coaching de Carreira"
+
+#: templates/db_translations/marketplace_servicetype.html:31
+msgid ""
+"Career assessment in the country of destination, including skype meetings, "
+"strategic planning, market evaluation, creation of CV, cover letter, "
+"LinkedIn and Portfolio."
+msgstr ""
+"Assessoria completa de carreira no país de destino, "
+"incluindo reuniões no skype, planejamento estratégico, avaliação de mercado, "
+"criação de CV, carta de apresentação, LinkedIn e Portfólio."
+
+#: templates/db_translations/marketplace_servicetype.html:32
+msgid "Relocation Assessment"
+msgstr "Assessoria de Mudança"
+
+#: templates/db_translations/marketplace_servicetype.html:32
+msgid ""
+"Get help to prepare your relocation plan. You will be assisted in aspects "
+"such as renting a house, buying furniture, buying a car and enrolling in "
+"school."
+msgstr ""
+"Obtenha ajuda para planejar a sua mudança. Você será auxiliado em aspectos "
+"como aluguel de casa, compra de móveis, compra de carro e matrículas escolares."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -5978,7 +6017,7 @@ msgstr "Solicitação de Serviço"
 msgid "You received a service request."
 msgstr "Você recebeu uma solicitação de serviço."
 
-#: templates/emails/order_confirmation_provider.html:49
+#: templates/emails/order_confirmation_provider.html:50
 msgid ""
 "IMPORTANT: If the payment is APPROVED, please get in touch with the user to "
 "schedule the execution of the service."
@@ -5986,47 +6025,47 @@ msgstr ""
 "IMPORTANTE: Se o pagamento está APROVADO, favor entrar em contato com o "
 "usuário para agendar a execução do serviço."
 
-#: templates/emails/order_confirmation_provider.html:70
+#: templates/emails/order_confirmation_provider.html:71
 #: templates/emails/order_confirmation_user.html:75
 msgid "View Order"
 msgstr "Ver Pedido"
 
-#: templates/emails/order_confirmation_provider.html:133
+#: templates/emails/order_confirmation_provider.html:134
 #: templates/site/account/contracts.html:19
 msgid "User"
 msgstr "Usuário"
 
-#: templates/emails/order_confirmation_provider.html:177
+#: templates/emails/order_confirmation_provider.html:178
 #: templates/emails/order_confirmation_user.html:192
 msgid "Order Date"
 msgstr "Data do Pedido"
 
-#: templates/emails/order_confirmation_provider.html:180
+#: templates/emails/order_confirmation_provider.html:181
 #: templates/emails/order_confirmation_user.html:195
 msgid "Order Number"
 msgstr "Número do Pedido"
 
-#: templates/emails/order_confirmation_provider.html:235
+#: templates/emails/order_confirmation_provider.html:236
 #: templates/emails/order_confirmation_user.html:250
 msgid "Order Details"
 msgstr "Dados do Pedido"
 
-#: templates/emails/order_confirmation_provider.html:247
+#: templates/emails/order_confirmation_provider.html:248
 #: templates/emails/order_confirmation_user.html:262
 msgid "Order Description"
 msgstr "Descrição do Pedido"
 
-#: templates/emails/order_confirmation_provider.html:248
+#: templates/emails/order_confirmation_provider.html:249
 #: templates/emails/order_confirmation_user.html:263
 msgid "Gross Total"
 msgstr "Total Bruto"
 
-#: templates/emails/order_confirmation_provider.html:249
+#: templates/emails/order_confirmation_provider.html:250
 #: templates/emails/order_confirmation_user.html:264
 msgid "Discount"
 msgstr "Desconto"
 
-#: templates/emails/order_confirmation_provider.html:250
+#: templates/emails/order_confirmation_provider.html:251
 #: templates/emails/order_confirmation_user.html:265
 msgid "Net Total"
 msgstr "Total Líquido"
