@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 13:22-0300\n"
+"POT-Creation-Date: 2015-07-23 17:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "Tira-Dúvidas"
 msgid "Professionals"
 msgstr "Profissionais"
 
-#: templates/_layouts/main.html:42 templates/_layouts/main.html.py:130
+#: templates/_layouts/main.html:42 templates/_layouts/main.html.py:131
 msgid "Immi Box"
 msgstr "Immi Box"
 
@@ -47,51 +47,56 @@ msgid "My Profile"
 msgstr "Meu Perfil"
 
 #: templates/_layouts/main.html:70
+#| msgid "Edit Profile"
+msgid "Public Profile"
+msgstr "Perfil público"
+
+#: templates/_layouts/main.html:71
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: templates/_layouts/main.html:71
+#: templates/_layouts/main.html:72
 msgid "My Orders"
 msgstr "Minhas Compras"
 
-#: templates/_layouts/main.html:72
+#: templates/_layouts/main.html:73
 msgid "My Messages"
 msgstr "Mensagens"
 
-#: templates/_layouts/main.html:73
+#: templates/_layouts/main.html:74
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/_layouts/main.html:77 templates/site/home/home.html:32
+#: templates/_layouts/main.html:78 templates/site/home/home.html:32
 #: templates/site/login/login.html:26 templates/site/login/login.html.py:38
 msgid "Login"
 msgstr "Login"
 
-#: templates/_layouts/main.html:81
+#: templates/_layouts/main.html:82
 msgid "View notifications"
 msgstr "Ver notificações"
 
-#: templates/_layouts/main.html:83
+#: templates/_layouts/main.html:84
 msgid "notifications"
 msgstr "notificações"
 
-#: templates/_layouts/main.html:104
+#: templates/_layouts/main.html:105
 msgid "And other"
 msgstr "E outro(s)"
 
-#: templates/_layouts/main.html:104
+#: templates/_layouts/main.html:105
 msgid "user(s)"
 msgstr "usuário(s)"
 
-#: templates/_layouts/main.html:110
+#: templates/_layouts/main.html:111
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
 
-#: templates/_layouts/main.html:119
+#: templates/_layouts/main.html:120
 msgid "Step-by-Step"
 msgstr "Passo-a-Passo"
 
-#: templates/_layouts/main.html:122
+#: templates/_layouts/main.html:123
 msgid ""
 "\n"
 "                                    Start here to understand the <br /"
@@ -103,7 +108,7 @@ msgstr ""
 "que você tem.\n"
 "                                    "
 
-#: templates/_layouts/main.html:133
+#: templates/_layouts/main.html:134
 msgid ""
 "\n"
 "                                    Tools to help you with<br />your "
@@ -115,65 +120,65 @@ msgstr ""
 "processo de imigração.\n"
 "                                    "
 
-#: templates/_layouts/main.html:145 templates/site/home/home.html:43
+#: templates/_layouts/main.html:146 templates/site/home/home.html:43
 #: wannamigrate/site/views.py:1230
 msgid "I'm from"
 msgstr "Sou do(a)"
 
-#: templates/_layouts/main.html:149 templates/site/home/home.html:47
+#: templates/_layouts/main.html:150 templates/site/home/home.html:47
 #: wannamigrate/site/views.py:1233
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:153 wannamigrate/site/views.py:1235
+#: templates/_layouts/main.html:154 wannamigrate/site/views.py:1235
 msgid "in"
 msgstr "no(a)"
 
-#: templates/_layouts/main.html:157
+#: templates/_layouts/main.html:158
 msgid "Change"
 msgstr "Mudar"
 
-#: templates/_layouts/main.html:175
+#: templates/_layouts/main.html:176
 msgid "How It Works"
 msgstr "Como Funciona"
 
-#: templates/_layouts/main.html:176
+#: templates/_layouts/main.html:177
 msgid "Terms &amp; Conditions"
 msgstr "Termos de Uso"
 
-#: templates/_layouts/main.html:177
+#: templates/_layouts/main.html:178
 msgid "Privacy Police"
 msgstr "Políticas de Privacidade"
 
-#: templates/_layouts/main.html:178 templates/site/contact/contact.html:21
+#: templates/_layouts/main.html:179 templates/site/contact/contact.html:21
 msgid "Contact Us"
 msgstr "Contato"
 
-#: templates/_layouts/main.html:181
+#: templates/_layouts/main.html:182
 msgid "Find a Professional"
 msgstr "Encontre um Profissional"
 
-#: templates/_layouts/main.html:182
+#: templates/_layouts/main.html:183
 msgid "Ask a Question"
 msgstr "Faça uma Pergunta"
 
-#: templates/_layouts/main.html:183
+#: templates/_layouts/main.html:184
 #: templates/points/dashboard/dashboard.html:18
 #: templates/site/tools/tools.html:13
 msgid "Immigration Points Calculator"
 msgstr "Calculadora de Pontos de Imigração"
 
-#: templates/_layouts/main.html:184
+#: templates/_layouts/main.html:185
 #: templates/site/about/service_providers.html:27
 #: wannamigrate/site/forms.py:252
 msgid "Become a Service Provider"
 msgstr "Torne-se um Prestador de Serviços"
 
-#: templates/_layouts/main.html:197
+#: templates/_layouts/main.html:198
 msgid "All Rights Reserved"
 msgstr "Todos os Direitos Reservados"
 
-#: templates/_layouts/main.html:262
+#: templates/_layouts/main.html:263
 msgid "No results found."
 msgstr "Sem resultados."
 
@@ -2910,8 +2915,8 @@ msgid ""
 "The goal is to prepare you and your family for the cultural changes you will "
 "face while moving to a new country."
 msgstr ""
-"O objetivo é preparar o cliente e sua família culturalmente para sua adaptação plena "
-"no processo de mudança para o novo país."
+"O objetivo é preparar o cliente e sua família culturalmente para sua "
+"adaptação plena no processo de mudança para o novo país."
 
 #: templates/db_translations/marketplace_servicetype.html:31
 msgid "Career Coaching"
@@ -2923,9 +2928,9 @@ msgid ""
 "strategic planning, market evaluation, creation of CV, cover letter, "
 "LinkedIn and Portfolio."
 msgstr ""
-"Assessoria completa de carreira no país de destino, "
-"incluindo reuniões no skype, planejamento estratégico, avaliação de mercado, "
-"criação de CV, carta de apresentação, LinkedIn e Portfólio."
+"Assessoria completa de carreira no país de destino, incluindo reuniões no "
+"skype, planejamento estratégico, avaliação de mercado, criação de CV, carta "
+"de apresentação, LinkedIn e Portfólio."
 
 #: templates/db_translations/marketplace_servicetype.html:32
 msgid "Relocation Assessment"
@@ -2938,7 +2943,8 @@ msgid ""
 "school."
 msgstr ""
 "Obtenha ajuda para planejar a sua mudança. Você será auxiliado em aspectos "
-"como aluguel de casa, compra de móveis, compra de carro e matrículas escolares."
+"como aluguel de casa, compra de móveis, compra de carro e matrículas "
+"escolares."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
@@ -7447,8 +7453,9 @@ msgid "Options"
 msgstr "Opções"
 
 #: templates/qa/blogpost/view.html:18 templates/qa/blogpost/view.html.py:71
-msgid "Back to BlogPosts"
-msgstr "Voltar aos BlogPosts"
+#| msgid "Back to BlogPosts"
+msgid "Back to Posts"
+msgstr "Voltar aos Posts"
 
 #: templates/qa/blogpost/view.html:22 templates/qa/blogpost/view.html.py:24
 msgid "Written by"
@@ -7502,6 +7509,13 @@ msgstr "Curtir"
 msgid "Upvoted"
 msgstr "Descurtir"
 
+#: templates/qa/common/avatar_name_listing.html:18
+#: templates/qa/common/title_body_listing.html:19
+#: templates/site/profile/user-content-people.html:18
+#: templates/site/profile/user-content-post.html:19
+msgid "Empty"
+msgstr "(vazio)"
+
 #: templates/qa/common/list_group_all.html:84
 msgid "viewers"
 msgstr "cliques"
@@ -7539,11 +7553,13 @@ msgid "Social"
 msgstr "Social"
 
 #: templates/qa/common/side_menu.html:40 templates/site/profile/view.html:235
+#: wannamigrate/qa/views.py:555
 msgid "Following"
 msgstr "Seguindo"
 
 #: templates/qa/common/side_menu.html:43 templates/qa/question/view.html:54
 #: templates/site/profile/view.html:234 templates/site/profile/view.html:278
+#: wannamigrate/qa/views.py:569
 msgid "Followers"
 msgstr "Seguidores"
 
@@ -7989,10 +8005,6 @@ msgstr "Países que dou suporte"
 #: templates/site/account/view.html:84
 msgid "Supported services"
 msgstr "Serviços que dou suporte"
-
-#: templates/site/account/view.html:95
-msgid "View my public profile"
-msgstr ""
 
 #: templates/site/contact/contact.html:22
 msgid ""
@@ -8514,11 +8526,6 @@ msgstr ""
 "        e  <a class=\"bold green\" target=\"_blank\" href=\"%(privacy_url)s"
 "\">Política de Privacidade</a> do Wanna Migrate\n"
 "    "
-
-#: templates/site/profile/user-content-people.html:18
-#: templates/site/profile/user-content-post.html:19
-msgid "Empty"
-msgstr "(vazio)"
 
 #: templates/site/profile/view.html:254 templates/site/profile/view.html:266
 msgid "Loading"
@@ -9673,7 +9680,12 @@ msgstr "Selecione ao menos um país como tópico."
 msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
-#: wannamigrate/qa/forms.py:214
+#: wannamigrate/qa/forms.py:213
+#| msgid "You can only answer a question once."
+msgid "Sorry, you can't answer your own question."
+msgstr "Desculpe, você não pode responder sua própria pergunta."
+
+#: wannamigrate/qa/forms.py:216
 msgid "You can only answer a question once."
 msgstr "Você só pode responder uma pergunta uma vez."
 
@@ -9681,37 +9693,52 @@ msgstr "Você só pode responder uma pergunta uma vez."
 msgid "Knowledge - Wanna Migrate"
 msgstr "Conhecimento - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:125
+#: wannamigrate/qa/views.py:126
 msgid "Questions & Answers - Wanna Migrate"
 msgstr "Perguntas e Respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:172
+#: wannamigrate/qa/views.py:173
 msgid "Add Question - Wanna Migrate"
 msgstr "Pergunte - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:219
+#: wannamigrate/qa/views.py:221
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:222
+#: wannamigrate/qa/views.py:224
 msgid "New answer to the question"
 msgstr "Nova resposta para a pergunta"
 
-#: wannamigrate/qa/views.py:325
+#: wannamigrate/qa/views.py:328
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:361
+#: wannamigrate/qa/views.py:365
 msgid "Post successfully created."
 msgstr "Postagem criada com sucesso."
 
-#: wannamigrate/qa/views.py:368
+#: wannamigrate/qa/views.py:372
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:459
+#: wannamigrate/qa/views.py:465
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
+
+#: wannamigrate/qa/views.py:527
+#| msgid "My Contracts - Wanna Migrate"
+msgid "My answers - Wanna Migrate"
+msgstr "Minhas respostas - Wanna Migrate"
+
+#: wannamigrate/qa/views.py:530
+#| msgid "answers"
+msgid "My answers"
+msgstr "Minhas respostas"
+
+#: wannamigrate/qa/views.py:552 wannamigrate/qa/views.py:566
+#| msgid "Login - Wanna Migrate"
+msgid "Following - Wanna Migrate"
+msgstr "Seguindo - Wanna Migrate"
 
 #: wannamigrate/qa/wm_editor.py:94
 msgid "Your content has some invalid tags."
