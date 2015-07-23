@@ -67,6 +67,7 @@
                                 </a>
                                 <div class="box-options box-account">
                                     <ul class="box">
+                                        <li><a class="bt-settings" href="{% url 'site:user_profile' request.user.slug %}">{% trans 'Public Profile' %}</a></li>
                                         <li><a class="bt-settings" href="{% url 'site:account' %}">{% trans 'Edit Profile' %}</a></li>
                                         <li><a class="bt-contracts" href="{% url 'site:contracts' %}">{% trans 'My Orders' %}</a></li>
                                         <li><a class="bt-pricing" href="{% url 'site:list_conversations' %}">{% trans 'My Messages' %}</a></li>

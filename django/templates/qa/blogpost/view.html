@@ -15,7 +15,7 @@
         <div id="container" class="container font-size5">
             {% include "site/_common/status.html" %}
             <div style="display: block;" id="reader-header" class="header">
-                <a href="/blogposts" class="bt-back">&laquo; {% trans "Back to BlogPosts" %}</a>
+                <a href="{% url 'qa:list_blogposts' %}" class="bt-back">&laquo; {% trans "Back to Posts" %}</a>
                 <div class="domain-border"></div>
                 <h1 id="reader-title">{{ blogpost.title }}</h1>
                 {% if blogpost.is_anonymous %}
@@ -68,7 +68,7 @@
             </div>
 
             <div class="ending">
-                <a href="/blogposts" class="bt-back">&laquo; {% trans "Back to BlogPosts" %}</a>
+                <a href="/blogposts" class="bt-back">&laquo; {% trans "Back to Posts" %}</a>
             </div>
 
         </div>
