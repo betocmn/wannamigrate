@@ -11,22 +11,20 @@ the templates on qa app
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.utils.text import Truncator
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.decorators import login_required
 from wannamigrate.core.decorators import ajax_login_required
 from wannamigrate.site.views import get_situation_form
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
     AddQuestionForm, AddBlogPostForm, AddAnswerForm
 )
 from wannamigrate.core.tasks import add_notification
 from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic, TopicTranslation
 from wannamigrate.core.models import(
-    User, UserStats, Language, Notification
+    UserStats, Language
 )
 from django.conf import settings
 from django.utils.translation import ugettext as _
@@ -35,7 +33,7 @@ from django.db import transaction
 import json
 import urllib
 from django.db.models import F
-from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
+from wannamigrate.qa.util import get_questions_by_step, get_blogposts_by_step
 from django.templatetags.static import static
 
 

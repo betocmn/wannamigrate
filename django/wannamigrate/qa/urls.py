@@ -29,9 +29,9 @@ urlpatterns = patterns('',
 
 
     # Blogposts
-    url( r'^posts/(?P<slug>[-\w]+)/$', views.view_blogpost, name = "view_blogpost" ),
+    url( r'^blogposts/(?P<slug>[-\w]+)/$', views.view_blogpost, name = "view_blogpost" ),
     url( r'^posts/add', views.add_blogpost, name = "add_blogpost" ),
-    url( r'^posts', views.list_blogposts, name = "list_blogposts" ),
+    url( r'^blogposts', views.list_blogposts, name = "list_blogposts" ),
 
 
     # Topics
