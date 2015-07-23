@@ -22,14 +22,14 @@
             <h3 class="title">{% trans 'My Content' %}</h3>
             <ul>
                 <li class="item {% if topics_menu_selected %} active {% endif %}">
-                    <a href="{% url "qa:list_topics" %}">{% trans 'Topics' %} {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following|kmi }})</span>{% endif %}</a>
+                    <a href="{% url 'qa:list_topics' %}">{% trans 'Topics' %} {% if user.is_authenticated %}<span id="following_topics_counter" class="count">({{ stats.total_topics_following|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if answers_menu_selected %} active {% endif %}">
-                    <p>{% trans 'Answers' %} {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</p>
+                    <a href="{% url 'qa:list_answers' %}">{% trans 'Answers' %} {% if user.is_authenticated %}<span  id="answers_counter" class="count">({{ stats.total_answers|kmi }})</span>{% endif %}</a>
                 </li>
-                <li class="item {% if reading_list_menu_selected %} active {% endif %}">
-                    <p>{% trans 'Reading list' %} {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_favorite_questions|add:stats.total_favorite_blogposts|kmi }})</span>{% endif %}</p>
-                </li>
+                <!--li class="item {% if reading_list_menu_selected %} active {% endif %}">
+                    <a href="{% url 'qa:reading_list' %}">{% trans 'Reading list' %} {% if user.is_authenticated %}<span  id="reading_list_counter" class="count">({{ stats.total_favorite_questions|add:stats.total_favorite_blogposts|kmi }})</span>{% endif %}</a>
+                </li-->
             </ul>
         </div>
 
@@ -37,10 +37,10 @@
             <h3 class="title">{% trans 'Social' %}</h3>
             <ul>
                 <li class="item {% if following_menu_selected %} active {% endif %}">
-                    <p>{% trans 'Following' %} {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following|kmi }})</span>{% endif %}</p>
+                    <a href="{% url 'qa:list_following' %}">{% trans 'Following' %} {% if user.is_authenticated %}<span  id="users_following_counter" class="count">({{ stats.total_users_following|kmi }})</span>{% endif %}</a>
                 </li>
                 <li class="item {% if followers_menu_selected %} active {% endif %}">
-                    <p>{% trans 'Followers' %} {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers|kmi }})</span>{% endif %}</p>
+                    <a href="{% url 'qa:list_followers' %}">{% trans 'Followers' %} {% if user.is_authenticated %}<span  id="users_followers_counter" class="count">({{ stats.total_users_followers|kmi }})</span>{% endif %}</a>
                 </li>
             </ul>
         </div>

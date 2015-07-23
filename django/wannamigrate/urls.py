@@ -21,11 +21,11 @@ from django.conf.urls.static import static
 # Include all desired apps that will have URLs
 urlpatterns = patterns('',
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
-    url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
     url( r'^immigration-calculator/', include( 'wannamigrate.points.urls', namespace = "points" ) ),
+    url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
     url( r'^', include( 'wannamigrate.marketplace.urls', namespace = "marketplace" ) ),
     url( r'^', include( 'wannamigrate.qa.urls', namespace = "qa" ) ),
-    url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
+    url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
 
 

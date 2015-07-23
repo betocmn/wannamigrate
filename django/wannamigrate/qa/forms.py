@@ -209,6 +209,8 @@ class AddAnswerForm( BaseModelForm ):
     def clean( self, *args, **kwargs ):
         cleaned_data = super( AddAnswerForm, self ).clean( *args, **kwargs )
 
+        if self.instance.question.owner == self.instance.owner:
+            self.add_error( "body", _( "Sorry, you can't answer your own question." ) )
 
         if Answer.objects.filter( question = self.instance.question, owner = self.instance.owner ).exists():
             self.add_error( "body", _( "You can only answer a question once." ) )

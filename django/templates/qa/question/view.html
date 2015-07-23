@@ -7,7 +7,7 @@
     {{ block.super }}
 
     <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
-    <link href="{% static 'common/wm-editor/css/wm_editor.css' %}" rel="stylesheet">
+    <link href="{% static 'common/wm-editor/css/wm-editor.css' %}" rel="stylesheet">
     <style>
         li.related > a {
             text-decoration:none;
@@ -103,7 +103,7 @@
                 </div><!--
                 <a href="#" class="bt-options">{% trans "Options" %}</a> -->
             </div>
-            {% if is_authenticated %}
+            {% if is_authenticated and question.owner != user %}
             <div class="comment">
                 <form action="{{ action_url|default:'' }}" method="post" id="main_form" class="add-answer">
                     {% csrf_token %}
@@ -149,7 +149,7 @@
                                 {% endif %}
                                 <span class="info"></span>
                             </div>
-                            <span class="text-post wm-html-content">
+                            <span class="text-post wm-html-content wm-answer">
                                 {% autoescape off %}
                                     {{ ans.body }}
                                 {% endautoescape %}

@@ -11,22 +11,20 @@ the templates on qa app
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.utils.text import Truncator
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.decorators import login_required
 from wannamigrate.core.decorators import ajax_login_required
 from wannamigrate.site.views import get_situation_form
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wannamigrate.qa.forms import (
     AddQuestionForm, AddBlogPostForm, AddAnswerForm
 )
 from wannamigrate.core.tasks import add_notification
 from wannamigrate.qa.models import BlogPost, Question, Answer, Vote, Topic, TopicTranslation
 from wannamigrate.core.models import(
-    User, UserStats, Language, Notification
+    UserStats, Language
 )
 from django.conf import settings
 from django.utils.translation import ugettext as _
@@ -35,7 +33,7 @@ from django.db import transaction
 import json
 import urllib
 from django.db.models import F
-from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
+from wannamigrate.qa.util import get_questions_by_step, get_blogposts_by_step
 from django.templatetags.static import static
 
 
@@ -92,6 +90,7 @@ def list_all( request, *args, **kwargs ):
 
     # Print Template
     return render( request, 'qa/common/list_all.html', template_data )
+
 
 
 def list_questions( request, *args, **kwargs ):
@@ -177,6 +176,7 @@ def add_question( request ):
 
     # Print Template
     return render( request, 'qa/question/add_question.html', template_data )
+
 
 
 #@login_required
@@ -294,6 +294,7 @@ def view_question( request, slug ):
 #    return debug_sql()
 
 
+
 def list_blogposts( request, *args, **kwargs ):
     """
         Handles the process of listing blogposts.
@@ -331,6 +332,7 @@ def list_blogposts( request, *args, **kwargs ):
 
     # Print Template
     return render( request, 'qa/blogpost/list.html', template_data )
+
 
 
 @login_required
@@ -373,6 +375,7 @@ def add_blogpost( request ):
 
     # Print Template
     return render( request, 'qa/blogpost/add.html', template_data )
+
 
 
 def view_blogpost( request, slug ):
@@ -441,6 +444,7 @@ def view_blogpost( request, slug ):
     return render( request, 'qa/blogpost/view.html', template_data )
 
 
+
 @login_required
 def list_topics( request ):
     """
@@ -497,6 +501,73 @@ def view_topic( request, slug ):
 
     # Print Template
     return render( request, 'qa/question/list.html', template_data )
+
+
+
+
+
+@login_required
+def list_answers( request ):
+    """
+        Lists all answers of the user.
+    :param request:
+    :return: A template rendered
+    """
+
+    # Gets all the answers of the user (including anonymous answers).
+    answers = Answer.objects.filter( owner = request.user ).prefetch_related( "question" ).all()
+
+    # Process the answers to properly display on view.
+    processed_answers = [ { "title" : x.question.title, "body" : x.body, "url" : reverse( "qa:view_question", kwargs={ "slug" : x.question.slug } ) + "#answer_{0}".format( x.id )  } for x in answers ]
+
+    # Fills template_data
+    template_data = {
+        "meta_title" : _( 'My answers - Wanna Migrate' ),
+        "contents" : processed_answers,
+        "answers_menu_selected" : True,
+        "special_title" : _( "My answers" ),
+    }
+    return render( request, "qa/common/title_body_container.html", template_data )
+
+
+@login_required
+def reading_list( request ):
+    """
+        Lists all favourited questions of the user.
+    :param request:
+    :return: A template rendered
+    """
+    raise Http404( "Not implemented" )
+
+
+
+@login_required
+def list_following( request ):
+    following = request.user.following.prefetch_related( "userpersonal" ).all()
+    processed_following = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in following ]
+
+    template_data = {
+        "meta_title" : _( 'Following - Wanna Migrate' ),
+        "contents" : processed_following,
+        "following_menu_selected" : True,
+        "special_title" : _( "Following" ),
+    }
+
+    return render( request, "qa/common/avatar_name_container.html", template_data )
+
+
+def list_followers( request ):
+    followers = request.user.followers.prefetch_related( "userpersonal" ).all()
+    processed_followers = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in followers ]
+
+    template_data = {
+        "meta_title" : _( 'Following - Wanna Migrate' ),
+        "contents" : processed_followers,
+        "followers_menu_selected" : True,
+        "special_title" : _( "Followers" ),
+    }
+
+    return render( request, "qa/common/avatar_name_container.html", template_data )
 
 
 

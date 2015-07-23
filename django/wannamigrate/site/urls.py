@@ -75,7 +75,7 @@ urlpatterns = patterns('',
     url( r'^x/consume/notifications/$', views.ajax_consume_notifications, name = "ajax_consume_notifications" ),
 
     # User's Profile
-    url( r'^user/(?P<slug>[-\w]+)/$', views.user_profile, name = 'user_profile' ),
+    url( r'^(?P<slug>[-\w]+)/$', views.user_profile, name = 'user_profile' ),
 
     # Profile ajax
     url( r'^x/follow/user/(?P<slug>[-\w]+)$', views.ajax_toggle_follow_user, name = "ajax_toggle_follow_user" ),

@@ -39,7 +39,7 @@
 /** WM Editor styles for Posts */
 .wm-html-content.wm-post { font-size: 1em; line-height: 1.6em; }
 .wm-html-content.wm-post h1{ font-size:1.3em; margin: 15px 0 8px 0; }
-.wm-html-content.wm-post strong, .wm-html-content.wm-post b { font-size:1em; font-weight: bold; }
+.wm-html-content.wm-post strong, .wm-html-content.wm-post b { font-size:1em; font-family: "open_sansbold"; }
 .wm-html-content.wm-post ul { list-style: disc outside none; }
 .wm-html-content.wm-post ul li, .wm-editor-content.wm-post ol li { margin-left: 35px; }
 .wm-html-content.wm-post a{ color:#68347E; }
@@ -73,7 +73,7 @@
 .wm-html-content.wm-answer { color: #555; font-size: 14px; }
 .wm-html-content.wm-answer * { margin:0; padding:0; text-decoration:none; color: #555; font-size: 14px; line-height: 1.4em; font-family: "open_sansregular"; }
 .wm-html-content.wm-answer p, .wm-html-content.wm-answer span { font-family:"open_sansregular"; font-size:14px; }
-.wm-html-content.wm-answer b, .wm-html-content.wm-answer strong { font-family:"open_sansbold"; font-size:14px; }
+.wm-html-content.wm-answer strong, .wm-html-content.wm-answer b { font-family:"open_sansbold" !important; font-size:14px; }
 .wm-html-content.wm-answer h1 { font-family:"open_sansbold"; font-size:18px; }
 .wm-html-content.wm-answer ol { list-style-type:decimal; padding-left: 30px; margin: 0px; }
 .wm-html-content.wm-answer ul { list-style-type: square; padding-left: 30px; margin: 0px; }

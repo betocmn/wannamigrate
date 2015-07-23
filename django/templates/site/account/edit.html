@@ -39,6 +39,19 @@
                     </div>
                 {% endif %}
 
+                {% for message in messages %}
+                    <div class="alert alert-dismissable
+                                                   {% if message.tags == 'error' %}
+                                                        alert-danger
+                                                   {% elif message.tags == 'success' %}
+                                                       alert-success
+                                                   {% elif message.tags == 'warning' %}
+                                                       alert-warning
+                                                   {% endif %}">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+
                 <form id="main_form" method="post" action="">
                     {% csrf_token %}
                     <input class="bt-save button" value="{% trans 'Save Information' %}" type="submit" />
@@ -73,7 +86,7 @@
                                 <label for="{{ user_form.name.id_for_label }}">{{ user_form.name.label }}</label>
                                 {{ user_form.name }} {{ user_form.name.errors }}
                             </div>
-                            <div class="field error-element{% if user_form.email.errors  %} has-error{% endif %}">
+                            <div class="field error-element{% if user_form.email.errors or 'email_validated' not in request.session %} has-error{% endif %}">
                                 <label for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
                                 {{ user_form.email }} <div style="margin-left: 124px;">{{ user_form.email.errors }}</div>
                             </div>

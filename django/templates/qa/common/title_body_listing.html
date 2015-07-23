@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load string_extras %}
+<ul class="title-body-list">
+    {% for content in contents %}
+        <li class="item">
+            <a href="{{ content.url }}">
+                <h3 class="title">
+                    {{ content.title }}
+                </h3>
+                <p class="body">
+                    {% autoescape off %}
+                        {{ content.body|striptags|truncate_smart:250 }}
+                    {% endautoescape %}
+                </p>
+            </a>
+        </li>
+    {% empty %}
+        <li class="item empty">{% trans "Empty" %}</li>
+    {% endfor %}
+</ul>
