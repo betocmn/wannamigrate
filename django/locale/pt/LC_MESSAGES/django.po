@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 17:48-0300\n"
+"POT-Creation-Date: 2015-07-23 19:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,6 @@ msgid "My Profile"
 msgstr "Meu Perfil"
 
 #: templates/_layouts/main.html:70
-#| msgid "Edit Profile"
 msgid "Public Profile"
 msgstr "Perfil público"
 
@@ -7453,7 +7452,6 @@ msgid "Options"
 msgstr "Opções"
 
 #: templates/qa/blogpost/view.html:18 templates/qa/blogpost/view.html.py:71
-#| msgid "Back to BlogPosts"
 msgid "Back to Posts"
 msgstr "Voltar aos Posts"
 
@@ -7553,13 +7551,13 @@ msgid "Social"
 msgstr "Social"
 
 #: templates/qa/common/side_menu.html:40 templates/site/profile/view.html:235
-#: wannamigrate/qa/views.py:555
+#: wannamigrate/qa/views.py:553
 msgid "Following"
 msgstr "Seguindo"
 
 #: templates/qa/common/side_menu.html:43 templates/qa/question/view.html:54
 #: templates/site/profile/view.html:234 templates/site/profile/view.html:278
-#: wannamigrate/qa/views.py:569
+#: wannamigrate/qa/views.py:567
 msgid "Followers"
 msgstr "Seguidores"
 
@@ -7924,27 +7922,27 @@ msgstr "Editar Minha Conta"
 msgid "Please correct fhe following errors:"
 msgstr "Favor corrigir os seguintes erros:"
 
-#: templates/site/account/edit.html:44 templates/site/account/edit.html:139
+#: templates/site/account/edit.html:57 templates/site/account/edit.html:152
 msgid "Save Information"
 msgstr "Salvar Dados"
 
-#: templates/site/account/edit.html:47
+#: templates/site/account/edit.html:60
 msgid "Profile Photo"
 msgstr "Foto do Perfil"
 
-#: templates/site/account/edit.html:103 templates/site/account/view.html:72
+#: templates/site/account/edit.html:116 templates/site/account/view.html:72
 msgid "Summary"
 msgstr "Descrição"
 
-#: templates/site/account/edit.html:107 templates/site/account/view.html:76
+#: templates/site/account/edit.html:120 templates/site/account/view.html:76
 msgid "Services Setup"
 msgstr "Configuração de Serviços"
 
-#: templates/site/account/edit.html:109
+#: templates/site/account/edit.html:122
 msgid "Supported countries:"
 msgstr "Países que dou suporte:"
 
-#: templates/site/account/edit.html:180 templates/site/account/edit.html:191
+#: templates/site/account/edit.html:193 templates/site/account/edit.html:204
 msgid "+ Add another"
 msgstr "+ Adicionar outro"
 
@@ -8686,6 +8684,10 @@ msgstr "O pedido foi devolvido."
 #: wannamigrate/core/mailer.py:224
 msgid "Service Requested"
 msgstr "Solicitação de Serviço Recebida"
+
+#: wannamigrate/core/middleware.py:78 wannamigrate/core/middleware.py:98
+msgid "You need a valid email address to use the site!"
+msgstr "Você precisa de um email válido para usar este site!"
 
 #: wannamigrate/core/models.py:40
 msgid "created date"
@@ -9681,7 +9683,6 @@ msgid "Write your answer"
 msgstr "Escreva sua resposta"
 
 #: wannamigrate/qa/forms.py:213
-#| msgid "You can only answer a question once."
 msgid "Sorry, you can't answer your own question."
 msgstr "Desculpe, você não pode responder sua própria pergunta."
 
@@ -9689,54 +9690,51 @@ msgstr "Desculpe, você não pode responder sua própria pergunta."
 msgid "You can only answer a question once."
 msgstr "Você só pode responder uma pergunta uma vez."
 
-#: wannamigrate/qa/views.py:86
+#: wannamigrate/qa/views.py:84
 msgid "Knowledge - Wanna Migrate"
 msgstr "Conhecimento - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:126
+#: wannamigrate/qa/views.py:124
 msgid "Questions & Answers - Wanna Migrate"
 msgstr "Perguntas e Respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:173
+#: wannamigrate/qa/views.py:171
 msgid "Add Question - Wanna Migrate"
 msgstr "Pergunte - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:221
+#: wannamigrate/qa/views.py:219
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:224
+#: wannamigrate/qa/views.py:222
 msgid "New answer to the question"
 msgstr "Nova resposta para a pergunta"
 
-#: wannamigrate/qa/views.py:328
+#: wannamigrate/qa/views.py:326
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:365
+#: wannamigrate/qa/views.py:363
 msgid "Post successfully created."
 msgstr "Postagem criada com sucesso."
 
-#: wannamigrate/qa/views.py:372
+#: wannamigrate/qa/views.py:370
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:465
+#: wannamigrate/qa/views.py:463
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:527
-#| msgid "My Contracts - Wanna Migrate"
+#: wannamigrate/qa/views.py:525
 msgid "My answers - Wanna Migrate"
 msgstr "Minhas respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:530
-#| msgid "answers"
+#: wannamigrate/qa/views.py:528
 msgid "My answers"
 msgstr "Minhas respostas"
 
-#: wannamigrate/qa/views.py:552 wannamigrate/qa/views.py:566
-#| msgid "Login - Wanna Migrate"
+#: wannamigrate/qa/views.py:550 wannamigrate/qa/views.py:564
 msgid "Following - Wanna Migrate"
 msgstr "Seguindo - Wanna Migrate"
 
