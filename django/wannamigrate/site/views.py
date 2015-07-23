@@ -35,7 +35,7 @@ from wannamigrate.site.forms import (
     UploadAvatarForm, StartConversationForm, ReplyConversationForm
 )
 from wannamigrate.core.models import (
-    User, UserStats, UserSituation, Situation, UserPersonal, Conversation, ConversationMessage,
+    User, UserStats, UserSituation, UserPersonal, Conversation, ConversationMessage,
     ConversationStatus_User, Language, Notification, Country, Goal
 )
 from wannamigrate.marketplace.models import (
@@ -46,8 +46,8 @@ from wannamigrate.core.mailer import Mailer
 import time
 from django.utils import timezone, translation
 import pytz
-from django.db.models import Prefetch, Count, F
-from wannamigrate.qa.util import get_content_by_step, get_questions_by_step, get_blogposts_by_step
+from django.db.models import Prefetch
+from wannamigrate.qa.util import get_questions_by_step
 from wannamigrate.core.decorators import ajax_login_required
 from wannamigrate.qa.models import Answer, Question, BlogPost
 from wannamigrate.core.tasks import add_notification, send_welcome_email

@@ -16,10 +16,8 @@ from django.template.defaultfilters import slugify
 from django.core.files.base import ContentFile
 from urllib.request import urlopen
 from urllib.error import HTTPError, URLError
-from PIL import Image
 from wannamigrate.core.util import get_object_or_false
 from wannamigrate.core.models import UserPersonal
-from wannamigrate.core.mailer import Mailer
 from wannamigrate.core.tasks import send_welcome_email
 
 
@@ -62,10 +60,9 @@ def save_extra_data( backend, details, response, user = None, is_new = False, *a
             if "name" in response:
                 full_name = response['name']['givenName'] + ' ' + response['name']['familyName']
 
-        elif backend.name == 'linkedin':
-            #if "pictureUrl" in response:
-                #url = response["pictureUrl"]
-            url = response['pictureUrls']['values'][0]
+        elif backend.name == 'linkedin-oauth2':
+            if 'pictureUrls' in response:
+                url = response['pictureUrls']['values'][0]
             if 'fullname' in details:
                 full_name = details['fullname']
 

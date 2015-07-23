@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 from django.conf import settings
 from django.utils import translation
 from wannamigrate.core.models import Situation, Country, Goal, Notification, Language, UserSituation
-from wannamigrate.core.util import get_object_or_false
-from django.http import HttpResponse
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db.models import F
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.contrib import messages
+from django.utils.translation import ugettext as _
 
 
 
@@ -59,11 +63,40 @@ class LocaleMiddleware( object ):
 
 
 ##########################
+# Email Validation Midlleware
+##########################
+class EmailValidationMiddleware( object ):
+
+    def process_request( self, request ):
+
+        if request.user.is_authenticated():
+            if 'email_validated' not in request.session and request.path_info not in [reverse( 'site:edit_account' ),reverse( 'site:logout' ) ]:
+                try:
+                    validate_email( request.user.email )
+                    request.session['email_validated'] = True
+                except ValidationError:
+                    messages.error( request, _( 'You need a valid email address to use the site!' ) )
+                    return HttpResponseRedirect( reverse( 'site:edit_account' ) )
+
+
+
+
+
+##########################
 # Situation Midlleware
 ##########################
 class SituationMiddleware( object ):
 
     def process_request( self, request ):
+
+        if request.user.is_authenticated():
+            if 'email_validated' not in request.session and request.path_info not in [reverse( 'site:edit_account' ),reverse( 'site:logout' ) ]:
+                try:
+                    validate_email( request.user.email )
+                    request.session['email_validated'] = True
+                except ValidationError:
+                    messages.error( request, _( 'You need a valid email address to use the site!' ) )
+                    return HttpResponseRedirect( reverse( 'site:edit_account' ) )
 
         # Default data
         populate_situation_session = False

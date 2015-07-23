@@ -155,6 +155,7 @@ MIDDLEWARE_CLASSES = (
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
     'wannamigrate.core.middleware.LocaleMiddleware',
     'wannamigrate.core.middleware.SituationMiddleware',
+    'wannamigrate.core.middleware.EmailValidationMiddleware',
     'wannamigrate.core.middleware.NotificationMiddleware',
 )
 
@@ -202,12 +203,12 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '4ca87548565ab5d9c40e60bb6309e219'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Linkedin APP Key
-SOCIAL_AUTH_LINKEDIN_KEY = '77eu4cz7x6srp6'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '77eu4cz7x6srp6'
 # Linkedin APP Secret
-SOCIAL_AUTH_LINKEDIN_SECRET = 'VOaF1eUDOlHziUTn'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'VOaF1eUDOlHziUTn'
 # Linkedin APP Scope
-SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress',]
-SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = [
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile', 'r_emailaddress',]
+SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = [
     'email-address',
     'picture-urls::(original)',
     'first-name',
@@ -215,7 +216,7 @@ SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = [
     'email-address',
     'picture-url',
 ]
-SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
+SOCIAL_AUTH_LINKEDIN_OAUTH2_EXTRA_DATA = [
     ('id', 'id'),
     ('firstName', 'first_name'),
     ('lastName', 'last_name'),
@@ -230,7 +231,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jVNjZUUzV-Ck0AFo8-vwsAVB'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.linkedin.LinkedinOAuth',
+    'social.backends.linkedin.LinkedinOAuth2',
     'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'wannamigrate.core.auth_backends.AdminBackend',
