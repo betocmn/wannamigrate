@@ -1358,7 +1358,7 @@ def ajax_get_user_posts( request, slug ):
 
     posts = BlogPost.objects.filter( owner = user, is_anonymous = False ).all()
 
-    processed_posts = [ { "title" : x.title, "body" : x.body, "url" : reverse( "qa:view_blogpost", kwargs={ "slug" : x.slug } ) } for x in posts ]
+    processed_posts = [ { "title" : x.title, "body" : x.body, "url" : reverse( "qa:view_blogpost", kwargs={ "user_slug" : settings.QA_ANONYMOUS_USER_SLUG if x.is_anonymous else user.slug , "slug" : x.slug } ) } for x in posts ]
 
     html = render_to_string( "site/profile/user-content-post.html", { "contents": processed_posts } )
     return HttpResponse( html )

@@ -119,7 +119,7 @@ class BlogPostsManager( IndexableContentManager ):
 
 
         self = self.prefetch_related(
-            "related_topics",
+            "related_topics", "owner",
         )
 
         return self.distinct().order_by( '-last_activity_date' )
