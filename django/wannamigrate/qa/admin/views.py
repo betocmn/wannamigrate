@@ -207,11 +207,14 @@ def edit_question( request, id ):
     # If form was submitted, it tries to validate and save data
     if form.is_valid():
         with transaction.atomic():
+            question.related_topics.clear()
             question = form.save( commit = False )
             question.generate_slug()
             question.save()
-            edition.save()
 
+            if edition.parent.title != edition.title \
+                    or edition.parent.body != edition.body:
+                edition.save()
             messages.success( request, 'Question successfully updated.' )
             # Redirect with success message
             return HttpResponseRedirect( reverse( 'admin:qa:view_question', args = ( question.id, ) ) )

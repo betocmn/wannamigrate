@@ -328,7 +328,7 @@ class EditQuestionForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = qa.Question
-        fields = [ "title", "is_anonymous" ]
+        fields = [ "title", "is_anonymous", "related_topics" ]
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
@@ -340,6 +340,37 @@ class EditQuestionForm( BaseModelForm ):
 
         # Set the class of the is_anonymous widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
+        # Get topics relative to the language passed.
+        self.fields[ "related_topics" ].choices = TopicTranslation.objects.filter( language = self.instance.language ).values_list( "topic_id", "name" )
+        self.fields[ "related_topics" ].required = True
+        self.fields[ "related_topics" ].widget.attrs[ "placeholder" ] = _( "Ex: Brazil, Canada, Student visa, Work visa, General immigration" ) + "..."
+        # Set the class of the is_anonymous widget
+        self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
+
+    def clean( self, *args, **kwargs ):
+        cleaned_data = super( EditQuestionForm, self ).clean( *args, **kwargs )
+
+        # The user should select at least Canada or Australia as topic.
+        if "related_topics" in cleaned_data:
+            # country_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ] ).exclude( country__isnull = True ).exists()
+            immigration_enabled_countries = Country.objects.filter( immigration_enabled = True ).values_list( "id", flat = True )
+            immigration_enabled_topic_selected = Topic.objects.filter( id__in = cleaned_data[ "related_topics" ], country__id__in = immigration_enabled_countries  ).exists()
+            if not immigration_enabled_topic_selected:
+                self.add_error( 'related_topics', _( "You need to select at least one of these countries: Australia, Canada." ) )
+
+        return cleaned_data
+
+    def save( self, commit = True ):
+        """
+            Saves the post info taking care of add the related topics to it.
+            :param: commit Indicates wether to save the model or not
+        """
+        instance = super( EditQuestionForm, self ).save( commit )
+        for topic in self.cleaned_data['related_topics']:
+            instance.related_topics.add( topic )
+
+        return instance
 
 
 
