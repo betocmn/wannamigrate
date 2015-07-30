@@ -87,6 +87,12 @@
                                             {{ form.is_anonymous }}
                                             {{ form.is_anonymous.errors }}
                                         </div>
+                                        <!-- Related topics -->
+                                        <div class="form-group {% if form.related_topics.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.related_topics.id_for_label }}">{{ form.related_topics.label }}</label>
+                                            {{ form.related_topics }}
+                                            {{ form.related_topics.errors }}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="text-center buttons">
