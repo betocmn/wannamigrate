@@ -29,6 +29,7 @@ urlpatterns = patterns('',
 
 
     # Permanent blogposts urls
+    url( r'^blogpost/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
     url( r'^blogposts/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
 
     # Blogposts
