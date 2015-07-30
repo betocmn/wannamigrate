@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="data-question">
-            <a href="{% url "qa:view_blogpost" blogpost.slug %}">
+            <a href="{% url "qa:view_blogpost" blogpost.user_slug blogpost.slug %}">
                 <h3 class="title-question">{{ blogpost.title }}</h3>
                 <p class="answer">
                     {{ blogpost.body|striptags|truncate_smart:250 }}
@@ -41,7 +41,7 @@
         <div class="box-options">
             <i class="shadow"></i>
             <ul class="box">
-                <li><a class="bt-share" href="{% url "qa:view_blogpost" blogpost.slug %}">{% trans "View" %}</a></li>
+                <li><a class="bt-share" href="{% url "qa:view_blogpost" blogpost.user_slug blogpost.slug %}">{% trans "View" %}</a></li>
                 <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
             </ul>
         </div>

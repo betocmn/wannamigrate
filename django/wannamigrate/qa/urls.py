@@ -28,10 +28,15 @@ urlpatterns = patterns('',
     url( r'^questions$', views.list_questions, name = "list_questions" ),
 
 
+    # Permanent blogposts urls
+    url( r'^blogpost/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
+    url( r'^blogposts/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
+
     # Blogposts
-    url( r'^blogpost/(?P<slug>[-\w]+)/$', views.view_blogpost, name = "view_blogpost" ),
+    url( r'^(?P<user_slug>[-\w]+)/posts/(?P<slug>[-\w]+)$', views.view_blogpost, name = 'view_blogpost' ),
     url( r'^posts/add', views.add_blogpost, name = "add_blogpost" ),
-    url( r'^blogposts', views.list_blogposts, name = "list_blogposts" ),
+    url( r'^blogposts', views.list_blogposts, name = "list_blogposts_old" ),
+    url( r'^posts', views.list_blogposts, name = "list_blogposts" ),
 
 
     # Topics

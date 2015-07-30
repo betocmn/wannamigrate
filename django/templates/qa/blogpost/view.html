@@ -52,7 +52,7 @@
                             {% for related_post in related_content %}
                                 {% ifchanged %}
                                     <li class="related">
-                                        <a href="{% url "qa:view_blogpost" related_post.slug %}">{{ related_post.title|truncate_smart:50 }}...</a>
+                                        <a href="{% url "qa:view_blogpost" related_post.user_slug related_post.slug %}">{{ related_post.title|truncate_smart:50 }}...</a>
                                     </li>
                                 {% endifchanged %}
                             {% endfor %}

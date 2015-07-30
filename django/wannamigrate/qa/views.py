@@ -11,7 +11,7 @@ the templates on qa app
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.utils.text import Truncator
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.decorators import login_required
 from wannamigrate.core.decorators import ajax_login_required
@@ -70,6 +70,8 @@ def list_all( request, *args, **kwargs ):
     # Get questions per step
     questions = get_questions_by_step( request, filter_params, step, results_per_step )
     blogposts = get_blogposts_by_step( request, filter_params, step, results_per_step )
+    for post in blogposts:
+        post.user_slug = settings.QA_ANONYMOUS_USER_SLUG if post.is_anonymous else post.owner.slug
 
     # Join two querysets
     contents = [ x for x in questions ]
@@ -319,6 +321,9 @@ def list_blogposts( request, *args, **kwargs ):
 
     # Get questions per step
     blogposts = get_blogposts_by_step( request, filter_params, step, results_per_step )
+    for post in blogposts:
+        post.user_slug = settings.QA_ANONYMOUS_USER_SLUG if post.is_anonymous else post.owner.slug
+
 
     # TEMPLATE DATA
     template_data = {
@@ -360,9 +365,11 @@ def add_blogpost( request ):
             blogpost.save()
             user_stats.save()
 
+            user_slug = settings.QA_ANONYMOUS_USER_SLUG if blogpost.is_anonymous else request.user.slug
+
             messages.success( request, _( 'Post successfully created.' ) )
             # Redirect with success message
-            return HttpResponseRedirect( reverse( 'qa:view_blogpost', args = ( blogpost.slug, ) ) )
+            return HttpResponseRedirect( reverse( 'qa:view_blogpost', args = ( user_slug, blogpost.slug, ) ) )
 
     # Template data
     template_data = {
@@ -378,7 +385,17 @@ def add_blogpost( request ):
 
 
 
-def view_blogpost( request, slug ):
+
+def view_blogpost_old( request, slug ):
+    blogpost = get_object_or_404( BlogPost.objects.prefetch_related( "owner" ), slug = slug )
+    if blogpost.is_anonymous == False:
+        return redirect( reverse( 'qa:view_blogpost', args = ( blogpost.owner.slug, blogpost.slug, ), ), permanent = True )
+    else:
+        return redirect( reverse( 'qa:view_blogpost', args = ( settings.QA_ANONYMOUS_USER_SLUG, blogpost.slug, ), ), permanent = True )
+
+
+
+def view_blogpost( request, user_slug, slug ):
     """
     BlogPost view. Shows a blogpost and its comments.
     :param request:
@@ -388,7 +405,13 @@ def view_blogpost( request, slug ):
     template_data = {}
 
     # Identifies blog post and increments number of views
-    blogpost = get_object_or_404( BlogPost.objects.prefetch_related( "related_topics"), slug = slug )
+    blogpost = get_object_or_404( BlogPost.objects.prefetch_related( "related_topics", "owner" ), slug = slug )
+
+
+    if ( blogpost.is_anonymous and user_slug != settings.QA_ANONYMOUS_USER_SLUG ) or \
+            ( blogpost.is_anonymous == False and user_slug != blogpost.owner.slug ):
+        raise Http404( "No BlogPost matches the given query." )
+
     blogpost.total_views += 1
     blogpost.save()
 
@@ -416,7 +439,10 @@ def view_blogpost( request, slug ):
             t.name = translations[ t.id ].name
             t.slug = translations[ t.id ].slug
 
-    related_content = BlogPost.objects.filter( related_topics__in = blogpost.related_topics.all() ).exclude( id = blogpost.id ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title" )[0:3]
+    related_content = BlogPost.objects.filter( related_topics__in = blogpost.related_topics.all() ).exclude( id = blogpost.id ).prefetch_related( "owner" ).order_by( "-total_upvotes", "-created_date" ).only( "id", "title", "owner" )[0:3]
+
+    for rc in related_content:
+        rc.user_slug = settings.QA_ANONYMOUS_USER_SLUG if rc.is_anonymous else rc.owner.slug
 
     # Checks if the user has upvoted or downvoted the post
     blogpost.is_upvoted = Vote.objects.filter(
@@ -629,6 +655,8 @@ def ajax_load_blogposts( request ):
 
     # Get questions by step
     blogposts = get_blogposts_by_step( request, filter_params, int( step ), results_per_step )
+    for post in blogposts:
+        post.user_slug = settings.QA_ANONYMOUS_USER_SLUG if post.is_anonymous else post.owner.slug
 
     # Render the result and return or raise a Http404 if no questions was found.
     if blogposts:
