@@ -20,41 +20,41 @@ from wannamigrate.qa.models import Question, BlogPost, Answer
 ##########################
 urlpatterns = patterns('',
     # ALL
-    url( r'^knowledge', views.list_all, name = "list_all" ),
+    url( r'^knowledge/$', views.list_all, name = "list_all" ),
 
     # Questions
     url( r'^questions/(?P<slug>[-\w]+)/$', views.view_question, name = "view_question" ),
-    url( r'^questions/add$', views.add_question, name = "add_question" ),
-    url( r'^questions$', views.list_questions, name = "list_questions" ),
+    url( r'^questions/add/$', views.add_question, name = "add_question" ),
+    url( r'^questions/$', views.list_questions, name = "list_questions" ),
 
 
     # Permanent blogposts urls
-    url( r'^blogpost/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
-    url( r'^blogposts/(?P<slug>[-\w]+)$', views.view_blogpost_old, name = 'view_blogpost_old' ),
+    url( r'^blogpost/(?P<slug>[-\w]+)/$', views.view_blogpost_old, name = 'view_blogpost_old' ),
+    url( r'^blogposts/(?P<slug>[-\w]+)/$', views.view_blogpost_old, name = 'view_blogpost_old' ),
 
     # Blogposts
-    url( r'^(?P<user_slug>[-\w]+)/posts/(?P<slug>[-\w]+)$', views.view_blogpost, name = 'view_blogpost' ),
-    url( r'^posts/add', views.add_blogpost, name = "add_blogpost" ),
-    url( r'^blogposts', views.list_blogposts, name = "list_blogposts_old" ),
-    url( r'^posts', views.list_blogposts, name = "list_blogposts" ),
+    url( r'^(?P<user_slug>[-\w]+)/posts/(?P<slug>[-\w]+)/$', views.view_blogpost, name = 'view_blogpost' ),
+    url( r'^posts/add/$', views.add_blogpost, name = "add_blogpost" ),
+    url( r'^blogposts/$', views.list_blogposts, name = "list_blogposts_old" ),
+    url( r'^posts/$', views.list_blogposts, name = "list_blogposts" ),
 
 
     # Topics
     url( r'^topics/(?P<slug>[-\w]+)/$', views.view_topic, name = "view_topic" ),
-    url( r'^topics/', views.list_topics, name = "list_topics" ),
+    url( r'^topics/$', views.list_topics, name = "list_topics" ),
 
 
     # Answers
-    url( r'^answers', views.list_answers, name = "list_answers" ),
+    url( r'^answers/$', views.list_answers, name = "list_answers" ),
 
 
     # Reading list
-    url( r'^reading-list', views.reading_list, name = "reading_list" ),
+    url( r'^reading-list/$', views.reading_list, name = "reading_list" ),
 
 
     # Following and Followers
-    url( r'^following', views.list_following, name = "list_following" ),
-    url( r'^followers', views.list_followers, name = "list_followers" ),
+    url( r'^following/$', views.list_following, name = "list_following" ),
+    url( r'^followers/$', views.list_followers, name = "list_followers" ),
 
 
     # AJAX Follow Content (Toggle)
@@ -79,9 +79,9 @@ urlpatterns = patterns('',
     url( r'^x/load/blogposts/$', views.ajax_load_blogposts, name = "ajax_load_blogposts" ),
     url( r'^x/load/all/$', views.ajax_load_all, name = "ajax_load_all" ),
 
-    url( r'^x/get/topics', views.ajax_get_topics, name = "ajax_get_topics" ),
-    url( r'^x/topic/follow/(?P<topic_id>\d+)', views.ajax_follow_topic, name = "ajax_follow_topic" ),
-    url( r'^x/topic/unfollow/(?P<topic_id>\d+)', views.ajax_unfollow_topic, name = "ajax_unfollow_topic" ),
+    url( r'^x/get/topics/$', views.ajax_get_topics, name = "ajax_get_topics" ),
+    url( r'^x/topic/follow/(?P<topic_id>\d+)/$', views.ajax_follow_topic, name = "ajax_follow_topic" ),
+    url( r'^x/topic/unfollow/(?P<topic_id>\d+)/$', views.ajax_unfollow_topic, name = "ajax_unfollow_topic" ),
 
 
 
