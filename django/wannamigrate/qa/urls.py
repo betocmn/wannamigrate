@@ -24,7 +24,7 @@ urlpatterns = patterns('',
 
     # Questions
     url( r'^questions/(?P<slug>[-\w]+)/$', views.view_question, name = "view_question" ),
-    url( r'^questions/add/$', views.add_question, name = "add_question" ),
+    url( r'^questions/add', views.add_question, name = "add_question" ),
     url( r'^questions/$', views.list_questions, name = "list_questions" ),
 
 
