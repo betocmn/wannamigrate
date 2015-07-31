@@ -23,6 +23,7 @@ from django.template.defaultfilters import slugify
 import itertools
 import pytz
 from django.utils import translation
+import re
 
 
 
@@ -784,33 +785,55 @@ class Notification( BaseModel ):
 
 
     @staticmethod
-    def add( message_translation, message_no_translation, url, users ):
+    def add( compressed_message, url, users, send_email = False ):
         """
         Inserts a notification of each of the given users in their preferred language
 
-        :param: message_translation
-        :param: message_no_translation
-        :param: url
-        :param: users
+        :param: compressed_message The notification message uncompressed.
+        The parts of the string that should be translated should be put inside three braces,
+        Ex: "{{{translate this}}} but don't translate that." will translate the text "translate this"
+        and keep the remaining unchanged.
+        :param: url The URL to redirect the users when they click on the notification.
+        :param: users The users that should be notified.
+        :param: Whether or not to send the notification via e-mail.
         :return: Int
         """
 
+        # Guarantee that users is a list
         if not isinstance( users, list ):
             users = [ users ]
 
         with transaction.atomic():
-
             nu = []
             notification_per_language = {}
+
+            # For each user being notified
             for user in users:
 
-                # inserts notification just once per language spoken by given users
-                user_language = user.preferred_language if user.preferred_language else 'en'
+                # Creates a notification translated to the preferred language of the current user.
+                user_language = 'en'
+                if user.preferred_language:
+                    user_language = user.preferred_language
+
                 translation.activate( user_language )
+
+                # Have I already translated for the given preferred language?
                 if user_language not in notification_per_language:
 
-                    # inserts notification
-                    notification = Notification( message = _( message_translation ) + ' ' + message_no_translation, url = url )
+                    # Decodificates the notification translating only the
+                    # necessary parts
+                    decompressed_message = compressed_message
+                    pattern = re.compile( "\{\{\{.*\}\}\}" )
+                    words_to_translate = re.findall( pattern, decompressed_message )
+                    for curr_word in words_to_translate:
+                        word_without_braces = curr_word.replace( "{{{", "" )
+                        word_without_braces = word_without_braces.replace( "}}}", "" )
+                        translated_word = _( word_without_braces )
+                        decompressed_message = decompressed_message.replace( curr_word, translated_word )
+
+                    # Creates the translated notification and keep it
+                    # on an array for further use.
+                    notification = Notification( message = decompressed_message, url = url )
                     notification.save()
                     notification_per_language[user_language] = notification
 
@@ -818,7 +841,8 @@ class Notification( BaseModel ):
                 nu.append( NotificationUser( notification = notification_per_language[user_language], user = user ) )
 
                 # sends email
-                Mailer.send_notification( user, notification_per_language[user_language] )
+                if send_email:
+                    Mailer.send_notification( user, notification_per_language[user_language] )
 
             # Save once (bulk)
             NotificationUser.objects.bulk_create( nu )

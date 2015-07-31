@@ -15,8 +15,8 @@ from django.utils import translation
 # Celery Tasks
 ##########################
 @shared_task
-def add_notification( message_translation, message_no_translation, url, users ):
-    return Notification.add( message_translation, message_no_translation, url, users )
+def add_notification( compressed_message, url, users, send_email = False ):
+    return Notification.add( compressed_message, url, users, send_email )
 
 
 @shared_task
