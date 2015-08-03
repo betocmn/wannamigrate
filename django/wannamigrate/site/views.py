@@ -1322,7 +1322,6 @@ def ajax_toggle_follow_user( request, slug ):
 
     # Generates a notification to the followed user
     if is_followed:
-        translation_hack = _( "now is following you" )  # TODO: fix it
         add_notification.delay(
             request.user.name + " {{{now is following you}}}.",
             reverse( "site:user_profile", kwargs={ "slug" : request.user.slug } ),

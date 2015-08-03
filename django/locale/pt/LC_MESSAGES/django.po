@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 14:46-0300\n"
+"POT-Creation-Date: 2015-08-03 15:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9966,24 +9966,21 @@ msgstr "e"
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1325
+
+# Q&A Dynamic translations.
 msgid "now is following you"
 msgstr "começou a te seguir"
+msgid "New answer to the question"
+msgstr "Nova resposta para a pergunta"
+msgid "liked your question"
+msgstr "curtiu da sua pergunta"
+msgid "liked your answer"
+msgstr "curtiu sua resposta"
+msgid "liked your post"
+msgstr "curtiu o seu post"
+msgid "New message from"
+msgstr "Nova mensagem de"
 
-#~ msgid "New answer to the question"
-#~ msgstr "Nova resposta para a pergunta"
-
-#~ msgid "liked your question"
-#~ msgstr "curtiu da sua pergunta"
-
-#~ msgid "liked your answer"
-#~ msgstr "curtiu sua resposta"
-
-#~ msgid "liked your post"
-#~ msgstr "curtiu o seu post"
-
-#~ msgid "New message from"
-#~ msgstr "Nova mensagem de"
 
 #~ msgid "Subtotal"
 #~ msgstr "Total Parcial"
