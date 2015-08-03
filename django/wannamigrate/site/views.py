@@ -819,6 +819,7 @@ def view_conversation( request, id ):
             to_user = conversation.to_user if from_user.id == conversation.from_user_id else conversation.from_user
 
             # CELERY TASK to add a notification to the destination user
+            translation_hack = _( "New message from" )
             add_notification.delay(
                 "{{{New message from}}} " + from_user.name,
                 reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
@@ -1322,6 +1323,7 @@ def ajax_toggle_follow_user( request, slug ):
 
     # Generates a notification to the followed user
     if is_followed:
+        translation_hack = _( "now is following you" )
         add_notification.delay(
             request.user.name + " {{{now is following you}}}.",
             reverse( "site:user_profile", kwargs={ "slug" : request.user.slug } ),
