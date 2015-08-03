@@ -819,7 +819,6 @@ def view_conversation( request, id ):
             to_user = conversation.to_user if from_user.id == conversation.from_user_id else conversation.from_user
 
             # CELERY TASK to add a notification to the destination user
-            translation_hack = _( "New message from" )    # Forces the translation TODO:fix it
             add_notification.delay(
                 "{{{New message from}}} " + from_user.name,
                 reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),
@@ -886,7 +885,6 @@ def start_conversation( request, to_user_slug ):
             msg.save()
 
             # CELERY TASK to add a notification to the destination user
-            translation_hack = _( "New message from" )  # TODO: fix it
             add_notification.delay(
                 "{{{New message from}}} " + conversation.from_user.name,
                 reverse( 'site:view_conversation', kwargs={ "id" : conversation.id } ),

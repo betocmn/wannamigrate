@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:43-0300\n"
+"POT-Creation-Date: 2015-08-03 14:46-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,16 +120,16 @@ msgstr ""
 "                                    "
 
 #: templates/_layouts/main.html:146 templates/site/home/home.html:43
-#: wannamigrate/site/views.py:1230
+#: wannamigrate/site/views.py:1228
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:150 templates/site/home/home.html:47
-#: wannamigrate/site/views.py:1233
+#: wannamigrate/site/views.py:1231
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:154 wannamigrate/site/views.py:1235
+#: templates/_layouts/main.html:154 wannamigrate/site/views.py:1233
 msgid "in"
 msgstr "no(a)"
 
@@ -7475,8 +7475,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1288
-#: wannamigrate/site/views.py:1321
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1286
+#: wannamigrate/site/views.py:1319
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7485,7 +7485,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1321
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1319
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -9699,23 +9699,15 @@ msgstr "Pergunte - Wanna Migrate"
 msgid "Answer successfully created."
 msgstr "Resposta criada com sucesso."
 
-#: wannamigrate/qa/views.py:224
-msgid "New answer to the question"
-msgstr "Nova resposta para a pergunta"
-
-#: wannamigrate/qa/views.py:331
+#: wannamigrate/qa/views.py:330
 msgid "Blog Posts - Wanna Migrate"
 msgstr "Blogs Posts - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:370
+#: wannamigrate/qa/views.py:369
 msgid "Post successfully created."
 msgstr "Postagem criada com sucesso."
 
-#: wannamigrate/qa/views.py:374
-msgid "wrote a new post"
-msgstr ""
-
-#: wannamigrate/qa/views.py:389
+#: wannamigrate/qa/views.py:387
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
@@ -9734,18 +9726,6 @@ msgstr "Minhas respostas"
 #: wannamigrate/qa/views.py:588 wannamigrate/qa/views.py:602
 msgid "Following - Wanna Migrate"
 msgstr "Seguindo - Wanna Migrate"
-
-#: wannamigrate/qa/views.py:886
-msgid "liked your question"
-msgstr "curtiu da sua pergunta"
-
-#: wannamigrate/qa/views.py:894
-msgid "liked your answer"
-msgstr "curtiu sua resposta"
-
-#: wannamigrate/qa/views.py:902
-msgid "liked your post"
-msgstr "curtiu o seu post"
 
 #: wannamigrate/qa/wm_editor.py:94
 msgid "Your content has some invalid tags."
@@ -9962,37 +9942,48 @@ msgstr "Meus Contratos - Wanna Migrate"
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:822 wannamigrate/site/views.py:889
-msgid "New message from"
-msgstr "Nova mensagem de"
-
-#: wannamigrate/site/views.py:924
+#: wannamigrate/site/views.py:922
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1016
+#: wannamigrate/site/views.py:1014
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1070
+#: wannamigrate/site/views.py:1068
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1088
+#: wannamigrate/site/views.py:1086
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1232
+#: wannamigrate/site/views.py:1230
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1242
+#: wannamigrate/site/views.py:1240
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1327
+#: wannamigrate/site/views.py:1325
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "New answer to the question"
+#~ msgstr "Nova resposta para a pergunta"
+
+#~ msgid "liked your question"
+#~ msgstr "curtiu da sua pergunta"
+
+#~ msgid "liked your answer"
+#~ msgstr "curtiu sua resposta"
+
+#~ msgid "liked your post"
+#~ msgstr "curtiu o seu post"
+
+#~ msgid "New message from"
+#~ msgstr "Nova mensagem de"
 
 #~ msgid "Subtotal"
 #~ msgstr "Total Parcial"

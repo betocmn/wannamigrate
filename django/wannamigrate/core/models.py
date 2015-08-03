@@ -11,7 +11,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group
 )
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.conf import settings
 from stdimage.models import StdImageField
 from stdimage.utils import UploadToUUID
@@ -828,7 +828,7 @@ class Notification( BaseModel ):
                     for curr_word in words_to_translate:
                         word_without_braces = curr_word.replace( "{{{", "" )
                         word_without_braces = word_without_braces.replace( "}}}", "" )
-                        translated_word = _( word_without_braces )
+                        translated_word = ugettext( word_without_braces )
                         decompressed_message = decompressed_message.replace( curr_word, translated_word )
 
                     # Creates the translated notification and keep it

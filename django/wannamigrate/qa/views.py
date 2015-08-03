@@ -221,7 +221,6 @@ def view_question( request, slug ):
                 messages.success( request, _( 'Answer successfully created.' ) )
 
                 # Adds a notification to the users following the question, using a CELERY task
-                translation_hack = _( "New answer to the question" )    # Forces the translation TODO:fix it
                 add_notification.delay(
                     "{{{New answer to the question}}} " + '"' + Truncator( question.title ).words( 6 ) + '"',
                     reverse( "qa:view_question", kwargs={ "slug" : slug } ) + "#answer_{0}".format( answer.id ),
@@ -371,7 +370,6 @@ def add_blogpost( request ):
 
             # notify the followers of the user
             if request.user.followers.count():
-                translation_hack = _( "wrote a new post" )    # Forces the translation TODO:fix it
                 add_notification.delay(
                     request.user.name + " {{{wrote a new post}}}",
                     reverse( 'qa:view_blogpost', args = ( user_slug, blogpost.slug, ) ),
@@ -885,7 +883,6 @@ def ajax_toggle_upvote_content( request, id, votable_instance ):
     # if the content was upvoted.
     if is_upvoted:
         if votable_instance == Question:
-            translation_hack = _( "liked your question" )    # Forces the translation TODO:fix it
             add_notification.delay(
                 request.user.name + " {{{liked your question}}}.",
                 reverse( 'qa:view_question', args = ( obj.slug, ) ),
@@ -893,7 +890,6 @@ def ajax_toggle_upvote_content( request, id, votable_instance ):
                 False
             )
         elif votable_instance == Answer:
-            translation_hack = _( "liked your answer" )    # Forces the translation TODO:fix it
             add_notification.delay(
                 request.user.name + " {{{liked your answer}}}.",
                 reverse( "qa:view_question", kwargs={ "slug" : obj.question.slug } ) + "#answer_{0}".format( obj.id ),
@@ -901,7 +897,6 @@ def ajax_toggle_upvote_content( request, id, votable_instance ):
                 False
             )
         elif votable_instance == BlogPost:
-            translation_hack = _( "liked your post" )    # Forces the translation TODO:fix it
             user_slug = settings.QA_ANONYMOUS_USER_SLUG if obj.is_anonymous else obj.owner.slug
             add_notification.delay(
                 request.user.name + " {{{liked your post}}}.",
