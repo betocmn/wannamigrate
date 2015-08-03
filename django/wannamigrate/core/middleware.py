@@ -16,7 +16,7 @@ from wannamigrate.core.models import Situation, Country, Goal, Notification, Lan
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models import F
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.utils.translation import ugettext as _
@@ -32,6 +32,11 @@ class LocaleMiddleware( object ):
 
     def process_request( self, request ):
 
+        # gets subdomain and force wwww
+        subdomain = request.get_host().split( '.', 2 )[0]
+        if subdomain == 'wannamigrate':
+            return HttpResponsePermanentRedirect( 'https://www.wannamigrate.com' + request.get_full_path() )
+
         # if language was still not set
         if 'language' not in request.session:
 
@@ -44,7 +49,6 @@ class LocaleMiddleware( object ):
             else:
 
                 # searches for a language subdomain (eg: 'https://pt.wannamigrate.com')
-                subdomain = request.get_host().split( '.', 2 )[0]
                 if subdomain not in [ 'www', 'dev' ] \
                     and subdomain in settings.COUNTRIES_BY_LANGUAGE \
                     and subdomain != translation.get_language():
