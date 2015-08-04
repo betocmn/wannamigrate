@@ -13,9 +13,6 @@
 <meta name="rating" content="General" />
 <meta name="resource-type" content="document" />
 <meta name="revisit-after" content="1" />
-{% if not is_prod  %}
-    <meta name="robots" content="noindex" />
-{% endif %}
 <meta name="doc-class" content="Completed" />
 <meta name="doc-rights" content="Public" />
 <meta name="format-detection" content="telephone=no" />
@@ -24,6 +21,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="google-site-verification" content="8FvUOkFZJK4Z5zcJ7VL54EmAltN3xcYuTrr7srWDzUY" />
+
+{% if is_prod  %}
+    <link rel="alternate" href="https://pt.wannamigrate.com{{ relative_full_path }}" hreflang="pt" />
+    <link rel="alternate" href="https://www.wannamigrate.com{{ relative_full_path }}" hreflang="en" />
+{% else %}
+    <meta name="robots" content="noindex" />
+{% endif %}
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon" />
