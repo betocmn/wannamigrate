@@ -1404,7 +1404,12 @@ def ajax_get_user_followers( request, slug ):
             ) ), slug = slug )
 
     followers = user.followers.all()
-    processed_followers = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal and x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in followers ]
+    processed_followers = []
+    for x in followers:
+        if x.userpersonal:
+            processed_followers.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
+        else:
+            processed_followers.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     html = render_to_string( "site/profile/user-content-people.html", { "contents": processed_followers } )
     return HttpResponse( html )
@@ -1420,7 +1425,12 @@ def ajax_get_user_following( request, slug ):
             ) ), slug = slug )
 
     following = user.following.all()
-    processed_following = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal and x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in following ]
+    processed_following = []
+    for x in following:
+        if x.userpersonal:
+            processed_following.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
+        else:
+            processed_following.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     html = render_to_string( "site/profile/user-content-people.html", { "contents": processed_following } )
     return HttpResponse( html )
