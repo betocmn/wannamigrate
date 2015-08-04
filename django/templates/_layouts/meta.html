@@ -4,7 +4,7 @@
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{% trans 'Wanna Migrate helps people to migrate around the world, regardless of their goals. Check your chances, get answers for your questions, hire a professional and achieve your dream.' %}{% endif %}">
+<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{% trans 'Start your plan to move to your dream country. Wanna Migrate is a step-by-step tool to help you to immigrate to a new country.' %}{% endif %}">
 <meta name="keywords" content="{% trans 'wanna migrate,immigrate,points based immigration,migration,high skilled migration,live in australia,live in canada,work in australia,work in canada, move to australia, move to canada' %}">
 <meta name="Title" content="{% if meta_title %}{{ meta_title }}{% else %}{% trans "Wanna Migrate - Go Abroad. Change your life." %}{% endif %}">
 <meta name="Robots" content="all">
@@ -13,9 +13,6 @@
 <meta name="rating" content="General" />
 <meta name="resource-type" content="document" />
 <meta name="revisit-after" content="1" />
-{% if not is_prod  %}
-    <meta name="robots" content="noindex" />
-{% endif %}
 <meta name="doc-class" content="Completed" />
 <meta name="doc-rights" content="Public" />
 <meta name="format-detection" content="telephone=no" />
@@ -24,6 +21,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="google-site-verification" content="8FvUOkFZJK4Z5zcJ7VL54EmAltN3xcYuTrr7srWDzUY" />
+
+{% if is_prod  %}
+    <link rel="alternate" href="https://pt.wannamigrate.com{{ relative_full_path }}" hreflang="pt" />
+    <link rel="alternate" href="https://www.wannamigrate.com{{ relative_full_path }}" hreflang="en" />
+{% else %}
+    <meta name="robots" content="noindex" />
+{% endif %}
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon" />
