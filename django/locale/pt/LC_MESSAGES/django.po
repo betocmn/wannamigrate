@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 15:42-0300\n"
+"POT-Creation-Date: 2015-08-04 11:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,16 +120,16 @@ msgstr ""
 "                                    "
 
 #: templates/_layouts/main.html:146 templates/site/home/home.html:43
-#: wannamigrate/site/views.py:1229
+#: wannamigrate/site/views.py:1250
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:150 templates/site/home/home.html:47
-#: wannamigrate/site/views.py:1232
+#: wannamigrate/site/views.py:1253
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:154 wannamigrate/site/views.py:1234
+#: templates/_layouts/main.html:154 wannamigrate/site/views.py:1255
 msgid "in"
 msgstr "no(a)"
 
@@ -183,13 +183,11 @@ msgstr "Sem resultados."
 
 #: templates/_layouts/meta.html:7
 msgid ""
-"Wanna Migrate helps people to migrate around the world, regardless of their "
-"goals. Check your chances, get answers for your questions, hire a "
-"professional and achieve your dream."
+"Start your plan to move to your dream country. Wanna Migrate is a step-by-"
+"step tool to help you to immigrate to a new country."
 msgstr ""
-"Wanna Migrate ajuda as pessoas a migrarem pelo mundo, independente de seus "
-"objetivos. Analise suas chances, tire suas dúvidas, contrate um expert e "
-"realize seu sonho."
+"Comece seu plano de mudar para o país de seus sonhos. Wanna Migrate é "
+"uma ferramenta passo-a-passo para lhe ajudar a imigrar para outro país."
 
 #: templates/_layouts/meta.html:8
 msgid ""
@@ -7475,8 +7473,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1287
-#: wannamigrate/site/views.py:1320
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1308
+#: wannamigrate/site/views.py:1341
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7485,7 +7483,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1320
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1341
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -7663,7 +7661,7 @@ msgid "My orders"
 msgstr "Minhas Compras"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:764
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:785
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -8008,7 +8006,7 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:766
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:787
 msgid "Sent"
 msgstr "Enviadas"
 
@@ -8021,7 +8019,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:768
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:789
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -8362,6 +8360,10 @@ msgstr "Informação disponível em breve!"
 msgid "We are updating this section. Come back in 24 hours."
 msgstr "Estamos atualizando esta seção."
 
+#: templates/site/home/home.html:23
+msgid "Move to a new country"
+msgstr "Mude para outro país"
+
 #: templates/site/home/home.html:30
 msgid "How it works?"
 msgstr "Como funciona?"
@@ -8687,7 +8689,7 @@ msgstr "O pedido foi devolvido."
 msgid "Service Requested"
 msgstr "Solicitação de Serviço Recebida"
 
-#: wannamigrate/core/middleware.py:78 wannamigrate/core/middleware.py:98
+#: wannamigrate/core/middleware.py:82 wannamigrate/core/middleware.py:102
 msgid "You need a valid email address to use the site!"
 msgstr "Você precisa de um email válido para usar este site!"
 
@@ -9950,50 +9952,59 @@ msgstr "Termos de Uso - Wanna Migrate"
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:647
+#: wannamigrate/site/views.py:668
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:678
+#: wannamigrate/site/views.py:699
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:706
+#: wannamigrate/site/views.py:727
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:822
+#: wannamigrate/site/views.py:843
 msgid "New message from"
 msgstr "Nova mensagem de"
 
-#: wannamigrate/site/views.py:923
+#: wannamigrate/site/views.py:944
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1015
+#: wannamigrate/site/views.py:1036
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1069
+#: wannamigrate/site/views.py:1090
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1087
+#: wannamigrate/site/views.py:1108
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1231
+#: wannamigrate/site/views.py:1252
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1241
+#: wannamigrate/site/views.py:1262
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
 # Q&A Dynamic translations.
-#: wannamigrate/site/views.py:1326
+#: wannamigrate/site/views.py:1347
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid ""
+#~ "Wanna Migrate helps people to migrate around the world, regardless of "
+#~ "their goals. Check your chances, get answers for your questions, hire a "
+#~ "professional and achieve your dream."
+#~ msgstr ""
+#~ "Wanna Migrate ajuda as pessoas a migrarem pelo mundo, independente de "
+#~ "seus objetivos. Analise suas chances, tire suas dúvidas, contrate um "
+#~ "expert e realize seu sonho."
 
 #~ msgid "Subtotal"
 #~ msgstr "Total Parcial"
