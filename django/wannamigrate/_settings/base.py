@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 ##########################
 from django.utils.translation import ugettext_lazy as _
 import os
+from celery.schedules import crontab
 
 
 
@@ -455,3 +456,25 @@ CORE_CONVERSATION_STATUS_ARCHIVE_ID = 3
 # Celery settings
 #######################################
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULE = {
+    'clear-sessions-every-day': {
+        'task': 'wannamigrate.core.tasks.clear_sessions',
+        'schedule': crontab(minute=0,hour=3),
+        #'args': (16, 16),
+    },
+    'database-backup-every-sunday': {
+        'task': 'wannamigrate.core.tasks.database_backup',
+        'schedule': crontab(minute=0,hour=3,day_of_week='sunday'),
+        #'args': (16, 16),
+    },
+    'fix-counters-every-monday': {
+        'task': 'wannamigrate.core.tasks.fix_counters',
+        'schedule': crontab(minute=0,hour=3,day_of_week='monday'),
+        #'args': (16, 16),
+    },
+    'clear-notifications-every-monday': {
+        'task': 'wannamigrate.core.tasks.clear_notifications',
+        'schedule': crontab(minute=0,hour=1,day_of_week='monday'),
+        #'args': (16, 16),
+    },
+}

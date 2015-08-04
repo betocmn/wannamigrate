@@ -112,6 +112,7 @@ AVAILABLE_SERVERS_PATTERN = '(' + '|'.join( sorted( SERVERS.keys() ) ) + ')'
 # Project root and virtualenv
 PROJECT_ROOT = DEPLOYMENT_ROOT + '/' + PROJECT_ALIAS
 PROJECT_VIRTUALENV = VIRTUALENV_ROOT + '/' + PROJECT_ALIAS + "venv"
+DATABASE_BACKUP_FOLDER = '/database_backup'
 
 # Aliases for django, wiki and wsgi
 DJANGO_ALIAS = "django"
@@ -244,7 +245,7 @@ CELERY_CONF = """
 
     [program:celery]
     ; Set full path to celery program if using virtualenv
-    command=/wannavenv/bin/celery worker -A wannamigrate --loglevel=INFO
+    command=/wannavenv/bin/celery worker -A wannamigrate -B --loglevel=INFO
 
     user=nobody
     directory=/wanna/django
