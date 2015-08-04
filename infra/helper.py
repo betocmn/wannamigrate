@@ -181,7 +181,6 @@ DJANGO_CONF = """
 
         WSGIScriptAlias / {django_root}/{app_name}/wsgi.py
 
-        Alias /robots.txt {django_root}/static/robots.txt
         Alias /favicon.ico {django_root}/static/favicon.ico
         Alias /static/ {django_root}/static/
         Alias /upload/ {django_root}/upload/

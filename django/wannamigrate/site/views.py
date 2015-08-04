@@ -629,6 +629,27 @@ def privacy( request ):
 
 
 #######################
+# ROBOTS.txt
+#######################
+def robots( request ):
+    """
+    Displays the robots.txt file
+
+    :param: request
+    :return Text/Plain
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Print Template
+    return render( request, 'site/seo/robots.txt', template_data, content_type = 'text/plain' )
+
+
+
+
+
+#######################
 # MY ACCOUNT VIEWS
 #######################
 @login_required
