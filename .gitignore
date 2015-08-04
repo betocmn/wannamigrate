@@ -8,3 +8,5 @@ django/wannamigrate/_settings/custom.py
 django/upload/*
 infra/sa-east-production.pem
 infra/us-west-wiki.pem
+django/celerybeat-schedule
+django/~/
