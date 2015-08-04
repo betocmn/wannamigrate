@@ -584,7 +584,12 @@ def reading_list( request ):
 @login_required
 def list_following( request ):
     following = request.user.following.prefetch_related( "userpersonal" ).all()
-    processed_following = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in following ]
+    processed_following = []
+    for x in following:
+        if x.userpersonal:
+            processed_following.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
+        else:
+            processed_following.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     template_data = {
         "meta_title" : _( 'Following - Wanna Migrate' ),
@@ -598,7 +603,12 @@ def list_following( request ):
 
 def list_followers( request ):
     followers = request.user.followers.prefetch_related( "userpersonal" ).all()
-    processed_followers = [ { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } for x in followers ]
+    processed_followers = []
+    for x in followers:
+        if x.userpersonal:
+            processed_followers.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
+        else:
+            processed_followers.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     template_data = {
         "meta_title" : _( 'Following - Wanna Migrate' ),
