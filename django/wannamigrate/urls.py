@@ -27,13 +27,3 @@ urlpatterns = patterns('',
     url( r'^', include( 'wannamigrate.qa.urls', namespace = "qa" ) ),
     url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )
-
-
-
-
-
-##########################
-# URLs USED BY DEBUG BAR
-##########################
-if settings.DEBUG:
-    pass

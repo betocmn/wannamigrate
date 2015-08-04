@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url( r'^reset_password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.reset_password, name = 'reset_password' ),
 
     # Terms, Conditions and Privacy
+    url( r'^robots.txt$', views.robots, name = 'robots' ),
     url( r'^terms/$', views.terms, name = 'terms' ),
     url( r'^privacy/$', views.privacy, name = 'privacy' ),
 

@@ -13,6 +13,9 @@
 <meta name="rating" content="General" />
 <meta name="resource-type" content="document" />
 <meta name="revisit-after" content="1" />
+{% if not is_prod  %}
+    <meta name="robots" content="noindex" />
+{% endif %}
 <meta name="doc-class" content="Completed" />
 <meta name="doc-rights" content="Public" />
 <meta name="format-detection" content="telephone=no" />

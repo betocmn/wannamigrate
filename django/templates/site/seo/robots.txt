@@ -1,0 +1,7 @@
+{% if is_prod  %}
+User-agent: *
+Disallow: /x/
+{% else %}
+User-agent: *
+Disallow: /
+{% endif %}
