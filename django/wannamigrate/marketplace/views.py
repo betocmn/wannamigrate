@@ -488,7 +488,7 @@ def get_promo_discount( request ):
 
         # Runs query accordingly to order type (product or service)
         if 'service_type' in request.session['payment']:
-            service_type_id = request.session['payment']['service_type'].id
+            service_type_id = request.session['payment']['service_type']['id']
             promo_code = get_object_or_false(
                 PromoCode,
                 name = code,
@@ -496,7 +496,7 @@ def get_promo_discount( request ):
                 service_type_id = service_type_id
             )
         else:
-            product_id = request.session['payment']['product'].id
+            product_id = request.session['payment']['product']['id']
             promo_code = get_object_or_false(
                 PromoCode,
                 name = code,
