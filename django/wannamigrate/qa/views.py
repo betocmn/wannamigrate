@@ -586,9 +586,9 @@ def list_following( request ):
     following = request.user.following.prefetch_related( "userpersonal" ).all()
     processed_following = []
     for x in following:
-        if x.userpersonal:
+        try:
             processed_following.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
-        else:
+        except Exception:
             processed_following.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     template_data = {
@@ -605,9 +605,9 @@ def list_followers( request ):
     followers = request.user.followers.prefetch_related( "userpersonal" ).all()
     processed_followers = []
     for x in followers:
-        if x.userpersonal:
+        try:
             processed_followers.append( { "name" : x.name, "avatar" : x.userpersonal.avatar.thumbnail.url if x.userpersonal.avatar else None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
-        else:
+        except Exception:
             processed_followers.append( { "name" : x.name, "avatar" : None, "url" : reverse( "site:user_profile", kwargs={ "slug" : x.slug } ) } )
 
     template_data = {
