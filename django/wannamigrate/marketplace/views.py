@@ -355,6 +355,73 @@ def international_cv( request ):
 
 
 #######################
+# IMMI BOX SUBSCRIPTION - VIEWS
+#######################
+def immi_box( request ):
+    """
+    Sales page for the subscription service
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        provider = get_object_or_false( Provider, pk = 13 )
+        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
+        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
+        if not provider or not service_type or not provider_service_type:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # order information
+        payment_info = {
+            'provider': { 'id': provider.id, 'name': provider.display_name },
+            'service_type': { 'id': service_type.id, 'name': service_type.name },
+            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
+        }
+
+        # saves service
+        if request.user.is_authenticated():
+            service = Service()
+            service.service_price = provider_service_type.price
+            service.description = service_type.name
+            service.user = request.user
+            service.provider = provider
+            service.service_type = service_type
+            service.service_status_id = ServiceStatus.get_status_from_order_status()
+            service.save()
+            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
+
+        # saves details to session
+        request.session['payment'] = payment_info
+
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    else:
+        # Cleans payment session
+        request.session['payment'] = {}
+        del request.session['payment']
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
+    template_data['meta_description'] = _( 'A powerful immigration tool to help you to move to your dream country.' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_subscription_plan'] = True
+
+    # Print Template
+    return render( request, 'marketplace/immi_box/immi_box.html', template_data )
+
+
+
+
+
+#######################
 # PAYMENT PAGE
 #######################
 @login_required( login_url = 'site:signup' )

@@ -1,0 +1,109 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "common/jquery-ui/css/ui-wannamigrate/jquery-ui.css" %}" />
+
+{% endblock head %}
+
+
+{% block content %}
+
+    <section class="immi-box">
+
+        <form id="service_type_form" method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="service_type_id" id="service_type_id" value="" />
+        </form>
+
+        <div class="top">
+            <div class="top_left">
+                <div class="title">
+                    Immi Box - {% trans "Immigration Tools" %}
+                </div>
+                <div class="text">
+                    <p>
+                    {% blocktrans %}
+                        Make the first step to start the plan to <span>move to a new country</span>. You will get help from the decision of what country and visa you should pursue to the actual relocation with your family.
+                    {% endblocktrans %}
+                    </p>
+                    <p>
+                    {% blocktrans %}
+                        This is a limited edition and you will get <span>1 year of subscription</span> to:
+                    {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+            <img src="{% static 'site/img/immi-box-main.jpg' %}" alt="{% trans "Immi Box Subscription" %}">
+        </div>
+
+        <div class="description">
+
+            <div class="text">
+                <ul>
+                    <li>{% trans "<span>Complete Guides</span> about moving to Canada and Australia, updated every month." %}</li>
+                    <li>{% trans "Immigration <span>Points Calculator</span> - Optimized." %}</li>
+                    <li>{% trans "<span>International CV tool</span> - Convert your current CV to the australian and canadian styles." %}</li>
+                    <li>{% trans "Templates for <span>work experience confirmation letters</span>." %}</li>
+                    <li>{% trans "Templates for <span>business plan</span> for business visas." %}</li>
+                    <li>{% trans "Templates for <span>ways to contact potential employers</span> for business visas." %}</li>
+                    <li>{% trans "Access to <span>webinars and posts</span> from real immigrants that went to Australia and Canada." %}</li>
+                    <li>{% trans "<span>Unlimited Q&A</span>: Make as many questions as you want, we guarantee you will have replies." %}</li>
+                    <li>{% trans "<span>Course Search</span> for your budget and subject." %}</li>
+                    <li>{% trans "<span>English Evaluation</span> to test your level and understand what you will need to improve." %}</li>
+                    <li><span>10-15% {% trans "discount" %}</span> {% trans "to use immigration consultants and IELTS Courses." %}</li>
+                    <li>{% trans "Unlimited <span>email support</span> and initial <span>training on Skype</span> (Only available if you received this by email)." %}</li>
+                </ul>
+                <span class="small">{% trans "After the payment, you will receive a confirmation email and details to start using the service, before the launch on 25 of August." %}</span>
+            </div>
+            <div class="order">
+                <div class="price">
+                    R$ <span>89,00<sup></sup><!--<sup>90</sup>--></span>
+                </div>
+                <div class="button-action">
+                    <a href="#" data-servicetypeid="32" class="bt-edit button">{% trans "Buy Package" %}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="back">
+            <a href="{% url 'site:dashboard' %}">{% trans 'Go back to dashboard' %}</a>
+        </div>
+
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // submits form for each button
+            $( '.description .button-action .button' ).click( function( event ) {
+                event.preventDefault();
+                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
+                $( "#service_type_form" ).submit();
+            });
+
+        });
+
+    </script>
+
+{% endblock scripts %}
