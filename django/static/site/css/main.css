@@ -11584,6 +11584,142 @@ ul.notifications-view li.notification-item a.notification-link span.date
 }
 
 
+/* Immi Box - Subscription */
+.dashboard .immi-box {
+  max-width: 95%;
+  margin: 0 auto;
+  padding-top: 35px;
+  padding-bottom: 55px;
+}
+.dashboard .immi-box .top .top_left .title {
+  color: #FFCD00;
+  font-family: "open_sansbold";
+  font-size: 30px;
+  line-height: 50px;
+  padding-bottom: 20px;
+}
+.dashboard .immi-box .top {
+  text-align: center;
+}
+.dashboard .immi-box .top .top_left {
+  text-align: left;
+}
+.dashboard .immi-box .top .top_left .text {
+  color: #878787;
+  font-family: "open_sansregular";
+  font-size: 20px;
+  line-height: 32px;
+}
+.dashboard .immi-box .top .top_left .text p {
+  margin-bottom: 10px;
+}
+.dashboard .immi-box .top .top_left .text span,
+.dashboard .immi-box .steps .text span{
+  font-family: "open_sansbold";
+}
+.dashboard .immi-box .top img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+.dashboard .immi-box .description{
+    font-family: "open_sansregular";
+}
+.dashboard .immi-box .description .text{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+.dashboard .immi-box .description .text span{
+    font-family: 'open_sansbold';
+}
+.dashboard .immi-box .description .small{
+    color: #555;
+    font-size: 14px;
+}
+.dashboard .immi-box .description .text ul {
+	list-style-image: url("../img/icon_li.png");
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #68347E;
+    font-size: 17px;
+    line-height: 32px;
+}
+.dashboard .immi-box .description .price {
+    color: #555;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 86px;
+    float: left;
+}
+.dashboard .immi-box .description .price span sup {
+    font-size: 22px;
+}
+.dashboard .immi-box .description .price span{
+    color: #555;
+    font-size: 32px;
+    line-height: 86px;
+    font-family: 'open_sansbold';
+}
+.dashboard .immi-box .description .button-action {
+  float: left;
+  min-width: 130px;
+  max-width: 155px;
+  margin: 10px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  padding-top: 16px;
+}
+.dashboard .immi-box .description .line{
+    background-color: #000;
+    opacity: 0.1;
+    height: 1px;
+    width: 100%;
+}
+.dashboard .immi-box .back{
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+.dashboard .immi-box .back a {
+    text-decoration: none;
+    color: #4f9276;
+}
+.dashboard .immi-box .back a:hover {
+    text-decoration: underline;
+}
+@media(min-width: 768px) {
+  .dashboard .immi-box .top .top_left {
+    float: left;
+    max-width: 61%;
+  }
+  .dashboard .immi-box .top img {
+    float: right;
+    max-width: 35%;
+  }
+}
+@media(min-width: 992px) {
+  .dashboard .immi-box {
+    max-width: 960px;
+  }
+  .dashboard .immi-box .steps {
+    max-width: 645px;
+  }
+  .dashboard .immi-box .top .top_left .title {
+    font-size: 36px;
+    padding-top: 30px;
+  }
+  .dashboard .immi-box .description{
+      width: 655px;
+      float: left;
+  }
+}
+
+
 /** title-body-list */
 .questions-answers > .special-title
 {
