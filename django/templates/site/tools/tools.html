@@ -7,6 +7,13 @@
     <div class="content extra-tools">
         <h2 class="title">{% trans 'Immi Box' context 'Page Title' %}</h2>
         <div class="tools">
+
+            {% include "site/_common/status.html" %}
+
+            <div class="alert alert-dismissable alert-warning">
+                <p><a href="{% url 'marketplace:immi_box' %}">{% trans "Sign-up" %}</a> {% trans "for our 1 year subscription package." %}</p>
+            </div>
+
             <div class="tool calculator">
                 <a href="{% url 'points:dashboard' %}">
                     <img src="{% static 'site/img/tool-imigration-calculator.jpg' %}" alt="{% trans 'immigration calculator' %}" />
