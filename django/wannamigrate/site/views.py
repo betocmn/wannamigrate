@@ -1159,11 +1159,8 @@ def dashboard( request ):
     # If situation is defined, we load questions and professionals related to it
     if 'situation' in request.session and 'from_country' in request.session['situation']:
 
-        # Gets 8 most related service providers
-        template_data['providers'] = Provider.get_listing( request.session['situation']['to_country']['id'], 0, 8 )
-
-        filter_params = {}
         # Fills the topics related to user's situation
+        filter_params = {}
         filter_params[ "related_countries_ids" ] = [ request.session['situation']['to_country']['id'] ]
         filter_params[ "related_goals_ids" ] = [ request.session['situation']['goal']['id'] ]
         filter_params[ "language_ids" ] = [ language.id ]

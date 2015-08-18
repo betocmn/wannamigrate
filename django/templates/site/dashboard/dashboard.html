@@ -13,7 +13,6 @@
 
         {% if 'situation' in request.session and 'from_country' in request.session.situation %}
 
-            <a class="bt-alternator"></a>
             <section class="questions home-questions show">
                 <div class="top">
                     <h2 class="title">{% trans "Questions" %}</h2>
@@ -71,63 +70,6 @@
                     <a href="{% url "qa:add_question" %}" class="bt-add-mobile button">{% trans "Add Question" context 'button' %}</a>
                 </div>
             </section>
-            <section class="professionals home-professionals">
-            <div class="top">
-                <h2 class="title">{% trans 'Professionals' %}</h2>
-            </div>
-            <div class="content-professionals">
-
-                {% for provider in providers.all %}
-
-                    {% url 'marketplace:profile' provider.user_id provider.display_name|slugify as view_professional_url %}
-
-                    <div class="professional category">
-                        <div class="thumb">
-                            <a class="contract" href="{{ view_professional_url }}" title="{{ provider.display_name }}">
-                                {% if provider.user.userpersonal.avatar %}
-                                    <img src="{{ provider.user.userpersonal.avatar.size100x100.url }}" alt="{{ provider.display_name }}" />
-                                {% else %}
-                                    <img src="{% static 'site/img/thumb-professional.jpg' %}" alt="{{ provider.display_name }}" />
-                                {% endif %}
-                            </a>
-                        </div>
-                        <div class="data-professional">
-                            <a class="contract" title="{{ provider.display_name }}" href="{{ view_professional_url }}">
-                                <strong class="name">{{ provider.display_name|truncatechars_html:41 }}</strong>
-                                <p class="expert">{{ provider.headline }}</p>
-                            </a>
-                            <div class="rate" data-score="{{ provider.review_score }}">
-                                <span class="count">({{ provider.user.userstats.total_reviews|kmi }})</span>
-                            </div>
-                            <div class="service">
-                                <p class="truncate-line">
-                                    {% for service_type in provider.service_types.all %}
-                                        {% ifchanged %}{% trans service_type.service_type_category.name %} /{% endifchanged %}
-                                    {% endfor %}
-                                </p>
-                            </div>
-                            <div class="data">
-                                <ul class="data-list">
-                                    <li class="data-item data-item-answers"><a href="{{ view_professional_url }}#answers" class="data-link answers"><strong>{{ provider.user.userstats.total_answers|kmi }}</strong> {% trans "answers" %}</a></li>
-                                    <li class="data-item data-item-viewers"><a href="{{ view_professional_url }}" class="data-link viewers"><strong>{{ provider.user.userstats.total_profile_views|kmi }}</strong> {% trans "views" %}</a></li>
-                                    <li class="data-item data-item-since">{% trans "Joined" %} <strong>{{ provider.user.created_date|date:"M Y"|lower }}</strong></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="bt-options">{% trans "Options" %}</a>
-                            <div class="box-options">
-                                <ul class="box">
-                                    <li><a class="bt-share" href="{{ view_professional_url }}">{% trans "View" %}</a></li>
-                                    <li><a class="bt-share" href="{% url 'site:contact' %}">{% trans "Report" %}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                {% endfor %}
-
-            </div>
-            <a href="{% url 'marketplace:professionals' %}" class="bt-view-more button-transparent">{% trans 'View More' %}</a>
-        </section>
 
         {% endif %}
     </div>
