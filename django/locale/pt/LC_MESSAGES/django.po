@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 11:16-0300\n"
+"POT-Creation-Date: 2015-08-18 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgstr "Faça uma Pergunta"
 
 #: templates/_layouts/main.html:184
 #: templates/points/dashboard/dashboard.html:18
-#: templates/site/tools/tools.html:13
+#: templates/site/tools/tools.html:20
 msgid "Immigration Points Calculator"
 msgstr "Calculadora de Pontos de Imigração"
 
@@ -2788,7 +2788,7 @@ msgid "Assistance for the student visa application."
 msgstr "Assistência para obtenção de visto de estudante."
 
 #: templates/db_translations/marketplace_servicetype.html:23
-#: templates/site/tools/tools.html:27
+#: templates/site/tools/tools.html:34
 msgid "Package - International CV"
 msgstr "Pacote - CV Internacional"
 
@@ -6506,8 +6506,8 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                        Esta é uma edição limitada (até 25 de Agosto) e você terá <span>1 ano "
-"de acesso</span> a:\n"
+"                        Esta é uma edição limitada (até 25 de Agosto) e você "
+"terá <span>1 ano de acesso</span> a:\n"
 "                    "
 
 #: templates/marketplace/immi_box/immi_box.html:42
@@ -8664,11 +8664,19 @@ msgctxt "Page Title"
 msgid "Immi Box"
 msgstr "Immi Box"
 
-#: templates/site/tools/tools.html:12
+#: templates/site/tools/tools.html:14
+msgid "Sign-up"
+msgstr "Assine"
+
+#: templates/site/tools/tools.html:14
+msgid "for our 1 year subscription package."
+msgstr "nosso pacote de imigração por 1 ano."
+
+#: templates/site/tools/tools.html:19
 msgid "immigration calculator"
 msgstr "calculadora de imigração"
 
-#: templates/site/tools/tools.html:14
+#: templates/site/tools/tools.html:21
 msgid ""
 "Find out if you qualify for a visa to work and live in Canada, Australia and "
 "New Zealand."
@@ -8676,23 +8684,23 @@ msgstr ""
 "Descubra se você se qualifica para um visto permanente para morar e "
 "trabalhar no Canadá, Austrália e Nova Zelândia."
 
-#: templates/site/tools/tools.html:19
+#: templates/site/tools/tools.html:26
 msgid "immigration guides"
 msgstr "guias de imigração"
 
-#: templates/site/tools/tools.html:20
+#: templates/site/tools/tools.html:27
 msgid "Immigration Guides"
 msgstr "Guias de Imigração"
 
-#: templates/site/tools/tools.html:21
+#: templates/site/tools/tools.html:28
 msgid "Download our complete step-by-step immigration guides."
 msgstr "Faça o download de nossos guias completos de imigração."
 
-#: templates/site/tools/tools.html:26
+#: templates/site/tools/tools.html:33
 msgid "package international cv"
 msgstr "pacote cv internacional"
 
-#: templates/site/tools/tools.html:28
+#: templates/site/tools/tools.html:35
 msgid ""
 "We help you with all the resources to start talking to international "
 "employers. CV, Cover letter, Linkedin, website..."
@@ -8700,30 +8708,30 @@ msgstr ""
 "Ajudamos você com todos os recursos para começar a entrar em contato com "
 "empregadores estrangeiros. CV, Carta de Apresentação e Linkedin."
 
-#: templates/site/tools/tools.html:33
+#: templates/site/tools/tools.html:40
 msgid "IELTS preparation course"
 msgstr "Curso preparatório IELTS"
 
-#: templates/site/tools/tools.html:34
+#: templates/site/tools/tools.html:41
 msgid "IELTS Preparation Course"
 msgstr "Curso Preparatório IELTS"
 
-#: templates/site/tools/tools.html:35
+#: templates/site/tools/tools.html:42
 msgid ""
 "Enroll in our online course and be ready for the English certification exam."
 msgstr ""
 "Matricule-se em nosso curso online e prepare-se para a prova de certificação "
 "de Inglês."
 
-#: templates/site/tools/tools.html:39
+#: templates/site/tools/tools.html:46
 msgid "find jobs"
 msgstr "encontre empregos"
 
-#: templates/site/tools/tools.html:40
+#: templates/site/tools/tools.html:47
 msgid "Find Jobs Overseas"
 msgstr "Encontre Empregos no Exterior"
 
-#: templates/site/tools/tools.html:41
+#: templates/site/tools/tools.html:48
 msgid ""
 "Get exposed to international employers and receive notifications about new "
 "job openings."
@@ -8731,15 +8739,15 @@ msgstr ""
 "Seja visto por empregadores internacionais e receba alertas de novas vagas "
 "em aberto em sua área."
 
-#: templates/site/tools/tools.html:44
+#: templates/site/tools/tools.html:51
 msgid "immigration genius"
 msgstr "gênio da imigração"
 
-#: templates/site/tools/tools.html:45
+#: templates/site/tools/tools.html:52
 msgid "Immigration Genius"
 msgstr "Gênio da Imigração"
 
-#: templates/site/tools/tools.html:46
+#: templates/site/tools/tools.html:53
 msgid ""
 "Answer some questions and get a final destination where you should live and "
 "can get a visa."
