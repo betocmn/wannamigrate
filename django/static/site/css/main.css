@@ -966,7 +966,7 @@ select {
 }
 .dashboard header .interaction {
   float: right;
-  width: 700px;
+  width: 723px;
   height: 80px;
   padding: 20px 50px 0 0;
   -moz-box-sizing: border-box;
@@ -977,7 +977,7 @@ select {
   box-sizing: border-box;
 }
 .dashboard header .interaction nav {
-  float: left;
+  float: right;
 }
 .dashboard header .interaction nav .nav-item {
   float: left;
@@ -995,7 +995,7 @@ select {
 }
 .dashboard header .interaction .search {
   position: relative;
-  float: left;
+  float: right;
   display: block;
   width: 155px;
   height: 35px;
@@ -1158,6 +1158,7 @@ select {
   width: 53px;
   height: 40px;
   position: relative;
+  margin-left: 12px;
 }
 .dashboard header .interaction .notification .notify-qty {
   background-color: #ffba00;
@@ -1447,6 +1448,7 @@ select {
     background: #f6f6f6;
     position: relative;
     top: 55px;
+    text-align: center;
 }
 .dashboard .situations .situation-options .line {
     background-color: #000;
@@ -1538,7 +1540,7 @@ sup{ vertical-align:super; }
 }
 .dashboard .content .questions {
   float: left;
-  width: 480px;
+  width: 960px;
   margin: 35px 0 0 0;
 }
 .dashboard .content .questions .top {
@@ -3522,8 +3524,16 @@ sup{ vertical-align:super; }
   .dashboard .wrapper header.show-search .interaction .search :-ms-input-placeholder {
     color: #fff;
   }
-  .dashboard .wrapper .situations {
-    display: none;
+  .dashboard .situations .situation {
+      margin-left: 15%;
+      width: 100%;
+      left: 0;
+  }
+  .dashboard .situations .situation .bt-change-situation {
+      display: none;
+  }
+  .dashboard.full .situations {
+    height: 470px;
   }
   .dashboard .wrapper .content {
     float: left;
@@ -4697,6 +4707,11 @@ sup{ vertical-align:super; }
     float: none;
     padding: 5px 0 0;
   }
+}
+@media screen and (max-width: 515px) {
+    .dashboard .situations .situation {
+        display: none;
+    }
 }
 .content.social {
   width: 960px;
@@ -9355,9 +9370,6 @@ sup{ vertical-align:super; }
   .dashboard .wrapper header.show-search .interaction .search :-ms-input-placeholder {
     color: #fff;
   }
-  .dashboard .wrapper .situations {
-    display: none;
-  }
   .dashboard .wrapper .content {
     float: left;
   }
@@ -9381,69 +9393,7 @@ sup{ vertical-align:super; }
     width: 100%;
     background-color: #fff;
   }
-  .dashboard .wrapper .content.home .questions .top,
-  .dashboard .wrapper .content.home .professionals .top {
-    position: absolute;
-    width: 15%;
-    padding: 0;
-    height: 85px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    box-sizing: border-box;
-    background: #dadada;
-    border-bottom: 0;
-    margin: 0;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-  }
-  .dashboard .wrapper .content.home .questions .top .title,
-  .dashboard .wrapper .content.home .professionals .top .title {
-    width: 15%;
-    float: none;
-    margin: 25px auto 0;
-    text-align: center;
-    color: transparent;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .dashboard .wrapper .content.home .questions .top .title:before,
-  .dashboard .wrapper .content.home .professionals .top .title:before {
-    right: 0;
-    margin: 0 auto;
-    background-position: center center;
-    border: 1px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
-  }
-  .dashboard .wrapper .content.home .questions .top .bt-add,
-  .dashboard .wrapper .content.home .professionals .top .bt-add {
-    display: none;
-  }
-  .dashboard .wrapper .content.home .questions .bt-add-mobile,
-  .dashboard .wrapper .content.home .professionals .bt-add-mobile {
-    display: block;
-    margin: 0 auto 25px;
-    width: 90%;
-  }
-  .dashboard .wrapper .content.home .questions .bt-view-more,
-  .dashboard .wrapper .content.home .professionals .bt-view-more {
-    display: none;
-  }
+
   .dashboard .wrapper .content.home .questions .content-questions,
   .dashboard .wrapper .content.home .professionals .content-questions,
   .dashboard .wrapper .content.home .questions .content-professionals,
@@ -9594,8 +9544,7 @@ sup{ vertical-align:super; }
   }
   .dashboard .wrapper .content.home .questions.show .top,
   .dashboard .wrapper .content.home .professionals.show .top {
-    width: 85%;
-    background: #f1f1f1;
+    display: none;
   }
   .dashboard .wrapper .content.home .questions.show .top .title,
   .dashboard .wrapper .content.home .professionals.show .top .title {
