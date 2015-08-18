@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 21:21-0300\n"
+"POT-Creation-Date: 2015-08-18 11:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6501,12 +6501,12 @@ msgstr ""
 #: templates/marketplace/immi_box/immi_box.html:36
 msgid ""
 "\n"
-"                        This is a limited edition and you will get <span>1 "
-"year of subscription</span> to:\n"
+"                        This is a limited edition until the 25th of August "
+"and you will get <span>1 year of subscription</span> to:\n"
 "                    "
 msgstr ""
 "\n"
-"                        Esta é uma edição limitada e você terá <span>1 ano "
+"                        Esta é uma edição limitada (até 25 de Agosto) e você terá <span>1 ano "
 "de acesso</span> a:\n"
 "                    "
 
@@ -6516,17 +6516,25 @@ msgstr "Assinatura Immi Box"
 
 #: templates/marketplace/immi_box/immi_box.html:49
 msgid ""
+"Unlimited <span>email support</span> and initial <span>training on Skype</"
+"span> (Only available if you received this by email)."
+msgstr ""
+"<span>Suporte ilimitado por email</span> e <span>treinamento inicial</span> "
+"por Skype."
+
+#: templates/marketplace/immi_box/immi_box.html:50
+msgid ""
 "<span>Complete Guides</span> about moving to Canada and Australia, updated "
 "every month."
 msgstr ""
-"<span>Guia completos</span> de como mudar para Canadá e Austrália, "
+"<span>Guias completos</span> de como mudar para Canadá e Austrália, "
 "atualizados mensalmente."
 
-#: templates/marketplace/immi_box/immi_box.html:50
+#: templates/marketplace/immi_box/immi_box.html:51
 msgid "Immigration <span>Points Calculator</span> - Optimized."
 msgstr "<span>Calculadora de Pontos</span> de Imigração - Otimizada."
 
-#: templates/marketplace/immi_box/immi_box.html:51
+#: templates/marketplace/immi_box/immi_box.html:52
 msgid ""
 "<span>International CV tool</span> - Convert your current CV to the "
 "australian and canadian styles."
@@ -6534,16 +6542,16 @@ msgstr ""
 "<span>Ferramenta CV Internacional</span> - Converta seu currículo brasileiro "
 "para os padrões australiano e canadense."
 
-#: templates/marketplace/immi_box/immi_box.html:52
+#: templates/marketplace/immi_box/immi_box.html:53
 msgid "Templates for <span>work experience confirmation letters</span>."
 msgstr ""
 "Templates para <span>carta de comprovação de experiência de trabalho</span>."
 
-#: templates/marketplace/immi_box/immi_box.html:53
+#: templates/marketplace/immi_box/immi_box.html:54
 msgid "Templates for <span>business plan</span> for business visas."
 msgstr "Templates para <span>business plan</span> para vistos de negócios."
 
-#: templates/marketplace/immi_box/immi_box.html:54
+#: templates/marketplace/immi_box/immi_box.html:55
 msgid ""
 "Templates for <span>ways to contact potential employers</span> for business "
 "visas."
@@ -6551,7 +6559,7 @@ msgstr ""
 "Templates para <span>formas de contactar empregadores</span>, antes mesmo de "
 "sair do Brasil."
 
-#: templates/marketplace/immi_box/immi_box.html:55
+#: templates/marketplace/immi_box/immi_box.html:56
 msgid ""
 "Access to <span>webinars and posts</span> from real immigrants that went to "
 "Australia and Canada."
@@ -6559,7 +6567,7 @@ msgstr ""
 "Acesso a <span>webinars e posts</span> de imigrantes reais que foram para "
 "Austrália ou Canadá."
 
-#: templates/marketplace/immi_box/immi_box.html:56
+#: templates/marketplace/immi_box/immi_box.html:57
 msgid ""
 "<span>Unlimited Q&A</span>: Make as many questions as you want, we guarantee "
 "you will have replies."
@@ -6567,11 +6575,11 @@ msgstr ""
 "<span>Tira-Dúvidas ilimitado</span>: Faça quantas perguntas desejar, "
 "garantimos que você receberá respostas."
 
-#: templates/marketplace/immi_box/immi_box.html:57
+#: templates/marketplace/immi_box/immi_box.html:58
 msgid "<span>Course Search</span> for your budget and subject."
 msgstr "<span>Busca de cursos</span> na sua área e orçamento."
 
-#: templates/marketplace/immi_box/immi_box.html:58
+#: templates/marketplace/immi_box/immi_box.html:59
 msgid ""
 "<span>English Evaluation</span> to test your level and understand what you "
 "will need to improve."
@@ -6579,24 +6587,16 @@ msgstr ""
 "<span>Teste de Inglês</span> para avaliação do seu nível e o que será "
 "necessário para a imigração."
 
-#: templates/marketplace/immi_box/immi_box.html:59
+#: templates/marketplace/immi_box/immi_box.html:60
 #: wannamigrate/marketplace/models.py:40
 #: wannamigrate/marketplace/models.py:200
 #: wannamigrate/marketplace/models.py:382
 msgid "discount"
 msgstr "desconto"
 
-#: templates/marketplace/immi_box/immi_box.html:59
+#: templates/marketplace/immi_box/immi_box.html:60
 msgid "to use immigration consultants and IELTS Courses."
 msgstr "para utilizar consultores de imigração e cursos IELTS."
-
-#: templates/marketplace/immi_box/immi_box.html:60
-msgid ""
-"Unlimited <span>email support</span> and initial <span>training on Skype</"
-"span> (Only available if you received this by email)."
-msgstr ""
-"<span>Suporte ilimitado por email</span> e <span>treinamento inicial</span> "
-"por Skype (Disponível somente para quem recebeu esta oferta por e-mail)."
 
 #: templates/marketplace/immi_box/immi_box.html:62
 msgid ""
