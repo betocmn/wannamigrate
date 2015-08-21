@@ -2950,7 +2950,7 @@ msgstr "1 ano de acesso ao Immi Box - Ferramentas para Imigração."
 
 #: templates/db_translations/marketplace_servicetype.html:34
 msgid "In-Person Individual Evaluation"
-msgstr ""
+msgstr "Avaliação Individual de Imigração"
 
 #: templates/db_translations/marketplace_servicetype.html:34
 msgid ""
@@ -2958,10 +2958,13 @@ msgid ""
 "to Canada and Australia with 1 hour of duration, final report and "
 "immigration guides as e-books."
 msgstr ""
+"Avaliação individual (ou em casal) presencial de imigração "
+"para o Canadá ou Austrália, com 1 hora de duração, relatório final e "
+"e-book de imigração."
 
 #: templates/db_translations/marketplace_servicetype.html:35
 msgid "In-Person Group Evaluation"
-msgstr ""
+msgstr "Workshop de Imigração"
 
 #: templates/db_translations/marketplace_servicetype.html:35
 msgid ""
@@ -2969,6 +2972,8 @@ msgid ""
 "Australia with 1 hour of duration, final report and immigration guides as e-"
 "books."
 msgstr ""
+"Workshop para avaliação de suas chances de imigrar para o Canadá ou "
+"Austrália, com 1 hora de duração, relatório individual e e-book."
 
 #: templates/db_translations/marketplace_servicetypecategory.html:2
 msgid "Immigration"
