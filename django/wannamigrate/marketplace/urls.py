@@ -36,6 +36,9 @@ urlpatterns = patterns('',
     # Immi Box Subscription
     url( r'^immi-box/subscription/$', views.immi_box, name = 'immi_box' ),
 
+    # Consulting
+    url( r'^immigration-evaluation/$', views.consulting, name = 'consulting' ),
+
     # Payment Page
     url( r'^payment/$', views.payment, name = 'payment' ),
 

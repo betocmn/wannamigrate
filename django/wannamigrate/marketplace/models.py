@@ -79,23 +79,6 @@ class Order( BaseModel ):
 
         return orders
 
-        """
-        services = Service.objects.select_related(
-            'service_status', 'user', 'provider'
-        )
-        if user_id:
-            if is_provider:
-                services = services.filter( provider__user_id = user_id, )
-            else:
-                services = services.filter( user_id = user_id, )
-        services = services.only(
-            'id', 'created_date', 'user', 'service_status', 'provider'
-        ).order_by(
-            '-created_date'
-        )
-
-        return services
-        """
 
 
 class OrderHistory( BaseModel ):
@@ -154,6 +137,8 @@ class Product( BaseModel ):
     is_active = models.BooleanField( _( "is active" ), default = True )
     icon_css_class = models.CharField( _( "name" ), max_length = 30 )
     price = models.DecimalField( _( "price" ), max_digits = 7, decimal_places = 2 )
+    country = models.ForeignKey( 'core.Country', verbose_name = _( 'country' ), blank = True, null = True, default = None )
+    expiry_months = models.SmallIntegerField( _( "expiry months" ), default = None, blank = True, null = True )
 
     # META Options
     class Meta:
@@ -558,3 +543,34 @@ class ServiceTypeCategory( BaseModel ):
     class Meta:
         default_permissions = []
 
+
+
+class Subscription( BaseModel ):
+    """
+    Subscription model
+    """
+
+    # Model Attributes
+    user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
+    product = models.ForeignKey( 'Product', verbose_name = _( 'product' ) )
+    subscription_status = models.ForeignKey( 'SubscriptionStatus', verbose_name = _( 'subscription status' ) )
+    start_date = models.DateField( _( 'start date' ) )
+    expiry_date = models.DateField( _( 'expiry date' ) )
+
+    # META Options
+    class Meta:
+        default_permissions = []
+
+
+
+class SubscriptionStatus( BaseModel ):
+    """
+    Subscription Status - 'pending payment', 'active', 'expired', 'cancelled', etc..
+    """
+
+    # Model Attributes
+    name = models.CharField( _( "name" ), max_length = 45 )
+
+    # META Options
+    class Meta:
+        default_permissions = []

@@ -1,0 +1,219 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "common/jquery-flexslider/css/flexslider.css" %}" />
+    <link rel="stylesheet" href="{% static "common/light-gallery/css/lightGallery.css" %}" />
+
+{% endblock head %}
+
+{% block body %}
+    <body class="dashboard generic-product consulting">
+{% endblock body %}
+
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
+
+{% block header %}
+    {{ block.super }}
+    <div class="clearfix"></div>
+    <div class="content_e_book">
+        <div class="title">
+            {% trans 'Immigration Evaluation' %}
+        </div>
+        <div class="text">
+            {% trans 'Get ready for your dream country' %}
+        </div>
+        <div class="text2">
+            {% trans 'In-person consultation to analyze your chances' %}
+        </div>
+        <a href="#" class="scroll-down">
+            <img src="{% static 'site/img/arrow_bottom.png' %}" alt="{% trans 'arrow-bottom' %}" />
+        </a>
+    </div>
+{% endblock header %}
+
+{% block situation %} {% endblock situation %}
+
+{% block content %}
+
+    <form id="service_type_form" method="post" action="">
+        {% csrf_token %}
+        <input type="hidden" name="service_type_id" id="service_type_id" value="" />
+    </form>
+
+    {% if LANGUAGE_CODE == 'en' %}
+        <section class="books_block">
+            {% include "site/_common/status.html" %}
+        </section>
+    {% endif %}
+    
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Immigration Workshop in São Luís/MA' %}
+                <br />
+                <span>{% trans '31th of August - Restaurante Sushimax (Lagoa) - 19:30h' %}</span>
+            </div>
+            <div class="text">
+                {% trans "Analyze your chances to immigrate to Canada or Australia." %}
+                <ul>
+                    <li>{% trans "Duration: 1 hour" %}</li>
+                    <li>{% trans "Learn immigration options and measure your chances" %}</li>
+                    <li>{% trans "How to start and execute your plan" %}</li>
+                    <li>{% trans "How to study, work and do business in Canada or Australia" %}</li>
+                    <li>{% trans "How to take your family to Canada or Australia" %}</li>
+                    <li>{% trans "Receive a personal report and immigration e-book" %}</li>
+                </ul>
+                <span class="small">{% trans "You will receive a confirmation email after the payment." %}</span>
+            </div>
+            <div class="books_bottom">
+                <div class="price">
+                    R$ <span>60,00<sup></sup><!--<sup>90</sup>--></span>
+                </div>
+                <div class="but">
+                    <a href="#" data-servicetypeid="34" class="bt-edit button">{% trans "Buy" %}</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="right">
+            <img src="{% static 'site/img/consulting-workshop.png' %}" alt="{% trans 'Immigration Consulting' %}" />
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+    <div class="line"></div>
+
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Immigration Individual Evaluation in São Luís/MA' %}
+                <br />
+                <span>{% trans '26th of August to 15th of September' %}</span>
+            </div>
+            <div class="text">
+                {% trans "Analyze your individual chances (or as a couple) to immigrate to Canada or Australia." %}
+                <ul>
+                    <li>{% trans "Duration: 1 hour" %}</li>
+                    <li>{% trans "Receive immigration options accordingly to your profile" %}</li>
+                    <li>{% trans "Receive a personal step-by-step plan" %}</li>
+                    <li>{% trans "How to study, work and do business in Canada or Australia" %}</li>
+                    <li>{% trans "How to take your family to Canada or Australia" %}</li>
+                    <li>{% trans "Receive a personal report and immigration e-book" %}</li>
+                </ul>
+                <span class="small">{% trans "You will be able to schedule a day and time after the payment." %}</span>
+            </div>
+            <div class="books_bottom">
+                <div class="price">
+                    R$ <span>150,00<sup></sup><!--<sup>90</sup>--></span>
+                </div>
+                <div class="but">
+                    <a href="#" data-servicetypeid="33" class="bt-edit button">{% trans "Buy" %}</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="right">
+            <img src="{% static 'site/img/consulting-individual.png' %}" alt="{% trans 'Immigration Consulting' %}" />
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <div class="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our users say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "You guys built a very rich content, with excellent hints. This guide could easily save months of research of information." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-tania.png' %}" alt="{% trans 'testmonial-tania-antonieli' %}" />
+                        </div>
+                        <div class="text2">Tânia Antonieli<br /><span>{% trans "Project Manager" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our readers say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "I had no idea I had most of the requirements to get a visa to live in Canada until I read the e-book." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-igor.png' %}" alt="{% trans 'testmonial-igor-freitas' %}" />
+                        </div>
+                        <div class="text2">Igor Freitas<br /><span>{% trans "Personal Trainer and Musician" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <!-- JS REQUIRED BY THIS PAGE -->
+    <script type="text/javascript" src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-flexslider/js/jquery.flexslider.js' %}"></script>
+
+    <!-- INLINE JS -->
+    <script type="text/javascript">
+
+        $( document ).ready( function() {
+
+            // submits form for each button (from books)
+            $( '.books_bottom .but .button' ).click( function( event ) {
+                event.preventDefault();
+                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
+                $( "#service_type_form" ).submit();
+            });
+
+            // plugin for testmonials slides
+            $( '.flexslider' ).flexslider({
+                animation: "slide"
+            });
+
+            // scrolls down arrow effect
+            $( 'a.scroll-down' ).click( function( event ) {
+                event.preventDefault();
+                $('html,body').animate({
+                  scrollTop: $( ".books_block").first().offset().top
+                }, 1000);
+            });
+
+            // makes arrow bounce
+            $( "a.scroll-down img" ).effect( "bounce", { distance: 40, times: 10 }, 3400 );
+
+        });
+
+    </script>
+
+{% endblock scripts %}
