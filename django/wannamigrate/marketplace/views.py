@@ -419,6 +419,76 @@ def immi_box( request ):
 
 
 
+#######################
+# CONSULTING - VIEWS
+#######################
+def consulting( request ):
+    """
+    List all consulting options available
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        provider = get_object_or_false( Provider, pk = 30 )
+        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
+        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
+        if not provider or not service_type or not provider_service_type:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # order information
+        payment_info = {
+            'provider': { 'id': provider.id, 'name': provider.display_name },
+            'service_type': { 'id': service_type.id, 'name': service_type.name },
+            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
+        }
+
+        # saves service
+        if request.user.is_authenticated():
+            service = Service()
+            service.service_price = provider_service_type.price
+            service.description = service_type.name
+            service.user = request.user
+            service.provider = provider
+            service.service_type = service_type
+            service.service_status_id = ServiceStatus.get_status_from_order_status()
+            service.save()
+            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
+
+        # saves details to session
+        request.session['payment'] = payment_info
+
+        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
+    else:
+        # Cleans payment session
+        request.session['payment'] = {}
+        del request.session['payment']
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Immigration Evaluation - Wanna Migrate' )
+    template_data['meta_description'] = _( 'In-person meeting to evaluate your chances to immigrate to Canada or Australia.' )
+
+    # Sets image as preview for sharing (as for facebook, twitter, etc.)
+    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/consulting-individual.png' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    #template_data['track_conversion_view_ebooks'] = True
+
+    # if language is english, we show warning that only portuguese guides are available for now
+    if translation.get_language() == "en":
+        messages.warning( request, "All sessions are in portuguese for now. We will soon release the english edition." )
+
+    # Print Template
+    return render( request, 'marketplace/consulting/consulting.html', template_data )
+
 
 
 #######################
