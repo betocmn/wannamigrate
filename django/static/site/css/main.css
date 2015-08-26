@@ -7753,7 +7753,7 @@ sup{ vertical-align:super; }
 .content.results .main .options .option {
   position: relative;
   float: left;
-  width: 33.3%;
+  width: 50%;
   height: 100px;
   line-height: 100px;
   text-align: center;
@@ -8101,7 +8101,7 @@ sup{ vertical-align:super; }
   padding: 9% 0 0;
 }
 .content.results .main .visa-application .visa-topics {
-  width: 60%;
+  width: 95%;
   margin: 0 auto;
 }
 .content.results .main .visa-application .visa-topics .visa-topic .title-topic {
@@ -8162,6 +8162,14 @@ sup{ vertical-align:super; }
   font-size: 16px;
   font-weight: normal;
   color: #555;
+}
+.content.results .main .visa-application .visa-topics .visa-topic .text a {
+    text-decoration: none;
+    color: #4f9276;
+}
+
+.content.results .main .visa-application .visa-topics .visa-topic .text a:hover {
+    text-decoration: underline;
 }
 .content.results .main .visa-application .visa-topics .visa-topic img {
   display: block;
@@ -10130,6 +10138,10 @@ sup{ vertical-align:super; }
   .dashboard.about .content.results .result .main .moving .moving-topics .text {
     padding-left: 0;
   }
+  .content.results .main .visa-application .visa-topics .visa-topic img {
+    display: block;
+    padding: 0;
+  }
   .dashboard.about .content.results .result .main .visa-application .visa-topics .image,
   .dashboard.about .content.results .result .main .moving .visa-topics .image,
   .dashboard.about .content.results .result .main .visa-application .moving-topics .image,
@@ -11107,6 +11119,13 @@ ul.notifications-view li.notification-item a.notification-link span.date
     color: #555;
     font-size: 14px;
 }
+.dashboard.generic-product .books_block .text .small a {
+    text-decoration: none;
+    color: #4f9276;
+}
+.dashboard.generic-product .books_block .text .small a:hover {
+    text-decoration: underline;
+}
 .dashboard.generic-product .books_block .text ul {
 	list-style-image: url("../img/icon_li.png");
     text-align: left;
@@ -11289,7 +11308,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
 .dashboard.generic-product.immi-box header {
     width: 100%;
     min-height: 610px;
-    background: url("../img/landing-bg-ielts-course.jpg") no-repeat;
+    background: url("../img/landing-bg-immi-box.jpg") no-repeat scroll center;
     background-size: cover;
     padding-bottom: 40px;
 }

@@ -13,12 +13,16 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext, ugettext_lazy as _
 from wannamigrate.core.forms import BaseForm, BaseModelForm, CountryChoiceField, GoalChoiceField, CountryImmigrationChoiceField
 from wannamigrate.marketplace.models import (
-    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType, PromoCode
+    Order, OrderHistory, Service, ServiceHistory, ServiceStatus, OrderStatus, ServiceType, PromoCode,
+    Subscription, SubscriptionStatus
 )
 from django.forms import ModelChoiceField
 from wannamigrate.marketplace.payment_processor import PaymentProcessor
 from wannamigrate.core.util import get_object_or_false
+from django.conf import settings
 import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 
 
@@ -158,6 +162,16 @@ class PaymentForm( BaseForm ):
             service_history.service_status_id = service.service_status_id
             service_history.user_id = service.user_id
             service_history.save()
+
+        # if it's a product with subscription, do some required actions
+        elif 'subscription' in self.payment_info:
+            # updates subscription status
+            subscription = Subscription.objects.get( pk = self.payment_info['subscription']['id'] )
+            subscription.subscription_status_id = SubscriptionStatus.get_status_from_order_status( payment_api_result['order_status_id'] )
+            if subscription.subscription_status_id == settings.ID_SUBSCRIPTION_STATUS_ACTIVE:
+                subscription.start_date = timezone.now()
+                subscription.expiry_date = timezone.now() + timedelta( days = 365 ) #@TODO improve this to use year
+            subscription.save()
 
         # If payment was not authorized, raise ERROR
         if not payment_api_result['success']:

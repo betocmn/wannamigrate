@@ -26,6 +26,8 @@ urlpatterns = patterns('',
 
     # E-books
     url( r'^ebooks/$', views.ebook, name = 'ebook' ),
+    url( r'^ebooks/$', views.ebook, name = 'ebook' ),
+    url( r'^ebooks/(?P<country_name>[a-z_\-]+)/$', views.ebook_read, name = 'ebook_read' ),
 
     # Course IELTS
     url( r'^course/ielts/$', views.ielts, name = 'ielts' ),
@@ -33,8 +35,9 @@ urlpatterns = patterns('',
     # International CV
     url( r'^international-cv/$', views.international_cv, name = 'international_cv' ),
 
-    # Immi Box Subscription
-    url( r'^immi-box/subscription/$', views.immi_box, name = 'immi_box' ),
+    # Immi Box
+    url( r'^immi-box/subscription/$', views.subscription, name = 'subscription' ),
+    url( r'^immi-box/$', views.immi_box, name = 'immi_box' ),
 
     # Consulting
     url( r'^immigration-evaluation/$', views.consulting, name = 'consulting' ),
@@ -50,8 +53,5 @@ urlpatterns = patterns('',
 
     # Update order status
     url( r'^payment_api_updated/$', views.payment_api_updated, name = 'payment_api_updated' ),
-
-    # Download Order page
-    url( r'^order/download/(?P<order_id_64>[0-9A-Za-z_\-]+)/(?P<user_id_64>[0-9A-Za-z_\-]+)/(?P<product_id_64>[0-9A-Za-z_\-]+)/(?P<external_code_64>[0-9A-Za-z_\-]+)/$', views.order_download, name = 'order_download' ),
 
 )

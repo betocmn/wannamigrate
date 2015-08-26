@@ -225,32 +225,6 @@ class Mailer( object ):
 
 
     @staticmethod
-    def send_order_download_link( user, order ):
-        """
-        Sends order download link to user
-
-        :param: user
-        :param: order
-        """
-
-        # passes data to template
-        template_data = {}
-        template_data['order'] = order
-        template_data['user'] = user
-
-        # Creates the download link
-        base_secure_url = settings.BASE_URL_SECURE
-        order_id_64 = urlsafe_base64_encode( force_bytes( order.pk ) )
-        user_id_64 = urlsafe_base64_encode( force_bytes( order.user_id ) )
-        product_id_64 = urlsafe_base64_encode( force_bytes( order.product_id ) )
-        external_code_64 = urlsafe_base64_encode( force_bytes( order.external_code ) )
-        template_data['download_link'] = base_secure_url + reverse( 'marketplace:order_download', args = ( order_id_64, user_id_64, product_id_64, external_code_64 ) )
-
-        body = Mailer.build_body_from_template( 'emails/order_download_link.html', template_data )
-        return Mailer.send( _( 'Your Download Link' ), body, user.email, None, None, settings.EMAIL_NOTIFICATION_NEW_ORDER )
-
-
-    @staticmethod
     def send_notification( user, notification ):
         """
         Sends e-mail from site notifying an user of a relevant update

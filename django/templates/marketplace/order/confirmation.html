@@ -14,10 +14,11 @@
                 {% if boleto_url %}
                     <p>{% trans 'Your Boleto Link:' %} <a href="{{ boleto_url }}">{{ boleto_url }}</a></p>
                 {% endif %}
-                {% if download_url %}
-                    <p>{% trans 'Your Download Link:' %} <a href="{{ download_url }}">{{ download_url }}</a></p>
+                {% if extra_message %}
+                    <p>{{ extra_message }}</p>
+                {% else %}
+                    <p>{% trans 'You will receive an email confirmation with all the details.' %}</p>
                 {% endif %}
-                <p>{% trans 'You will receive an email confirmation with all the details.' %}</p>
             </div>
         </div>
     </div>

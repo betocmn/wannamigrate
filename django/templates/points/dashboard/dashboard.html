@@ -123,9 +123,8 @@
                 <div class="step-by-step">
                     <p class="locked">{% trans "You still don’t have enough points<br />to migrate to this country" %}</p>
                     <ul class="step-by">
-                        <li class="item check"><a href="#">{% trans "Check my results" %}</a></li>
-                        <li class="item visa"><a href="#">{% trans "Apply for the visa" %}</a></li>
-                        <li class="item moving-to"><a href="#">{% trans "Hire a professional" %}</a></li>
+                        <li class="item check"><a href="#">{% trans "Check country result" %}</a></li>
+                        <li class="item moving-to"><a href="#">{% trans "Get professional help" %}</a></li>
                     </ul>
                 </div>
             </div>
@@ -178,7 +177,6 @@
                 $( '.choose-country' ).hide();
                 $( '.step-by-step' ).fadeIn( 'fast' );
                 $( '.step-by-step .item.check a').attr( 'href', '{% url 'points:situation' 'australia' %}' );
-                $( '.step-by-step .item.visa a').attr( 'href', '{% url 'points:visa_application' 'australia' %}' );
                 $( '.step-by-step .item.moving-to a').attr( 'href', '{% url 'points:professional_help' 'australia' %}' );
                 {% if au_points < au_min_points %}
                     $( '.step-by-step p.locked' ).show();
@@ -194,7 +192,6 @@
                 $( '.choose-country' ).hide();
                 $( '.step-by-step' ).fadeIn( 'fast' );
                 $( '.step-by-step .item.check a').attr( 'href', '{% url 'points:situation' 'canada' %}' );
-                $( '.step-by-step .item.visa a').attr( 'href', '{% url 'points:visa_application' 'canada' %}' );
                 $( '.step-by-step .item.moving-to a').attr( 'href', '{% url 'points:professional_help' 'canada' %}' );
                 {% if ca_points < ca_min_points %}
                     $( '.step-by-step p.locked' ).show();
@@ -210,7 +207,6 @@
                 $( '.choose-country' ).hide();
                 $( '.step-by-step' ).fadeIn( 'fast' );
                 $( '.step-by-step .item.check a').attr( 'href', '{% url 'points:situation' 'new-zealand' %}' );
-                $( '.step-by-step .item.visa a').attr( 'href', '{% url 'points:visa_application' 'new-zealand' %}' );
                 $( '.step-by-step .item.moving-to a').attr( 'href', '{% url 'points:professional_help' 'new-zealand' %}' );
                 {% if nz_points < nz_min_points %}
                     $( '.step-by-step p.locked' ).show();

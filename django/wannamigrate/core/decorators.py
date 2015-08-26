@@ -77,3 +77,15 @@ def ajax_login_required( view_func ):
         else:
             return HttpResponse( status = 401 )
     return _wrapped_view
+
+
+def subscription_required( view_func ):
+    """
+    Wraps an check to see if there's an active subscription in the session
+    """
+    def _wrapped_view(request, *args, **kwargs):
+        if 'subscription' not in request.session or request.session['subscription'] is None:
+            return HttpResponseRedirect( reverse( 'marketplace:immi_box' ) )
+        else:
+            return view_func(request, *args, **kwargs)
+    return _wrapped_view

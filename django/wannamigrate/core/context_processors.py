@@ -26,6 +26,10 @@ def add_global_template_data( request ):
     # Determine if we are in PROD server or not
     template_data['is_prod'] = getattr( settings, 'IS_PROD', False )
 
+    # Set destination country IDs
+    template_data['ID_COUNTRY_AUSTRALIA'] = getattr( settings, 'ID_COUNTRY_AUSTRALIA', False )
+    template_data['ID_COUNTRY_CANADA'] = getattr( settings, 'ID_COUNTRY_CANADA', False )
+
     # Full path
     template_data['relative_full_path'] = request.get_full_path()
 

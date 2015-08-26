@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.7/topics/http/middleware/
 from django.conf import settings
 from django.utils import translation
 from wannamigrate.core.models import Situation, Country, Goal, Notification, Language, UserSituation
+from wannamigrate.marketplace.models import Subscription
+from wannamigrate.core.util import get_list_or_false
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models import F
@@ -168,6 +170,38 @@ class SituationMiddleware( object ):
             request.session['situation']['to_country']['name'] = to_country.name
             request.session['situation']['to_country']['code'] = to_country.code
             request.session['situation']['total_users'] = situation.total_users
+
+
+
+
+
+##########################
+# Subscription Midlleware
+##########################
+class SubscriptionMiddleware( object ):
+
+    def process_request( self, request ):
+
+        # if language was still not set
+        if request.user.is_authenticated() and 'subscription' not in request.session:
+
+            # searches for active subscriptions
+            subscriptions = Subscription.get_listing( request.user.id )
+            if subscriptions:
+                records = []
+                countries = []
+                for subscription in subscriptions:
+                    records.append({
+                        'id': subscription.id,
+                        'country_id': subscription.product.country_id,
+                        'product_id': subscription.product_id,
+                    })
+                    countries.append( subscription.product.country_id )
+                request.session['subscription'] = {}
+                request.session['subscription']['subscriptions'] = records
+                request.session['subscription']['countries'] = countries
+            else:
+                request.session['subscription'] = None
 
 
 

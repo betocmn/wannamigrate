@@ -24,7 +24,6 @@
             <div class="main">
                 <ul class="options">
                     <li class="option situation"><a href="{% url 'points:situation' country_name %}">{% trans "My situation" %}</a></li>
-                    <li class="option visa"><a href="{% url 'points:visa_application' country_name %}">{% trans "Visa application" %}</a></li>
                     <li class="option movingto active"><a href="{% url 'points:professional_help' country_name %}">{% trans "Get expert help" %}</a></li>
                 </ul>
                 <div class="visa-application guide-steps">
@@ -32,7 +31,7 @@
 
                         <div class="visa-topic">
 
-                            <p class="text"> <a href="{% url 'marketplace:professionals' %}">{% trans "Click Here" %}:</a>{% trans " to search for an expert that can help you with you migration plan." %}</p>
+                            <p class="text"> <a href="{% url 'marketplace:immi_box' %}">{% trans "Subscribe to the Immi Box " %}</a> {% trans "to have full access to all the immigration tools you need." %}</p>
                             <img src="{% static "site/img/temp-visa-image.jpg" %}" />
 
                         </div>

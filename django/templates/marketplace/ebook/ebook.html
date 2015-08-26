@@ -43,11 +43,6 @@
 
 {% block content %}
 
-    <form id="product_form" method="post" action="">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" id="product_id" value="" />
-    </form>
-
     {% if LANGUAGE_CODE == 'en' %}
         <section class="books_block">
             {% include "site/_common/status.html" %}
@@ -67,22 +62,27 @@
                     <li>{% trans "How to study, work and do business in Canada" %}</li>
                     <li>{% trans "How to take your family to Canada" %}</li>
                 </ul>
-                <span class="small">{% trans "You will receive a link to download the ebook in PDF." %}</span>
+                <span class="small">
+                    {% trans "You can open the book if you have an" %}
+                    <a href="{% url 'marketplace:subscription' %}">{% trans "active subscription" %}</a>
+                    {% trans "for this country." %}
+                </span>
             </div>
             <div class="books_bottom">
-                <div class="price">
-                    R$ <span>19,00<sup></sup><!--<sup>90</sup>--></span>
-                </div>
-                <div class="but">
-                    <a href="#" data-productid="1" class="bt-edit button">{% trans "Buy Guide" %}</a>
-                </div>
+
+                {% if request.session.situation.to_country.id == ID_COUNTRY_CANADA %}
+                    <div class="but">
+                        <a href="{% url 'marketplace:ebook_read' 'canada' %}" class="bt-edit button">{% trans "Open" %}</a>
+                    </div>
+                {% endif %}
+
                 <div class="preview">
-                    <a href="#" class="open-gallery">{% trans "preview book" %}</a>
+                    <a href="#" class="open-gallery ca">{% trans "preview book" %}</a>
                 </div>
             </div>
         </div>
         <div class="right">
-            <ul class="gallery">
+            <ul class="gallery ca">
                 <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' %}">
                     <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
                 </li>
@@ -117,29 +117,56 @@
                 {% trans 'Guide - How to move to Australia' %}
             </div>
             <div class="text">
-                {% trans "Coming soon!" %}
-                <!--
+                {% trans "The perfect guide if you want to live in Australia and don't know where to begin. You will learn:" %}
                 <ul>
-                    <li>{% trans "Why Canada and your immigration options" %}</li>
+                    <li>{% trans "Why Australia and your immigration options" %}</li>
                     <li>{% trans "How to start and execute your plan" %}</li>
-                    <li>{% trans "How to study, work and do business in Canada" %}</li>
-                    <li>{% trans "How to take your family to Canada" %}</li>
+                    <li>{% trans "How to study, work and do business in Australia" %}</li>
+                    <li>{% trans "How to take your family to Australia" %}</li>
                 </ul>
-                -->
+                <span class="small">
+                    {% trans "You can open the book if you have an" %}
+                    <a href="{% url 'marketplace:subscription' %}">{% trans "active subscription" %}</a>
+                    {% trans "for this country." %}
+                </span>
             </div>
             <div class="books_bottom">
-                <!--
-                <div class="price">
-                    R$ <span>19,00<sup></sup></span>
+
+                {% if request.session.situation.to_country.id == ID_COUNTRY_AUSTRALIA %}
+                    <div class="but">
+                        <a href="{% url 'marketplace:ebook_read' 'australia' %}" class="bt-edit button">{% trans "Open" %}</a>
+                    </div>
+                {% endif %}
+
+                <div class="preview">
+                    <a href="#" class="open-gallery au">{% trans "preview book" %}</a>
                 </div>
-                <div class="but">
-                    <a href="#" class="bt-edit button">{% trans "Buy Guide" %}</a>
-                </div>
-                -->
             </div>
         </div>
         <div class="right">
-            <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+            <ul class="gallery au">
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-1.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-2.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-3.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-4.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-5.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-6.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+                <li data-src="{% static 'site/img/e-book-como-mudar-para-a-australia-preview-7.jpg' %}">
+                    <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -192,10 +219,10 @@
 
     <section class="call_to_action">
         <div class="left">
-            {% trans "Sign-up and get more help" %}
+            {% trans "Full access to all the tools?" %}
         </div>
         <div class="but">
-            <a href="{% url 'site:dashboard' %}" class="bt-edit button">{% trans "Start now. It's free" %}</a>
+            <a href="{% url 'marketplace:subscription' %}" class="bt-edit button">{% trans "Subscribe Now" %}</a>
         </div>
     </section>
 
@@ -215,13 +242,6 @@
     <script type="text/javascript">
 
         $( document ).ready( function() {
-
-            // submits form for each button (from books)
-            $( '.books_bottom .but .button' ).click( function( event ) {
-                event.preventDefault();
-                $( "#product_id" ).val( $( this ).attr( 'data-productid' ) );
-                $( "#product_form" ).submit();
-            });
 
             // plugin for testmonials slides
             $( '.flexslider' ).flexslider({
@@ -243,9 +263,13 @@
             $( ".gallery" ).lightGallery({
                 lang: { allPhotos: '{% trans "First pages" %}' }
             });
-            $( 'a.open-gallery' ).click( function( event ) {
+            $( 'a.open-gallery.ca' ).click( function( event ) {
                 event.preventDefault();
-                $( ".gallery li" ).first().trigger( "click" );
+                $( ".gallery.ca li" ).first().trigger( "click" );
+            });
+            $( 'a.open-gallery.au' ).click( function( event ) {
+                event.preventDefault();
+                $( ".gallery.au li" ).first().trigger( "click" );
             });
 
         });

@@ -46,7 +46,6 @@ from wannamigrate.points.models import (
 #######################
 # DASHBOARD VIEWS
 #######################
-@login_required
 def dashboard( request ):
     """
     Process the dashboard page.
@@ -59,12 +58,15 @@ def dashboard( request ):
     """
 
     # If User edited data, but did not calculate points by clicking in save and exit
-    try:
-        user_stats = UserStats.objects.get( user = request.user )
-    except UserStats.DoesNotExist:
+    if request.user.is_authenticated():
+        try:
+            user_stats = UserStats.objects.get( user = request.user )
+        except UserStats.DoesNotExist:
+            user_stats = False
+        if user_stats and user_stats.updating_now:
+            return HttpResponseRedirect( reverse( "points:calculate_points" ) )
+    else:
         user_stats = False
-    if user_stats and user_stats.updating_now:
-        return HttpResponseRedirect( reverse( "points:calculate_points" ) )
 
     # Instantiate all country_config
     country_config = CountryConfig.objects.all()
@@ -94,9 +96,12 @@ def dashboard( request ):
     template_data['work_percentage'] = 0
 
     # Get User Results per country
-    try:
-        user_result = UserResult.objects.filter( user = request.user )
-    except UserResult.DoesNotExist:
+    if request.user.is_authenticated():
+        try:
+            user_result = UserResult.objects.filter( user = request.user )
+        except UserResult.DoesNotExist:
+            user_result = False
+    else:
         user_result = False
 
     # Pass total points per country to template
@@ -775,50 +780,6 @@ def situation( request, country_name ):
 
     # Print Template
     return render( request, 'points/country/situation.html', template_data )
-
-
-@login_required
-def visa_application( request, country_name ):
-    """
-    Visa Application
-
-    :param: request
-    :param country_name:
-    :return: String - HTML
-    """
-
-    # Initializes template data
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Visa Application - Immigration Calculator - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Check your chances of obtaining a permanent visa to move to Canada, Australia or New Zealand.' )
-
-    # Initial settings
-    template_data['top_bar_css_class'] = "fixTopBar"
-    template_data['country_name'] = country_name
-
-    # Get Country and set options for it
-    if country_name == 'australia':
-        country = Country.objects.get( pk = settings.ID_COUNTRY_AUSTRALIA )
-        template_data['map_css_class'] = 'australia'
-        template_data['country_name_as_label'] = _( 'Australia' )
-
-    elif country_name == 'canada':
-        country = Country.objects.get( pk = settings.ID_COUNTRY_CANADA )
-        template_data['map_css_class'] = 'canada'
-        template_data['country_name_as_label'] = _( 'Canada' )
-
-    elif country_name == 'new-zealand':
-        country = Country.objects.get( pk = settings.ID_COUNTRY_NEW_ZEALAND )
-        template_data['map_css_class'] = 'newzealand'
-        template_data['country_name_as_label'] = _( 'New Zealand' )
-
-    else:
-        return HttpResponseRedirect( reverse( "points:dashboard" ) )
-
-    # Print Template
-    return render( request, 'points/country/visa_application.html', template_data )
 
 
 @login_required
