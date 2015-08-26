@@ -587,7 +587,7 @@ def payment( request ):
         service.service_status_id = ServiceStatus.get_status_from_order_status()
         service.save()
         request.session['payment']['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
-    else:
+    elif not is_service:
         if request.session['payment']['product']['product_category_id'] in settings.SUBSCRIPTION_PRODUCT_CATEGORIES:
             is_subscription = True
             if 'subscription' not in request.session['payment']:
