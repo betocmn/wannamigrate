@@ -70,7 +70,7 @@
             </div>
             <div class="books_bottom">
 
-                {% if request.session.situation.to_country.id == ID_COUNTRY_CANADA %}
+                {% if request.session.situation.to_country.id == ID_COUNTRY_CANADA and ID_COUNTRY_CANADA in request.session.subscription.countries %}
                     <div class="but">
                         <a href="{% url 'marketplace:ebook_read' 'canada' %}" class="bt-edit button">{% trans "Open" %}</a>
                     </div>
@@ -132,7 +132,7 @@
             </div>
             <div class="books_bottom">
 
-                {% if request.session.situation.to_country.id == ID_COUNTRY_AUSTRALIA %}
+                {% if request.session.situation.to_country.id == ID_COUNTRY_AUSTRALIA and ID_COUNTRY_AUSTRALIA in request.session.subscription.countries %}
                     <div class="but">
                         <a href="{% url 'marketplace:ebook_read' 'australia' %}" class="bt-edit button">{% trans "Open" %}</a>
                     </div>
