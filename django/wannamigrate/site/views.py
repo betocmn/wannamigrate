@@ -568,19 +568,7 @@ def tools( request ):
     :param: request
     :return String - HTML
     """
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immigration Tools - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Use our tools to help you with your immigration plan. You can use an immigration calculator, download immigration guides and more.' )
-
-    # Gets Situation Form
-    template_data['situation_form'] = get_situation_form( request )
-
-    # Print Template
-    return render( request, 'site/tools/tools.html', template_data )
+    return redirect( reverse( 'marketplace:immi_box' ), permanent = True )
 
 
 
@@ -1134,7 +1122,6 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
-    #return HttpResponse( Goal.objects.get( pk = request.session['situation']['goal']['id'] ) )
     # Initial template
     template_data = {}
 

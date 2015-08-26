@@ -554,13 +554,33 @@ class Subscription( BaseModel ):
     user = models.ForeignKey( 'core.User', verbose_name = _( 'user' ) )
     product = models.ForeignKey( 'Product', verbose_name = _( 'product' ) )
     subscription_status = models.ForeignKey( 'SubscriptionStatus', verbose_name = _( 'subscription status' ) )
-    start_date = models.DateField( _( 'start date' ) )
-    expiry_date = models.DateField( _( 'expiry date' ) )
+    start_date = models.DateField( _( 'start date' ),blank = True, null = True, default = None )
+    expiry_date = models.DateField( _( 'expiry date' ),blank = True, null = True, default = None  )
 
     # META Options
     class Meta:
         default_permissions = []
 
+    # Class Methods
+    @staticmethod
+    def get_listing( user_id ):
+        """
+        Query used to search for subscriptions with product details
+
+        :param: user_id
+        :return: Objects
+        """
+
+        subscriptions = Subscription.objects.select_related(
+            'product'
+        ).filter(
+            user_id = user_id,
+            subscription_status_id = settings.ID_SUBSCRIPTION_STATUS_ACTIVE
+        ).only(
+            'id', 'product__country_id', 'product_id'
+        )
+
+        return subscriptions
 
 
 class SubscriptionStatus( BaseModel ):
@@ -574,3 +594,23 @@ class SubscriptionStatus( BaseModel ):
     # META Options
     class Meta:
         default_permissions = []
+
+    # Class Methods
+    @staticmethod
+    def get_status_from_order_status( order_status_id = None ):
+        """
+        Return the correct subscription status accordingly to the
+        payment result code
+
+        :param: result_code
+        :return: Int
+        """
+
+        if not order_status_id or order_status_id == settings.ID_ORDER_STATUS_PENDING:
+            return settings.ID_SUBSCRIPTION_STATUS_PENDING
+
+        elif order_status_id == settings.ID_ORDER_STATUS_APPROVED:
+            return settings.ID_SUBSCRIPTION_STATUS_ACTIVE
+
+        else:
+            return settings.ID_SUBSCRIPTION_STATUS_CANCELLED

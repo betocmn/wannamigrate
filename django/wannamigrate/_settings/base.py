@@ -157,6 +157,7 @@ MIDDLEWARE_CLASSES = (
     'wannamigrate.core.middleware.LocaleMiddleware',
     'wannamigrate.core.middleware.SituationMiddleware',
     'wannamigrate.core.middleware.EmailValidationMiddleware',
+    'wannamigrate.core.middleware.SubscriptionMiddleware',
     'wannamigrate.core.middleware.NotificationMiddleware',
 )
 
@@ -306,6 +307,15 @@ GEOIP_COUNTRY = 'GeoIP.dat'
 
 
 #########################################
+# SUBSCRIPTION SETTINGS
+#########################################
+SUBSCRIPTION_PRODUCT_CATEGORIES = [2,3]
+
+
+
+
+
+#########################################
 # IMMIGRATION POINTS SETTINGS
 #########################################
 
@@ -436,6 +446,12 @@ ID_SERVICE_STATUS_PENDING = 1
 ID_SERVICE_STATUS_STARTED = 2
 ID_SERVICE_STATUS_COMPLETED = 3
 ID_SERVICE_STATUS_CANCELLED = 4
+
+# Database IDs for subscription statuses
+ID_SUBSCRIPTION_STATUS_PENDING = 1
+ID_SUBSCRIPTION_STATUS_ACTIVE = 2
+ID_SUBSCRIPTION_STATUS_EXPIRED = 3
+ID_SUBSCRIPTION_STATUS_CANCELLED = 4
 
 
 

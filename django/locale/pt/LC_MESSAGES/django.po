@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 18:43-0300\n"
+"POT-Creation-Date: 2015-08-26 00:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,8 @@ msgid "Q&A"
 msgstr "Tira-Dúvidas"
 
 #: templates/_layouts/main.html:89 templates/_layouts/main.html.py:133
-#: templates/marketplace/immi_box/immi_box_NEW.html:28
+#: templates/emails/order_confirmation_user.html:147
+#: templates/marketplace/immi_box/subscription.html:28
 msgid "Immi Box"
 msgstr "Immi Box"
 
@@ -121,16 +122,16 @@ msgstr ""
 "                                    "
 
 #: templates/_layouts/main.html:148 templates/site/home/home.html:43
-#: wannamigrate/site/views.py:1247
+#: wannamigrate/site/views.py:1234
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:152 templates/site/home/home.html:47
-#: wannamigrate/site/views.py:1250
+#: wannamigrate/site/views.py:1237
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:156 wannamigrate/site/views.py:1252
+#: templates/_layouts/main.html:156 wannamigrate/site/views.py:1239
 msgid "in"
 msgstr "no(a)"
 
@@ -159,6 +160,7 @@ msgid "Ask a Question"
 msgstr "Faça uma Pergunta"
 
 #: templates/_layouts/main.html:186
+#: templates/marketplace/immi_box/immi_box.html:23
 #: templates/points/dashboard/dashboard.html:18
 #: templates/site/tools/tools.html:20
 msgid "Immigration Points Calculator"
@@ -1230,8 +1232,8 @@ msgstr "Samoa Americana"
 #: templates/db_translations/core_country.html:118
 #: templates/db_translations/qa_topic.html:7
 #: templates/points/dashboard/dashboard.html:88
-#: templates/site/guide/guide.html:169 wannamigrate/points/views.py:617
-#: wannamigrate/points/views.py:805 wannamigrate/points/views.py:845
+#: templates/site/guide/guide.html:169 wannamigrate/points/views.py:622
+#: wannamigrate/points/views.py:806
 msgid "Australia"
 msgstr "Austrália"
 
@@ -1291,8 +1293,7 @@ msgstr "Nova Caledônia"
 #: templates/db_translations/core_country.html:132
 #: templates/db_translations/qa_topic.html:9
 #: templates/points/dashboard/dashboard.html:106
-#: wannamigrate/points/views.py:637 wannamigrate/points/views.py:815
-#: wannamigrate/points/views.py:855
+#: wannamigrate/points/views.py:642 wannamigrate/points/views.py:816
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
@@ -1599,8 +1600,8 @@ msgstr "Ilhas Virgens Britânicas"
 #: templates/db_translations/core_country.html:205
 #: templates/db_translations/qa_topic.html:8
 #: templates/points/dashboard/dashboard.html:97
-#: templates/site/guide/guide.html:39 wannamigrate/points/views.py:627
-#: wannamigrate/points/views.py:810 wannamigrate/points/views.py:850
+#: templates/site/guide/guide.html:39 wannamigrate/points/views.py:632
+#: wannamigrate/points/views.py:811
 msgid "Canada"
 msgstr "Canadá"
 
@@ -2554,6 +2555,49 @@ msgstr "Guia - Como Mudar para o Canadá"
 msgid "A complete step-by-step guide about immigrating to Canada."
 msgstr "Guia completo com passo-a-passo sobre imigração para o Canadá."
 
+#: templates/db_translations/marketplace_product.html:3
+msgid "Subscription 1 Year - Australia"
+msgstr "Assinatura de 1 Ano - Austrália"
+
+#: templates/db_translations/marketplace_product.html:3
+msgid ""
+"1 year of full-access to the Immi Box - Immigration tools - for Australia"
+msgstr ""
+"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Austrália"
+
+#: templates/db_translations/marketplace_product.html:4
+msgid "Subscription 1 Year - Canada"
+msgstr "Assinatura de 1 Ano - Canadá"
+
+#: templates/db_translations/marketplace_product.html:4
+msgid "1 year of full-access to the Immi Box - Immigration tools - for Canada"
+msgstr ""
+"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Canadá"
+
+#: templates/db_translations/marketplace_product.html:5
+msgid "Subscription 1 Year - Australia (With Support)"
+msgstr "Assinatura de 1 Ano - Austrália (Com Suporte)"
+
+#: templates/db_translations/marketplace_product.html:5
+msgid ""
+"1 year of full-access to the Immi Box - Immigration tools - for Australia, "
+"including email support"
+msgstr ""
+"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - "
+"Austrália, incluindo suporte por email"
+
+#: templates/db_translations/marketplace_product.html:6
+msgid "Subscription 1 Year - Canada (With Support)"
+msgstr "Assinatura de 1 Ano - Canadá (Com Suporte)"
+
+#: templates/db_translations/marketplace_product.html:6
+msgid ""
+"1 year of full-access to the Immi Box - Immigration tools - for Canada, "
+"including email support"
+msgstr ""
+"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Canadá, "
+"incluindo suporte por email"
+
 #: templates/db_translations/marketplace_servicetype.html:2
 msgid "Initial Consultation Skype 30-min"
 msgstr "Consulta Inicial Skype 30-min"
@@ -2958,9 +3002,8 @@ msgid ""
 "to Canada and Australia with 1 hour of duration, final report and "
 "immigration guides as e-books."
 msgstr ""
-"Avaliação individual (ou em casal) presencial de imigração "
-"para o Canadá ou Austrália, com 1 hora de duração, relatório final e "
-"e-book de imigração."
+"Avaliação individual (ou em casal) presencial de imigração para o Canadá ou "
+"Austrália, com 1 hora de duração, relatório final e e-book de imigração."
 
 #: templates/db_translations/marketplace_servicetype.html:35
 msgid "In-Person Group Evaluation"
@@ -5964,7 +6007,7 @@ msgid "Move Countries"
 msgstr "Mudança de País"
 
 #: templates/db_translations/qa_topic.html:51
-#: templates/points/country/situation.html:64
+#: templates/points/country/situation.html:63
 #: templates/points/dashboard/dashboard.html:67
 msgid "Work"
 msgstr "Trabalho"
@@ -6020,7 +6063,6 @@ msgstr "Você tem uma notificação"
 #: templates/emails/notification.html:43
 #: templates/emails/order_confirmation_provider.html:43
 #: templates/emails/order_confirmation_user.html:43
-#: templates/emails/order_download_link.html:43
 #: templates/emails/reset_password.html:43
 #: templates/emails/welcome_provider.html:43
 #: templates/emails/welcome_user.html:44
@@ -6115,37 +6157,9 @@ msgstr "Ver Boleto"
 msgid "Professional"
 msgstr "Profissional"
 
-#: templates/emails/order_confirmation_user.html:147
-msgid "Download"
-msgstr "Download"
-
 #: templates/emails/order_confirmation_user.html:148
-msgid ""
-"You will receive another email with a download link, when the payment is "
-"approved."
-msgstr ""
-"Você receberá outro email com o link de download, após a aprovação do "
-"pagamento."
-
-#: templates/emails/order_download_link.html:28
-#: wannamigrate/core/mailer.py:250
-msgid "Your Download Link"
-msgstr "Link para Download"
-
-#: templates/emails/order_download_link.html:46
-msgid "This is your download link for your recent order on Wanna Migrate."
-msgstr "Este é o link de download para a sua compra recente no Wanna Migrate."
-
-#: templates/emails/order_download_link.html:48
-msgid ""
-"It will be valid for 3 days. Click the button below to download the e-book:"
-msgstr ""
-"O link estará válido por 3 dias. Clique no botão abaixo para fazer o "
-"download do e-book:"
-
-#: templates/emails/order_download_link.html:68
-msgid "Download Now"
-msgstr "Fazer Download"
+msgid "You will have full access on your login after the payment is approved."
+msgstr "Você terá acesso completo no seu login após a aprovação do pagamento."
 
 #: templates/emails/reset_password.html:28
 msgid "Reset you Password"
@@ -6218,7 +6232,7 @@ msgstr "Avaliação de Imigração"
 
 #: templates/marketplace/consulting/consulting.html:31
 #: templates/marketplace/ebook/ebook.html:31
-#: templates/marketplace/immi_box/immi_box_NEW.html:31
+#: templates/marketplace/immi_box/subscription.html:31
 msgid "Get ready for your dream country"
 msgstr "Prepare-se para o país dos seus sonhos"
 
@@ -6229,7 +6243,7 @@ msgstr "Consultas presenciais para analisar suas chances"
 #: templates/marketplace/consulting/consulting.html:37
 #: templates/marketplace/ebook/ebook.html:37
 #: templates/marketplace/ielts/ielts.html:37
-#: templates/marketplace/immi_box/immi_box_NEW.html:37
+#: templates/marketplace/immi_box/subscription.html:37
 msgid "arrow-bottom"
 msgstr "descer"
 
@@ -6246,7 +6260,7 @@ msgid "Analyze your chances to immigrate to Canada or Australia."
 msgstr "Descubra suas chances de imigrar para Canadá ou Austrália."
 
 #: templates/marketplace/consulting/consulting.html:67
-#: templates/marketplace/consulting/consulting.html:108
+#: templates/marketplace/consulting/consulting.html:104
 msgid "Duration: 1 hour"
 msgstr "Duração: 1 hora"
 
@@ -6255,25 +6269,23 @@ msgid "Learn immigration options and measure your chances"
 msgstr "Descubra as opções de imigração e suas chances"
 
 #: templates/marketplace/consulting/consulting.html:69
-#: templates/marketplace/ebook/ebook.html:66
-#: templates/marketplace/ebook/ebook.html:124
-#: templates/marketplace/immi_box/immi_box_NEW.html:66
-#: templates/marketplace/immi_box/immi_box_NEW.html:124
+#: templates/marketplace/ebook/ebook.html:61
+#: templates/marketplace/ebook/ebook.html:123
 msgid "How to start and execute your plan"
 msgstr "Como iniciar e executar o seu plano"
 
 #: templates/marketplace/consulting/consulting.html:70
-#: templates/marketplace/consulting/consulting.html:111
+#: templates/marketplace/consulting/consulting.html:107
 msgid "How to study, work and do business in Canada or Australia"
 msgstr "Como estudar, trabalhar e fazer negócios no Canadá ou Austrália"
 
 #: templates/marketplace/consulting/consulting.html:71
-#: templates/marketplace/consulting/consulting.html:112
+#: templates/marketplace/consulting/consulting.html:108
 msgid "How to take your family to Canada or Australia"
 msgstr "Como levar sua família para o Canadá ou Austrália"
 
 #: templates/marketplace/consulting/consulting.html:72
-#: templates/marketplace/consulting/consulting.html:113
+#: templates/marketplace/consulting/consulting.html:109
 msgid "Receive a personal report and immigration e-book"
 msgstr "Receba um relatório individual e um e-book"
 
@@ -6282,86 +6294,66 @@ msgid "You will receive a confirmation email after the payment."
 msgstr "Você receberá um email de confirmação após o pagamento."
 
 #: templates/marketplace/consulting/consulting.html:81
-#: templates/marketplace/consulting/consulting.html:122
+#: templates/marketplace/consulting/consulting.html:118
 msgid "Buy"
 msgstr "Comprar"
 
-#: templates/marketplace/consulting/consulting.html:89
+#: templates/marketplace/consulting/consulting.html:87
+#: templates/marketplace/consulting/consulting.html:124
 msgid "Immigration Consulting"
 msgstr "Consultoria de Imigração"
 
-#: templates/marketplace/consulting/consulting.html:101
+#: templates/marketplace/consulting/consulting.html:97
 msgid "Immigration Individual Evaluation in São Luís/MA"
 msgstr "Avaliação Individual de Imigração em São Luís/MA"
 
-#: templates/marketplace/consulting/consulting.html:103
+#: templates/marketplace/consulting/consulting.html:99
 msgid "26th of August to 15th of September"
 msgstr "26 de Agosto a 15 de Setembro"
 
-#: templates/marketplace/consulting/consulting.html:106
+#: templates/marketplace/consulting/consulting.html:102
 msgid ""
 "Analyze your individual chances (or as a couple) to immigrate to Canada or "
 "Australia."
 msgstr ""
-"Analise suas chances individuais (ou em casal) de imigrar ao Canadá "
-"ou a Austrália."
+"Analise suas chances individuais (ou em casal) de imigrar ao Canadá ou a "
+"Austrália."
 
-#: templates/marketplace/consulting/consulting.html:109
+#: templates/marketplace/consulting/consulting.html:105
 msgid "Receive immigration options accordingly to your profile"
 msgstr "Opções de imigração de acordo com o seu perfil"
 
-#: templates/marketplace/consulting/consulting.html:110
+#: templates/marketplace/consulting/consulting.html:106
 msgid "Receive a personal step-by-step plan"
 msgstr "Plano pessoal em formato passo-a-passo"
 
-#: templates/marketplace/consulting/consulting.html:115
+#: templates/marketplace/consulting/consulting.html:111
 msgid "You will be able to schedule a day and time after the payment."
 msgstr "Você poderá agendar a data e horário após o pagamento."
 
-#: templates/marketplace/consulting/consulting.html:130
-#: templates/marketplace/ebook/ebook.html:60
-#: templates/marketplace/ebook/ebook.html:87
-#: templates/marketplace/ebook/ebook.html:90
-#: templates/marketplace/ebook/ebook.html:93
-#: templates/marketplace/ebook/ebook.html:96
-#: templates/marketplace/ebook/ebook.html:99
-#: templates/marketplace/ebook/ebook.html:102
-#: templates/marketplace/ebook/ebook.html:105
-#: templates/marketplace/immi_box/immi_box_NEW.html:60
-#: templates/marketplace/immi_box/immi_box_NEW.html:87
-#: templates/marketplace/immi_box/immi_box_NEW.html:90
-#: templates/marketplace/immi_box/immi_box_NEW.html:93
-#: templates/marketplace/immi_box/immi_box_NEW.html:96
-#: templates/marketplace/immi_box/immi_box_NEW.html:99
-#: templates/marketplace/immi_box/immi_box_NEW.html:102
-#: templates/marketplace/immi_box/immi_box_NEW.html:105
-#: templates/qa/blogpost/view.html:65 templates/qa/question/view.html:205
-#: templates/site/guide/guide.html:36
-msgid "Guide - How to move to Canada"
-msgstr "Guia - Como mudar para o Canadá"
-
-#: templates/marketplace/consulting/consulting.html:144
-#: templates/marketplace/ebook/ebook.html:154
+#: templates/marketplace/consulting/consulting.html:136
+#: templates/marketplace/ebook/ebook.html:181
 #: templates/marketplace/ielts/ielts.html:160
-#: templates/marketplace/immi_box/immi_box_NEW.html:154
+#: templates/marketplace/immi_box/subscription.html:199
+#: templates/marketplace/immi_box/subscription.html:218
 msgid "What our users say"
 msgstr "O que nossos usuários falam"
 
-#: templates/marketplace/consulting/consulting.html:147
-#: templates/marketplace/consulting/consulting.html:166
-#: templates/marketplace/ebook/ebook.html:157
-#: templates/marketplace/ebook/ebook.html:176
+#: templates/marketplace/consulting/consulting.html:139
+#: templates/marketplace/consulting/consulting.html:158
+#: templates/marketplace/ebook/ebook.html:184
+#: templates/marketplace/ebook/ebook.html:203
 #: templates/marketplace/ielts/ielts.html:163
 #: templates/marketplace/ielts/ielts.html:182
-#: templates/marketplace/immi_box/immi_box_NEW.html:157
-#: templates/marketplace/immi_box/immi_box_NEW.html:176
+#: templates/marketplace/immi_box/subscription.html:202
+#: templates/marketplace/immi_box/subscription.html:221
 msgid "quotes"
 msgstr "depoimentos"
 
-#: templates/marketplace/consulting/consulting.html:150
-#: templates/marketplace/ebook/ebook.html:160
+#: templates/marketplace/consulting/consulting.html:142
+#: templates/marketplace/ebook/ebook.html:187
 #: templates/marketplace/ielts/ielts.html:166
-#: templates/marketplace/immi_box/immi_box_NEW.html:160
+#: templates/marketplace/immi_box/subscription.html:205
 msgid ""
 "You guys built a very rich content, with excellent hints. This guide could "
 "easily save months of research of information."
@@ -6369,31 +6361,30 @@ msgstr ""
 "O site conseguiu criar um conteúdo super rico, com dicas geniais. Este guia "
 "pode facilmente economizar meses de trabalho de busca por informação."
 
-#: templates/marketplace/consulting/consulting.html:154
-#: templates/marketplace/ebook/ebook.html:164
+#: templates/marketplace/consulting/consulting.html:146
+#: templates/marketplace/ebook/ebook.html:191
 #: templates/marketplace/ielts/ielts.html:170
-#: templates/marketplace/immi_box/immi_box_NEW.html:164
+#: templates/marketplace/immi_box/subscription.html:209
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
-#: templates/marketplace/consulting/consulting.html:156
-#: templates/marketplace/ebook/ebook.html:166
+#: templates/marketplace/consulting/consulting.html:148
+#: templates/marketplace/ebook/ebook.html:193
 #: templates/marketplace/ielts/ielts.html:172
-#: templates/marketplace/immi_box/immi_box_NEW.html:166
+#: templates/marketplace/immi_box/subscription.html:211
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
-#: templates/marketplace/consulting/consulting.html:163
-#: templates/marketplace/ebook/ebook.html:173
+#: templates/marketplace/consulting/consulting.html:155
+#: templates/marketplace/ebook/ebook.html:200
 #: templates/marketplace/ielts/ielts.html:179
-#: templates/marketplace/immi_box/immi_box_NEW.html:173
 msgid "What our readers say"
 msgstr "Opinião de quem já leu"
 
-#: templates/marketplace/consulting/consulting.html:169
-#: templates/marketplace/ebook/ebook.html:179
+#: templates/marketplace/consulting/consulting.html:161
+#: templates/marketplace/ebook/ebook.html:206
 #: templates/marketplace/ielts/ielts.html:185
-#: templates/marketplace/immi_box/immi_box_NEW.html:179
+#: templates/marketplace/immi_box/subscription.html:224
 msgid ""
 "I had no idea I had most of the requirements to get a visa to live in Canada "
 "until I read the e-book."
@@ -6401,17 +6392,17 @@ msgstr ""
 "Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
 "o e-book. Agora, esta é uma das minhas possibilidades para os próximos anos."
 
-#: templates/marketplace/consulting/consulting.html:173
-#: templates/marketplace/ebook/ebook.html:183
+#: templates/marketplace/consulting/consulting.html:165
+#: templates/marketplace/ebook/ebook.html:210
 #: templates/marketplace/ielts/ielts.html:189
-#: templates/marketplace/immi_box/immi_box_NEW.html:183
+#: templates/marketplace/immi_box/subscription.html:228
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
-#: templates/marketplace/consulting/consulting.html:175
-#: templates/marketplace/ebook/ebook.html:185
+#: templates/marketplace/consulting/consulting.html:167
+#: templates/marketplace/ebook/ebook.html:212
 #: templates/marketplace/ielts/ielts.html:191
-#: templates/marketplace/immi_box/immi_box_NEW.html:185
+#: templates/marketplace/immi_box/subscription.html:230
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
 
@@ -6423,8 +6414,20 @@ msgstr "E-Books"
 msgid "For future immigrants - Made by real immigrants"
 msgstr "Para futuros imigrantes - Feito por imigrantes reais"
 
-#: templates/marketplace/ebook/ebook.html:63
-#: templates/marketplace/immi_box/immi_box_NEW.html:63
+#: templates/marketplace/ebook/ebook.html:55
+#: templates/marketplace/ebook/ebook.html:87
+#: templates/marketplace/ebook/ebook.html:90
+#: templates/marketplace/ebook/ebook.html:93
+#: templates/marketplace/ebook/ebook.html:96
+#: templates/marketplace/ebook/ebook.html:99
+#: templates/marketplace/ebook/ebook.html:102
+#: templates/marketplace/ebook/ebook.html:105
+#: templates/qa/blogpost/view.html:65 templates/qa/question/view.html:205
+#: templates/site/guide/guide.html:36
+msgid "Guide - How to move to Canada"
+msgstr "Guia - Como mudar para o Canadá"
+
+#: templates/marketplace/ebook/ebook.html:58
 msgid ""
 "The perfect guide if you want to live in Canada and don't know where to "
 "begin. You will learn:"
@@ -6432,71 +6435,85 @@ msgstr ""
 "O guia perfeito para quem deseja morar no Canadá e não sabe por onde "
 "começar. Você irá aprender:"
 
-#: templates/marketplace/ebook/ebook.html:65
-#: templates/marketplace/ebook/ebook.html:123
-#: templates/marketplace/immi_box/immi_box_NEW.html:65
-#: templates/marketplace/immi_box/immi_box_NEW.html:123
+#: templates/marketplace/ebook/ebook.html:60
 msgid "Why Canada and your immigration options"
 msgstr "Por que o Canadá e suas opções de imigração"
 
-#: templates/marketplace/ebook/ebook.html:67
-#: templates/marketplace/ebook/ebook.html:125
-#: templates/marketplace/immi_box/immi_box_NEW.html:67
-#: templates/marketplace/immi_box/immi_box_NEW.html:125
+#: templates/marketplace/ebook/ebook.html:62
 msgid "How to study, work and do business in Canada"
 msgstr "Como estudar, trabalhar e fazer negócios no Canadá"
 
-#: templates/marketplace/ebook/ebook.html:68
-#: templates/marketplace/ebook/ebook.html:126
-#: templates/marketplace/immi_box/immi_box_NEW.html:68
-#: templates/marketplace/immi_box/immi_box_NEW.html:126
+#: templates/marketplace/ebook/ebook.html:63
 msgid "How to take your family to Canada"
 msgstr "Como levar sua família para o Canadá"
 
-#: templates/marketplace/ebook/ebook.html:70
-#: templates/marketplace/immi_box/immi_box_NEW.html:70
-msgid "You will receive a link to download the ebook in PDF."
-msgstr "Você receberá um link para baixar o ebook em PDF."
+#: templates/marketplace/ebook/ebook.html:66
+#: templates/marketplace/ebook/ebook.html:128
+msgid "You can open the book if you have an"
+msgstr "Você pode abrir este ebook caso tenha uma"
 
-#: templates/marketplace/ebook/ebook.html:77
-#: templates/marketplace/ebook/ebook.html:136
-#: templates/marketplace/immi_box/immi_box_NEW.html:77
-#: templates/marketplace/immi_box/immi_box_NEW.html:136
-msgid "Buy Guide"
-msgstr "Comprar"
+#: templates/marketplace/ebook/ebook.html:67
+#: templates/marketplace/ebook/ebook.html:129
+msgid "active subscription"
+msgstr "assinatura ativa"
+
+#: templates/marketplace/ebook/ebook.html:68
+#: templates/marketplace/ebook/ebook.html:130
+msgid "for this country."
+msgstr "para este país."
+
+#: templates/marketplace/ebook/ebook.html:75
+#: templates/marketplace/ebook/ebook.html:137
+msgid "Open"
+msgstr "Abrir"
 
 #: templates/marketplace/ebook/ebook.html:80
-#: templates/marketplace/immi_box/immi_box_NEW.html:80
+#: templates/marketplace/ebook/ebook.html:142
 msgid "preview book"
 msgstr "preview do ebook"
 
 #: templates/marketplace/ebook/ebook.html:117
-#: templates/marketplace/ebook/ebook.html:142
-#: templates/marketplace/immi_box/immi_box_NEW.html:117
-#: templates/marketplace/immi_box/immi_box_NEW.html:142
+#: templates/marketplace/ebook/ebook.html:149
+#: templates/marketplace/ebook/ebook.html:152
+#: templates/marketplace/ebook/ebook.html:155
+#: templates/marketplace/ebook/ebook.html:158
+#: templates/marketplace/ebook/ebook.html:161
+#: templates/marketplace/ebook/ebook.html:164
+#: templates/marketplace/ebook/ebook.html:167
 msgid "Guide - How to move to Australia"
 msgstr "Guia - Como mudar para a Austrália"
 
 #: templates/marketplace/ebook/ebook.html:120
-#: templates/marketplace/immi_box/immi_box_NEW.html:120
-msgid "Coming soon!"
-msgstr "Em breve!"
+msgid ""
+"The perfect guide if you want to live in Australia and don't know where to "
+"begin. You will learn:"
+msgstr ""
+"O guia perfeito para quem deseja morar na Austrália e não sabe por onde "
+"começar. Você irá aprender:"
 
-#: templates/marketplace/ebook/ebook.html:195
-#: templates/marketplace/ielts/ielts.html:201
-#: templates/marketplace/immi_box/immi_box_NEW.html:195
-msgid "Sign-up and get more help"
-msgstr "Cadastre-se e obtenha ajuda"
+#: templates/marketplace/ebook/ebook.html:122
+msgid "Why Australia and your immigration options"
+msgstr "Por que a Austrália e suas opções de imigração"
 
-#: templates/marketplace/ebook/ebook.html:198
-#: templates/marketplace/ielts/ielts.html:204
-#: templates/marketplace/immi_box/immi_box_NEW.html:198
-msgid "Start now. It's free"
-msgstr "Comece gratuitamente"
+#: templates/marketplace/ebook/ebook.html:124
+msgid "How to study, work and do business in Australia"
+msgstr "Como estudar, trabalhar e fazer negócios na Austrália"
 
-#: templates/marketplace/ebook/ebook.html:244
+#: templates/marketplace/ebook/ebook.html:125
+msgid "How to take your family to Australia"
+msgstr "Como levar sua família para a Austrália"
+
+#: templates/marketplace/ebook/ebook.html:222
+msgid "Full access to all the tools?"
+msgstr "Acesso completo a todas as ferramentas?"
+
+#: templates/marketplace/ebook/ebook.html:225
+msgid "Subscribe Now"
+msgstr "Assine Já"
+
+#: templates/marketplace/ebook/ebook.html:264
 #: templates/marketplace/ielts/ielts.html:251
-#: templates/marketplace/immi_box/immi_box_NEW.html:244
+#: templates/marketplace/immi_box/subscription.html:289
 msgid "First pages"
 msgstr "Primeiras páginas"
 
@@ -6641,148 +6658,241 @@ msgstr "Dicas para a prova e estratégias de estudo em todos os módulos"
 msgid "Personal feedback on 2 writing tasks"
 msgstr "Feedback individual para 2 atividades de escrita"
 
-#: templates/marketplace/immi_box/immi_box.html:27
-msgid "Immigration Tools"
-msgstr "Ferramentas para Imigração"
+#: templates/marketplace/ielts/ielts.html:201
+msgid "Sign-up and get more help"
+msgstr "Cadastre-se e obtenha ajuda"
 
-#: templates/marketplace/immi_box/immi_box.html:31
+#: templates/marketplace/ielts/ielts.html:204
+msgid "Start now. It's free"
+msgstr "Comece gratuitamente"
+
+#: templates/marketplace/immi_box/immi_box.html:8
+#: templates/site/tools/tools.html:8
+msgctxt "Page Title"
+msgid "Immi Box"
+msgstr "Immi Box"
+
+#: templates/marketplace/immi_box/immi_box.html:15
+#: templates/site/tools/tools.html:26
+msgid "immigration guides"
+msgstr "guias de imigração"
+
+#: templates/marketplace/immi_box/immi_box.html:16
+msgid "Immigration Guide"
+msgstr "Guia de Imigração"
+
+#: templates/marketplace/immi_box/immi_box.html:17
+msgid "All you need to start and execute your immigration plan."
+msgstr "Tudo que você precisa para iniciar o seu plano de imigração."
+
+#: templates/marketplace/immi_box/immi_box.html:22
+#: templates/site/tools/tools.html:19
+msgid "immigration calculator"
+msgstr "calculadora de imigração"
+
+#: templates/marketplace/immi_box/immi_box.html:24
+#: templates/site/tools/tools.html:21
 msgid ""
-"\n"
-"                        Make the first step to start the plan to <span>move "
-"to a new country</span>. You will get help from the decision of what country "
-"and visa you should pursue to the actual relocation with your family.\n"
-"                    "
+"Find out if you qualify for a visa to work and live in Canada, Australia and "
+"New Zealand."
 msgstr ""
-"\n"
-"                        Dê o primeiro passo em direção <span>a um novo país</"
-"span>. Você será auxiliado na decisão de país/visto, prova de inglês, "
-"aplicação ao visto, busca por emprego e a mudança definitiva.\n"
-"                    "
+"Descubra se você se qualifica para um visto permanente para morar e "
+"trabalhar no Canadá, Austrália e Nova Zelândia."
 
-#: templates/marketplace/immi_box/immi_box.html:36
+#: templates/marketplace/immi_box/immi_box.html:28
+#: templates/site/tools/tools.html:33
+msgid "package international cv"
+msgstr "pacote cv internacional"
+
+#: templates/marketplace/immi_box/immi_box.html:29
+msgid "Build you CV for"
+msgstr "Crie seu CV para"
+
+#: templates/marketplace/immi_box/immi_box.html:30
+#: templates/site/tools/tools.html:35
 msgid ""
-"\n"
-"                        This is a limited edition until the 25th of August "
-"and you will get <span>1 year of subscription</span> to:\n"
-"                    "
+"We help you with all the resources to start talking to international "
+"employers. CV, Cover letter, Linkedin, website..."
 msgstr ""
-"\n"
-"                        Esta é uma edição limitada (até 25 de Agosto) e você "
-"terá <span>1 ano de acesso</span> a:\n"
-"                    "
+"Ajudamos você com todos os recursos para começar a entrar em contato com "
+"empregadores estrangeiros. CV, Carta de Apresentação e Linkedin."
 
-#: templates/marketplace/immi_box/immi_box.html:42
-msgid "Immi Box Subscription"
-msgstr "Assinatura Immi Box"
+#: templates/marketplace/immi_box/immi_box.html:33
+msgid "Templates for immigration documents"
+msgstr "Templates para documentos de imigração"
 
-#: templates/marketplace/immi_box/immi_box.html:49
-msgid ""
-"Unlimited <span>email support</span> and initial <span>training on Skype</"
-"span> (Only available if you received this by email)."
+#: templates/marketplace/immi_box/immi_box.html:34
+msgid "Templates for Visa Application"
+msgstr "Templates para a Aplicação ao Visto"
+
+#: templates/marketplace/immi_box/immi_box.html:35
+msgid "Templates for employment letters, business plan, proof of funds, etc..."
 msgstr ""
-"<span>Suporte ilimitado por email</span> e <span>treinamento inicial</span> "
-"por Skype."
+"Templates para cartas de empregadores, plano de negócios, comprovação "
+"financeira, etc..."
 
-#: templates/marketplace/immi_box/immi_box.html:50
-msgid ""
-"<span>Complete Guides</span> about moving to Canada and Australia, updated "
-"every month."
+#: templates/marketplace/immi_box/immi_box.html:38
+msgid "Discounts for third party services"
+msgstr "Descontos para serviços terceirizados"
+
+#: templates/marketplace/immi_box/immi_box.html:39
+msgid "Discounts - 3rd Party Services"
+msgstr "Descontos - Serviços Terceirizados"
+
+#: templates/marketplace/immi_box/immi_box.html:40
+msgid "off for immigration consultants, IELTS courses, translators, etc..."
 msgstr ""
-"<span>Guias completos</span> de como mudar para Canadá e Austrália, "
-"atualizados mensalmente."
+"de desconto para consultores de imigração, cursos IELTS, tradutores, etc..."
 
-#: templates/marketplace/immi_box/immi_box.html:51
-msgid "Immigration <span>Points Calculator</span> - Optimized."
-msgstr "<span>Calculadora de Pontos</span> de Imigração - Otimizada."
+#: templates/marketplace/immi_box/immi_box.html:43
+#: templates/marketplace/immi_box/immi_box.html:44
+msgid "English Evaluation"
+msgstr "Teste de Inglês"
 
-#: templates/marketplace/immi_box/immi_box.html:52
-msgid ""
-"<span>International CV tool</span> - Convert your current CV to the "
-"australian and canadian styles."
+#: templates/marketplace/immi_box/immi_box.html:45
+msgid "Answer some questions and test your English level."
+msgstr "Responda algumas perguntas e calcule o seu nível de Inglês."
+
+#: templates/marketplace/immi_box/subscription.html:34
+msgid "All you need for your immigration process"
+msgstr "Tudo que você precisa para o processo de imigração"
+
+#: templates/marketplace/immi_box/subscription.html:60
+msgid "Subscription to Immi Box - Canada"
+msgstr "Assinatura do Immi Box - Canadá"
+
+#: templates/marketplace/immi_box/subscription.html:63
+msgid "1 year of access to all the tools you need to immigrate to Canada."
 msgstr ""
-"<span>Ferramenta CV Internacional</span> - Converta seu currículo brasileiro "
-"para os padrões australiano e canadense."
+"1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
+"Canadá."
 
-#: templates/marketplace/immi_box/immi_box.html:53
-msgid "Templates for <span>work experience confirmation letters</span>."
-msgstr ""
-"Templates para <span>carta de comprovação de experiência de trabalho</span>."
+#: templates/marketplace/immi_box/subscription.html:65
+#: templates/marketplace/immi_box/subscription.html:98
+#: templates/marketplace/immi_box/subscription.html:133
+#: templates/marketplace/immi_box/subscription.html:168
+msgid "Identify the best type of visa for your profile"
+msgstr "Identifique o tipo de visto ideal para o seu perfil"
 
-#: templates/marketplace/immi_box/immi_box.html:54
-msgid "Templates for <span>business plan</span> for business visas."
-msgstr "Templates para <span>business plan</span> para vistos de negócios."
+#: templates/marketplace/immi_box/subscription.html:66
+#: templates/marketplace/immi_box/subscription.html:134
+msgid "Learn how to study, work and do business in Canada"
+msgstr "Entenda como estudar, trabalhar e fazer negócios no Canadá"
 
-#: templates/marketplace/immi_box/immi_box.html:55
-msgid ""
-"Templates for <span>ways to contact potential employers</span> for business "
-"visas."
-msgstr ""
-"Templates para <span>formas de contactar empregadores</span>, antes mesmo de "
-"sair do Brasil."
+#: templates/marketplace/immi_box/subscription.html:67
+#: templates/marketplace/immi_box/subscription.html:100
+#: templates/marketplace/immi_box/subscription.html:135
+#: templates/marketplace/immi_box/subscription.html:170
+msgid "Organize all the documents you need"
+msgstr "Organize toda documentação necessária"
 
-#: templates/marketplace/immi_box/immi_box.html:56
-msgid ""
-"Access to <span>webinars and posts</span> from real immigrants that went to "
-"Australia and Canada."
-msgstr ""
-"Acesso a <span>webinars e posts</span> de imigrantes reais que foram para "
-"Austrália ou Canadá."
+#: templates/marketplace/immi_box/subscription.html:68
+#: templates/marketplace/immi_box/subscription.html:101
+#: templates/marketplace/immi_box/subscription.html:136
+#: templates/marketplace/immi_box/subscription.html:171
+msgid "Start your visa application"
+msgstr "Inicie sua aplicação ao visto"
 
-#: templates/marketplace/immi_box/immi_box.html:57
-msgid ""
-"<span>Unlimited Q&A</span>: Make as many questions as you want, we guarantee "
-"you will have replies."
-msgstr ""
-"<span>Tira-Dúvidas ilimitado</span>: Faça quantas perguntas desejar, "
-"garantimos que você receberá respostas."
+#: templates/marketplace/immi_box/subscription.html:69
+#: templates/marketplace/immi_box/subscription.html:137
+msgid "Build your Canadian CV and contact employers"
+msgstr "Crie seu CV Canadense e entre em contato com empregadores"
 
-#: templates/marketplace/immi_box/immi_box.html:58
-msgid "<span>Course Search</span> for your budget and subject."
-msgstr "<span>Busca de cursos</span> na sua área e orçamento."
+#: templates/marketplace/immi_box/subscription.html:71
+#: templates/marketplace/immi_box/subscription.html:104
+#: templates/marketplace/immi_box/subscription.html:139
+#: templates/marketplace/immi_box/subscription.html:174
+msgid "You will have full access to our premium area after the payment."
+msgstr "Você terá acesso completo a área premium após o pagamento."
 
-#: templates/marketplace/immi_box/immi_box.html:59
-msgid ""
-"<span>English Evaluation</span> to test your level and understand what you "
-"will need to improve."
-msgstr ""
-"<span>Teste de Inglês</span> para avaliação do seu nível e o que será "
-"necessário para a imigração."
-
-#: templates/marketplace/immi_box/immi_box.html:60
-#: wannamigrate/marketplace/models.py:40
-#: wannamigrate/marketplace/models.py:185
-#: wannamigrate/marketplace/models.py:367
-msgid "discount"
-msgstr "desconto"
-
-#: templates/marketplace/immi_box/immi_box.html:60
-msgid "to use immigration consultants and IELTS Courses."
-msgstr "para utilizar consultores de imigração e cursos IELTS."
-
-#: templates/marketplace/immi_box/immi_box.html:62
-msgid ""
-"After the payment, you will receive a confirmation email and details to "
-"start using the service, before the launch on 25 of August."
-msgstr ""
-"Após o pagamento, você receberá um e-mail de confirmação e detalhes para "
-"começar a usar o serviço antes do lançamento do dia 25 de Agosto."
-
-#: templates/marketplace/immi_box/immi_box.html:69
+#: templates/marketplace/immi_box/subscription.html:78
+#: templates/marketplace/immi_box/subscription.html:111
+#: templates/marketplace/immi_box/subscription.html:146
+#: templates/marketplace/immi_box/subscription.html:181
 #: templates/marketplace/international_cv/international_cv.html:63
 msgid "Buy Package"
 msgstr "Comprar"
 
-#: templates/marketplace/immi_box/immi_box.html:77
-#: templates/marketplace/international_cv/international_cv.html:71
-#: templates/site/guide/guide.html:297
-msgid "Go back to dashboard"
-msgstr "Voltar ao painel principal"
+#: templates/marketplace/immi_box/subscription.html:83
+msgid "Immi Box - Canada"
+msgstr "Immi Box - Canadá"
 
-#: templates/marketplace/immi_box/immi_box_NEW.html:34
-#, fuzzy
-#| msgid "Why Canada and your immigration options"
-msgid "All you need for your immigration process"
-msgstr "Por que o Canadá e suas opções de imigração"
+#: templates/marketplace/immi_box/subscription.html:93
+msgid "Subscription to Immi Box - Australia"
+msgstr "Assinatura do Immi Box - Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:96
+msgid "1 year of access to all the tools you need to immigrate to Australia."
+msgstr ""
+"1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
+"Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:99
+#: templates/marketplace/immi_box/subscription.html:169
+msgid "Learn how to study, work and do business in Australia"
+msgstr "Entenda como estudar, trabalhar e fazer negócios na Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:102
+#: templates/marketplace/immi_box/subscription.html:172
+msgid "Build your Australian CV and contact employers"
+msgstr "Crie seu CV Australiano e entre em contato com empregadores"
+
+#: templates/marketplace/immi_box/subscription.html:116
+msgid "Immi Box - Australia"
+msgstr "Immi Box - Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:126
+msgid "Subscription to Immi Box + Support - Canada"
+msgstr "Assinatura do Immi Box + Suporte - Canadá"
+
+#: templates/marketplace/immi_box/subscription.html:129
+msgid ""
+"1 year of access to all the tools you need to immigrate to Canada, plus "
+"unlimited support."
+msgstr ""
+"1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
+"Canadá e suporte ilimitado."
+
+#: templates/marketplace/immi_box/subscription.html:131
+#: templates/marketplace/immi_box/subscription.html:166
+msgid "Initial Immigration Training via Skype"
+msgstr "Treinamento inicial de imigração via Skype"
+
+#: templates/marketplace/immi_box/subscription.html:132
+#: templates/marketplace/immi_box/subscription.html:167
+msgid "Unlimited email support to answer all your questions"
+msgstr "Suporte ilimitado por email para tirar todas as suas dúvidas"
+
+#: templates/marketplace/immi_box/subscription.html:151
+msgid "Immi Box and Support - Canada"
+msgstr "Immi Box e Suporte - Canadá"
+
+#: templates/marketplace/immi_box/subscription.html:161
+msgid "Subscription to Immi Box + Support - Australia"
+msgstr "Assinatura do Immi Box + Suporte - Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:164
+msgid ""
+"1 year of access to all the tools you need to immigrate to Australia, plus "
+"unlimited support."
+msgstr ""
+"1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
+"Austrália e suporte ilimitado."
+
+#: templates/marketplace/immi_box/subscription.html:186
+msgid "Immi Box and Support - Australia"
+msgstr "Immi Box e Suporte - Austrália"
+
+#: templates/marketplace/immi_box/subscription.html:240
+msgid "Start now. It's free!"
+msgstr "Inicie gratuitamente!"
+
+#: templates/marketplace/immi_box/subscription.html:243
+#: templates/site/about/service_providers.html:65
+#: templates/site/about/service_providers.html:127
+#: templates/site/login/signup.html:26
+msgid "Sign up"
+msgstr "Cadastre-se"
 
 #: templates/marketplace/international_cv/international_cv.html:27
 msgid ""
@@ -6848,6 +6958,11 @@ msgstr ""
 "Após o pagamento, você receberá um e-mail de confirmação e o prazo para "
 "conclusão do serviço é de 4 dias úteis."
 
+#: templates/marketplace/international_cv/international_cv.html:71
+#: templates/site/guide/guide.html:297
+msgid "Go back to dashboard"
+msgstr "Voltar ao painel principal"
+
 #: templates/marketplace/order/confirmation.html:10
 msgid "Your order was received"
 msgstr "Seu pedido foi recebido."
@@ -6855,10 +6970,6 @@ msgstr "Seu pedido foi recebido."
 #: templates/marketplace/order/confirmation.html:15
 msgid "Your Boleto Link:"
 msgstr "Link do seu Boleto:"
-
-#: templates/marketplace/order/confirmation.html:18
-msgid "Your Download Link:"
-msgstr "Link para Download:"
 
 #: templates/marketplace/order/confirmation.html:20
 msgid "You will receive an email confirmation with all the details."
@@ -7084,439 +7195,75 @@ msgstr "Respostas"
 
 #: templates/points/country/professional_help.html:26
 #: templates/points/country/situation.html:26
-#: templates/points/country/visa_application.html:26
 msgid "My situation"
 msgstr "Minha situação"
 
 #: templates/points/country/professional_help.html:27
 #: templates/points/country/situation.html:27
-#: templates/points/country/visa_application.html:27
-msgid "Visa application"
-msgstr "Aplicação ao visto"
-
-#: templates/points/country/professional_help.html:28
-#: templates/points/country/situation.html:28
-#: templates/points/country/visa_application.html:28
 msgid "Get expert help"
 msgstr "Contrate um expert"
 
-#: templates/points/country/professional_help.html:35
-#: templates/points/country/visa_application.html:59
-#: templates/points/country/visa_application.html:91
-#: templates/points/country/visa_application.html:97
-#: templates/points/country/visa_application.html:106
-#: templates/points/country/visa_application.html:113
-#: templates/points/country/visa_application.html:134
-#: templates/points/country/visa_application.html:135
-msgid "Click Here"
-msgstr "Clique Aqui"
+#: templates/points/country/professional_help.html:34
+msgid "Subscribe to the Immi Box "
+msgstr "Assine o Immi Box "
 
-#: templates/points/country/professional_help.html:35
-msgid " to search for an expert that can help you with you migration plan."
+#: templates/points/country/professional_help.html:34
+msgid "to have full access to all the immigration tools you need."
 msgstr ""
-" para buscar por um expert que possa lhe ajudar com seu plano de imigração."
+"para ter acesso completo a todas as ferramentas de imigração que você "
+"precisa."
 
-#: templates/points/country/situation.html:38
+#: templates/points/country/situation.html:37
 #: templates/points/dashboard/dashboard.html:98
 #: templates/points/dashboard/dashboard.html:107
 msgid "Points"
 msgstr "Pontos"
 
-#: templates/points/country/situation.html:38
+#: templates/points/country/situation.html:37
 msgid "Of"
 msgstr "De"
 
-#: templates/points/country/situation.html:38
+#: templates/points/country/situation.html:37
 #: templates/points/dashboard/dashboard.html:89
 #: templates/points/dashboard/dashboard.html:98
 #: templates/points/dashboard/dashboard.html:107
 msgid "REQUIRED"
 msgstr "MÍNIMOS"
 
-#: templates/points/country/situation.html:43
+#: templates/points/country/situation.html:42
 #: templates/points/dashboard/dashboard.html:28
 msgid "Personal"
 msgstr "Pessoal"
 
-#: templates/points/country/situation.html:47
-#: templates/points/country/situation.html:54
-#: templates/points/country/situation.html:61
-#: templates/points/country/situation.html:68
+#: templates/points/country/situation.html:46
+#: templates/points/country/situation.html:53
+#: templates/points/country/situation.html:60
+#: templates/points/country/situation.html:67
 #: templates/points/dashboard/dashboard.html:89
 msgid "POINTS"
 msgstr "PONTOS"
 
-#: templates/points/country/situation.html:47
-#: templates/points/country/situation.html:54
-#: templates/points/country/situation.html:61
-#: templates/points/country/situation.html:68
+#: templates/points/country/situation.html:46
+#: templates/points/country/situation.html:53
+#: templates/points/country/situation.html:60
+#: templates/points/country/situation.html:67
 msgid "of"
 msgstr "de"
 
-#: templates/points/country/situation.html:50
+#: templates/points/country/situation.html:49
 #: templates/points/dashboard/dashboard.html:41
 #: templates/site/account/view.html:53
 msgid "Language"
 msgstr "Idioma"
 
-#: templates/points/country/situation.html:57
+#: templates/points/country/situation.html:56
 #: templates/points/dashboard/dashboard.html:54
 msgid "Education"
 msgstr "Escolaridade"
 
-#: templates/points/country/situation.html:77
+#: templates/points/country/situation.html:76
 msgid "Hints"
 msgstr "Dicas"
-
-#: templates/points/country/visa_application.html:35
-#: templates/points/country/visa_application.html:55
-#: templates/points/country/visa_application.html:63
-#: templates/points/country/visa_application.html:77
-#: templates/points/country/visa_application.html:102
-#: templates/points/country/visa_application.html:109
-#: templates/points/country/visa_application.html:118
-#: templates/points/country/visa_application.html:127
-#: templates/points/country/visa_application.html:140
-msgid "Step"
-msgstr "Passo"
-
-#: templates/points/country/visa_application.html:37
-#: templates/points/country/visa_application.html:79
-#: templates/points/country/visa_application.html:120
-msgid "Get your passport ready"
-msgstr "Tenha seu passaporte no ponto"
-
-#: templates/points/country/visa_application.html:38
-#: templates/points/country/visa_application.html:80
-#: templates/points/country/visa_application.html:121
-msgid ""
-"If you still don't have a passport or need to renew it, you will have to do "
-"it before applying for the visa."
-msgstr ""
-"Se você ainda não tem um passaporte ou precisa renovar o mesmo, terá que ter "
-"tudo pronto antes da aplicação ao visto."
-
-#: templates/points/country/visa_application.html:39
-#: templates/points/country/visa_application.html:81
-#: templates/points/country/visa_application.html:122
-msgid ""
-"Passports are issued by specific government departments, such as the police, "
-"immigration dept., etc... This will vary from country to country."
-msgstr ""
-"Passaportes são emitidos por órgãos governamentais específicos, como a "
-"Polícia, departamento de imigração, etc... Isso irá variar de país para país."
-
-#: templates/points/country/visa_application.html:41
-msgid "Provide proofs that you have competent English skills"
-msgstr "Comprove que você tem um nível intermediário de Inglês"
-
-#: templates/points/country/visa_application.html:42
-msgid "You need to have one of the following:"
-msgstr "Você precisa ter uma das opções seguintes:"
-
-#: templates/points/country/visa_application.html:43
-msgid "Score of at least 6 for each of the four test components."
-msgstr "Nota mínima 6 para cada um dos quatro módulos do teste."
-
-#: templates/points/country/visa_application.html:44
-msgid ""
-"Score of at least 'B' for each of the four test components (OET) or 12 for "
-"listening, 13 for reading, 21 for writing and 18 for speaking (TOEFL iBT)."
-msgstr ""
-"Nota mínima 'B' para cada um dos quatro módulos do teste (OET) ou 12 para "
-"listening, 13 para reading, 21 para writing e 18 para speaking (TOEFL iBT)."
-
-#: templates/points/country/visa_application.html:45
-msgid "Score of at least 50 in each of the four test components."
-msgstr "Nota mínima 50 em cada um dos quatro módulos do teste."
-
-#: templates/points/country/visa_application.html:46
-msgid ""
-"Valid passport from the United Kingdom, the United States of America, "
-"Canada, New Zealand or the Republic of Ireland and you are a citizen of that "
-"country."
-msgstr ""
-"Passaporte válido do Reino Unido, Estados Unidos, Canadá, Nova Zelândia, ou "
-"Irlanda e ser um cidadão do país em questão."
-
-#: templates/points/country/visa_application.html:48
-msgid "Get your occupation recognized by Australia"
-msgstr "Reconheça sua profissão na Austrália"
-
-#: templates/points/country/visa_application.html:49
-msgid ""
-"You will have to apply for an Australian Skills Assessment from the relevant "
-"authority on your field of work."
-msgstr ""
-"Você terá que aplicar para uma Avaliação de Habilidades da Austrália, "
-"realizada pelo órgão regulamentador na sua área de trabalho."
-
-#: templates/points/country/visa_application.html:50
-#: templates/points/country/visa_application.html:51
-msgid ""
-"In almost all cases, assessing bodies will require that you have post-"
-"secondary, such as university or trade, qualifications in order to receive a "
-"positive assessment of your skills."
-msgstr ""
-"Em quase todos os casos, o órgão regulamentador irá requisitar formação em "
-"curso superior ou técnico, para fornecer uma avaliação positiva"
-
-#: templates/points/country/visa_application.html:57
-msgid "Submit an Expression of Interest"
-msgstr "Envie uma 'Expression of Interest' (Demonstração de Interesse)"
-
-#: templates/points/country/visa_application.html:58
-msgid ""
-"In Australia you need to be invited to apply for the visa.  To be invited "
-"you need to have the minimum number of points required and then submit an "
-"expression of interest, which is an online form."
-msgstr ""
-"Na Austrália você precisa ser convidado pelo governo para aplicar ao visto. "
-"Para ser convidade você precisa atingir a marca mínima de pontos e depois "
-"enviar uma 'expression of interest', que é um formulário online."
-
-#: templates/points/country/visa_application.html:59
-msgid "to send your expression of interest."
-msgstr "para enviar a sua 'expression of interest'"
-
-#: templates/points/country/visa_application.html:65
-#: templates/points/country/visa_application.html:142
-msgid "Send your Visa Application"
-msgstr "Faça sua Aplicação ao Visto"
-
-#: templates/points/country/visa_application.html:66
-msgid ""
-"After you receive an invitation from the Governmenet of Australia you will "
-"be able to send your visa application."
-msgstr ""
-"Após receber um convite o Governo da Austrália, você poderá preparar e "
-"enviar sua aplicação ao visto."
-
-#: templates/points/country/visa_application.html:67
-msgid ""
-"Remember that after the invitation, you have only 60 days to apply and you "
-"will have to provide all the documentation, so make sure you have it all "
-"prepared even before you send your Expression of Interest:"
-msgstr ""
-"Lembre-se que depois do convite, você possuir apenas 60 dias para enviar a "
-"aplicação ao visto e você terá que fornecer toda a documentação e "
-"comprovações mencionadas. Recomendamos ter tudo pronto antes mesmo de enviar "
-"a 'Expression of Interest'."
-
-#: templates/points/country/visa_application.html:68
-msgid "Proofs for English skills."
-msgstr "Comprovação de habilidades na Língua Inglesa"
-
-#: templates/points/country/visa_application.html:69
-msgid "Skills Assessment for your occupation."
-msgstr "Avaliação de Habilidades para sua profissão."
-
-#: templates/points/country/visa_application.html:70
-msgid "Proofs for education degrees"
-msgstr "Comprovação de escolaridade"
-
-#: templates/points/country/visa_application.html:71
-msgid "Personal Identification Documentation (including Passport)"
-msgstr "Documentação de identificação (incluindo passaporte)"
-
-#: templates/points/country/visa_application.html:72
-msgid "Policy and Medical checks (certificates)"
-msgstr "Certificados Médicos e Policiais"
-
-#: templates/points/country/visa_application.html:83
-msgid "Provide proofs for Minimum Language Requirement"
-msgstr "Comprove habilidades na Língua Estrangeira"
-
-#: templates/points/country/visa_application.html:84
-msgid ""
-"It can be for English or French. You will need to provide one of the "
-"following certificates:"
-msgstr ""
-"Poderá ser para Inglês ou Francês. Você terá que fornecer um dos "
-"certificados a seguir:"
-
-#: templates/points/country/visa_application.html:85
-msgid "Score of at least 7 for each of the four test components."
-msgstr "Nota mínima 7 para cada um dos quatro módulos do teste."
-
-#: templates/points/country/visa_application.html:86
-msgid "Score of at least 6 for each of the four test components"
-msgstr "Nota mínima 6 para cada um dos quatro módulos do teste"
-
-#: templates/points/country/visa_application.html:87
-msgid ""
-"Score of: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 (Reading), "
-"310 – 348 (Writing)."
-msgstr ""
-"Nota Mínima: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 "
-"(Reading), 310 – 348 (Writing)."
-
-#: templates/points/country/visa_application.html:89
-msgid "Provide proofs for Minimum Education Requirement"
-msgstr "Comprove sua Escolaridade"
-
-#: templates/points/country/visa_application.html:90
-msgid ""
-"If your degree was obtained outside Canada, you will need an Educational "
-"Credential Assessment (ECA) report issued by an organization designated by "
-"Citizenship and Immigration Canada. "
-msgstr ""
-"Se seu diploma foi conquistado fora do Canadá, você precisará de um "
-"certificado (ECA) emitido por uma organização nomeada pelo Departamento de "
-"Imigração do Canadá."
-
-#: templates/points/country/visa_application.html:91
-#: templates/points/country/visa_application.html:97
-msgid "to have your education assessed."
-msgstr "para ter sua escolaridade avaliada."
-
-#: templates/points/country/visa_application.html:93
-msgid "Provide proofs for Minimum Work Experience Requirements"
-msgstr "Comprove sua Experiência Profissional"
-
-#: templates/points/country/visa_application.html:94
-msgid "You will have to prove all of the following:"
-msgstr "Você terá que provar o seguinte:"
-
-#: templates/points/country/visa_application.html:95
-msgid ""
-"You must have at least one year of continuous full-time (or the equivalent "
-"in continuous part-time) paid work experience in the primary occupation you "
-"specify in your application."
-msgstr ""
-"Você precisa ter pelo menos 1 ano contínuo de trabalho, em tempo integral "
-"(ou o equivalente em meio-período), com salário fixo, na sua área "
-"profissional indicada.specify in your application."
-
-#: templates/points/country/visa_application.html:96
-msgid "You must have had this experience within the last 10 years."
-msgstr "Você precisa ter tido essa experiência nos últimos 10 anos"
-
-#: templates/points/country/visa_application.html:104
-msgid "Fill Out The Application"
-msgstr "Preencha a aplicação"
-
-#: templates/points/country/visa_application.html:105
-msgid ""
-"You will need the documents listed above and also Police Certificates and "
-"Translations of all document, if not in English or French."
-msgstr ""
-"Você precisará de todos os documentos listados acima e também de "
-"certificados policiais e traduções de toda documentação, se não estive em "
-"Inglês ou Francês."
-
-#: templates/points/country/visa_application.html:106
-msgid "Then you need to fill out all the following forms:"
-msgstr "Em seguida você deverá preencher todos os forms a seguir:"
-
-#: templates/points/country/visa_application.html:111
-msgid "Pay the Fees"
-msgstr "Efetue o Pagamento das Taxas"
-
-#: templates/points/country/visa_application.html:112
-msgid ""
-"Complete the Fee Payment Form - Application for Permanent Residence (IMM "
-"5620) and include it with your application to the CIO. On-line payments are "
-"not accepted by the CIO."
-msgstr ""
-"Preencha o formulário de pagamento das taxas - Aplicação para residência "
-"permanente (IMM 5620) e inclua na papelada da sua aplicação ao visto. "
-"Pagamentos online não serão aceitos."
-
-#: templates/points/country/visa_application.html:113
-msgid "to get the form."
-msgstr "para receber o formulário."
-
-#: templates/points/country/visa_application.html:129
-msgid "Submit an Expression of Interest (EOI)"
-msgstr "Envie uma 'Expression of Interest' (EOI)"
-
-#: templates/points/country/visa_application.html:130
-msgid ""
-"On the EOI form you fill out information about yourself, your family, your "
-"skills and your work experience. As you complete your EOI, you claim points. "
-"However, you do not have to provide evidence at this point."
-msgstr ""
-"No formulário EOI você preenche informações sobre você, sua família, suas "
-"habilidades profissionais e sua experiência de trabalho. Assim que você "
-"finaliza o formulário você requisita seus pontos, apesar de não precisar "
-"comprovar nada neste momento."
-
-#: templates/points/country/visa_application.html:131
-msgid ""
-"Submitting an online EOI costs a fee of NZ$510.00. Submitting a paper-based "
-"EOI costs a fee of NZ$650. Online EOIs cost less because they require less "
-"processing than paper-based EOIs."
-msgstr ""
-"O envio do EOI de forma online custa 510.00 dólares neo-zelandeses. O envio "
-"do EOIimpresso custa 540 dólares new-zelandeses. A forma online custa menos "
-"por exigir menos processamento manual que a forma impressa."
-
-#: templates/points/country/visa_application.html:132
-msgid ""
-"If your EOI has a score of 100 points or more, it goes in the pool of EOIs. "
-"Every two weeks they automatically select EOIs with a points score of 140 or "
-"over from the pool. Then they select EOIs with a points score between 100 "
-"and 139 which include points for a skilled job or job offer. If there are "
-"still have spaces available, they use additional criteria to select lower-"
-"scoring EOIs."
-msgstr ""
-"Se o seu EOI tiver uma pontuação de 100 pontos ou mais, você irá para uma "
-"fila de EOIs. A cada 2 semanas são selecionadas as EOIs com pontuações de "
-"140 ou mais desta fila. Em seguida são selecionadas EOIs com pontuações "
-"entre 100 e 139 que possuem pontos porprofissões qualificadas ou com uma "
-"proposta de trabalho. Se ainda assim sobrarem algumas vagas, serão "
-"utilizados critério adicionais para selecionar pontuações menores."
-
-#: templates/points/country/visa_application.html:133
-msgid ""
-"EOIs are only valid for six months. If your EOI is not selected within six "
-"months, it will lapse and be withdrawn from the pool. Your EOI fee will not "
-"be refunded."
-msgstr ""
-"As EOIs tem validade de 6 meses.  Se sua EOI não for selecionada neste "
-"período, será cancelada  e as taxas não são reembolsáveis."
-
-#: templates/points/country/visa_application.html:134
-msgid "for online application."
-msgstr "para aplicação online"
-
-#: templates/points/country/visa_application.html:135
-msgid "for paper application."
-msgstr "para aplicação impressa"
-
-#: templates/points/country/visa_application.html:143
-msgid ""
-"After you receive an invitation to apply, you need to check the information "
-"you provided in your EOI is still up to date and correct. You also need to "
-"provide:"
-msgstr ""
-"Após receber um convite para aplicar ao visto, você terá que confirmar toda "
-"informação fornecida em sua EOI, além de:"
-
-#: templates/points/country/visa_application.html:144
-msgid "evidence to support the points you claimed in your EOI."
-msgstr "Comprovantes para os itens que lhe deram pontos em sua EOI."
-
-#: templates/points/country/visa_application.html:145
-msgid ""
-"proof that you and everyone else on your application meet all of our health, "
-"character and English language requirements."
-msgstr ""
-"Comprovações que você e todos os membros de sua aplicação atendem aos "
-"requisitos de saúde, antecedentes e língua estrangeira."
-
-#: templates/points/country/visa_application.html:146
-msgid ""
-"You then need to send all documents and evidence, with your application form "
-"and a fee. You must make your application within four months of being "
-"invited to apply for residence. Any applications received after four months "
-"will not be accepted.."
-msgstr ""
-"Em seguida você deverá enviar todos os documentos e comprovantes, juntamente "
-"com o formulário do visto e o pagamento.  Você deverá enviar sua aplicação "
-"em até 4 meses após o convite. Quaisquer aplicações recebidas depois dos 4 "
-"meses serão negadas."
 
 #: templates/points/dashboard/dashboard.html:22
 msgid "Edit your information:"
@@ -7565,16 +7312,12 @@ msgid "You still don’t have enough points<br />to migrate to this country"
 msgstr "Você ainda não tem pontos<br />para migrar para este país"
 
 #: templates/points/dashboard/dashboard.html:126
-msgid "Check my results"
-msgstr "Ver meus resultados"
+msgid "Check country result"
+msgstr "Resultado do país"
 
 #: templates/points/dashboard/dashboard.html:127
-msgid "Apply for the visa"
-msgstr "Aplicar ao visto"
-
-#: templates/points/dashboard/dashboard.html:128
-msgid "Hire a professional"
-msgstr "Contrate um expert"
+msgid "Get professional help"
+msgstr "Auxílio profissional"
 
 #: templates/points/user/edit_education.html:31
 msgid "Education Details"
@@ -7768,8 +7511,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1305
-#: wannamigrate/site/views.py:1338
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1292
+#: wannamigrate/site/views.py:1325
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7778,7 +7521,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1338
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1325
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -7956,7 +7699,7 @@ msgid "My orders"
 msgstr "Minhas Compras"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:785
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:773
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -8069,12 +7812,6 @@ msgstr "Encontramos os <span>clientes certos</span>"
 #: templates/site/about/service_providers.html:60
 msgid "We <span>handle payments</span>"
 msgstr "Cuidamos <span>do pagamento</span>"
-
-#: templates/site/about/service_providers.html:65
-#: templates/site/about/service_providers.html:127
-#: templates/site/login/signup.html:26
-msgid "Sign up"
-msgstr "Cadastre-se"
 
 #: templates/site/about/service_providers.html:68
 msgid "How it works"
@@ -8310,7 +8047,7 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:787
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:775
 msgid "Sent"
 msgstr "Enviadas"
 
@@ -8323,7 +8060,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:789
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:777
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -8673,8 +8410,8 @@ msgid "How it works?"
 msgstr "Como funciona?"
 
 #: templates/site/home/home.html:31
-msgid "I'm a service provider"
-msgstr "Prestador de serviços"
+msgid "Subscription Plans"
+msgstr "Planos de Assinatura"
 
 #: templates/site/home/home.html:38
 msgid "<strong>Go</strong> abroad. <strong>Change</strong> your life."
@@ -8687,7 +8424,7 @@ msgstr "No(a)"
 #: templates/site/home/home.html:55
 msgctxt "landing_call_to_action"
 msgid "Start now! It's free"
-msgstr "Comece gratuitamente"
+msgstr "Inicie gratuitamente"
 
 #: templates/site/home/home.html:62
 msgid "Terms & Conditions"
@@ -8827,11 +8564,6 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: templates/site/tools/tools.html:8
-msgctxt "Page Title"
-msgid "Immi Box"
-msgstr "Immi Box"
-
 #: templates/site/tools/tools.html:14
 msgid "Sign-up"
 msgstr "Assine"
@@ -8840,22 +8572,6 @@ msgstr "Assine"
 msgid "for our 1 year subscription package."
 msgstr "nosso pacote de imigração por 1 ano."
 
-#: templates/site/tools/tools.html:19
-msgid "immigration calculator"
-msgstr "calculadora de imigração"
-
-#: templates/site/tools/tools.html:21
-msgid ""
-"Find out if you qualify for a visa to work and live in Canada, Australia and "
-"New Zealand."
-msgstr ""
-"Descubra se você se qualifica para um visto permanente para morar e "
-"trabalhar no Canadá, Austrália e Nova Zelândia."
-
-#: templates/site/tools/tools.html:26
-msgid "immigration guides"
-msgstr "guias de imigração"
-
 #: templates/site/tools/tools.html:27
 msgid "Immigration Guides"
 msgstr "Guias de Imigração"
@@ -8863,18 +8579,6 @@ msgstr "Guias de Imigração"
 #: templates/site/tools/tools.html:28
 msgid "Download our complete step-by-step immigration guides."
 msgstr "Faça o download de nossos guias completos de imigração."
-
-#: templates/site/tools/tools.html:33
-msgid "package international cv"
-msgstr "pacote cv internacional"
-
-#: templates/site/tools/tools.html:35
-msgid ""
-"We help you with all the resources to start talking to international "
-"employers. CV, Cover letter, Linkedin, website..."
-msgstr ""
-"Ajudamos você com todos os recursos para começar a entrar em contato com "
-"empregadores estrangeiros. CV, Carta de Apresentação e Linkedin."
 
 #: templates/site/tools/tools.html:40
 msgid "IELTS preparation course"
@@ -9001,7 +8705,7 @@ msgstr "O pedido foi devolvido."
 msgid "Service Requested"
 msgstr "Solicitação de Serviço Recebida"
 
-#: wannamigrate/core/middleware.py:82 wannamigrate/core/middleware.py:102
+#: wannamigrate/core/middleware.py:84 wannamigrate/core/middleware.py:104
 msgid "You need a valid email address to use the site!"
 msgstr "Você precisa de um email válido para usar este site!"
 
@@ -9026,7 +8730,7 @@ msgstr "data de modificação"
 #: wannamigrate/marketplace/models.py:508
 #: wannamigrate/marketplace/models.py:511
 #: wannamigrate/marketplace/models.py:540
-#: wannamigrate/marketplace/models.py:572 wannamigrate/points/models.py:180
+#: wannamigrate/marketplace/models.py:592 wannamigrate/points/models.py:180
 msgid "name"
 msgstr "nome"
 
@@ -9335,19 +9039,19 @@ msgstr "%s anos"
 msgid "Select Duration"
 msgstr "Selecione Duração"
 
-#: wannamigrate/marketplace/forms.py:85
+#: wannamigrate/marketplace/forms.py:89
 msgid "Payment information missing."
 msgstr "Informações de pagamento inexistentes."
 
-#: wannamigrate/marketplace/forms.py:89
+#: wannamigrate/marketplace/forms.py:93
 msgid "Invalid Payment Method."
 msgstr "Método de Pagamento Inválido"
 
-#: wannamigrate/marketplace/forms.py:111
+#: wannamigrate/marketplace/forms.py:115
 msgid "Invalid Promo Code."
 msgstr "Código Promocional Inválido."
 
-#: wannamigrate/marketplace/forms.py:165
+#: wannamigrate/marketplace/forms.py:179
 msgid "Payment not authorized."
 msgstr "Pagamento não autorizado."
 
@@ -9389,6 +9093,12 @@ msgstr "total bruto"
 #: wannamigrate/marketplace/models.py:39
 msgid "net total"
 msgstr "total líquido"
+
+#: wannamigrate/marketplace/models.py:40
+#: wannamigrate/marketplace/models.py:185
+#: wannamigrate/marketplace/models.py:367
+msgid "discount"
+msgstr "desconto"
 
 #: wannamigrate/marketplace/models.py:41
 msgid "fees"
@@ -9534,12 +9244,12 @@ msgstr "data de início"
 msgid "expiry date"
 msgstr "data de validade"
 
-#: wannamigrate/marketplace/views.py:64
+#: wannamigrate/marketplace/views.py:67
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:65 wannamigrate/marketplace/views.py:531
-#: wannamigrate/marketplace/views.py:682
+#: wannamigrate/marketplace/views.py:68 wannamigrate/marketplace/views.py:617
+#: wannamigrate/marketplace/views.py:769
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -9547,7 +9257,7 @@ msgstr ""
 "Tome decisões mais rápidas e seguras no planejamento de mudar de país.  "
 "Obtenha ajuda de um experts em imigração no Wanna Migrate."
 
-#: wannamigrate/marketplace/views.py:151
+#: wannamigrate/marketplace/views.py:154
 msgid ""
 "can be hired through Wanna Migrate. Sign-up to connect with thousands of "
 "experts in immigration and related."
@@ -9555,11 +9265,11 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:201
+#: wannamigrate/marketplace/views.py:204
 msgid "E-Books - Immigration Guides - Wanna Migrate"
 msgstr "E-Books - Guias de Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:202
+#: wannamigrate/marketplace/views.py:205
 msgid ""
 "Download our complete guides about immigrating to Canada, immigration to "
 "Australia and others."
@@ -9567,21 +9277,21 @@ msgstr ""
 "Faça o download de nossos guias completos de Imigração para o Canadá, "
 "Imigração para a Austrália e outros."
 
-#: wannamigrate/marketplace/views.py:270
+#: wannamigrate/marketplace/views.py:301
 msgid "IELTS Online Course - Wanna Migrate"
 msgstr "Curso Online IELTS - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:271
+#: wannamigrate/marketplace/views.py:302
 msgid ""
 "Get ready for the English Exam for immigration with IELTS Online course."
 msgstr ""
 "Prepare-se para a prova de Inglês para Imigração com o curso IELTS Online."
 
-#: wannamigrate/marketplace/views.py:341
+#: wannamigrate/marketplace/views.py:372
 msgid "Build your International CV - Wanna Migrate"
 msgstr "Crie seu Currículo Internacional - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:342
+#: wannamigrate/marketplace/views.py:373
 msgid ""
 "We will help you out by creating your international CV, cover letter and "
 "Linkedin profile."
@@ -9589,21 +9299,34 @@ msgstr ""
 "Ajudaremos você a criar o seu currículo internacional, carta de apresentação "
 "e perfil do Linkedin."
 
-#: wannamigrate/marketplace/views.py:411
+#: wannamigrate/marketplace/views.py:403
+msgid ""
+"You don't have an active subscription for this country. You can change your "
+"destination country above!"
+msgstr ""
+"Você não tem assinatura ativa para este país. Você pode mudar o país de "
+"destino, acima!"
+
+#: wannamigrate/marketplace/views.py:409 wannamigrate/marketplace/views.py:475
 msgid "Immi Box - Immigration Tools - Wanna Migrate"
 msgstr "Immi Box - Ferramentas para Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:412
-msgid "A powerful immigration tool to help you to move to your dream country."
+#: wannamigrate/marketplace/views.py:410 wannamigrate/marketplace/views.py:476
+msgid ""
+"Powerful immigration tools to help you to immigrate to your dream country."
 msgstr ""
-"Uma ferramenta poderosa de imigração para ajudá-lo a se mudar para o país "
-"dos seus sonhos."
+"Ferramentas poderosas de imigração para ajudá-lo a se mudar para o país dos "
+"seus sonhos."
 
-#: wannamigrate/marketplace/views.py:476
+#: wannamigrate/marketplace/views.py:455 wannamigrate/marketplace/views.py:601
+msgid "There's already an active subscription for this country and product."
+msgstr ""
+
+#: wannamigrate/marketplace/views.py:540
 msgid "Immigration Evaluation - Wanna Migrate"
 msgstr "Avaliação de Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:477
+#: wannamigrate/marketplace/views.py:541
 msgid ""
 "In-person meeting to evaluate your chances to immigrate to Canada or "
 "Australia."
@@ -9611,31 +9334,36 @@ msgstr ""
 "Reunião presencial para avaliar suas chances de imigrar para Canadá ou "
 "Austrália."
 
-#: wannamigrate/marketplace/views.py:530
+#: wannamigrate/marketplace/views.py:616
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:681
+#: wannamigrate/marketplace/views.py:768
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:690
+#: wannamigrate/marketplace/views.py:777
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:693
+#: wannamigrate/marketplace/views.py:780
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:696
+#: wannamigrate/marketplace/views.py:782
+msgid ""
+"You can now click on 'Immi Box' from the top menu to access the premium area."
+msgstr ""
+
+#: wannamigrate/marketplace/views.py:786
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:699
+#: wannamigrate/marketplace/views.py:789
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:702
+#: wannamigrate/marketplace/views.py:792
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 
@@ -9815,7 +9543,7 @@ msgstr "pontuação - escolaridade"
 msgid "score work"
 msgstr "pontuação - trabalho"
 
-#: wannamigrate/points/views.py:81
+#: wannamigrate/points/views.py:83
 msgid ""
 "Immigration Calculator - Check your chances for Australia, Canada and New "
 "Zealand - Wanna Migrate"
@@ -9823,10 +9551,10 @@ msgstr ""
 "Calculadora de Imigração - Descubra suas chances para Austrália, Canadá e "
 "Nova Zelândia - Wanna Migrate"
 
-#: wannamigrate/points/views.py:82 wannamigrate/points/views.py:157
-#: wannamigrate/points/views.py:234 wannamigrate/points/views.py:318
-#: wannamigrate/points/views.py:402 wannamigrate/points/views.py:593
-#: wannamigrate/points/views.py:795 wannamigrate/points/views.py:839
+#: wannamigrate/points/views.py:84 wannamigrate/points/views.py:162
+#: wannamigrate/points/views.py:239 wannamigrate/points/views.py:323
+#: wannamigrate/points/views.py:407 wannamigrate/points/views.py:598
+#: wannamigrate/points/views.py:800
 msgid ""
 "Check your chances of obtaining a permanent visa to move to Canada, "
 "Australia or New Zealand."
@@ -9834,59 +9562,59 @@ msgstr ""
 "Descubra suas chances de obter um visto permanente para mudar para o Canadá, "
 "Austrália ou Nova Zelândia."
 
-#: wannamigrate/points/views.py:156
+#: wannamigrate/points/views.py:161
 msgid "Edit Personal - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Pessoal - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:233
+#: wannamigrate/points/views.py:238
 msgid "Edit Language - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Idioma - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:317
+#: wannamigrate/points/views.py:322
 msgid "Edit Education - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Escolaridade - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:401
+#: wannamigrate/points/views.py:406
 msgid "Edit Work - Immigration Calculator - Wanna Migrate"
 msgstr "Editar Trabalho - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:511
+#: wannamigrate/points/views.py:516
 msgid "Select Occupation"
 msgstr "Selecione Profissão"
 
-#: wannamigrate/points/views.py:592
+#: wannamigrate/points/views.py:597
 msgid "Situation - Immigration Calculator - Wanna Migrate"
 msgstr "Situação - Calculadora de Imigração - Wanna Migrate"
 
-#: wannamigrate/points/views.py:604
+#: wannamigrate/points/views.py:609
 msgid "You don’t have enough points"
 msgstr "Você não tem pontos suficientes"
 
-#: wannamigrate/points/views.py:668
+#: wannamigrate/points/views.py:673
 msgid "Enough points"
 msgstr "Pontos suficientes"
 
-#: wannamigrate/points/views.py:671
+#: wannamigrate/points/views.py:676
 msgid "Not enough points"
 msgstr "Pontuação Insuficiente"
 
-#: wannamigrate/points/views.py:674
+#: wannamigrate/points/views.py:679
 msgid "Occupation not in demand"
 msgstr "Profissão fora da lista de demanda"
 
-#: wannamigrate/points/views.py:677
+#: wannamigrate/points/views.py:682
 msgid "Age not allowed"
 msgstr "Idade não permitida"
 
-#: wannamigrate/points/views.py:680
+#: wannamigrate/points/views.py:685
 msgid "Language requirements not met"
 msgstr "Requisitos de idioma insuficientes"
 
-#: wannamigrate/points/views.py:683
+#: wannamigrate/points/views.py:688
 msgid "Work experience not enough"
 msgstr "Experiência de trabalho insuficiente"
 
-#: wannamigrate/points/views.py:724
+#: wannamigrate/points/views.py:729
 msgid ""
 "You can get 5 extra points if you can get recognized as a translator for "
 "your native language.  You will have to do a test with <a href='www.naati."
@@ -9896,7 +9624,7 @@ msgstr ""
 "tradutor na sua língua nativa. Você terá que fazer uma prova na <a href='www."
 "naati.com.au/' target='blank'>NAATI</a>"
 
-#: wannamigrate/points/views.py:727
+#: wannamigrate/points/views.py:732
 msgid ""
 "If you can get a job offer from an Australia Employer (<a href='http://www."
 "seek.com.au' target='blank'>Find jobs here</a>), You should ask your him to "
@@ -9907,7 +9635,7 @@ msgstr ""
 "deverá solicitar que seu empregador faça a requisição do seu visto "
 "patrocinado.  Será mais rápido e barato."
 
-#: wannamigrate/points/views.py:730
+#: wannamigrate/points/views.py:735
 msgid ""
 "You can get 5 extra points if you have a partner/espouse (stable union) and "
 "he/she is under 50 years old and in the same occupation as you."
@@ -9915,7 +9643,7 @@ msgstr ""
 "Você pode receber 5 pontos extras se tiver um esposo(a) (ou união estável) e "
 "ele/ela tiver menos de 50 anos e trabalhar na mesma profissão que você."
 
-#: wannamigrate/points/views.py:733
+#: wannamigrate/points/views.py:738
 msgid ""
 "If you are willing to live in a regional part of Australia in the beginning, "
 "it's easier to get the visa (more details soon)."
@@ -9923,8 +9651,8 @@ msgstr ""
 "Se você tiver disponibilidade de viver em uma parte interiorana da Austrália "
 "no começo, será mais fácil conseguir o visto (mais detalhes em breve)."
 
-#: wannamigrate/points/views.py:736 wannamigrate/points/views.py:756
-#: wannamigrate/points/views.py:770
+#: wannamigrate/points/views.py:741 wannamigrate/points/views.py:761
+#: wannamigrate/points/views.py:775
 msgid ""
 "If you have money/assets that you will take with you, you can apply for an "
 "investment visa."
@@ -9932,7 +9660,7 @@ msgstr ""
 "Se você tiver dinheiro/patrimônio que irá levar com você, poderá aplicar "
 "para um visto de investidor."
 
-#: wannamigrate/points/views.py:741
+#: wannamigrate/points/views.py:746
 msgid ""
 "You can get 5 extra points if your partner/spouse (stable union) has a basic "
 "level of english or french."
@@ -9940,7 +9668,7 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha um nível básico de inglês ou francês."
 
-#: wannamigrate/points/views.py:744
+#: wannamigrate/points/views.py:749
 msgid ""
 "You can get 5 extra points if you or your partner/espouse (stable union) "
 "complete any studies or have a past job in Canada."
@@ -9948,11 +9676,11 @@ msgstr ""
 "Você pode receber 5 pontos extras caso seu esposo(a) (ou união estável) "
 "tenha estudado ou trabalho no Canadá."
 
-#: wannamigrate/points/views.py:747
+#: wannamigrate/points/views.py:752
 msgid "You can get 5 extra points if you have a close family member in Canada."
 msgstr "Você pode receber 5 pontos extras se tiver um parente no Canadá."
 
-#: wannamigrate/points/views.py:750
+#: wannamigrate/points/views.py:755
 msgid ""
 "You can get 15 extra points if you can get a job offer from an Canada "
 "Employer (<a href='http://www.jobbank.gc.ca/' target='blank'>Find jobs here</"
@@ -9962,7 +9690,7 @@ msgstr ""
 "uma empresa do Canadá. (<a href='http://www.jobbank.gc.ca/' "
 "target='blank'>Procure por Emprego Aqui</a>)."
 
-#: wannamigrate/points/views.py:753
+#: wannamigrate/points/views.py:758
 msgid ""
 "Each state of canada has its own additional immigration program, usually "
 "easier to get in. (<a href='http://www.immigration-quebec.gouv.qc.ca/en/' "
@@ -9972,13 +9700,13 @@ msgstr ""
 "normalmente são mais facilitados. (<a href='http://www.immigration-quebec."
 "gouv.qc.ca/en/' target='blank'>Confira a do estado de Québec</a>)."
 
-#: wannamigrate/points/views.py:761
+#: wannamigrate/points/views.py:766
 msgid ""
 "You can get 10 extra points if you have a close family member in New-Zealand."
 msgstr ""
 "Você pode receber 10 pontos extras se tiver um parente na Nova Zelândia."
 
-#: wannamigrate/points/views.py:764
+#: wannamigrate/points/views.py:769
 msgid ""
 "You can get 20 extra points if you have a partner/espouse with a skilled "
 "occupation or job offer."
@@ -9986,7 +9714,7 @@ msgstr ""
 "Você pode receber 20 pontos extras se seu esposo(a) (ou união estável) tiver "
 "uma profissãoqualificada ou uma proposta de trabalho."
 
-#: wannamigrate/points/views.py:767
+#: wannamigrate/points/views.py:772
 msgid ""
 "You can get up to 30 extra points if you have worked (or job offer) on a "
 "regional part of New Zealand."
@@ -9994,17 +9722,13 @@ msgstr ""
 "Você pode receber até 30 pontos extras se tiver trabalhado (ou proposta de "
 "emprego) em uma parte interiorana da Nova Zelândia."
 
-#: wannamigrate/points/views.py:773
+#: wannamigrate/points/views.py:778
 msgid ""
 "<strong>Congratulations!</strong> You have enough points to apply for a visa"
 msgstr ""
 "<strong>Parabéns!</strong> Você tem pontos suficientes para aplicar ao visto"
 
-#: wannamigrate/points/views.py:794
-msgid "Visa Application - Immigration Calculator - Wanna Migrate"
-msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
-
-#: wannamigrate/points/views.py:838
+#: wannamigrate/points/views.py:799
 msgid "Professional Help - Immigration Calculator - Wanna Migrate"
 msgstr "Ajuda de Experts - Calculadora de Imigração - Wanna Migrate"
 
@@ -10278,71 +10002,504 @@ msgstr ""
 "Um passo-a-passo inicial para lhe informar suas opções de migrar para o "
 "Canadá"
 
-#: wannamigrate/site/views.py:576
-msgid "Immigration Tools - Wanna Migrate"
-msgstr "Ferramentas para Imigração - Wanna Migrate"
-
-#: wannamigrate/site/views.py:577
-msgid ""
-"Use our tools to help you with your immigration plan. You can use an "
-"immigration calculator, download immigration guides and more."
-msgstr ""
-"Utilize nossas ferramentas para ajudá-lo com o seu plano de imigração. Você "
-"pode usar a calculadora de imigração, fazer download de guias de imigração e "
-"muito mais."
-
-#: wannamigrate/site/views.py:604
+#: wannamigrate/site/views.py:592
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:622
+#: wannamigrate/site/views.py:610
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:668
+#: wannamigrate/site/views.py:656
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:699
+#: wannamigrate/site/views.py:687
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:727
+#: wannamigrate/site/views.py:715
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:843
+#: wannamigrate/site/views.py:831
 msgid "New message from"
 msgstr "Nova mensagem de"
 
-#: wannamigrate/site/views.py:944
+#: wannamigrate/site/views.py:932
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1036
+#: wannamigrate/site/views.py:1024
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1090
+#: wannamigrate/site/views.py:1078
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1108
+#: wannamigrate/site/views.py:1096
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1249
+#: wannamigrate/site/views.py:1236
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1259
+#: wannamigrate/site/views.py:1246
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
 # Q&A Dynamic translations.
-#: wannamigrate/site/views.py:1344
+#: wannamigrate/site/views.py:1331
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "I'm a service provider"
+#~ msgstr "Prestador de serviços"
+
+#~ msgid "You will receive a link to download the ebook in PDF."
+#~ msgstr "Você receberá um link para baixar o ebook em PDF."
+
+#, fuzzy
+#~| msgid "Sign-up and get more help"
+#~ msgid "Start now and get free help"
+#~ msgstr "Cadastre-se e obtenha ajuda"
+
+#~ msgid "Buy Guide"
+#~ msgstr "Comprar"
+
+#~ msgid "Coming soon!"
+#~ msgstr "Em breve!"
+
+#~ msgid "Visa application"
+#~ msgstr "Aplicação ao visto"
+
+#~ msgid "Click Here"
+#~ msgstr "Clique Aqui"
+
+#~ msgid " to search for an expert that can help you with you migration plan."
+#~ msgstr ""
+#~ " para buscar por um expert que possa lhe ajudar com seu plano de "
+#~ "imigração."
+
+#~ msgid "Step"
+#~ msgstr "Passo"
+
+#~ msgid "Get your passport ready"
+#~ msgstr "Tenha seu passaporte no ponto"
+
+#~ msgid ""
+#~ "If you still don't have a passport or need to renew it, you will have to "
+#~ "do it before applying for the visa."
+#~ msgstr ""
+#~ "Se você ainda não tem um passaporte ou precisa renovar o mesmo, terá que "
+#~ "ter tudo pronto antes da aplicação ao visto."
+
+#~ msgid ""
+#~ "Passports are issued by specific government departments, such as the "
+#~ "police, immigration dept., etc... This will vary from country to country."
+#~ msgstr ""
+#~ "Passaportes são emitidos por órgãos governamentais específicos, como a "
+#~ "Polícia, departamento de imigração, etc... Isso irá variar de país para "
+#~ "país."
+
+#~ msgid "Provide proofs that you have competent English skills"
+#~ msgstr "Comprove que você tem um nível intermediário de Inglês"
+
+#~ msgid "You need to have one of the following:"
+#~ msgstr "Você precisa ter uma das opções seguintes:"
+
+#~ msgid "Score of at least 6 for each of the four test components."
+#~ msgstr "Nota mínima 6 para cada um dos quatro módulos do teste."
+
+#~ msgid ""
+#~ "Score of at least 'B' for each of the four test components (OET) or 12 "
+#~ "for listening, 13 for reading, 21 for writing and 18 for speaking (TOEFL "
+#~ "iBT)."
+#~ msgstr ""
+#~ "Nota mínima 'B' para cada um dos quatro módulos do teste (OET) ou 12 para "
+#~ "listening, 13 para reading, 21 para writing e 18 para speaking (TOEFL "
+#~ "iBT)."
+
+#~ msgid "Score of at least 50 in each of the four test components."
+#~ msgstr "Nota mínima 50 em cada um dos quatro módulos do teste."
+
+#~ msgid ""
+#~ "Valid passport from the United Kingdom, the United States of America, "
+#~ "Canada, New Zealand or the Republic of Ireland and you are a citizen of "
+#~ "that country."
+#~ msgstr ""
+#~ "Passaporte válido do Reino Unido, Estados Unidos, Canadá, Nova Zelândia, "
+#~ "ou Irlanda e ser um cidadão do país em questão."
+
+#~ msgid "Get your occupation recognized by Australia"
+#~ msgstr "Reconheça sua profissão na Austrália"
+
+#~ msgid ""
+#~ "You will have to apply for an Australian Skills Assessment from the "
+#~ "relevant authority on your field of work."
+#~ msgstr ""
+#~ "Você terá que aplicar para uma Avaliação de Habilidades da Austrália, "
+#~ "realizada pelo órgão regulamentador na sua área de trabalho."
+
+#~ msgid ""
+#~ "In almost all cases, assessing bodies will require that you have post-"
+#~ "secondary, such as university or trade, qualifications in order to "
+#~ "receive a positive assessment of your skills."
+#~ msgstr ""
+#~ "Em quase todos os casos, o órgão regulamentador irá requisitar formação "
+#~ "em curso superior ou técnico, para fornecer uma avaliação positiva"
+
+#~ msgid "Submit an Expression of Interest"
+#~ msgstr "Envie uma 'Expression of Interest' (Demonstração de Interesse)"
+
+#~ msgid ""
+#~ "In Australia you need to be invited to apply for the visa.  To be invited "
+#~ "you need to have the minimum number of points required and then submit an "
+#~ "expression of interest, which is an online form."
+#~ msgstr ""
+#~ "Na Austrália você precisa ser convidado pelo governo para aplicar ao "
+#~ "visto. Para ser convidade você precisa atingir a marca mínima de pontos e "
+#~ "depois enviar uma 'expression of interest', que é um formulário online."
+
+#~ msgid "to send your expression of interest."
+#~ msgstr "para enviar a sua 'expression of interest'"
+
+#~ msgid ""
+#~ "After you receive an invitation from the Governmenet of Australia you "
+#~ "will be able to send your visa application."
+#~ msgstr ""
+#~ "Após receber um convite o Governo da Austrália, você poderá preparar e "
+#~ "enviar sua aplicação ao visto."
+
+#~ msgid ""
+#~ "Remember that after the invitation, you have only 60 days to apply and "
+#~ "you will have to provide all the documentation, so make sure you have it "
+#~ "all prepared even before you send your Expression of Interest:"
+#~ msgstr ""
+#~ "Lembre-se que depois do convite, você possuir apenas 60 dias para enviar "
+#~ "a aplicação ao visto e você terá que fornecer toda a documentação e "
+#~ "comprovações mencionadas. Recomendamos ter tudo pronto antes mesmo de "
+#~ "enviar a 'Expression of Interest'."
+
+#~ msgid "Proofs for English skills."
+#~ msgstr "Comprovação de habilidades na Língua Inglesa"
+
+#~ msgid "Skills Assessment for your occupation."
+#~ msgstr "Avaliação de Habilidades para sua profissão."
+
+#~ msgid "Proofs for education degrees"
+#~ msgstr "Comprovação de escolaridade"
+
+#~ msgid "Personal Identification Documentation (including Passport)"
+#~ msgstr "Documentação de identificação (incluindo passaporte)"
+
+#~ msgid "Policy and Medical checks (certificates)"
+#~ msgstr "Certificados Médicos e Policiais"
+
+#~ msgid "Provide proofs for Minimum Language Requirement"
+#~ msgstr "Comprove habilidades na Língua Estrangeira"
+
+#~ msgid ""
+#~ "It can be for English or French. You will need to provide one of the "
+#~ "following certificates:"
+#~ msgstr ""
+#~ "Poderá ser para Inglês ou Francês. Você terá que fornecer um dos "
+#~ "certificados a seguir:"
+
+#~ msgid "Score of at least 7 for each of the four test components."
+#~ msgstr "Nota mínima 7 para cada um dos quatro módulos do teste."
+
+#~ msgid "Score of at least 6 for each of the four test components"
+#~ msgstr "Nota mínima 6 para cada um dos quatro módulos do teste"
+
+#~ msgid ""
+#~ "Score of: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 "
+#~ "(Reading), 310 – 348 (Writing)."
+#~ msgstr ""
+#~ "Nota Mínima: 310 – 348 (Speaking), 249 – 279 (Listening), 207 – 232 "
+#~ "(Reading), 310 – 348 (Writing)."
+
+#~ msgid "Provide proofs for Minimum Education Requirement"
+#~ msgstr "Comprove sua Escolaridade"
+
+#~ msgid ""
+#~ "If your degree was obtained outside Canada, you will need an Educational "
+#~ "Credential Assessment (ECA) report issued by an organization designated "
+#~ "by Citizenship and Immigration Canada. "
+#~ msgstr ""
+#~ "Se seu diploma foi conquistado fora do Canadá, você precisará de um "
+#~ "certificado (ECA) emitido por uma organização nomeada pelo Departamento "
+#~ "de Imigração do Canadá."
+
+#~ msgid "to have your education assessed."
+#~ msgstr "para ter sua escolaridade avaliada."
+
+#~ msgid "Provide proofs for Minimum Work Experience Requirements"
+#~ msgstr "Comprove sua Experiência Profissional"
+
+#~ msgid "You will have to prove all of the following:"
+#~ msgstr "Você terá que provar o seguinte:"
+
+#~ msgid ""
+#~ "You must have at least one year of continuous full-time (or the "
+#~ "equivalent in continuous part-time) paid work experience in the primary "
+#~ "occupation you specify in your application."
+#~ msgstr ""
+#~ "Você precisa ter pelo menos 1 ano contínuo de trabalho, em tempo integral "
+#~ "(ou o equivalente em meio-período), com salário fixo, na sua área "
+#~ "profissional indicada.specify in your application."
+
+#~ msgid "You must have had this experience within the last 10 years."
+#~ msgstr "Você precisa ter tido essa experiência nos últimos 10 anos"
+
+#~ msgid "Fill Out The Application"
+#~ msgstr "Preencha a aplicação"
+
+#~ msgid ""
+#~ "You will need the documents listed above and also Police Certificates and "
+#~ "Translations of all document, if not in English or French."
+#~ msgstr ""
+#~ "Você precisará de todos os documentos listados acima e também de "
+#~ "certificados policiais e traduções de toda documentação, se não estive em "
+#~ "Inglês ou Francês."
+
+#~ msgid "Then you need to fill out all the following forms:"
+#~ msgstr "Em seguida você deverá preencher todos os forms a seguir:"
+
+#~ msgid "Pay the Fees"
+#~ msgstr "Efetue o Pagamento das Taxas"
+
+#~ msgid ""
+#~ "Complete the Fee Payment Form - Application for Permanent Residence (IMM "
+#~ "5620) and include it with your application to the CIO. On-line payments "
+#~ "are not accepted by the CIO."
+#~ msgstr ""
+#~ "Preencha o formulário de pagamento das taxas - Aplicação para residência "
+#~ "permanente (IMM 5620) e inclua na papelada da sua aplicação ao visto. "
+#~ "Pagamentos online não serão aceitos."
+
+#~ msgid "to get the form."
+#~ msgstr "para receber o formulário."
+
+#~ msgid "Submit an Expression of Interest (EOI)"
+#~ msgstr "Envie uma 'Expression of Interest' (EOI)"
+
+#~ msgid ""
+#~ "On the EOI form you fill out information about yourself, your family, "
+#~ "your skills and your work experience. As you complete your EOI, you claim "
+#~ "points. However, you do not have to provide evidence at this point."
+#~ msgstr ""
+#~ "No formulário EOI você preenche informações sobre você, sua família, suas "
+#~ "habilidades profissionais e sua experiência de trabalho. Assim que você "
+#~ "finaliza o formulário você requisita seus pontos, apesar de não precisar "
+#~ "comprovar nada neste momento."
+
+#~ msgid ""
+#~ "Submitting an online EOI costs a fee of NZ$510.00. Submitting a paper-"
+#~ "based EOI costs a fee of NZ$650. Online EOIs cost less because they "
+#~ "require less processing than paper-based EOIs."
+#~ msgstr ""
+#~ "O envio do EOI de forma online custa 510.00 dólares neo-zelandeses. O "
+#~ "envio do EOIimpresso custa 540 dólares new-zelandeses. A forma online "
+#~ "custa menos por exigir menos processamento manual que a forma impressa."
+
+#~ msgid ""
+#~ "If your EOI has a score of 100 points or more, it goes in the pool of "
+#~ "EOIs. Every two weeks they automatically select EOIs with a points score "
+#~ "of 140 or over from the pool. Then they select EOIs with a points score "
+#~ "between 100 and 139 which include points for a skilled job or job offer. "
+#~ "If there are still have spaces available, they use additional criteria to "
+#~ "select lower-scoring EOIs."
+#~ msgstr ""
+#~ "Se o seu EOI tiver uma pontuação de 100 pontos ou mais, você irá para uma "
+#~ "fila de EOIs. A cada 2 semanas são selecionadas as EOIs com pontuações de "
+#~ "140 ou mais desta fila. Em seguida são selecionadas EOIs com pontuações "
+#~ "entre 100 e 139 que possuem pontos porprofissões qualificadas ou com uma "
+#~ "proposta de trabalho. Se ainda assim sobrarem algumas vagas, serão "
+#~ "utilizados critério adicionais para selecionar pontuações menores."
+
+#~ msgid ""
+#~ "EOIs are only valid for six months. If your EOI is not selected within "
+#~ "six months, it will lapse and be withdrawn from the pool. Your EOI fee "
+#~ "will not be refunded."
+#~ msgstr ""
+#~ "As EOIs tem validade de 6 meses.  Se sua EOI não for selecionada neste "
+#~ "período, será cancelada  e as taxas não são reembolsáveis."
+
+#~ msgid "for online application."
+#~ msgstr "para aplicação online"
+
+#~ msgid "for paper application."
+#~ msgstr "para aplicação impressa"
+
+#~ msgid ""
+#~ "After you receive an invitation to apply, you need to check the "
+#~ "information you provided in your EOI is still up to date and correct. You "
+#~ "also need to provide:"
+#~ msgstr ""
+#~ "Após receber um convite para aplicar ao visto, você terá que confirmar "
+#~ "toda informação fornecida em sua EOI, além de:"
+
+#~ msgid "evidence to support the points you claimed in your EOI."
+#~ msgstr "Comprovantes para os itens que lhe deram pontos em sua EOI."
+
+#~ msgid ""
+#~ "proof that you and everyone else on your application meet all of our "
+#~ "health, character and English language requirements."
+#~ msgstr ""
+#~ "Comprovações que você e todos os membros de sua aplicação atendem aos "
+#~ "requisitos de saúde, antecedentes e língua estrangeira."
+
+#~ msgid ""
+#~ "You then need to send all documents and evidence, with your application "
+#~ "form and a fee. You must make your application within four months of "
+#~ "being invited to apply for residence. Any applications received after "
+#~ "four months will not be accepted.."
+#~ msgstr ""
+#~ "Em seguida você deverá enviar todos os documentos e comprovantes, "
+#~ "juntamente com o formulário do visto e o pagamento.  Você deverá enviar "
+#~ "sua aplicação em até 4 meses após o convite. Quaisquer aplicações "
+#~ "recebidas depois dos 4 meses serão negadas."
+
+#~ msgid "Apply for the visa"
+#~ msgstr "Aplicar ao visto"
+
+#~ msgid "Visa Application - Immigration Calculator - Wanna Migrate"
+#~ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"
+
+#~ msgid "Immigration Tools - Wanna Migrate"
+#~ msgstr "Ferramentas para Imigração - Wanna Migrate"
+
+#~ msgid ""
+#~ "Use our tools to help you with your immigration plan. You can use an "
+#~ "immigration calculator, download immigration guides and more."
+#~ msgstr ""
+#~ "Utilize nossas ferramentas para ajudá-lo com o seu plano de imigração. "
+#~ "Você pode usar a calculadora de imigração, fazer download de guias de "
+#~ "imigração e muito mais."
+
+#~ msgid "Download"
+#~ msgstr "Download"
+
+#~ msgid "Your Download Link"
+#~ msgstr "Link para Download"
+
+#~ msgid "This is your download link for your recent order on Wanna Migrate."
+#~ msgstr ""
+#~ "Este é o link de download para a sua compra recente no Wanna Migrate."
+
+#~ msgid ""
+#~ "It will be valid for 3 days. Click the button below to download the e-"
+#~ "book:"
+#~ msgstr ""
+#~ "O link estará válido por 3 dias. Clique no botão abaixo para fazer o "
+#~ "download do e-book:"
+
+#~ msgid "Download Now"
+#~ msgstr "Fazer Download"
+
+#~ msgid "Immigration Tools"
+#~ msgstr "Ferramentas para Imigração"
+
+#~ msgid ""
+#~ "\n"
+#~ "                        Make the first step to start the plan to "
+#~ "<span>move to a new country</span>. You will get help from the decision "
+#~ "of what country and visa you should pursue to the actual relocation with "
+#~ "your family.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                        Dê o primeiro passo em direção <span>a um novo "
+#~ "país</span>. Você será auxiliado na decisão de país/visto, prova de "
+#~ "inglês, aplicação ao visto, busca por emprego e a mudança definitiva.\n"
+#~ "                    "
+
+#~ msgid ""
+#~ "\n"
+#~ "                        This is a limited edition until the 25th of "
+#~ "August and you will get <span>1 year of subscription</span> to:\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                        Esta é uma edição limitada (até 25 de Agosto) e "
+#~ "você terá <span>1 ano de acesso</span> a:\n"
+#~ "                    "
+
+#~ msgid ""
+#~ "Unlimited <span>email support</span> and initial <span>training on Skype</"
+#~ "span> (Only available if you received this by email)."
+#~ msgstr ""
+#~ "<span>Suporte ilimitado por email</span> e <span>treinamento inicial</"
+#~ "span> por Skype."
+
+#~ msgid ""
+#~ "<span>Complete Guides</span> about moving to Canada and Australia, "
+#~ "updated every month."
+#~ msgstr ""
+#~ "<span>Guias completos</span> de como mudar para Canadá e Austrália, "
+#~ "atualizados mensalmente."
+
+#~ msgid "Immigration <span>Points Calculator</span> - Optimized."
+#~ msgstr "<span>Calculadora de Pontos</span> de Imigração - Otimizada."
+
+#~ msgid ""
+#~ "<span>International CV tool</span> - Convert your current CV to the "
+#~ "australian and canadian styles."
+#~ msgstr ""
+#~ "<span>Ferramenta CV Internacional</span> - Converta seu currículo "
+#~ "brasileiro para os padrões australiano e canadense."
+
+#~ msgid "Templates for <span>work experience confirmation letters</span>."
+#~ msgstr ""
+#~ "Templates para <span>carta de comprovação de experiência de trabalho</"
+#~ "span>."
+
+#~ msgid "Templates for <span>business plan</span> for business visas."
+#~ msgstr "Templates para <span>business plan</span> para vistos de negócios."
+
+#~ msgid ""
+#~ "Templates for <span>ways to contact potential employers</span> for "
+#~ "business visas."
+#~ msgstr ""
+#~ "Templates para <span>formas de contactar empregadores</span>, antes mesmo "
+#~ "de sair do Brasil."
+
+#~ msgid ""
+#~ "Access to <span>webinars and posts</span> from real immigrants that went "
+#~ "to Australia and Canada."
+#~ msgstr ""
+#~ "Acesso a <span>webinars e posts</span> de imigrantes reais que foram para "
+#~ "Austrália ou Canadá."
+
+#~ msgid ""
+#~ "<span>Unlimited Q&A</span>: Make as many questions as you want, we "
+#~ "guarantee you will have replies."
+#~ msgstr ""
+#~ "<span>Tira-Dúvidas ilimitado</span>: Faça quantas perguntas desejar, "
+#~ "garantimos que você receberá respostas."
+
+#~ msgid "<span>Course Search</span> for your budget and subject."
+#~ msgstr "<span>Busca de cursos</span> na sua área e orçamento."
+
+#~ msgid ""
+#~ "<span>English Evaluation</span> to test your level and understand what "
+#~ "you will need to improve."
+#~ msgstr ""
+#~ "<span>Teste de Inglês</span> para avaliação do seu nível e o que será "
+#~ "necessário para a imigração."
+
+#~ msgid ""
+#~ "After the payment, you will receive a confirmation email and details to "
+#~ "start using the service, before the launch on 25 of August."
+#~ msgstr ""
+#~ "Após o pagamento, você receberá um e-mail de confirmação e detalhes para "
+#~ "começar a usar o serviço antes do lançamento do dia 25 de Agosto."
+
+#~ msgid "Your Download Link:"
+#~ msgstr "Link para Download:"
 
 #~ msgid "Professionals"
 #~ msgstr "Profissionais"

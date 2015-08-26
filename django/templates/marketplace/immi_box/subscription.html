@@ -48,63 +48,39 @@
         <input type="hidden" name="product_id" id="product_id" value="" />
     </form>
 
-    {% if LANGUAGE_CODE == 'en' %}
+    {% if messages %}
         <section class="books_block">
             {% include "site/_common/status.html" %}
         </section>
     {% endif %}
-    
+
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Guide - How to move to Canada' %}
+                {% trans 'Subscription to Immi Box - Canada' %}
             </div>
             <div class="text">
-                {% trans "The perfect guide if you want to live in Canada and don't know where to begin. You will learn:" %}
+                {% trans "1 year of access to all the tools you need to immigrate to Canada." %}
                 <ul>
-                    <li>{% trans "Why Canada and your immigration options" %}</li>
-                    <li>{% trans "How to start and execute your plan" %}</li>
-                    <li>{% trans "How to study, work and do business in Canada" %}</li>
-                    <li>{% trans "How to take your family to Canada" %}</li>
+                    <li>{% trans "Identify the best type of visa for your profile" %}</li>
+                    <li>{% trans "Learn how to study, work and do business in Canada" %}</li>
+                    <li>{% trans "Organize all the documents you need" %}</li>
+                    <li>{% trans "Start your visa application" %}</li>
+                    <li>{% trans "Build your Canadian CV and contact employers" %}</li>
                 </ul>
-                <span class="small">{% trans "You will receive a link to download the ebook in PDF." %}</span>
+                <span class="small">{% trans "You will have full access to our premium area after the payment." %}</span>
             </div>
             <div class="books_bottom">
                 <div class="price">
-                    R$ <span>19,00<sup></sup><!--<sup>90</sup>--></span>
+                    R$ <span>80,00<sup></sup></span>
                 </div>
                 <div class="but">
-                    <a href="#" data-productid="1" class="bt-edit button">{% trans "Buy Guide" %}</a>
-                </div>
-                <div class="preview">
-                    <a href="#" class="open-gallery">{% trans "preview book" %}</a>
+                    <a href="#" data-productid="3" class="bt-edit button">{% trans "Buy Package" %}</a>
                 </div>
             </div>
         </div>
         <div class="right">
-            <ul class="gallery">
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-2.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-3.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-4.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-5.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-6.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-                <li data-src="{% static 'site/img/e-book-como-mudar-para-o-canada-preview-7.jpg' %}">
-                    <img src="{% static 'site/img/e-book-como-mudar-para-o-canada.png' %}" alt="{% trans 'Guide - How to move to Canada' %}" />
-                </li>
-            </ul>
+            <img src="{% static 'site/img/immi-box-canada.jpg' %}" alt="{% trans 'Immi Box - Canada' %}" />
         </div>
     </section>
 
@@ -114,36 +90,105 @@
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Guide - How to move to Australia' %}
+                {% trans 'Subscription to Immi Box - Australia' %}
             </div>
             <div class="text">
-                {% trans "Coming soon!" %}
-                <!--
+                {% trans "1 year of access to all the tools you need to immigrate to Australia." %}
                 <ul>
-                    <li>{% trans "Why Canada and your immigration options" %}</li>
-                    <li>{% trans "How to start and execute your plan" %}</li>
-                    <li>{% trans "How to study, work and do business in Canada" %}</li>
-                    <li>{% trans "How to take your family to Canada" %}</li>
+                    <li>{% trans "Identify the best type of visa for your profile" %}</li>
+                    <li>{% trans "Learn how to study, work and do business in Australia" %}</li>
+                    <li>{% trans "Organize all the documents you need" %}</li>
+                    <li>{% trans "Start your visa application" %}</li>
+                    <li>{% trans "Build your Australian CV and contact employers" %}</li>
                 </ul>
-                -->
+                <span class="small">{% trans "You will have full access to our premium area after the payment." %}</span>
             </div>
             <div class="books_bottom">
-                <!--
                 <div class="price">
-                    R$ <span>19,00<sup></sup></span>
+                    R$ <span>80,00<sup></sup></span>
                 </div>
                 <div class="but">
-                    <a href="#" class="bt-edit button">{% trans "Buy Guide" %}</a>
+                    <a href="#" data-productid="2" class="bt-edit button">{% trans "Buy Package" %}</a>
                 </div>
-                -->
             </div>
         </div>
         <div class="right">
-            <img src="{% static 'site/img/e-book-como-mudar-para-a-australia.png' %}" alt="{% trans 'Guide - How to move to Australia' %}" />
+            <img src="{% static 'site/img/immi-box-australia.jpg' %}" alt="{% trans 'Immi Box - Australia' %}" />
         </div>
     </section>
 
     <div class="clearfix"></div>
+    <div class="line"></div>
+
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Subscription to Immi Box + Support - Canada' %}
+            </div>
+            <div class="text">
+                {% trans "1 year of access to all the tools you need to immigrate to Canada, plus unlimited support." %}
+                <ul>
+                    <li>{% trans "Initial Immigration Training via Skype" %}</li>
+                    <li>{% trans "Unlimited email support to answer all your questions" %}</li>
+                    <li>{% trans "Identify the best type of visa for your profile" %}</li>
+                    <li>{% trans "Learn how to study, work and do business in Canada" %}</li>
+                    <li>{% trans "Organize all the documents you need" %}</li>
+                    <li>{% trans "Start your visa application" %}</li>
+                    <li>{% trans "Build your Canadian CV and contact employers" %}</li>
+                </ul>
+                <span class="small">{% trans "You will have full access to our premium area after the payment." %}</span>
+            </div>
+            <div class="books_bottom">
+                <div class="price">
+                    R$ <span>150,00<sup></sup></span>
+                </div>
+                <div class="but">
+                    <a href="#" data-productid="5" class="bt-edit button">{% trans "Buy Package" %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <img src="{% static 'site/img/immi-box-canada-support.jpg' %}" alt="{% trans 'Immi Box and Support - Canada' %}" />
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+    <div class="line"></div>
+
+    <section class="books_block">
+        <div class="left">
+            <div class="title">
+                {% trans 'Subscription to Immi Box + Support - Australia' %}
+            </div>
+            <div class="text">
+                {% trans "1 year of access to all the tools you need to immigrate to Australia, plus unlimited support." %}
+                <ul>
+                    <li>{% trans "Initial Immigration Training via Skype" %}</li>
+                    <li>{% trans "Unlimited email support to answer all your questions" %}</li>
+                    <li>{% trans "Identify the best type of visa for your profile" %}</li>
+                    <li>{% trans "Learn how to study, work and do business in Australia" %}</li>
+                    <li>{% trans "Organize all the documents you need" %}</li>
+                    <li>{% trans "Start your visa application" %}</li>
+                    <li>{% trans "Build your Australian CV and contact employers" %}</li>
+                </ul>
+                <span class="small">{% trans "You will have full access to our premium area after the payment." %}</span>
+            </div>
+            <div class="books_bottom">
+                <div class="price">
+                    R$ <span>150,00<sup></sup></span>
+                </div>
+                <div class="but">
+                    <a href="#" data-productid="4" class="bt-edit button">{% trans "Buy Package" %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <img src="{% static 'site/img/immi-box-australia-support.jpg' %}" alt="{% trans 'Immi Box and Support - Australia' %}" />
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+    <br /><br /><br />
 
     <div class="slider">
         <div class="flexslider">
@@ -170,7 +215,7 @@
                 <li>
                     <div class="flex-caption">
                     <div class="title">
-                        {% trans "What our readers say" %}
+                        {% trans "What our users say" %}
                     </div>
                     <div class="img">
                         <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
@@ -192,10 +237,10 @@
 
     <section class="call_to_action">
         <div class="left">
-            {% trans "Sign-up and get more help" %}
+            {% trans "Start now. It's free!" %}
         </div>
         <div class="but">
-            <a href="{% url 'site:dashboard' %}" class="bt-edit button">{% trans "Start now. It's free" %}</a>
+            <a href="{% url 'site:dashboard' %}" class="bt-edit button">{% trans "Sign up" %}</a>
         </div>
     </section>
 
