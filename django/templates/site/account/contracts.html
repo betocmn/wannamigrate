@@ -28,7 +28,7 @@
                                 <td class="professional">{{ order.service.user.name }}</td>
                                 <td class="date">{{ order.created_date|date:"d M Y"|lower }}</td>
                                 <td class="total">R$ {{ order.net_total }}</td>
-                                <td class="status {% if order.service.service_status_id == 2 or order.service.service_status_id == 3 %}paid{% else %}waiting{% endif %}">{{ order.service.service_status.name }}</td>
+                                <td class="status {% if order.order_status_id == 2 %}paid{% else %}waiting{% endif %}">{{ order.order_status.name }}</td>
                             </tr>
                         {% endfor %}
 
@@ -53,7 +53,7 @@
                                 <td class="professional">{{ order.service.provider.display_name }}</td>
                                 <td class="date">{{ order.created_date|date:"d M Y"|lower }}</td>
                                 <td class="total">R$ {{ order.net_total }}</td>
-                                <td class="status {% if order.service.service_status_id == 2 or order.service.service_status_id == 3 %}paid{% else %}waiting{% endif %}">{{ order.service.service_status.name }}</td>
+                                <td class="status {% if order.order_status_id == 2 %}paid{% else %}waiting{% endif %}">{{ order.order_status.name }}</td>
                             </tr>
                         {% endfor %}
 
