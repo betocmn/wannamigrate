@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-26 00:34-0300\n"
+"POT-Creation-Date: 2015-08-27 11:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,7 @@ msgstr "Tira-Dúvidas"
 #: templates/_layouts/main.html:89 templates/_layouts/main.html.py:133
 #: templates/emails/order_confirmation_user.html:147
 #: templates/marketplace/immi_box/subscription.html:28
+#: templates/site/guide/guide.html:36
 msgid "Immi Box"
 msgstr "Immi Box"
 
@@ -6422,8 +6423,6 @@ msgstr "Para futuros imigrantes - Feito por imigrantes reais"
 #: templates/marketplace/ebook/ebook.html:99
 #: templates/marketplace/ebook/ebook.html:102
 #: templates/marketplace/ebook/ebook.html:105
-#: templates/qa/blogpost/view.html:65 templates/qa/question/view.html:205
-#: templates/site/guide/guide.html:36
 msgid "Guide - How to move to Canada"
 msgstr "Guia - Como mudar para o Canadá"
 
@@ -7479,7 +7478,7 @@ msgstr "Última atividade"
 msgid "Options"
 msgstr "Opções"
 
-#: templates/qa/blogpost/view.html:18 templates/qa/blogpost/view.html.py:71
+#: templates/qa/blogpost/view.html:18 templates/qa/blogpost/view.html.py:73
 msgid "Back to Posts"
 msgstr "Voltar aos Posts"
 
@@ -7498,6 +7497,10 @@ msgstr "Veja também..."
 #: templates/qa/blogpost/view.html:50
 msgid "Related Posts"
 msgstr "Posts Relacionados"
+
+#: templates/qa/blogpost/view.html:66 templates/qa/question/view.html:206
+msgid "Subscription to Immi Box"
+msgstr "Assinatura do Immi Box"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:12
@@ -7662,7 +7665,7 @@ msgstr "Escrever uma resposta"
 msgid "Write answer"
 msgstr "Responder"
 
-#: templates/qa/question/view.html:146 templates/qa/question/view.html:249
+#: templates/qa/question/view.html:146 templates/qa/question/view.html:251
 msgid "Anonymous"
 msgstr "Anônimo"
 
@@ -7754,14 +7757,6 @@ msgstr ""
 #: templates/site/about/how_it_works.html:44
 msgid "Start now. It’s Free!"
 msgstr "Comece agora. É gratuito!"
-
-#: templates/site/about/how_it_works.html:45
-msgid "If you’re a Service Provider, please"
-msgstr "Se é um Prestador de Serviços,"
-
-#: templates/site/about/how_it_works.html:45
-msgid "click here"
-msgstr "clique aqui"
 
 #: templates/site/about/service_providers.html:13
 msgid ""
@@ -8127,8 +8122,8 @@ msgstr ""
 "                        "
 
 #: templates/site/guide/guide.html:36
-msgid "Download our e-book"
-msgstr "Faça o download do nosso e-book"
+msgid "Get immigration assistance for 1 year by subscribing to our"
+msgstr "Receba suporte de imigração por 1 ano, assinando o"
 
 #: templates/site/guide/guide.html:44 templates/site/guide/guide.html:183
 msgid "1 - Define your goal:"
@@ -10054,6 +10049,15 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1331
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "If you’re a Service Provider, please"
+#~ msgstr "Se é um Prestador de Serviços,"
+
+#~ msgid "click here"
+#~ msgstr "clique aqui"
+
+#~ msgid "Download our e-book"
+#~ msgstr "Faça o download do nosso e-book"
 
 #~ msgid "I'm a service provider"
 #~ msgstr "Prestador de serviços"
