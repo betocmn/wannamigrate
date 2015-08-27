@@ -59,7 +59,7 @@ class Order( BaseModel ):
         """
 
         orders = Order.objects.select_related(
-            'order_status', 'service', 'user', 'service__service_status', 'service__provider'
+            'order_status', 'service', 'user', 'service__provider'
         )
         if user_id:
             if is_provider:
@@ -72,7 +72,7 @@ class Order( BaseModel ):
             orders = orders.filter( service_id__isnull = False, )
         orders = orders.only(
             'id', 'created_date', 'description', 'gross_total', 'net_total', 'discount',
-            'order_status', 'service', 'user', 'service__service_status', 'service__provider'
+            'order_status__id', 'order_status__name', 'service', 'user', 'service__service_status', 'service__provider'
         ).order_by(
             '-created_date'
         )
