@@ -219,24 +219,27 @@ def ebook( request ):
 
 
 @subscription_required
-def ebook_read( request, country_name ):
+def ebook_read( request, item_name ):
     """
     Read E-book PDF
 
     :param: request
-    :param country_name:
+    :param item_name:
     :return: String - HTML
     """
 
     # Initial settings
-    template_data = { 'country_name': country_name }
+    template_data = {}
 
     # Get Country and set options for it
-    if country_name == 'canada' and settings.ID_COUNTRY_CANADA in request.session['subscription']['countries']:
+    if item_name == 'canada' and settings.ID_COUNTRY_CANADA in request.session['subscription']['countries']:
         template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhWjZpdWJyUS1ZNkk/preview'
 
-    elif country_name == 'australia' and settings.ID_COUNTRY_AUSTRALIA in request.session['subscription']['countries']:
+    elif item_name == 'australia' and settings.ID_COUNTRY_AUSTRALIA in request.session['subscription']['countries']:
         template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhejNoMkNtZjBiOVU/preview'
+
+    elif item_name == 'international_cv':
+        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhMWlCbC1ORndEUTg/preview'
 
     else:
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
@@ -328,45 +331,6 @@ def international_cv( request ):
 
     # Initializes template data dictionary
     template_data = {}
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        provider = get_object_or_false( Provider, pk = 13 )
-        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
-        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
-        if not provider or not service_type or not provider_service_type:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # order information
-        payment_info = {
-            'provider': { 'id': provider.id, 'name': provider.display_name },
-            'service_type': { 'id': service_type.id, 'name': service_type.name },
-            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
-        }
-
-        # saves service
-        if request.user.is_authenticated():
-            service = Service()
-            service.service_price = provider_service_type.price
-            service.description = service_type.name
-            service.user = request.user
-            service.provider = provider
-            service.service_type = service_type
-            service.service_status_id = ServiceStatus.get_status_from_order_status()
-            service.save()
-            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
-
-        # saves details to session
-        request.session['payment'] = payment_info
-
-        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    else:
-        # Cleans payment session
-        request.session['payment'] = {}
-        del request.session['payment']
 
     # Overwrites meta title and description (for SEO)
     template_data['meta_title'] = _( 'Build your International CV - Wanna Migrate' )

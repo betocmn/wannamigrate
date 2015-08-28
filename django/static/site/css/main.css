@@ -11020,6 +11020,322 @@ ul.notifications-view li.notification-item a.notification-link span.date
 
 
 
+/* Home-page (new) */
+.dashboard.home header {
+    width: 100%;
+    min-height: 510px;
+    background: url("../img/home-background-canada-5.jpg") no-repeat;
+    background-size: cover;
+    padding-bottom: 40px;
+}
+.dashboard.home header .heading {
+    text-align: center;
+    padding-top: 150px;
+}
+.dashboard.home .clearfix {
+	clear: both;
+}
+.dashboard.home header .heading .title {
+    color: #FFF;
+    font-size: 30px;
+    text-shadow: 0 1px 1px rgba(0, 0, 1, 0.19);
+    line-height: 38px;
+    font-family: 'open_sanssemibold';
+}
+.dashboard.home header .heading .title span {
+    color: #FFCF01;
+}
+.dashboard.home header .get-help {
+    padding-top: 30px;
+    width: 868px;
+    height: 250px;
+    margin: 0 auto;
+}
+.dashboard.home header .get-help form {
+    width: auto;
+    height: 103px;
+    padding: 20px 25px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.5);
+}
+.dashboard.home header .get-help form fieldset {
+    float: left;
+}
+.dashboard.home header .get-help form .field {
+    float: left;
+    height: 35px;
+    font-size: 14px;
+}
+.dashboard.home header .get-help form .field label {
+    display: block;
+    font-family: 'open_sansregular';
+    font-size: 14px;
+    padding: 0 0 10px 10px;
+    color: #fff;
+}
+.dashboard.home header .get-help form .field select {
+    height: 35px;
+}
+.dashboard.home header .get-help form .from select {
+    width: 200px;
+}
+.dashboard.home header .get-help form .want {
+    margin: 0 20px;
+}
+.dashboard.home header .get-help form .want select {
+    width: 200px;
+}
+.dashboard.home header .get-help form .to select {
+    width: 200px;
+}
+.dashboard.home header .get-help form .bt-help {
+    float: right;
+    width: 153px;
+    margin: 25px 0 0 0;
+    padding-top: 9px;
+    height: 35px;
+    font-size: 14px;
+}
+
+
+
+
+.dashboard.home .books_block {
+	text-align: center;
+	padding: 20px;
+}
+.dashboard.home .books_block .right ul.gallery {
+    cursor: pointer;
+}
+.dashboard.home .books_block .right ul.gallery li {
+    display: none;
+}
+.dashboard.home .books_block .right ul.gallery li:first-child {
+    display: block;
+}
+.dashboard.home .books_block .but {
+    float: left;
+    min-width: 130px;
+    max-width: 155px;
+    margin: 10px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+.dashboard.home .books_block .preview {
+    float: left;
+    line-height: 107px;
+    margin-left: 7px;
+    font-size: 14px;
+}
+.dashboard.home .books_block .preview a {
+    color: #4f9276;
+    text-decoration: none;
+}
+.dashboard.home .books_block .preview a:hover {
+    text-decoration: underline;
+}
+.dashboard.home .books_block .title{
+	color: #232323;
+    font-size: 28px;
+    padding-bottom: 28px;
+    font-family: 'open_sansbold';
+}
+.dashboard.home .books_block .title span {
+	color: #ADAAAA;
+    font-size: 20px;
+}
+.dashboard.home .books_block .text{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+.dashboard.home .books_block .text span{
+    font-family: 'open_sansbold';
+}
+.dashboard.home .books_block .text .small{
+    color: #555;
+    font-size: 14px;
+}
+.dashboard.home .books_block .text .small a {
+    text-decoration: none;
+    color: #4f9276;
+}
+.dashboard.home .books_block .text .small a:hover {
+    text-decoration: underline;
+}
+.dashboard.home .books_block .text ul {
+	list-style-image: url("../img/icon_li.png");
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.dashboard.home .books_block .price {
+    color: #555;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 86px;
+}
+
+.dashboard.home .books_block .price span sup {
+    font-size: 22px;
+}
+.dashboard.home .books_block .price span{
+    color: #555;
+    font-size: 32px;
+    line-height: 86px;
+    font-family: 'open_sansbold';
+}
+.dashboard.home .line{
+    background-color: #000;
+    opacity: 0.1;
+    height: 1px;
+    width: 100%;
+}
+.dashboard.home .books_block img {
+  max-width: 100%;
+  height: auto;
+}
+.dashboard.home .call_to_action {
+  padding: 0 20px 20px 20px;
+  text-align: center;
+}
+.dashboard.home .call_to_action .left {
+    color: #68347E;
+    font-size: 36px;
+    font-weight: 400;
+}
+.dashboard.home .call_to_action .but {
+    max-width: 195px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+.dashboard.home .flex-caption {
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  padding-bottom: 20%;
+}
+.dashboard.home .flexslider {
+    overflow: hidden;
+}
+.dashboard.home .flexslider {
+    background: url("../img/bg_slider.jpg") no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 0;
+}
+.dashboard.home .flex-caption .img {
+  width: 33px;
+  height: 30px;
+  margin: 0 auto;
+}
+.dashboard.home .flex-caption .bottom img {
+  width: 75px;
+  height: 75px;
+  float: left;
+  padding-right: 25px;
+  padding-top: 15px;
+}
+.dashboard.home .flex-caption .bottom {
+  text-align: center;
+  padding-right: 100px;
+}
+.dashboard.home .flex-caption .title {
+    color: #FFF;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 86px;
+    font-family: 'open_sansbold';
+}
+.dashboard.home .flex-caption .text {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 42px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    max-width: 70%;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-family: 'open_sanslight';
+}
+.dashboard.home .flex-caption .bottom .text2 {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: left;
+    font-family: 'open_sansbold';
+}
+.dashboard.home .flex-caption .bottom .text2 span {
+    font-family: 'open_sanslight';
+}
+.dashboard.home .flex-control-nav {
+    bottom: 40px;
+}
+@media(min-width: 768px) {
+    .dashboard.home .books_block {
+        padding: 70px;
+        text-align: left;
+    }
+    .dashboard.home .books_block .left {
+        width: 50%;
+        float: left;
+    }
+    .dashboard.home .books_block .right {
+        width: 50%;
+        float: right;
+        text-align: center;
+    }
+    .dashboard.home .books_block img {
+      margin: 0 auto;
+    }
+    .dashboard.home .books_block .price {
+        float: left;
+    }
+    .dashboard.home .books_block .but {
+        padding-top: 22px;
+    }
+    .dashboard.home .books_bottom {
+        text-align: left;
+    }
+    .dashboard.home .line {
+        margin-top: 50px;
+    }
+    .dashboard.home .call_to_action {
+        padding: 0 70px 70px 70px;
+        text-align: center;
+    }
+    .dashboard.home .call_to_action .left {
+        width: 590px;
+        float: left;
+        margin-left: 80px;
+    }
+    .dashboard.home .call_to_action .but {
+        width: 35%;
+        float: left;
+        padding-bottom: 70px;
+        padding-top: 0;
+    }
+    .dashboard.home .flex-caption .bottom {
+      padding-right: 150px;
+    }
+    .dashboard.home .flex-caption {
+      padding-bottom: 10%;
+    }
+    .dashboard.home .flex-caption .bottom .text2 {
+        line-height: 26px;
+    }
+}
+
+
 /* Landing-Page for Generic Products (E-Books, etc..) */
 .dashboard.generic-product header {
     width: 100%;

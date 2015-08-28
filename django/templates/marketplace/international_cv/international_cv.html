@@ -48,7 +48,7 @@
 
             <div class="text">
                 <ul>
-                    <li>{% trans "Receive an international CV from your current one" %}</li>
+                    <li>{% trans "Build an international CV from your current one" %}</li>
                     <li>{% trans "Get help to write an attractive cover letter" %}</li>
                     <li>{% trans "Let us help you with your Linkedin Profile" %}</li>
                     <li>{% trans "Get hints about how to approach employers" %}</li>
@@ -56,11 +56,13 @@
                 <span class="small">{% trans "After the payment, you will receive a confirmation email and the deadline for the conclusion of the service is 4 business days." %}</span>
             </div>
             <div class="order">
-                <div class="price">
-                    R$ <span>49,00<sup></sup><!--<sup>90</sup>--></span>
-                </div>
                 <div class="button-action">
-                    <a href="#" data-servicetypeid="22" class="bt-edit button">{% trans "Buy Package" %}</a>
+
+                    {% if ID_COUNTRY_CANADA in request.session.subscription.countries or ID_COUNTRY_AUSTRALIA in request.session.subscription.countries %}
+                        <a href="{% url 'marketplace:ebook_read' 'international_cv' %}" class="bt-edit button">{% trans "Open" %}</a>
+                    {% else %}
+                        <a href="{% url 'marketplace:subscription' %}" class="bt-edit button">{% trans "Buy Package" %}</a>
+                     {% endif %}
                 </div>
             </div>
         </div>
@@ -89,12 +91,6 @@
 
         $( document ).ready( function() {
 
-            // submits form for each button
-            $( '.description .button-action .button' ).click( function( event ) {
-                event.preventDefault();
-                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
-                $( "#service_type_form" ).submit();
-            });
 
         });
 
