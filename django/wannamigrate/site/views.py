@@ -184,6 +184,33 @@ def home( request ):
     return render( request, 'site/home/home.html', template_data )
 
 
+def new_home( request ):
+    """
+    Home-Page - Used as a provocative landing page to conquer new users
+
+    :param: request
+    :return: String - The html page rendered
+    """
+
+    # Temporary code to login automatically (for YCombinator Application)
+    if 'demo' in request.GET and request.GET.get( 'demo' ) == '672gah829sP32s89UiQz09321':
+        email = 'demo@demo.com'
+        password = 'demowanna'
+        user = authenticate( email = email, password = password )
+        auth_login( request, user )
+    else:
+        # Checks if the user is already authenticated.
+        if request.user.is_authenticated():
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # passes form to template
+    template_data['form'] = get_situation_form( request )
+
+    # Prints Template
+    return render( request, 'site/home/new_home.html', template_data )
 
 
 

@@ -24,10 +24,12 @@
                     <p class="text">{% trans 'Find out if you qualify for a visa to work and live in Canada, Australia and New Zealand.' %}</p>
                 </a>
             </div>
-            <div class="tool unavailable international-cv">
-                <img src="{% static 'site/img/tool-international-cv.jpg' %}" alt="{% trans 'package international cv' %}" />
-                <h3 class="title-tool">{% trans 'Build you CV for' %} {% trans request.session.situation.to_country.name %}</h3>
-                <p class="text">{% trans 'We help you with all the resources to start talking to international employers. CV, Cover letter, Linkedin, website...' %}</p>
+            <div class="tool international-cv">
+                <a href="{% url 'marketplace:international_cv' %}">
+                    <img src="{% static 'site/img/tool-international-cv.jpg' %}" alt="{% trans 'package international cv' %}" />
+                    <h3 class="title-tool">{% trans 'Build you international CV' %}</h3>
+                    <p class="text">{% trans 'We help you with all the resources to start talking to international employers. CV, Cover letter, Linkedin, website...' %}</p>
+                </a>
             </div>
             <div class="tool unavailable templates">
                 <img src="{% static 'site/img/tool-templates.jpg' %}" alt="{% trans 'Templates for immigration documents' %}" />
