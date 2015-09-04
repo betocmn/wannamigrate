@@ -31,7 +31,7 @@
             {% trans 'Get ready for your dream country' %}
         </div>
         <div class="text2">
-            {% trans 'In-person consultation to analyze your chances' %}
+            {{ city.title }}
         </div>
         <a href="#" class="scroll-down">
             <img src="{% static 'site/img/arrow_bottom.png' %}" alt="{% trans 'arrow-bottom' %}" />
@@ -43,10 +43,6 @@
 
 {% block content %}
 
-    <form id="service_type_form" method="post" action="">
-        {% csrf_token %}
-        <input type="hidden" name="service_type_id" id="service_type_id" value="" />
-    </form>
 
     {% if LANGUAGE_CODE == 'en' %}
         <section class="books_block">
@@ -57,28 +53,29 @@
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Immigration Workshop in São Luís/MA' %}
+                {{ city.workshop_text }}
                 <br />
-                <span>{% trans '31th of August - Restaurante Sushimax (Lagoa) - 19:30h' %}</span>
+                <span>{{ city.workshop_sub_text }}</span>
             </div>
             <div class="text">
                 {% trans "Analyze your chances to immigrate to Canada or Australia." %}
                 <ul>
-                    <li>{% trans "Duration: 1 hour" %}</li>
+                    <li>{% trans "Duration: 1 hour and a half (in group)" %}</li>
                     <li>{% trans "Learn immigration options and measure your chances" %}</li>
                     <li>{% trans "How to start and execute your plan" %}</li>
                     <li>{% trans "How to study, work and do business in Canada or Australia" %}</li>
                     <li>{% trans "How to take your family to Canada or Australia" %}</li>
-                    <li>{% trans "Receive a personal report and immigration e-book" %}</li>
+                    <li>{% trans "Calculate your immigration points to understand your chances" %}</li>
+                    <li>{% trans "Receive an immigration e-book and International CV templates" %}</li>
                 </ul>
                 <span class="small">{% trans "You will receive a confirmation email after the payment." %}</span>
             </div>
             <div class="books_bottom">
                 <div class="price">
-                    R$ <span>60,00<sup></sup><!--<sup>90</sup>--></span>
+                    R$ <span>65,00<sup></sup><!--<sup>90</sup>--></span>
                 </div>
                 <div class="but">
-                    <a href="#" data-servicetypeid="34" class="bt-edit button">{% trans "Buy" %}</a>
+                    <a href="{{ city.workshop_link }}" class="bt-edit button">{% trans "Buy" %}</a>
                 </div>
 
             </div>
@@ -94,28 +91,30 @@
     <section class="books_block">
         <div class="left">
             <div class="title">
-                {% trans 'Immigration Individual Evaluation in São Luís/MA' %}
+                {{ city.individual_text }}
                 <br />
-                <span>{% trans '26th of August to 15th of September' %}</span>
+                <span>{{ city.individual_sub_text }}</span>
             </div>
             <div class="text">
                 {% trans "Analyze your individual chances (or as a couple) to immigrate to Canada or Australia." %}
                 <ul>
                     <li>{% trans "Duration: 1 hour" %}</li>
-                    <li>{% trans "Receive immigration options accordingly to your profile" %}</li>
-                    <li>{% trans "Receive a personal step-by-step plan" %}</li>
+                    <li>{% trans "Immigration options accordingly to your profile" %}</li>
+                    <li>{% trans "Personal step-by-step plan" %}</li>
                     <li>{% trans "How to study, work and do business in Canada or Australia" %}</li>
                     <li>{% trans "How to take your family to Canada or Australia" %}</li>
-                    <li>{% trans "Receive a personal report and immigration e-book" %}</li>
+                    <li>{% trans "Evaluation of your immigration points" %}</li>
+                    <li>{% trans "Individual report" %}</li>
+                    <li>{% trans "1 year subscription to the" %} <a href="{% url 'marketplace:subscription' %}" target="_blank">Immi Box</a>, {% trans "including tools for CV preparation, visa application, english evaluation, etc..." %} </li>
                 </ul>
-                <span class="small">{% trans "You will be able to schedule a day and time after the payment." %}</span>
+                <span class="small">{% trans "You will be able to schedule a day and time before the payment." %}</span>
             </div>
             <div class="books_bottom">
                 <div class="price">
-                    R$ <span>150,00<sup></sup><!--<sup>90</sup>--></span>
+                    R$ <span>160,00<sup></sup><!--<sup>90</sup>--></span>
                 </div>
                 <div class="but">
-                    <a href="#" data-servicetypeid="33" class="bt-edit button">{% trans "Buy" %}</a>
+                    <a href="{{ city.individual_link }}" class="bt-edit button">{% trans "Buy" %}</a>
                 </div>
 
             </div>
@@ -126,6 +125,9 @@
     </section>
 
     <div class="clearfix"></div>
+    <div class="clearfix"></div>
+
+    <br /><br />
 
     <div class="slider">
         <div class="flexslider">
@@ -152,7 +154,7 @@
                 <li>
                     <div class="flex-caption">
                     <div class="title">
-                        {% trans "What our readers say" %}
+                        {% trans "What our users say" %}
                     </div>
                     <div class="img">
                         <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
@@ -172,6 +174,15 @@
         </div>
     </div>
 
+    <section class="call_to_action">
+        <div class="left">
+            {% trans "Full access to all the tools?" %}
+        </div>
+        <div class="but">
+            <a href="{% url 'marketplace:subscription' %}" class="bt-edit button">{% trans "Subscribe Now" %}</a>
+        </div>
+    </section>
+
 
 {% endblock content %}
 
@@ -189,12 +200,6 @@
 
         $( document ).ready( function() {
 
-            // submits form for each button (from books)
-            $( '.books_bottom .but .button' ).click( function( event ) {
-                event.preventDefault();
-                $( "#service_type_id" ).val( $( this ).attr( 'data-servicetypeid' ) );
-                $( "#service_type_form" ).submit();
-            });
 
             // plugin for testmonials slides
             $( '.flexslider' ).flexslider({

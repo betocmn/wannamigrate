@@ -450,16 +450,55 @@ def subscription( request ):
 #######################
 # CONSULTING - VIEWS
 #######################
-def consulting( request ):
+def consulting( request, city ):
     """
-    List all consulting options available
+    List all consulting options available per city
 
     :param: request
     :return String - HTML from The dashboard page.
     """
 
+    # Configure available cities and dates
+    cities = {
+        'sao-luis': {
+            'display': 'São Luís',
+            'title': _( 'In-person consultations in São Luís/MA - September 09th to 22nd' ),
+            'workshop_text': _( 'Immigration Workshop in São Luís/MA' ),
+            'workshop_sub_text': _( '14/09 - Restaurante Sushimax (Lagoa) - 19:30h' ),
+            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-sao-luis',
+            'individual_text': _( 'Immigration Individual Evaluation in São Luís/MA' ),
+            'individual_sub_text': _( 'From 09/Sep to 22/Sep' ),
+            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-sao-luis'
+        },
+        'teresina': {
+            'display': 'Teresina',
+            'title': _( 'In-person consultations in Teresina/PI - September 23rd and 24th' ),
+            'workshop_text': _( 'Immigration Workshop in Teresina/PI' ),
+            'workshop_sub_text': _( '24/09 - Hotel Ibis Teresina - 19:30h' ),
+            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-teresina',
+            'individual_text': _( 'Immigration Individual Evaluation in Teresina/PI' ),
+            'individual_sub_text': _( 'September 23rd and 24th' ),
+            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-teresina'
+        },
+        'belem': {
+            'display': 'Belém',
+            'title': _( 'In-person consultations in Belém/PA - October 6th and 7th' ),
+            'workshop_text': _( 'Immigration Workshop in Belém/PA' ),
+            'workshop_sub_text': _( '07/10 - Hotel Ibis Teresina - 19:30h' ),
+            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-belem',
+            'individual_text': _( 'Immigration Individual Evaluation in Belém/PA' ),
+            'individual_sub_text': _( 'October 6th and 7th' ),
+            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-belem'
+        },
+    }
+
+    # validates city
+    if city not in cities:
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+
     # Initializes template data dictionary
-    template_data = {}
+    template_data = { 'city': cities[city] }
 
     # If form was submitted (to proceed to payment page)
     if request.method == 'POST':
@@ -501,7 +540,7 @@ def consulting( request ):
         del request.session['payment']
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immigration Evaluation - Wanna Migrate' )
+    template_data['meta_title'] = _( 'Immigration Evaluation' ) + ' - ' + cities[city]['display']
     template_data['meta_description'] = _( 'In-person meeting to evaluate your chances to immigrate to Canada or Australia.' )
 
     # Sets image as preview for sharing (as for facebook, twitter, etc.)
