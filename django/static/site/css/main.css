@@ -3250,9 +3250,9 @@ sup{ vertical-align:super; }
     position: absolute;
     height: auto;
     width: 336px;
-    line-height: inherit;
+    line-height: 14px;
     float: right;
-    top: 135px;
+    top: 114px;
     right: 36px;
 }
 .dashboard footer a.language {
@@ -11435,11 +11435,11 @@ ul.notifications-view li.notification-item a.notification-link span.date
     color: #555;
     font-size: 14px;
 }
-.dashboard.generic-product .books_block .text .small a {
+.dashboard.generic-product .books_block .text a {
     text-decoration: none;
     color: #4f9276;
 }
-.dashboard.generic-product .books_block .text .small a:hover {
+.dashboard.generic-product .books_block .text a:hover {
     text-decoration: underline;
 }
 .dashboard.generic-product .books_block .text ul {

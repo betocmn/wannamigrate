@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     url( r'^immi-box/$', views.immi_box, name = 'immi_box' ),
 
     # Consulting
-    url( r'^immigration-evaluation/$', views.consulting, name = 'consulting' ),
+    url( r'^immigration-evaluation/(?P<city>[a-z_\-]+)$', views.consulting, name = 'consulting' ),
 
     # Payment Page
     url( r'^payment/$', views.payment, name = 'payment' ),

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-28 19:46-0300\n"
+"POT-Creation-Date: 2015-09-03 23:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,11 +174,11 @@ msgstr "Calculadora de Pontos de Imigração"
 msgid "Become a Service Provider"
 msgstr "Torne-se um Prestador de Serviços"
 
-#: templates/_layouts/main.html:200
+#: templates/_layouts/main.html:203
 msgid "All Rights Reserved"
 msgstr "Todos os Direitos Reservados"
 
-#: templates/_layouts/main.html:265
+#: templates/_layouts/main.html:269
 msgid "No results found."
 msgstr "Sem resultados."
 
@@ -6229,6 +6229,7 @@ msgid "Start Getting Help!"
 msgstr "Comece Agora!"
 
 #: templates/marketplace/consulting/consulting.html:28
+#: wannamigrate/marketplace/views.py:543
 msgid "Immigration Evaluation"
 msgstr "Avaliação de Imigração"
 
@@ -6238,10 +6239,6 @@ msgstr "Avaliação de Imigração"
 msgid "Get ready for your dream country"
 msgstr "Prepare-se para o país dos seus sonhos"
 
-#: templates/marketplace/consulting/consulting.html:34
-msgid "In-person consultation to analyze your chances"
-msgstr "Consultas presenciais para analisar suas chances"
-
 #: templates/marketplace/consulting/consulting.html:37
 #: templates/marketplace/ebook/ebook.html:37
 #: templates/marketplace/ielts/ielts.html:37
@@ -6249,91 +6246,102 @@ msgstr "Consultas presenciais para analisar suas chances"
 msgid "arrow-bottom"
 msgstr "descer"
 
-#: templates/marketplace/consulting/consulting.html:60
-msgid "Immigration Workshop in São Luís/MA"
-msgstr "Workshop de Imigração em São Luís/MA"
-
-#: templates/marketplace/consulting/consulting.html:62
-msgid "31th of August - Restaurante Sushimax (Lagoa) - 19:30h"
-msgstr "31 de Agosto - Restaurante Sushimax (Lagoa) - 19:30h"
-
-#: templates/marketplace/consulting/consulting.html:65
+#: templates/marketplace/consulting/consulting.html:61
 msgid "Analyze your chances to immigrate to Canada or Australia."
 msgstr "Descubra suas chances de imigrar para Canadá ou Austrália."
 
-#: templates/marketplace/consulting/consulting.html:67
-#: templates/marketplace/consulting/consulting.html:104
-msgid "Duration: 1 hour"
-msgstr "Duração: 1 hora"
+#: templates/marketplace/consulting/consulting.html:63
+msgid "Duration: 1 hour and a half (in group)"
+msgstr "Duração: 1 hora e meia (em grupo)"
 
-#: templates/marketplace/consulting/consulting.html:68
+#: templates/marketplace/consulting/consulting.html:64
 msgid "Learn immigration options and measure your chances"
 msgstr "Descubra as opções de imigração e suas chances"
 
-#: templates/marketplace/consulting/consulting.html:69
+#: templates/marketplace/consulting/consulting.html:65
 #: templates/marketplace/ebook/ebook.html:61
 #: templates/marketplace/ebook/ebook.html:123
 msgid "How to start and execute your plan"
 msgstr "Como iniciar e executar o seu plano"
 
-#: templates/marketplace/consulting/consulting.html:70
-#: templates/marketplace/consulting/consulting.html:107
+#: templates/marketplace/consulting/consulting.html:66
+#: templates/marketplace/consulting/consulting.html:104
 msgid "How to study, work and do business in Canada or Australia"
 msgstr "Como estudar, trabalhar e fazer negócios no Canadá ou Austrália"
 
-#: templates/marketplace/consulting/consulting.html:71
-#: templates/marketplace/consulting/consulting.html:108
+#: templates/marketplace/consulting/consulting.html:67
+#: templates/marketplace/consulting/consulting.html:105
 msgid "How to take your family to Canada or Australia"
 msgstr "Como levar sua família para o Canadá ou Austrália"
 
-#: templates/marketplace/consulting/consulting.html:72
-#: templates/marketplace/consulting/consulting.html:109
-msgid "Receive a personal report and immigration e-book"
-msgstr "Receba um relatório individual e um e-book"
+#: templates/marketplace/consulting/consulting.html:68
+msgid "Calculate your immigration points to understand your chances"
+msgstr "Faça simulações de seus pontos de imigração e entenda suas chances"
 
-#: templates/marketplace/consulting/consulting.html:74
+#: templates/marketplace/consulting/consulting.html:69
+msgid "Receive an immigration e-book and International CV templates"
+msgstr "Guia de Imigração (e-book) e templates de CV internacional"
+
+#: templates/marketplace/consulting/consulting.html:71
 msgid "You will receive a confirmation email after the payment."
 msgstr "Você receberá um email de confirmação após o pagamento."
 
-#: templates/marketplace/consulting/consulting.html:81
-#: templates/marketplace/consulting/consulting.html:118
+#: templates/marketplace/consulting/consulting.html:78
+#: templates/marketplace/consulting/consulting.html:117
 msgid "Buy"
 msgstr "Comprar"
 
-#: templates/marketplace/consulting/consulting.html:87
-#: templates/marketplace/consulting/consulting.html:124
+#: templates/marketplace/consulting/consulting.html:84
+#: templates/marketplace/consulting/consulting.html:123
 msgid "Immigration Consulting"
 msgstr "Consultoria de Imigração"
 
-#: templates/marketplace/consulting/consulting.html:97
-msgid "Immigration Individual Evaluation in São Luís/MA"
-msgstr "Avaliação Individual de Imigração em São Luís/MA"
-
 #: templates/marketplace/consulting/consulting.html:99
-msgid "26th of August to 15th of September"
-msgstr "26 de Agosto a 15 de Setembro"
-
-#: templates/marketplace/consulting/consulting.html:102
 msgid ""
 "Analyze your individual chances (or as a couple) to immigrate to Canada or "
 "Australia."
 msgstr ""
-"Analise suas chances individuais (ou em casal) de imigrar ao Canadá ou a "
+"Analise suas chances individuais (ou em casal) de imigrar para o Canadá ou para a "
 "Austrália."
 
-#: templates/marketplace/consulting/consulting.html:105
-msgid "Receive immigration options accordingly to your profile"
+#: templates/marketplace/consulting/consulting.html:101
+msgid "Duration: 1 hour"
+msgstr "Duração: 1 hora"
+
+#: templates/marketplace/consulting/consulting.html:102
+msgid "Immigration options accordingly to your profile"
 msgstr "Opções de imigração de acordo com o seu perfil"
 
+#: templates/marketplace/consulting/consulting.html:103
+msgid "Personal step-by-step plan"
+msgstr "Plano individual em formato passo-a-passo"
+
 #: templates/marketplace/consulting/consulting.html:106
-msgid "Receive a personal step-by-step plan"
-msgstr "Plano pessoal em formato passo-a-passo"
+msgid "Evaluation of your immigration points"
+msgstr "Simulações de pontos de imigração com os seus dados"
 
-#: templates/marketplace/consulting/consulting.html:111
-msgid "You will be able to schedule a day and time after the payment."
-msgstr "Você poderá agendar a data e horário após o pagamento."
+#: templates/marketplace/consulting/consulting.html:107
+msgid "Individual report"
+msgstr "Relatório individual"
 
-#: templates/marketplace/consulting/consulting.html:136
+#: templates/marketplace/consulting/consulting.html:108
+msgid "1 year subscription to the"
+msgstr "1 ano de assinatura ao"
+
+#: templates/marketplace/consulting/consulting.html:108
+msgid ""
+"including tools for CV preparation, visa application, english evaluation, "
+"etc..."
+msgstr ""
+"incluindo guia de imigração, ferramentas para preparação de CV, aplicação ao visto, análise do "
+"Inglês, etc..."
+
+#: templates/marketplace/consulting/consulting.html:110
+msgid "You will be able to schedule a day and time before the payment."
+msgstr "Você poderá agendar a data e horário antes do pagamento."
+
+#: templates/marketplace/consulting/consulting.html:138
+#: templates/marketplace/consulting/consulting.html:157
 #: templates/marketplace/ebook/ebook.html:181
 #: templates/marketplace/ielts/ielts.html:160
 #: templates/marketplace/immi_box/subscription.html:199
@@ -6342,8 +6350,8 @@ msgstr "Você poderá agendar a data e horário após o pagamento."
 msgid "What our users say"
 msgstr "O que nossos usuários falam"
 
-#: templates/marketplace/consulting/consulting.html:139
-#: templates/marketplace/consulting/consulting.html:158
+#: templates/marketplace/consulting/consulting.html:141
+#: templates/marketplace/consulting/consulting.html:160
 #: templates/marketplace/ebook/ebook.html:184
 #: templates/marketplace/ebook/ebook.html:203
 #: templates/marketplace/ielts/ielts.html:163
@@ -6354,7 +6362,7 @@ msgstr "O que nossos usuários falam"
 msgid "quotes"
 msgstr "depoimentos"
 
-#: templates/marketplace/consulting/consulting.html:142
+#: templates/marketplace/consulting/consulting.html:144
 #: templates/marketplace/ebook/ebook.html:187
 #: templates/marketplace/ielts/ielts.html:166
 #: templates/marketplace/immi_box/subscription.html:205
@@ -6366,7 +6374,7 @@ msgstr ""
 "O site conseguiu criar um conteúdo super rico, com dicas geniais. Este guia "
 "pode facilmente economizar meses de trabalho de busca por informação."
 
-#: templates/marketplace/consulting/consulting.html:146
+#: templates/marketplace/consulting/consulting.html:148
 #: templates/marketplace/ebook/ebook.html:191
 #: templates/marketplace/ielts/ielts.html:170
 #: templates/marketplace/immi_box/subscription.html:209
@@ -6374,7 +6382,7 @@ msgstr ""
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
-#: templates/marketplace/consulting/consulting.html:148
+#: templates/marketplace/consulting/consulting.html:150
 #: templates/marketplace/ebook/ebook.html:193
 #: templates/marketplace/ielts/ielts.html:172
 #: templates/marketplace/immi_box/subscription.html:211
@@ -6382,13 +6390,7 @@ msgstr "depoimento-tania-antonieli"
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
-#: templates/marketplace/consulting/consulting.html:155
-#: templates/marketplace/ebook/ebook.html:200
-#: templates/marketplace/ielts/ielts.html:179
-msgid "What our readers say"
-msgstr "Opinião de quem já leu"
-
-#: templates/marketplace/consulting/consulting.html:161
+#: templates/marketplace/consulting/consulting.html:163
 #: templates/marketplace/ebook/ebook.html:206
 #: templates/marketplace/ielts/ielts.html:185
 #: templates/marketplace/immi_box/subscription.html:224
@@ -6400,7 +6402,7 @@ msgstr ""
 "Eu não sabia que existiam tantas maneiras de se mudar para o Canadá, até ler "
 "o e-book. Agora, esta é uma das minhas possibilidades para os próximos anos."
 
-#: templates/marketplace/consulting/consulting.html:165
+#: templates/marketplace/consulting/consulting.html:167
 #: templates/marketplace/ebook/ebook.html:210
 #: templates/marketplace/ielts/ielts.html:189
 #: templates/marketplace/immi_box/subscription.html:228
@@ -6408,13 +6410,23 @@ msgstr ""
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
-#: templates/marketplace/consulting/consulting.html:167
+#: templates/marketplace/consulting/consulting.html:169
 #: templates/marketplace/ebook/ebook.html:212
 #: templates/marketplace/ielts/ielts.html:191
 #: templates/marketplace/immi_box/subscription.html:230
 #: templates/site/home/new_home.html:236
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
+
+#: templates/marketplace/consulting/consulting.html:179
+#: templates/marketplace/ebook/ebook.html:222
+msgid "Full access to all the tools?"
+msgstr "Acesso completo a todas as ferramentas?"
+
+#: templates/marketplace/consulting/consulting.html:182
+#: templates/marketplace/ebook/ebook.html:225
+msgid "Subscribe Now"
+msgstr "Assine Já"
 
 #: templates/marketplace/ebook/ebook.html:28
 msgid "E-Books"
@@ -6512,13 +6524,10 @@ msgstr "Como estudar, trabalhar e fazer negócios na Austrália"
 msgid "How to take your family to Australia"
 msgstr "Como levar sua família para a Austrália"
 
-#: templates/marketplace/ebook/ebook.html:222
-msgid "Full access to all the tools?"
-msgstr "Acesso completo a todas as ferramentas?"
-
-#: templates/marketplace/ebook/ebook.html:225
-msgid "Subscribe Now"
-msgstr "Assine Já"
+#: templates/marketplace/ebook/ebook.html:200
+#: templates/marketplace/ielts/ielts.html:179
+msgid "What our readers say"
+msgstr "Opinião de quem já leu"
 
 #: templates/marketplace/ebook/ebook.html:264
 #: templates/marketplace/ielts/ielts.html:251
@@ -8478,7 +8487,8 @@ msgstr ""
 
 #: templates/site/home/new_home.html:23
 msgid "Get all the help you need to<br />immigrate to your dream country"
-msgstr "Toda ajuda que você precisa<br />para imigrar para o país dos seus sonhos"
+msgstr ""
+"Toda ajuda que você precisa<br />para imigrar para o país dos seus sonhos"
 
 #: templates/site/home/new_home.html:43
 msgctxt "landing_call_to_action"
@@ -9291,8 +9301,8 @@ msgstr "data de validade"
 msgid "Find and Hire an Immigration Expert - Wanna Migrate"
 msgstr "Encontre e Contrate um Expert em Imigração - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:68 wannamigrate/marketplace/views.py:581
-#: wannamigrate/marketplace/views.py:733
+#: wannamigrate/marketplace/views.py:68 wannamigrate/marketplace/views.py:620
+#: wannamigrate/marketplace/views.py:772
 msgid ""
 "Make faster & better decisions when planning to go to another country.  Get "
 "help from immigration experts in Wanna Migrate."
@@ -9361,15 +9371,71 @@ msgstr ""
 "Ferramentas poderosas de imigração para ajudá-lo a se mudar para o país dos "
 "seus sonhos."
 
-#: wannamigrate/marketplace/views.py:419 wannamigrate/marketplace/views.py:565
+#: wannamigrate/marketplace/views.py:419 wannamigrate/marketplace/views.py:604
 msgid "There's already an active subscription for this country and product."
-msgstr ""
+msgstr "Já existe uma assinatura ativa para este país e produto."
 
-#: wannamigrate/marketplace/views.py:504
-msgid "Immigration Evaluation - Wanna Migrate"
-msgstr "Avaliação de Imigração - Wanna Migrate"
+#: wannamigrate/marketplace/views.py:465
+msgid "In-person consultations in São Luís/MA - September 09th to 22nd"
+msgstr "Avaliações presenciais em São Luís/MA de 9 a 22 de Setembro"
 
-#: wannamigrate/marketplace/views.py:505
+#: wannamigrate/marketplace/views.py:466
+msgid "Immigration Workshop in São Luís/MA"
+msgstr "Workshop de Imigração em São Luís/MA"
+
+#: wannamigrate/marketplace/views.py:467
+msgid "14/09 - Restaurante Sushimax (Lagoa) - 19:30h"
+msgstr "14/09 - Restaurante Sushimax (Lagoa) - 19:30h"
+
+#: wannamigrate/marketplace/views.py:469
+msgid "Immigration Individual Evaluation in São Luís/MA"
+msgstr "Avaliação Individual de Imigração em São Luís/MA"
+
+#: wannamigrate/marketplace/views.py:470
+msgid "From 09/Sep to 22/Sep"
+msgstr "De 09 a 22 de Setembro"
+
+#: wannamigrate/marketplace/views.py:475
+msgid "In-person consultations in Teresina/PI - September 23rd and 24th"
+msgstr "Avaliações presenciais em Teresina/PI - 23 e 24 de Setembro"
+
+#: wannamigrate/marketplace/views.py:476
+msgid "Immigration Workshop in Teresina/PI"
+msgstr "Workshop de Imigração em São Luís/MA"
+
+#: wannamigrate/marketplace/views.py:477
+msgid "24/09 - Hotel Ibis Teresina - 19:30h"
+msgstr "24/09 - Hotel Ibis Teresina - 19:30h"
+
+#: wannamigrate/marketplace/views.py:479
+msgid "Immigration Individual Evaluation in Teresina/PI"
+msgstr "Avaliação Individual de Imigração em São Luís/MA"
+
+#: wannamigrate/marketplace/views.py:480
+msgid "September 23rd and 24th"
+msgstr "23 e 24 de Setembro"
+
+#: wannamigrate/marketplace/views.py:485
+msgid "In-person consultations in Belém/PA - October 6th and 7th"
+msgstr "Avaliações presenciais em Belém/PA - 6 e 7 de Outubro"
+
+#: wannamigrate/marketplace/views.py:486
+msgid "Immigration Workshop in Belém/PA"
+msgstr "Workshop de Imigração em Belém/PA"
+
+#: wannamigrate/marketplace/views.py:487
+msgid "07/10 - Hotel Ibis Teresina - 19:30h"
+msgstr "07/10 - Hotel Ibis Teresina - 19:30h"
+
+#: wannamigrate/marketplace/views.py:489
+msgid "Immigration Individual Evaluation in Belém/PA"
+msgstr "Avaliação Individual de Imigração em Belém/PA"
+
+#: wannamigrate/marketplace/views.py:490
+msgid "October 6th and 7th"
+msgstr "6 e 7 de Outubro"
+
+#: wannamigrate/marketplace/views.py:544
 msgid ""
 "In-person meeting to evaluate your chances to immigrate to Canada or "
 "Australia."
@@ -9377,36 +9443,37 @@ msgstr ""
 "Reunião presencial para avaliar suas chances de imigrar para Canadá ou "
 "Austrália."
 
-#: wannamigrate/marketplace/views.py:580
+#: wannamigrate/marketplace/views.py:619
 msgid "Payment - Wanna Migrate"
 msgstr "Pagamento - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:732
+#: wannamigrate/marketplace/views.py:771
 msgid "Order Confirmation - Wanna Migrate"
 msgstr "Confirmação de Pedido - Wanna Migrate"
 
-#: wannamigrate/marketplace/views.py:741
+#: wannamigrate/marketplace/views.py:780
 msgid "Your order was <span>received</span> and will be processed soon."
 msgstr "Seu pedido foi <span>recebido</span> e está sendo processado."
 
-#: wannamigrate/marketplace/views.py:744
+#: wannamigrate/marketplace/views.py:783
 msgid "Your order was <span>approved</span>."
 msgstr "Seu pedido foi <span>aprovado</span>."
 
-#: wannamigrate/marketplace/views.py:746
+#: wannamigrate/marketplace/views.py:785
 msgid ""
 "You can now click on 'Immi Box' from the top menu to access the premium area."
 msgstr ""
+"Você pode clicar em 'Immi Box' no menu superior para acessar a área restrita."
 
-#: wannamigrate/marketplace/views.py:750
+#: wannamigrate/marketplace/views.py:789
 msgid "Your order was <span>denied</span>."
 msgstr "Seu pedido foi <span>recusado</span>."
 
-#: wannamigrate/marketplace/views.py:753
+#: wannamigrate/marketplace/views.py:792
 msgid "Your order was <span>cancelled</span>."
 msgstr "Seu pedido foi <span>cancelado</span>."
 
-#: wannamigrate/marketplace/views.py:756
+#: wannamigrate/marketplace/views.py:795
 msgid "Your order was <span>refunded</span>."
 msgstr "Seu pedido foi <span>devolvido</span>.."
 
@@ -10097,6 +10164,15 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1358
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Immigration Evaluation - Wanna Migrate"
+#~ msgstr "Avaliação de Imigração - Wanna Migrate"
+
+#~ msgid "Receive a personal report and immigration e-book"
+#~ msgstr "Receba um relatório individual e um e-book"
+
+#~ msgid "26th of August to 15th of September"
+#~ msgstr "26 de Agosto a 15 de Setembro"
 
 #~ msgid "Build you CV for"
 #~ msgstr "Crie seu CV para"
