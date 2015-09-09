@@ -233,13 +233,13 @@ def ebook_read( request, item_name ):
 
     # Get Country and set options for it
     if item_name == 'canada' and settings.ID_COUNTRY_CANADA in request.session['subscription']['countries']:
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhWjZpdWJyUS1ZNkk/preview'
+        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhNURaMGdvLWNvVDA/preview'
 
     elif item_name == 'australia' and settings.ID_COUNTRY_AUSTRALIA in request.session['subscription']['countries']:
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhejNoMkNtZjBiOVU/preview'
+        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhLVpCem9CMzBPWUE/preview'
 
     elif item_name == 'international_cv':
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhMWlCbC1ORndEUTg/preview'
+        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjha09CN21nMGpILWc/preview'
 
     else:
         return HttpResponseRedirect( reverse( "site:dashboard" ) )
