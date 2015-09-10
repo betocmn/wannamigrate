@@ -288,6 +288,7 @@ LOCAL_APPS = (
     'wannamigrate.points',
     'wannamigrate.marketplace',
     'wannamigrate.qa',
+    'wannamigrate.director',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
