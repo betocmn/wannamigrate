@@ -21,7 +21,6 @@ urlpatterns = patterns('',
    
     # Home and Login
     url( r'^$', views.home, name = 'home' ),
-    url( r'^new_home$', views.new_home, name = 'new_home' ),
     url( r'^login/$', views.login, name = 'login' ),
     url( r'^signup/$', views.signup, name = 'signup' ),
     url( r'^(?P<type>[a-z_\-]+)/signup/$', views.signup, name = 'signup' ),

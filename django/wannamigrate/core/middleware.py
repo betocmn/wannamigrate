@@ -106,7 +106,7 @@ class SituationMiddleware( object ):
 
         # Default data
         populate_situation_session = False
-        default_situation_id = 35
+        default_situation_id = 36
 
         # If it's first time access
         if 'situation' not in request.session:

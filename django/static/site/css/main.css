@@ -976,6 +976,9 @@ select {
   -o-box-sizing: border-box;
   box-sizing: border-box;
 }
+.dashboard.home header .interaction {
+    width: 200px;
+}
 .dashboard header .interaction nav {
   float: right;
 }
@@ -1048,6 +1051,10 @@ select {
   float: right;
   width: 145px;
   height: 40px;
+}
+.dashboard header .interaction .account.login {
+  text-align: right;
+  padding-right: 20px;
 }
 .dashboard header .interaction .account .box-account {
   position: relative;
@@ -3250,10 +3257,10 @@ sup{ vertical-align:super; }
     position: absolute;
     height: auto;
     width: 336px;
-    line-height: 14px;
+    line-height: 18px;
     float: right;
-    top: 114px;
-    right: 36px;
+    top: 93px;
+    right: 59px;
 }
 .dashboard footer a.language {
     padding-left: 22px;
@@ -4261,14 +4268,23 @@ sup{ vertical-align:super; }
       margin-left: 140px;
   }
   .dashboard .wrapper footer {
-    display: none;
-    overflow: hidden;
+    padding-left: 10px;
+    height: 200px;
   }
   .dashboard .wrapper footer .logo {
     float: none;
-    margin: 28px auto 0;
+    margin: 15px 0 0 0;
   }
-  .dashboard .wrapper footer .nav-footer,
+  .dashboard footer a.language {
+    right: 33px;
+    top: 12px;
+  }
+  .dashboard .wrapper footer .nav-footer {
+      display: block;
+      float: none;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
   .dashboard .wrapper footer .copyright {
     display: none;
   }
@@ -10033,18 +10049,6 @@ sup{ vertical-align:super; }
   .dashboard .wrapper .content.social .content .question-postList .answers .answer .post {
     width: 100%;
   }
-  .dashboard .wrapper footer {
-    display: none;
-    overflow: hidden;
-  }
-  .dashboard .wrapper footer .logo {
-    float: none;
-    margin: 28px auto 0;
-  }
-  .dashboard .wrapper footer .nav-footer,
-  .dashboard .wrapper footer .copyright {
-    display: none;
-  }
   .dashboard.choose .content.choose-destiny .steps .step {
     float: none;
     clear: left;
@@ -11023,9 +11027,12 @@ ul.notifications-view li.notification-item a.notification-link span.date
 /* Home-page (new) */
 .dashboard.home header {
     width: 100%;
-    min-height: 510px;
-    background: url("../img/home-background-canada-5.jpg") no-repeat;
+    min-height: 550px;
+    background-color: #c6c6c6;
+    background-image: url("../img/home-background-wanna-migrate.jpg");
     background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
     padding-bottom: 40px;
 }
 .dashboard.home header .heading {
@@ -11061,7 +11068,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.71)
 }
 .dashboard.home header .get-help form fieldset {
     float: left;
@@ -11096,126 +11103,27 @@ ul.notifications-view li.notification-item a.notification-link span.date
 .dashboard.home header .get-help form .bt-help {
     float: right;
     width: 153px;
-    margin: 25px 0 0 0;
-    padding-top: 9px;
-    height: 35px;
+    margin: 22px 0 0 0;
+    padding-top: 11px;
+    height: 37px;
     font-size: 14px;
 }
-
-
-
-
-.dashboard.home .books_block {
-	text-align: center;
-	padding: 20px;
-}
-.dashboard.home .books_block .right ul.gallery {
-    cursor: pointer;
-}
-.dashboard.home .books_block .right ul.gallery li {
-    display: none;
-}
-.dashboard.home .books_block .right ul.gallery li:first-child {
-    display: block;
-}
-.dashboard.home .books_block .but {
-    float: left;
-    min-width: 130px;
-    max-width: 155px;
-    margin: 10px;
-    padding-bottom: 5px;
-    text-transform: uppercase;
-}
-.dashboard.home .books_block .preview {
-    float: left;
-    line-height: 107px;
-    margin-left: 7px;
-    font-size: 14px;
-}
-.dashboard.home .books_block .preview a {
-    color: #4f9276;
-    text-decoration: none;
-}
-.dashboard.home .books_block .preview a:hover {
-    text-decoration: underline;
-}
-.dashboard.home .books_block .title{
-	color: #232323;
+.dashboard.home .main-title {
+	color: #67337D;
     font-size: 28px;
     padding-bottom: 28px;
     font-family: 'open_sansbold';
+    text-align: center;
 }
-.dashboard.home .books_block .title span {
-	color: #ADAAAA;
-    font-size: 20px;
+.dashboard.home .howitworks {
+	margin-top: 30px;
 }
-.dashboard.home .books_block .text{
-    color: #555;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 28px;
+.dashboard.home .howitworks .columb img {
+    padding-top: 35px;
 }
-.dashboard.home .books_block .text span{
-    font-family: 'open_sansbold';
-}
-.dashboard.home .books_block .text .small{
-    color: #555;
-    font-size: 14px;
-}
-.dashboard.home .books_block .text .small a {
-    text-decoration: none;
-    color: #4f9276;
-}
-.dashboard.home .books_block .text .small a:hover {
-    text-decoration: underline;
-}
-.dashboard.home .books_block .text ul {
-	list-style-image: url("../img/icon_li.png");
-    text-align: left;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.dashboard.home .books_block .price {
-    color: #555;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 86px;
-}
-
-.dashboard.home .books_block .price span sup {
-    font-size: 22px;
-}
-.dashboard.home .books_block .price span{
-    color: #555;
-    font-size: 32px;
-    line-height: 86px;
-    font-family: 'open_sansbold';
-}
-.dashboard.home .line{
-    background-color: #000;
-    opacity: 0.1;
-    height: 1px;
-    width: 100%;
-}
-.dashboard.home .books_block img {
-  max-width: 100%;
-  height: auto;
-}
-.dashboard.home .call_to_action {
-  padding: 0 20px 20px 20px;
-  text-align: center;
-}
-.dashboard.home .call_to_action .left {
-    color: #68347E;
-    font-size: 36px;
-    font-weight: 400;
-}
-.dashboard.home .call_to_action .but {
-    max-width: 195px;
-    margin: 0 auto;
-    padding-top: 10px;
+.dashboard.home .howitworks .but {
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 .dashboard.home .flex-caption {
   left: 0;
@@ -11231,6 +11139,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     background-size: cover;
     border: none;
     border-radius: 0;
+    margin-botom: 20px
 }
 .dashboard.home .flex-caption .img {
   width: 33px;
@@ -11280,50 +11189,42 @@ ul.notifications-view li.notification-item a.notification-link span.date
 .dashboard.home .flex-control-nav {
     bottom: 40px;
 }
+.dashboard.home .featured {
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+.dashboard.home .featured .container {
+    height: 165px;
+    text-align: center;
+    width: 1030px;
+    margin: 0 auto;
+}
+.dashboard.home .featured .title {
+    text-align: left;
+}
+.dashboard.home .featured .left {
+    float: left;
+    margin-right: 40px;
+    border-right: 1px solid #CECDCD;
+    padding-right: 12px;
+}
+.dashboard.home .featured .right {
+    float: left;
+}
+.dashboard.home .featured .logos {
+    margin-top: 25px;
+    height: 70px;
+}
+.dashboard.home .featured .logos a {
+    display: inline-block;
+    float: left;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
 @media(min-width: 768px) {
-    .dashboard.home .books_block {
-        padding: 70px;
-        text-align: left;
-    }
-    .dashboard.home .books_block .left {
-        width: 50%;
-        float: left;
-    }
-    .dashboard.home .books_block .right {
-        width: 50%;
-        float: right;
-        text-align: center;
-    }
-    .dashboard.home .books_block img {
-      margin: 0 auto;
-    }
-    .dashboard.home .books_block .price {
-        float: left;
-    }
-    .dashboard.home .books_block .but {
-        padding-top: 22px;
-    }
-    .dashboard.home .books_bottom {
-        text-align: left;
-    }
-    .dashboard.home .line {
-        margin-top: 50px;
-    }
-    .dashboard.home .call_to_action {
-        padding: 0 70px 70px 70px;
-        text-align: center;
-    }
-    .dashboard.home .call_to_action .left {
-        width: 590px;
-        float: left;
-        margin-left: 80px;
-    }
-    .dashboard.home .call_to_action .but {
-        width: 35%;
-        float: left;
-        padding-bottom: 70px;
-        padding-top: 0;
-    }
     .dashboard.home .flex-caption .bottom {
       padding-right: 150px;
     }
@@ -11333,7 +11234,93 @@ ul.notifications-view li.notification-item a.notification-link span.date
     .dashboard.home .flex-caption .bottom .text2 {
         line-height: 26px;
     }
+    .dashboard.home header .interaction nav {
+       display: none;
+    }
 }
+@media(max-width: 992px) {
+
+    .dashboard.home .featured .container {
+        height: 250px;
+        width: 100%;
+    }
+    .dashboard.home .featured .title {
+        text-align: center;
+    }
+    .dashboard.home .featured .logos {
+        text-align: center;
+    }
+    .dashboard.home .featured .logos a {
+        float: none;
+    }
+    .dashboard.home .featured .left {
+        display: block;
+        float: none;
+        margin-right: 0;
+        border-right: 0;
+        padding-right: 0;
+    }
+    .dashboard.home .featured .right {
+        display: block;
+        float: none;
+    }
+    .dashboard .wrapper footer .copyright {
+        display: none;
+    }
+    .dashboard footer .nav-footer {
+        left: 58%;
+    }
+
+}
+@media screen and (max-width: 878px) {
+    .dashboard.home header .heading {
+        padding-top: 95px;
+    }
+    .dashboard.home header .heading .title {
+        font-size: 23px;
+    }
+    .dashboard.home header .get-help {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .dashboard.home header .get-help .title {
+        padding: 0 45px 40px 45px;
+        font-size: 28px;
+        line-height: 38px;
+    }
+    .dashboard.home header .get-help form {
+        width: 360px;
+        height: 340px;
+        padding: 24px 15px;
+        margin: 0 auto;
+    }
+    .dashboard.home header .get-help form fieldset {
+        float: none;
+    }
+    .dashboard.home header .get-help form .field {
+        float: none;
+        width: 290px;
+        height: 75px;
+        margin: 0 auto;
+    }
+    .dashboard.home header .get-help form .from select,
+    .dashboard.home header .get-help form .want select,
+    .dashboard.home header .get-help form .to select {
+        width: 290px;
+        height: 45px;
+    }
+    .dashboard.home header .get-help form .bt-help {
+        float: none;
+        width: 290px;
+        margin: 10px auto 0;
+    }
+}
+
+
 
 
 /* Landing-Page for Generic Products (E-Books, etc..) */
