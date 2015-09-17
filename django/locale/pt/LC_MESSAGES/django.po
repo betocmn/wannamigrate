@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-03 23:17-0300\n"
+"POT-Creation-Date: 2015-09-17 15:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,8 +50,8 @@ msgid "Logout"
 msgstr "Logout"
 
 #: templates/_layouts/main.html:64 templates/site/home/home.html:32
-#: templates/site/home/new_home.html:18 templates/site/login/login.html:26
-#: templates/site/login/login.html.py:38
+#: templates/site/home/new_home.html:27 templates/site/home/new_home.html:31
+#: templates/site/login/login.html:26 templates/site/login/login.html.py:38
 msgid "Login"
 msgstr "Login"
 
@@ -69,6 +69,7 @@ msgid "Search"
 msgstr "Busca"
 
 #: templates/_layouts/main.html:87 templates/_layouts/main.html.py:178
+#: templates/site/home/new_home.html:33
 msgid "How It Works"
 msgstr "Como Funciona"
 
@@ -124,12 +125,12 @@ msgstr ""
 "                                    "
 
 #: templates/_layouts/main.html:148 templates/site/home/home.html:43
-#: templates/site/home/new_home.html:31 wannamigrate/site/views.py:1261
+#: templates/site/home/new_home.html:47 wannamigrate/site/views.py:1261
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:152 templates/site/home/home.html:47
-#: templates/site/home/new_home.html:35 wannamigrate/site/views.py:1264
+#: templates/site/home/new_home.html:51 wannamigrate/site/views.py:1264
 msgid "I wanna"
 msgstr "Quero"
 
@@ -174,11 +175,7 @@ msgstr "Calculadora de Pontos de Imigração"
 msgid "Become a Service Provider"
 msgstr "Torne-se um Prestador de Serviços"
 
-#: templates/_layouts/main.html:203
-msgid "All Rights Reserved"
-msgstr "Todos os Direitos Reservados"
-
-#: templates/_layouts/main.html:269
+#: templates/_layouts/main.html:267
 msgid "No results found."
 msgstr "Sem resultados."
 
@@ -6301,8 +6298,8 @@ msgid ""
 "Analyze your individual chances (or as a couple) to immigrate to Canada or "
 "Australia."
 msgstr ""
-"Analise suas chances individuais (ou em casal) de imigrar para o Canadá ou para a "
-"Austrália."
+"Analise suas chances individuais (ou em casal) de imigrar para o Canadá ou "
+"para a Austrália."
 
 #: templates/marketplace/consulting/consulting.html:101
 msgid "Duration: 1 hour"
@@ -6333,8 +6330,8 @@ msgid ""
 "including tools for CV preparation, visa application, english evaluation, "
 "etc..."
 msgstr ""
-"incluindo guia de imigração, ferramentas para preparação de CV, aplicação ao visto, análise do "
-"Inglês, etc..."
+"incluindo guia de imigração, ferramentas para preparação de CV, aplicação ao "
+"visto, análise do Inglês, etc..."
 
 #: templates/marketplace/consulting/consulting.html:110
 msgid "You will be able to schedule a day and time before the payment."
@@ -6346,7 +6343,7 @@ msgstr "Você poderá agendar a data e horário antes do pagamento."
 #: templates/marketplace/ielts/ielts.html:160
 #: templates/marketplace/immi_box/subscription.html:199
 #: templates/marketplace/immi_box/subscription.html:218
-#: templates/site/home/new_home.html:205 templates/site/home/new_home.html:224
+#: templates/site/home/new_home.html:115 templates/site/home/new_home.html:134
 msgid "What our users say"
 msgstr "O que nossos usuários falam"
 
@@ -6358,7 +6355,7 @@ msgstr "O que nossos usuários falam"
 #: templates/marketplace/ielts/ielts.html:182
 #: templates/marketplace/immi_box/subscription.html:202
 #: templates/marketplace/immi_box/subscription.html:221
-#: templates/site/home/new_home.html:208 templates/site/home/new_home.html:227
+#: templates/site/home/new_home.html:118 templates/site/home/new_home.html:137
 msgid "quotes"
 msgstr "depoimentos"
 
@@ -6366,7 +6363,6 @@ msgstr "depoimentos"
 #: templates/marketplace/ebook/ebook.html:187
 #: templates/marketplace/ielts/ielts.html:166
 #: templates/marketplace/immi_box/subscription.html:205
-#: templates/site/home/new_home.html:211
 msgid ""
 "You guys built a very rich content, with excellent hints. This guide could "
 "easily save months of research of information."
@@ -6378,7 +6374,7 @@ msgstr ""
 #: templates/marketplace/ebook/ebook.html:191
 #: templates/marketplace/ielts/ielts.html:170
 #: templates/marketplace/immi_box/subscription.html:209
-#: templates/site/home/new_home.html:215
+#: templates/site/home/new_home.html:125
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
@@ -6386,7 +6382,7 @@ msgstr "depoimento-tania-antonieli"
 #: templates/marketplace/ebook/ebook.html:193
 #: templates/marketplace/ielts/ielts.html:172
 #: templates/marketplace/immi_box/subscription.html:211
-#: templates/site/home/new_home.html:217
+#: templates/site/home/new_home.html:127
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
@@ -6394,7 +6390,6 @@ msgstr "Gerente de Projetos"
 #: templates/marketplace/ebook/ebook.html:206
 #: templates/marketplace/ielts/ielts.html:185
 #: templates/marketplace/immi_box/subscription.html:224
-#: templates/site/home/new_home.html:230
 msgid ""
 "I had no idea I had most of the requirements to get a visa to live in Canada "
 "until I read the e-book."
@@ -6406,7 +6401,7 @@ msgstr ""
 #: templates/marketplace/ebook/ebook.html:210
 #: templates/marketplace/ielts/ielts.html:189
 #: templates/marketplace/immi_box/subscription.html:228
-#: templates/site/home/new_home.html:234
+#: templates/site/home/new_home.html:144
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
@@ -6414,7 +6409,7 @@ msgstr "depoimento-igor-freitas"
 #: templates/marketplace/ebook/ebook.html:212
 #: templates/marketplace/ielts/ielts.html:191
 #: templates/marketplace/immi_box/subscription.html:230
-#: templates/site/home/new_home.html:236
+#: templates/site/home/new_home.html:146
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
 
@@ -6776,12 +6771,10 @@ msgid "All you need for your immigration process"
 msgstr "Tudo que você precisa para o processo de imigração"
 
 #: templates/marketplace/immi_box/subscription.html:60
-#: templates/site/home/new_home.html:66
 msgid "Subscription to Immi Box - Canada"
 msgstr "Assinatura do Immi Box - Canadá"
 
 #: templates/marketplace/immi_box/subscription.html:63
-#: templates/site/home/new_home.html:69
 msgid "1 year of access to all the tools you need to immigrate to Canada."
 msgstr ""
 "1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
@@ -6791,14 +6784,11 @@ msgstr ""
 #: templates/marketplace/immi_box/subscription.html:98
 #: templates/marketplace/immi_box/subscription.html:133
 #: templates/marketplace/immi_box/subscription.html:168
-#: templates/site/home/new_home.html:71 templates/site/home/new_home.html:104
-#: templates/site/home/new_home.html:139 templates/site/home/new_home.html:174
 msgid "Identify the best type of visa for your profile"
 msgstr "Identifique o tipo de visto ideal para o seu perfil"
 
 #: templates/marketplace/immi_box/subscription.html:66
 #: templates/marketplace/immi_box/subscription.html:134
-#: templates/site/home/new_home.html:72 templates/site/home/new_home.html:140
 msgid "Learn how to study, work and do business in Canada"
 msgstr "Entenda como estudar, trabalhar e fazer negócios no Canadá"
 
@@ -6806,8 +6796,6 @@ msgstr "Entenda como estudar, trabalhar e fazer negócios no Canadá"
 #: templates/marketplace/immi_box/subscription.html:100
 #: templates/marketplace/immi_box/subscription.html:135
 #: templates/marketplace/immi_box/subscription.html:170
-#: templates/site/home/new_home.html:73 templates/site/home/new_home.html:106
-#: templates/site/home/new_home.html:141 templates/site/home/new_home.html:176
 msgid "Organize all the documents you need"
 msgstr "Organize toda documentação necessária"
 
@@ -6815,14 +6803,11 @@ msgstr "Organize toda documentação necessária"
 #: templates/marketplace/immi_box/subscription.html:101
 #: templates/marketplace/immi_box/subscription.html:136
 #: templates/marketplace/immi_box/subscription.html:171
-#: templates/site/home/new_home.html:74 templates/site/home/new_home.html:107
-#: templates/site/home/new_home.html:142 templates/site/home/new_home.html:177
 msgid "Start your visa application"
 msgstr "Inicie sua aplicação ao visto"
 
 #: templates/marketplace/immi_box/subscription.html:69
 #: templates/marketplace/immi_box/subscription.html:137
-#: templates/site/home/new_home.html:75 templates/site/home/new_home.html:143
 msgid "Build your Canadian CV and contact employers"
 msgstr "Crie seu CV Canadense e entre em contato com empregadores"
 
@@ -6830,8 +6815,6 @@ msgstr "Crie seu CV Canadense e entre em contato com empregadores"
 #: templates/marketplace/immi_box/subscription.html:104
 #: templates/marketplace/immi_box/subscription.html:139
 #: templates/marketplace/immi_box/subscription.html:174
-#: templates/site/home/new_home.html:77 templates/site/home/new_home.html:110
-#: templates/site/home/new_home.html:145 templates/site/home/new_home.html:180
 msgid "You will have full access to our premium area after the payment."
 msgstr "Você terá acesso completo a área premium após o pagamento."
 
@@ -6840,23 +6823,18 @@ msgstr "Você terá acesso completo a área premium após o pagamento."
 #: templates/marketplace/immi_box/subscription.html:146
 #: templates/marketplace/immi_box/subscription.html:181
 #: templates/marketplace/international_cv/international_cv.html:64
-#: templates/site/home/new_home.html:84 templates/site/home/new_home.html:117
-#: templates/site/home/new_home.html:152 templates/site/home/new_home.html:187
 msgid "Buy Package"
 msgstr "Comprar"
 
 #: templates/marketplace/immi_box/subscription.html:83
-#: templates/site/home/new_home.html:89
 msgid "Immi Box - Canada"
 msgstr "Immi Box - Canadá"
 
 #: templates/marketplace/immi_box/subscription.html:93
-#: templates/site/home/new_home.html:99
 msgid "Subscription to Immi Box - Australia"
 msgstr "Assinatura do Immi Box - Austrália"
 
 #: templates/marketplace/immi_box/subscription.html:96
-#: templates/site/home/new_home.html:102
 msgid "1 year of access to all the tools you need to immigrate to Australia."
 msgstr ""
 "1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
@@ -6864,28 +6842,23 @@ msgstr ""
 
 #: templates/marketplace/immi_box/subscription.html:99
 #: templates/marketplace/immi_box/subscription.html:169
-#: templates/site/home/new_home.html:105 templates/site/home/new_home.html:175
 msgid "Learn how to study, work and do business in Australia"
 msgstr "Entenda como estudar, trabalhar e fazer negócios na Austrália"
 
 #: templates/marketplace/immi_box/subscription.html:102
 #: templates/marketplace/immi_box/subscription.html:172
-#: templates/site/home/new_home.html:108 templates/site/home/new_home.html:178
 msgid "Build your Australian CV and contact employers"
 msgstr "Crie seu CV Australiano e entre em contato com empregadores"
 
 #: templates/marketplace/immi_box/subscription.html:116
-#: templates/site/home/new_home.html:122
 msgid "Immi Box - Australia"
 msgstr "Immi Box - Austrália"
 
 #: templates/marketplace/immi_box/subscription.html:126
-#: templates/site/home/new_home.html:132
 msgid "Subscription to Immi Box + Support - Canada"
 msgstr "Assinatura do Immi Box + Suporte - Canadá"
 
 #: templates/marketplace/immi_box/subscription.html:129
-#: templates/site/home/new_home.html:135
 msgid ""
 "1 year of access to all the tools you need to immigrate to Canada, plus "
 "unlimited support."
@@ -6895,28 +6868,23 @@ msgstr ""
 
 #: templates/marketplace/immi_box/subscription.html:131
 #: templates/marketplace/immi_box/subscription.html:166
-#: templates/site/home/new_home.html:137 templates/site/home/new_home.html:172
 msgid "Initial Immigration Training via Skype"
 msgstr "Treinamento inicial de imigração via Skype"
 
 #: templates/marketplace/immi_box/subscription.html:132
 #: templates/marketplace/immi_box/subscription.html:167
-#: templates/site/home/new_home.html:138 templates/site/home/new_home.html:173
 msgid "Unlimited email support to answer all your questions"
 msgstr "Suporte ilimitado por email para tirar todas as suas dúvidas"
 
 #: templates/marketplace/immi_box/subscription.html:151
-#: templates/site/home/new_home.html:157
 msgid "Immi Box and Support - Canada"
 msgstr "Immi Box e Suporte - Canadá"
 
 #: templates/marketplace/immi_box/subscription.html:161
-#: templates/site/home/new_home.html:167
 msgid "Subscription to Immi Box + Support - Australia"
 msgstr "Assinatura do Immi Box + Suporte - Austrália"
 
 #: templates/marketplace/immi_box/subscription.html:164
-#: templates/site/home/new_home.html:170
 msgid ""
 "1 year of access to all the tools you need to immigrate to Australia, plus "
 "unlimited support."
@@ -6925,19 +6893,17 @@ msgstr ""
 "Austrália e suporte ilimitado."
 
 #: templates/marketplace/immi_box/subscription.html:186
-#: templates/site/home/new_home.html:192
 msgid "Immi Box and Support - Australia"
 msgstr "Immi Box e Suporte - Austrália"
 
 #: templates/marketplace/immi_box/subscription.html:240
-#: templates/site/home/new_home.html:246
 msgid "Start now. It's free!"
 msgstr "Inicie gratuitamente!"
 
 #: templates/marketplace/immi_box/subscription.html:243
 #: templates/site/about/service_providers.html:65
 #: templates/site/about/service_providers.html:127
-#: templates/site/home/new_home.html:249 templates/site/login/signup.html:26
+#: templates/site/login/signup.html:26
 msgid "Sign up"
 msgstr "Cadastre-se"
 
@@ -7764,10 +7730,12 @@ msgstr "como funciona"
 
 #: templates/site/about/how_it_works.html:16
 #: templates/site/about/how_it_works.html:18
+#: templates/site/home/new_home.html:73 templates/site/home/new_home.html:75
 msgid "Set Your Migration Plan"
-msgstr "Crie seu Plano de Imigração"
+msgstr "Crie Seu Plano de Imigração"
 
 #: templates/site/about/how_it_works.html:21
+#: templates/site/home/new_home.html:78
 msgid ""
 "Define where you want to go. (i.e. 'Work and live in Australia', 'study in "
 "Canada'...)"
@@ -7776,31 +7744,41 @@ msgstr ""
 "Canadá'...)"
 
 #: templates/site/about/how_it_works.html:25
-#: templates/site/about/how_it_works.html:27
+#: templates/site/home/new_home.html:82
 msgctxt "imperative"
 msgid "Get Help"
 msgstr "Obtenha Ajuda"
 
+#: templates/site/about/how_it_works.html:27
+#: templates/site/home/new_home.html:84
+msgid "Apply For The Visa"
+msgstr "Aplicação ao Visto"
+
 #: templates/site/about/how_it_works.html:30
+#: templates/site/home/new_home.html:87
 msgid ""
-"Get free help from our community or sign-up for a premium account to get "
-"full access to our awesome tools."
+"Get help from our community and from our premium tool that will guide you "
+"through each step."
 msgstr ""
-"Receba ajuda gratuita de nossa comunidade ou assine o pacote premium para "
-"ter acesso completo a ferramentas fantásticas."
+"Receba ajuda de nossa comunidade e ferramenta premium que irá guiá-lo "
+"em cada passo."
 
 #: templates/site/about/how_it_works.html:34
-#: templates/site/about/how_it_works.html:36
+#: templates/site/home/new_home.html:91
 msgid "Move to Your Dream Country"
-msgstr "Mude para o País Desejado"
+msgstr "Mude Para o País Desejado"
+
+#: templates/site/about/how_it_works.html:36
+#: templates/site/home/new_home.html:93
+msgid "Move To Your Dream Country"
+msgstr "Mude Para o País Desejado"
 
 #: templates/site/about/how_it_works.html:39
+#: templates/site/home/new_home.html:96
 msgid ""
-"All you need to choose a country, apply for the visa, improve your english, "
-"validate your school records, apply for job offers, etc..."
+"Say goodbye and get ready to start living and working in your new country."
 msgstr ""
-"Tudo que você precisa para escolher o país, aplicar ao visto, melhorar o "
-"inglês, validar seu diploma, aplicar para vagas de empregos, etc..."
+"Hora de se despedir e se preparar para viver e trabalhar no novo país."
 
 #: templates/site/about/how_it_works.html:44
 msgid "Start now. It’s Free!"
@@ -8460,7 +8438,7 @@ msgstr "Planos de Assinatura"
 msgid "<strong>Go</strong> abroad. <strong>Change</strong> your life."
 msgstr "<strong>More</strong> no exterior. <strong>Mude</strong> de vida."
 
-#: templates/site/home/home.html:51 templates/site/home/new_home.html:39
+#: templates/site/home/home.html:51 templates/site/home/new_home.html:55
 msgid "In"
 msgstr "No(a)"
 
@@ -8485,15 +8463,77 @@ msgstr "Contato"
 msgid "Under maintenance. We'll be back in a few minutes."
 msgstr ""
 
-#: templates/site/home/new_home.html:23
-msgid "Get all the help you need to<br />immigrate to your dream country"
-msgstr ""
-"Toda ajuda que você precisa<br />para imigrar para o país dos seus sonhos"
+#: templates/site/home/new_home.html:32 templates/site/login/signup.html:41
+msgid "Sign-Up"
+msgstr "Cadastre-se"
 
-#: templates/site/home/new_home.html:43
+#: templates/site/home/new_home.html:39
+msgid ""
+"The interactive way to learn all you need<br />to <span>immigrate</span> to "
+"your dream country"
+msgstr ""
+"Passo a passo interativo com tudo que você precisa<br />para <span>imigrar</span> para o país dos seus sonhos"
+
+#: templates/site/home/new_home.html:59
 msgctxt "landing_call_to_action"
 msgid "Start Now!"
 msgstr "Comece Já!"
+
+#: templates/site/home/new_home.html:70
+msgid "How it Works"
+msgstr "Como Funciona"
+
+#: templates/site/home/new_home.html:101
+msgid "Start my Journey"
+msgstr "Iniciar Jornada"
+
+#: templates/site/home/new_home.html:121
+msgid ""
+"The site has built excellent content that can easily save you months of "
+"research for immigration information."
+msgstr ""
+"O site conseguiu criar um conteúdo super rico que "
+"pode facilmente economizar meses de trabalho de busca por informação."
+
+#: templates/site/home/new_home.html:140
+msgid ""
+"I had no idea I had most of the requirements to get a visa to live and work "
+"in Canada until using Wanna Migrate."
+msgstr ""
+"Não sabia que já tinha quase todos os requisitos para viver e trabalhar no "
+"Canadá até utilizar o Wanna Migrate"
+
+#: templates/site/home/new_home.html:158
+msgid "In the news:"
+msgstr "Foi notícia:"
+
+#: templates/site/home/new_home.html:161 templates/site/home/new_home.html:181
+msgid "G1"
+msgstr ""
+
+#: templates/site/home/new_home.html:164
+msgid "iMirante"
+msgstr ""
+
+#: templates/site/home/new_home.html:167
+msgid "Projeto Draft"
+msgstr ""
+
+#: templates/site/home/new_home.html:172
+msgid "Supported by:"
+msgstr "Apoiado por:"
+
+#: templates/site/home/new_home.html:175
+msgid "MCTI"
+msgstr ""
+
+#: templates/site/home/new_home.html:178
+msgid "Finep"
+msgstr ""
+
+#: templates/site/home/new_home.html:184
+msgid "Start-up Chile"
+msgstr "Visto de Startup"
 
 #: templates/site/login/login.html:40
 msgid "Forgot your password?"
@@ -8575,10 +8615,6 @@ msgstr "Redefinir Senha"
 #: templates/site/login/reset_password.html:35
 msgid "Create and confirm your new password."
 msgstr "Crie e confirme sua nova senha."
-
-#: templates/site/login/signup.html:41
-msgid "Sign-Up"
-msgstr "Cadastre-se"
 
 #: templates/site/login/signup.html:47
 msgid "Alternatively, you can sign up using:"
@@ -10165,6 +10201,16 @@ msgstr "Perfil - Wanna Migrate"
 msgid "now is following you"
 msgstr "começou a te seguir"
 
+#~ msgid "All Rights Reserved"
+#~ msgstr "Todos os Direitos Reservados"
+
+#~ msgid ""
+#~ "All you need to choose a country, apply for the visa, improve your "
+#~ "english, validate your school records, apply for job offers, etc..."
+#~ msgstr ""
+#~ "Tudo que você precisa para escolher o país, aplicar ao visto, melhorar o "
+#~ "inglês, validar seu diploma, aplicar para vagas de empregos, etc..."
+
 #~ msgid "Immigration Evaluation - Wanna Migrate"
 #~ msgstr "Avaliação de Imigração - Wanna Migrate"
 
@@ -10493,9 +10539,6 @@ msgstr "começou a te seguir"
 #~ "juntamente com o formulário do visto e o pagamento.  Você deverá enviar "
 #~ "sua aplicação em até 4 meses após o convite. Quaisquer aplicações "
 #~ "recebidas depois dos 4 meses serão negadas."
-
-#~ msgid "Apply for the visa"
-#~ msgstr "Aplicar ao visto"
 
 #~ msgid "Visa Application - Immigration Calculator - Wanna Migrate"
 #~ msgstr "Aplicação ao Visto - Calculadora de Imigração - Wanna Migrate"

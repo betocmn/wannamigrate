@@ -1,111 +1,213 @@
+{% extends "_layouts/main.html" %}
 {% load staticfiles %}
 {% load i18n %}
-<!doctype html>
-<html lang="en">
 
-    <head>
+{% block head %}
 
-        {% include "_layouts/meta.html" %}
+    {{ block.super }}
 
-        <!-- Css files -->
-        <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
-        <link rel="stylesheet" href="{% static "site/css/login.css"%}" />
-        <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/dd.css"%}" />
-        <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/flags.css"%}" />
+    <!-- Inline CSS -->
+    <link rel="stylesheet" href="{% static "common/jquery-flexslider/css/flexslider.css" %}" />
 
-    </head>
+{% endblock head %}
 
+{% block body %}
+    <body class="dashboard home">
+{% endblock body %}
 
-    <body class="landing">
+{% block background %}
+    <i class="shadow"></i>
+{% endblock background %}
 
-        <div class="wrapper">
-            <div class="background">
-                <img class="img" src="{% static 'site/img/landing-bg.jpg' %}" alt="{% trans "Move to a new country" %}" />
-            </div>
-            <header>
-                <h1 class="logo"><a href="index.html" title="Wanna Migrate">Wanna Migrate</a></h1>
-                <a href="#" class="bt-nav">Menu</a>
-                <nav class="nav nav-login">
-                    <ul>
-                        <li><a class="nav-link" href="{%  url 'site:how_it_works' %}">{% trans "How it works?" %}</a></li>
-                        <li><a class="nav-link" href="{%  url 'marketplace:subscription' %}">{% trans "Subscription Plans" %}</a></li>
-                        <li><a class="nav-link button bt-login" href="{%  url 'site:login' %}" title="Login">{% trans "Login" %}</a></li>
-                    </ul>
-                </nav>
-            </header>
-            <div class="content">
-                <section class="get-help">
-                    <h2 class="title">{% trans "<strong>Go</strong> abroad. <strong>Change</strong> your life." %}</h2>
-                    <form action="{% url 'site:change_situation' %}" method="post" id="main_form">
-                        {% csrf_token %}
-                        <fieldset>
-                            <div class="from field {% if form.from_country.errors %}has-error{% endif %}">
-                                <label for="from_country">{% trans "I'm from" %}</label>
-                                {{ form.from_country }}
-                            </div>
-                            <div class="want field {% if form.goal.errors %}has-error{% endif %}">
-                                <label for="">{% trans "I wanna" %}</label>
-                                {{ form.goal }}
-                            </div>
-                            <div class="to field {% if form.to_country.errors %}has-error{% endif %}">
-                                <label for="">{% trans "In" %}</label>
-                                {{ form.to_country }}
-                            </div>
-                        </fieldset>
-                        <input type="submit" name="submit_button" class="button bt-help" value="{% trans "Start now! It's free" context 'landing_call_to_action' %}" />
-                    </form>
-                </section>
-            </div>
-            <footer>
-                <nav class="nav-footer">
-                    <ul>
-                        <li class="conditions"><a class="nav-footer-link" href="{%  url 'site:terms' %}">{% trans "Terms & Conditions" %}</a></li>
-                        <li class="privacy"><a class="nav-footer-link" href="{%  url 'site:privacy' %}">{% trans "Privacy" %}</a></li>
-                        <li class="contact"><a class="nav-footer-link" href="{%  url 'site:contact' %}">{% trans "Contact" %}</a></li>
-                        <li class="language">
-                            {% get_language_info for LANGUAGE_CODE as current_language %}
-                            <a class="nav-footer-link bt-options {{ current_language.code }}" href="#">{{ current_language.name_local }}</a>
-                            <div class="box-options">
-                                <ul class="box">
-                                    {% get_language_info_list for LANGUAGES as languages %}
-                                    {% for language in languages %}
-                                            <li><a class="{{ language.code }}" href="{% url 'site:set_lang' language.code %}?next={{request.path}}">{{ language.name_local }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-
-                        </li>
-                    </ul>
-                </nav>
-            </footer>
+{% block header %}
+    <h1 class="logo"><a href="{% url 'site:home' %}" title="Wanna Migrate">Wanna Migrate</a></h1>
+    <a href="#" class="bt-nav">Menu</a>
+    <div class="interaction">
+        <div class="account login">
+            <a href="{% url 'site:login' %}" class="my-account login"><span>{% trans 'Login' %}</span></a>
         </div>
+        <nav class="nav nav-dashboard">
+            <ul>
+                <li class="nav-item"><a class="nav-link" data-link="login" href="{% url 'site:login' %}">{% trans "Login" %}</a></li>
+                <li class="nav-item"><a class="nav-link" data-link="signup" href="{% url 'site:signup' %}">{% trans "Sign-Up" %}</a></li>
+                <li class="nav-item"><a class="nav-link" data-link="about" href="{% url 'site:how_it_works' %}">{% trans "How It Works" %}</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="heading">
+        <div class="title">
+            {% trans 'The interactive way to learn all you need<br />to <span>immigrate</span> to your dream country' %}
+        </div>
+    </div>
+    <div class="get-help">
+        <form action="{% url 'site:change_situation' %}?next={% url 'site:signup' %}" method="post" id="main_form">
+            {% csrf_token %}
+            <fieldset>
+                <div class="from field {% if form.from_country.errors %}has-error{% endif %}">
+                    <label for="from_country">{% trans "I'm from" %}</label>
+                    {{ form.from_country }}
+                </div>
+                <div class="want field {% if form.goal.errors %}has-error{% endif %}">
+                    <label for="">{% trans "I wanna" %}</label>
+                    {{ form.goal }}
+                </div>
+                <div class="to field {% if form.to_country.errors %}has-error{% endif %}">
+                    <label for="">{% trans "In" %}</label>
+                    {{ form.to_country }}
+                </div>
+            </fieldset>
+            <input type="submit" name="submit_button" class="button bt-help" value="{% trans "Start Now!" context 'landing_call_to_action' %}" />
+        </form>
+    </div>
+{% endblock header %}
 
-        {% include "_layouts/analytics.html" %}
+{% block situation %} {% endblock situation %}
 
-        {% if sql_output %}
-            <br /><br /><br />
-            <div id="sql-output">
-                <h1>SQL Queries - Make 'em faster :)</h1>
-                {{ sql_output|safe }}
+{% block content %}
+
+    <section class="howitworks">
+        <div class="main-title">
+            {% trans 'How it Works' %}
+        </div>
+        <div class="columb columb_1">
+            <img src="{% static 'site/img/img_1.png' %}" alt="{% trans "Set Your Migration Plan" %}" />
+            <div class="title">
+                {% trans "Set Your Migration Plan" %}
             </div>
-        {% endif %}
+            <div class="text">
+                {% trans "Define where you want to go. (i.e. 'Work and live in Australia', 'study in Canada'...)" %}
+            </div>
+        </div>
+        <div class="columb columb_2">
+            <img src="{% static 'site/img/img_2.png' %}" alt="{% trans "Get Help" context "imperative" %}" />
+            <div class="title">
+                {% trans "Apply For The Visa" %}
+            </div>
+            <div class="text">
+                {% trans "Get help from our community and from our premium tool that will guide you through each step." %}
+            </div>
+        </div>
+        <div class="columb columb_3">
+            <img src="{% static 'site/img/img_3.png' %}" alt="{% trans "Move to Your Dream Country" %}" />
+            <div class="title">
+                {% trans "Move To Your Dream Country" %}
+            </div>
+            <div class="text">
+                {% trans "Say goodbye and get ready to start living and working in your new country." %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="but">
+             <a href="{% url 'site:signup' %}" class="bt-edit button">{% trans "Start my Journey" %}</a>
+        </div>
+        <div class="clearfix"></div>
 
-    </body>
+    </section>
 
-    <!-- JS Libraries -->
-    <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'common/jquery-dd/js/jquery.dd.js' %}"></script>
+    <div class="clearfix"></div>
+
+    <div class="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our users say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "The site has built excellent content that can easily save you months of research for immigration information." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-tania.png' %}" alt="{% trans 'testmonial-tania-antonieli' %}" />
+                        </div>
+                        <div class="text2">Tânia Antonieli<br /><span>{% trans "Project Manager" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex-caption">
+                    <div class="title">
+                        {% trans "What our users say" %}
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'site/img/quotes.png' %}" alt="{% trans 'quotes' %}" />
+                    </div>
+                    <div class="text">
+                        {% trans "I had no idea I had most of the requirements to get a visa to live and work in Canada until using Wanna Migrate." %}
+                    </div>
+                    <div class="bottom">
+                        <div class="img">
+                            <img src="{% static 'site/img/e-book-testmonial-igor.png' %}" alt="{% trans 'testmonial-igor-freitas' %}" />
+                        </div>
+                        <div class="text2">Igor Freitas<br /><span>{% trans "Personal Trainer and Musician" %}</span></div>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="featured">
+
+        <div class="container">
+            <div class="left">
+                <div class="title">{% trans "In the news:" %}</div>
+                <div class="logos">
+                    <a href="http://g1.globo.com/ma/maranhao/noticia/2015/07/falta-de-investimento-estimula-migracao-de-startups-no-maranhao.html" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-g1.png' %}" alt="{% trans 'G1' %}" />
+                    </a>
+                    <a href="http://imirante.com/servicos/sao-luis/noticias/2015/08/20/saiba-como-imigrar-para-paises-como-canada-e-australia.shtml" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-imirante.png' %}" alt="{% trans 'iMirante' %}" />
+                    </a>
+                    <a href="http://projetodraft.com/wannamigrate-plataforma-para-quem-quer-migrar-a-outro-pais/" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-projeto-draft.png' %}" alt="{% trans 'Projeto Draft' %}" />
+                    </a>
+                </div>
+            </div>
+            <div class="right">
+                <div class="title">{% trans "Supported by:" %}</div>
+                <div class="logos">
+                    <a href="http://www.mcti.gov.br/" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-mcti.png' %}" alt="{% trans 'MCTI' %}" />
+                    </a>
+                    <a href="http://www.finep.gov.br/" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-finep.png' %}" alt="{% trans 'Finep' %}" />
+                    </a>
+                    <a href="http:/fapema.br" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-fapema.png' %}" alt="{% trans 'G1' %}" />
+                    </a>
+                    <a href="http:/www.startupchile.org" target="_blank">
+                        <img src="{% static 'site/img/featured-logo-startup-chile.png' %}" alt="{% trans 'Start-up Chile' %}" />
+                    </a>
+                </div>
+            </div>
+         </div>
+    </section>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
 
     <!-- JS Custom Scripts -->
     <script type="text/javascript" src="{% static 'site/js/countries.js' %}"></script>
-    <script type="text/javascript" src="{% static 'site/js/landing.js' %}"></script>
-    <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-flexslider/js/jquery.flexslider.js' %}"></script>
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
         $( document ).ready( function() {
+
+            // plugin for testmonials slides
+            $( '.flexslider' ).flexslider({
+                animation: "slide"
+            });
 
             // set classes for country flags in the options
             $( "select.custom-select.country option" ).each( function(){
@@ -121,13 +223,9 @@
             // create custom dropdown for countries
             $( ".custom-select" ).msDropdown();
 
-            // JS FORM Validation
-            $( "#main_form" ).submit( function() {
-                return validate_empty_fields( this, '{{ form.get_required_fields }}', 'none' );
-            });
 
         })
 
     </script>
 
-</html>
+{% endblock scripts %}
