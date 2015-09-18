@@ -22,6 +22,7 @@ from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, Htt
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+import random
 
 
 
@@ -106,11 +107,11 @@ class SituationMiddleware( object ):
 
         # Default data
         populate_situation_session = False
-        default_situation_id = 36
 
         # If it's first time access
         if 'situation' not in request.session:
             populate_situation_session = True
+            default_situation_id = random.choice( [35,36] )
             situation = Situation.objects.get( pk = default_situation_id )
 
         # if user just logged in or signed up, we need to adjust the situation
