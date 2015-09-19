@@ -4279,6 +4279,10 @@ sup{ vertical-align:super; }
     right: 33px;
     top: 12px;
   }
+  .dashboard footer .box-options .box {
+    bottom: -77px;
+    right: -51px;
+  }
   .dashboard .wrapper footer .nav-footer {
       display: block;
       float: none;
@@ -4704,6 +4708,23 @@ sup{ vertical-align:super; }
   .dashboard-edit-forms footer .options-list .option-item .option-link {
     font-size: 12px;
   }
+}
+@media screen and (max-width: 450px) {
+    .dashboard .wrapper footer {
+        height: 60px;
+    }
+    .dashboard footer .box-options .box {
+        bottom: 51px;
+        right: -51px;
+    }
+    .dashboard .box-options .box:before {
+        border: none;
+    }
+	.dashboard .wrapper footer .nav-footer,
+    .dashboard .wrapper footer ul.social-links,
+    .dashboard .wrapper footer .copyright {
+        display: none !important;
+    }
 }
 @media screen and (max-width: 360px) {
   .landing .content .get-help .title strong ~ strong {
@@ -11203,6 +11224,9 @@ ul.notifications-view li.notification-item a.notification-link span.date
 }
 .dashboard.home .featured .title {
     text-align: left;
+    color: #67337D;
+    font-family: "open_sanssemibold";
+    font-size: 14px;
 }
 .dashboard.home .featured .left {
     float: left;
@@ -11317,6 +11341,50 @@ ul.notifications-view li.notification-item a.notification-link span.date
         float: none;
         width: 290px;
         margin: 10px auto 0;
+    }
+    .dashboard.home .flex-caption .text {
+        font-size: 26px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .dashboard.home header .heading {
+        padding-top: 60px;
+    }
+    .dashboard.home header .heading .title {
+        font-size: 18px;
+    }
+    .dashboard.home header .heading .title br {
+        display: none;
+    }
+    .dashboard.home header .get-help form {
+        width: 300px;
+    }
+    .dashboard.home header .get-help form .field {
+        width: 210px;
+    }
+    .dashboard.home header .get-help form .from select,
+    .dashboard.home header .get-help form .want select,
+    .dashboard.home header .get-help form .to select {
+        width: 210px;
+    }
+    .dashboard.home header .get-help form .bt-help {
+        width: 210px;
+    }
+    .dashboard.home .flex-caption .text {
+        font-size: 22px;
+    }
+}
+@media screen and (max-width: 630px) {
+    .dashboard.home .featured .container {
+        height: 100%;
+    }
+    .dashboard.home .featured .logos {
+        height: 100%;
+        margin-bottom: 43px;
+    }
+    .dashboard.home .featured .logos a {
+        height: 50px;
+        margin-top: 15px;
     }
 }
 
