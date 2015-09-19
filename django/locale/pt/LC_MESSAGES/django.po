@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 15:29-0300\n"
+"POT-Creation-Date: 2015-09-19 12:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,8 +49,8 @@ msgstr "Mensagens"
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/_layouts/main.html:64 templates/site/home/home.html:32
-#: templates/site/home/new_home.html:27 templates/site/home/new_home.html:31
+#: templates/_layouts/main.html:64 templates/site/home/home.html:27
+#: templates/site/home/home.html.py:31 templates/site/home/landing_old.html:32
 #: templates/site/login/login.html:26 templates/site/login/login.html.py:38
 msgid "Login"
 msgstr "Login"
@@ -69,7 +69,7 @@ msgid "Search"
 msgstr "Busca"
 
 #: templates/_layouts/main.html:87 templates/_layouts/main.html.py:178
-#: templates/site/home/new_home.html:33
+#: templates/site/home/home.html:33
 msgid "How It Works"
 msgstr "Como Funciona"
 
@@ -124,17 +124,17 @@ msgstr ""
 "processo de imigração.\n"
 "                                    "
 
-#: templates/_layouts/main.html:148 templates/site/home/home.html:43
-#: templates/site/home/new_home.html:47 wannamigrate/site/views.py:1261
+#: templates/_layouts/main.html:148 templates/site/home/home.html:47
+#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1235
 msgid "I'm from"
 msgstr "Sou do(a)"
 
-#: templates/_layouts/main.html:152 templates/site/home/home.html:47
-#: templates/site/home/new_home.html:51 wannamigrate/site/views.py:1264
+#: templates/_layouts/main.html:152 templates/site/home/home.html:51
+#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1238
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:156 wannamigrate/site/views.py:1266
+#: templates/_layouts/main.html:156 wannamigrate/site/views.py:1240
 msgid "in"
 msgstr "no(a)"
 
@@ -6343,7 +6343,7 @@ msgstr "Você poderá agendar a data e horário antes do pagamento."
 #: templates/marketplace/ielts/ielts.html:160
 #: templates/marketplace/immi_box/subscription.html:199
 #: templates/marketplace/immi_box/subscription.html:218
-#: templates/site/home/new_home.html:115 templates/site/home/new_home.html:134
+#: templates/site/home/home.html:115 templates/site/home/home.html.py:134
 msgid "What our users say"
 msgstr "O que nossos usuários falam"
 
@@ -6355,7 +6355,7 @@ msgstr "O que nossos usuários falam"
 #: templates/marketplace/ielts/ielts.html:182
 #: templates/marketplace/immi_box/subscription.html:202
 #: templates/marketplace/immi_box/subscription.html:221
-#: templates/site/home/new_home.html:118 templates/site/home/new_home.html:137
+#: templates/site/home/home.html:118 templates/site/home/home.html.py:137
 msgid "quotes"
 msgstr "depoimentos"
 
@@ -6374,7 +6374,7 @@ msgstr ""
 #: templates/marketplace/ebook/ebook.html:191
 #: templates/marketplace/ielts/ielts.html:170
 #: templates/marketplace/immi_box/subscription.html:209
-#: templates/site/home/new_home.html:125
+#: templates/site/home/home.html:125
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
@@ -6382,7 +6382,7 @@ msgstr "depoimento-tania-antonieli"
 #: templates/marketplace/ebook/ebook.html:193
 #: templates/marketplace/ielts/ielts.html:172
 #: templates/marketplace/immi_box/subscription.html:211
-#: templates/site/home/new_home.html:127
+#: templates/site/home/home.html:127
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
@@ -6401,7 +6401,7 @@ msgstr ""
 #: templates/marketplace/ebook/ebook.html:210
 #: templates/marketplace/ielts/ielts.html:189
 #: templates/marketplace/immi_box/subscription.html:228
-#: templates/site/home/new_home.html:144
+#: templates/site/home/home.html:144
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
@@ -6409,7 +6409,7 @@ msgstr "depoimento-igor-freitas"
 #: templates/marketplace/ebook/ebook.html:212
 #: templates/marketplace/ielts/ielts.html:191
 #: templates/marketplace/immi_box/subscription.html:230
-#: templates/site/home/new_home.html:146
+#: templates/site/home/home.html:146
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
 
@@ -7528,8 +7528,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1319
-#: wannamigrate/site/views.py:1352
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1293
+#: wannamigrate/site/views.py:1326
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7538,7 +7538,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1352
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1326
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -7716,7 +7716,7 @@ msgid "My orders"
 msgstr "Minhas Compras"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:800
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:774
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -7729,13 +7729,12 @@ msgid "how it works"
 msgstr "como funciona"
 
 #: templates/site/about/how_it_works.html:16
-#: templates/site/about/how_it_works.html:18
-#: templates/site/home/new_home.html:73 templates/site/home/new_home.html:75
+#: templates/site/about/how_it_works.html:18 templates/site/home/home.html:73
+#: templates/site/home/home.html.py:75
 msgid "Set Your Migration Plan"
 msgstr "Crie Seu Plano de Imigração"
 
-#: templates/site/about/how_it_works.html:21
-#: templates/site/home/new_home.html:78
+#: templates/site/about/how_it_works.html:21 templates/site/home/home.html:78
 msgid ""
 "Define where you want to go. (i.e. 'Work and live in Australia', 'study in "
 "Canada'...)"
@@ -7743,42 +7742,35 @@ msgstr ""
 "Defina para onde quer ir (ex: 'Morar e trabalhar na Austrália', 'Estudar no "
 "Canadá'...)"
 
-#: templates/site/about/how_it_works.html:25
-#: templates/site/home/new_home.html:82
+#: templates/site/about/how_it_works.html:25 templates/site/home/home.html:82
 msgctxt "imperative"
 msgid "Get Help"
 msgstr "Obtenha Ajuda"
 
-#: templates/site/about/how_it_works.html:27
-#: templates/site/home/new_home.html:84
+#: templates/site/about/how_it_works.html:27 templates/site/home/home.html:84
 msgid "Apply For The Visa"
 msgstr "Aplicação ao Visto"
 
-#: templates/site/about/how_it_works.html:30
-#: templates/site/home/new_home.html:87
+#: templates/site/about/how_it_works.html:30 templates/site/home/home.html:87
 msgid ""
 "Get help from our community and from our premium tool that will guide you "
 "through each step."
 msgstr ""
-"Receba ajuda de nossa comunidade e ferramenta premium que irá guiá-lo "
-"em cada passo."
+"Receba ajuda de nossa comunidade e ferramenta premium que irá guiá-lo em "
+"cada passo."
 
-#: templates/site/about/how_it_works.html:34
-#: templates/site/home/new_home.html:91
+#: templates/site/about/how_it_works.html:34 templates/site/home/home.html:91
 msgid "Move to Your Dream Country"
 msgstr "Mude Para o País Desejado"
 
-#: templates/site/about/how_it_works.html:36
-#: templates/site/home/new_home.html:93
+#: templates/site/about/how_it_works.html:36 templates/site/home/home.html:93
 msgid "Move To Your Dream Country"
 msgstr "Mude Para o País Desejado"
 
-#: templates/site/about/how_it_works.html:39
-#: templates/site/home/new_home.html:96
+#: templates/site/about/how_it_works.html:39 templates/site/home/home.html:96
 msgid ""
 "Say goodbye and get ready to start living and working in your new country."
-msgstr ""
-"Hora de se despedir e se preparar para viver e trabalhar no novo país."
+msgstr "Hora de se despedir e se preparar para viver e trabalhar no novo país."
 
 #: templates/site/about/how_it_works.html:44
 msgid "Start now. It’s Free!"
@@ -8068,7 +8060,7 @@ msgstr ""
 msgid "Send us your feedback or request:"
 msgstr "Envie seu feedback ou requisição:"
 
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:802
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:776
 msgid "Sent"
 msgstr "Enviadas"
 
@@ -8081,7 +8073,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:804
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:778
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -8422,80 +8414,44 @@ msgstr "Informação disponível em breve!"
 msgid "We are updating this section. Come back in 24 hours."
 msgstr "Estamos atualizando esta seção."
 
-#: templates/site/home/home.html:23
-msgid "Move to a new country"
-msgstr "Mude para outro país"
-
-#: templates/site/home/home.html:30
-msgid "How it works?"
-msgstr "Como funciona?"
-
-#: templates/site/home/home.html:31
-msgid "Subscription Plans"
-msgstr "Planos de Assinatura"
-
-#: templates/site/home/home.html:38
-msgid "<strong>Go</strong> abroad. <strong>Change</strong> your life."
-msgstr "<strong>More</strong> no exterior. <strong>Mude</strong> de vida."
-
-#: templates/site/home/home.html:51 templates/site/home/new_home.html:55
-msgid "In"
-msgstr "No(a)"
-
-#: templates/site/home/home.html:55
-msgctxt "landing_call_to_action"
-msgid "Start now! It's free"
-msgstr "Inicie gratuitamente"
-
-#: templates/site/home/home.html:62
-msgid "Terms & Conditions"
-msgstr "Termos de Uso"
-
-#: templates/site/home/home.html:63
-msgid "Privacy"
-msgstr "Privacidade"
-
-#: templates/site/home/home.html:64
-msgid "Contact"
-msgstr "Contato"
-
-#: templates/site/home/maintenance.html:30
-msgid "Under maintenance. We'll be back in a few minutes."
-msgstr ""
-
-#: templates/site/home/new_home.html:32 templates/site/login/signup.html:41
+#: templates/site/home/home.html:32 templates/site/login/signup.html:41
 msgid "Sign-Up"
 msgstr "Cadastre-se"
 
-#: templates/site/home/new_home.html:39
+#: templates/site/home/home.html:39
 msgid ""
-"The interactive way to learn all you need<br />to <span>immigrate</span> to "
+"The interactive way to learn all you need <br />to <span>immigrate</span> to "
 "your dream country"
 msgstr ""
-"Passo a passo interativo com tudo que você precisa<br />para <span>imigrar</span> para o país dos seus sonhos"
+"Plataforma interativa com tudo que você precisa <br />para <span>imigrar</"
+"span> para o país dos seus sonhos"
 
-#: templates/site/home/new_home.html:59
+#: templates/site/home/home.html:55 templates/site/home/landing_old.html:51
+msgid "In"
+msgstr "No(a)"
+
+#: templates/site/home/home.html:59
 msgctxt "landing_call_to_action"
 msgid "Start Now!"
 msgstr "Comece Já!"
 
-#: templates/site/home/new_home.html:70
+#: templates/site/home/home.html:70
 msgid "How it Works"
 msgstr "Como Funciona"
 
-#: templates/site/home/new_home.html:101
+#: templates/site/home/home.html:101
 msgid "Start my Journey"
 msgstr "Iniciar Jornada"
 
-#: templates/site/home/new_home.html:121
+#: templates/site/home/home.html:121
 msgid ""
 "The site has built excellent content that can easily save you months of "
 "research for immigration information."
 msgstr ""
-"O site conseguiu criar um conteúdo super rico que "
-"pode facilmente economizar meses de trabalho de busca por informação."
+"O site conseguiu criar um conteúdo super rico que pode facilmente economizar "
+"meses de trabalho de busca por informação."
 
-#: templates/site/home/new_home.html:140
+#: templates/site/home/home.html:140
 msgid ""
 "I had no idea I had most of the requirements to get a visa to live and work "
 "in Canada until using Wanna Migrate."
@@ -8503,37 +8459,74 @@ msgstr ""
 "Não sabia que já tinha quase todos os requisitos para viver e trabalhar no "
 "Canadá até utilizar o Wanna Migrate"
 
-#: templates/site/home/new_home.html:158
+#: templates/site/home/home.html:158
 msgid "In the news:"
 msgstr "Foi notícia:"
 
-#: templates/site/home/new_home.html:161 templates/site/home/new_home.html:181
+#: templates/site/home/home.html:161 templates/site/home/home.html.py:181
 msgid "G1"
 msgstr ""
 
-#: templates/site/home/new_home.html:164
+#: templates/site/home/home.html:164
 msgid "iMirante"
 msgstr ""
 
-#: templates/site/home/new_home.html:167
+#: templates/site/home/home.html:167
 msgid "Projeto Draft"
 msgstr ""
 
-#: templates/site/home/new_home.html:172
+#: templates/site/home/home.html:172
 msgid "Supported by:"
 msgstr "Apoiado por:"
 
-#: templates/site/home/new_home.html:175
+#: templates/site/home/home.html:175
 msgid "MCTI"
 msgstr ""
 
-#: templates/site/home/new_home.html:178
+#: templates/site/home/home.html:178
 msgid "Finep"
 msgstr ""
 
-#: templates/site/home/new_home.html:184
+#: templates/site/home/home.html:184
 msgid "Start-up Chile"
 msgstr "Visto de Startup"
+
+#: templates/site/home/landing_old.html:23
+msgid "Move to a new country"
+msgstr "Mude para outro país"
+
+#: templates/site/home/landing_old.html:30
+msgid "How it works?"
+msgstr "Como funciona?"
+
+#: templates/site/home/landing_old.html:31
+msgid "Subscription Plans"
+msgstr "Planos de Assinatura"
+
+#: templates/site/home/landing_old.html:38
+msgid "<strong>Go</strong> abroad. <strong>Change</strong> your life."
+msgstr "<strong>More</strong> no exterior. <strong>Mude</strong> de vida."
+
+#: templates/site/home/landing_old.html:55
+msgctxt "landing_call_to_action"
+msgid "Start now! It's free"
+msgstr "Inicie gratuitamente"
+
+#: templates/site/home/landing_old.html:62
+msgid "Terms & Conditions"
+msgstr "Termos de Uso"
+
+#: templates/site/home/landing_old.html:63
+msgid "Privacy"
+msgstr "Privacidade"
+
+#: templates/site/home/landing_old.html:64
+msgid "Contact"
+msgstr "Contato"
+
+#: templates/site/home/maintenance.html:30
+msgid "Under maintenance. We'll be back in a few minutes."
+msgstr ""
 
 #: templates/site/login/login.html:40
 msgid "Forgot your password?"
@@ -8794,7 +8787,7 @@ msgstr "O pedido foi devolvido."
 msgid "Service Requested"
 msgstr "Solicitação de Serviço Recebida"
 
-#: wannamigrate/core/middleware.py:84 wannamigrate/core/middleware.py:104
+#: wannamigrate/core/middleware.py:85 wannamigrate/core/middleware.py:105
 msgid "You need a valid email address to use the site!"
 msgstr "Você precisa de um email válido para usar este site!"
 
@@ -10071,51 +10064,51 @@ msgstr "Você possui países duplicados para dar suporte."
 msgid "You must choose different services for supported services."
 msgstr "Você possui serviços duplicados para dar suporte."
 
-#: wannamigrate/site/views.py:239
+#: wannamigrate/site/views.py:213
 msgid "Login - Wanna Migrate"
 msgstr "Login - Wanna Migrate"
 
-#: wannamigrate/site/views.py:258
+#: wannamigrate/site/views.py:232
 msgid "Invalid login. Please try again."
 msgstr "Login inválido. Tente novamente."
 
-#: wannamigrate/site/views.py:305
+#: wannamigrate/site/views.py:279
 msgid "Sign Up - Wanna Migrate"
 msgstr "Cadastre-se - Wanna Migrate"
 
-#: wannamigrate/site/views.py:382
+#: wannamigrate/site/views.py:356
 msgid "Recover Password - Wanna Migrate"
 msgstr "Recupere sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:400
+#: wannamigrate/site/views.py:374
 msgid "Password reset instructions were successfully sent to your e-mail."
 msgstr "As instruções para redefinição de senha foram enviados por e-mail."
 
-#: wannamigrate/site/views.py:434
+#: wannamigrate/site/views.py:408
 msgid "Reset Password - Wanna Migrate"
 msgstr "Redefina sua Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:447
+#: wannamigrate/site/views.py:421
 msgid "Password successfully updated."
 msgstr "Senha alterada com sucesso."
 
-#: wannamigrate/site/views.py:474
+#: wannamigrate/site/views.py:448
 msgid "Contact Us - Wanna Migrate"
 msgstr "Contato - Wanna Migrate"
 
-#: wannamigrate/site/views.py:490
+#: wannamigrate/site/views.py:464
 msgid "Your message was successfully sent."
 msgstr "Sua mensagem foi enviada com sucesso."
 
-#: wannamigrate/site/views.py:517
+#: wannamigrate/site/views.py:491
 msgid "How it Works - Wanna Migrate"
 msgstr "Como Funciona - Wanna Migrate"
 
-#: wannamigrate/site/views.py:542
+#: wannamigrate/site/views.py:516
 msgid "Become a Service Provider - Wanna Migrate"
 msgstr "Torne-se um Prestador de Serviços - Wanna Migrate"
 
-#: wannamigrate/site/views.py:543
+#: wannamigrate/site/views.py:517
 msgid ""
 "Wanna Migrate brings online clients to you. We are specialized in attracting "
 "people planning to migrate to another country, temporarily or permanently."
@@ -10124,11 +10117,11 @@ msgstr ""
 "pessoas planejando migrar para um novo país, de forma temporária ou "
 "permanente."
 
-#: wannamigrate/site/views.py:569
+#: wannamigrate/site/views.py:543
 msgid "Step-by-Step to Immigrate to Australia - Wanna Migrate"
 msgstr "Passo-a-Passo para Imigrar para a Austrália - Wanna Migrate"
 
-#: wannamigrate/site/views.py:570
+#: wannamigrate/site/views.py:544
 msgid ""
 "A step-by-step initial guide to let you know your options to migrate to "
 "Australia"
@@ -10136,11 +10129,11 @@ msgstr ""
 "Um passo-a-passo inicial para lhe informar suas opções de migrar para a "
 "Austrália"
 
-#: wannamigrate/site/views.py:572
+#: wannamigrate/site/views.py:546
 msgid "Step-by-Step to Immigrate to Canada - Wanna Migrate"
 msgstr "Passo-a-Passo para Imigrar para o Canadá - Wanna Migrate"
 
-#: wannamigrate/site/views.py:573
+#: wannamigrate/site/views.py:547
 msgid ""
 "A step-by-step initial guide to let you know your options to migrate to "
 "Canada"
@@ -10148,56 +10141,56 @@ msgstr ""
 "Um passo-a-passo inicial para lhe informar suas opções de migrar para o "
 "Canadá"
 
-#: wannamigrate/site/views.py:619
+#: wannamigrate/site/views.py:593
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:637
+#: wannamigrate/site/views.py:611
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:683
+#: wannamigrate/site/views.py:657
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:714
+#: wannamigrate/site/views.py:688
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:742
+#: wannamigrate/site/views.py:716
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:858
+#: wannamigrate/site/views.py:832
 msgid "New message from"
 msgstr "Nova mensagem de"
 
-#: wannamigrate/site/views.py:959
+#: wannamigrate/site/views.py:933
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1051
+#: wannamigrate/site/views.py:1025
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1105
+#: wannamigrate/site/views.py:1079
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1123
+#: wannamigrate/site/views.py:1097
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1263
+#: wannamigrate/site/views.py:1237
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1273
+#: wannamigrate/site/views.py:1247
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
 # Q&A Dynamic translations.
-#: wannamigrate/site/views.py:1358
+#: wannamigrate/site/views.py:1332
 msgid "now is following you"
 msgstr "começou a te seguir"
 
