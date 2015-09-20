@@ -11052,7 +11052,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     background-color: #c6c6c6;
     background-image: url("../img/home-background-wanna-migrate.jpg");
     background-size: cover;
-    background-position: top left;
+    background-position: bottom left;
     background-repeat: no-repeat;
     padding-bottom: 40px;
 }
