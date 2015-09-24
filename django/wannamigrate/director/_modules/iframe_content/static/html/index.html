@@ -1,0 +1,12 @@
+{% if css %}
+<style type="text/css">
+    {{ css }}
+</style>
+{% endif %}
+
+<iframe class="iframe-content" src="{{ content_object.url }}" frameborder="0" width="100%"></iframe>
+{% if js %}
+    <script language="javascript" type="text/javascript">
+        {{ js }}
+    </script>
+{% endif %}

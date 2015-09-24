@@ -6,6 +6,7 @@
 {% block head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static "director/css/director.css"%}" />
+    <link rel="stylesheet" href="{% static "common/font-awesome/css/font-awesome.min.css"%}" />
 {% endblock head %}
 
 
@@ -57,7 +58,13 @@
                         <li class="objective" id="objective-{{obj.id}}">
                             <a href="{% url "director:view" m.id obj.id %}">
                                 <div class="progress">
-                                    <span class="ball">0%</span>
+                                    <span class="ball {% if obj.progress > 0 %}active{% endif %}">
+                                        {% if obj.progress == 100 %}
+                                            <i class="fa fa-check"></i>
+                                        {% else %}
+                                            {{obj.progress}}%
+                                        {% endif %}
+                                    </span>
                                 </div>
                                 <div class="description">
                                     <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>
@@ -78,7 +85,7 @@
 
     {{ block.super }}
 
-    <script type="text/javascript">
+    <!--script type="text/javascript">
         $(document).ready(function(){
             {% for m in missions %}
                 {% for obj in m.objectives_set %}
@@ -91,6 +98,6 @@
                 {% endfor %}
             {% endfor %}
         });
-    </script>
+    </script-->
 
 {% endblock scripts %}

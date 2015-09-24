@@ -2,6 +2,8 @@
 # Imports
 ##########################
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from wannamigrate.core.models import BaseModel, Situation
 from django.utils.translation import ugettext_lazy as _
 
@@ -42,10 +44,14 @@ class Objective( BaseModel ):
     # The description of the objective (Ex: Browse your possibilities and see what
     # better to you... ).
     description = models.TextField()
-    # The url to the content of this objective
-    content_url = models.TextField()
-    # The url to the progress of this content
-    content_progress_url = models.TextField()
+
+    # The content of the objective (a generic foreign key)
+    content_type = models.ForeignKey( ContentType )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey( 'content_type', 'object_id' )
+    # The module of the content
+    content_module = models.CharField( max_length = 200 )
+
 
 
     # The str representation of this object
@@ -99,3 +105,24 @@ class SituationsMissions( BaseModel ):
     # The str representation of this object
     def __str__( self ):
         return self.situation + ' ' + self.mission + ' ' + self.order
+
+
+
+
+
+
+
+"""
+#############################################
+# Loads all the models from the modules
+# inside _modules folder.
+#############################################
+import importlib
+import os
+search_path = os.path.dirname( os.path.abspath( __file__ ) ) + '/' + "_modules"
+modules_to_load = [x for x in os.listdir( search_path ) ]
+package = '.'.join( [__package__, "_modules" ] )
+for module in modules_to_load:
+    abs_package = '.'.join( [ package, module, "models" ] )
+    importlib.__import__( abs_package )
+"""
