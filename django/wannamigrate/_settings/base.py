@@ -288,9 +288,17 @@ LOCAL_APPS = (
     'wannamigrate.points',
     'wannamigrate.marketplace',
     'wannamigrate.qa',
+    'wannamigrate.director',
+)
+DIRECTOR_MODULES = (
+    'wannamigrate.director._modules.form_content',
+    'wannamigrate.director._modules.html_content',
+    'wannamigrate.director._modules.iframe_content',
+    'wannamigrate.director._modules.redirect_content',
+    'wannamigrate.director._modules.generic_container',
 )
 
-INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS + DIRECTOR_MODULES
 
 
 

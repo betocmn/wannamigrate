@@ -1,0 +1,90 @@
+{% extends "_layouts/main.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "director/css/director.css"%}" />
+    <link rel="stylesheet" href="{% static "common/font-awesome/css/font-awesome.min.css"%}" />
+{% endblock head %}
+
+
+{% block situation %}
+<article class="situation full">
+    <section class="wrap text-center">
+      <h1 class="title">
+        {% trans "I'm from" %} {% trans request.session.situation.from_country.name %}
+        {% trans "I wanna" %} {% trans request.session.situation.goal.name %}
+        {% trans "In" %} {% trans request.session.situation.to_country.name %}
+      </h1>
+      <section class="description">
+        {% trans "Follow our step-by-step guide to move to" %} {% trans request.session.situation.to_country.name %}
+      </section>
+    </section>
+</article>
+<article class="stats full">
+    <div class="wrap">
+        <section class="item text-center">
+          <h3>{{ request.session.situation.total_users|kmi }}</h3>
+          <p>{% trans "users with the same objective" %}</p>
+        </section>
+        <section class="item text-center">
+          <h3>{{ general_progress }}%</h3>
+          <p>{% trans "completed" %}</p>
+        </section>
+        <section class="item text-center">
+          <h3>250.000</h3>
+          <p>{% trans "slots per year" %}</p>
+        </section>
+        <div class="clearfix"></div>
+    </div>
+</article>
+{% endblock situation %}
+
+
+{% block content %}
+{% include "site/_common/status.html" %}
+<article class="syllabus">
+    <aside class="syllabus-leadin">
+      <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64px" height="32px" viewBox="0 0 64 32" version="1.1"><style>.shape{fill: none;fill-rule: evenodd;}.path{fill: #FFFFFF;}</style><defs></defs><g class="shape"><path d="M0.27734375 0.9 L64.2773438 0.9 L32.2773438 32.9 L0.27734375 0.9 Z" class="path"></path></g></svg>
+    </aside>
+    <div class="wrap">
+        <article class="missions">
+        {% for m in missions %}
+            <section id="{{ m.id }}" class="mission">
+                <h1 class="text-center">{% trans m.title %}</h1>
+                <ul class="objectives">
+                    {% for obj in m.objectives_set %}
+                        <li class="objective" id="objective-{{obj.id}}">
+                            <a href="{% url "director:view" m.hash obj.hash %}">
+                                <div class="progress">
+                                    <span class="ball {% if obj.progress > 0 %}active{% endif %}">
+                                        {% if obj.progress == 100 %}
+                                            <i class="fa fa-check"></i>
+                                        {% else %}
+                                            {{obj.progress}}%
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="description">
+                                    <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>
+                                    <p>{% trans obj.description %}</p>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endfor %}
+        </article>
+    </div>
+</article>
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+
+{% endblock scripts %}
