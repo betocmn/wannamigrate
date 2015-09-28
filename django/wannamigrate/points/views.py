@@ -821,3 +821,8 @@ def professional_help( request, country_name ):
     # Print Template
     return render( request, 'points/country/professional_help.html', template_data )
 
+
+@login_required
+def get_progress( request ):
+    # TODO: calculate the progress for the request.user here and return a number between 0 and 100.
+    return 100

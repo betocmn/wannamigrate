@@ -34,8 +34,10 @@
 {% endblock situation %}
 
 {% block content %}
+
 <article class="objective-content">
     <div class="wrap">
+        {% include "site/_common/status.html" %}
         {{ content }}
     </div>
 </article>

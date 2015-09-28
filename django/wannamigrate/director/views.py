@@ -45,6 +45,9 @@ def dashboard( request ):
                 m.objectives_set.append( mo.objective )
 
 
+    # Calculates the general progress of this user
+    general_progress = 0
+    n_objectives = 0
 
     # Gets the percenage of the user foreach objective
     for m in missions:
@@ -60,22 +63,29 @@ def dashboard( request ):
 
             # Renders and asign the result to content
             o.progress = dynamic_get_progress( request, content_object )
+            general_progress += o.progress
+            n_objectives += 1
+
+    if ( n_objectives > 0 ):
+        general_progress /= n_objectives
 
     template_data[ "missions" ] = missions
+    template_data[ "general_progress" ] = int( general_progress )
+
 
     return render( request, 'director/dashboard.html', template_data )
 
 
 
-def view( request, mission_id, objective_id ):
+def view( request, mission_hash, objective_hash ):
     """
     Shows the content of an objective.
     :param mission_id: The id of the mission being acomplished.
     :param objective_id: The id of the objective being acomplished.
     """
     # Gets the mission and objective being visualized
-    mission = get_object_or_404( Mission, pk = mission_id )
-    objective = get_object_or_404( Objective, pk = objective_id )
+    mission = get_object_or_404( Mission, hash = mission_hash )
+    objective = get_object_or_404( Objective, hash = objective_hash )
 
 
     # Loads the content from the objective

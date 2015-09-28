@@ -18,8 +18,8 @@ def process_iframe( content ):
 def process_redirect( content ):
     print( "Processing redirect" )
     redirect = RedirectContent( url = content["url"], blank = content["blank"] )
-    if ( content[ "progress_url" ] ):
-        redirect.progress_url = content[ "progress_url" ]
+    if ( content[ "progress_uri" ] ):
+        redirect.progress_uri = content[ "progress_uri" ]
     redirect.save()
     return ( redirect.id, ContentType.objects.get_for_model( RedirectContent ) )
 

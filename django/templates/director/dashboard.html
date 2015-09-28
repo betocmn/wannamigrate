@@ -30,12 +30,12 @@
           <p>{% trans "users with the same objective" %}</p>
         </section>
         <section class="item text-center">
-          <h3>1 Year</h3>
-          <p>{% trans "estimated time" %}</p>
+          <h3>{{ general_progress }}%</h3>
+          <p>{% trans "completed" %}</p>
         </section>
         <section class="item text-center">
-          <h3>120.000</h3>
-          <p>{% trans "estimated jobs" %}</p>
+          <h3>250.000</h3>
+          <p>{% trans "slots per year" %}</p>
         </section>
         <div class="clearfix"></div>
     </div>
@@ -44,6 +44,7 @@
 
 
 {% block content %}
+{% include "site/_common/status.html" %}
 <article class="syllabus">
     <aside class="syllabus-leadin">
       <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64px" height="32px" viewBox="0 0 64 32" version="1.1"><style>.shape{fill: none;fill-rule: evenodd;}.path{fill: #FFFFFF;}</style><defs></defs><g class="shape"><path d="M0.27734375 0.9 L64.2773438 0.9 L32.2773438 32.9 L0.27734375 0.9 Z" class="path"></path></g></svg>
@@ -56,7 +57,7 @@
                 <ul class="objectives">
                     {% for obj in m.objectives_set %}
                         <li class="objective" id="objective-{{obj.id}}">
-                            <a href="{% url "director:view" m.id obj.id %}">
+                            <a href="{% url "director:view" m.hash obj.hash %}">
                                 <div class="progress">
                                     <span class="ball {% if obj.progress > 0 %}active{% endif %}">
                                         {% if obj.progress == 100 %}
@@ -85,19 +86,5 @@
 
     {{ block.super }}
 
-    <!--script type="text/javascript">
-        $(document).ready(function(){
-            {% for m in missions %}
-                {% for obj in m.objectives_set %}
-                    $.getJSON( "{{ obj.content_progress_url }}", function( data ) {
-                        if (data > 0) {
-                            $("li#objective-{{ obj.id }} > a > div.progress > span.ball").html(data + "%");
-                            $("li#objective-{{ obj.id }} > a > div.progress > span.ball").addClass( "active" );
-                        }
-                    });
-                {% endfor %}
-            {% endfor %}
-        });
-    </script-->
 
 {% endblock scripts %}

@@ -1,14 +1,14 @@
 {% load i18n %}
+{% if css %}
+<style type="text/css">
+    {{ css }}
+</style>
+{% endif %}
 <div>
-    <h1>{{ content_object.question }}</h1>
-    <form action="" method="post">
+    <h1 class="form-content-question">{% trans content_object.question %}</h1>
+    <form action="" method="post" class="form-content">
         {% csrf_token %}
-        {% for choice in content_object.choices.all %}
-            <input type="radio" name="answer" value="{{ choice.id }}">{{ choice.text }}
-        {% endfor %}
-        <input type="submit" value="{% trans 'Submit' %}" />
+        {{ form.choice }}
+        <input class="form-content-submit" type="submit" value="{% trans 'Submit' %}" />
     </form>
-    {% if answer %}
-    <h3> You selected: {{ answer }}</h3>
-    {% endif %}
 </div>

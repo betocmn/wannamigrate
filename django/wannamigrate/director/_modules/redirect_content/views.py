@@ -4,9 +4,8 @@
 from django.http import HttpResponseRedirect
 from django.template import Template, Context
 import pkg_resources
-import urllib
 from .models import RedirectContent, RedirectContentUserProgress
-
+from django.utils.module_loading import import_string
 
 
 
@@ -22,7 +21,7 @@ def render( request, content_object ):
     :return: The content of the object rendered as string.
     """
 
-    if ( not content_object.progress_url ):
+    if ( not content_object.progress_uri ):
         update_progress( request.user, content_object, 100 )
 
     if not content_object.blank:
@@ -40,13 +39,16 @@ def render( request, content_object ):
 
 def get_progress( request, content_object ):
 
-    # If the redirection content has a progress_url, loads the progress from it.
-    if ( content_object.progress_url ):
+    # If the redirection content has a progress_uri, loads the progress from it.
+    if ( content_object.progress_uri ):
         try:
-            f = urllib.request.urlopen( content_object.progress_url )
-            return int( f.read() )
+            # Loads the render method from the current content module.
+            dynamic_get_progress = import_string( content_object.progress_uri )
+            # Renders and asign the result to content
+            return dynamic_get_progress( request )
         except:
             return 0
+
 
     # If not, look into RedirectContentUserProgress table.
     user_progress = RedirectContentUserProgress.objects.filter( user = request.user, redirect_content = content_object ).first()

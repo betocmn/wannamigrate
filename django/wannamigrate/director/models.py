@@ -6,6 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from wannamigrate.core.models import BaseModel, Situation
 from django.utils.translation import ugettext_lazy as _
+import uuid
 
 
 
@@ -20,6 +21,8 @@ class Mission( BaseModel ):
     """
     # The title of the mission (Ex: Visa type, English Skills).
     title = models.CharField( max_length = 200 )
+    # The slug for this mission
+    hash = models.CharField( max_length = 32 )
     # The objectives of this mission.
     objectives = models.ManyToManyField( "Objective", through = "MissionsObjectives", related_name = "missions" )
     # The situations of this mission
@@ -29,6 +32,14 @@ class Mission( BaseModel ):
     # The str representation of this object
     def __str__( self ):
         return _( self.title )
+
+
+    def save( self, *args, **kwargs ):
+        if not self.hash:
+            # Newly created object, so set hash
+            self.hash = uuid.uuid1().hex
+
+        super( Mission, self ).save( *args, **kwargs )
 
 
 
@@ -41,6 +52,8 @@ class Objective( BaseModel ):
     """
     # The title of the objective (Ex: Defining your visa type).
     title = models.CharField( max_length = 250 )
+    # The slug for this objective
+    hash = models.CharField( max_length = 32 )
     # The description of the objective (Ex: Browse your possibilities and see what
     # better to you... ).
     description = models.TextField()
@@ -51,6 +64,14 @@ class Objective( BaseModel ):
     content_object = GenericForeignKey( 'content_type', 'object_id' )
     # The module of the content
     content_module = models.CharField( max_length = 200 )
+
+
+    def save( self, *args, **kwargs ):
+        if not self.hash:
+            # Newly created object, so set hash
+            self.hash = uuid.uuid1().hex
+
+        super( Objective, self ).save( *args, **kwargs )
 
 
 

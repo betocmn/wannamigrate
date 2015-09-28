@@ -18,7 +18,7 @@ class RedirectContent( BaseModel ):
     """
     # The html code of this content.
     url = models.CharField( max_length = 300 )
-    progress_url = models.CharField( max_length = 300, blank = True, default = '' )
+    progress_uri = models.CharField( max_length = 300, blank = True, default = '' )
     blank = models.BooleanField( default = True )
 
 
