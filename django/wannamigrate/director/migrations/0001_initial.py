@@ -8,8 +8,8 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('core', '0026_auto_20150721_1419'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0001_initial'),
     ]
 
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FormContent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('question', models.CharField(max_length=300)),
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FormContentChoice',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('text', models.CharField(max_length=200)),
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FormContentUserChoice',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('choice', models.ForeignKey(to='director.FormContentChoice')),
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GenericContainer',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('layout', models.CharField(max_length=200)),
@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GenericContainerContent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('order', models.IntegerField()),
@@ -85,7 +85,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HtmlContent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('html', models.TextField()),
@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HtmlContentUserProgress',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('progress', models.IntegerField()),
@@ -111,7 +111,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IframeContent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('url', models.CharField(max_length=300)),
@@ -123,7 +123,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IframeContentUserProgress',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('progress', models.IntegerField()),
@@ -137,7 +137,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Mission',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('title', models.CharField(max_length=200)),
@@ -150,7 +150,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MissionsObjectives',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('order', models.PositiveSmallIntegerField()),
@@ -164,7 +164,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Objective',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('title', models.CharField(max_length=250)),
@@ -181,12 +181,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RedirectContent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('url', models.CharField(max_length=300)),
-                ('progress_url', models.CharField(max_length=300)),
+                ('progress_url', models.CharField(max_length=300, blank=True, default='')),
                 ('blank', models.BooleanField(default=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='RedirectContentUserProgress',
+            fields=[
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
+                ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
+                ('progress', models.IntegerField()),
+                ('redirect_content', models.ForeignKey(to='director.RedirectContent')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -195,7 +209,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SituationsMissions',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True, verbose_name='created date')),
                 ('modified_date', models.DateTimeField(auto_now=True, verbose_name='modified date')),
                 ('order', models.PositiveSmallIntegerField()),
@@ -210,6 +224,10 @@ class Migration(migrations.Migration):
             name='situationsmissions',
             unique_together=set([('situation', 'mission'), ('situation', 'order')]),
         ),
+        migrations.AlterUniqueTogether(
+            name='redirectcontentuserprogress',
+            unique_together=set([('redirect_content', 'user')]),
+        ),
         migrations.AddField(
             model_name='missionsobjectives',
             name='objective',
@@ -223,13 +241,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mission',
             name='objectives',
-            field=models.ManyToManyField(to='director.Objective', related_name='missions', through='director.MissionsObjectives'),
+            field=models.ManyToManyField(through='director.MissionsObjectives', to='director.Objective', related_name='missions'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='mission',
             name='situations',
-            field=models.ManyToManyField(to='core.Situation', related_name='missions', through='director.SituationsMissions'),
+            field=models.ManyToManyField(through='director.SituationsMissions', to='core.Situation', related_name='missions'),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(

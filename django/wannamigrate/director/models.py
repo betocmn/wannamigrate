@@ -81,7 +81,7 @@ class MissionsObjectives( BaseModel ):
 
     # The str representation of this object
     def __str__( self ):
-        return self.mission + ' ' + self.objective + ' ' + self.order + "(optional)" if self.optional else "(required)"
+        return str( self.mission ) + ' ' + str( self.objective ) + ' ' + str( self.order ) + "(optional)" if self.optional else "(required)"
 
 
 
@@ -104,7 +104,7 @@ class SituationsMissions( BaseModel ):
 
     # The str representation of this object
     def __str__( self ):
-        return self.situation + ' ' + self.mission + ' ' + self.order
+        return str( self.situation ) + ' ' + str( self.mission ) + ' ' + str( self.order )
 
 
 
