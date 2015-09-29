@@ -169,10 +169,10 @@ def home( request ):
         password = 'demowanna'
         user = authenticate( email = email, password = password )
         auth_login( request, user )
-    else:
-        # Checks if the user is already authenticated.
-        if request.user.is_authenticated():
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+    # Checks if the user is already authenticated.
+    if request.user.is_authenticated():
+        return HttpResponseRedirect( reverse( "site:dashboard" ) )
 
     # Initializes template data dictionary
     template_data = {}
@@ -603,8 +603,8 @@ def premium( request ):
         del request.session['payment']
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Powerful immigration tools to help you to immigrate to your dream country.' )
+    template_data['meta_title'] = _( 'Premium Subscription - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Powerful immigration tool to help you to immigrate to your dream country.' )
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_view_subscription_plan'] = True

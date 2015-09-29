@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 12:30-0300\n"
+"POT-Creation-Date: 2015-09-29 13:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid ""
 msgstr ""
 "\n"
 "                                    Ferramenta com passo-a-passo interativo "
-"para guiá-lo em cada etapa do processo de imigração.\n"
+"para guiá-lo <br />em cada etapa do processo de imigração.\n"
 "                                    "
 
 #: templates/_layouts/main.html:137 templates/director/dashboard.html:17
@@ -2845,10 +2845,11 @@ msgstr "Requisitos e Validação"
 
 #: templates/db_translations/director_objective.html:10
 #: templates/db_translations/director_objective.html:28
-#: templates/db_translations/director_objective.html:47
-#: templates/db_translations/director_objective.html:65
-msgid "Understand what education level you need and how to do a "
-msgstr "Nível de escolaridade exigido e como fazer a "
+msgid ""
+"Understand what education level you need and how to do a Education "
+"Credential Assessment"
+msgstr ""
+"Nível de escolaridade exigido e como fazer a Validação do Diploma (ECA)"
 
 #: templates/db_translations/director_objective.html:11
 #: templates/db_translations/director_objective.html:29
@@ -3019,6 +3020,14 @@ msgstr "Aprenda como procurar por cursos na área desejada"
 #: templates/db_translations/director_objective.html:39
 msgid "Why immigrate to Australia?"
 msgstr "Por que imigrar para a Austrália?"
+
+#: templates/db_translations/director_objective.html:47
+#: templates/db_translations/director_objective.html:65
+msgid ""
+"Understand what education level you need and how to do a Skills Assessment"
+msgstr ""
+"Nível de escolaridade exigido e como fazer o Reconhecimento Profisional "
+"(Skills Assessment)"
 
 #: templates/db_translations/director_objective.html:48
 #: templates/db_translations/director_objective.html:66
@@ -10533,14 +10542,14 @@ msgstr ""
 "permanente."
 
 #: wannamigrate/site/views.py:606
-msgid "Immi Box - Immigration Tools - Wanna Migrate"
-msgstr "Immi Box - Ferramentas para Imigração - Wanna Migrate"
+msgid "Premium Subscription - Wanna Migrate"
+msgstr "Assinatura Premium - Wanna Migrate"
 
 #: wannamigrate/site/views.py:607
 msgid ""
-"Powerful immigration tools to help you to immigrate to your dream country."
+"Powerful immigration tool to help you to immigrate to your dream country."
 msgstr ""
-"Ferramentas poderosas de imigração para ajudá-lo a se mudar para o país dos "
+"Ferramenta poderosa de imigração para ajudá-lo a se mudar para o país dos "
 "seus sonhos."
 
 #: wannamigrate/site/views.py:650
@@ -10595,6 +10604,9 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1389
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Immi Box - Immigration Tools - Wanna Migrate"
+#~ msgstr "Immi Box - Ferramentas para Imigração - Wanna Migrate"
 
 #~ msgid "Step-by-Step"
 #~ msgstr "Passo-a-Passo"
