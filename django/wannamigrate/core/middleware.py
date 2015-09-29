@@ -133,8 +133,10 @@ class SituationMiddleware( object ):
                     }
                 )
                 if not created:
-                    situation.total_users = F( 'total_users' ) + 1
-                    situation.save()
+                    situation.total_users = situation.total_users + 1
+                    Situation.objects.filter( pk = situation.id ).update(
+                        total_users = F( 'total_users' ) + 1
+                    )
                 user_situation = UserSituation()
                 user_situation.user = request.user
                 user_situation.situation = situation
