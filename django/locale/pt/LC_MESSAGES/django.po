@@ -106,7 +106,7 @@ msgid ""
 msgstr ""
 "\n"
 "                                    Ferramenta com passo-a-passo interativo "
-"para guiá-lo em cada etapa do processo de imigração.\n"
+"para guiá-lo <br />em cada etapa do processo de imigração.\n"
 "                                    "
 
 #: templates/_layouts/main.html:137 templates/director/dashboard.html:17
