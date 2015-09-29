@@ -63,13 +63,25 @@
                         <li class="objective" id="objective-{{obj.id}}">
                             <a href="{% url "director:view" m.hash obj.hash %}">
                                 <div class="progress">
-                                    <span class="ball {% if obj.progress > 0 %}active{% endif %}">
-                                        {% if obj.progress == 100 %}
-                                            <i class="fa fa-check"></i>
-                                        {% else %}
-                                            {{obj.progress}}%
-                                        {% endif %}
-                                    </span>
+                                    {% if subscription %}
+                                        <span class="ball {% if obj.progress > 0 %}active{% endif %}">
+                                            {% if obj.progress == 100 %}
+                                                <i class="fa fa-check"></i>
+                                            {% else %}
+                                                {{obj.progress}}%
+                                            {% endif %}
+                                        </span>
+                                    {% else %}
+                                        <span class="ball {% if obj.is_public and obj.progress > 0 %}active{% endif %}">
+                                            {% if not obj.is_public %}
+                                                <i class="fa fa-lock"></i>
+                                            {% elif obj.progress == 100 %}
+                                                <i class="fa fa-check"></i>
+                                            {% else %}
+                                                {{obj.progress}}%
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="description">
                                     <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>

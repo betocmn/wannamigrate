@@ -15,16 +15,14 @@ from django.utils.module_loading import import_string
 
 
 
+
+
 # Create your views here.
 @login_required
 def dashboard( request ):
     """
     Process the dashboard page of the Wanna Cademy module.
     """
-
-    # If there's no active subscription, we redirect to the subscription page
-    if 'subscription' not in request.session or request.session['subscription'] is None:
-        return HttpResponseRedirect( reverse( "site:premium" ) )
 
     # Initial template
     template_data = {}
@@ -60,7 +58,6 @@ def dashboard( request ):
             module = o.content_module
             content_object = o.content_object
 
-
             # Loads the render method from the current content module.
             views_path = '.'.join( [ __package__, '_modules', module, 'views' ] )
             dynamic_get_progress = import_string( '.'.join( [ views_path, "get_progress" ] ) )
@@ -73,6 +70,7 @@ def dashboard( request ):
     if ( n_objectives > 0 ):
         general_progress /= n_objectives
 
+    template_data[ "subscription" ] = 'subscription' in request.session and request.session['subscription']
     template_data[ "missions" ] = missions
     template_data[ "general_progress" ] = int( general_progress )
 
@@ -88,13 +86,15 @@ def view( request, mission_hash, objective_hash ):
     :param objective_id: The id of the objective being acomplished.
     """
 
-    # If there's no active subscription, we redirect to the subscription page
-    if 'subscription' not in request.session or request.session['subscription'] is None:
-        return HttpResponseRedirect( reverse( "site:premium" ) )
-
     # Gets the mission and objective being visualized
     mission = get_object_or_404( Mission, hash = mission_hash )
     objective = get_object_or_404( Objective, hash = objective_hash )
+
+
+    # If there's no active subscription, and the objective is not public, redirect.
+    no_subscription = 'subscription' not in request.session or request.session['subscription'] is None
+    if not objective.is_public and no_subscription:
+        return HttpResponseRedirect( reverse( "site:premium" ) )
 
     # Loads the content from the objective
     module = objective.content_module

@@ -1180,6 +1180,8 @@ def dashboard( request ):
     :return String - HTML from The dashboard page.
     """
 
+    return redirect( reverse( "director:dashboard" ) )
+
     # Initial template
     template_data = {}
 
