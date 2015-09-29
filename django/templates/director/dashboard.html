@@ -60,7 +60,7 @@
                 <h1 class="text-center">{% trans m.title %}</h1>
                 <ul class="objectives">
                     {% for obj in m.objectives_set %}
-                        <li class="objective" id="objective-{{obj.id}}">
+                        <li class="objective {% if not subscription and not obj.is_public %} locked {% endif %}" id="objective-{{obj.id}}">
                             <a href="{% url "director:view" m.hash obj.hash %}">
                                 <div class="progress">
                                     {% if subscription %}

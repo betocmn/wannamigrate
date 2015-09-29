@@ -92,6 +92,18 @@ article.syllabus div article.missions section.mission ul li.objective a:hover di
   color:#68347E;
   background:white;
 }
+article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball { background: white; }
+article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball i
+{
+  font-size: 34px;
+  padding-top:8px;
+  color:#CCC;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball{ background: #CCC; }
+article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball i
+{
+  color:#68347E;
+}
 article.syllabus div article.missions section.mission ul li.objective a div.description h3
 {
   font-size: 18px;
@@ -100,6 +112,7 @@ article.syllabus div article.missions section.mission ul li.objective a div.desc
   padding: 0px 0px 0.3rem 0;
   text-transform: capitalize;
 }
+article.syllabus div article.missions section.mission ul li.objective.locked a div.description h3 { color: #CCC !important; }
 article.syllabus div article.missions section.mission ul li.objective a:hover div.description h3 { color: white; }
 article.syllabus div article.missions section.mission ul li.objective a div.description p { display:none; }
 @media (min-width: 700px)
@@ -111,6 +124,7 @@ article.syllabus div article.missions section.mission ul li.objective a div.desc
     color: #666;
     margin-top: 5px;
   }
+  article.syllabus div article.missions section.mission ul li.objective.locked a div.description p { color: #CCC !important; }
   article.syllabus div article.missions section.mission ul li.objective a:hover div.description p { color: #F2F2F2; }
 }
 article.path { padding:1em 0; font-size:14px; border-bottom: solid 1px #eee; }
