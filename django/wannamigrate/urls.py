@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url( r'^admin/', include( 'wannamigrate.admin.urls', namespace = "admin" ) ),
     url( r'^immigration-calculator/', include( 'wannamigrate.points.urls', namespace = "points" ) ),
+    url( r'^', include( 'wannamigrate.director.urls', namespace = "director" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
     url( r'^', include( 'wannamigrate.marketplace.urls', namespace = "marketplace" ) ),
     url( r'^', include( 'wannamigrate.qa.urls', namespace = "qa" ) ),

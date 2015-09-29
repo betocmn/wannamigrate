@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if css %}
+<style type="text/css">
+    {{ css }}
+</style>
+{% endif %}
+<div>
+    <h1 class="form-content-question">{% trans content_object.question %}</h1>
+    <form action="" method="post" class="form-content">
+        {% csrf_token %}
+        {{ form.choice }}
+        <input class="form-content-submit" type="submit" value="{% trans 'Submit' %}" />
+    </form>
+</div>

@@ -45,7 +45,8 @@ urlpatterns = patterns('',
     # Guides (Step-by-step)
     url( r'^step-by-step/(?P<country_name>[a-z_\-]+)/$', views.guide, name = 'guide' ),
 
-    # Immi-Box
+    # Premium
+    url( r'^premium/$', views.premium, name = 'premium' ),
     url( r'^tools/$', views.tools, name = 'tools' ),
 
     # My Account

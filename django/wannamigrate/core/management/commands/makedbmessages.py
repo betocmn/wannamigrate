@@ -15,6 +15,9 @@ from wannamigrate.core.models import Country, Language, Goal
 from wannamigrate.points.models import Answer, Occupation, OccupationCategory
 from wannamigrate.qa.models import Topic
 from wannamigrate.marketplace.models import ServiceType, ServiceTypeCategory, Product
+from wannamigrate.director.models import Mission, Objective
+from wannamigrate.director._modules.form_content.models import FormContent, FormContentChoice
+from wannamigrate.director._modules.html_content.models import HtmlContent
 from django.core.files import File
 from django.conf import settings
 import os
@@ -66,8 +69,23 @@ class Command( BaseCommand ):
             elif table_name == 'qa_topic':
                 model = Topic
                 possible_fields = [ 'name' ]
+            elif table_name == 'director_formcontent':
+                model = FormContent
+                possible_fields = [ 'question' ]
+            elif table_name == 'director_formcontentchoice':
+                model = FormContentChoice
+                possible_fields = [ 'text' ]
+            elif table_name == 'director_htmlcontent':
+                model = HtmlContent
+                possible_fields = [ 'html' ]
+            elif table_name == 'director_mission':
+                model = Mission
+                possible_fields = [ 'title' ]
+            elif table_name == 'director_objective':
+                model = Objective
+                possible_fields = [ 'title', 'description' ]
             else:
-                raise CommandError( 'Table does not need translations or do not exist' )
+                raise CommandError( 'Table does not need translations or is not supported' )
 
             # grab values from the db table and build the content
             file_content = '{% load i18n %}\n'

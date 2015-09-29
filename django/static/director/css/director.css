@@ -1,0 +1,122 @@
+
+/** CSS for Wannacademy version **/
+.full { width: 100%; }
+.wrap { box-sizing: border-box; max-width: 960px; min-width: 200px; margin: 0px auto; }
+.text-center { text-align: center; }
+article.situation { padding-top: 3rem; padding-bottom: 3rem; border-top: solid 1px #eee; border-bottom: solid 1px #eee; }
+article.situation section h1.title { font-size:25px; font-weight: 300; color: #68347E; padding-bottom:1rem; }
+article.situation section section.description{ color: #444; }
+article.stats { border-bottom: solid 1px #eee; padding-top: 1rem; padding-bottom: 1rem; }
+article.stats div section.item 
+{ 
+  width: 90%; margin:0 auto; padding-top: 1rem; padding-bottom: 1rem; 
+  border-left: solid 1px #eee; border-right: solid 1px #eee; 
+}
+@media (min-width: 700px) 
+{
+  article.stats div section.item 
+  { 
+    float:left; width: 33.1%; padding-top: 1rem; padding-bottom: 1rem; 
+    border-left: solid 1px #eee; border-right: solid 1px #eee; 
+  }
+}
+article.stats div section.item h3 { font-size: 20px; font-weight: 300; padding-bottom: 0.5rem; color: #444; }
+article.stats div section.item p { color: #666; }
+article.syllabus{ background-color: #eee; width:100%; position: relative; padding-top:2rem; }
+article.syllabus .syllabus-leadin{ position: absolute; top: -2px; left: 50%; margin-left: -32px; }
+article.syllabus div article.missions { min-width: 300px; max-width:600px; margin:0 auto; padding: 2rem 10px 3rem 10px; }
+article.syllabus div article.missions section.mission { display:block; }
+article.syllabus div article.missions section.mission h1
+{ 
+  font-size:18px; font-weight: 300; text-transform: uppercase;
+  padding: 3rem 0 1rem; color:#444; margin-bottom: 10px;
+}
+article.syllabus div article.missions section.mission ul li.objective a
+{
+  position:relative;
+  display: block;
+  width: 100%;
+  height: 130px;
+  background-color:white;
+  border-bottom: solid 1px #eee;
+  text-decoration: none;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover{ background-color: #68347E; }
+article.syllabus div article.missions section.mission ul li.objective a div.progress
+{
+  width:25%; height:100%; float:left;
+  position: relative; text-align: center;
+}
+
+article.syllabus div article.missions section.mission ul li.objective a div.description
+{
+  position:relative;
+  float:left;
+  width:73%;
+  height: 50px;
+  top:50%;
+  margin-top:-25px;
+  padding: 0 1%;
+}
+
+@media (min-width: 700px)
+{
+  article.syllabus div article.missions section.mission ul li.objective a div.progress { width:20% !important; }
+  article.syllabus div article.missions section.mission ul li.objective a div.description { width:78% !important; }
+}
+article.syllabus div article.missions section.mission ul li.objective a div.progress span.ball {
+  display: block;
+  font-weight: bold;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #F1F2F2;
+  color:#666;
+  text-align: center;
+  text-align: center;
+  line-height: 3rem;
+  top:50%;
+  left:50%;
+  margin-top:-1.5rem;
+  margin-left:-1.5rem;
+  font-size:14px;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.progress span.ball.active
+{
+  color:white;
+  background:#68347E;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover div.progress span.ball
+{
+  color:#68347E;
+  background:white;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.description h3
+{
+  font-size: 18px;
+  font-weight: 300;
+  color: #444;
+  padding: 0px 0px 0.3rem 0;
+  text-transform: capitalize;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover div.description h3 { color: white; }
+article.syllabus div article.missions section.mission ul li.objective a div.description p { display:none; }
+@media (min-width: 700px)
+{
+  article.syllabus div article.missions section.mission ul li.objective a div.description p {
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+    margin-top: 5px;
+  }
+  article.syllabus div article.missions section.mission ul li.objective a:hover div.description p { color: #F2F2F2; }
+}
+article.path { padding:1em 0; font-size:14px; border-bottom: solid 1px #eee; }
+
+
+
+/** Test css */
+article.objective-content{ padding:2em 0; }
+article.objective-content div.wrap iframe.content { position: relative; top:0; left: 0; width: 100%; height: 100%; overflow:hidden; }
