@@ -40,7 +40,7 @@ from wannamigrate.core.models import (
 )
 from wannamigrate.marketplace.models import (
     Provider, ProviderCountry, ProviderServiceType,
-    Order
+    Order, Product, Subscription, SubscriptionStatus
 )
 from wannamigrate.core.mailer import Mailer
 import time
@@ -534,26 +534,83 @@ def guide( request, country_name ):
     :param: country_name
     :return String - HTML from The dashboard page.
     """
+    return redirect( reverse( 'site:premium' ), permanent = True )
+
+
+
+
+
+#######################
+# PREMIUM SUBSCRIPTION - VIEWS
+#######################
+def premium( request ):
+    """
+    Sales page for the subscription service
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # If user is already subscribe, redirects him to premium features page
+    if 'subscription' in request.session and request.session['subscription']:
+        return HttpResponseRedirect( reverse( "director:dashboard" ) )
 
     # Initializes template data dictionary
     template_data = {}
+    error = False
 
-    # Gets country and overwrites meta title and description (for SEO)
-    if country_name == 'australia':
-        template_data['meta_title'] = _( 'Step-by-Step to Immigrate to Australia - Wanna Migrate' )
-        template_data['meta_description'] = _( 'A step-by-step initial guide to let you know your options to migrate to Australia' )
-    elif country_name == 'canada':
-        template_data['meta_title'] = _( 'Step-by-Step to Immigrate to Canada - Wanna Migrate' )
-        template_data['meta_description'] = _( 'A step-by-step initial guide to let you know your options to migrate to Canada' )
+    # If form was submitted (to proceed to payment page)
+    if request.method == 'POST':
+
+        # Identifies database records
+        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
+        if not product:
+            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+
+        # saves details to session
+        payment_info = {
+            'product': { 'id': product.id, 'name': product.name, 'price': product.price, 'product_category_id': product.product_category_id }
+        }
+
+        # saves subscription
+        if request.user.is_authenticated() and product.product_category_id in settings.SUBSCRIPTION_PRODUCT_CATEGORIES:
+
+            subscription = get_object_or_false(
+                Subscription,
+                user_id = request.user.id,
+                product_id = product.id,
+                subscription_status_id = settings.ID_SUBSCRIPTION_STATUS_ACTIVE
+            )
+            if subscription:
+                error = True
+                messages.error( request, _( "There's already an active subscription for this country and product." ) )
+            else:
+                subscription = Subscription()
+                subscription.product_id = product.id
+                subscription.subscription_status_id = SubscriptionStatus.get_status_from_order_status()
+                subscription.user = request.user
+                subscription.save()
+                payment_info['subscription'] = { 'id': subscription.id, 'subscription_status_id': subscription.subscription_status_id }
+
+        if not error:
+            # saves details to session and redirect
+            request.session['payment'] = payment_info
+            return HttpResponseRedirect( reverse( "marketplace:payment" ) )
+
     else:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
+        # Cleans payment session
+        request.session['payment'] = {}
+        del request.session['payment']
 
-    # Passes additional data to template
-    template_data['situation_form'] = get_situation_form( request )
-    template_data['country_name'] = country_name
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Powerful immigration tools to help you to immigrate to your dream country.' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_subscription_plan'] = True
 
     # Print Template
-    return render( request, 'site/guide/guide.html', template_data )
+    return render( request, 'site/premium/premium.html', template_data )
 
 
 
@@ -569,7 +626,7 @@ def tools( request ):
     :param: request
     :return String - HTML
     """
-    return redirect( reverse( 'marketplace:immi_box' ), permanent = True )
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
 
 

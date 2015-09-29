@@ -1464,29 +1464,26 @@ select {
     width: 960px;
     margin: 0 auto;
 }
-.dashboard .situations .situation-options .left, .dashboard .situations .situation-options .right {
+.dashboard .situations .situation-options a {
     text-align: center;
     text-decoration: none;
 }
-.dashboard .situations .situation-options .left:hover .title, .dashboard .situations .situation-options .left:hover .text, .dashboard .situations .situation-options .right:hover .title, .dashboard .situations .situation-options .right:hover .text {
+.dashboard .situations .situation-options a:hover .title, .dashboard .situations .situation-options a:hover .text {
     text-decoration: underline;
 }
-.dashboard .situations .situation-options .left img , .dashboard .situations .situation-options .right img {
+.dashboard .situations .situation-options img {
     padding-top: 20px;
 }
-.dashboard .situations .situation-options .left .title , .dashboard .situations .situation-options .right .title {
+.dashboard .situations .situation-options .title {
     font-size: 18px;
     font-weight: 700;
     line-height: 56px;
     font-family: "open_sansbold";
 }
-.dashboard .situations .situation-options .left .title {
-    color: #68347E;
-}
-.dashboard .situations .situation-options .right .title {
+.dashboard .situations .situation-options .title {
     color: #FFBA00;
 }
-.dashboard .situations .situation-options .left .text , .dashboard .situations .situation-options .right .text {
+.dashboard .situations .situation-options .text {
     color: #888;
     line-height: 22px;
     font-size: 14px;
@@ -1522,14 +1519,10 @@ sup{ vertical-align:super; }
     color: #68347E;
 }
 @media(min-width: 768px) {
-    .dashboard .situations .situation-options .left {
-        width: 50%;
-        float: left;
+    .dashboard .situations .situation-options a {
+        width: 100%;
     }
-    .dashboard .situations .situation-options .right {
-        width: 50%;
-        float: left;
-    }
+
     .dashboard .situations .situation-options .situation-options-block {
         max-width: 550px;
         margin: 0 auto;
@@ -3540,7 +3533,7 @@ sup{ vertical-align:super; }
       display: none;
   }
   .dashboard.full .situations {
-    height: 470px;
+    height: 300px;
   }
   .dashboard .wrapper .content {
     float: left;

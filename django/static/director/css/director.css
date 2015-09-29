@@ -98,6 +98,7 @@ article.syllabus div article.missions section.mission ul li.objective a div.desc
   font-weight: 300;
   color: #444;
   padding: 0px 0px 0.3rem 0;
+  text-transform: capitalize;
 }
 article.syllabus div article.missions section.mission ul li.objective a:hover div.description h3 { color: white; }
 article.syllabus div article.missions section.mission ul li.objective a div.description p { display:none; }
@@ -105,9 +106,10 @@ article.syllabus div article.missions section.mission ul li.objective a div.desc
 {
   article.syllabus div article.missions section.mission ul li.objective a div.description p {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     color: #666;
+    margin-top: 5px;
   }
   article.syllabus div article.missions section.mission ul li.objective a:hover div.description p { color: #F2F2F2; }
 }

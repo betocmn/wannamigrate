@@ -19,7 +19,11 @@
         {% trans "In" %} {% trans request.session.situation.to_country.name %}
       </h1>
       <section class="description">
-        {% trans "Follow our step-by-step guide to move to" %} {% trans request.session.situation.to_country.name %}
+        {% if request.session.situation.to_country.code == 'AU' %}
+            {% trans "Follow our step-by-step guide to move to Australia" %}
+        {% else %}
+            {% trans "Follow our step-by-step guide to move to Canada" %}
+        {% endif %}
       </section>
     </section>
 </article>
@@ -34,7 +38,7 @@
           <p>{% trans "completed" %}</p>
         </section>
         <section class="item text-center">
-          <h3>250.000</h3>
+          <h3>250 000</h3>
           <p>{% trans "slots per year" %}</p>
         </section>
         <div class="clearfix"></div>

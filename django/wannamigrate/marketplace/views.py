@@ -9,7 +9,7 @@ the templates on the marketplace app
 # Imports
 ##########################
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -59,25 +59,7 @@ def professionals( request ):
     :param: request
     :return: String - The html page rendered
     """
-
-    # Initial template
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Find and Hire an Immigration Expert - Wanna Migrate' )
-    template_data['meta_description'] =  _( 'Make faster & better decisions when planning to go to another country.  Get help from immigration experts in Wanna Migrate.' )
-
-    # Gets Situation Form
-    template_data['situation_form'] = get_situation_form( request )
-
-    # If situation is defined, we load professionals related to it
-    if 'situation' in request.session and 'to_country' in request.session['situation']:
-
-        # Gets 5 most related service providers
-        template_data['providers'] = Provider.get_listing( request.session['situation']['to_country']['id'], 0, 20 )
-
-    # Print Template
-    return render( request, 'marketplace/professionals/list.html', template_data )
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
 
 
@@ -181,41 +163,7 @@ def ebook( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
-        if not product:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # saves details to session
-        request.session['payment'] = {
-            'product': { 'id': product.id, 'name': product.name, 'price': product.price, 'product_category_id': product.product_category_id }
-        }
-
-        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'E-Books - Immigration Guides - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Download our complete guides about immigrating to Canada, immigration to Australia and others.' )
-
-    # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/e-book-como-mudar-para-o-canada-preview-1.jpg' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_ebooks'] = True
-
-    # if language is english, we show warning that only portuguese guides are available for now
-    if translation.get_language() == "en":
-        messages.warning( request, "All e-books are in portuguese for now. We will soon release the english versions." )
-
-    # Print Template
-    return render( request, 'marketplace/ebook/ebook.html', template_data )
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
 
 @subscription_required
@@ -227,25 +175,7 @@ def ebook_read( request, item_name ):
     :param item_name:
     :return: String - HTML
     """
-
-    # Initial settings
-    template_data = {}
-
-    # Get Country and set options for it
-    if item_name == 'canada' and settings.ID_COUNTRY_CANADA in request.session['subscription']['countries']:
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhNURaMGdvLWNvVDA/preview'
-
-    elif item_name == 'australia' and settings.ID_COUNTRY_AUSTRALIA in request.session['subscription']['countries']:
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjhLVpCem9CMzBPWUE/preview'
-
-    elif item_name == 'international_cv':
-        template_data['ebook_url'] = 'https://drive.google.com/file/d/0B3qN5CaSfrjha09CN21nMGpILWc/preview'
-
-    else:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-    # Print Template
-    return render( request, 'marketplace/ebook/read.html', template_data )
+    return redirect( reverse( 'director:dashboard' ), permanent = True )
 
 
 
@@ -262,57 +192,8 @@ def ielts( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
-    # Initializes template data dictionary
-    template_data = {}
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        provider = get_object_or_false( Provider, pk = 13 )
-        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
-        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
-        if not provider or not service_type or not provider_service_type:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # order information
-        payment_info = {
-            'provider': { 'id': provider.id, 'name': provider.display_name },
-            'service_type': { 'id': service_type.id, 'name': service_type.name },
-            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
-        }
-
-        # saves service
-        if request.user.is_authenticated():
-            service = Service()
-            service.service_price = provider_service_type.price
-            service.description = service_type.name
-            service.user = request.user
-            service.provider = provider
-            service.service_type = service_type
-            service.service_status_id = ServiceStatus.get_status_from_order_status()
-            service.save()
-            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
-
-        # saves details to session
-        request.session['payment'] = payment_info
-
-        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'IELTS Online Course - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Get ready for the English Exam for immigration with IELTS Online course.' )
-
-    # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/ielts-course-preview-image.jpg' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_ielts_course'] = True
-
-
-    # Print Template
-    return render( request, 'marketplace/ielts/ielts.html', template_data )
 
 
 
@@ -328,22 +209,7 @@ def international_cv( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Build your International CV - Wanna Migrate' )
-    template_data['meta_description'] = _( 'We will help you out by creating your international CV, cover letter and Linkedin profile.' )
-
-    # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/international-cv-preview-1.jpg' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_international_cv'] = True
-
-    # Print Template
-    return render( request, 'marketplace/international_cv/international_cv.html', template_data )
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
 
 
@@ -359,25 +225,8 @@ def immi_box( request ):
     :param: request
     :return String - HTML
     """
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
-    # If there's no active subscription, we redirect to the subscription page
-    if 'subscription' not in request.session or request.session['subscription'] is None:
-        return HttpResponseRedirect( reverse( "marketplace:subscription" ) )
-    elif request.session['situation']['to_country']['id'] not in request.session['subscription']['countries']:
-        messages.warning( request, _( "You don't have an active subscription for this country. You can change your destination country above!" ) )
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Powerful immigration tools to help you to immigrate to your dream country.' )
-
-    # Gets Situation Form
-    template_data['situation_form'] = get_situation_form( request )
-
-    # Print Template
-    return render( request, 'marketplace/immi_box/immi_box.html', template_data )
 
 
 def subscription( request ):
@@ -387,63 +236,8 @@ def subscription( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
-    # Initializes template data dictionary
-    template_data = {}
-    error = False
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
-        if not product:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # saves details to session
-        payment_info = {
-            'product': { 'id': product.id, 'name': product.name, 'price': product.price, 'product_category_id': product.product_category_id }
-        }
-
-        # saves subscription
-        if request.user.is_authenticated() and product.product_category_id in settings.SUBSCRIPTION_PRODUCT_CATEGORIES:
-
-            subscription = get_object_or_false(
-                Subscription,
-                user_id = request.user.id,
-                product_id = product.id,
-                subscription_status_id = settings.ID_SUBSCRIPTION_STATUS_ACTIVE
-            )
-            if subscription:
-                error = True
-                messages.error( request, _( "There's already an active subscription for this country and product." ) )
-            else:
-                subscription = Subscription()
-                subscription.product_id = product.id
-                subscription.subscription_status_id = SubscriptionStatus.get_status_from_order_status()
-                subscription.user = request.user
-                subscription.save()
-                payment_info['subscription'] = { 'id': subscription.id, 'subscription_status_id': subscription.subscription_status_id }
-
-        if not error:
-            # saves details to session and redirect
-            request.session['payment'] = payment_info
-            return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    else:
-        # Cleans payment session
-        request.session['payment'] = {}
-        del request.session['payment']
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Powerful immigration tools to help you to immigrate to your dream country.' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_subscription_plan'] = True
-
-    # Print Template
-    return render( request, 'marketplace/immi_box/subscription.html', template_data )
 
 
 
@@ -457,104 +251,7 @@ def consulting( request, city ):
     :param: request
     :return String - HTML from The dashboard page.
     """
-
-    # Configure available cities and dates
-    cities = {
-        'sao-luis': {
-            'display': 'São Luís',
-            'title': _( 'In-person consultations in São Luís/MA - September 09th to 22nd' ),
-            'workshop_text': _( 'Immigration Workshop in São Luís/MA' ),
-            'workshop_sub_text': _( '14/09 - Restaurante Sushimax (Lagoa) - 19:30h' ),
-            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-sao-luis',
-            'individual_text': _( 'Immigration Individual Evaluation in São Luís/MA' ),
-            'individual_sub_text': _( 'From 09/Sep to 22/Sep' ),
-            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-sao-luis'
-        },
-        'teresina': {
-            'display': 'Teresina',
-            'title': _( 'In-person consultations in Teresina/PI - September 23rd and 24th' ),
-            'workshop_text': _( 'Immigration Workshop in Teresina/PI' ),
-            'workshop_sub_text': _( '24/09 - Hotel Ibis Teresina - 19:30h' ),
-            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-teresina',
-            'individual_text': _( 'Immigration Individual Evaluation in Teresina/PI' ),
-            'individual_sub_text': _( 'September 23rd and 24th' ),
-            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-teresina'
-        },
-        'belem': {
-            'display': 'Belém',
-            'title': _( 'In-person consultations in Belém/PA - October 6th and 7th' ),
-            'workshop_text': _( 'Immigration Workshop in Belém/PA' ),
-            'workshop_sub_text': _( '07/10 - Hotel Ibis Teresina - 19:30h' ),
-            'workshop_link': 'https://eventioz.com.br/e/workshop-de-imigracao-belem',
-            'individual_text': _( 'Immigration Individual Evaluation in Belém/PA' ),
-            'individual_sub_text': _( 'October 6th and 7th' ),
-            'individual_link': 'https://eventioz.com.br/e/avaliacao-individual-de-imigracao-belem'
-        },
-    }
-
-    # validates city
-    if city not in cities:
-        return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-
-    # Initializes template data dictionary
-    template_data = { 'city': cities[city] }
-
-    # If form was submitted (to proceed to payment page)
-    if request.method == 'POST':
-
-        # Identifies database records
-        provider = get_object_or_false( Provider, pk = 30 )
-        service_type = get_object_or_false( ServiceType, pk = request.POST['service_type_id'] )
-        provider_service_type = get_object_or_false( ProviderServiceType, provider_id = provider.id, service_type_id = service_type.id )
-        if not provider or not service_type or not provider_service_type:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
-
-        # order information
-        payment_info = {
-            'provider': { 'id': provider.id, 'name': provider.display_name },
-            'service_type': { 'id': service_type.id, 'name': service_type.name },
-            'provider_service_type': { 'id': provider_service_type.id, 'price': provider_service_type.price },
-        }
-
-        # saves service
-        if request.user.is_authenticated():
-            service = Service()
-            service.service_price = provider_service_type.price
-            service.description = service_type.name
-            service.user = request.user
-            service.provider = provider
-            service.service_type = service_type
-            service.service_status_id = ServiceStatus.get_status_from_order_status()
-            service.save()
-            payment_info['service'] = { 'id': service.id, 'service_price': service.service_price, 'description': service.description }
-
-        # saves details to session
-        request.session['payment'] = payment_info
-
-        return HttpResponseRedirect( reverse( "marketplace:payment" ) )
-
-    else:
-        # Cleans payment session
-        request.session['payment'] = {}
-        del request.session['payment']
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immigration Evaluation' ) + ' - ' + cities[city]['display']
-    template_data['meta_description'] = _( 'In-person meeting to evaluate your chances to immigrate to Canada or Australia.' )
-
-    # Sets image as preview for sharing (as for facebook, twitter, etc.)
-    template_data['meta_image'] = settings.BASE_URL + static( 'site/img/consulting-individual.png' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    #template_data['track_conversion_view_ebooks'] = True
-
-    # if language is english, we show warning that only portuguese guides are available for now
-    if translation.get_language() == "en":
-        messages.warning( request, "All sessions are in portuguese for now. We will soon release the english edition." )
-
-    # Print Template
-    return render( request, 'marketplace/consulting/consulting.html', template_data )
+    return redirect( reverse( 'site:premium' ), permanent = True )
 
 
 

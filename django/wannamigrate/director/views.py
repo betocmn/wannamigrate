@@ -22,6 +22,10 @@ def dashboard( request ):
     Process the dashboard page of the Wanna Cademy module.
     """
 
+    # If there's no active subscription, we redirect to the subscription page
+    if 'subscription' not in request.session or request.session['subscription'] is None:
+        return HttpResponseRedirect( reverse( "site:premium" ) )
+
     # Initial template
     template_data = {}
 
@@ -83,10 +87,14 @@ def view( request, mission_hash, objective_hash ):
     :param mission_id: The id of the mission being acomplished.
     :param objective_id: The id of the objective being acomplished.
     """
+
+    # If there's no active subscription, we redirect to the subscription page
+    if 'subscription' not in request.session or request.session['subscription'] is None:
+        return HttpResponseRedirect( reverse( "site:premium" ) )
+
     # Gets the mission and objective being visualized
     mission = get_object_or_404( Mission, hash = mission_hash )
     objective = get_object_or_404( Objective, hash = objective_hash )
-
 
     # Loads the content from the objective
     module = objective.content_module
