@@ -603,8 +603,8 @@ def premium( request ):
         del request.session['payment']
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Immi Box - Immigration Tools - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Powerful immigration tools to help you to immigrate to your dream country.' )
+    template_data['meta_title'] = _( 'Premium Subscription - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Powerful immigration tool to help you to immigrate to your dream country.' )
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_view_subscription_plan'] = True
