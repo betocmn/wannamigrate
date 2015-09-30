@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 13:44-0300\n"
+"POT-Creation-Date: 2015-09-29 23:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,8 @@ msgstr "Como Funciona"
 msgid "Q&A"
 msgstr "Tira-Dúvidas"
 
-#: templates/_layouts/main.html:89 templates/site/premium/premium.html:28
+#: templates/_layouts/main.html:89 templates/_layouts/main.html.py:122
+#: templates/site/premium/premium.html:28
 msgid "Premium"
 msgstr ""
 
@@ -93,10 +94,6 @@ msgstr "usuário(s)"
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
 
-#: templates/_layouts/main.html:122
-msgid "Premium Subscription"
-msgstr "Assinatura Premium"
-
 #: templates/_layouts/main.html:125
 msgid ""
 "\n"
@@ -111,17 +108,17 @@ msgstr ""
 
 #: templates/_layouts/main.html:137 templates/director/dashboard.html:17
 #: templates/director/view.html:16 templates/site/home/home.html:47
-#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1292
+#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1294
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:141 templates/director/dashboard.html:18
 #: templates/director/view.html:17 templates/site/home/home.html:51
-#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1295
+#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1297
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:145 wannamigrate/site/views.py:1297
+#: templates/_layouts/main.html:145 wannamigrate/site/views.py:1299
 msgid "in"
 msgstr "no(a)"
 
@@ -2846,8 +2843,8 @@ msgstr "Requisitos e Validação"
 #: templates/db_translations/director_objective.html:10
 #: templates/db_translations/director_objective.html:28
 msgid ""
-"Understand what education level you need and how to do a Education "
-"Credential Assessment"
+"Understand what education level you need and how to do a \"Education "
+"Credential Assessment\""
 msgstr ""
 "Nível de escolaridade exigido e como fazer a Validação do Diploma (ECA)"
 
@@ -3024,7 +3021,8 @@ msgstr "Por que imigrar para a Austrália?"
 #: templates/db_translations/director_objective.html:47
 #: templates/db_translations/director_objective.html:65
 msgid ""
-"Understand what education level you need and how to do a Skills Assessment"
+"Understand what education level you need and how to do a \"Skills Assessment"
+"\""
 msgstr ""
 "Nível de escolaridade exigido e como fazer o Reconhecimento Profisional "
 "(Skills Assessment)"
@@ -6599,9 +6597,29 @@ msgstr "concluído"
 msgid "slots per year"
 msgstr "vagas por ano"
 
-#: templates/director/dashboard.html:75
+#: templates/director/dashboard.html:87
 msgid "Optional"
 msgstr "Opcional"
+
+#: templates/director/dashboard.html:104
+msgid "Locked"
+msgstr "Restrito"
+
+#: templates/director/dashboard.html:106
+msgid "Dear"
+msgstr "Querido(a)"
+
+#: templates/director/dashboard.html:107
+msgid ""
+"this content is only available for subscribers, click on the link bellow to "
+"learn more about our plans"
+msgstr ""
+"este conteúdo só é disponível para assinantes. Clique no botão abaixo "
+"para conhecer os nossos planos premium"
+
+#: templates/director/dashboard.html:109
+msgid "Learn more"
+msgstr "Aprenda mais"
 
 #: templates/director/view.html:21
 msgid "Follow our step-by-step guide to move to"
@@ -7946,8 +7964,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1350
-#: wannamigrate/site/views.py:1383
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1352
+#: wannamigrate/site/views.py:1385
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7956,7 +7974,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1383
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1385
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -10592,18 +10610,21 @@ msgstr "Redefinir Senha - Wanna Migrate"
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1294
+#: wannamigrate/site/views.py:1296
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1304
+#: wannamigrate/site/views.py:1306
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
 # Q&A Dynamic translations.
-#: wannamigrate/site/views.py:1389
+#: wannamigrate/site/views.py:1391
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Premium Subscription"
+#~ msgstr "Assinatura Premium"
 
 #~ msgid "Immi Box - Immigration Tools - Wanna Migrate"
 #~ msgstr "Immi Box - Ferramentas para Imigração - Wanna Migrate"
