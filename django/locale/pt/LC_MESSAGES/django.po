@@ -6614,7 +6614,7 @@ msgid ""
 "this content is only available for subscribers, click on the link bellow to "
 "learn more about our plans"
 msgstr ""
-"este conteúdo só é disponível para assinantes. Clique no botão abaixo "
+"este conteúdo só está disponível para assinantes. Clique no botão abaixo "
 "para conhecer os nossos planos premium"
 
 #: templates/director/dashboard.html:109
