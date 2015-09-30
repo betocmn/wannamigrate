@@ -6607,7 +6607,7 @@ msgstr "Restrito"
 
 #: templates/director/dashboard.html:106
 msgid "Dear"
-msgstr "Querido(a)"
+msgstr "Caro(a)"
 
 #: templates/director/dashboard.html:107
 msgid ""
@@ -6619,7 +6619,7 @@ msgstr ""
 
 #: templates/director/dashboard.html:109
 msgid "Learn more"
-msgstr "Aprenda mais"
+msgstr "Saiba mais"
 
 #: templates/director/view.html:21
 msgid "Follow our step-by-step guide to move to"
