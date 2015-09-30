@@ -96,11 +96,39 @@
         </article>
     </div>
 </article>
+{% if not subscription %}
+    <div id="subscribe">
+        <div class="modal-content">
+            <a href="javascript:close();" class="close-button"><i class="fa fa-close"></i></a>
+            <i class="fa fa-lock"></i>
+            <h2>{% trans "Locked" %}</h2>
+            <p>
+                {% trans "Dear" %} {{request.user.name}},
+                {% trans "this content is only available for subscribers, click on the link bellow to learn more about our plans" %}.
+            </p>
+            <a href="{% url 'site:premium' %}" class="button featured">{% trans "Learn more" %}</a>
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}
 
 {% block scripts %}
 
     {{ block.super }}
+    {% if not subscription %}
+        <script type="text/javascript">
+            function close() { $("#subscribe").fadeOut(); }
+            $("#subscribe").click( close );
+            $("#subscribe").children().click(function(e) {
+                e.stopPropagation();
+            });
+
+            $( "li.objective.locked a").click(function( e ){
+                e.preventDefault();
+                $( "#subscribe" ).fadeIn();
+            });
+        </script>
+    {% endif %}
 
 
 {% endblock scripts %}

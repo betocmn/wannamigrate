@@ -134,3 +134,21 @@ article.path { padding:1em 0; font-size:14px; border-bottom: solid 1px #eee; }
 /** Test css */
 article.objective-content{ padding:2em 0; }
 article.objective-content div.wrap iframe.content { position: relative; top:0; left: 0; width: 100%; height: 100%; overflow:hidden; }
+
+
+/** Subscribe modal on dashboard **/
+#subscribe
+{
+  position: fixed; left: 0px; top: 0px; width:100%; height:100%; text-align:center;
+  background: rgba(0, 0, 0, 0.8); z-index: 9999; display: none;
+}
+.modal-content { width: 280px; position: relative; margin: 12% auto; padding: 5px 20px 13px 20px; background: #fff; }
+.modal-content i.fa-lock { font-size: 40px; margin-top: 20px; }
+.modal-content p { margin: 20px 0 25px 0; text-align: center; line-height: 20px; }
+.modal-content a.button { display: inline-block; padding:13px 15px; margin-bottom:10px; }
+.modal-content a.close-button
+{
+  position: absolute; top: 0; right: 0; display: block; width: 26px; height: 26px; background: #CCC;
+  text-align: center; line-height: 26px; color: white; text-decoration: none; font-weight: bold;
+}
+.modal-content a.close-button:hover { background: #C85050; }
