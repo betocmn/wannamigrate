@@ -60,16 +60,28 @@
                 <h1 class="text-center">{% trans m.title %}</h1>
                 <ul class="objectives">
                     {% for obj in m.objectives_set %}
-                        <li class="objective" id="objective-{{obj.id}}">
+                        <li class="objective {% if not subscription and not obj.is_public %} locked {% endif %}" id="objective-{{obj.id}}">
                             <a href="{% url "director:view" m.hash obj.hash %}">
                                 <div class="progress">
-                                    <span class="ball {% if obj.progress > 0 %}active{% endif %}">
-                                        {% if obj.progress == 100 %}
-                                            <i class="fa fa-check"></i>
-                                        {% else %}
-                                            {{obj.progress}}%
-                                        {% endif %}
-                                    </span>
+                                    {% if subscription %}
+                                        <span class="ball {% if obj.progress > 0 %}active{% endif %}">
+                                            {% if obj.progress == 100 %}
+                                                <i class="fa fa-check"></i>
+                                            {% else %}
+                                                {{obj.progress}}%
+                                            {% endif %}
+                                        </span>
+                                    {% else %}
+                                        <span class="ball {% if obj.is_public and obj.progress > 0 %}active{% endif %}">
+                                            {% if not obj.is_public %}
+                                                <i class="fa fa-lock"></i>
+                                            {% elif obj.progress == 100 %}
+                                                <i class="fa fa-check"></i>
+                                            {% else %}
+                                                {{obj.progress}}%
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="description">
                                     <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>
@@ -84,11 +96,39 @@
         </article>
     </div>
 </article>
+{% if not subscription %}
+    <div id="subscribe">
+        <div class="modal-content">
+            <a href="javascript:close();" class="close-button"><i class="fa fa-close"></i></a>
+            <i class="fa fa-lock"></i>
+            <h2>{% trans "Locked" %}</h2>
+            <p>
+                {% trans "Dear" %} {{request.user.name}},
+                {% trans "this content is only available for subscribers, click on the link bellow to learn more about our plans" %}.
+            </p>
+            <a href="{% url 'site:premium' %}" class="button featured">{% trans "Learn more" %}</a>
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}
 
 {% block scripts %}
 
     {{ block.super }}
+    {% if not subscription %}
+        <script type="text/javascript">
+            function close() { $("#subscribe").fadeOut(); }
+            $("#subscribe").click( close );
+            $("#subscribe").children().click(function(e) {
+                e.stopPropagation();
+            });
+
+            $( "li.objective.locked a").click(function( e ){
+                e.preventDefault();
+                $( "#subscribe" ).fadeIn();
+            });
+        </script>
+    {% endif %}
 
 
 {% endblock scripts %}

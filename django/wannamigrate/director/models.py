@@ -57,7 +57,8 @@ class Objective( BaseModel ):
     # The description of the objective (Ex: Browse your possibilities and see what
     # better to you... ).
     description = models.TextField()
-
+    # Indicates if this objective is public (can be viewed by non subscription users)
+    is_public = models.BooleanField( default = False )
     # The content of the objective (a generic foreign key)
     content_type = models.ForeignKey( ContentType )
     object_id = models.PositiveIntegerField()

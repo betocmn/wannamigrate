@@ -824,5 +824,25 @@ def professional_help( request, country_name ):
 
 @login_required
 def get_progress( request ):
-    # TODO: calculate the progress for the request.user here and return a number between 0 and 100.
-    return 100
+    """
+    Returns the progress of the user on the calculator.
+    :param request:
+    :return:
+    """
+    progress = 0
+    # Gets the user stats
+    user_stats = request.user.user_stats
+
+    # The values that compound the progress
+    progress_values = [
+        user_stats.percentage_personal,
+        user_stats.percentage_language,
+        user_stats.percentage_education,
+        user_stats.percentage_work,
+    ]
+
+    # OBS: I'm not checking if this list is empty... I am assuming that progress_values always has
+    # at least one element.
+    progress = sum( progress_values ) / len( progress_values )
+
+    return progress

@@ -65,7 +65,7 @@ urlpatterns = patterns('',
     url( r'^conversations/archive$', views.list_conversations, { "conversation_status_id" : settings.CORE_CONVERSATION_STATUS_ARCHIVE_ID }, name = 'list_conversations_archive' ),
 
     # Dashboard
-    url( r'^dashboard/$', views.dashboard, name = 'dashboard' ),
+    url( r'^site/dashboard/$', views.dashboard, name = 'dashboard' ),
 
     # Change Situation
     url( r'^change-situation/$', views.change_situation, name = 'change_situation' ),
