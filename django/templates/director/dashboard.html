@@ -61,7 +61,11 @@
                 <ul class="objectives">
                     {% for obj in m.objectives_set %}
                         <li class="objective {% if not subscription and not obj.is_public %} locked {% endif %}" id="objective-{{obj.id}}">
-                            <a href="{% url "director:view" m.hash obj.hash %}">
+                            {% if obj.content_module == "redirect_content" %}
+                            <a href="{% url "director:view" m.hash obj.hash %}" {% if obj.content_object.blank %} target="_blank" {% endif %} >
+                            {% else %}
+                            <a href="{% url "director:view" m.hash obj.hash %}" >
+                            {% endif %}
                                 <div class="progress">
                                     {% if subscription %}
                                         <span class="ball {% if obj.progress > 0 %}active{% endif %}">
