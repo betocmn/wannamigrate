@@ -20,19 +20,19 @@ def render( request, content_object ):
     :param content_object: The object being displayed.
     :return: The content of the object rendered as string.
     """
-
+    # Updates the progress for this content
     if ( not content_object.progress_uri ):
         update_progress( request.user, content_object, 100 )
 
-    if not content_object.blank:
-        return HttpResponseRedirect( content_object.url )
+    # Returns the redirection
+    return HttpResponseRedirect( content_object.url )
 
     # Loads the template from a string
-    html_str = pkg_resources.resource_string( __name__, "static/html/index.html" )
-    t = Template(  html_str )
+    #html_str = pkg_resources.resource_string( __name__, "static/html/index.html" )
+    #t = Template(  html_str )
     # Creates a context to the template.
-    c = Context( { "content_object" : content_object } )
-    return t.render( c )
+    #c = Context( { "content_object" : content_object } )
+    #return t.render( c )
 
 
 

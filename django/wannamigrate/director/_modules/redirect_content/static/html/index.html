@@ -1,9 +1,3 @@
 <script type="text/javascript">
-    url = "{{ content_object.url }}";
-    {% if content_object.blank %}
-        window.open( url, '_blank' )
-        history.go(-1);
-    {% else %}
-        window.location = url;
-    {% endif %}
+    window.location = "{{ content_object.url }}";
 </script>
