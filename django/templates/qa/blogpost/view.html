@@ -61,9 +61,9 @@
                 {% endif %}
 
                 <div class="banner-advertising">
-                    <a href="{% url 'marketplace:subscription' %}">
-                        {% with 'site/img/immi-box-subscription-banner-'|add:LANGUAGE_CODE|add:'.png' as banner_path %}
-                        <img src="{% static banner_path %}" alt="{% trans "Subscription to Immi Box" %}" />
+                    <a href="{% url 'site:premium' %}">
+                        {% with 'site/img/premium-subscription-banner-'|add:LANGUAGE_CODE|add:'.jpg' as banner_path %}
+                        <img src="{% static banner_path %}" alt="{% trans "Premium Subscription" %}" />
                         {% endwith %}
                     </a>
                 </div>
