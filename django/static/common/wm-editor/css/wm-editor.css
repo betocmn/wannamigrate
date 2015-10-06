@@ -37,7 +37,7 @@
 
 
 /** WM Editor styles for Posts */
-.wm-html-content.wm-post { font-size: 1em; line-height: 1.6em; }
+.wm-html-content.wm-post { font-size: 0.9em; line-height: 1.6em; color: #000; }
 .wm-html-content.wm-post h1{ font-size:1.3em; margin: 15px 0 8px 0; }
 .wm-html-content.wm-post strong, .wm-html-content.wm-post b { font-size:1em; font-family: "open_sansbold"; }
 .wm-html-content.wm-post ul { list-style: disc outside none; }
