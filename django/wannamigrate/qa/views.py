@@ -438,6 +438,8 @@ def view_blogpost( request, user_slug, slug ):
         template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-3.jpg' )
     elif blogpost.id == 4:
         template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-4.jpg' )
+    elif blogpost.id == 5:
+        template_data['meta_image'] = settings.BASE_URL + static( 'site/img/share-image-post-wanna-migrate-5.jpg' )
 
 
     ###############################
