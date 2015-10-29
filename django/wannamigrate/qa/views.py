@@ -193,7 +193,7 @@ def view_question( request, slug ):
 
     question = get_object_or_404( Question.objects.prefetch_related( "related_topics"), slug = slug )
     question.total_views += 1
-    question.save()
+    question.save( update_lad = True )
 
     ###############################
     # Process topic translation
@@ -425,7 +425,7 @@ def view_blogpost( request, user_slug, slug ):
         raise Http404( "No BlogPost matches the given query." )
 
     blogpost.total_views += 1
-    blogpost.save()
+    blogpost.save( update_lad = False )
 
     # Sets image as preview for sharing (as for facebook, twitter, etc.)
     # TODO: This is "gambiarra". After image support is added to posts, change this code to

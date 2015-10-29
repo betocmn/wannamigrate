@@ -338,7 +338,6 @@ def edit_blogpost( request, id ):
     if form.is_valid():
         with transaction.atomic():
             blogpost = form.save( commit = False )
-            blogpost.generate_slug()
             blogpost.save()
             edition.save()
 

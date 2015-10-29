@@ -162,7 +162,13 @@ class IndexableContent( models.Model ):
     def save( self, *args, **kwargs ):
 
         # Sets the last activity date of the content
-        self.last_activity_date = timezone.now()
+        if "update_lad" in kwargs:
+            update_lad = kwargs.pop( "update_lad" )
+            if update_lad is True:
+                self.last_activity_date = timezone.now()
+        else:
+            self.last_activity_date = timezone.now()
+
 
         if not self.slug:
             self.generate_slug()

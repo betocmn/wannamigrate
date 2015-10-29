@@ -381,15 +381,15 @@ class EditBlogPostForm( BaseModelForm ):
     class Meta:
         """ Meta class describing the model and the fields required on this form. """
         model = qa.BlogPost
-        fields = [ "title", "body", "is_anonymous" ]
+        fields = [ "title", "slug", "body", "is_anonymous" ]
 
     # Initalizing the form
     def __init__( self, *args, **kwargs ):
         super( EditBlogPostForm, self ).__init__( *args, **kwargs )
 
         # Overrides the choices to the related_topics field.
-        self.fields[ "title" ].widget = forms.Textarea()
-        self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "BlogPost title..." )
+        #self.fields[ "title" ].widget = forms.Textarea()
+        #self.fields[ "title" ].widget.attrs[ "placeholder" ] = _( "BlogPost title..." )
 
         # Set the class of the is_anonymous widget
         self.fields[ "is_anonymous" ].widget.attrs[ "class" ] = "checkbox"
