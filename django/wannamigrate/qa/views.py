@@ -193,7 +193,7 @@ def view_question( request, slug ):
 
     question = get_object_or_404( Question.objects.prefetch_related( "related_topics"), slug = slug )
     question.total_views += 1
-    question.save( update_lad = True )
+    question.save( update_lad = False )
 
     ###############################
     # Process topic translation
