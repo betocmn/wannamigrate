@@ -22,7 +22,8 @@
     <script src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
     <script src="{% static 'common/jquery-ui/js/jquery-ui.js' %}"></script>
     <script src="{% static 'common/auto-topics/js/autotopics.js' %}"></script>
-    <script src="{% static 'common/wm-editor/js/wm_editor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/tinymce/tinymce.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/tinymce/util.js' %}"></script>
 
     <script type="text/javascript">
 
@@ -36,7 +37,8 @@
 
             // Topics autocomplete
             $("#{{ form.related_topics.id_for_label }}").autotopics();
-            $("#{{ form.body.id_for_label }}").wm_editor();
+
+            init_editor( "textarea#{{ form.body.id_for_label }}", "wm-html-content wm-post", "{% static 'common/wm-editor/css/wm-editor.css' %}" );
 
         });
         
@@ -49,7 +51,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Edit Question</h1>
+                    <h1 class="page-header">Edit Post</h1>
                 </div>
             </div>
             
@@ -74,6 +76,12 @@
                                             <label class="control-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
                                             {{ form.title }}
                                             {{ form.title.errors }}
+                                        </div>
+                                        <!-- Slug -->
+                                        <div class="form-group {% if form.slug.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ form.slug.id_for_label }}">{{ form.slug.label }}</label>
+                                            {{ form.slug }}
+                                            {{ form.slug.errors }}
                                         </div>
                                         <!-- Body -->
                                         <div class="form-group {% if form.body.errors %}has-error{% endif %}">

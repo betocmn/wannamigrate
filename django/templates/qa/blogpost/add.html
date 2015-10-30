@@ -75,36 +75,13 @@
     <script src="{% static 'common/auto-topics/js/autotopics.js' %}"></script>
     <script type="text/javascript" src="{% static 'site/js/questions_answers.js' %}"></script>
     <script type="text/javascript" src="{% static 'common/tinymce/tinymce.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/tinymce/util.js' %}"></script>
 
 
     <!-- INLINE JS -->
     <script type="text/javascript">
 
-        function init_editor()
-        {
-            tinymce.PluginManager.add('customh1', function(editor, url) {
-                // Add a button that opens a window
-                editor.addButton('customh1', {
-                    text: "H",
-                    title: "Header",
-                    icon: false,
-                    onclick:  function() { editor.execCommand( 'mceToggleFormat', false, "h1" ); }
-                });
-            });
 
-
-            tinymce.init({
-                selector: "textarea#{{ form.body.id_for_label }}",
-                plugins: [
-                    "autolink lists link image charmap anchor hr customh1",
-                ],
-                menubar: false,
-                statusbar: false,
-                toolbar: [ "customh1 bold italic underline strikethrough blockquote | justifyleft justifycenter justifyright justifyfull | bullist numlist | hr link image" ],
-                body_class: "wm-html-content wm-post",
-                content_css: "{% static 'common/wm-editor/css/wm-editor.css' %}",
-            });
-        }
 
         $( document ).ready( function() {
             $("#{{ form.related_topics.id_for_label }}").autotopics( {
@@ -113,7 +90,7 @@
                 wrapper_class : "tag",
             } );
 
-            init_editor();
+            init_editor( "textarea#{{ form.body.id_for_label }}", "wm-html-content wm-post", "{% static 'common/wm-editor/css/wm-editor.css' %}" );
 
         });
     </script>
