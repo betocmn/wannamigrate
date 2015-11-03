@@ -614,6 +614,31 @@ def premium( request ):
 
 
 
+def pricing( request ):
+    """
+    New sales page for the subscription service
+
+    :param: request
+    :return String - HTML from The dashboard page.
+    """
+
+    # If user is already subscribe, redirects him to dashboard
+    if 'subscription' in request.session and request.session['subscription']:
+        return HttpResponseRedirect( reverse( "director:dashboard" ) )
+
+    # Initializes template data dictionary
+    template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Pricing - Wanna Migrate' )
+    template_data['meta_description'] = _( 'Immigration Plans.' )
+
+    # Activates Page Conversion tags for Google Ad Words
+    template_data['track_conversion_view_subscription_plan'] = True
+
+    # Print Template
+    return render( request, 'site/premium/pricing.html', template_data )
+
 
 
 #######################

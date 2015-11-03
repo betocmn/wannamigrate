@@ -47,6 +47,7 @@ urlpatterns = patterns('',
 
     # Premium
     url( r'^premium/$', views.premium, name = 'premium' ),
+    url( r'^pricing/$', views.pricing, name = 'pricing' ),
     url( r'^tools/$', views.tools, name = 'tools' ),
 
     # My Account
