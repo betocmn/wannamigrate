@@ -966,7 +966,7 @@ select {
 }
 .dashboard header .interaction {
   float: right;
-  width: 723px;
+  width: 735px;
   height: 80px;
   padding: 20px 50px 0 0;
   -moz-box-sizing: border-box;
@@ -11139,6 +11139,7 @@ ul.notifications-view li.notification-item a.notification-link span.date
     margin-top: 60px;
     margin-bottom: 60px;
 }
+
 .dashboard.home .flex-caption {
   left: 0;
   bottom: 0;

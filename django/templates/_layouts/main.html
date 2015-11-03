@@ -84,9 +84,9 @@
                         </form>
                         <nav class="nav nav-dashboard">
                             <ul>
-                                <li class="nav-item"><a class="nav-link" data-link="professionals" href="{% url 'site:how_it_works' %}">{% trans "How It Works" %}</a></li>
+                                <li class="nav-item"><a class="nav-link" data-link="dashboard" href="{% url 'site:dashboard' %}">{% trans "Dashboard" %}</a></li>
+                                <li class="nav-item"><a class="nav-link" data-link="pricing" href="{% url 'site:pricing' %}">{% trans "Pricing" %}</a></li>
                                 <li class="nav-item"><a class="nav-link" data-link="question" href="{% url 'qa:list_questions' %}">{% trans "Q&A" %}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{% url 'site:premium' %}">{% trans "Premium" %}</a></li>
                             </ul>
                         </nav>
 
@@ -170,8 +170,8 @@
                         <li class="contact"><a class="nav-footer-link" href="{% url 'site:contact' %}">{% trans "Contact Us" %}</a></li>
                     </ul>
                     <ul class="explore">
-                        <li class="conditions"><a class="nav-footer-link" href="{% url 'site:premium' %}">{% trans "Sign-up for Premium" %}</a></li>
-                        <li class="privacy"><a class="nav-footer-link" href="{% url 'qa:list_questions' %}">{% trans "Ask a Question" %}</a></li>
+                        <li class="conditions"><a class="nav-footer-link" href="{% url 'site:pricing' %}">{% trans "Pricing" %}</a></li>
+                        <li class="privacy"><a class="nav-footer-link" href="{% url 'qa:list_questions' %}">{% trans "Q&A" %}</a></li>
                         <li class="contact"><a class="nav-footer-link" href="{% url 'points:dashboard' %}">{% trans "Immigration Points Calculator" %}</a></li>
                         <li class="contact"><a class="nav-footer-link" href="{% url 'site:service_providers' %}">{% trans "Become a Service Provider" %}</a></li>
                     </ul>

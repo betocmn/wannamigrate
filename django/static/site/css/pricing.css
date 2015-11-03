@@ -25,7 +25,7 @@ section.pricing div.wrapper-full div.plans div.plan
 
     position: relative;
     display: inline-block;
-    width: 207px;
+    width: 227px;
     background-color: #FAFAFA;
     color: #454545;
     margin-top: 100px;
@@ -58,7 +58,7 @@ section.pricing div.wrapper-full div.plans div.plan:before
     background-color: #68347E;
     border-right: 1px solid #68347E;
     border-left: 1px solid #68347E;
-    width: 207px;
+    width: 227px;
     padding: 0 14px 0 14px;
 }
 
@@ -116,6 +116,11 @@ section.pricing div.wrapper-full div.plans div.plan ul li
     font-size: 14px;
     text-align: left;
     margin: 0 20px 20px 20px;
+}
+
+section.pricing div.wrapper-full div.plans div.plan ul li strong
+{
+    font-family: 'open_sansbold';
 }
 
 section.pricing div.wrapper-full div.plans div.plan.popular ul li {

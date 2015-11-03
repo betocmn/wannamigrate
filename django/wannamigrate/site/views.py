@@ -541,7 +541,7 @@ def guide( request, country_name ):
 
 
 #######################
-# PREMIUM SUBSCRIPTION - VIEWS
+# PRICING - VIEWS
 #######################
 def premium( request ):
     """
@@ -550,10 +550,16 @@ def premium( request ):
     :param: request
     :return String - HTML from The dashboard page.
     """
+    return redirect( reverse( 'site:pricing' ), permanent = True )
 
-    # If user is already subscribe, redirects him to premium features page
-    if 'subscription' in request.session and request.session['subscription']:
-        return HttpResponseRedirect( reverse( "director:dashboard" ) )
+
+def pricing( request ):
+    """
+    Pricing page for the subscription service
+
+    :param: request
+    :return String - HTML
+    """
 
     # Initializes template data dictionary
     template_data = {}
@@ -565,7 +571,7 @@ def premium( request ):
         # Identifies database records
         product = get_object_or_false( Product, pk = request.POST['product_id'], is_active = True )
         if not product:
-            return HttpResponseRedirect( reverse( "site:dashboard" ) )
+            return HttpResponseRedirect( reverse( "site:pricing" ) )
 
         # saves details to session
         payment_info = {
@@ -583,7 +589,7 @@ def premium( request ):
             )
             if subscription:
                 error = True
-                messages.error( request, _( "There's already an active subscription for this country and product." ) )
+                messages.error( request, _( "There's already an active subscription for this product." ) )
             else:
                 subscription = Subscription()
                 subscription.product_id = product.id
@@ -603,41 +609,14 @@ def premium( request ):
         del request.session['payment']
 
     # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Premium Subscription - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Powerful immigration tool to help you to immigrate to your dream country.' )
-
-    # Activates Page Conversion tags for Google Ad Words
-    template_data['track_conversion_view_subscription_plan'] = True
-
-    # Print Template
-    return render( request, 'site/premium/premium.html', template_data )
-
-
-
-def pricing( request ):
-    """
-    New sales page for the subscription service
-
-    :param: request
-    :return String - HTML from The dashboard page.
-    """
-
-    # If user is already subscribe, redirects him to dashboard
-    if 'subscription' in request.session and request.session['subscription']:
-        return HttpResponseRedirect( reverse( "director:dashboard" ) )
-
-    # Initializes template data dictionary
-    template_data = {}
-
-    # Overwrites meta title and description (for SEO)
     template_data['meta_title'] = _( 'Pricing - Wanna Migrate' )
-    template_data['meta_description'] = _( 'Immigration Plans.' )
+    template_data['meta_description'] = _( 'Subscription plans for an immigration tool to help you to immigrate to your dream country.' )
 
     # Activates Page Conversion tags for Google Ad Words
     template_data['track_conversion_view_subscription_plan'] = True
 
     # Print Template
-    return render( request, 'site/premium/pricing.html', template_data )
+    return render( request, 'site/pricing/pricing.html', template_data )
 
 
 
@@ -651,7 +630,7 @@ def tools( request ):
     :param: request
     :return String - HTML
     """
-    return redirect( reverse( 'site:premium' ), permanent = True )
+    return redirect( reverse( 'site:pricing' ), permanent = True )
 
 
 
