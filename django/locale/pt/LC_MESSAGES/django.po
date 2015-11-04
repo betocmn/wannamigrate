@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 23:26-0300\n"
+"POT-Creation-Date: 2015-11-03 20:39-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,19 +68,22 @@ msgstr "notificações"
 msgid "Search"
 msgstr "Busca"
 
-#: templates/_layouts/main.html:87 templates/_layouts/main.html.py:167
-#: templates/site/home/home.html:33
-msgid "How It Works"
-msgstr "Como Funciona"
+#: templates/_layouts/main.html:87 templates/director/view.html:27
+msgid "Dashboard"
+msgstr "Dashboard"
 
-#: templates/_layouts/main.html:88
+#: templates/_layouts/main.html:88 templates/_layouts/main.html.py:173
+#: templates/site/home/home.html:33
+msgid "Pricing"
+msgstr "Planos e Preços"
+
+#: templates/_layouts/main.html:89 templates/_layouts/main.html.py:174
+#: templates/site/pricing/pricing.html:46
+#: templates/site/pricing/pricing.html:64
+#: templates/site/pricing/pricing.html:83
+#: templates/site/pricing/pricing.html:103
 msgid "Q&A"
 msgstr "Tira-Dúvidas"
-
-#: templates/_layouts/main.html:89 templates/_layouts/main.html.py:122
-#: templates/site/premium/premium.html:28
-msgid "Premium"
-msgstr ""
 
 #: templates/_layouts/main.html:107
 msgid "And other"
@@ -93,6 +96,10 @@ msgstr "usuário(s)"
 #: templates/_layouts/main.html:113
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
+
+#: templates/_layouts/main.html:122
+msgid "Premium"
+msgstr ""
 
 #: templates/_layouts/main.html:125
 msgid ""
@@ -108,23 +115,27 @@ msgstr ""
 
 #: templates/_layouts/main.html:137 templates/director/dashboard.html:17
 #: templates/director/view.html:16 templates/site/home/home.html:47
-#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1294
+#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1298
 msgid "I'm from"
 msgstr "Sou do(a)"
 
 #: templates/_layouts/main.html:141 templates/director/dashboard.html:18
 #: templates/director/view.html:17 templates/site/home/home.html:51
-#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1297
+#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1301
 msgid "I wanna"
 msgstr "Quero"
 
-#: templates/_layouts/main.html:145 wannamigrate/site/views.py:1299
+#: templates/_layouts/main.html:145 wannamigrate/site/views.py:1303
 msgid "in"
 msgstr "no(a)"
 
 #: templates/_layouts/main.html:149
 msgid "Change"
 msgstr "Mudar"
+
+#: templates/_layouts/main.html:167
+msgid "How It Works"
+msgstr "Como Funciona"
 
 #: templates/_layouts/main.html:168
 msgid "Terms &amp; Conditions"
@@ -137,14 +148,6 @@ msgstr "Políticas de Privacidade"
 #: templates/_layouts/main.html:170 templates/site/contact/contact.html:21
 msgid "Contact Us"
 msgstr "Contato"
-
-#: templates/_layouts/main.html:173
-msgid "Sign-up for Premium"
-msgstr "Assine o Premium"
-
-#: templates/_layouts/main.html:174
-msgid "Ask a Question"
-msgstr "Faça uma Pergunta"
 
 #: templates/_layouts/main.html:175
 #: templates/marketplace/immi_box/immi_box.html:23
@@ -2648,7 +2651,7 @@ msgstr "Não enviada"
 #: templates/db_translations/director_formcontentchoice.html:24
 #: templates/db_translations/director_formcontentchoice.html:41
 #: templates/db_translations/director_formcontentchoice.html:48
-#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:833
+#: templates/site/conversation/box_menu.html:4 wannamigrate/site/views.py:837
 msgid "Sent"
 msgstr "Enviada"
 
@@ -3064,55 +3067,28 @@ msgid "Language and Skills Certificates"
 msgstr "Certificados de Idioma e Validação Profissional"
 
 #: templates/db_translations/marketplace_product.html:2
-msgid "Guide - How to Move to Canada"
-msgstr "Guia - Como Mudar para o Canadá"
+msgid "Subscription 3 Months"
+msgstr "Assinatura 3 Meses"
 
 #: templates/db_translations/marketplace_product.html:2
-msgid "A complete step-by-step guide about immigrating to Canada."
-msgstr "Guia completo com passo-a-passo sobre imigração para o Canadá."
+msgid "3 months subscription"
+msgstr "assinatura de 3 meses"
 
 #: templates/db_translations/marketplace_product.html:3
-msgid "Subscription 1 Year - Australia"
-msgstr "Assinatura de 1 Ano - Austrália"
+msgid "Subscription 6 Months"
+msgstr "Assinatura 6 Meses"
 
 #: templates/db_translations/marketplace_product.html:3
-msgid ""
-"1 year of full-access to the Immi Box - Immigration tools - for Australia"
-msgstr ""
-"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Austrália"
+msgid "6 months subscription + unlimited email support"
+msgstr "6 meses de assinatura + suporte ilimitado por email"
 
 #: templates/db_translations/marketplace_product.html:4
-msgid "Subscription 1 Year - Canada"
-msgstr "Assinatura de 1 Ano - Canadá"
+msgid "Subscription 1 Year"
+msgstr "Assinatura 12 Meses"
 
 #: templates/db_translations/marketplace_product.html:4
-msgid "1 year of full-access to the Immi Box - Immigration tools - for Canada"
-msgstr ""
-"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Canadá"
-
-#: templates/db_translations/marketplace_product.html:5
-msgid "Subscription 1 Year - Australia (With Support)"
-msgstr "Assinatura de 1 Ano - Austrália (Com Suporte)"
-
-#: templates/db_translations/marketplace_product.html:5
-msgid ""
-"1 year of full-access to the Immi Box - Immigration tools - for Australia, "
-"including email support"
-msgstr ""
-"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - "
-"Austrália, incluindo suporte por email"
-
-#: templates/db_translations/marketplace_product.html:6
-msgid "Subscription 1 Year - Canada (With Support)"
-msgstr "Assinatura de 1 Ano - Canadá (Com Suporte)"
-
-#: templates/db_translations/marketplace_product.html:6
-msgid ""
-"1 year of full-access to the Immi Box - Immigration tools - for Canada, "
-"including email support"
-msgstr ""
-"1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Canadá, "
-"incluindo suporte por email"
+msgid "1 year subscription + unlimited email support + skype interview"
+msgstr "1 ano de assinatura + suporte ilimitado por email + avaliação por Skype"
 
 #: templates/db_translations/marketplace_servicetype.html:2
 msgid "Initial Consultation Skype 30-min"
@@ -6597,19 +6573,19 @@ msgstr "concluído"
 msgid "slots per year"
 msgstr "vagas por ano"
 
-#: templates/director/dashboard.html:87
+#: templates/director/dashboard.html:91
 msgid "Optional"
 msgstr "Opcional"
 
-#: templates/director/dashboard.html:104
+#: templates/director/dashboard.html:108
 msgid "Locked"
 msgstr "Restrito"
 
-#: templates/director/dashboard.html:106
+#: templates/director/dashboard.html:110
 msgid "Dear"
 msgstr "Caro(a)"
 
-#: templates/director/dashboard.html:107
+#: templates/director/dashboard.html:111
 msgid ""
 "this content is only available for subscribers, click on the link bellow to "
 "learn more about our plans"
@@ -6617,17 +6593,13 @@ msgstr ""
 "este conteúdo só está disponível para assinantes. Clique no botão abaixo "
 "para conhecer os nossos planos premium"
 
-#: templates/director/dashboard.html:109
+#: templates/director/dashboard.html:113
 msgid "Learn more"
 msgstr "Saiba mais"
 
 #: templates/director/view.html:21
 msgid "Follow our step-by-step guide to move to"
 msgstr "Siga nosso passo-a-passo para"
-
-#: templates/director/view.html:27
-msgid "Dashboard"
-msgstr "Dashboard"
 
 #: templates/emails/notification.html:28
 msgid "You have a notification"
@@ -6810,14 +6782,12 @@ msgstr "Avaliação de Imigração"
 
 #: templates/marketplace/consulting/consulting.html:31
 #: templates/marketplace/ebook/ebook.html:31
-#: templates/site/premium/premium.html:31
 msgid "Get ready for your dream country"
 msgstr "Prepare-se para o país dos seus sonhos"
 
 #: templates/marketplace/consulting/consulting.html:37
 #: templates/marketplace/ebook/ebook.html:37
 #: templates/marketplace/ielts/ielts.html:37
-#: templates/site/premium/premium.html:37
 msgid "arrow-bottom"
 msgstr "descer"
 
@@ -6920,8 +6890,6 @@ msgstr "Você poderá agendar a data e horário antes do pagamento."
 #: templates/marketplace/ebook/ebook.html:181
 #: templates/marketplace/ielts/ielts.html:160
 #: templates/site/home/home.html:115 templates/site/home/home.html.py:134
-#: templates/site/premium/premium.html:199
-#: templates/site/premium/premium.html:218
 msgid "What our users say"
 msgstr "O que nossos usuários falam"
 
@@ -6932,15 +6900,12 @@ msgstr "O que nossos usuários falam"
 #: templates/marketplace/ielts/ielts.html:163
 #: templates/marketplace/ielts/ielts.html:182
 #: templates/site/home/home.html:118 templates/site/home/home.html.py:137
-#: templates/site/premium/premium.html:202
-#: templates/site/premium/premium.html:221
 msgid "quotes"
 msgstr "depoimentos"
 
 #: templates/marketplace/consulting/consulting.html:144
 #: templates/marketplace/ebook/ebook.html:187
 #: templates/marketplace/ielts/ielts.html:166
-#: templates/site/premium/premium.html:205
 msgid ""
 "You guys built a very rich content, with excellent hints. This guide could "
 "easily save months of research of information."
@@ -6951,21 +6916,20 @@ msgstr ""
 #: templates/marketplace/consulting/consulting.html:148
 #: templates/marketplace/ebook/ebook.html:191
 #: templates/marketplace/ielts/ielts.html:170
-#: templates/site/home/home.html:125 templates/site/premium/premium.html:209
+#: templates/site/home/home.html:125
 msgid "testmonial-tania-antonieli"
 msgstr "depoimento-tania-antonieli"
 
 #: templates/marketplace/consulting/consulting.html:150
 #: templates/marketplace/ebook/ebook.html:193
 #: templates/marketplace/ielts/ielts.html:172
-#: templates/site/home/home.html:127 templates/site/premium/premium.html:211
+#: templates/site/home/home.html:127
 msgid "Project Manager"
 msgstr "Gerente de Projetos"
 
 #: templates/marketplace/consulting/consulting.html:163
 #: templates/marketplace/ebook/ebook.html:206
 #: templates/marketplace/ielts/ielts.html:185
-#: templates/site/premium/premium.html:224
 msgid ""
 "I had no idea I had most of the requirements to get a visa to live in Canada "
 "until I read the e-book."
@@ -6976,14 +6940,14 @@ msgstr ""
 #: templates/marketplace/consulting/consulting.html:167
 #: templates/marketplace/ebook/ebook.html:210
 #: templates/marketplace/ielts/ielts.html:189
-#: templates/site/home/home.html:144 templates/site/premium/premium.html:228
+#: templates/site/home/home.html:144
 msgid "testmonial-igor-freitas"
 msgstr "depoimento-igor-freitas"
 
 #: templates/marketplace/consulting/consulting.html:169
 #: templates/marketplace/ebook/ebook.html:212
 #: templates/marketplace/ielts/ielts.html:191
-#: templates/site/home/home.html:146 templates/site/premium/premium.html:230
+#: templates/site/home/home.html:146
 msgid "Personal Trainer and Musician"
 msgstr "Personal Trainer e Músico"
 
@@ -7100,7 +7064,6 @@ msgstr "Opinião de quem já leu"
 
 #: templates/marketplace/ebook/ebook.html:264
 #: templates/marketplace/ielts/ielts.html:251
-#: templates/site/premium/premium.html:289
 msgid "First pages"
 msgstr "Primeiras páginas"
 
@@ -7400,10 +7363,6 @@ msgstr ""
 "conclusão do serviço é de 4 dias úteis."
 
 #: templates/marketplace/international_cv/international_cv.html:64
-#: templates/site/premium/premium.html:78
-#: templates/site/premium/premium.html:111
-#: templates/site/premium/premium.html:146
-#: templates/site/premium/premium.html:181
 msgid "Buy Package"
 msgstr "Comprar"
 
@@ -7949,8 +7908,8 @@ msgid "Related Posts"
 msgstr "Posts Relacionados"
 
 #: templates/qa/blogpost/view.html:66 templates/qa/question/view.html:206
-msgid "Subscription to Immi Box"
-msgstr "Assinatura do Immi Box"
+msgid "Premium Subscription"
+msgstr "Assinatura Premium"
 
 #: templates/qa/buttons/toggle_downvote.html:7
 #: templates/qa/buttons/toggle_downvote.html:12
@@ -7964,8 +7923,8 @@ msgstr "Irrelevante (desfazer)"
 
 #: templates/qa/buttons/toggle_follow.html:7
 #: templates/qa/buttons/toggle_follow.html:12
-#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1352
-#: wannamigrate/site/views.py:1385
+#: templates/site/profile/view.html:221 wannamigrate/site/views.py:1356
+#: wannamigrate/site/views.py:1389
 msgid "Follow"
 msgstr "Seguir"
 
@@ -7974,7 +7933,7 @@ msgid "UnFollow"
 msgstr "Seguindo"
 
 #: templates/qa/buttons/toggle_follow.html:10
-#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1385
+#: templates/site/profile/view.html:219 wannamigrate/site/views.py:1389
 msgid "Unfollow"
 msgstr "Seguindo"
 
@@ -8032,13 +7991,13 @@ msgid "Social"
 msgstr "Social"
 
 #: templates/qa/common/side_menu.html:40 templates/site/profile/view.html:235
-#: wannamigrate/qa/views.py:598
+#: wannamigrate/qa/views.py:602
 msgid "Following"
 msgstr "Seguindo"
 
 #: templates/qa/common/side_menu.html:43 templates/qa/question/view.html:54
 #: templates/site/profile/view.html:234 templates/site/profile/view.html:278
-#: wannamigrate/qa/views.py:617
+#: wannamigrate/qa/views.py:621
 msgid "Followers"
 msgstr "Seguidores"
 
@@ -8152,7 +8111,7 @@ msgid "My orders"
 msgstr "Minhas Compras"
 
 #: templates/site/_common/my_account_menu.html:10
-#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:831
+#: templates/site/conversation/box_menu.html:3 wannamigrate/site/views.py:835
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -8264,7 +8223,7 @@ msgstr "Cuidamos <span>do pagamento</span>"
 
 #: templates/site/about/service_providers.html:65
 #: templates/site/about/service_providers.html:127
-#: templates/site/login/signup.html:26 templates/site/premium/premium.html:243
+#: templates/site/login/signup.html:26
 msgid "Sign up"
 msgstr "Cadastre-se"
 
@@ -8511,7 +8470,7 @@ msgstr "Arquivo"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:835
+#: templates/site/conversation/list.html:22 wannamigrate/site/views.py:839
 msgid "Archive"
 msgstr "Arquivar"
 
@@ -8934,6 +8893,7 @@ msgid "How it works?"
 msgstr "Como funciona?"
 
 #: templates/site/home/landing_old.html:31
+#: templates/site/pricing/pricing.html:30
 msgid "Subscription Plans"
 msgstr "Planos de Assinatura"
 
@@ -9076,135 +9036,76 @@ msgstr ""
 "\">Política de Privacidade</a> do Wanna Migrate\n"
 "    "
 
-#: templates/site/premium/premium.html:34
-msgid "All you need for your immigration process"
-msgstr "Tudo que você precisa para o processo de imigração"
-
-#: templates/site/premium/premium.html:60
-msgid "Subscription to Premium - Canada"
-msgstr "Assinatura do Premium - Canadá"
-
-#: templates/site/premium/premium.html:63
-msgid "1 year of access to all the tools you need to immigrate to Canada."
-msgstr ""
-"1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
-"Canadá."
-
-#: templates/site/premium/premium.html:65
-#: templates/site/premium/premium.html:98
-#: templates/site/premium/premium.html:133
-#: templates/site/premium/premium.html:168
-msgid "Identify the best type of visa for your profile"
-msgstr "Identifique o tipo de visto ideal para o seu perfil"
-
-#: templates/site/premium/premium.html:66
-#: templates/site/premium/premium.html:134
-msgid "Learn how to study, work and do business in Canada"
-msgstr "Entenda como estudar, trabalhar e fazer negócios no Canadá"
-
-#: templates/site/premium/premium.html:67
-#: templates/site/premium/premium.html:100
-#: templates/site/premium/premium.html:135
-#: templates/site/premium/premium.html:170
-msgid "Organize all the documents you need"
-msgstr "Organize toda documentação necessária"
-
-#: templates/site/premium/premium.html:68
-#: templates/site/premium/premium.html:101
-#: templates/site/premium/premium.html:136
-#: templates/site/premium/premium.html:171
-msgid "Start your visa application"
-msgstr "Inicie sua aplicação ao visto"
-
-#: templates/site/premium/premium.html:69
-#: templates/site/premium/premium.html:137
-msgid "Build your Canadian CV and contact employers"
-msgstr "Crie seu CV Canadense e entre em contato com empregadores"
-
-#: templates/site/premium/premium.html:71
-#: templates/site/premium/premium.html:104
-#: templates/site/premium/premium.html:139
-#: templates/site/premium/premium.html:174
-msgid "You will have full access to our premium area after the payment."
-msgstr "Você terá acesso completo a área premium após o pagamento."
-
-#: templates/site/premium/premium.html:83
-msgid "Premium - Canada"
-msgstr "Premium - Canadá"
-
-#: templates/site/premium/premium.html:93
-msgid "Subscription to Premium - Australia"
-msgstr "Assinatura do Premium - Austrália"
-
-#: templates/site/premium/premium.html:96
-msgid "1 year of access to all the tools you need to immigrate to Australia."
-msgstr ""
-"1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
-"Austrália"
-
-#: templates/site/premium/premium.html:99
-#: templates/site/premium/premium.html:169
-msgid "Learn how to study, work and do business in Australia"
-msgstr "Entenda como estudar, trabalhar e fazer negócios na Austrália"
-
-#: templates/site/premium/premium.html:102
-#: templates/site/premium/premium.html:172
-msgid "Build your Australian CV and contact employers"
-msgstr "Crie seu CV Australiano e entre em contato com empregadores"
-
-#: templates/site/premium/premium.html:116
-msgid "Premium - Australia"
-msgstr "Premium - Austrália"
-
-#: templates/site/premium/premium.html:126
-msgid "Subscription to Premium + Support - Canada"
-msgstr "Assinatura do Premium + Suporte - Canadá"
-
-#: templates/site/premium/premium.html:129
+#: templates/site/pricing/pricing.html:32
 msgid ""
-"1 year of access to all the tools you need to immigrate to Canada, plus "
-"unlimited support."
+"All paid plans include unlimited access to our step-by-step tool to "
+"Australia and Canada."
 msgstr ""
-"1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
-"Canadá e suporte ilimitado."
+"Todos os planos pagos incluem acesso a ferramenta passo-a-passo para Austrália e Canadá."
 
-#: templates/site/premium/premium.html:131
-#: templates/site/premium/premium.html:166
-msgid "Initial Immigration Training via Skype"
-msgstr "Treinamento inicial de imigração via Skype"
+#: templates/site/pricing/pricing.html:44
+msgid "Forever Free"
+msgstr "Tempo ilimitado"
 
-#: templates/site/premium/premium.html:132
-#: templates/site/premium/premium.html:167
-msgid "Unlimited email support to answer all your questions"
-msgstr "Suporte ilimitado por email para tirar todas as suas dúvidas"
+#: templates/site/pricing/pricing.html:45
+#: templates/site/pricing/pricing.html:63
+#: templates/site/pricing/pricing.html:82
+#: templates/site/pricing/pricing.html:102
+msgid "Immigration calculator"
+msgstr "Calculadora de imigração"
 
-#: templates/site/premium/premium.html:151
-msgid "Premium and Support - Canada"
-msgstr "Premium e Suporte - Canadá"
+#: templates/site/pricing/pricing.html:52
+#: templates/site/pricing/pricing.html:71
+#: templates/site/pricing/pricing.html:91
+#: templates/site/pricing/pricing.html:109
+msgctxt "Pricing"
+msgid "Sign Up"
+msgstr "Assine"
 
-#: templates/site/premium/premium.html:161
-msgid "Subscription to Premium + Support - Australia"
-msgstr "Assinatura do Premium + Suporte - Austrália"
+#: templates/site/pricing/pricing.html:62
+msgid "<strong>3 months</strong> access"
+msgstr "<strong>3 meses</strong> de acesso"
 
-#: templates/site/premium/premium.html:164
-msgid ""
-"1 year of access to all the tools you need to immigrate to Australia, plus "
-"unlimited support."
-msgstr ""
-"1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
-"Austrália e suporte ilimitado."
+#: templates/site/pricing/pricing.html:65
+#: templates/site/pricing/pricing.html:84
+#: templates/site/pricing/pricing.html:104
+msgid "Private webinars"
+msgstr "Webinars privados"
 
-#: templates/site/premium/premium.html:186
-msgid "Premium and Support - Australia"
-msgstr "Premium e Suporte - Austrália"
+#: templates/site/pricing/pricing.html:66
+#: templates/site/pricing/pricing.html:85
+#: templates/site/pricing/pricing.html:105
+msgid "Step-by-step tool"
+msgstr "Ferramenta passo-a-passo"
 
-#: templates/site/premium/premium.html:240
-msgid "Start now. It's free!"
-msgstr "Inicie gratuitamente!"
+#: templates/site/pricing/pricing.html:81
+msgid "<strong>6 months</strong> access"
+msgstr "<strong>6 meses</strong> de acesso"
+
+#: templates/site/pricing/pricing.html:86
+#: templates/site/pricing/pricing.html:106
+msgid "Unlimited <strong>email support</strong>"
+msgstr "<strong>Suporte por email</strong> ilimitado"
+
+#: templates/site/pricing/pricing.html:101
+msgid "<strong>12 months</strong> access"
+msgstr "<strong>12 meses</strong> de acesso"
+
+#: templates/site/pricing/pricing.html:107
+msgid "20 min <strong>Skype interview</strong>"
+msgstr "<strong>Avaliação no Skype</strong> 20min"
+
+#: templates/site/pricing/pricing.html:119
+msgid "Not convinced yet?"
+msgstr "Ainda não está convencido?"
+
+#: templates/site/pricing/pricing.html:121
+msgid "Take a look at our demo below:"
+msgstr "Veja uma demonstração abaixo:"
 
 #: templates/site/profile/view.html:254 templates/site/profile/view.html:266
 msgid "Loading"
-msgstr ""
+msgstr "Carregando"
 
 #: templates/site/tools/tools.html:14
 msgid "Sign-up"
@@ -9278,10 +9179,6 @@ msgstr ""
 #: wannamigrate/admin/forms.py:360 wannamigrate/qa/forms.py:82
 msgid "You need to select at least one of these countries: Australia, Canada."
 msgstr ""
-
-#: wannamigrate/admin/forms.py:392
-msgid "BlogPost title..."
-msgstr "Título do Post..."
 
 #: wannamigrate/core/mailer.py:103
 msgid "Welcome to Wanna Migrate"
@@ -9902,7 +9799,7 @@ msgstr ""
 "pode ser contratado pelo Wanna Migrate. Cadastre-se para entrar em contato "
 "com milhares de experts em imigração e assuntos relacionados."
 
-#: wannamigrate/marketplace/views.py:301 wannamigrate/site/views.py:586
+#: wannamigrate/marketplace/views.py:301
 msgid "There's already an active subscription for this country and product."
 msgstr "Já existe uma assinatura ativa para este país e produto."
 
@@ -10373,31 +10270,31 @@ msgstr "escreveu um novo post"
 msgid "Add Blog Post - Wanna Migrate"
 msgstr "Criar Blog Post - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:503
+#: wannamigrate/qa/views.py:507
 msgid "Topics - Wanna Migrate"
 msgstr "Tópicos - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:565
+#: wannamigrate/qa/views.py:569
 msgid "My answers - Wanna Migrate"
 msgstr "Minhas respostas - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:568
+#: wannamigrate/qa/views.py:572
 msgid "My answers"
 msgstr "Minhas respostas"
 
-#: wannamigrate/qa/views.py:595 wannamigrate/qa/views.py:614
+#: wannamigrate/qa/views.py:599 wannamigrate/qa/views.py:618
 msgid "Following - Wanna Migrate"
 msgstr "Seguindo - Wanna Migrate"
 
-#: wannamigrate/qa/views.py:898
+#: wannamigrate/qa/views.py:902
 msgid "liked your question"
 msgstr "curtiu da sua pergunta"
 
-#: wannamigrate/qa/views.py:906
+#: wannamigrate/qa/views.py:910
 msgid "liked your answer"
 msgstr "curtiu sua resposta"
 
-#: wannamigrate/qa/views.py:915
+#: wannamigrate/qa/views.py:919
 msgid "liked your post"
 msgstr "curtiu o seu post"
 
@@ -10559,78 +10456,226 @@ msgstr ""
 "pessoas planejando migrar para um novo país, de forma temporária ou "
 "permanente."
 
-#: wannamigrate/site/views.py:606
-msgid "Premium Subscription - Wanna Migrate"
-msgstr "Assinatura Premium - Wanna Migrate"
+#: wannamigrate/site/views.py:592
+msgid "There's already an active subscription for this product."
+msgstr "Já existe uma assinatura ativa para este produto."
 
-#: wannamigrate/site/views.py:607
+#: wannamigrate/site/views.py:612
+msgid "Pricing - Wanna Migrate"
+msgstr "Planos e Preços - Wanna Migrate"
+
+#: wannamigrate/site/views.py:613
 msgid ""
-"Powerful immigration tool to help you to immigrate to your dream country."
+"Subscription plans for an immigration tool to help you to immigrate to your "
+"dream country."
 msgstr ""
-"Ferramenta poderosa de imigração para ajudá-lo a se mudar para o país dos "
-"seus sonhos."
+"Planos de assinatura para ferramenta de imigração para ajudá-lo a mudar de país."
 
-#: wannamigrate/site/views.py:650
+#: wannamigrate/site/views.py:654
 msgid "Terms & Conditions - Wanna Migrate"
 msgstr "Termos de Uso - Wanna Migrate"
 
-#: wannamigrate/site/views.py:668
+#: wannamigrate/site/views.py:672
 msgid "Privacy Policy - Wanna Migrate"
 msgstr "Políticas de Privacidade - Wanna Migrate"
 
-#: wannamigrate/site/views.py:714
+#: wannamigrate/site/views.py:718
 msgid "My Account - Wanna Migrate"
 msgstr "Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:745
+#: wannamigrate/site/views.py:749
 msgid "My Contracts - Wanna Migrate"
 msgstr "Meus Contratos - Wanna Migrate"
 
-#: wannamigrate/site/views.py:773
+#: wannamigrate/site/views.py:777
 msgid "My Notifications - Wanna Migrate"
 msgstr "Minhas Notificações - Wanna Migrate"
 
-#: wannamigrate/site/views.py:889
+#: wannamigrate/site/views.py:893
 msgid "New message from"
 msgstr "Nova mensagem de"
 
-#: wannamigrate/site/views.py:990
+#: wannamigrate/site/views.py:994
 msgid "Edit My Account - Wanna Migrate"
 msgstr "Editar Minha Conta - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1082
+#: wannamigrate/site/views.py:1086
 msgid "Data successfully updated."
 msgstr "Dados atualizados com sucesso."
 
-#: wannamigrate/site/views.py:1136
+#: wannamigrate/site/views.py:1140
 msgid "Change Password - Wanna Migrate"
 msgstr "Redefinir Senha - Wanna Migrate"
 
-#: wannamigrate/site/views.py:1154
+#: wannamigrate/site/views.py:1158
 msgid "Your password was successfully updated."
 msgstr "Senha atualizada com sucesso."
 
-#: wannamigrate/site/views.py:1296
+#: wannamigrate/site/views.py:1300
 msgid "and"
 msgstr "e"
 
-#: wannamigrate/site/views.py:1306
+#: wannamigrate/site/views.py:1310
 msgid "Profile - Wanna Migrate"
 msgstr "Perfil - Wanna Migrate"
 
 # Q&A Dynamic translations.
-#: wannamigrate/site/views.py:1391
+#: wannamigrate/site/views.py:1395
 msgid "now is following you"
 msgstr "começou a te seguir"
 
-#~ msgid "Premium Subscription"
-#~ msgstr "Assinatura Premium"
+#~ msgid "Sign-up for Premium"
+#~ msgstr "Assine o Premium"
+
+#~ msgid "Ask a Question"
+#~ msgstr "Faça uma Pergunta"
+
+#~ msgid "All you need for your immigration process"
+#~ msgstr "Tudo que você precisa para o processo de imigração"
+
+#~ msgid "Subscription to Premium - Canada"
+#~ msgstr "Assinatura do Premium - Canadá"
+
+#~ msgid "1 year of access to all the tools you need to immigrate to Canada."
+#~ msgstr ""
+#~ "1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
+#~ "Canadá."
+
+#~ msgid "Identify the best type of visa for your profile"
+#~ msgstr "Identifique o tipo de visto ideal para o seu perfil"
+
+#~ msgid "Learn how to study, work and do business in Canada"
+#~ msgstr "Entenda como estudar, trabalhar e fazer negócios no Canadá"
+
+#~ msgid "Organize all the documents you need"
+#~ msgstr "Organize toda documentação necessária"
+
+#~ msgid "Start your visa application"
+#~ msgstr "Inicie sua aplicação ao visto"
+
+#~ msgid "Build your Canadian CV and contact employers"
+#~ msgstr "Crie seu CV Canadense e entre em contato com empregadores"
+
+#~ msgid "You will have full access to our premium area after the payment."
+#~ msgstr "Você terá acesso completo a área premium após o pagamento."
+
+#~ msgid "Premium - Canada"
+#~ msgstr "Premium - Canadá"
+
+#~ msgid "Subscription to Premium - Australia"
+#~ msgstr "Assinatura do Premium - Austrália"
+
+#~ msgid ""
+#~ "1 year of access to all the tools you need to immigrate to Australia."
+#~ msgstr ""
+#~ "1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
+#~ "Austrália"
+
+#~ msgid "Learn how to study, work and do business in Australia"
+#~ msgstr "Entenda como estudar, trabalhar e fazer negócios na Austrália"
+
+#~ msgid "Build your Australian CV and contact employers"
+#~ msgstr "Crie seu CV Australiano e entre em contato com empregadores"
+
+#~ msgid "Premium - Australia"
+#~ msgstr "Premium - Austrália"
+
+#~ msgid "Subscription to Premium + Support - Canada"
+#~ msgstr "Assinatura do Premium + Suporte - Canadá"
+
+#~ msgid ""
+#~ "1 year of access to all the tools you need to immigrate to Canada, plus "
+#~ "unlimited support."
+#~ msgstr ""
+#~ "1 ano de acesso a todas as ferramentas que você precisa para imigrar ao "
+#~ "Canadá e suporte ilimitado."
+
+#~ msgid "Initial Immigration Training via Skype"
+#~ msgstr "Treinamento inicial de imigração via Skype"
+
+#~ msgid "Unlimited email support to answer all your questions"
+#~ msgstr "Suporte ilimitado por email para tirar todas as suas dúvidas"
+
+#~ msgid "Premium and Support - Canada"
+#~ msgstr "Premium e Suporte - Canadá"
+
+#~ msgid "Subscription to Premium + Support - Australia"
+#~ msgstr "Assinatura do Premium + Suporte - Austrália"
+
+#~ msgid ""
+#~ "1 year of access to all the tools you need to immigrate to Australia, "
+#~ "plus unlimited support."
+#~ msgstr ""
+#~ "1 ano de acesso a todas as ferramentas que você precisa para imigrar a "
+#~ "Austrália e suporte ilimitado."
+
+#~ msgid "Premium and Support - Australia"
+#~ msgstr "Premium e Suporte - Austrália"
+
+#~ msgid "Start now. It's free!"
+#~ msgstr "Inicie gratuitamente!"
+
+#, fuzzy
+#~| msgid "Immigration Tools"
+#~ msgid "Immigration Plans"
+#~ msgstr "Ferramentas para Imigração"
+
+#~ msgid "Premium Subscription - Wanna Migrate"
+#~ msgstr "Assinatura Premium - Wanna Migrate"
+
+#, fuzzy
+#~| msgid "Immigration Tools"
+#~ msgid "Immigration Plans."
+#~ msgstr "Ferramentas para Imigração"
+
+#~ msgid "Guide - How to Move to Canada"
+#~ msgstr "Guia - Como Mudar para o Canadá"
+
+#~ msgid "A complete step-by-step guide about immigrating to Canada."
+#~ msgstr "Guia completo com passo-a-passo sobre imigração para o Canadá."
+
+#~ msgid "Subscription 1 Year - Australia"
+#~ msgstr "Assinatura de 1 Ano - Austrália"
+
+#~ msgid ""
+#~ "1 year of full-access to the Immi Box - Immigration tools - for Australia"
+#~ msgstr ""
+#~ "1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - "
+#~ "Austrália"
+
+#~ msgid ""
+#~ "1 year of full-access to the Immi Box - Immigration tools - for Canada"
+#~ msgstr ""
+#~ "1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - Canadá"
+
+#~ msgid "Subscription 1 Year - Australia (With Support)"
+#~ msgstr "Assinatura de 1 Ano - Austrália (Com Suporte)"
+
+#~ msgid ""
+#~ "1 year of full-access to the Immi Box - Immigration tools - for "
+#~ "Australia, including email support"
+#~ msgstr ""
+#~ "1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - "
+#~ "Austrália, incluindo suporte por email"
+
+#~ msgid "Subscription 1 Year - Canada (With Support)"
+#~ msgstr "Assinatura de 1 Ano - Canadá (Com Suporte)"
+
+#~ msgid ""
+#~ "1 year of full-access to the Immi Box - Immigration tools - for Canada, "
+#~ "including email support"
+#~ msgstr ""
+#~ "1 ano de acesso completo ao Immi Box - Ferramentas para Imigração - "
+#~ "Canadá, incluindo suporte por email"
+
+#~ msgid "Subscription to Immi Box"
+#~ msgstr "Assinatura do Immi Box"
+
+#~ msgid "BlogPost title..."
+#~ msgstr "Título do Post..."
 
 #~ msgid "Immi Box - Immigration Tools - Wanna Migrate"
 #~ msgstr "Immi Box - Ferramentas para Imigração - Wanna Migrate"
-
-#~ msgid "Step-by-Step"
-#~ msgstr "Passo-a-Passo"
 
 #~ msgid ""
 #~ "\n"
@@ -11116,9 +11161,6 @@ msgstr "começou a te seguir"
 
 #~ msgid "Download Now"
 #~ msgstr "Fazer Download"
-
-#~ msgid "Immigration Tools"
-#~ msgstr "Ferramentas para Imigração"
 
 #~ msgid ""
 #~ "\n"
