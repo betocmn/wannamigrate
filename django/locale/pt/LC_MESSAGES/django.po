@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-03 20:39-0200\n"
+"POT-Creation-Date: 2015-11-07 21:14-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,6 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: templates/_layouts/main.html:88 templates/_layouts/main.html.py:173
-#: templates/site/home/home.html:33
 msgid "Pricing"
 msgstr "Planos e Preços"
 
@@ -113,15 +112,15 @@ msgstr ""
 "para guiá-lo <br />em cada etapa do processo de imigração.\n"
 "                                    "
 
-#: templates/_layouts/main.html:137 templates/director/dashboard.html:17
-#: templates/director/view.html:16 templates/site/home/home.html:47
-#: templates/site/home/landing_old.html:43 wannamigrate/site/views.py:1298
+#: templates/_layouts/main.html:137 templates/director/view.html:16
+#: templates/site/home/home.html:47 templates/site/home/landing_old.html:43
+#: wannamigrate/site/views.py:1298
 msgid "I'm from"
 msgstr "Sou do(a)"
 
-#: templates/_layouts/main.html:141 templates/director/dashboard.html:18
-#: templates/director/view.html:17 templates/site/home/home.html:51
-#: templates/site/home/landing_old.html:47 wannamigrate/site/views.py:1301
+#: templates/_layouts/main.html:141 templates/director/view.html:17
+#: templates/site/home/home.html:51 templates/site/home/landing_old.html:47
+#: wannamigrate/site/views.py:1301
 msgid "I wanna"
 msgstr "Quero"
 
@@ -133,7 +132,7 @@ msgstr "no(a)"
 msgid "Change"
 msgstr "Mudar"
 
-#: templates/_layouts/main.html:167
+#: templates/_layouts/main.html:167 templates/site/home/home.html:33
 msgid "How It Works"
 msgstr "Como Funciona"
 
@@ -3088,7 +3087,8 @@ msgstr "Assinatura 12 Meses"
 
 #: templates/db_translations/marketplace_product.html:4
 msgid "1 year subscription + unlimited email support + skype interview"
-msgstr "1 ano de assinatura + suporte ilimitado por email + avaliação por Skype"
+msgstr ""
+"1 ano de assinatura + suporte ilimitado por email + avaliação por Skype"
 
 #: templates/db_translations/marketplace_servicetype.html:2
 msgid "Initial Consultation Skype 30-min"
@@ -6548,44 +6548,24 @@ msgstr "Investidores"
 msgid "Buy Property"
 msgstr "Comprar Imóvel"
 
-#: templates/director/dashboard.html:19 templates/director/view.html:18
-#: templates/site/home/home.html:55 templates/site/home/landing_old.html:51
-msgid "In"
-msgstr "No(a)"
+#: templates/director/dashboard.html:19
+msgctxt "Progress Dashboard"
+msgid "Complete"
+msgstr "Concluído"
 
-#: templates/director/dashboard.html:23
-msgid "Follow our step-by-step guide to move to Australia"
-msgstr "Siga nosso passo-a-passo e mude para a Austrália"
-
-#: templates/director/dashboard.html:25
-msgid "Follow our step-by-step guide to move to Canada"
-msgstr "Siga nosso passo-a-passo e mude para o Canadá"
-
-#: templates/director/dashboard.html:34
-msgid "users with the same objective"
-msgstr "usuários com o mesmo objetivo"
-
-#: templates/director/dashboard.html:38
-msgid "completed"
-msgstr "concluído"
-
-#: templates/director/dashboard.html:42
-msgid "slots per year"
-msgstr "vagas por ano"
-
-#: templates/director/dashboard.html:91
+#: templates/director/dashboard.html:46
 msgid "Optional"
 msgstr "Opcional"
 
-#: templates/director/dashboard.html:108
+#: templates/director/dashboard.html:84
 msgid "Locked"
 msgstr "Restrito"
 
-#: templates/director/dashboard.html:110
+#: templates/director/dashboard.html:86
 msgid "Dear"
 msgstr "Caro(a)"
 
-#: templates/director/dashboard.html:111
+#: templates/director/dashboard.html:87
 msgid ""
 "this content is only available for subscribers, click on the link bellow to "
 "learn more about our plans"
@@ -6593,9 +6573,14 @@ msgstr ""
 "este conteúdo só está disponível para assinantes. Clique no botão abaixo "
 "para conhecer os nossos planos premium"
 
-#: templates/director/dashboard.html:113
+#: templates/director/dashboard.html:89
 msgid "Learn more"
 msgstr "Saiba mais"
+
+#: templates/director/view.html:18 templates/site/home/home.html:55
+#: templates/site/home/landing_old.html:51
+msgid "In"
+msgstr "No(a)"
 
 #: templates/director/view.html:21
 msgid "Follow our step-by-step guide to move to"
@@ -9041,7 +9026,8 @@ msgid ""
 "All paid plans include unlimited access to our step-by-step tool to "
 "Australia and Canada."
 msgstr ""
-"Todos os planos pagos incluem acesso a ferramenta passo-a-passo para Austrália e Canadá."
+"Todos os planos pagos incluem acesso a ferramenta passo-a-passo para "
+"Austrália e Canadá."
 
 #: templates/site/pricing/pricing.html:44
 msgid "Forever Free"
@@ -10469,7 +10455,8 @@ msgid ""
 "Subscription plans for an immigration tool to help you to immigrate to your "
 "dream country."
 msgstr ""
-"Planos de assinatura para ferramenta de imigração para ajudá-lo a mudar de país."
+"Planos de assinatura para ferramenta de imigração para ajudá-lo a mudar de "
+"país."
 
 #: wannamigrate/site/views.py:654
 msgid "Terms & Conditions - Wanna Migrate"
@@ -10523,6 +10510,21 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1395
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Follow our step-by-step guide to move to Australia"
+#~ msgstr "Siga nosso passo-a-passo e mude para a Austrália"
+
+#~ msgid "Follow our step-by-step guide to move to Canada"
+#~ msgstr "Siga nosso passo-a-passo e mude para o Canadá"
+
+#~ msgid "users with the same objective"
+#~ msgstr "usuários com o mesmo objetivo"
+
+#~ msgid "completed"
+#~ msgstr "concluído"
+
+#~ msgid "slots per year"
+#~ msgstr "vagas por ano"
 
 #~ msgid "Sign-up for Premium"
 #~ msgstr "Assine o Premium"

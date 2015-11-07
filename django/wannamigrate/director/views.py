@@ -1,16 +1,12 @@
 ##################
 # Imports
 ##################
-from django.template.loader import render_to_string
-from django.contrib import messages
-from django.db import transaction
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from wannamigrate.director.models import Mission, Objective, MissionsObjectives, SituationsMissions
-from django.db.models import Prefetch, Count
-from django.conf import settings
+from wannamigrate.site.views import get_situation_form
 from django.utils.module_loading import import_string
 
 
@@ -73,6 +69,7 @@ def dashboard( request ):
     template_data[ "subscription" ] = 'subscription' in request.session and request.session['subscription']
     template_data[ "missions" ] = missions
     template_data[ "general_progress" ] = int( general_progress )
+    template_data[ "situation_form" ] = get_situation_form( request )
 
 
     return render( request, 'director/dashboard.html', template_data )
