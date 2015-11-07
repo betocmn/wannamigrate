@@ -11,41 +11,17 @@
 
 
 {% block situation %}
-<article class="situation full">
-    <section class="wrap text-center">
-      <h1 class="title">
-        {% trans "I'm from" %} {% trans request.session.situation.from_country.name %},
-        {% trans "I wanna" %} {% trans request.session.situation.goal.name %}
-        {% trans "In" %} {% trans request.session.situation.to_country.name %}
-      </h1>
-      <section class="description">
-        {% if request.session.situation.to_country.code == 'AU' %}
-            {% trans "Follow our step-by-step guide to move to Australia" %}
-        {% else %}
-            {% trans "Follow our step-by-step guide to move to Canada" %}
-        {% endif %}
-      </section>
-    </section>
-</article>
-<article class="stats full">
-    <div class="wrap">
-        <section class="item text-center">
-          <h3>{{ request.session.situation.total_users|kmi }}</h3>
-          <p>{% trans "users with the same objective" %}</p>
-        </section>
-        <section class="item text-center">
-          <h3>{{ general_progress }}%</h3>
-          <p>{% trans "completed" %}</p>
-        </section>
-        <section class="item text-center">
-          <h3>250 000</h3>
-          <p>{% trans "slots per year" %}</p>
-        </section>
-        <div class="clearfix"></div>
-    </div>
-</article>
-{% endblock situation %}
-
+    {{block.super}}
+    <article class="general-progress">
+        <div class="wrap">
+             <div class="progress">
+              <div class="progress-bar" style="width:0%">
+                <span class="sr-only">{{general_progress}}% {% trans "Complete" %}</span>
+              </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
 
 {% block content %}
 {% include "site/_common/status.html" %}
@@ -66,6 +42,10 @@
                             {% else %}
                             <a href="{% url "director:view" m.hash obj.hash %}" >
                             {% endif %}
+                                <div class="description">
+                                    <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>
+                                    <p>{% trans obj.description %}</p>
+                                </div>
                                 <div class="progress">
                                     {% if subscription %}
                                         <span class="ball {% if obj.progress > 0 %}active{% endif %}">
@@ -86,10 +66,6 @@
                                             {% endif %}
                                         </span>
                                     {% endif %}
-                                </div>
-                                <div class="description">
-                                    <h3>{% trans obj.title %} {% if obj.optional %}({% trans "Optional" %}){% endif %}</h3>
-                                    <p>{% trans obj.description %}</p>
                                 </div>
                             </a>
                         </li>
@@ -119,6 +95,11 @@
 {% block scripts %}
 
     {{ block.super }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".progress-bar").css( "width", "{{general_progress}}%" );
+        });
+    </script>
     {% if not subscription %}
         <script type="text/javascript">
             function close() { $("#subscribe").fadeOut(); }
