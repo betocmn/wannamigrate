@@ -1,154 +1,264 @@
-
-/** CSS for Wannacademy version **/
-.full { width: 100%; }
-.wrap { box-sizing: border-box; max-width: 960px; min-width: 200px; margin: 0px auto; }
-.text-center { text-align: center; }
-article.situation { padding-top: 3rem; padding-bottom: 3rem; border-top: solid 1px #eee; border-bottom: solid 1px #eee; }
-article.situation section h1.title { font-size:25px; font-weight: 300; color: #68347E; padding-bottom:1rem; }
-article.situation section section.description{ color: #444; }
-article.stats { border-bottom: solid 1px #eee; padding-top: 1rem; padding-bottom: 1rem; }
-article.stats div section.item 
-{ 
-  width: 90%; margin:0 auto; padding-top: 1rem; padding-bottom: 1rem; 
-  border-left: solid 1px #eee; border-right: solid 1px #eee; 
+.full {
+    width: 100%;
 }
-@media (min-width: 700px) 
-{
-  article.stats div section.item 
-  { 
-    float:left; width: 33.1%; padding-top: 1rem; padding-bottom: 1rem; 
-    border-left: solid 1px #eee; border-right: solid 1px #eee; 
-  }
+.wrap {
+    box-sizing: border-box;
+    max-width: 960px;
+    min-width: 200px;
+    margin: 0px auto;
 }
-article.stats div section.item h3 { font-size: 20px; font-weight: 300; padding-bottom: 0.5rem; color: #444; }
-article.stats div section.item p { color: #666; }
-article.syllabus{ background-color: #eee; width:100%; position: relative; padding-top:2rem; }
-article.syllabus .syllabus-leadin{ position: absolute; top: -2px; left: 50%; margin-left: -32px; }
-article.syllabus div article.missions { min-width: 300px; max-width:600px; margin:0 auto; padding: 2rem 10px 3rem 10px; }
-article.syllabus div article.missions section.mission { display:block; }
-article.syllabus div article.missions section.mission h1
-{ 
-  font-size:18px; font-weight: 300; text-transform: uppercase;
-  padding: 3rem 0 1rem; color:#444; margin-bottom: 10px;
+.text-center {
+    text-align: center;
 }
-article.syllabus div article.missions section.mission ul li.objective a
-{
-  position:relative;
-  display: block;
-  width: 100%;
-  height: 130px;
-  background-color:white;
-  border-bottom: solid 1px #eee;
-  text-decoration: none;
+article.situation {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-top: solid 1px #eee;
+    border-bottom: solid 1px #eee;
 }
-article.syllabus div article.missions section.mission ul li.objective a:hover{ background-color: #68347E; }
-article.syllabus div article.missions section.mission ul li.objective a div.progress
-{
-  width:25%; height:100%; float:left;
-  position: relative; text-align: center;
+article.situation section h1.title {
+    font-size: 25px;
+    font-weight: 300;
+    color: #68347E;
+    padding-bottom: 1rem;
 }
-
-article.syllabus div article.missions section.mission ul li.objective a div.description
-{
-  position:relative;
-  float:left;
-  width:73%;
-  height: 50px;
-  top:50%;
-  margin-top:-25px;
-  padding: 0 1%;
+article.situation section section.description {
+    color: #444;
 }
-
-@media (min-width: 700px)
-{
-  article.syllabus div article.missions section.mission ul li.objective a div.progress { width:20% !important; }
-  article.syllabus div article.missions section.mission ul li.objective a div.description { width:78% !important; }
+article.general-progress {
+    padding: 10px 0 10px 0;
+    background-color: #F6F6F6;
+}
+article.general-progress div.progress {
+    overflow: hidden;
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset;
+    height: 20px;
+    line-height: 20px;
+}
+article.general-progress div.progress div.progress-bar {
+    float: left;
+    width: 0px;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #FFF;
+    text-align: center;
+    background-color: #68347E;
+    box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.15) inset;
+    transition: width 1s ease 0s;
+}
+article.general-progress div.progress div.progress-bar span.sr-only {
+    position: relative;
+    color: white;
+}
+article.syllabus {
+    background-color: #eee;
+    width: 100%;
+    position: relative;
+    padding-top: 2rem;
+}
+article.syllabus .syllabus-leadin {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    margin-left: -32px;
+}
+article.syllabus .syllabus-leadin svg g.shape path.path {
+    fill: #f6f6f6;
+}
+article.syllabus div article.missions {
+    min-width: 300px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 10px 3rem 10px;
+}
+article.syllabus div article.missions section.mission {
+    display: block;
+}
+article.syllabus div article.missions section.mission h1 {
+    font-size: 18px;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 3rem 0 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+article.syllabus div article.missions section.mission ul li.objective a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 130px;
+    background-color: white;
+    border-bottom: solid 1px #eee;
+    text-decoration: none;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover {
+    background-color: #68347E;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.progress {
+    width: 25%;
+    height: 100%;
+    float: right;
+    position: relative;
+    text-align: center;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.description {
+    position: relative;
+    float: left;
+    width: 73%;
+    height: 50px;
+    top: 50%;
+    margin-top: -25px;
+    padding: 0 1%;
+}
+@media (min-width: 700px) {
+    article.syllabus div article.missions section.mission ul li.objective a div.progress {
+        width: 20% !important;
+    }
+    article.syllabus div article.missions section.mission ul li.objective a div.description {
+        width: 78% !important;
+    }
 }
 article.syllabus div article.missions section.mission ul li.objective a div.progress span.ball {
-  display: block;
-  font-weight: bold;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background: #F1F2F2;
-  color:#666;
-  text-align: center;
-  text-align: center;
-  line-height: 3rem;
-  top:50%;
-  left:50%;
-  margin-top:-1.5rem;
-  margin-left:-1.5rem;
-  font-size:14px;
-}
-article.syllabus div article.missions section.mission ul li.objective a div.progress span.ball.active
-{
-  color:white;
-  background:#68347E;
-}
-article.syllabus div article.missions section.mission ul li.objective a:hover div.progress span.ball
-{
-  color:#68347E;
-  background:white;
-}
-article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball { background: white; }
-article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball i
-{
-  font-size: 34px;
-  padding-top:8px;
-  color:#CCC;
-}
-article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball{ background: #CCC; }
-article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball i
-{
-  color:#68347E;
-}
-article.syllabus div article.missions section.mission ul li.objective a div.description h3
-{
-  font-size: 18px;
-  font-weight: 300;
-  color: #444;
-  padding: 0px 0px 0.3rem 0;
-  text-transform: capitalize;
-}
-article.syllabus div article.missions section.mission ul li.objective.locked a div.description h3 { color: #CCC !important; }
-article.syllabus div article.missions section.mission ul li.objective a:hover div.description h3 { color: white; }
-article.syllabus div article.missions section.mission ul li.objective a div.description p { display:none; }
-@media (min-width: 700px)
-{
-  article.syllabus div article.missions section.mission ul li.objective a div.description p {
     display: block;
-    font-size: 14px;
-    font-weight: 300;
+    font-weight: bold;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: #F1F2F2;
     color: #666;
-    margin-top: 5px;
-  }
-  article.syllabus div article.missions section.mission ul li.objective.locked a div.description p { color: #CCC !important; }
-  article.syllabus div article.missions section.mission ul li.objective a:hover div.description p { color: #F2F2F2; }
+    text-align: center;
+    text-align: center;
+    line-height: 3rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.5rem;
+    margin-left: -1.5rem;
+    font-size: 14px;
 }
-article.path { padding:1em 0; font-size:14px; border-bottom: solid 1px #eee; }
-
-
-
+article.syllabus div article.missions section.mission ul li.objective a div.progress span.ball.active {
+    color: white;
+    background: #68347E;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover div.progress span.ball {
+    color: #68347E;
+    background: white;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball {
+    background: white;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a div.progress span.ball i {
+    font-size: 34px;
+    padding-top: 8px;
+    color: #CCC;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball {
+    background: #CCC;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a:hover div.progress span.ball i {
+    color: #68347E;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.description h3 {
+    font-size: 18px;
+    font-weight: 300;
+    color: #444;
+    padding: 0px 0px 0.3rem 10px;
+    text-transform: capitalize;
+}
+article.syllabus div article.missions section.mission ul li.objective.locked a div.description h3 {
+    color: #CCC !important;
+}
+article.syllabus div article.missions section.mission ul li.objective a:hover div.description h3 {
+    color: white;
+}
+article.syllabus div article.missions section.mission ul li.objective a div.description p {
+    display: none;
+}
+@media (min-width: 700px) {
+    article.syllabus div article.missions section.mission ul li.objective a div.description p {
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        margin-top: 5px;
+        padding-left: 10px;
+    }
+    article.syllabus div article.missions section.mission ul li.objective.locked a div.description p {
+        color: #CCC !important;
+    }
+    article.syllabus div article.missions section.mission ul li.objective a:hover div.description p {
+        color: #F2F2F2;
+    }
+}
+article.path {
+    padding: 1em 0;
+    font-size: 14px;
+    border-bottom: solid 1px #eee;
+}
 /** Test css */
-article.objective-content{ padding:2em 0; }
-article.objective-content div.wrap iframe.content { position: relative; top:0; left: 0; width: 100%; height: 100%; overflow:hidden; }
 
-
+article.objective-content {
+    padding: 2em 0;
+}
+article.objective-content div.wrap iframe.content {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 /** Subscribe modal on dashboard **/
-#subscribe
-{
-  position: fixed; left: 0px; top: 0px; width:100%; height:100%; text-align:center;
-  background: rgba(0, 0, 0, 0.8); z-index: 9999; display: none;
+
+#subscribe {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: none;
 }
-.modal-content { width: 280px; position: relative; margin: 12% auto; padding: 5px 20px 13px 20px; background: #fff; }
-.modal-content i.fa-lock { font-size: 40px; margin-top: 20px; }
-.modal-content p { margin: 20px 0 25px 0; text-align: center; line-height: 20px; }
-.modal-content a.button { display: inline-block; padding:13px 15px; margin-bottom:10px; }
-.modal-content a.close-button
-{
-  position: absolute; top: 0; right: 0; display: block; width: 26px; height: 26px; background: #CCC;
-  text-align: center; line-height: 26px; color: white; text-decoration: none; font-weight: bold;
+.modal-content {
+    width: 280px;
+    position: relative;
+    margin: 12% auto;
+    padding: 5px 20px 13px 20px;
+    background: #fff;
 }
-.modal-content a.close-button:hover { background: #C85050; }
+.modal-content i.fa-lock {
+    font-size: 40px;
+    margin-top: 20px;
+}
+.modal-content p {
+    margin: 20px 0 25px 0;
+    text-align: center;
+    line-height: 20px;
+}
+.modal-content a.button {
+    display: inline-block;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+}
+.modal-content a.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: #CCC;
+    text-align: center;
+    line-height: 26px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.modal-content a.close-button:hover {
+    background: #C85050;
+}
