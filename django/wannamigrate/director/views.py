@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from wannamigrate.director.models import Mission, Objective, MissionsObjectives, SituationsMissions
+from wannamigrate.director.models import Mission, Objective, MissionsObjectives
 from wannamigrate.site.views import get_situation_form
 from django.utils.module_loading import import_string
 
@@ -23,16 +23,12 @@ def dashboard( request ):
     # Initial template
     template_data = {}
 
-    # Gets the situation id of the user.
-    situation_id = request.session[ "situation" ][ "id" ]
+    # Gets the country/goal config from situation
+    to_country_id = request.session[ "situation" ]["to_country"][ "id" ]
+    goal_id = request.session[ "situation" ]["goal"][ "id" ]
 
     # Gets the missions for the situation
-    missions = []
-    situations_missions = SituationsMissions.objects.filter( situation__id = situation_id ).order_by( "order" ).all()
-    for x in situations_missions:
-        x.mission.objectives_set = []
-        missions.append( x.mission )
-
+    missions = Mission.objects.filter( to_country_id = to_country_id, goal_id = goal_id ).order_by( "order" ).all()
 
     # Gets the objectives for the missions
     missions_objectives = MissionsObjectives.objects.filter( mission__in = missions ).order_by( "order" ).all()
@@ -40,6 +36,8 @@ def dashboard( request ):
         for m in missions:
             if m.id == mo.mission.id:
                 mo.objective.optional = mo.optional
+                if not hasattr( m, 'objectives_set'):
+                    m.objectives_set = []
                 m.objectives_set.append( mo.objective )
 
 

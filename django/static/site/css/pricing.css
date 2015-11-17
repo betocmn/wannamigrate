@@ -19,13 +19,17 @@ section.pricing div.wrapper-full h3.main-sub-header
     color:#333;
     font-weight: normal;
 }
+section.pricing div.wrapper-full h3.main-sub-header strong
+{
+    font-family: "open_sanssemibold";
+}
 section.pricing div.wrapper-full div.plans { text-align: center; }
 section.pricing div.wrapper-full div.plans div.plan
 {
 
     position: relative;
     display: inline-block;
-    width: 227px;
+    width: 245px;
     background-color: #FAFAFA;
     color: #454545;
     margin-top: 100px;
@@ -58,7 +62,7 @@ section.pricing div.wrapper-full div.plans div.plan:before
     background-color: #68347E;
     border-right: 1px solid #68347E;
     border-left: 1px solid #68347E;
-    width: 227px;
+    width: 245px;
     padding: 0 14px 0 14px;
 }
 

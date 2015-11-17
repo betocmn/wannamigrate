@@ -1,5 +1,4 @@
-from wannamigrate.core.models import Situation
-from wannamigrate.director.models import Mission, Objective, MissionsObjectives, SituationsMissions
+from wannamigrate.director.models import Mission, Objective, MissionsObjectives
 from wannamigrate.director._modules.form_content.models import FormContent, FormContentChoice
 from wannamigrate.director._modules.generic_container.models import GenericContainer, GenericContainerContent
 from wannamigrate.director._modules.redirect_content.models import RedirectContent
@@ -93,14 +92,14 @@ def process_generic_content( generic_content ):
 
 def process_data_for_situation( data, to_country_id, goal_id ):
 
-    # Gets all the situations for live and work in canada.
-    situations = Situation.objects.filter( to_country__id = to_country_id, goal__id = goal_id ).all()
-
     # MISSIONS
     mission_order = 0
     for mission in data:
         m = Mission()
         m.title = mission["title"]
+        m.to_country_id = to_country_id
+        m.goal_id = goal_id
+        m.order = mission_order
         m.save()
 
         print( "Created mission: " + str( m.title ) )
@@ -135,14 +134,6 @@ def process_data_for_situation( data, to_country_id, goal_id ):
 
             objective_order += 1
 
-
-        print( "Adding the mission to all situations" )
-        for s in situations:
-            sm = SituationsMissions()
-            sm.mission = m
-            sm.situation = s
-            sm.order = mission_order
-            sm.save()
         print( "done!" )
 
         mission_order += 1

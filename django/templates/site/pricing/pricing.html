@@ -27,24 +27,20 @@
 
     <section class="pricing">
       <div class="wrapper-full">
-        <h1 class="main-page-header">{% trans "Subscription Plans" %}</h1>
+        <h1 class="main-page-header">{% trans "Sign-up Plans" %}</h1>
         <h3 class="main-sub-header">
-            {% trans "All paid plans include unlimited access to our step-by-step tool to Australia and Canada." %}
+            {% trans "All plans include unlimited access to our step-by-step for <strong>Australia</strong> and <strong>Canada</strong>." %}
         </h3>
         <div class="plans">
             <div class="plan">
               <div class="price">
                 <span class="currency"></span>
                 <span class="amount">Free</span>
-                <span class="slash"></span>
-                <span class="month"></span>
               </div>
 
               <ul>
                 <li>{% trans "Forever Free" %}</li>
-                <li>{% trans "Immigration calculator" %}</li>
-                <li>{% trans "Q&A" %}</li>
-                <li>&nbsp;</li>
+                <li>{% trans "Full-access to the platform" %}</li>
                 <li>&nbsp;</li>
                 <li>&nbsp;</li>
                 <li>&nbsp;</li>
@@ -52,61 +48,39 @@
               <a class="plan-sign-up" href="{% url 'site:signup' %}">{% trans "Sign Up" context "Pricing" %}</a>
             </div>
 
-            <div class="plan">
-              <div class="price">
-                <span class="currency">R$</span>
-                <span class="amount">78</span>
-              </div>
-
-              <ul>
-                <li>{% trans "<strong>3 months</strong> access" %}</li>
-                <li>{% trans "Immigration calculator" %}</li>
-                <li>{% trans "Q&A" %}</li>
-                <li>{% trans "Private webinars" %}</li>
-                <li>{% trans "Step-by-step tool" %}</li>
-                <li>&nbsp;</li>
-                <li>&nbsp;</li>
-
-              </ul>
-              <a class="plan-sign-up" href="#" data-productid="2">{% trans "Sign Up" context "Pricing" %}</a>
-            </div>
 
             <div class="plan popular">
               <div class="price">
                 <span class="currency">R$</span>
-                <span class="amount">140</span>
+                <span class="amount">175</span>
               </div>
 
               <ul>
-                <li>{% trans "<strong>6 months</strong> access" %}</li>
-                <li>{% trans "Immigration calculator" %}</li>
-                <li>{% trans "Q&A" %}</li>
+                <li>{% trans "Full-access to the platform" %}</li>
+                <li>{% trans "Personal evaluation" %}</li>
+                <li>{% trans "Skype interview - 30mins" %}</li>
+                <li>{% trans "Creation of english resumé" %}</li>
                 <li>{% trans "Private webinars" %}</li>
-                <li>{% trans "Step-by-step tool" %}</li>
-                <li>{% trans "Unlimited <strong>email support</strong>" %}</li>
-                <li>&nbsp;</li>
-                <li>&nbsp;</li>
+                <li>{% trans "English level evaluation" %}</li>
                 <li>&nbsp;</li>
               </ul>
-              <a class="plan-sign-up" href="#" data-productid="3">{% trans "Sign Up" context "Pricing" %}</a>
+              <a class="plan-sign-up submit" href="#" data-productid="3">{% trans "Sign Up" context "Pricing" %}</a>
             </div>
 
-            <div class="plan">
+            <div class="plan immigration-agent">
               <div class="price">
                 <span class="currency">R$</span>
-                <span class="amount">260</span>
+                <span class="amount">3.500</span>
               </div>
 
               <ul>
-                <li>{% trans "<strong>12 months</strong> access" %}</li>
-                <li>{% trans "Immigration calculator" %}</li>
-                <li>{% trans "Q&A" %}</li>
-                <li>{% trans "Private webinars" %}</li>
-                <li>{% trans "Step-by-step tool" %}</li>
-                <li>{% trans "Unlimited <strong>email support</strong>" %}</li>
-                <li>{% trans "20 min <strong>Skype interview</strong>" %}</li>
+                <li>{% trans "Immigration consultant" %}</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
               </ul>
-              <a class="plan-sign-up" href="#" data-productid="4">{% trans "Sign Up" context "Pricing" %}</a>
+              <a class="plan-sign-up" href="{% url 'site:contact' %}">{% trans "Contact Us" context "Pricing" %}</a>
             </div>
         </div>
       </div>
@@ -141,7 +115,7 @@
         $( document ).ready( function() {
 
             // submits form for each button (from books)
-            $( 'div.plan a.plan-sign-up' ).click( function( event ) {
+            $( 'div.plan a.plan-sign-up.submit' ).click( function( event ) {
                 event.preventDefault();
                 $( "#product_id" ).val( $( this ).attr( 'data-productid' ) );
                 $( "#product_form" ).submit();
