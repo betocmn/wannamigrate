@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 18:15-0200\n"
+"POT-Creation-Date: 2015-11-17 17:52-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2672,6 +2672,17 @@ msgstr "Aprovada"
 msgid "Available Soon"
 msgstr "Em breve"
 
+#: templates/db_translations/director_htmlcontent.html:14
+#: templates/db_translations/director_htmlcontent.html:15
+#: templates/db_translations/director_htmlcontent.html:16
+#: templates/db_translations/director_htmlcontent.html:17
+#: templates/db_translations/director_htmlcontent.html:18
+#: templates/db_translations/director_htmlcontent.html:19
+#: templates/db_translations/director_htmlcontent.html:20
+#: templates/db_translations/director_htmlcontent.html:21
+msgid "Request a time by sending an email to contact@wannamigrate.com"
+msgstr "Agende um horário através do email contact@wannamigrate.com"
+
 #: templates/db_translations/director_mission.html:3
 #: templates/db_translations/director_mission.html:17
 msgid "Visa Type"
@@ -2766,11 +2777,15 @@ msgstr ""
 
 #: templates/db_translations/director_objective.html:5
 #: templates/db_translations/director_objective.html:42
-msgid "Skype Evaluation"
-msgstr "Avaliação via Skype"
+#: templates/db_translations/director_objective.html:76
+#: templates/db_translations/director_objective.html:77
+msgid "Personal Immigration Evaluation on Skype"
+msgstr "Avaliação Individual de Imigração no Skype"
 
 #: templates/db_translations/director_objective.html:5
 #: templates/db_translations/director_objective.html:42
+#: templates/db_translations/director_objective.html:76
+#: templates/db_translations/director_objective.html:77
 msgid "Talk to an expert to have your situation evaluated"
 msgstr "Converse com um expert para ter uma avaliação individual"
 
@@ -3022,8 +3037,7 @@ msgid ""
 "Understand what education level you need and how to do a \"Skills Assessment"
 "\""
 msgstr ""
-"Nível de escolaridade exigido e como fazer o Reconhecimento Profisional "
-"(Skills Assessment)"
+"Nível de escolaridade exigido e como fazer a Validação de sua Profissão"
 
 #: templates/db_translations/director_objective.html:48
 #: templates/db_translations/director_objective.html:66
@@ -3060,6 +3074,20 @@ msgstr "Encontre um Curso"
 #: templates/db_translations/director_objective.html:72
 msgid "Language and Skills Certificates"
 msgstr "Certificados de Idioma e Validação Profissional"
+
+#: templates/db_translations/director_objective.html:78
+#: templates/db_translations/director_objective.html:79
+#: templates/db_translations/director_objective.html:80
+#: templates/db_translations/director_objective.html:81
+msgid "Package - International Resumé"
+msgstr "Pacote - CV Internacional"
+
+#: templates/db_translations/director_objective.html:78
+#: templates/db_translations/director_objective.html:79
+#: templates/db_translations/director_objective.html:80
+#: templates/db_translations/director_objective.html:81
+msgid "We will translate and build your resumé, cover-letter and Linkedin"
+msgstr "Nós iremos traduzir e criar o seu CV, cover-letter e Linkedin"
 
 #: templates/db_translations/marketplace_product.html:2
 msgid "Guide - How to Move to Canada"
@@ -8804,7 +8832,8 @@ msgstr "Cadastre-se"
 msgid ""
 "Learn how to immigrate<br />to your dream country - <span>for free</span>"
 msgstr ""
-"Aprenda como imigrar para o<br />país dos seus sonhos - <span>gratuitamente</span>"
+"Aprenda como imigrar para o<br />país dos seus sonhos - <span>gratuitamente</"
+"span>"
 
 #: templates/site/home/home.html:59
 msgctxt "landing_call_to_action"
@@ -9291,11 +9320,11 @@ msgstr "Selecione Idioma"
 msgid "from country"
 msgstr "país de origem"
 
-#: wannamigrate/core/models.py:239
+#: wannamigrate/core/models.py:239 wannamigrate/director/models.py:29
 msgid "to country"
 msgstr "país de destino"
 
-#: wannamigrate/core/models.py:240
+#: wannamigrate/core/models.py:240 wannamigrate/director/models.py:31
 msgid "goal"
 msgstr "objetivo"
 
@@ -10503,6 +10532,14 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1395
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Understand what education level you need and how to do a "
+#~ msgstr ""
+#~ "Nível de escolaridade exigido e como fazer o Reconhecimento Profisional "
+#~ "(Skills Assessment)"
+
+#~ msgid "Skype Evaluation"
+#~ msgstr "Avaliação via Skype"
 
 #~ msgid "Subscription 3 Months"
 #~ msgstr "Assinatura 3 Meses"
