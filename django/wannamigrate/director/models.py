@@ -25,8 +25,12 @@ class Mission( BaseModel ):
     hash = models.CharField( max_length = 32 )
     # The objectives of this mission.
     objectives = models.ManyToManyField( "Objective", through = "MissionsObjectives", related_name = "missions" )
-    # The situations of this mission
-    situations = models.ManyToManyField( Situation, through = "SituationsMissions", related_name = "missions" )
+    # Destination Country of this mission
+    to_country = models.ForeignKey( 'core.Country', verbose_name =  _( "to country" ) )
+    # Goal of this mission
+    goal = models.ForeignKey( 'core.Goal', verbose_name =  _( "goal" ) )
+    # The order of the mission on the situation
+    order = models.PositiveSmallIntegerField()
 
 
     # The str representation of this object
@@ -104,31 +108,6 @@ class MissionsObjectives( BaseModel ):
     # The str representation of this object
     def __str__( self ):
         return str( self.mission ) + ' ' + str( self.objective ) + ' ' + str( self.order ) + "(optional)" if self.optional else "(required)"
-
-
-
-
-class SituationsMissions( BaseModel ):
-    """
-    Relational object. It relates Missions and Situations.
-    """
-    # The objective
-    situation = models.ForeignKey( Situation )
-    # The mission
-    mission = models.ForeignKey( "Mission" )
-    # The order of the mission on the situation
-    order = models.PositiveSmallIntegerField()
-
-
-    class Meta:
-        unique_together = ( ( "situation", "mission" ), ( "situation", "order" ), )
-
-
-    # The str representation of this object
-    def __str__( self ):
-        return str( self.situation ) + ' ' + str( self.mission ) + ' ' + str( self.order )
-
-
 
 
 

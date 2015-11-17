@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-07 21:14-0200\n"
+"POT-Creation-Date: 2015-11-12 18:15-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,15 +72,11 @@ msgstr "Busca"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: templates/_layouts/main.html:88 templates/_layouts/main.html.py:173
-msgid "Pricing"
-msgstr "Planos e Preços"
+#: templates/_layouts/main.html:88 templates/_layouts/main.html.py:122
+msgid "Premium"
+msgstr ""
 
 #: templates/_layouts/main.html:89 templates/_layouts/main.html.py:174
-#: templates/site/pricing/pricing.html:46
-#: templates/site/pricing/pricing.html:64
-#: templates/site/pricing/pricing.html:83
-#: templates/site/pricing/pricing.html:103
 msgid "Q&A"
 msgstr "Tira-Dúvidas"
 
@@ -95,10 +91,6 @@ msgstr "usuário(s)"
 #: templates/_layouts/main.html:113
 msgid "Change Situation"
 msgstr "Mudar Objetivo"
-
-#: templates/_layouts/main.html:122
-msgid "Premium"
-msgstr ""
 
 #: templates/_layouts/main.html:125
 msgid ""
@@ -147,6 +139,10 @@ msgstr "Políticas de Privacidade"
 #: templates/_layouts/main.html:170 templates/site/contact/contact.html:21
 msgid "Contact Us"
 msgstr "Contato"
+
+#: templates/_layouts/main.html:173
+msgid "Upgrade to Premium"
+msgstr "Assinatura Premium"
 
 #: templates/_layouts/main.html:175
 #: templates/marketplace/immi_box/immi_box.html:23
@@ -3055,7 +3051,7 @@ msgstr "Por que estudar na Austrália?"
 
 #: templates/db_translations/director_objective.html:60
 msgid "Studying in Australia"
-msgstr "Estuadr na Austrália"
+msgstr "Estudar na Austrália"
 
 #: templates/db_translations/director_objective.html:61
 msgid "Find a course"
@@ -3066,29 +3062,33 @@ msgid "Language and Skills Certificates"
 msgstr "Certificados de Idioma e Validação Profissional"
 
 #: templates/db_translations/marketplace_product.html:2
-msgid "Subscription 3 Months"
-msgstr "Assinatura 3 Meses"
+msgid "Guide - How to Move to Canada"
+msgstr "Guia - Como Mudar para o Canadá"
 
 #: templates/db_translations/marketplace_product.html:2
-msgid "3 months subscription"
-msgstr "assinatura de 3 meses"
+msgid "A complete step-by-step guide about immigrating to Canada."
+msgstr "Guia completo com passo-a-passo sobre imigração para o Canadá."
 
 #: templates/db_translations/marketplace_product.html:3
-msgid "Subscription 6 Months"
-msgstr "Assinatura 6 Meses"
+msgid "Subscription 1 Year (disabled)"
+msgstr "Assinatura 1 Ano (desabilitada)"
 
 #: templates/db_translations/marketplace_product.html:3
-msgid "6 months subscription + unlimited email support"
-msgstr "6 meses de assinatura + suporte ilimitado por email"
-
-#: templates/db_translations/marketplace_product.html:4
-msgid "Subscription 1 Year"
-msgstr "Assinatura 12 Meses"
-
-#: templates/db_translations/marketplace_product.html:4
 msgid "1 year subscription + unlimited email support + skype interview"
 msgstr ""
 "1 ano de assinatura + suporte ilimitado por email + avaliação por Skype"
+
+#: templates/db_translations/marketplace_product.html:4
+msgid "PRO Package"
+msgstr "Plano Premium"
+
+#: templates/db_translations/marketplace_product.html:4
+msgid ""
+"Skype interview + Resumé creation + English evaluation + 3 months email "
+"support"
+msgstr ""
+"Entrevista via Skype + Criação de CV + Avaliação de Inglês + 3 meses de "
+"suporte por email "
 
 #: templates/db_translations/marketplace_servicetype.html:2
 msgid "Initial Consultation Skype 30-min"
@@ -8802,11 +8802,9 @@ msgstr "Cadastre-se"
 
 #: templates/site/home/home.html:39
 msgid ""
-"The interactive way to learn all you need <br />to <span>immigrate</span> to "
-"your dream country"
+"Learn how to immigrate<br />to your dream country - <span>for free</span>"
 msgstr ""
-"Plataforma interativa com tudo que você precisa <br />para <span>imigrar</"
-"span> para o país dos seus sonhos"
+"Aprenda como imigrar para o<br />país dos seus sonhos - <span>gratuitamente</span>"
 
 #: templates/site/home/home.html:59
 msgctxt "landing_call_to_action"
@@ -8878,7 +8876,6 @@ msgid "How it works?"
 msgstr "Como funciona?"
 
 #: templates/site/home/landing_old.html:31
-#: templates/site/pricing/pricing.html:30
 msgid "Subscription Plans"
 msgstr "Planos de Assinatura"
 
@@ -9021,71 +9018,67 @@ msgstr ""
 "\">Política de Privacidade</a> do Wanna Migrate\n"
 "    "
 
+#: templates/site/pricing/pricing.html:30
+msgid "Sign-up Plans"
+msgstr "Planos de Cadastro"
+
 #: templates/site/pricing/pricing.html:32
 msgid ""
-"All paid plans include unlimited access to our step-by-step tool to "
-"Australia and Canada."
+"All plans include unlimited access to our step-by-step for "
+"<strong>Australia</strong> and <strong>Canada</strong>."
 msgstr ""
-"Todos os planos pagos incluem acesso a ferramenta passo-a-passo para "
-"Austrália e Canadá."
+"Todos os planos incluem acesso ilimitado ao passo-a-passo para "
+"<strong>Austrália</strong> e <strong>Canadá</strong>."
 
-#: templates/site/pricing/pricing.html:44
+#: templates/site/pricing/pricing.html:42
 msgid "Forever Free"
-msgstr "Tempo ilimitado"
+msgstr "Gratuito para sempre"
 
-#: templates/site/pricing/pricing.html:45
-#: templates/site/pricing/pricing.html:63
-#: templates/site/pricing/pricing.html:82
-#: templates/site/pricing/pricing.html:102
-msgid "Immigration calculator"
-msgstr "Calculadora de imigração"
+#: templates/site/pricing/pricing.html:43
+#: templates/site/pricing/pricing.html:59
+msgid "Full-access to the platform"
+msgstr "Acesso completo a ferramenta"
 
-#: templates/site/pricing/pricing.html:52
-#: templates/site/pricing/pricing.html:71
-#: templates/site/pricing/pricing.html:91
-#: templates/site/pricing/pricing.html:109
+#: templates/site/pricing/pricing.html:48
+#: templates/site/pricing/pricing.html:67
 msgctxt "Pricing"
 msgid "Sign Up"
 msgstr "Assine"
 
-#: templates/site/pricing/pricing.html:62
-msgid "<strong>3 months</strong> access"
-msgstr "<strong>3 meses</strong> de acesso"
+#: templates/site/pricing/pricing.html:60
+msgid "Personal evaluation"
+msgstr "Avaliação individual"
 
-#: templates/site/pricing/pricing.html:65
-#: templates/site/pricing/pricing.html:84
-#: templates/site/pricing/pricing.html:104
+#: templates/site/pricing/pricing.html:61
+msgid "Skype interview - 30mins"
+msgstr "Entrevista por Skype - 30mins"
+
+#: templates/site/pricing/pricing.html:62
+msgid "Creation of english resumé"
+msgstr "Criação de CV em inglês"
+
+#: templates/site/pricing/pricing.html:63
 msgid "Private webinars"
 msgstr "Webinars privados"
 
-#: templates/site/pricing/pricing.html:66
-#: templates/site/pricing/pricing.html:85
-#: templates/site/pricing/pricing.html:105
-msgid "Step-by-step tool"
-msgstr "Ferramenta passo-a-passo"
+#: templates/site/pricing/pricing.html:64
+msgid "English level evaluation"
+msgstr "Avaliação de nível de Inglês"
 
-#: templates/site/pricing/pricing.html:81
-msgid "<strong>6 months</strong> access"
-msgstr "<strong>6 meses</strong> de acesso"
+#: templates/site/pricing/pricing.html:77
+msgid "Immigration consultant"
+msgstr "Consultor de imigração"
 
-#: templates/site/pricing/pricing.html:86
-#: templates/site/pricing/pricing.html:106
-msgid "Unlimited <strong>email support</strong>"
-msgstr "<strong>Suporte por email</strong> ilimitado"
+#: templates/site/pricing/pricing.html:83
+msgctxt "Pricing"
+msgid "Contact Us"
+msgstr "Contato"
 
-#: templates/site/pricing/pricing.html:101
-msgid "<strong>12 months</strong> access"
-msgstr "<strong>12 meses</strong> de acesso"
-
-#: templates/site/pricing/pricing.html:107
-msgid "20 min <strong>Skype interview</strong>"
-msgstr "<strong>Avaliação no Skype</strong> 20min"
-
-#: templates/site/pricing/pricing.html:119
+#: templates/site/pricing/pricing.html:93
 msgid "Not convinced yet?"
 msgstr "Ainda não está convencido?"
 
-#: templates/site/pricing/pricing.html:121
+#: templates/site/pricing/pricing.html:95
 msgid "Take a look at our demo below:"
 msgstr "Veja uma demonstração abaixo:"
 
@@ -10511,6 +10504,49 @@ msgstr "Perfil - Wanna Migrate"
 msgid "now is following you"
 msgstr "começou a te seguir"
 
+#~ msgid "Subscription 3 Months"
+#~ msgstr "Assinatura 3 Meses"
+
+#~ msgid "3 months subscription"
+#~ msgstr "assinatura de 3 meses"
+
+#~ msgid "Subscription 6 Months"
+#~ msgstr "Assinatura 6 Meses"
+
+#~ msgid "6 months subscription + unlimited email support"
+#~ msgstr "6 meses de assinatura + suporte ilimitado por email"
+
+#~ msgid "Pricing"
+#~ msgstr "Planos e Preços"
+
+#~ msgid ""
+#~ "The interactive way to learn all you need <br />to <span>immigrate</span> "
+#~ "to your dream country"
+#~ msgstr ""
+#~ "Plataforma interativa com tudo que você precisa <br />para <span>imigrar</"
+#~ "span> para o país dos seus sonhos"
+
+#~ msgid "Immigration calculator"
+#~ msgstr "Calculadora de imigração"
+
+#~ msgid "<strong>3 months</strong> access"
+#~ msgstr "<strong>3 meses</strong> de acesso"
+
+#~ msgid "Step-by-step tool"
+#~ msgstr "Ferramenta passo-a-passo"
+
+#~ msgid "<strong>6 months</strong> access"
+#~ msgstr "<strong>6 meses</strong> de acesso"
+
+#~ msgid "Unlimited <strong>email support</strong>"
+#~ msgstr "<strong>Suporte por email</strong> ilimitado"
+
+#~ msgid "<strong>12 months</strong> access"
+#~ msgstr "<strong>12 meses</strong> de acesso"
+
+#~ msgid "20 min <strong>Skype interview</strong>"
+#~ msgstr "<strong>Avaliação no Skype</strong> 20min"
+
 #~ msgid "Follow our step-by-step guide to move to Australia"
 #~ msgstr "Siga nosso passo-a-passo e mude para a Austrália"
 
@@ -10629,12 +10665,6 @@ msgstr "começou a te seguir"
 #~| msgid "Immigration Tools"
 #~ msgid "Immigration Plans."
 #~ msgstr "Ferramentas para Imigração"
-
-#~ msgid "Guide - How to Move to Canada"
-#~ msgstr "Guia - Como Mudar para o Canadá"
-
-#~ msgid "A complete step-by-step guide about immigrating to Canada."
-#~ msgstr "Guia completo com passo-a-passo sobre imigração para o Canadá."
 
 #~ msgid "Subscription 1 Year - Australia"
 #~ msgstr "Assinatura de 1 Ano - Austrália"
