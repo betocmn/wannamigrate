@@ -9110,7 +9110,7 @@ msgstr "Consultor de imigração"
 
 #: templates/site/pricing/pricing.html:78
 msgid "Estimated value"
-msgstr ""
+msgstr "Valor estimado"
 
 #: templates/site/pricing/pricing.html:83
 msgctxt "Pricing"
