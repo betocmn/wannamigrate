@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:52-0200\n"
+"POT-Creation-Date: 2015-11-17 23:24-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8825,6 +8825,7 @@ msgid "We are updating this section. Come back in 24 hours."
 msgstr "Estamos atualizando esta seção."
 
 #: templates/site/home/home.html:32 templates/site/login/signup.html:41
+#: templates/site/pricing/pricing.html:48
 msgid "Sign-Up"
 msgstr "Cadastre-se"
 
@@ -9060,19 +9061,23 @@ msgstr ""
 "<strong>Austrália</strong> e <strong>Canadá</strong>."
 
 #: templates/site/pricing/pricing.html:42
-msgid "Forever Free"
-msgstr "Gratuito para sempre"
+#| msgid "Get help to migrate:"
+msgid "Step by step to immigrate"
+msgstr "Passo a passo para imigrar"
 
 #: templates/site/pricing/pricing.html:43
+#| msgid "Immigration Points Calculator"
+msgid "Points calculator"
+msgstr "Calculadora de Pontos de Imigração"
+
+#: templates/site/pricing/pricing.html:44
+#| msgid "Questions & answers"
+msgid "Questions & Anwers"
+msgstr "Perguntas e Respostas"
+
 #: templates/site/pricing/pricing.html:59
 msgid "Full-access to the platform"
 msgstr "Acesso completo a ferramenta"
-
-#: templates/site/pricing/pricing.html:48
-#: templates/site/pricing/pricing.html:67
-msgctxt "Pricing"
-msgid "Sign Up"
-msgstr "Assine"
 
 #: templates/site/pricing/pricing.html:60
 msgid "Personal evaluation"
@@ -9094,9 +9099,18 @@ msgstr "Webinars privados"
 msgid "English level evaluation"
 msgstr "Avaliação de nível de Inglês"
 
+#: templates/site/pricing/pricing.html:67
+msgctxt "Pricing"
+msgid "Sign Up"
+msgstr "Assine"
+
 #: templates/site/pricing/pricing.html:77
 msgid "Immigration consultant"
 msgstr "Consultor de imigração"
+
+#: templates/site/pricing/pricing.html:78
+msgid "Estimated value"
+msgstr "Valor estimado"
 
 #: templates/site/pricing/pricing.html:83
 msgctxt "Pricing"
@@ -10532,6 +10546,9 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1395
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Forever Free"
+#~ msgstr "Gratuito para sempre"
 
 #~ msgid "Understand what education level you need and how to do a "
 #~ msgstr ""
