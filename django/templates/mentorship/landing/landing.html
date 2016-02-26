@@ -1,0 +1,144 @@
+{% extends "_layouts/mentorship.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+    {% block body %}
+    <body class="landing">
+    {% endblock body %}
+
+
+        {% block content %}
+
+            <!-- Banner -->
+                <section id="banner">
+                    <h2>{% trans "Move to Australia <br />by getting an I.T. job" %}</h2>
+                    <p>
+                        {% trans "6-week program to learn from professionals <br />who already made it there" %}
+                    </p>
+                    <ul class="actions">
+                        <li><a href="#one" class="button special scrolly">{% trans "Learn More" %}</a></li>
+                    </ul>
+                </section>
+
+            <!-- One -->
+                <section id="one" class="wrapper style1 special">
+                    <div class="container box alt bordered">
+                        <header class="major">
+                            <h2>{% trans "457 Visa for IT Professionals" %}</h2>
+                            <p>
+                                {% trans "If chosen by an eligible australian company, you will be hired and receive a visa to live in australia. <br />The good news is you can apply from anywhere in the world using the internet. <strong>Our 6-week <br />program uses proven techniques</strong> to prepare you to find a job in Australia. " %}
+                            </p>
+                        </header>
+                        <div class="author">
+							<p>
+                                <span class="image">
+                                    <img src="{% static "mentorship/img/avatar-humberto-moreira.png"%}" alt="Humberto Moreira" />
+                                </span>
+                                {% trans 'Your mentor will be <a href="http://www.humbertomn.com">Humberto Moreira</a> who has received more than 10 job offers from Australia while living in Sao Luis, Brazil. He has lived in 5 different countries, including Australia.' %}
+                            </p>
+                        </div>
+                        <ul class="icons-grid">
+                            <li>
+                                <span class="icon major style4 fa-folder-open"></span>
+                                <h3>{% trans "Week 1" %}</h3>
+                                <p>{% trans "Introductory skype meeting. Goal setting. Immigration evaluation. Resumé creation. Cover-Letter creation." %} <a href="{% url 'mentorship:about' %}">{% trans "Read more" %}</a></p>
+                            </li>
+                            <li>
+                                <span class="icon major style3 fa-globe"></span>
+                                <h3>{% trans "Week 2" %}</h3>
+                                <p>{% trans "Online presence construction: Linkedin, personal website, github and other dev websites." %} <a href="{% url 'mentorship:about' %}">{% trans "Read more" %}</a></p>
+                            </li>
+                            <li>
+                                <span class="icon major style2 fa-briefcase"></span>
+                                <h3>{% trans "Week 3" %}</h3>
+                                <p>{% trans "Training session on Skype. Interview practice on Skype. Selection of potential employers." %} <a href="{% url 'mentorship:about' %}">{% trans "Read more" %}</a></p>
+                            </li>
+                            <li>
+                                <span class="icon major style1 fa-paper-plane"></span>
+                                <h3>{% trans "Week 4 - 6" %}</h3>
+                                <p>{% trans "Job hunting. Networking with professionals from 10 countries. Follow-up meetings." %} <a href="{% url 'mentorship:about' %}">{% trans "Read more" %}</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+            <!-- Two -->
+                <section id="two" class="wrapper style2 special">
+                    <div class="container">
+                        <header class="major">
+                            <h2>{% trans "Average I.T. Salaries in Australia" %}</h2>
+                            <p>{% trans "Australia has the best minimum-wage in the world <br />and IT is one of the best paying sectors." %}
+                            </p>
+                        </header>
+                        <ul class="counters">
+                            <li class="style1">
+                                <strong>A$ {{ 6900|localize }}<span>{% trans "per month" %}</span></strong> {% trans "Senior Developer" %}
+                            </li>
+                            <li class="style2">
+                                <strong>A$ {{ 6300|localize }}<span>{% trans "per month" %}</span></strong> {% trans "Systems Administrator" %}
+                            </li>
+                            <li class="style3">
+                                <strong>A$ {{ 7500|localize }}<span>{% trans "per month" %}</span></strong> {% trans "Database Administrator" %}
+                            </li>
+                            <li class="style4">
+                                <strong>A$ {{ 7600|localize }}<span>{% trans "per month" %}</span></strong> {% trans "IT Project Manager" %}
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+
+            <!-- Three
+                <section id="three" class="wrapper style1 special">
+                    <div class="container">
+                        <div class="row 150%">
+                            <section class="4u 12u$(medium) 12u$(small)">
+                                <div class="box style1">
+                                    <span class="image full"><img src="{% static "mentorship/img/pic01.jpg"%}" alt="" /></span>
+                                    <h3>Lorem ipsum</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque esse quas dolores, unde!</p>
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">More</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <section class="4u 6u(medium) 12u$(small)">
+                                <div class="box style2">
+                                    <span class="image full"><img src="{% static "mentorship/img/pic02.jpg"%}" alt="" /></span>
+                                    <h3>Minima odio</h3>
+                                    <p>Tempora, dignissimos maxime quis reprehenderit, quos quia, blanditiis facilis totam iure dolor vel unde.</p>
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">More</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <section class="4u$ 6u$(medium) 12u$(small)">
+                                <div class="box style4">
+                                    <span class="image full"><img src="{% static "mentorship/img/pic03.jpg"%}" alt="" /></span>
+                                    <h3>Consequuntur odit</h3>
+                                    <p>Porro, cupiditate soluta quam maxime reiciendis ut, molestias itaque eum assumenda veritatis?</p>
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">More</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            -->
+
+            <!-- Four -->
+                <section id="four" class="wrapper style3 special">
+                    <div class="container">
+                        <header class="major">
+                            <h2>{% trans "Apply for the waiting list" %}</h2>
+                            <p>{% trans "We have limited spots per month. Apply below and be a part of the next cycle." %}</p>
+                        </header>
+                        <ul class="actions uniform">
+                            <li><a href="{% url 'mentorship:apply' %}" class="button special">{% trans "Apply" %}</a></li>
+                            <li><a href="{% url 'mentorship:about' %}" class="button alt">{% trans "Learn More" %}</a></li>
+                        </ul>
+                    </div>
+                </section>
+        {% endblock content %}

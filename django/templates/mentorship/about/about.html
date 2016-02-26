@@ -1,0 +1,88 @@
+{% extends "_layouts/mentorship.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+
+{% block content %}
+
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <div class="container box big bordered">
+            <header class="major special">
+                <h2>{% trans "The Program" %}</h2>
+                <p>{% trans "6-week program with proven techniques to teach you<br />how to find an IT job and sponsor in Australia" %}</p>
+            </header>
+
+            <!-- Content -->
+                <section id="content">
+                    <a href="#" class="image main"><img src="{% static 'mentorship/img/australia-life.jpg' %}" alt="Life in Australia" /></a>
+
+                    <h3>{% trans "Introduction" %}</h3>
+                    
+                    <p>{% trans "Australia ranks highly in most lists of the best countries to live in the world. It's the only country in the world that haven't had an economy depression in the last 24 years. It's a very rich country powered by a strong economy and a small population, and that's the reason the country welcomes around 250 thousand new immigrants every year."%}</p>
+                    
+                    <p>{% trans "The exciting news is that beyond the available immigration programs, there's a shortcut for skilled professionals to get a visa to live and work in Australia: <strong>The 457 Visa</strong>: Many australian companies can't find enough professionals to hire inside the country so they decide to hire someone from overseas. The whole process can be done via the Internet and in the end, the approved applicant receives an initial 4-year visa to live and work in Australia, where he can later apply for permanent residency." %}</p>
+
+                    <p>{% trans "The 457 visa offers many advantages:" %}</p>
+                    <ul>
+                        <li>{% trans "Anyone in the world can use the <strong>internet</strong> to apply for the open positions." %}</li>
+                        <li>{% trans "The visa is processed in <strong>1-3 months</strong>." %}</li>
+                        <li>{% trans "You don't have to provide <strong>financial proofs</strong> for the visa application, the employment contract is enough." %}</li>
+                        <li>{% trans "The visa application <strong>costs are much lower</strong> and usually paid by the employer." %}</li>
+                    </ul>
+
+                    <p>{% trans 'After getting the 457 visa <strong>twice</strong> as a web developer (in 2008 and in 2015), <a href="http://www.humbertomn.com" target="_blank">Humberto Moreira</a> decided to launch the Mentorship service to help other IT professionals to search for companies that can sponsor them to Australia. After joining forces with other IT professionals that came to Australia under the 457 visa, we created a 6-week program to teach you how to use proven techniques on your job hunting in Australia.' %}</p>
+
+                    <h3>{% trans "Schedule" %}</h3>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Scheduled Time" %}</th>
+                                    <th>{% trans "Activites" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{% trans "Week 1" %}</td>
+                                    <td>{% trans 'We will have a introductory skype meeting to get to know you and to define your objectives. With that we will create your personalized plan and an immigration evaluation. To finish the week we will get your english resumé and cover-letter ready.' %}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Week 2" %}</td>
+                                    <td>{% trans "It's time for hands on work. As important as the resumé (sometimes even more important), your online presence will need to be built and calibrated, accordingly to the companies you want to work. Linkedin, Github, Facebook, Twitter, Stack Overflow, etc..." %}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Week 3" %}</td>
+                                    <td>{% trans "With your professional content all ready to go it's time for practical training. We will have skype sessions to get ready and make an interview practice. We will also select potential employers." %}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Week 4-6" %}</td>
+                                    <td>{% trans "You will be introduced to a private network to connect to professionals, employers and recruiters from more than 10 countries, specially Australia. It's time to start applying for jobs with our help and getting to know recruiters and employers in Australia." %}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>{% trans "Application and Costs" %}</h3>
+
+                    <p>{% trans "We can only take a limited number of professionals per month to provide a high quality personal service to the selected ones. You can apply using the button below to be part of the next cycle. We will evaluate the professional profile of each candidate and will select only the ones we believe have good chances to find a sponsor company to move to Australia." %}
+
+                    <p>{% trans "If selected, you will need to pay a one time fee of <strong>BRL 700.00 with money back guarantee</strong>, that means you can give it a try for the first week and if you're not satisfied, we will give your money back!" %}</p>
+
+                    <section id="four" class="wrapper style3 special">
+                        <div class="container">
+                            <ul class="actions uniform">
+                                <li><a href="{% url 'mentorship:apply' %}" class="button special">{% trans "Apply" %}</a></li>
+                                <li><a href="{% url 'site:contact' %}" class="button alt">{% trans "Contact Us" %}</a></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </section>
+
+        </div>
+    </section>
+
+{% endblock content %}
