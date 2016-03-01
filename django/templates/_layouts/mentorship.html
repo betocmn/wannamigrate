@@ -1,0 +1,155 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load string_extras %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+        {% block head %}
+
+            {% include "_layouts/meta.html" %}
+
+            <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+            <![endif]-->
+
+            <!-- Custom meta-tags for main -->
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <!-- Css files -->
+            <!--[if lte IE 8]><script src="{% static "mentorship/js/ie/html5shiv.js"%}"></script><![endif]-->
+            <link rel="stylesheet" href="{% static "mentorship/css/main.css"%}" />
+            <!--[if lte IE 8]><link rel="stylesheet" href="{% static "mentorship/css/ie8.css"%}" /><![endif]-->
+
+        {% endblock head %}
+
+	</head>
+
+    {% block body %}
+    <body>
+    {% endblock body %}
+
+		<!-- Header -->
+			<header id="header" class="">
+
+                {% block header %}
+				<h1 id="logo">
+                    <a href="{% url 'mentorship:landing' %}">{% trans "Mentorship" %}</a>
+                </h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'mentorship:about' %}">{% trans "PROGRAM" %}</a></li>
+						<li><a href="{% url 'mentorship:faq' %}">{% trans "FAQ" %}</a></li>
+						<li><a href="{% url 'mentorship:apply' %}" class="button alt">{% trans "APPLY" %}</a></li>
+					</ul>
+				</nav>
+                {% endblock header %}
+
+			</header>
+
+		<!-- Content -->
+			{% block content %}{% endblock content %}
+
+		<!-- Footer -->
+            {% block footer %}
+			<div id="footer">
+				<div class="container">
+					<div class="row 200% uniform">
+						<section class="4u 12u$(medium) 12u$(xsmall) footer-info">
+							<h2>{% trans "Work with IT in Australia" %}</h2>
+							<p>{% trans "If you are a talented IT professional with an intermediate level of english we can help you to find a job and sponsor in Australia." %}</p>
+							<ul class="actions">
+								<li><a href="{% url 'mentorship:about' %}" class="button alt">{% trans "Learn more" %}</a></li>
+							</ul>
+						</section>
+						<section class="4u 6u(medium) 12u$(xsmall)">
+							<h3>{% trans 'FAQ' %}</h3>
+							<ul class="updates">
+								<li>
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How does the service work?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "We provide a 6-week consultancy service to help you to find a job and sponsor in Australia..." %}
+                                    </a>
+								</li>
+								<li>
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How can I apply for a slot?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "You can apply for the next cycle by filling out the application form..." %}
+                                    </a>
+								</li>
+								<li>
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "What is the 457 Visa?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "It's a visa that allows australian companies to hire..." %}
+                                    </a>
+								</li>
+                                <li>
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How much does it cost?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "It's free to apply and receive feedback, but if selected you will have..." %}
+                                    </a>
+								</li>
+							</ul>
+						</section>
+						<section class="4u$ 6u$(medium) 12u$(xsmall)">
+							<h3>Contact Us</h3>
+							<ul class="labeled-icons">
+                                <li>
+									<h4 class="icon fa-balance-scale"><span class="label">{% trans "Business" %}</span></h4>
+									{% trans "Intertech S. Informática LTDA<br />Business #: 08.563.174/0001-74" %}
+								</li>
+								<li>
+									<h4 class="icon fa-home"><span class="label">{% trans "Address" %}</span></h4>
+                                    {% trans "797-801 Botany Road, Rosebery<br />Sydney, NSW, Australia." %}
+								</li>
+								<li>
+									<h4 class="icon fa-phone"><span class="label">{% trans "Phone" %}</span></h4>
+									+61 0410979465
+								</li>
+								<li>
+									<h4 class="icon fa-envelope"><span class="label">{% trans "Email" %}</span></h4>
+									<a href="{% url 'site:contact' %}">{% trans "Contact Us" %}</a>
+								</li>
+								<li>
+									<h4 class="icon fa-facebook"><span class="label">Facebook</span></h4>
+									<a href="https://www.facebook.com/wannamigrate">facebook.com/wannamigrate</a>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+				<div class="copyright">
+					&copy; Wanna Migrate Mentorship. All rights reserved.
+				</div>
+			</div>
+            {% endblock footer %}
+
+
+        <!-- SQL Debug -->
+            {% if sql_output %}
+                <br /><br /><br />
+                <div id="sql-output">
+                    <h1>SQL Queries - Make 'em faster :)</h1>
+                    {{ sql_output|safe }}
+                </div>
+            {% endif %}
+
+        <!-- Google Analytics -->
+            {% include "_layouts/analytics.html" %}
+
+		<!-- Scripts -->
+            {% block scripts %}
+                <script src="{% static "mentorship/js/jquery.min.js"%}"></script>
+                <script src="{% static "mentorship/js/jquery.dropotron.min.js"%}"></script>
+                <script src="{% static "mentorship/js/jquery.scrolly.min.js"%}"></script>
+                <script src="{% static "mentorship/js/jquery.scrollgress.min.js"%}"></script>
+                <script src="{% static "mentorship/js/skel.min.js"%}"></script>
+                <script src="{% static "mentorship/js/util.js"%}"></script>
+                <!--[if lte IE 8]><script src="{% static "mentorship/js/ie/respond.min.js"%}"></script><![endif]-->
+                <script src="{% static "mentorship/js/main.js"%}"></script>
+                <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
+            {% endblock scripts %}
+
+	</body>
+</html>

@@ -10,6 +10,14 @@
 
             {% include "_layouts/meta.html" %}
 
+            <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+            <![endif]-->
+
+            <!-- Custom meta-tags for main -->
+            <meta name='viewport' content='width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, minimal-ui' />
+
             <!-- Css files -->
             <link rel="stylesheet" href="{% static "site/css/main.css"%}" />
             <link rel="stylesheet" type="text/css" href="{% static "common/msdropdown/css/dd.css"%}" />

@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url( r'^', include( 'wannamigrate.director.urls', namespace = "director" ) ),
     url( '', include( 'social.apps.django_app.urls', namespace = "social" ) ),
     url( r'^', include( 'wannamigrate.marketplace.urls', namespace = "marketplace" ) ),
+    url( r'^mentorship/', include( 'wannamigrate.mentorship.urls', namespace = "mentorship" ) ),
     url( r'^', include( 'wannamigrate.qa.urls', namespace = "qa" ) ),
     url( r'^', include( 'wannamigrate.site.urls', namespace = "site" ) ),
 ) + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )

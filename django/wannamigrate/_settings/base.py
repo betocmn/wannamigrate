@@ -78,6 +78,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
+
 LOCALE_PATHS = (
     os.path.join( BASE_DIR, '..', 'locale' ),
 )
@@ -289,6 +291,7 @@ LOCAL_APPS = (
     'wannamigrate.marketplace',
     'wannamigrate.qa',
     'wannamigrate.director',
+    'wannamigrate.mentorship',
 )
 DIRECTOR_MODULES = (
     'wannamigrate.director._modules.form_content',
