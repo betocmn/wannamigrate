@@ -234,7 +234,7 @@ msgstr "Quanto custa?"
 #: templates/_layouts/mentorship.html:90
 msgid ""
 "It's free to apply and receive feedback, but if selected you will have..."
-msgstr "É gratuito para aplicar e receber feedbac, mas caso selecionado..."
+msgstr "É gratuito para aplicar e receber feedback, mas caso selecionado..."
 
 #: templates/_layouts/mentorship.html:99
 msgid "Business"
@@ -7723,7 +7723,7 @@ msgid ""
 "6-week program with proven techniques to teach you<br />how to find an IT "
 "job and sponsor in Australia"
 msgstr ""
-"Programa de 6 semanas com técnicas comprovadas para ensiná-lo<br />como "
+"Programa de 6 semanas com técnicas comprovadas para ensiná-lo <br /> como "
 "encontrar um emprego em TI e sponsor na Austrália"
 
 #: templates/mentorship/about/about.html:21
@@ -7906,7 +7906,7 @@ msgid ""
 msgstr ""
 "Aceitamos apenas um número limitado de profissionais por mês, com o objetivo "
 "de manter um alto padrão de qualidade no serviço individual. Você pode "
-"aplicar para o próximo ciclo atravé do botão abaixo. Iremos avaliar o perfil "
+"aplicar para o próximo ciclo através do botão abaixo. Iremos avaliar o perfil "
 "profissional de cada candidato e selecionaremos apenas aqueles que possuem "
 "ótimas chances de receber um visto 457 de uma empresa australiana."
 
@@ -8017,7 +8017,7 @@ msgstr "Mude para a Austrália <br />através de um emprego em TI"
 msgid ""
 "6-week program to learn from professionals <br />who already made it there"
 msgstr ""
-"Programa de 6 semanas para aprender com profissionais<br /> que já chegaram "
+"Programa de 6 semanas para aprender com profissionais <br /> que já chegaram "
 "lá"
 
 #: templates/mentorship/landing/landing.html:20
@@ -8037,10 +8037,10 @@ msgid ""
 "uses proven techniques</strong> to prepare you to find a job in Australia. "
 msgstr ""
 "Caso escolhido por uma empresa australiana, você será contratado e receberá "
-"um visto<br />para trabalhar na Austrália. A boa notícia é que você pode "
+"um visto <br /> para trabalhar na Austrália. A boa notícia é que você pode "
 "aplicar de qualquer lugar do mundo,<br /> através da internet. <strong>Nosso "
 "programa de 6-semanas utiliza técnicas comprovadas</strong> para <br /"
-">prepará-lo para a busca de emprego internacional. "
+"> prepará-lo para a busca de emprego internacional. "
 
 #: templates/mentorship/landing/landing.html:38
 msgid ""
@@ -8105,7 +8105,7 @@ msgid ""
 "Australia has the best minimum-wage in the world <br />and IT is one of the "
 "best paying sectors."
 msgstr ""
-"A Austrália tem o maior salário-mínimo no mundo<br />e TI é um dos setores "
+"A Austrália tem o maior salário-mínimo no mundo <br />e TI é um dos setores "
 "mais aquecidos no país."
 
 #: templates/mentorship/landing/landing.html:76

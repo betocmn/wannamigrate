@@ -3421,6 +3421,11 @@
 					padding: 4em 0 2em 0 ;
 				}
 
+                .wrapper.style1 .box.alt div.author p {
+					font-size: 0.9em;
+                    max-width: 87%
+				}
+
 		/* Banner */
 
 			#banner {
