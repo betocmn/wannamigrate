@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-01 07:15-0300\n"
+"POT-Creation-Date: 2016-03-01 07:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10437,11 +10437,18 @@ msgstr ""
 "inclua URLs de sua presença online (linkedin, facebook, twitter, github, "
 "etc...)"
 
-#: wannamigrate/mentorship/views.py:57
-msgid "Apply - Mentorship - Wanna Migrate"
-msgstr "Candidate-se - Mentorship - Wanna Migrate"
+#: wannamigrate/mentorship/views.py:36 wannamigrate/mentorship/views.py:83
+#: wannamigrate/mentorship/views.py:107 wannamigrate/mentorship/views.py:132
+msgid "Move to Australia by getting an I.T. job"
+msgstr "Mude para a Austrália através de um emprego em TI"
 
-#: wannamigrate/mentorship/views.py:74
+#: wannamigrate/mentorship/views.py:37 wannamigrate/mentorship/views.py:84
+#: wannamigrate/mentorship/views.py:108 wannamigrate/mentorship/views.py:133
+msgid "6-week program to learn from professionals who already made it there"
+msgstr ""
+"Programa de 6 semanas para aprender com profissionais que já chegaram lá"
+
+#: wannamigrate/mentorship/views.py:75
 msgid "Your application was successfully sent."
 msgstr "Sua aplicação foi enviada com sucesso."
 
@@ -11113,6 +11120,9 @@ msgstr "Perfil - Wanna Migrate"
 #: wannamigrate/site/views.py:1395
 msgid "now is following you"
 msgstr "começou a te seguir"
+
+#~ msgid "Apply - Mentorship - Wanna Migrate"
+#~ msgstr "Candidate-se - Mentorship - Wanna Migrate"
 
 #~ msgid "per month"
 #~ msgstr "por mês"
