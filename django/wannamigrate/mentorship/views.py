@@ -32,6 +32,10 @@ def landing( request ):
     # Initializes template data dictionary
     template_data = {}
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Move to Australia by getting an I.T. job' )
+    template_data['meta_description'] = _( '6-week program to learn from professionals who already made it there' )
+
     # Prints Template
     return render( request, 'mentorship/landing/landing.html', template_data )
 
@@ -52,9 +56,6 @@ def apply( request ):
     # Initializes template data dictionary
     template_data = {}
     sent = False
-
-    # Overwrites meta title and description (for SEO)
-    template_data['meta_title'] = _( 'Apply - Mentorship - Wanna Migrate' )
 
     # Creates form
     form = ApplyForm( request.POST or None )
@@ -78,6 +79,10 @@ def apply( request ):
     template_data['form'] = form
     template_data['sent'] = sent
 
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Move to Australia by getting an I.T. job' )
+    template_data['meta_description'] = _( '6-week program to learn from professionals who already made it there' )
+
     # Prints Template
     return render( request, 'mentorship/apply/apply.html', template_data )
 
@@ -97,6 +102,10 @@ def about( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Move to Australia by getting an I.T. job' )
+    template_data['meta_description'] = _( '6-week program to learn from professionals who already made it there' )
 
     # Prints Template
     return render( request, 'mentorship/about/about.html', template_data )
@@ -118,6 +127,10 @@ def faq( request ):
 
     # Initializes template data dictionary
     template_data = {}
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Move to Australia by getting an I.T. job' )
+    template_data['meta_description'] = _( '6-week program to learn from professionals who already made it there' )
 
     # Prints Template
     return render( request, 'mentorship/faq/faq.html', template_data )
