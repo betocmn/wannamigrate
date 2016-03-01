@@ -67,26 +67,26 @@
 							<h3>{% trans 'FAQ' %}</h3>
 							<ul class="updates">
 								<li>
-									<p><a href="#">{% trans "What exactly is the service?" %}</a></p>
-									<a href="{% url 'mentorship:faq' %}#1" class="timestamp">
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How does the service work?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
                                         {% trans "We provide a 6-week consultancy service to help you to find a job and sponsor in Australia..." %}
                                     </a>
 								</li>
 								<li>
-									<p><a href="#">{% trans "How can I apply?" %}</a></p>
-									<a href="{% url 'mentorship:about' %}#2" class="timestamp">
-                                        {% trans "You will need to apply for the waiting list by filling out our application form and...." %}
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How can I apply for a slot?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "You can apply for the next cycle by filling out the application form..." %}
                                     </a>
 								</li>
 								<li>
-									<p><a href="#">{% trans "What is the 457 Visa?" %}</a></p>
-									<a href="{% url 'mentorship:about' %}#3" class="timestamp">
-                                        {% trans "This is a visa used by australian companies to hire foreign professionals that..." %}
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "What is the 457 Visa?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
+                                        {% trans "It's a visa that allows australian companies to hire..." %}
                                     </a>
 								</li>
                                 <li>
-									<p><a href="#">{% trans "How much does it cost?" %}</a></p>
-									<a href="{% url 'mentorship:about' %}#3" class="timestamp">
+									<p><a href="{% url 'mentorship:faq' %}">{% trans "How much does it cost?" %}</a></p>
+									<a href="{% url 'mentorship:faq' %}" class="timestamp">
                                         {% trans "It's free to apply and receive feedback, but if selected you will have..." %}
                                     </a>
 								</li>
@@ -148,6 +148,7 @@
                 <script src="{% static "mentorship/js/util.js"%}"></script>
                 <!--[if lte IE 8]><script src="{% static "mentorship/js/ie/respond.min.js"%}"></script><![endif]-->
                 <script src="{% static "mentorship/js/main.js"%}"></script>
+                <script type="text/javascript" src="{% static 'site/js/util.js' %}"></script>
             {% endblock scripts %}
 
 	</body>

@@ -8,32 +8,11 @@ the templates on the marketplace app
 ##########################
 # Imports
 ##########################
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
-from wannamigrate.core.util import get_object_or_false
-from wannamigrate.mentorship.models import (
-    Applicant
-)
-from wannamigrate.core.models import UserStats
 from wannamigrate.core.mailer import Mailer
-from wannamigrate.site.views import get_situation_form
-from wannamigrate.marketplace.payment_processor import PaymentProcessor
-from wannamigrate.marketplace.tasks import (
-    send_order_confirmation_user, send_order_confirmation_provider
-)
-from wannamigrate.core.decorators import subscription_required
-from django.conf import settings
-from django.db.models import F
-from django.db import transaction
-from django.views.decorators.csrf import csrf_exempt
-from django.utils import translation
-import datetime
-from datetime import timedelta
-from django.utils import timezone
+from wannamigrate.mentorship.forms import ApplyForm
 
 
 
@@ -44,7 +23,7 @@ from django.utils import timezone
 #######################
 def landing( request ):
     """
-    Listing of professionals
+    Home-page for the mentorship product
 
     :param: request
     :return: String - The html page rendered
@@ -64,7 +43,7 @@ def landing( request ):
 #######################
 def apply( request ):
     """
-    Listing of professionals
+    Apply
 
     :param: request
     :return: String - The html page rendered
@@ -72,9 +51,35 @@ def apply( request ):
 
     # Initializes template data dictionary
     template_data = {}
+    sent = False
+
+    # Overwrites meta title and description (for SEO)
+    template_data['meta_title'] = _( 'Apply - Mentorship - Wanna Migrate' )
+
+    # Creates form
+    form = ApplyForm( request.POST or None )
+
+    # If the form has been submitted...
+    if form.is_valid():
+
+        email = form.cleaned_data[ 'email' ]
+        name = form.cleaned_data[ 'name' ]
+        english_level = form.cleaned_data[ 'english_level' ]
+        about = form.cleaned_data[ 'about' ]
+        message = "English Level %s <br /><br />%s" % (english_level, about)
+
+        # Send Email with message
+        # TODO: Change this to a celery background event and use a try/exception block
+        send_result = Mailer.send_contact_email( email, name, message, 'Mentorship Application' )
+        messages.success( request, _( 'Your application was successfully sent.' ) )
+        sent = True
+
+    # pass form to template
+    template_data['form'] = form
+    template_data['sent'] = sent
 
     # Prints Template
-    return render( request, 'mentorship/landing/landing.html', template_data )
+    return render( request, 'mentorship/apply/apply.html', template_data )
 
 
 
@@ -84,7 +89,7 @@ def apply( request ):
 #######################
 def about( request ):
     """
-    Listing of professionals
+    About page
 
     :param: request
     :return: String - The html page rendered
@@ -105,7 +110,7 @@ def about( request ):
 #######################
 def faq( request ):
     """
-    Listing of professionals
+    FAQ
 
     :param: request
     :return: String - The html page rendered
@@ -115,6 +120,6 @@ def faq( request ):
     template_data = {}
 
     # Prints Template
-    return render( request, 'mentorship/faw/faq.html', template_data )
+    return render( request, 'mentorship/faq/faq.html', template_data )
 
 

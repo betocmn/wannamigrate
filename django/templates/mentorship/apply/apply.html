@@ -1,0 +1,66 @@
+{% extends "_layouts/mentorship.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+
+{% block content %}
+
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <div class="container box big bordered">
+            <header class="major special">
+                <h2>{% trans "Apply" %}</h2>
+                <p>{% trans "6-week program with proven techniques to teach you<br />how to find an IT job and sponsor in Australia" %}</p>
+            </header>
+
+            <!-- Content -->
+                <section id="content">
+
+                    <h3>{% trans "Application Form" %}</h3>
+
+                    {% include "site/_common/status.html" %}
+
+                    {% if not sent %}
+
+                        <form method="post" action="" id="main_form">
+
+                            {% csrf_token %}
+
+                            <div class="row uniform 50%">
+                                <div class="6u 12u$(xsmall)">
+                                    {{ form.name }}
+                                    {{ form.name.errors }}
+                                </div>
+                                <div class="6u$ 12u$(xsmall)">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="12u$">
+                                    <div class="select-wrapper">
+                                        {{ form.english_level }}
+                                        {{ form.english_level.errors }}
+                                    </div>
+                                </div>
+                                <div class="12u$">
+                                    {{ form.about }}
+                                    {{ form.about.errors }}
+                                </div>
+                                <div class="12u$">
+                                    <ul class="actions">
+                                        <li><input type="submit" value="{% trans 'Apply Now' %}" class="special" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+
+                    {% endif %}
+
+                </section>
+
+
+
+        </div>
+    </section>
+
+{% endblock content %}
