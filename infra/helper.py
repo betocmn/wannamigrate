@@ -33,9 +33,9 @@ SERVERS = {
     },
 
     "prod" : {
-        "IP" : "54.94.209.35",         # The IP address of the server.
+        "IP" : "54.233.70.76",         # The IP address of the server.
         "DOMAIN" : "wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "sa-east-production.pem",             # The keypair file used to connect to the server.
+        "KEYPAIR" : "production.pem",             # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,         # The HTTP port on the server.
         "HTTPS_PORT" : 443,        # The HTTPS port on the server.
