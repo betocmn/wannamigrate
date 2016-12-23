@@ -175,10 +175,10 @@ MIDDLEWARE_CLASSES = (
 DEFAULT_FROM_EMAIL = 'Wanna Migrate <contact@wannamigrate.com>'
 
 # SMTP Config
-EMAIL_HOST = 'smtpi.wannamigrate.com'
+EMAIL_HOST = 'gator3135.hostgator.com'
 EMAIL_HOST_USER = 'contact@wannamigrate.com'
-EMAIL_HOST_PASSWORD = 'ju829sj'
-EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = '}inFkX@U71=['
+EMAIL_PORT = 465
 
 # Email to receive contact form messages
 EMAIL_NOTIFICATION_CONTACT_FORM = 'humberto@wannamigrate.com'
