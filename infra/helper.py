@@ -21,9 +21,9 @@ SERVERS = {
     },
 
     "dev" : {
-        "IP" : "52.11.204.125",         # The IP address of the server.
-        "DOMAIN" : "dev.wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "us-west-development.pem", # The keypair file used to connect to the server.
+        "IP": "",         # The IP address of the server.
+        "DOMAIN" : "",     # Server's domain name.
+        "KEYPAIR" : "", # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
         "HTTP_PORT" : 80,         # The HTTP port on the server.
         "HTTPS_PORT" : 443,        # The HTTPS port on the server.
@@ -33,12 +33,12 @@ SERVERS = {
     },
 
     "prod" : {
-        "IP" : "54.233.70.76",         # The IP address of the server.
-        "DOMAIN" : "wannamigrate.com",     # Server's domain name.
-        "KEYPAIR" : "production.pem",             # The keypair file used to connect to the server.
+        "IP": "54.179.156.171",         # The IP address of the server.
+        "DOMAIN": "wannamigrate.com",     # Server's domain name.
+        "KEYPAIR": "wanna-singapore-production.pem", # The keypair file used to connect to the server.
         "DEFAULT_USER" : "ubuntu",   # The default user and user group of the server.
-        "HTTP_PORT" : 80,         # The HTTP port on the server.
-        "HTTPS_PORT" : 443,        # The HTTPS port on the server.
+        "HTTP_PORT": 80,         # The HTTP port on the server.
+        "HTTPS_PORT": 443,        # The HTTPS port on the server.
         "HTTP_FORWARDED_PORT" : 80,   # The HTTP forwarded port
         "HTTPS_FORWARDED_PORT" : 443,  # The HTTPS forwarded port
         "BRANCH" : "master",            # Vagrant server doesn't require git
