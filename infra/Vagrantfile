@@ -6,13 +6,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Virtual Machine Box
-  config.vm.box = "ubuntu/trusty32"
+  config.vm.box = "ubuntu/trusty64"
 
-  config.vm.synced_folder "../", "/wanna",
-    owner: "vagrant", group: "wanna-dev"
+  config.vm.synced_folder "../", "/wannamigrate", type: "nfs"
 
-  config.vm.network "forwarded_port", guest: 80, host: 8083
-  config.vm.network "forwarded_port", guest: 81, host: 8183
-  config.vm.network "forwarded_port", guest: 443, host: 4447
+  config.vm.network "private_network", type: "dhcp"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8087
+  config.vm.network "forwarded_port", guest: 81, host: 8187
+  config.vm.network "forwarded_port", guest: 443, host: 4437
 
 end

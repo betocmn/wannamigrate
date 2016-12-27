@@ -1,6 +1,0 @@
-{% load i18n %}
-<ul class="box-menu">
-    <li class="box-item"><a class="box-link message-menu {% if messages_menu_selected %} active {% endif %}" href="{% url "site:list_conversations" %}">{% trans "Inbox" %}</a></li>
-    <li class="box-item"><a class="box-link send-menu {% if sent_menu_selected %} active {% endif %}" href="{% url "site:list_conversations_sent" %}">{% trans "Sent" %}</a></li>
-    <li class="box-item"><a class="box-link files-menu {% if archive_menu_selected %} active {% endif %}" href="{% url "site:list_conversations_archive" %}">{% trans "Archive" context 'noun' %}</a></li>
-</ul>

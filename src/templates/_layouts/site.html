@@ -1,0 +1,98 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load compress %}
+<!doctype html>
+<html>
+
+    <head>
+    {% block head %}
+
+        <!-- Meta -->
+        {% include "_layouts/meta.html" %}
+
+        <!-- CSS -->
+        {% compress css %}
+            <link href="{% static 'site/css/main.css' %}" type="text/css" rel="stylesheet" />
+            <link href="{% static 'site/css/overwrite.css' %}" type="text/css" rel="stylesheet" />
+        {% endcompress %}
+
+        <!--[if lte IE 8]><script src="{% static 'site/js/ie/html5shiv.js' %}"></script><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="{% static 'site/css/ie8.css' %}" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="{% static 'site/css/ie9.css' %}" /><![endif]-->
+
+    {% endblock head %}
+    </head>
+
+    <body class="{% block body_css %}{% endblock body_css %}">
+
+        <div id="page-wrapper">
+
+            {% block header %}
+
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo">
+                      <span>Wanna Migrate</span>
+                    </a>
+                    <nav>
+                        <ul>
+                            <li><a href="#menu">Menu</a></li>
+                        </ul>
+                    </nav>
+                </header>
+
+                <!-- Menu -->
+                <nav id="menu">
+                    <ul class="links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="generic.html">Generic</a></li>
+                        <li><a href="elements.html">Elements</a></li>
+                    </ul>
+                    <ul class="actions vertical">
+                        <li><a href="#" class="button special fit">Sign Up</a></li>
+                        <li><a href="#" class="button fit">Log In</a></li>
+                    </ul>
+                </nav>
+
+            {% endblock header %}
+
+            <!-- Content-->
+            {% block content %}{% endblock content %}
+
+
+            {% block footer %}
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <div class="inner">
+                        <ul class="icons">
+                            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+                            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+                            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+                        </ul>
+                    </div>
+                    <p class="copyright">&copy; 2017 Wannamigrate.com. Made in Sydney, Australia</p>
+                </footer>
+
+            {% endblock footer %}
+
+        </div>
+
+        <!-- Scripts-->
+        {% block scripts %}
+            <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
+            <script type="text/javascript" src="{% static 'common/jquery-scrollex/js/jquery.scrollex.js' %}"></script>
+            <script type="text/javascript" src="{% static 'common/jquery-scrolly/js/jquery.scrolly.js' %}"></script>
+            <script type="text/javascript" src="{% static 'common/skel/js/skel.js' %}"></script>
+            <script type="text/javascript" src="{% static 'common/util/js/util.js' %}"></script>
+            <!--[if lte IE 8]><script src="{% static 'site/js/ie/respond.min.js' %}"></script><![endif]-->
+			<script type="text/javascript" src="{% static 'site/js/layout.js' %}"></script>
+			<script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
+        {% endblock scripts %}
+
+        {% block status %}
+            {% include "_layouts/status.html" %}
+        {% endblock status %}
+
+    </body>
+</html>

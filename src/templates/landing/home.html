@@ -1,0 +1,145 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block body_css %}landing{% endblock body_css %}
+{% block header_css %}alt{% endblock header_css %}
+
+{% block content %}
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <header>
+                <h1>Organise your Immigration Plan</h1>
+                <p>
+                    Millions of people dream about moving to a new country. The ones who succeed
+                    <br /> have one thing in common: They <strong>plan</strong> and
+                    <strong>organise</strong> each step.
+                </p>
+            </header>
+            <ul class="actions">
+                <li><a href="subscribe.html" class="button special big">Get Started</a></li>
+            </ul>
+        </div>
+        <a href="#one" class="more">Learn More</a>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- One -->
+        <section id="one" class="main">
+            <div class="inner spotlight style1">
+                <div class="content">
+                    <header>
+                        <h2>Understand your visa options</h2>
+                    </header>
+                    <p>
+                        Around half a million people immigrate to Australia and Canada every
+                        year in a very diverse group of visa types. Many people waste months
+                        or years trying to be approved in a visa that is not the ideal for their
+                        situation. We will show you all your options and give examples
+                        of other immigrants in a similar situation to help you make the best choice.
+                    </p>
+                </div>
+                <span class="image"><img src="{% static "site/img/pic01.svg" %}" alt="" /></span>
+            </div>
+        </section>
+
+        <!-- Two -->
+        <section id="two" class="main">
+            <div class="inner spotlight alt style2">
+                <div class="content">
+                    <header>
+                        <h2>Plan and organise your application</h2>
+                    </header>
+                    <p>
+                        Let's be direct: Immigration applications are hard! You will have to go
+                        through things such as preparing documents, attending medical examinations,
+                        getting ready for English tests, validating your education and professional
+                        degrees, among others. Our buil-in Task Manager will remind you of when and
+                        what to do in each phase of the process.
+                    </p>
+                </div>
+                <span class="image"><img src="{% static "site/img/pic02.svg" %}" alt="" /></span>
+            </div>
+        </section>
+
+        <!-- Three -->
+        <section id="three" class="main">
+            <div class="inner spotlight style3">
+                <div class="content">
+                    <header>
+                        <h2>Get help all along the way</h2>
+                    </header>
+                    <p>
+                        Our team is made of immigrants. We undertand it's a very exhausting process
+                        so we make sure to share successfull stories from other immigrants and make
+                        it possible for you to interact with them and other people who can help.
+                    </p>
+                </div>
+                <span class="image"><img src="{% static "site/img/pic03.svg" %}" alt="" /></span>
+            </div>
+        </section>
+
+        <!-- Four -->
+        <section id="four" class="main special">
+            <div class="inner">
+                <header>
+                    <h2>Your immigration pathway</h2>
+                </header>
+                <div class="features">
+                    <section>
+                        <span class="icon major fa-book style1"></span>
+                        <h3>Immi<span>Guide</span></h3>
+                        <p>
+                            We've curated all you need to know in an easy to follow step-by-step
+                            guide. Learn about the process and the options you have.
+                        </p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-list-ol style2"></span>
+                        <h3>Immi<span>Tasks</span></h3>
+                        <p>
+                            People who organise each step of the process have higher chances to get
+                            a visa approved. You will be able to visually organise all your tasks.
+                        </p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-save style3"></span>
+                        <h3>Immi<span>Docs</span></h3>
+                        <p>
+                            Use our sample documents to make sure you will never miss any requirement
+                            on your visa application.
+                        </p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-coffee style4"></span>
+                        <h3>Immi<span>Social</span></h3>
+                        <p>
+                            Get inspired, have your questions answered and interact with other
+                            immigrants who already made it to their dream country.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+                <!-- CTA -->
+        <section id="cta" class="main special">
+            <div class="inner">
+                <p>
+                    Take the first step to change your life. Join our community<br />
+                    and start planning today your move to a better country.
+                </p>
+                <ul class="actions vertical">
+                    <li><a href="subscribe.html" class="button special big">Get Started</a></li>
+                    <li><a href="#" class="button big">How it Works</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}

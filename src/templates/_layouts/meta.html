@@ -1,0 +1,36 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!-- Core Metas -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Title" content="{% if meta_title %}{{ meta_title }}{% else %}{% trans "Wanna Migrate | Organise your immigration plan." %}{% endif %}" />
+<title>{% if meta_title %}{{ meta_title }}{% else %}{% trans "Wanna Migrate | Organise your immigration plan." %}{% endif %}</title>
+<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{% trans "Wanna Migrate helps you to organise all you need to immigrate to your dream country." %}{% endif %}" />
+<meta name="keywords" content="{% trans "wanna migrate, immigrate, immigration, australia, canada, migrate to australia" %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Social Media Metas -->
+<meta property="og:url" content="https://www.wannamigrate.com" />
+<meta property="og:site_name" content="{% trans "Wanna Migrate" %}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{% if meta_title %}{{ meta_title }}{% else %}{% trans "Lele & Beto Wedding" %}{% endif %}" />
+<meta property="og:image" content="{% if meta_image %}{{ meta_image }}{% else %}{{ base_url }}{% static 'site/img/banner.jpg' %}{% endif %}" />
+<meta property="og:description" content="{% if meta_description %}{{ meta_description }}{% else %}{% trans "Wanna Migrate helps you to organise all you need to immigrate to your dream country." %}{% endif %}" />
+
+<!-- Crawling Metas -->
+{% if is_prod  %}
+    <meta name="robots" content="all" />
+{% else %}
+    <meta name="robots" content="noindex" />
+{% endif %}
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="{% static "site/img/favicon/apple-touch-icon.png" %}">
+<link rel="icon" type="image/png" href="{% static "site/img/favicon/favicon-32x32.png" %}" sizes="32x32">
+<link rel="icon" type="image/png" href="{% static "site/img/favicon/favicon-16x16.png" %}" sizes="16x16">
+<link rel="manifest" href="{% static "site/img/favicon/manifest.json" %}">
+<link rel="mask-icon" href="{% static "site/img/favicon/safari-pinned-tab.svg" %}" color="#5bbad5">
+<link rel="shortcut icon" href="{% static "site/img/favicon/favicon.ico" %}">
+<meta name="msapplication-config" content="{% static "site/img/favicon/browserconfig.xml" %}">
+<meta name="theme-color" content="#ffffff">
+

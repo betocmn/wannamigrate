@@ -1,0 +1,45 @@
+/***** GENERAL ********/
+h1, h2 {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+
+/**** HEADER *****/
+#header .logo {
+    display: block;
+    height: inherit;
+    line-height: inherit;
+    background: transparent url("../img/logo-wanna-migrate.png") no-repeat center center;
+    background-size: contain;
+    width: 160px;
+}
+#header .logo span{
+    display: none;
+}
+#header.alt .logo {
+    background-image: url("../img/logo-wanna-migrate-alt.png");
+}
+@media screen and (max-width: 736px) {
+    #header .logo {
+        width: 130px;
+    }
+}
+
+
+/**** HOME *****/
+@media screen and (min-width: 737px) {
+    #banner .inner {
+        max-width: 45%;
+        margin-left: 40%;
+    }
+}
+@media screen and (max-width: 480px) {
+    #banner{
+        background-position-x: -136px;
+    }
+}
+#four h3 span {
+  font-weight: 700;
+}
