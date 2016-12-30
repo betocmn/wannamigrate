@@ -22,7 +22,7 @@ SERVERS = {
     },
 
     "prod": {
-        "IP": "54.179.156.171",
+        "IP": "52.221.243.179",
         "DOMAIN": "wannamigrate.com",
         "KEYPAIR": "wanna-singapore-production.pem",
         "DEFAULT_USER": "ubuntu",

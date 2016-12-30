@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /logout
+Disallow: /recover-password
+Disallow: /checkout
+
+Sitemap: https://www.wannamigrate.com/sitemap.xml
