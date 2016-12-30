@@ -37,11 +37,13 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "wannamigrate.com",
     "www.wannamigrate.com",
+    "52.221.243.179"
 ]
 
 INTERNAL_IPS = (
     "localhost",
     "127.0.0.1",
+    "52.221.243.179"
 )
 
 # Path of wsgi app

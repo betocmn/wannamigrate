@@ -127,79 +127,7 @@ exec {project_alias}venv/bin/{gunicorn_alias} --workers 3 --bind unix:{source_ro
 """
 
 NGINX_CONF = """
-server {{
-    listen 80;
-    server_name {www_domain};
 
-    # For pre-compressed copies (.gz)
-    gzip_static on;
-
-    # Apple icons
-    location ^~ /apple-touch-icon {{
-        root {source_root}/static/site/img/favicon;
-        access_log off;
-        log_not_found off;
-    }}
-
-    # Favicon
-    location = /favicon.ico {{
-        root {source_root}/static/site/img/favicon;
-        access_log off;
-        log_not_found off;
-    }}
-
-    # Robots.txt
-    location = /robots.txt {{
-        root {source_root}/static/site/seo;
-        access_log off;
-        log_not_found off;
-    }}
-
-    # Site Map
-    location = /sitemap.xml {{
-        root {source_root}/static/site/seo;
-        access_log off;
-        log_not_found off;
-    }}
-
-    # Cache - cache.appcache, your document html and data
-    location ~* \.(?:manifest|appcache|html?|xml|json)$ {{
-        root {source_root};
-        expires -1;
-    }}
-
-    # Cache - Media: images, icons, video, audio, HTC
-    location ~* \.(?:jpg|jpeg|gif|png|pdf|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {{
-        root {source_root};
-        expires 1M;
-        access_log off;
-        add_header Cache-Control "public";
-    }}
-
-    # Cache - CSS and Javascript
-    location ~* \.(?:css|js)$ {{
-        root {source_root};
-        expires 1y;
-        access_log off;
-        add_header Cache-Control "public";
-    }}
-
-    # Static html/css/img
-    location /static/ {{
-        root {source_root};
-    }}
-
-    # User Uploads
-    location /upload/ {{
-        root {source_root};
-    }}
-
-    # Forward everything else to Django
-    location / {{
-        include proxy_params;
-        proxy_pass http://unix:{\}/gunicorn.sock;
-    }}
-}}
 """
 
 CELERY_WORKER_CONF = """
@@ -314,7 +242,6 @@ def config(args):
         remote_commands.append("echo \"   ...DONE!\"")
 
         # Updates apt-get
-        """
         remote_commands.append("echo \" \"")
         remote_commands.append("echo \"#########################\"")
         remote_commands.append("echo \"# UPDATING APT-GET      #\"")
@@ -334,7 +261,6 @@ def config(args):
         for package in INSTALL_PACKAGES:
             remote_commands.append("sudo apt-get install {0} --yes".format(package))
         remote_commands.append("echo \"   ...DONE!\"")
-        """
 
         # Checks for the WITH param to know if
         # there is more features to install, like database.
@@ -461,7 +387,6 @@ def config(args):
             gunicorn_conf = set_real_time_config(GUNICORN_CONF, server)
 
             # Generates gunicorn upstart file
-            """
             remote_commands.extend([
                 # wsgi conf file
                 "sudo rm -rf {0}/{1}.conf".format(GUNICORN_UPSTART_PATH, GUNICORN_ALIAS),
@@ -511,13 +436,10 @@ def config(args):
                 "sudo service supervisor restart"
             ])
             remote_commands.append("echo \"   ...DONE!\"")
-            """
 
         # Clears nginx's default conf.
-        """
         remote_commands.append("echo \"Removing nginx's default conf file\"")
         remote_commands.append("sudo rm -r {0}/default".format(NGINX_SITES_AVAILABLE_PATH))
-        """
 
         # Reinforces the owner and group of all project's folders
         if server != 'local':
