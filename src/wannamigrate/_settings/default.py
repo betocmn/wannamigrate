@@ -174,7 +174,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
