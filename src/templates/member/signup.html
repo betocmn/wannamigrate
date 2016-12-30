@@ -2,81 +2,111 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% block body_css %}landing{% endblock body_css %}
-{% block header_css %}alt{% endblock header_css %}
-
 {% block content %}
 
     <!-- Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" class="signup-wrapper">
 
         <!-- Main -->
         <section id="main" class="main">
+
             <div class="inner">
                 <header class="major">
-                    <h1>Sign Up</h1>
+                    <h1>{% trans "SIGN UP" %}</h1>
                 </header>
 
-                <div class="6u$ 12u$(medium)">
+                <div class="row">
 
-                    <!-- Form -->
-                    <h3>Form</h3>
+                    <div class="6u 12u$(small)">
 
-                    <form method="post" action="#">
-                        <div class="row uniform">
-                            <div class="6u 12u$(xsmall)">
-                                <input type="text" name="name" id="name" value="" placeholder="Name" />
-                            </div>
-                            <div class="6u$ 12u$(xsmall)">
-                                <input type="email" name="email" id="email" value="" placeholder="Email" />
-                            </div>
-                            <!-- Break -->
-                            <div class="12u$">
-                                <div class="select-wrapper">
-                                    <select name="category" id="category">
-                                        <option value="">- Category -</option>
-                                        <option value="1">Manufacturing</option>
-                                        <option value="1">Shipping</option>
-                                        <option value="1">Administration</option>
-                                        <option value="1">Human Resources</option>
-                                    </select>
+                        <!-- Form -->
+                        <h3>{% trans "CREATE YOUR ACCOUNT" %}</h3>
+
+                        <form method="post" action="">
+
+                            {% csrf_token %}
+
+                            <div class="row uniform">
+
+                                <div class="6u 12u$(xsmall) {% if form.first_name.errors %}has-error{% endif %}">
+                                    {{ form.first_name }}
+                                    {{ form.first_name.errors }}
+                                </div>
+                                <div class="6u$ 12u$(xsmall) {% if form.last_name.errors %}has-error{% endif %}">
+                                    {{ form.last_name }}
+                                    {{ form.last_name.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.country.errors %}has-error{% endif %}">
+                                    <div class="select-wrapper">
+                                        {{ form.country }}
+                                        {{ form.country.errors }}
+                                    </div>
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.email.errors %}has-error{% endif %}">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.password.errors %}has-error{% endif %}">
+                                    {{ form.password }}
+                                    {{ form.password.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                {% for radio in form.gender %}
+                                    <div class="3u{% if forloop.first %} -6u 3u(small) -5u(small){% else %}${% endif %}">
+                                        {{ radio.tag }}
+                                        <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                    </div>
+                                {% endfor %}
+
+                                <!-- Break -->
+                                <div class="12u$">
+                                    <ul class="actions">
+                                        <li>
+                                            <input type="submit" value="{% trans "Create Account" %}" class="special" />
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <!-- Break -->
-                            <div class="4u 12u$(small)">
-                                <input type="radio" id="priority-low" name="priority" checked>
-                                <label for="priority-low">Low</label>
-                            </div>
-                            <div class="4u 12u$(small)">
-                                <input type="radio" id="priority-normal" name="priority">
-                                <label for="priority-normal">Normal</label>
-                            </div>
-                            <div class="4u$ 12u$(small)">
-                                <input type="radio" id="priority-high" name="priority">
-                                <label for="priority-high">High</label>
-                            </div>
-                            <!-- Break -->
-                            <div class="6u 12u$(small)">
-                                <input type="checkbox" id="copy" name="copy">
-                                <label for="copy">Email me a copy</label>
-                            </div>
-                            <div class="6u$ 12u$(small)">
-                                <input type="checkbox" id="human" name="human" checked>
-                                <label for="human">I am a human</label>
-                            </div>
-                            <!-- Break -->
-                            <div class="12u$">
-                                <textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
-                            </div>
-                            <!-- Break -->
-                            <div class="12u$">
-                                <ul class="actions">
-                                    <li><input type="submit" value="Send Message" class="special" /></li>
-                                    <li><input type="reset" value="Reset" /></li>
+                        </form>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <div class="facebook">
+
+                            <p>{% trans "or alternatively, you can:" %}</p>
+
+                            <div class="8u -2u 12u(medium) -0u(medium)">
+                                <ul class="actions vertical">
+                                    <li>
+                                        <a href="#" class="facebook-button button special fit icon fa-facebook-official">
+                                            {% trans "Sign-up with Facebook" %}
+                                        </a>
+                                        <div class="facebook-loading" style="display: none;">
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
+
                         </div>
-                    </form>
+
+                    </div>
+
+                    <div class="12u align-center">
+                        <p>
+                            {% trans "Already registered?" %}
+                            <a href="{% url "member:login" %}">{% trans "Log in here" %}</a>
+                        </p>
+                    </div>
 
                 </div>
 
@@ -86,3 +116,28 @@
     </div>
 
 {% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'site/js/facebook.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            facebook.setup_login({
+                facebook_login_url: "{% url "member:login_facebook" %}",
+                redirect_url: "{{ next }}",
+                facebook_app_id: '{{ facebook_app_id }}',
+                facebook_button_element: '.facebook-button',
+                facebook_loading_element: '.facebook-loading',
+            });
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

@@ -26,6 +26,22 @@ def add_global_template_data( request ):
     # Determine if we are in PROD server or not
     template_data['is_prod'] = getattr(settings, 'IS_PROD', False)
 
+    # If user has just signed-up and we have still not done the tracking alias
+    if 'user_is_pending_tracking_alias' in request.session \
+            and request.session['user_is_pending_tracking_alias']:
+        template_data['user_is_pending_tracking_alias'] = True
+        request.session['user_is_pending_tracking_alias'] = False
+    else:
+        template_data['user_is_pending_tracking_alias'] = False
+
+    # Segment client key to the front-end
+    template_data['segment_key'] = getattr(settings, 'SEGMENT_KEY', False)
+
+    # Tracking events needed globally
+    template_data['tracking_event_viewed_content'] = getattr(
+        settings, 'TRACKING_EVENT_VIEWED_CONTENT', False
+    )
+
     # Full path
     template_data['relative_full_path'] = request.get_full_path()
 

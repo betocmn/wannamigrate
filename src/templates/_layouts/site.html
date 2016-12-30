@@ -31,12 +31,20 @@
 
                 <!-- Header -->
                 <header id="header">
-                    <a href="index.html" class="logo">
+                    <a href="{% url 'landing:home' %}" class="logo">
                       <span>Wanna Migrate</span>
                     </a>
                     <nav>
                         <ul>
-                            <li><a href="#menu">Menu</a></li>
+                            <li>
+                                <a href="#menu">
+                                    {% if user and user.is_authenticated %}
+                                        {{ user.first_name|lower }}
+                                    {% else %}
+                                        MENU
+                                    {% endif %}
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </header>
@@ -44,14 +52,20 @@
                 <!-- Menu -->
                 <nav id="menu">
                     <ul class="links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="generic.html">Generic</a></li>
-                        <li><a href="elements.html">Elements</a></li>
+                        <li><a href="{% url 'landing:home' %}">{% trans "HOME" %}</a></li>
+                        <li><a href="{% url 'company:how_it_works' %}">{% trans "HOW IT WORKS" %}</a></li>
+                        <li><a href="{% url 'company:contact' %}">{% trans "CONTACT US" %}</a></li>
                     </ul>
-                    <ul class="actions vertical">
-                        <li><a href="#" class="button special fit">Sign Up</a></li>
-                        <li><a href="#" class="button fit">Log In</a></li>
-                    </ul>
+                    {% if not user or not user.is_authenticated %}
+                        <ul class="actions vertical">
+                            <li><a href="{% url 'member:signup' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
+                            <li><a href="{% url 'member:login' %}" class="button fit">{% trans "LOG IN" %}</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="actions vertical">
+                            <li><a href="{% url 'member:logout' %}" class="button fit">{% trans "LOGOUT" %}</a></li>
+                        </ul>
+                    {% endif %}
                 </nav>
 
             {% endblock header %}
@@ -65,13 +79,46 @@
                 <!-- Footer -->
                 <footer id="footer">
                     <div class="inner">
-                        <ul class="icons">
-                            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-                            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-                            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
-                        </ul>
+                        <div class="row">
+                            <div class="3u 6u(small)">
+                                <ul class="links">
+                                    <li><a href="{% url 'landing:home' %}">{% trans "Home" %}</a> </li>
+                                    <li><a href="{% url 'company:how_it_works' %}">{% trans "How it works" %}</a> </li>
+                                    <li><a href="{% url 'member:signup' %}">{% trans "Sign up" %}</a> </li>
+                                    <li><a href="{% url 'member:login' %}">{% trans "Log in" %}</a> </li>
+                                </ul>
+                            </div>
+                            <div class="3u 6u$(small)">
+                                <ul class="links">
+                                    <li><a href="{% url 'company:contact' %}">{% trans "Contact us" %}</a> </li>
+                                    <li><a href="{% url 'company:terms' %}">{% trans "Terms" %}</a> </li>
+                                    <li><a href="{% url 'company:privacy' %}">{% trans "Privacy" %}</a> </li>
+                                    <li><a href="http://www.border.gov.au/">{% trans "Australian Government" %}</a> </li>
+                                </ul>
+                            </div>
+                            <div class="6u 12u$(small)">
+                                <ul class="icons">
+                                    <li>
+                                        <a href="https://www.facebook.com/wannamigrate" class="icon alt fa-facebook">
+                                            <span class="label">Facebook</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/wannamigrate" class="icon alt fa-instagram">
+                                            <span class="label">Instagram</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'company:contact' %}" class="icon alt fa-envelope">
+                                            <span class="label">Email</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <p class="copyright">&copy; 2017 Wannamigrate.com. {% trans "Made in Sydney - Australia" %}</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="copyright">&copy; 2017 Wannamigrate.com. Made in Sydney, Australia</p>
+
                 </footer>
 
             {% endblock footer %}
@@ -80,14 +127,25 @@
 
         <!-- Scripts-->
         {% block scripts %}
-            <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
-            <script type="text/javascript" src="{% static 'common/jquery-scrollex/js/jquery.scrollex.js' %}"></script>
-            <script type="text/javascript" src="{% static 'common/jquery-scrolly/js/jquery.scrolly.js' %}"></script>
-            <script type="text/javascript" src="{% static 'common/skel/js/skel.js' %}"></script>
-            <script type="text/javascript" src="{% static 'common/util/js/util.js' %}"></script>
+
+            {% compress js %}
+                <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/jquery-scrollex/js/jquery.scrollex.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/jquery-scrolly/js/jquery.scrolly.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/skel/js/skel.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/load-css/js/loadCSS.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/pnotify/js/pnotify.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/util/js/util.js' %}"></script>
+                <script type="text/javascript" src="{% static 'site/js/layout.js' %}"></script>
+                <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
+                <script type="text/javascript">
+                    loadCSS('{% static 'common/font-awesome/css/font-awesome.css' %}');
+                    loadCSS('{% static 'common/pnotify/css/pnotify.css' %}');
+                </script>
+            {% endcompress %}
+
             <!--[if lte IE 8]><script src="{% static 'site/js/ie/respond.min.js' %}"></script><![endif]-->
-			<script type="text/javascript" src="{% static 'site/js/layout.js' %}"></script>
-			<script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
+
         {% endblock scripts %}
 
         {% block status %}

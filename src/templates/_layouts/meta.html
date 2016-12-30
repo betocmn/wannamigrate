@@ -34,3 +34,26 @@
 <meta name="msapplication-config" content="{% static "site/img/favicon/browserconfig.xml" %}">
 <meta name="theme-color" content="#ffffff">
 
+<!-- Tracking - Segment -->
+<script type="text/javascript">
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("{{ segment_key }}");
+  analytics.page();
+  }}();
+</script>
+{% if user.is_authenticated %}
+    <script type="text/javascript">
+        {% if user_is_pending_tracking_alias %}
+            analytics.alias('{{ user.id }}');
+        {% endif %}
+        analytics.identify('{{ user.id }}', {
+            email : '{{ user.email }}',
+            id: '{{ user.id }}',
+            firstName: '{{ user.first_name|default:'' }}',
+            lastName: '{{ user.last_name|default:'' }}',
+            name: {% if user.first_name %}'{{ user.first_name }} {{ user.last_name }}'{% else %}''{% endif %},
+            created: '{{ user.created_date|date:"Y-m-d H:i:s" }}',
+        });
+    </script>
+{% endif %}
+

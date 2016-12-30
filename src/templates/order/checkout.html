@@ -1,0 +1,148 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom CSS -->
+    <link href="{% static 'common/featherlight/css/featherlight.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="checkout-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "YOU'RE ALMOST IN" %}</h1>
+                </header>
+
+                <p>
+                    {% blocktrans %}
+                        All options below will give you <strong>lifetime access</strong>
+                        to all tools on our immigration assistance platform, including free
+                        upgrades to all new features released and countries added.
+                    {% endblocktrans %}
+                </p>
+
+                <div class="row">
+
+                    <div class="6u 12u$(small)">
+
+                        <h3>Default Lifetime Subscription</h3>
+                        <div class="box">
+                            <p>
+                                {% blocktrans %}
+                                    No requirements. Just confirm your subscription and get access
+                                    straight away.
+                                {% endblocktrans %}
+                            </p>
+                            <div class="align-center">
+                                <input type="radio" id="plan-default" name="plan" checked value="default" />
+                                <label for="plan-default">$ 15</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <h3>Discount Lifetime Subscription</h3>
+                        <div class="box">
+                            <p>
+                                {% blocktrans %}
+                                    You get the discount to post about us on your favourite social
+                                    media profile.
+                                {% endblocktrans %}
+                            </p>
+                            <div class="align-center">
+                                <input type="radio" id="plan-discount" name="plan" value="discount" />
+                                <label for="plan-discount">$ 9</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="12u$">
+                        <ul class="actions vertical align-center">
+                            <li>
+                                <a href="#" class="button special big" id="payment-button" data-featherlight="#confirmation">
+                                    {% trans "MAKE PAYMENT" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <hr class="major" />
+
+                <div class="12u align-center">
+                    <p>
+                        {% trans "Not sure what's included?" %}
+                        <a href="{% url 'company:how_it_works' %}">{% trans "Check How it Works" %}</a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <div class="12u$ hidden" id="confirmation">
+
+        <h3>{% trans "Thank You" %}</h3>
+        <p>
+            {% blocktrans %}
+                We are redesigning the platform from zero to make your experience even better.
+                We will be ready to accept new members in late January, 2017.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% trans "If you want to guarantee the lifetime access offer, let us know via our" %}
+            <a href="{% url 'company:contact' %}">contact page</a>.
+        </p>
+
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'common/featherlight/js/featherlight.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Sends tracking event on payment button clicked
+            $("#payment-button").click(function () {
+                var plan = $('input[name=plan]:checked').val();
+                // Sends tracking event
+                track_event('{{ tracking_event_proceeded_to_payment }}', {
+                    // Used by other services (e.g. Facebook pixel)
+                    subscription_plan: plan,
+                    currency: 'AUD',
+                    value: 2,
+                    content_category: 'checkout',
+                    content_name: 'Payment',
+                });
+            })
+
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

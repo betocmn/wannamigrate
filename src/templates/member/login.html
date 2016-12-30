@@ -1,0 +1,119 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="login-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "LOG IN" %}</h1>
+                </header>
+
+                <div class="row">
+
+                    <div class="6u 12u$(small)">
+
+                        <!-- Form -->
+                        <h3>{% trans "YOUR LOGIN DETAILS" %}</h3>
+
+                        <form method="post" action="">
+
+                            {% csrf_token %}
+
+                            <div class="row uniform">
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.email.errors %}has-error{% endif %}">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.password.errors %}has-error{% endif %}">
+                                    {{ form.password }}
+                                    {{ form.password.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$">
+                                    <ul class="actions">
+                                        <li>
+                                            <input type="submit" value="{% trans "Log in" %}" class="special" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <div class="facebook">
+
+                            <p>{% trans "or alternatively, you can:" %}</p>
+
+                            <div class="8u -2u 12u(medium) -0u(medium)">
+                                <ul class="actions vertical">
+                                    <li>
+                                        <a href="#" class="facebook-button button special fit icon fa-facebook-official">
+                                            {% trans "Log in with Facebook" %}
+                                        </a>
+                                        <div class="facebook-loading" style="display: none;">
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="12u align-center">
+                        <p>
+                            {% trans "Not registered yet?" %}
+                            <a href="{% url 'member:signup' %}">{% trans "Sign up here" %}</a>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'site/js/facebook.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            facebook.setup_login({
+                facebook_login_url: "{% url "member:login_facebook" %}",
+                redirect_url: "{{ next }}",
+                facebook_app_id: '{{ facebook_app_id }}',
+                facebook_button_element: '.facebook-button',
+                facebook_loading_element: '.facebook-loading',
+            });
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

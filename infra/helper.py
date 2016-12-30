@@ -62,7 +62,7 @@ LINUX_DEV_PACKAGES = [
 
 # Virtualenv packages
 VIRTUALENV_PACKAGES = [
-    "django==1.9.10",
+    "Django==1.10.4",
     "django-stdimage==2.3.3",
     "pytz==2016.6.1",
     "requests==2.11.1",

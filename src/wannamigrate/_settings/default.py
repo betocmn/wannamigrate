@@ -89,6 +89,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, '..', "static")
 
 
 #########################################
+# AUTH SETTINGS
+#########################################
+AUTH_USER_MODEL = 'core.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'wannamigrate.core.auth_backends.AdminBackend',
+)
+
+
+#########################################
 # TEMPLATE SETTINGS
 #########################################
 
@@ -115,6 +125,8 @@ TEMPLATES = [
 # MIDDLEWARES
 #########################################
 MIDDLEWARE_CLASSES = (
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,7 +135,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
 )
 
 
@@ -145,6 +156,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'wannamigrate.core',
     'wannamigrate.landing',
+    'wannamigrate.company',
     'wannamigrate.member',
     'wannamigrate.order',
 )
@@ -177,9 +189,18 @@ EXCLUDE_FROM_MINIFYING = ('/admin/')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
+            'formatter': 'verbose',
             'class': 'logging.FileHandler',
             'filename': '/wannamigrate/debug.log',
         },
@@ -199,6 +220,14 @@ LOGGING = {
 
 
 #########################################
+# CELERY SETTINGS
+#########################################
+CELERY_TIMEZONE = 'Australia/Sydney'
+if IS_PROD:
+    CELERYBEAT_SCHEDULE = {}
+
+
+#########################################
 # WANNAMIGRATE APP SETTINGS
 #########################################
 
@@ -212,3 +241,41 @@ BOOLEAN_CHOICES = (
     (False, _('No'))
 )
 TIMEZONES = [(tz, tz) for tz in pytz.common_timezones]
+
+# DB IDS - Countries
+DB_ID_COUNTRY_AUSTRALIA = 117
+
+# DB IDS - Payment Types
+DB_ID_PAYMENT_TYPE_STRIPE_CARDS = 1
+DB_ID_PAYMENT_TYPE_PAYPAL_CARDS = 2
+
+# DB IDS - Order Status
+DB_ID_ORDER_STATUS_AWAITING_PAYMENT = 1
+DB_ID_ORDER_STATUS_AUTHORISED_WAITING = 2
+DB_ID_ORDER_STATUS_CHARGED_SUCCEEDED = 3
+DB_ID_ORDER_STATUS_CHARGED_FAILED = 4
+DB_ID_ORDER_STATUS_CHARGED_REFUNDED = 5
+DB_ID_ORDER_STATUS_AWAITING_AUTHORISATION = 6
+
+# DB IDS - Subscription Status
+DB_ID_SUBSCRIPTION_STATUS_NEVER_ACTIVATED = 1
+DB_ID_SUBSCRIPTION_STATUS_ACTIVE = 2
+DB_ID_SUBSCRIPTION_STATUS_EXPIRED = 3
+DB_ID_SUBSCRIPTION_STATUS_CANCELLED = 4
+DB_ID_SUBSCRIPTION_STATUS_SKIP = 5
+DB_ID_SUBSCRIPTION_STATUS_PAUSE = 6
+
+# EMAIL SETTINGS
+EMAIL_DEFAULT_TO_ADDRESS = 'hello@humbertomn.com'
+EMAIL_DEFAULT_FROM_ADDRESS = 'humberto@wannamigrate.com'
+EMAIL_DEFAULT_FROM_NAME = 'Wanna Migrate'
+EMAIL_TEMPLATE_CONTACT_FORM = 'aa8f9c9d-9e1a-441a-9142-9839e8a858f9'
+
+# TRACKING EVENTS SETTINGS
+TRACKING_EVENT_SENT_SUPPORT_MESSAGE = 'sent_support_message'
+TRACKING_EVENT_LOGGED_IN = 'logged_in'
+TRACKING_EVENT_SIGNED_UP = 'signed_up'
+TRACKING_EVENT_REQUESTED_PASSWORD_RESET = 'requested_password_reset'
+TRACKING_EVENT_PLACED_ORDER = 'placed_order'
+TRACKING_EVENT_VIEWED_CONTENT = 'viewed_content'
+TRACKING_EVENT_PROCEEDED_TO_PAYMENT = 'proceeded_to_payment'

@@ -1,0 +1,19 @@
+{% if messages and not skip_global %}
+
+    {% for message in messages %}
+        <script type="text/javascript">
+            display_notification('{{ message.tags }}', '', '{{ message }}');
+        </script>
+    {% endfor %}
+
+{% elif form and form.errors %}
+
+    <script type="text/javascript">
+        var error_message = 'You have errors on the form:';
+        {% for error in form.non_field_errors %}
+            error_message += '<br />{{ error|escape }}';
+        {% endfor %}
+        display_notification('error', 'Error', error_message);
+    </script>
+
+{% endif %}

@@ -1,0 +1,219 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom CSS -->
+    <link href="{% static 'common/tooltipster/css/tooltipster.bundle.min.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="about-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "ABOUT" %}</h1>
+                </header>
+
+                <h2 id="content">{% trans "TO IMMIGRANTS. BY IMMIGRANTS." %}</h2>
+                <p>
+                    {% blocktrans %}
+                        It all started in 2001, when I was a teenager in Brazil, dreaming
+                        about living in a better country. One day I decided to start researching about
+                        immigration and wrote down an initial action plan. My end goal was to work
+                        and live in Australia. Fast forward to November 2016, after migrating
+                        temporarily to the USA, Chile and the UK, I've obtained my
+                        Australian Permanent Residency Visa and currently live in Sydney.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}
+                        In all these years I've gone through a lot of immigration bureaucracy, not
+                        just on my applications, but also helping out other people trying to move
+                        to Australia or Canada. With that, I was able to identify many best
+                        practices and common errors when trying to obtain a visa to move
+                        to a new country and, as a software developer, it was obvious I needed to
+                        build an online tool to help other people with similar dreams.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    <em>{% trans "- Humberto Moreira, Founder." %}</em>
+                </p>
+
+                <h2 id="content">{% trans "HOW IT WORKS" %}</h2>
+                <p>
+                    {% blocktrans %}
+                        After joining, you will get <strong>lifetime access</strong>
+                        to all tools on our immigration assistance platform, including free
+                        upgrades to all new features released and countries added.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}
+                        We know it can be a difficult plan, so you have the freedom to start using
+                        it today or in 5 years, whenever you are ready.
+                    {% endblocktrans %}
+                </p>
+
+                <!--
+
+                <div class="row screens top-40">
+                    <div class="4u 12u$(medium)">
+                        <span class="image fit">
+                            <img src="{% static 'site/img/wanna-migrate-screen-1.png' %}" alt="" />
+                        </span>
+                    </div>
+                    <div class="4u 12u$(medium)">
+                        <span class="image fit">
+                            <img src="{% static 'site/img/wanna-migrate-screen-2.png' %}" alt="" />
+                        </span>
+                    </div>
+                    <div class="4u$ 12u$(medium)">
+                        <span class="image fit">
+                            <img src="{% static 'site/img/wanna-migrate-screen-3.png' %}" alt="" />
+                        </span>
+                    </div>
+                </div>
+                -->
+
+                <div class="feature-list top-15">
+                    <h3>{% trans "FEATURES" %}</h3>
+                    <ul class="alt">
+                        <li>
+                            <span class="icon major fa-map-signs style1"></span>
+                            <span class="title">{% trans "immi<strong>Guide</strong>" %}</span> -
+                            {% trans "Learn the important parts of the process on a step-by-step guide." %}
+                        </li>
+                        <li>
+                            <span class="icon major fa-tasks style2"></span>
+                            <span class="title">{% trans "immi<strong>Tasks</strong>" %}</span> -
+                            {% trans "Organise all steps required in a drag-and-drop tool." %}
+                        </li>
+                        <li>
+                            <span class="icon major fa-file-text style3"></span>
+                            <span class="title">{% trans "immi<strong>Docs</strong>" %}</span> -
+                            {% trans "Use our sample docs to make sure you're putting in the required information." %}
+                        </li>
+                        <li>
+                            <span class="icon major fa-hashtag style4"></span>
+                            <span class="title">{% trans "immi<strong>Stories</strong>" %}</span> -
+                            {% trans "Get inspired and ask questions. Every week a successful immigrant will tell his story and talk to the comunity." %}
+                        </li>
+                        <li class="disabled">
+                            <span class="icon major fa-dollar"></span>
+                            <span class="title">{% trans "immi<strong>Discounts</strong>" %}</span> -
+                            {% trans "Get 15% discounts in services such as IELTS and other English Courses." %}
+                            {% trans "(coming soon)" %}
+                        </li>
+                        <li class="disabled">
+                            <span class="icon major fa-tablet"></span>
+                            <span class="title">{% trans "immi<strong>Assistant</strong>" %}</span> -
+                            {% trans "Talk to a virtual assistant via chat to ask your questions." %}
+                            {% trans "(coming soon)" %}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="countries top-15">
+                    <h3>{% trans "DESTINATION COUNTRIES" %}</h3>
+                    <ul class="icons">
+                        <li>
+                            <span>{% trans 'Australia' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-australia.png' %}" alt="{% trans 'Australia' %}" class="tooltip" title="{% trans "Australia - fully integrated" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'Canada' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-canada.png' %}" alt="{% trans 'Canada' %}" class="tooltip" title="{% trans "Canada - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'USA' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-usa.png' %}" alt="{% trans 'USA' %}" class="tooltip" title="{% trans "USA - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'UK' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-uk.png' %}" alt="{% trans 'UK' %}" class="tooltip" title="{% trans "UK - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'Japan' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-japan.png' %}" alt="{% trans 'Japan' %}" class="tooltip" title="{% trans "Japan - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'Netherlands' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-netherlands.png' %}" alt="{% trans 'Netherlands' %}" class="tooltip" title="{% trans "Netherlands - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'Ireland' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-ireland.png' %}" alt="{% trans 'Ireland' %}" class="tooltip" title="{% trans "Ireland - coming soon" %}" />
+                        </li>
+                        <li class="disabled">
+                            <span>{% trans 'New Zealand' %}</span>
+                            <img src="{% static 'site/img/wanna-migrate-flag-new-zealand.png' %}" alt="{% trans 'New Zealand' %}" class="tooltip" title="{% trans "New Zealand - coming soon" %}" />
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="get-started top-15">
+                    <h2 id="content">{% trans "I WANNA JOIN!" %}</h2>
+                    <div class="box">
+                        <p>
+                            {% blocktrans %}
+                                For a limited time, you are able to purchase your
+                                <strong>lifetime subscription</strong> for only <code>$ 9.00</code>.
+                                That's right, you will be able to use our service forever and get
+                                free upgrades when we add new countries and features.
+                            {% endblocktrans %}
+                        </p>
+                        <ul class="actions vertical align-center">
+                            <li>
+                                <a href="{% url 'member:signup' %}" class="button special big">
+                                    {% trans "GET STARTED" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'common/tooltipster/js/tooltipster.bundle.min.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Sends tracking event
+            track_event('{{ tracking_event_viewed_content }}', {
+                // Used by other services (e.g. Facebook pixel)
+                currency: 'AUD',
+                value: 0.1,
+                content_category: 'about',
+                content_name: 'How It Works',
+            });
+
+            // Activates tooltips
+            $('.tooltip').tooltipster();
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

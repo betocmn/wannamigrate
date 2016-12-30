@@ -1,12 +1,57 @@
-/***** GENERAL ********/
-h1, h2 {
-    font-family: "Source Sans Pro", sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+/*
+
+1- GENERAL
+2- HEADER
+3- FOOTER
+4- HOME
+5- SIGNUP
+6- LOGIN
+7- ABOUT
+8- CONTACT US
+
+*/
+
+/***** 1- GENERAL ********/
+.errorlist li {
+    font-size: 1em;
+    color: #ed4e71;
+    padding-left: 0;
+}
+.ui-pnotify-title {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.ui-pnotify-text {
+    font-size: 1em;
+    font-weight: 300;
+}
+.hidden {
+    display: none;
+}
+.top-10 {
+    margin-top: 10px;
+}
+.top-15 {
+    margin-top: 15px;
+}
+.top-20 {
+    margin-top: 20px;
+}
+.top-30 {
+    margin-top: 30px;
+}
+.top-40 {
+    margin-top: 40px;
+}
+.top-50 {
+    margin-top: 50px;
+}
+.featherlight-content {
+    max-width: 600px;
 }
 
 
-/**** HEADER *****/
+/**** 2- HEADER *****/
 #header .logo {
     display: block;
     height: inherit;
@@ -28,7 +73,19 @@ h1, h2 {
 }
 
 
-/**** HOME *****/
+/**** 3- FOOTER *****/
+#footer .links {
+    list-style: none;
+    text-align: left;
+}
+@media screen and (max-width: 736px) {
+    #footer .links {
+        text-align: center;
+    }
+}
+
+
+/**** 4- HOME *****/
 @media screen and (min-width: 737px) {
     #banner .inner {
         max-width: 45%;
@@ -40,6 +97,98 @@ h1, h2 {
         background-position-x: -136px;
     }
 }
+#four h3 {
+  font-weight: 500;
+}
 #four h3 span {
   font-weight: 700;
+}
+
+
+/**** 5- SIGNUP ****/
+.signup-wrapper .facebook {
+    margin: auto;
+    text-align: center;
+}
+.signup-wrapper .facebook .button {
+    background-color: #8cbae9;
+}
+.signup-wrapper .facebook .button:hover {
+    background-color: #77ade5;
+}
+
+.signup-wrapper .facebook .icon:before {
+    font-size: 1.5em;
+}
+@media screen and (min-width: 737px) {
+    .signup-wrapper .facebook {
+        padding-top: 5em;
+    }
+}
+
+
+/**** 6- LOGIN ****/
+.login-wrapper .facebook {
+    margin: auto;
+    text-align: center;
+}
+.login-wrapper .facebook .button {
+    background-color: #8cbae9;
+}
+.login-wrapper .facebook .button:hover {
+    background-color: #77ade5;
+}
+
+.login-wrapper .facebook .icon:before {
+    font-size: 1.5em;
+}
+@media screen and (min-width: 737px) {
+    .login-wrapper .facebook {
+        padding-top: 2em;
+    }
+}
+
+
+/**** 7- ABOUT ****/
+.about-wrapper .screens img {
+    border: 1px solid #d3d3d3;
+}
+.about-wrapper .countries span {
+    display: block;
+    font-size: 0.7em;
+    text-align: center;
+    margin: 0 auto 5px auto;
+}
+.about-wrapper .countries img {
+    max-width: 60px;
+}
+.about-wrapper .countries .disabled img {
+    filter: grayscale(70%);
+    opacity: 0.3;
+}
+.about-wrapper .feature-list .icon.major {
+    display: inline;
+}
+.about-wrapper .feature-list .icon.major:before {
+    font-size: 1.5rem;
+}
+.about-wrapper .feature-list .title{
+    margin: 0 10px;
+}
+.about-wrapper .feature-list li.disabled {
+    opacity: 0.7;
+}
+.about-wrapper .feature-list li.disabled .icon.major:before {
+    opacity: 0.4;
+}
+
+
+/**** 8- CONTACT ****/
+.contact-wrapper .address {
+    margin: auto;
+}
+@media screen and (min-width: 737px) {
+    .contact-wrapper .address {
+        padding: 8em;
+    }
 }

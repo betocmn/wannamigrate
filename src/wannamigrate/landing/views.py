@@ -8,9 +8,7 @@ the templates on landing pages
 ##########################
 # Imports
 ##########################
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.conf import settings
-from django.utils import translation
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -25,5 +23,14 @@ def home(request):
     :return: String
     """
 
-    context = {'user': request.user}
-    return render(request, 'landing/home.html', context)
+    # If coming from a logout
+    has_logged_out = request.GET.get('logout', False)
+
+    # Builds template data dictionary
+    template_data = {
+        'user': request.user,
+        'has_logged_out': has_logged_out
+    }
+
+    # Displays HTML template
+    return render(request, 'landing/home.html', template_data)

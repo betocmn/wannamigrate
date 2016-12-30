@@ -1,0 +1,97 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="contact-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "CONTACT US" %}</h1>
+                </header>
+
+                <div class="row">
+
+                    <div class="6u 12u$(small)">
+
+                        <!-- Form -->
+                        <h3>{% trans "SEND US A MESSAGE" %}</h3>
+
+                        <form method="post" action="">
+
+                            {% csrf_token %}
+
+                            <div class="row uniform">
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.name.errors %}has-error{% endif %}">
+                                    {{ form.name }}
+                                    {{ form.name.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.email.errors %}has-error{% endif %}">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$ {% if form.message.errors %}has-error{% endif %}">
+                                    {{ form.message }}
+                                    {{ form.message.errors }}
+                                </div>
+
+                                <!-- Break -->
+                                <div class="12u$">
+                                    <ul class="actions">
+                                        <li>
+                                            <input type="submit" value="{% trans "Send Message" %}" class="special" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <div class="address">
+                            <p>
+                                797 Botany Road.
+                                <br />Rosebery, NSW, 2018.
+                                <br />Sydney, Australia.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

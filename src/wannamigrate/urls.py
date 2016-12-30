@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 urlpatterns = [
 
     url(r'^', include('wannamigrate.landing.urls', namespace="landing")),
+    url(r'^', include('wannamigrate.company.urls', namespace="company")),
+    url(r'^', include('wannamigrate.order.urls', namespace="order")),
     url(r'^', include('wannamigrate.member.urls', namespace="member")),
 
 ]
