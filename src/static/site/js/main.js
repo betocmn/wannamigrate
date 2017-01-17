@@ -19,6 +19,16 @@
 		var	$window = $(window),
 			$body = $('body');
 
+		// Sets ups django ajax requests
+			$.ajaxSetup({
+				beforeSend: function(xhr, settings) {
+					if (!csrf_safe_method(settings.type) && !this.crossDomain) {
+						var csrftoken = get_cookie('csrftoken');
+						xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					}
+				}
+			});
+
 		// Disable animations/transitions until the page has loaded.
 			$body.addClass('is-loading');
 

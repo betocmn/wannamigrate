@@ -88,7 +88,7 @@
 /**** 4- HOME *****/
 @media screen and (min-width: 737px) {
     #banner .inner {
-        max-width: 45%;
+        max-width: 50%;
         margin-left: 40%;
     }
 }

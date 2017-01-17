@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [
     "wannamigrate.com",
     "www.wannamigrate.com",
     "52.221.243.179",
-    "ec2-52-221-243-179.ap-southeast-1.compute.amazonaws.com"
+    "ec2-52-221-243-179.ap-southeast-1.compute.amazonaws.com",
 ]
 
 INTERNAL_IPS = (
