@@ -58,7 +58,7 @@
                     </ul>
                     {% if not user or not user.is_authenticated %}
                         <ul class="actions vertical">
-                            <li><a href="{% url 'member:signup' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
+                            <li><a href="{% url 'company:how_it_works' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
                             <li><a href="{% url 'member:login' %}" class="button fit">{% trans "LOG IN" %}</a></li>
                         </ul>
                     {% else %}
