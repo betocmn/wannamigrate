@@ -18,20 +18,19 @@ function track_event(event, data) {
 }
 
 /**
- *  Track a Facebook Pixel only Event via Segment
+ *  Track Facebook Pixel Events via Segment
  *
  *  Currently using Segment.com
  *
  */
-function track_facebook_event(event, data) {
+function track_duplicate_js_event(event, data) {
     analytics.track(event, data, {
         integrations: {
             All: false,
-            'Facebook Pixel': true
+            'Facebook Pixel': true,
         }
     });
 }
-
 /**
  *  Clears tracking user using a 3rd party library
  *

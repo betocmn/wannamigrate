@@ -34,7 +34,6 @@ class TrackingProcessor(object):
         :param data: dict
         :param order: Object
         :param password_reset_url: String
-        :param to_contact: String
         :return: None
         """
 
@@ -57,10 +56,7 @@ class TrackingProcessor(object):
         data['member_last_name'] = user.last_name
         data['member_birth_date'] = "%s" % member.birth_date
         data['member_gender'] = member.gender
-        data['member_mobile_number'] = member.mobile_number
-        data['member_referral_code'] = member.referral_code
         data['member_registration_date'] = date_to_string(user.created_date)
-        data['member_login_url'] = "%s%s" % (settings.BASE_URL_SECURE, reverse('member:login'))
 
         # If sending a reset password link
         if password_reset_url:
@@ -116,7 +112,5 @@ class TrackingProcessor(object):
             'member_last_name': last_name,
             'member_birth_date': "%s" % member.birth_date,
             'member_gender': member.gender,
-            'member_mobile_number': member.mobile_number,
-            'member_referral_code': member.referral_code,
             'member_registration_date': date_to_string(user.created_date)
         })

@@ -28,6 +28,7 @@ from wannamigrate.member.forms import (
     LoginForm, SignupForm
 )
 from wannamigrate.member.models import Member
+from wannamigrate.core.tasks import track_event, track_user
 
 
 #######################
@@ -67,6 +68,20 @@ def login(request):
 
             # Logs user in
             auth_login(request, user)
+
+            # Identifies member
+            member = get_object_or_false(Member, user_id=user.id)
+
+            # Tracks user
+            track_user.delay(member)
+
+            # Tracks event
+            track_event.delay(member, settings.TRACKING_EVENT_LOGGED_IN, {
+                'auth': 'password',
+                'currency': 'AUD',
+                'value': 2,
+                'content_category': 'account',
+            })
 
             # Redirects to next page
             return redirect(redirect_next)
@@ -162,13 +177,28 @@ def login_facebook(request):
                 user.facebook_id = facebook_basic_data['id']
                 user.save()
 
+                # Checks if we need to do the tracking alias
+                user_is_pending_tracking_alias = False
+                if is_signup and 'user_is_pending_tracking_alias' not in request.session:
+                    user_is_pending_tracking_alias = True
+
                 # Logs user in
                 auth_user = authenticate(email=user.email, id=user.id, password_hash=user.password)
                 auth_login(request, auth_user)
 
-                # If new user, we need to do the tracking alias
-                if is_signup:
+                # Tracks user
+                track_user.delay(member)
+                if user_is_pending_tracking_alias:
                     request.session['user_is_pending_tracking_alias'] = True
+
+                # Tracks event
+                event = settings.TRACKING_EVENT_SIGNED_UP if is_signup else settings.TRACKING_EVENT_LOGGED_IN
+                track_event.delay(member, event, {
+                    'auth': 'facebook',
+                    'currency': 'AUD',
+                    'value': 2,
+                    'content_category': 'account',
+                })
 
                 # Return JSON success data
                 return JsonResponse({'status': 'success', 'message': _('user logged in')})
@@ -221,6 +251,11 @@ def signup(request):
         member = form.save()
         if member is not None:
 
+            # Checks if tracking alias was already done
+            user_is_pending_tracking_alias = False
+            if 'user_is_pending_tracking_alias' not in request.session:
+                user_is_pending_tracking_alias = True
+
             # Logs user in
             user = authenticate(
                 email=form.cleaned_data['email'].lower(),
@@ -228,8 +263,18 @@ def signup(request):
             )
             auth_login(request, user)
 
-            # If new user, we need to do the tracking alias
-            request.session['user_is_pending_tracking_alias'] = True
+            # Tracks user
+            track_user.delay(member)
+            if user_is_pending_tracking_alias:
+                request.session['user_is_pending_tracking_alias'] = True
+
+            # Tracks event
+            track_event.delay(member, settings.TRACKING_EVENT_SIGNED_UP, {
+                'auth': 'password',
+                'currency': 'AUD',
+                'value': 2,
+                'content_category': 'account',
+            })
 
             # Redirects to next page
             return redirect(redirect_next)
