@@ -8,6 +8,7 @@
 6- LOGIN
 7- ABOUT
 8- CONTACT US
+9- QUIZ
 
 */
 
@@ -164,8 +165,8 @@
     max-width: 60px;
 }
 .about-wrapper .countries .disabled img {
-    filter: grayscale(70%);
-    opacity: 0.3;
+    filter: grayscale(100%);
+    opacity: 0.2;
 }
 .about-wrapper .feature-list .icon.major {
     display: inline;
@@ -192,4 +193,38 @@
     .contact-wrapper .address {
         padding: 8em;
     }
+}
+
+
+/**** 9- QUIZ ****/
+.quiz-wrapper .inner h2 span {
+    display: block;
+    font-size: 2em;
+}
+.quiz-wrapper .navigation div.buttons {
+    float: left;
+    width: 70%;
+}
+.quiz-wrapper .navigation div.index {
+    float: left;
+    width: 30%;
+    text-align: right;
+    font-size: 0.8em;
+    line-height: 3.2em;
+    padding-right: 5px;
+}
+.quiz-result-wrapper header img {
+    display: inline;
+    width: 50px;
+}
+.quiz-result-wrapper h1 {
+    color: #7bd2ed;
+}
+.quiz-result-wrapper h1 span.break {
+    display: block;
+}
+.quiz-result-wrapper h1 span {
+    font-size: 0.5em;
+    font-weight: 500;
+    color: #777777;
 }

@@ -9,6 +9,7 @@ on the desired template using: {% load string_extras %}
 ##########################
 from django import template
 import re
+import decimal
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
@@ -62,29 +63,47 @@ def truncate_smart(value, limit=80):
 
 @register.filter(name='str_or_dash')
 def str_or_dash(value):
-    """ Returns a string or a dash if the string is empty.
-        :param: value The string to be tested.
-        :return: value if value is not empty or "-".
+    """
+    Returns a string or a dash if the string is empty.
+    :param: value The string to be tested.
+    :return: value if value is not empty or "-".
     """
     return value if len(value) > 0 else "-"
 
 
 @register.filter(name='boolean_yes_or_no')
 def boolean_yes_or_no(value):
-    """ Returns a string representation of a boolean. True becomes the 
-        string "Yes" and False becomes "No", but only if it's a boolean value
-        :param: value The boolean value to be converted.
-        :return: Yes if value is True, No otherwise.
+    """
+    Returns a string representation of a boolean. True becomes the
+    string "Yes" and False becomes "No", but only if it's a boolean value
+    :param: value The boolean value to be converted.
+    :return: Yes if value is True, No otherwise.
     """
     if isinstance(value, bool):
-        return "Yes" if value else "No"
+        if value:
+            return '<span class="status-green">Yes</span>'
+        return '<span class="status-red">No</span>'
+
     return value
+
+
+@register.filter(name='default_empty_or_zero')
+def default_empty_or_zero(value):
+    """
+    If none, returns a string representation of a empty or zero if it's a decimal.
+    """
+    if value:
+        return value
+    if value == 0 and (isinstance(value, float) or isinstance(value, decimal.Decimal)):
+        return "0.00"
+    return "--"
 
 
 @register.filter(name='kmi')
 def kmi(value):
-    """ Converts a number into kmi representation.
-        (k -> thousand, mi -> million)
+    """
+    Converts a number into kmi representation.
+    (k -> thousand, mi -> million)
     :param value: The number to be converted
     :return: X / 1000 k if the number is greater than 1 thousand. X / 1000000 if the number is greater than 1 million.
     """
@@ -111,7 +130,8 @@ def kmi(value):
 
 @register.filter(name='remove_contact_info')
 def remove_contact_info(value):
-    """ Removes contact information (e-mail, phone number) on a string.
+    """
+    Removes contact information (e-mail, phone number) on a string.
     :param value: The search string.
     :return: The string with its contact info replaced.
     """
@@ -147,7 +167,7 @@ def status_colour(status_name):
 
         keywords = {
             'red': ['failed', 'cancelled', 'declined', 'never activated', 'expired', 'no'],
-            'green': ['succeeded', 'active', 'yes']
+            'green': ['succeeded', 'active', 'yes', 'completed']
         }
 
         for colour, keyword_list in keywords.items():

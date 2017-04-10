@@ -1,0 +1,72 @@
+    {% if not partial %}
+        <form action="{{ action_url|default:'' }}" method="post" id="main_form">
+        {% csrf_token %}
+    {% endif %}
+
+
+    {% for fieldset in form.get_fieldsets %}
+
+        <div class="row fieldset"
+             id="{% if title %}{{ title|slugify }}{% else %}{{ fieldset.title|slugify }}{% endif %}-fieldset">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading bold">
+                        {% if title %} {{ title }} {% else %} {{ fieldset.title }} {% endif %}
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                {% for field in form %}
+
+                                    {% if field.name in fieldset.fields %}
+                                        <div class="form-group col-lg-6 {% if field.errors %}has-error{% endif %}" id="{{ field.id_for_label }}_container">
+                                            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                            {% if field.field.required %}<span class="required">*</span>{% endif %}
+                                            {{ field }}
+                                            <span id="{{ field.id_for_label }}_extra"></span>
+                                            {{ field.errors }}
+                                        </div>
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+
+    {% if not partial %}
+        <div class="row">
+            <div class="col-lg-12 text-center buttons">
+                <button type="submit" id="main_form_submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
+
+    <script type="text/javascript">
+
+        /**
+         * Jquery On Load
+         *
+         */
+        $(document).ready(function() {
+
+            // JS FORM Validation
+            $( "#main_form" ).submit( function() {
+                return validate_empty_fields( this, '{{ form.get_required_fields }}' );
+            });
+
+        });
+
+    </script>

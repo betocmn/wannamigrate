@@ -1,0 +1,125 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+{% load dictionary_extras %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- PAGE EXTRA JS -->
+    <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+
+    <script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+		    // Django formsets
+            $( '#main_form div.quiz_answer' ).formset({
+                prefix: "{{ quiz_answer_formset.prefix }}",
+                addCssClass: 'btn btn-default {{ quiz_answer_formset.prefix }}',
+                addText: 'add another',
+                deleteText: 'delete',
+                keepFieldValues: ''
+            });
+
+		});
+
+	</script>
+
+{% endblock head %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Edit Quiz Question</h1>
+        </div>
+
+    </div>
+
+    {% include "admin/_common/status.html" %}
+
+    {% if quiz_question_form.errors or quiz_answer_formset.total_error_count %}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <ul>
+                <li><strong>There are errors on your form!</strong></li>
+                {% for error in quiz_question_form.non_field_errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+                {% for error in quiz_answer_formset.non_field_errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form action="" method="post" id="main_form" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% include "admin/_common/form.html" with form=quiz_question_form partial=True %}
+
+        <div class="row fieldset" id="badge-rules-fieldset">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading bold">
+                        Quiz Answers
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                {{ quiz_answer_formset.management_form }}
+                                {% for quiz_answer_form in quiz_answer_formset %}
+                                    <div class="quiz_answer row" id="{{ quiz_answer_form.prefix }}-row">
+
+                                        <div class="form-group col-lg-7 {% if quiz_answer_form.description.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ quiz_answer_form.description.id_for_label }}">{{ quiz_answer_form.description.label }}</label>
+                                            {{ quiz_answer_form.description }}
+                                            {{ quiz_answer_form.description.errors }}
+                                        </div>
+                                        <div class="form-group col-lg-3 {% if quiz_answer_form.points.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ quiz_answer_form.points.id_for_label }}">{{ quiz_answer_form.points.label }}</label>
+                                            {{ quiz_answer_form.points }}
+                                            {{ quiz_answer_form.points.errors }}
+                                        </div>
+
+                                        {{ quiz_answer_form.id }}
+                                        {% if quiz_answer_form.instance.pk %}
+                                            {{ quiz_answer_form.DELETE }}
+                                        {% endif %}
+
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center buttons">
+                <button type="submit" id="main_form_submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock content %}
+
+
+
+
+
+
+

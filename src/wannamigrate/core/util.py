@@ -9,21 +9,25 @@ We put here all functions that couldn't belong to any module or class.
 ##########################
 import json
 import time
+import re
 import math
 import datetime
+import itertools
+import random
+import string
 import pendulum
-import re
 from functools import reduce
 from decimal import Decimal, ROUND_DOWN
 from datetime import date
 from io import StringIO
 from stdimage.utils import UploadTo
+from django.db import connections
+from django.utils.functional import lazy
 from django.utils.text import slugify
 from django.utils import timezone
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.shortcuts import _get_queryset
-from django.http import HttpResponse
 from wannamigrate.core.templatetags.string_extras import status_colour
 
 
@@ -65,6 +69,28 @@ def generate_unique_id():
     return '%8x%05x' % (math.floor(m), (m - math.floor(m)) * 1000000)
 
 
+def generate_random_string(size=6, numbers_only=False, ignore_zeros=False):
+    """
+    Generates random string containing uppercase letters or numbers.
+
+    Note: This is not guaranteed to be unique, for this, please use UUID
+
+    :param size: int
+    :param numbers_only: Boolean
+    :param ignore_zeros: Boolean
+    :return: String
+    """
+    if ignore_zeros:
+        possible = '123456789'
+    else:
+        possible = string.digits
+    if not numbers_only:
+        possible += string.ascii_uppercase
+    return ''.join(
+        random.SystemRandom().choice(possible) for _ in range(size)
+    )
+
+
 def format_monetary(value):
     """
     Formats value with 2 decimal places
@@ -73,6 +99,28 @@ def format_monetary(value):
     :return: Decimal
     """
     return Decimal(value).quantize(Decimal('.01'), rounding=ROUND_DOWN)
+
+
+def remove_non_alphanumeric(value):
+    """
+    Remove special chars
+
+    :param value: str
+    :return: String
+    """
+    pattern = re.compile('[\W_]+')
+    return pattern.sub('', value)
+
+
+def remove_non_numeric(value):
+    """
+    Removes non numeric chars
+
+    :param value: str
+    :return: String
+    """
+    pattern = re.compile('[^0-9]')
+    return pattern.sub('', value)
 
 
 def convert_to_cents(number):
@@ -105,6 +153,15 @@ def calculate_gst(value, method='inclusive'):
     return format_monetary(gst)
 
 
+def date_today():
+    """
+    Returns DateTime object of current time
+
+    :return DateTime (Pendulum):
+    """
+    return pendulum.today()
+
+
 def date_now():
     """
     Returns DateTime object of current time
@@ -112,6 +169,26 @@ def date_now():
     :return DateTime (Pendulum):
     """
     return pendulum.now()
+
+
+def date_from_datetime(date_object):
+    """
+    Returns Pendulum object from a datetime object
+
+    :param date_object:
+    :return DateTime (Pendulum):
+    """
+
+    # If Date, formats and converts to str for json encoding
+    if isinstance(date_object, datetime.datetime):
+        current_tz = timezone.get_current_timezone()
+        date_object = pendulum.instance(date_object).in_timezone(current_tz.zone)
+
+    # If Date, formats and converts to str for json encoding
+    elif isinstance(date_object, datetime.date):
+        date_object = pendulum.from_date(date_object.year, date_object.month, date_object.day)
+
+    return date_object
 
 
 def date_from_string(string, str_format='%Y-%m-%d'):
@@ -125,7 +202,7 @@ def date_from_string(string, str_format='%Y-%m-%d'):
     return pendulum.from_format(string, str_format)
 
 
-def date_from_params(year=None, month=None, day=None, hour=None):
+def date_from_params(year=None, month=None, day=None, hour=None, minute=None):
     """
     Create a Datetime object by specifying one or more date parts (e.g. day, month, year or hour)
 
@@ -133,12 +210,18 @@ def date_from_params(year=None, month=None, day=None, hour=None):
     :param month:
     :param day:
     :param hour:
+    :param minute:
     :return:
     """
     current_tz = timezone.get_current_timezone()
     pendulum_date = pendulum.from_date(year, month, day, current_tz.zone)
+    time_info = {}
     if hour:
-        pendulum_date = pendulum_date.add(hours=hour)
+        time_info['hours'] = hour
+    if minute:
+        time_info['minutes'] = minute
+    if time_info:
+        pendulum_date = pendulum_date.add(**time_info)
     return pendulum_date
 
 
@@ -151,9 +234,7 @@ def date_to_string(pendulum_datetime, str_format='%Y-%m-%d %H:%M:%S', formatter=
     :param formatter:
     :return DateTime (Pendulum):
     """
-    if isinstance(pendulum_datetime, datetime.datetime) \
-            or isinstance(pendulum_datetime, datetime.date):
-        pendulum_datetime = pendulum.instance(pendulum_datetime)
+    pendulum_datetime = date_from_datetime(pendulum_datetime)
     return pendulum_datetime.format(str_format, formatter=formatter)
 
 
@@ -173,9 +254,7 @@ def date_subtract(pendulum_datetime, years=0, months=0, weeks=0, days=0, hours=0
     :param microseconds:
     :return DateTime (Pendulum):
     """
-    if isinstance(pendulum_datetime, datetime.datetime) \
-            or isinstance(pendulum_datetime, datetime.date):
-        pendulum_datetime = pendulum.instance(pendulum_datetime)
+    pendulum_datetime = date_from_datetime(pendulum_datetime)
     return pendulum_datetime.subtract(
         years, months, weeks, days, hours, minutes, seconds, microseconds
     )
@@ -198,9 +277,7 @@ def date_add(pendulum_datetime, years=0, months=0, weeks=0, days=0, hours=0,
     :param microseconds:
     :return DateTime (Pendulum):
     """
-    if isinstance(pendulum_datetime, datetime.datetime) \
-            or isinstance(pendulum_datetime, datetime.date):
-        pendulum_datetime = pendulum.instance(pendulum_datetime)
+    pendulum_datetime = date_from_datetime(pendulum_datetime)
     return pendulum_datetime.add(
         years, months, weeks, days, hours, minutes, seconds, microseconds
     )
@@ -227,20 +304,33 @@ def date_first_day_of_month():
     return pendulum.now().start_of('month')
 
 
-def date_next_from_day(month_day, force_next_month=False):
+def date_first_day_of_week():
+    """
+    Returns DateTime object from string
+
+    :return DateTime (Pendulum):
+    """
+    return pendulum.now().start_of('week')
+
+
+def date_next_from_day(month_day, force_next_month=False, from_date=None):
     """
     Returns DateTime object from the next day of the current month_day given.
 
     :param month_day:
     :param force_next_month:
+    :param from_date:
     :return DateTime (Pendulum):
     """
-    now = pendulum.now()
-    if force_next_month or now.day > month_day:
-        next_month = now.add(months=1)
+    if from_date:
+        base_date = date_from_datetime(from_date)
+    else:
+        base_date = pendulum.now()
+    if force_next_month or base_date.day > month_day:
+        next_month = base_date.add(months=1)
         return pendulum.from_date(next_month.year, next_month.month, month_day)
     else:
-        return pendulum.from_date(now.year, now.month, month_day)
+        return pendulum.from_date(base_date.year, base_date.month, month_day)
 
 
 def date_next_business_date(from_date=None):
@@ -252,9 +342,8 @@ def date_next_business_date(from_date=None):
     """
     if not from_date:
         pendulum_datetime = pendulum.now()
-    elif isinstance(from_date, datetime.datetime):
-        current_tz = timezone.get_current_timezone()
-        pendulum_datetime = pendulum.instance(from_date).in_timezone(current_tz.zone)
+    else:
+        pendulum_datetime = date_from_datetime(from_date)
 
     next_date = date_add(pendulum_datetime, days=1)
     if not next_date.is_weekday():
@@ -433,8 +522,10 @@ def build_datatable_json(request, objects, info, actions=['view', 'edit', 'delet
 
             # If Decimal, converts to str for json encoding
             elif isinstance(value, Decimal):
-                value = str(value)
+                value = str(format_monetary(value))
 
+            if value:
+                value = str(value)
             values.append(value)
 
         if 'view' in actions:
@@ -513,12 +604,11 @@ def get_list_or_false(klass, *args, **kwargs):
     return obj_list
 
 
-def debug_sql():
+def get_sql_queries():
     """
     Print all SQL Queries
     """
-    from django.db import connection
-    queries_text = ''
-    for query in connection.queries:
-        queries_text += '<br /><br /><br />' + str(query['sql'])
-    return HttpResponse(queries_text)
+    return lazy(
+        lambda: list(itertools.chain(*[connections[x].queries for x in connections])),
+        list
+    )

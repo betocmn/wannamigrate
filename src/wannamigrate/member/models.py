@@ -46,6 +46,7 @@ class Member(BaseModel):
     )
     staff_notes = models.TextField(_("staff notes"), blank=True, null=True)
     referral_code = models.CharField(_("referral code"), max_length=30, null=True, blank=True)
+    quiz_answers = models.ManyToManyField("quiz.QuizAnswer")
 
     # Fields organised for crud operations
     fieldsets = [

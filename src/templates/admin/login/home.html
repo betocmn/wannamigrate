@@ -1,0 +1,93 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+			// Set form submission validation
+			$( "#login_form" ).submit( function() {
+				return validate_empty_fields( this, 'id_email,id_password' );
+			});
+
+		});
+
+	</script>
+
+{% endblock head %}
+
+{% block body %}
+
+    <body class="login">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+
+                <div class="logo-login text-center">
+
+                    <img src="{% static 'admin/img/logo.png' %}" alt="Wanna Migrate Admin" width="180" />
+
+                </div>
+
+                <div class="login-panel panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Backend Login</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        {% include "admin/_common/status.html" %}
+
+                        <form action="" method="post" id="login_form">
+
+                            {% csrf_token %}
+
+                            <fieldset>
+
+                                <div class="form-group no-label">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+
+                                <div class="form-group no-label">
+                                    {{ form.password }}
+                                    {{ form.password.errors }}
+                                </div>
+
+                                <!--
+                                <div class="checkbox">
+                                    <label>
+                                         <input type="checkbox" name="remember" id="remember" value="1" />
+                                         Remember Me
+                                    </label>
+                                </div>
+                                -->
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-login"><i class="fa fa-lock"></i>Login</button>
+                                </div>
+
+                            </fieldset>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+{% endblock body %}
+
+</html>

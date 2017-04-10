@@ -1,0 +1,79 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Masked Input -->
+    <script src="{% static 'common/jquery-mask/js/jquery.mask.js' %}"></script>
+		
+	<script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+            // Form masks
+            $("#id_birth_date").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+
+		});
+		
+	</script>
+	
+{% endblock head %}
+
+
+{% block content %}
+
+            <div class="row">
+            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Edit Member</h1>
+                </div>
+                
+            </div>
+            
+            {% include "admin/_common/status.html" with form=user_form %}
+
+            {% include "admin/_common/status.html" with form=member_form %}
+
+            {% include "admin/_common/status.html" with form=shipping_form %}
+
+            {% include "admin/_common/status.html" with form=billing_form %}
+
+            {% include "admin/_common/status.html" with form=wine_preferences_form %}
+
+            <form action="" method="post" id="main_form" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {% include "admin/_common/form.html" with form=user_form partial=True %}
+
+                {% include "admin/_common/form.html" with form=member_form partial=True %}
+
+                {% include "admin/_common/form.html" with form=wine_preferences_form partial=True title="Wine Preferences" %}
+
+                {% include "admin/_common/form.html" with form=shipping_form partial=True title="Shipping Address" %}
+
+                {% include "admin/_common/form.html" with form=billing_form partial=True title="Billing Address" %}
+
+                <div class="row">
+                    <div class="col-lg-12 text-center buttons">
+                        <button type="submit" id="main_form_submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                        <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+                    </div>
+                </div>
+            
+            </form>
+
+{% endblock content %}
+
+
+
+
+
+
+

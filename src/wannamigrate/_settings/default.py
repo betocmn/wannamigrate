@@ -159,10 +159,12 @@ THIRD_PARTY_APPS = (
 )
 LOCAL_APPS = (
     'wannamigrate.core',
+    'wannamigrate.admin',
     'wannamigrate.landing',
     'wannamigrate.company',
     'wannamigrate.member',
     'wannamigrate.order',
+    'wannamigrate.quiz',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

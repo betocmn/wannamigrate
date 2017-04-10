@@ -1,0 +1,68 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">View Quiz Question Details</h1>
+        </div>
+
+    </div>
+
+    {% include "admin/_common/status.html" %}
+
+    {% include "admin/_common/details.html" with model=quiz_question partial=True %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading bold">
+                    Answers
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            {% for quiz_answer in quiz_question.quizanswer_set.all %}
+
+                                <div class="col-lg-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>Answer:</dt>
+                                        <dd>
+                                            {{ quiz_answer.description }}
+                                            | {{ quiz_answer.points }}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            {% empty %}
+                                --
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 text-center buttons">
+            <a href="{{ urls.back }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+            <a href="{{ urls.edit }}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+            <a href="#" onclick="confirm_delete( '{{ urls.delete }}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+            <a href="{{ urls.add }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add New</a>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
+

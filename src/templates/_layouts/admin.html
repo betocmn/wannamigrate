@@ -1,0 +1,225 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+
+    <head>
+	{% block head %}
+
+            <!-- Meta -->
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="Title" content="TheWineGallery - ADMIN" />
+            <title>Wanna Migrate - ADMIN</title>
+            <meta name="Robots" content="noindex, nofollow" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <!-- CSS -->
+            <link href="{% static 'common/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+            <link href="{% static 'common/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+            <link href="{% static 'admin/css/sb-admin.css' %}" rel="stylesheet">
+            <link href="{% static 'admin/css/style.css' %}" rel="stylesheet">
+        
+            <!-- Favicon -->
+            <link rel="apple-touch-icon" sizes="180x180" href="{% static "admin/img/favicon/apple-touch-icon.png" %}">
+            <link rel="icon" type="image/png" href="{% static "admin/img/favicon/favicon-32x32.png" %}" sizes="32x32">
+            <link rel="icon" type="image/png" href="{% static "admin/img/favicon/favicon-16x16.png" %}" sizes="16x16">
+            <link rel="manifest" href="{% static "admin/img/favicon/manifest.json" %}">
+            <link rel="mask-icon" href="{% static "admin/img/favicon/safari-pinned-tab.svg" %}" color="#5bbad5">
+            <link rel="shortcut icon" href="{% static "admin/img/favicon/favicon.ico" %}">
+            <meta name="msapplication-config" content="{% static "admin/img/favicon/browserconfig.xml" %}">
+            <meta name="theme-color" content="#ffffff">
+
+            <!-- JAVASCRIPT -->
+            <script src="{% static 'common/jquery/js/jquery.js' %}"></script>
+            <script src="{% static 'common/bootstrap/js/bootstrap.js' %}"></script>
+            <script src="{% static 'common/util/js/util.js' %}"></script>
+
+            <script type="text/javascript">
+
+                /*
+                 * Django CSRF Protection to ajax calls (https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax)
+                 */
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrf_safe_method(settings.type) && !this.crossDomain) {
+                            var csrftoken = get_cookie('csrftoken');
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+
+                // Adjusts menu for mobile view
+                var menus_loaded = false;
+                $(function() {
+                    $(window).bind("load resize", function() {
+                        width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+                        if(!menus_loaded) {
+                            $(".navbar-top-links .dropdown-toggle").each(function () {
+                                var $alt = $(this).clone().addClass("alt").html('');
+                                $(this).find('i').clone().appendTo($alt);
+                                $alt.appendTo($(this).parent());
+                            });
+                            menus_loaded = true;
+                        }
+                        if (width < 960) {
+                            $(".navbar-top-links .dropdown-toggle").hide();
+                            $(".navbar-top-links .dropdown-toggle.alt").show();
+                        } else {
+                            $(".navbar-top-links .dropdown-toggle").show();
+                            $(".navbar-top-links .dropdown-toggle.alt").hide();
+                        }
+                    })
+                })
+
+            </script>
+
+    {% endblock head %}
+    </head>
+
+    {% block body %}
+        <body>
+
+            <div id="wrapper">
+
+                <nav class="navbar navbar-default navbar-static-top {% if not is_prod %}testing-environment{% endif %}" role="navigation" style="margin-bottom: 0">
+
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{%  url 'admin:home' %}">
+                            <img src="{% static 'admin/img/logo_admin.png' %}" title="WannaMigrate" width="150" />
+                        </a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+
+                        <!-- /.dropdown -->
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-credit-card fa-fw"></i>
+                                Orders
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <p class="disabled">Manage Orders</p>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Manage Promo Codes</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-users fa-fw"></i>
+                                Customer Acquisition
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                {% if perms.member.admin_view_member %}
+                                    <li>
+                                        <a href="{% url 'admin:member:list' %}">Members</a>
+                                    </li>
+                                {% endif %}
+                                {% if perms.quiz.admin_view_quiz_question %}
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'admin:quiz:list' %}">Quizzes</a>
+                                    </li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Advanced Search</p>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Export as CSV</p>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Blacklist</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bar-chart fa-fw"></i>
+                                Reports
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <p class="disabled">Startup Growth Report</p>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Sales Report</p>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <p class="disabled">Stock Report</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-cog fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="{% url 'admin:login:my_account' %}">My Account</a>
+                                </li>
+                                <li class="divider"></li>
+                                {% if perms.core.admin_view_admin_user %}
+                                    <li>
+                                        <a href="{% url 'admin:admin_user:list' %}">Admin Users</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                {% endif %}
+                                {% if perms.auth.add_group or perms.auth.change_group or perms.auth.delete_group  %}
+                                    <li>
+                                        <a href="{% url 'admin:group:list' %}">Groups & Permissions</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                {% endif %}
+                                <li>
+                                    <a href="{% url 'admin:login:logout' %}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <!-- /.navbar-static-side -->
+                </nav>
+
+                <div id="page-wrapper">
+
+                    {% block content %}{% endblock content %}
+
+                    <!-- DEBUG sql queries -->
+                    {% if sql_output %}
+                        <div class="sql-queries">
+                            <h1>SQL Queries</h1>
+                            {% for query in sql_output %}
+                                <h2>(Query {{ forloop.counter }}): {{ query.time }}s</h2>
+                                <div>{{ query.sql }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </body>
+
+    {% endblock body %}
+
+</html>
+    

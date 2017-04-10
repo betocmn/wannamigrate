@@ -230,7 +230,7 @@ class UserManager(BaseUserManager):
         :return: User Object
         """
 
-        user = self.create_user(email, password=password, fist_name=first_name, last_name=last_name)
+        user = self.create_user(email, password=password, first_name=first_name, last_name=last_name)
         user.is_superuser = True
         user.is_admin = True
         user.is_active = True

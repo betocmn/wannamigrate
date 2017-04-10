@@ -1,0 +1,88 @@
+{% load string_extras %}
+
+{% for fieldset in model.get_display_fields %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading bold">
+                    {% if title %} {{ title }} {% else %} {{ fieldset.title }} {% endif %}
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            {% for field in fieldset.fields %}
+
+                                <div class="col-lg-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>{{ field.label }}:</dt>
+                                        <dd>
+                                            {% if field.value %}
+
+                                                {% if 'password' in field.name %}
+                                                    ********
+                                                {% elif '_date' in field.name %}
+                                                    {{ field.value|date:"d/m/Y P"|default:field.value }}
+                                                {% elif 'client_notes' == field.name %}
+                                                    <span class="alert-warning">{{ field.value|safe }}</span>
+                                                {% elif 'description' in field.name %}
+                                                    {{ field.value|safe|truncatechars_html:300 }}
+                                                {% elif 'status' in field.name %}
+                                                    {{ field.value|status_colour|default:'--'|safe }}
+                                                {% elif 'member' in field.name %}
+                                                    <a href="{% url 'admin:member:details' field.value.id %}">{{ field.value.user.get_full_name|default:field.value.user.email }}</a>
+                                                {% elif 'order' == field.name %}
+                                                    <a href="{% url 'admin:order:details' field.value.id %}">#{{ field.value.id }} | {{ field.value.order_status.name }}</a>
+                                                {% elif 'subscription' == field.name or 'referral_subscription' == field.name %}
+                                                    <a href="{% url 'admin:subscription:details' field.value.id %}">#{{ field.value.id }} - Month {{ field.value.month_count }} - {{ field.value.subscription_status.name }}</a>
+                                                {% elif 'gift' == field.name %}
+                                                    <a href="{% url 'admin:gift:details' field.value.id %}">{{ field.value }}</a>
+                                                {% elif 'shipping_api_tracking_number' in field.name %}
+                                                    <a href="https://www.shippit.com/track/{{ field.value }}" target="_blank">{{ field.value }}</a>
+                                                {% elif 'discount_code' == field.name and referral_member %}
+                                                    {{ field.value }} (referral from <a href="{% url 'admin:member:details' referral_member.id %}">{{ referral_member.name }}</a>)
+                                                {% elif 'photo' in field.name or 'avatar' in field.name or 'image' in field.name %}
+                                                    {% if field.value.thumbnail.url %}
+                                                        <img src="{{ field.value.thumbnail.url }}" />
+                                                    {% else %}
+                                                        [not uploaded]
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|truncatechars_html:200 }}
+                                                {% endif %}
+
+                                            {% else %}
+
+                                                {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|truncatechars_html:200 }}
+
+                                            {% endif %}
+
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+
+
+{% if not partial %}
+    <div class="row">
+        <div class="col-lg-12 text-center buttons">
+            <a href="{{ urls.back }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Go Back</a>
+            <a href="{{ urls.edit }}" class="btn btn-default"><i class="fa fa-edit"></i>Edit Data</a>
+            <a href="#" onclick="confirm_delete( '{{ urls.delete }}' )" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</a>
+            <a href="{{ urls.add }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add New</a>
+        </div>
+    </div>
+{% endif %}

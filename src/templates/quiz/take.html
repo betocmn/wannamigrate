@@ -1,0 +1,164 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load compress %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        {% block head %}
+
+            <!-- Meta -->
+            {% include "_layouts/meta.html" %}
+
+            <!-- CSS -->
+            {% compress css %}
+                <link href="{% static 'site/css/quiz/main.css' %}" type="text/css" rel="stylesheet" />
+                <link href="{% static 'site/css/overwrite.css' %}" type="text/css" rel="stylesheet" />
+            {% endcompress %}
+
+            <noscript><link rel="stylesheet" href="{% static 'site/css/quiz/noscript.css' %}" /></noscript>
+
+            <!--[if lte IE 8]><script src="{% static 'site/js/quiz/ie/html5shiv.js' %}"></script><![endif]-->
+            <!--[if lte IE 8]><link rel="stylesheet" href="{% static 'site/css/quiz/ie8.css' %}" /><![endif]-->
+            <!--[if lte IE 9]><link rel="stylesheet" href="{% static 'site/css/quiz/ie9.css' %}" /><![endif]-->
+
+        {% endblock head %}
+    </head>
+
+	<body class="is-loading-0 is-loading-1">
+
+        <form method="post" action="">
+
+            {% csrf_token %}
+
+		    <!-- Wrapper -->
+			<div id="wrapper" class="quiz-wrapper">
+
+                {% for quiz_question in quiz_questions %}
+
+                    <article id="question-{{ quiz_question.sort_order }}" class="panel secondary">
+                        <div class="image">
+                            {% if quiz_question.photo %}
+                                <img src="{{ quiz_question.photo.url }}" alt="" data-position="center center" />
+                            {% else %}
+                                <img src="{% static 'site/img/immigration-quiz-default.jpg' %}" alt="" data-position="center center" />
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                            <div class="inner">
+                                <header>
+                                    <h2><span>{{ country.name }}</span> {% trans "Immigration Quiz" %}</h2>
+                                    <p>
+                                        {{ quiz_question.sort_order }}. {{ quiz_question.description }}
+                                    </p>
+                                </header>
+                                <div class="field">
+                                        <div class="select-wrapper">
+                                        <select name="answers">
+                                            <option value="">--</option>
+                                            {% for quiz_answer in quiz_question.quizanswer_set.all %}
+                                                <option value="{{ quiz_answer.id }}">{{ quiz_answer.description }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="navigation">
+                                <div class="buttons">
+                                    <ul class="actions spinX">
+                                        {% if not forloop.first %}
+                                            <li><a href="#question-{{ quiz_question.sort_order|add:"-1" }}" class="button small back">{% trans "Back" %}</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'landing:home' %}" class="button small back">{% trans "Back" %}</a></li>
+                                        {% endif %}
+
+                                        {% if not forloop.last %}
+                                            <li><a href="#question-{{ quiz_question.sort_order|add:"1" }}" class="button small special">{% trans "Next" %}</a></li>
+                                        {% else %}
+                                            <li><a href="#question-last" class="button small special">{% trans "Next" %}</a></li>
+                                        {% endif %}
+
+                                    </ul>
+                                </div>
+                                <div class="index">
+                                    {{ forloop.counter }} of {{ total_questions }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                {% endfor %}
+
+                <article id="question-last" class="panel special">
+                    <div class="image">
+                        <img src="{% static 'site/img/immigration-quiz-default.jpg' %}" alt="" data-position="center center" />
+                    </div>
+                    <div class="content">
+                        <div class="inner">
+                            <header>
+                                <h1>{% trans "Very Well Done!" %}</h1>
+                                <p>{% trans "It's great to see you taking the first step towards your dream. Sign-up below to check your results and next steps." %}</p>
+                            </header>
+                            <div class="field">
+                                <label for="email">{% trans "Your E-Mail" %}</label>
+                                <input required type="email" name="email" id="email" value="{{ user.email }}" placeholder="steve.jobs@me.com" />
+                            </div>
+                            <ul class="actions">
+                                <li><input type="submit" value="{% trans "Get Results" %}" class="special" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+				<!-- Footer -->
+                <footer id="footer">
+                    <p class="copyright">&copy; Wanna Migrate</p>
+                </footer>
+
+			</div>
+
+        </form>
+
+        <!-- Scripts-->
+        {% block scripts %}
+
+            {% compress js %}
+                <script type="text/javascript" src="{% static 'common/jquery/js/jquery.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/jquery-scrollex/js/jquery.scrollex.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/jquery-scrolly/js/jquery.scrolly.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/skel/js/skel.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/load-css/js/loadCSS.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/pnotify/js/pnotify.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/util/js/util.js' %}"></script>
+                <script type="text/javascript" src="{% static 'site/js/quiz/util.js' %}"></script>
+                <script type="text/javascript" src="{% static 'site/js/quiz/main.js' %}"></script>
+                <script type="text/javascript">
+
+                    // Form submission
+                    $('form').submit(function () {
+
+                        var $email = $('#email');
+                        if($email.val() == ''){
+                            display_notification('error', 'Error!', 'You have to provide your email address.');
+                            $email.focus();
+                            return false;
+                        }
+
+                    });
+
+                    // Lazy load non-crucial css
+                    loadCSS('{% static 'common/font-awesome/css/font-awesome.css' %}');
+                    loadCSS('{% static 'common/pnotify/css/pnotify.css' %}');
+                </script>
+            {% endcompress %}
+
+            <!--[if lte IE 8]><script src="{% static 'site/js/quiz/ie/respond.min.js' %}"></script><![endif]-->
+
+        {% endblock scripts %}
+
+        {% block status %}
+            {% include "_layouts/status.html" %}
+        {% endblock status %}
+
+	</body>
+</html>

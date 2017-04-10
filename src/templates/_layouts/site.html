@@ -39,7 +39,7 @@
                             <li>
                                 <a href="#menu">
                                     {% if user and user.is_authenticated %}
-                                        {{ user.first_name|lower }}
+                                        {{ user.first_name|default:'me' }}
                                     {% else %}
                                         MENU
                                     {% endif %}

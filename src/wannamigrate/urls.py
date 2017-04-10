@@ -16,6 +16,8 @@ from django.conf.urls import include, url
 # Include all desired apps that will have URLs
 urlpatterns = [
 
+    url(r'^admin', include('wannamigrate.admin.urls', namespace="admin")),
+    url(r'^immigration-quiz', include('wannamigrate.quiz.urls', namespace="quiz")),
     url(r'^', include('wannamigrate.landing.urls', namespace="landing")),
     url(r'^', include('wannamigrate.company.urls', namespace="company")),
     url(r'^', include('wannamigrate.order.urls', namespace="order")),
