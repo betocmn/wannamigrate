@@ -1,0 +1,73 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="thankyou-wrapper contact-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "THANK YOU!" %}</h1>
+                </header>
+
+                <div class="row">
+
+                    <div class="6u 12u$(small)">
+
+                        <div class="confirmation">
+                            <h3>{% trans "Congrats and Welcome!" %}</h3>
+                            <p>
+                                {% trans "Your order is approved and you now have unlimited access to our immigration dashboard." %}
+                            </p>
+                            <p>
+                                {% trans "We hope to help you all along on your immigration journey." %}
+                            </p>
+                            <a href="{% url 'member:dashboard' %}" class="button special big">{% trans "Go to your dashboard" %}</a>
+                        </div>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <span class="image fit">
+                            <img src="{% static 'site/img/wanna-migrate-packing.jpg' %}" alt="{% trans "Thank You" %}" />
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Sends tracking event
+            {% if track_order %}
+                track_event('{{ tracking_event_placed_order }}', {
+                    value: {{ order.net_total }},
+                    order_total: {{ order.net_total }},
+                    order_discount_code: '{{ order.discount_code }}'
+                });
+            {% endif %}
+        });
+
+
+    </script>
+
+{% endblock scripts %}

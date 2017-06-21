@@ -2,10 +2,19 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- PAGE EXTRA CSS -->
+    <link href="{% static 'common/selectize/css/selectize.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
 {% block content %}
 
     <!-- Banner -->
-    <section id="banner">
+    <section id="banner" class="home-wrapper">
         <div class="inner">
             <header>
                 <h1>{% trans "Change your life in a new country" %}</h1>
@@ -17,7 +26,16 @@
                 </p>
             </header>
             <ul class="actions">
-                <li><a href="{% url 'company:how_it_works' %}" class="button special big">{% trans "Get Started" %}</a></li>
+                <li>
+                    <div class="country-container">
+                        <select id="country-selectize" name="country-selectize" placeholder="Select a Country">
+                            <option value="au" selected="selected">Australia</option>
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <a href="{% url 'quiz:take' 'australia' %}" class="button special big">{% trans "Get Started" %}</a>
+                </li>
             </ul>
         </div>
         <a href="#one" class="more">{% trans "Learn More" %}</a>
@@ -35,11 +53,12 @@
                     </header>
                     <p>
                         {% blocktrans %}
-                            Around half a million people immigrate to Australia and Canada every
+                            Around 500,000 people immigrate to Australia and Canada every
                             year in a very diverse group of visa types. Many people waste months
-                            or years trying to be approved in a visa that is not the ideal for their
-                            situation. We will show you all your options and give examples
-                            of other immigrants in a similar situation to help you make the best choice.
+                            or years trying to be approved on a visa that is not ideal to their
+                            situation. Our goal is to show you all your options and give you examples
+                            of other immigrants in a similar situation so you can make the best choice
+                            available.
                         {% endblocktrans %}
                     </p>
                 </div>
@@ -56,10 +75,10 @@
                     </header>
                     <p>
                         {% blocktrans %}
-                            Let's be direct: Immigration applications are hard! You will have to go
+                            Let's be direct: Immigration applications are hard work! You will have to go
                             through things such as preparing documents, attending medical examinations,
-                            getting ready for English tests, validating your educational and professional
-                            degrees, among others. Our built-in Task Manager will remind you of when and
+                            getting ready for English Tests, validating your educational and professional
+                            degrees, among many other steps. Our built-in Task Manager will remind you of when and
                             what to do in each phase of the process.
                         {% endblocktrans %}
                     </p>
@@ -77,9 +96,9 @@
                     </header>
                     <p>
                         {% blocktrans %}
-                            Our team is made of immigrants. We undertand it's a very exhausting process
-                            so we make sure to share successfull stories from other immigrants and make
-                            it possible for you to interact with them and other people who can help.
+                            Our team is made of immigrants. We get it! We know how exhausting the whole process
+                            can be, so we make sure to share successful stories from other immigrants and make
+                            it possible for you to interact with them and other people who can help you .
                         {% endblocktrans %}
                     </p>
                 </div>
@@ -110,7 +129,7 @@
                         <p>
                             {% blocktrans %}
                                 Organise each step of the process to have better chances to get
-                                your visa approved. You will be able to visually manage all your tasks.
+                                your visa approved. You will be able to drag and drop your tasks.
                             {% endblocktrans %}
                         </p>
                     </section>
@@ -148,8 +167,8 @@
                     {% endblocktrans %}
                 </p>
                 <ul class="actions vertical">
-                    <li><a href="{% url 'company:how_it_works' %}" class="button special big">{% trans "GET STARTED" %}</a></li>
-                    <li><a href="{% url 'company:contact' %}" class="button big">{% trans "CONTACT US" %}</a></li>
+                    <li><a href="{% url 'quiz:take' 'australia' %}" class="button special big">{% trans "GET STARTED" %}</a></li>
+                    <li><a href="{% url 'company:about' %}" class="button big">{% trans "ABOUT US" %}</a></li>
                 </ul>
             </div>
         </section>
@@ -163,22 +182,39 @@
 
     {{ block.super }}
 
+    <!-- PAGE EXTRA JS -->
+    <script type="text/javascript" src="{% static 'common/selectize/js/selectize.js' %}"></script>
+
     <script type="text/javascript">
+
         $(document).ready(function(){
+
+            $('#country-selectize').selectize({
+                maxItems: 1,
+                labelField: 'name',
+                valueField: 'code',
+                plugins: [],
+                searchField: ['name'],
+                options: [{ code:"au", name:"{% trans "Australia" %}"},],
+                preload: true,
+                persist: false,
+                render: {
+                    item: function(item, escape) {
+                        return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
+                    },
+                    option: function(item, escape) {
+                        return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
+                    }
+                },
+            });
+
             // If it's a logout, clear tracking analytics user
             {% if has_logged_out %}
                 track_logout();
             {% endif %}
 
-            // Sends tracking event
-            track_event('{{ tracking_event_viewed_content }}', {
-                // Used by other services (e.g. Facebook pixel)
-                currency: 'AUD',
-                value: 0.1,
-                content_category: 'home',
-                content_name: 'Website Home-Page',
-            });
         });
+
     </script>
 
 {% endblock scripts %}

@@ -83,6 +83,31 @@ def generate_slug_from_name(sender, instance, raw, using, update_fields, **kwarg
         instance.slug = "%s-%d" % (orig[:max_length - len(str(x)) - 1], x)
 
 
+def generate_slug_from_title(sender, instance, raw, using, update_fields, **kwargs):
+    """
+    Generic slugify for models that use a 'name' and 'slug' attribute.
+    This will always update the slug if the name has changed
+
+    :param sender:
+    :param instance:
+    :param raw:
+    :param using:
+    :param update_fields:
+    :param kwargs:
+    :return:
+    """
+    max_length = sender._meta.get_field('slug').max_length
+    instance.slug = orig = slugify(instance.title)[:max_length]
+    for x in itertools.count(1):
+        if instance.pk:
+            records = sender.objects.filter(slug=instance.slug).exclude(pk=instance.pk)
+        else:
+            records = sender.objects.filter(slug=instance.slug)
+        if not records.exists():
+            break
+        instance.slug = "%s-%d" % (orig[:max_length - len(str(x)) - 1], x)
+
+
 ##########################
 # Signals setup
 ##########################

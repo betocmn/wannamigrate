@@ -24,72 +24,146 @@
                     <h1>{% trans "YOU'RE ALMOST IN" %}</h1>
                 </header>
 
-                <p>
-                    {% blocktrans %}
-                        Both options below will give you <strong>lifetime access</strong>
-                        to all tools on our immigration assistance platform, including free
-                        upgrades to new features released and countries added.
-                    {% endblocktrans %}
-                </p>
+                <form action="{% url 'order:process_payment' %}" method="POST" id="payment-form">
 
-                <div class="row">
+                    {% csrf_token %}
 
-                    <div class="6u 12u$(small)">
+                    <div class="row sub-title">
+                        <div class="8u -2u 12u$(small) align-center">
+                            {% blocktrans %}
+                                Once your payment is confirmed, you will get <strong>one year</strong> instant access
+                                to the immigration dashboard, including free upgrades to new features and countries.
+                            {% endblocktrans %}
+                        </div>
+                    </div>
 
-                        <h3>Default Lifetime Subscription</h3>
-                        <div class="box">
-                            <p>
-                                {% blocktrans %}
-                                    No requirements. Just confirm your subscription and get access
-                                    straight away.
-                                {% endblocktrans %}
-                            </p>
-                            <div class="align-center">
-                                <input type="radio" id="plan-default" name="plan" checked value="default" />
-                                <label for="plan-default">$ 15</label>
+                    <div class="row summary">
+                        <div class="8u -2u 12u$(small) align-center">
+                            <div class="content">
+                                <div class="cards">
+                                    <img src="{% static 'site/img/credit-card-visa-dark.png' %}" />
+                                    <img src="{% static 'site/img/credit-card-mastercard-dark.png' %}"  />
+                                    <img src="{% static 'site/img/credit-card-american-express-dark.png' %}" />
+                                </div>
+                                <div class="total">
+                                    <code>
+                                        Order Total: $<span id="order_total">{{ order_total|floatformat }}</span> (AUD)
+                                    </code>
+                                </div>
+                                {% if not discount_value %}
+                                    <div class="promo-link" id="promo-link">
+                                        <a href="javascript:;">(add discount code)</a>
+                                    </div>
+                                {% endif %}
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row forms">
+
+                        <div class="8u -2u 12u$(small)" id="promo-container" {% if not discount_value %}style="display: none;"{% endif %}>
+
+                            <div class="box">
+                                <div class="form-container active">
+                                    <div id="card-form-wrapper">
+                                        <div class="row uniform">
+                                            <div class="6u 12u$(xsmall) form-field">
+                                                <label>
+                                                    <input type="text" name="promo_code" id="promo_code" class="field" />
+                                                    <span><span>{% trans "Discount Code" %}</span></span>
+                                                </label>
+                                                <p>
+                                                    <span id="promo-error"></span>
+                                                    <span id="promo-success">{% if discount_value %}${{ discount_value }} Discount Applied :){% endif %}</span>
+                                                </p>
+                                            </div>
+                                            <div class="6u$ 12u$(xsmall) form-field">
+                                                {% if not discount_value %}
+                                                    <button type="button" class="button small" id="promo-button">
+                                                        {% trans "apply discount" %}
+                                                    </button>
+                                                    <div class="promo-loading" style="display: none;">
+                                                        <i class="fa fa-spinner fa-spin"></i>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="8u -2u 12u$(small)">
+
+                            <div class="box">
+                                <div class="form-container active">
+                                    <div id="card-form-wrapper">
+                                        <div class="row uniform">
+                                            <div class="6u 12u$(xsmall) form-field">
+                                                <label>
+                                                    <div id="card-number-element" class="field field-icon"></div>
+                                                    <span><span>{% trans "Card Number" %}</span></span>
+                                                    <span class="brand">
+                                                        <i class="fa fa-credit-card" id="brand-icon"></i>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="6u$ 12u$(xsmall) form-field">
+                                                <label>
+                                                    <input type="text" name="cardholder-name" class="field" placeholder="{% trans "Elon Musk" %}" autocomplete="off" />
+                                                    <span><span>{% trans "Name On Card" %}</span></span>
+                                                </label>
+                                            </div>
+                                            <div class="6u 12u$(xsmall) form-field">
+                                                <label>
+                                                    <div id="card-expiry-element" class="field"></div>
+                                                    <span><span>{% trans "Expiry Date" %}</span></span>
+                                                </label>
+                                            </div>
+                                            <div class="6u$ 12u$(xsmall) form-field">
+                                                <label>
+                                                    <div id="card-cvc-element" class="field"></div>
+                                                    <span><span>{% trans "CVC" %}</span></span>
+                                                </label>
+                                            </div>
+                                            <div class="6u 12u$(xsmall) form-field">
+                                                <label>
+                                                    <input type="text" name="address-zip" class="field" placeholder="{% trans "99999" %}" />
+                                                    <span><span>{% trans "Billing Post Code" %}</span></span>
+                                                </label>
+                                            </div>
+                                            <div class="6u$ 12u$(xsmall) form-field">
+                                                <label>
+                                                    <input type="text" name="address-country" class="field" placeholder="{% trans "China" %}" value="{{ member.country.name }}" />
+                                                    <span><span>{% trans "Billing Country" %}</span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="12u$">
+                            <ul class="actions vertical align-center">
+                                <li>
+                                    <button type="submit" class="button special big" id="payment-button">
+                                        {% trans "CONFIRM PAYMENT" %}
+                                    </button>
+                                    <div style="display: none" class="payment-loading">
+                                        <i class="fa fa-2x fa-spinner fa-spin"></i>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
 
                     </div>
 
-                    <div class="6u 12u$(small)">
-
-                        <h3>Discount Lifetime Subscription</h3>
-                        <div class="box">
-                            <p>
-                                {% blocktrans %}
-                                    You get the discount to post about us on your favourite social
-                                    media profile.
-                                {% endblocktrans %}
-                            </p>
-                            <div class="align-center">
-                                <input type="radio" id="plan-discount" name="plan" value="discount" />
-                                <label for="plan-discount">$ 9</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="12u$">
-                        <ul class="actions vertical align-center">
-                            <li>
-                                <a href="#" class="button special big" id="payment-button" data-featherlight="#confirmation">
-                                    {% trans "MAKE PAYMENT" %}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-                <hr class="major" />
-
-                <div class="12u align-center">
-                    <p>
-                        {% trans "Not sure what's included?" %}
-                        <a href="{% url 'company:how_it_works' %}">{% trans "Check How it Works" %}</a>
-                    </p>
-                </div>
+                </form>
 
             </div>
         </section>
@@ -119,28 +193,148 @@
 
     {{ block.super }}
 
+    <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript" src="{% static 'common/featherlight/js/featherlight.js' %}"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function(){
 
-            // Sends tracking event on payment button clicked
-            $("#payment-button").click(function () {
-                var plan = $('input[name=plan]:checked').val();
-                // Sends tracking event
-                track_event('{{ tracking_event_proceeded_to_payment }}', {
-                    // Used by other services (e.g. Facebook pixel)
-                    subscription_plan: plan,
-                    currency: 'AUD',
-                    value: 2,
-                    content_category: 'checkout',
-                    content_name: 'Payment',
+            // Initialises Stripe elements
+            var stripe = Stripe('{{ stripe_publishable_key }}');
+            var elements = stripe.elements();
+            var style = {
+                base: {
+                    iconColor: '#F99A52',
+                    color: '#494848',
+                    lineHeight: '44px',
+                    fontWeight: 300,
+                    fontFamily: '"Roboto", Helvetica, sans-serif',
+                    fontSize: '12pt',
+                    '::placeholder': {
+                        color: '#cecece',
+                    }
+                },
+                invalid: {
+                    color: '#ed4e71',
+                    iconColor: '#ed4e71'
+                }
+            };
+
+            // Toggles promo box
+            $('#promo-link').click(function () {
+                $('#promo_code').focus();
+                $('#promo-container').fadeIn();
+                $(this).hide();
+            });
+
+            // Promo Code Submission
+            $("#promo-button").click(function(e){
+                var $button = $(this);
+                var $loading = $(".promo-loading");
+                $button.hide();
+                $loading.show();
+                var url = '{% url "order:get_promo_info" %}';
+                var promo_code = $("#promo_code").val();
+                var params = {code: promo_code};
+                $.get(url, params, function(data) {
+                    $loading.hide();
+                    var $promo_error = $("#promo-error");
+                    var $promo_success = $("#promo-success");
+                    $promo_error.html('');
+                    $promo_success.html('');
+                    if(data.status == 'success'){
+                        var $total = $("#order_total");
+                        var new_total = parseFloat($total.html()) - parseFloat(data.discount);
+                        $total.html(number_format (new_total, 2, '.', ''));
+                        var discount_html = '$' + data.discount + ' Discount Applied :)';
+                        $promo_success.html(discount_html);
+                        $("#discount_total").html(data.discount);
+                        $("#discount_row").show();
+                    } else {
+                        $promo_error.html(data.message);
+                        $button.show();
+                    }
+
                 });
+            });
+
+            // Creates instances of card Elements
+            var card_number = elements.create('cardNumber', {style: style});
+            var card_expiry = elements.create('cardExpiry', {style: style});
+            var card_cvc = elements.create('cardCvc', {style: style});
+            card_number.mount('#card-number-element');
+            card_expiry.mount('#card-expiry-element');
+            card_cvc.mount('#card-cvc-element');
+
+            // Sets up credit-card brand
+            var cardBrandToPfClass = {
+                'visa': 'fa-cc-visa',
+                'mastercard': 'fa-cc-mastercard',
+                'amex': 'fa-cc-amex',
+                'discover': 'fa-cc-discover',
+                'diners': 'fa-cc-diners',
+                'jcb': 'fa-cc-jcb',
+                'unknown': 'fa-credit-card',
+            }
+            function set_brand_icon(brand) {
+                var brandIconElement = document.getElementById('brand-icon');
+                var pfClass = 'fa-credit-card';
+                if (brand in cardBrandToPfClass) {
+                    pfClass = cardBrandToPfClass[brand];
+                }
+                for (var i = brandIconElement.classList.length - 1; i >= 0; i--) {
+                    brandIconElement.classList.remove(brandIconElement.classList[i]);
+                }
+                brandIconElement.classList.add('fa');
+                brandIconElement.classList.add(pfClass);
+            }
+
+            // On change events for each stripe element
+            card_number.addEventListener('change', function(event) {
+                if (event.brand) {
+                    set_brand_icon(event.brand);
+                }
+            });
+
+            // Submits payment
+            $("#payment-form").submit(function(e){
+
+                // initial settings
+                event.preventDefault();
+                var $button = $("#payment-button");
+                var $loading = $(".payment-loading");
+                var $form = $(this);
+                $button.hide();
+                $loading.show();
+
+                // Sends data to stripe
+                var extra_details = {
+                    name: $('input[name=cardholder-name]').val(),
+                    address_zip: $('input[name=address-zip]').val(),
+                    address_country: $('input[name=address-country]').val(),
+                };
+                stripe.createToken(card_number, extra_details).then(function(result) {
+                    if (result.error) {
+                        display_notification('error', 'Error', result.error.message);
+                        $loading.hide();
+                        $button.show();
+                    } else {
+                        $form.append($('<input type="hidden" name="token" />').val(result.token.id));
+                        $form.get(0).submit();
+                    }
+                });
+
+                // Stops form submission
+                return false;
             })
 
 
         });
+
+        // Debugs payment error
+        var debug_payment_error = {{ payment_error|safe }};
+        console.log(debug_payment_error);
 
 
     </script>

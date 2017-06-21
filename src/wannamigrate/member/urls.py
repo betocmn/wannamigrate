@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^login-facebook/$', views.login_facebook, name='login_facebook'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^dashboard/$', views.dashboard, name='dashboard'),
 
 ]

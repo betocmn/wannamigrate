@@ -54,7 +54,7 @@ def contact(request):
     return render(request, 'company/contact.html', template_data)
 
 
-def how_it_works(request):
+def about(request):
     """
     How it works
 
@@ -65,11 +65,11 @@ def how_it_works(request):
     # Builds template data dictionary
     template_data = {
         'user': request.user,
-        'meta_title': _('How It Works | Wanna Migrate'),
+        'meta_title': _('About Us | Wanna Migrate'),
     }
 
     # Displays HTML template
-    return render(request, 'company/how_it_works.html', template_data)
+    return render(request, 'company/about.html', template_data)
 
 
 def terms(request):

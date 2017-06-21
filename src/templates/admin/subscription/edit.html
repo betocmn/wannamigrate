@@ -1,0 +1,49 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Masked Input -->
+    <script src="{% static 'common/jquery-mask/js/jquery.mask.js' %}"></script>
+
+	<script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+            // Form masks
+            $("#id_hold_until_date").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+
+		});
+
+	</script>
+
+{% endblock head %}
+
+{% block content %}
+
+            <div class="row">
+            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Edit Subscription</h1>
+                </div>
+                
+            </div>
+            
+            {% include "admin/_common/status.html" %}
+            
+            {% include "admin/_common/form.html" %}
+
+{% endblock content %}
+
+
+
+
+
+
+

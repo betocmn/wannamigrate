@@ -1,0 +1,81 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block body_css_class %}{{ block.super }} transparent{% endblock body_css_class %}
+{% block header_css_class %}{{ block.super }} alt{% endblock header_css_class %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="dashboard-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+
+                <header class="major">
+                    <div class="country">
+                        <a href="{% url 'member:dashboard' %}" class="icon alt">
+                            {% with country_img='site/img/wanna-migrate-flag-'|add:request.session.country_slug|add:'-square.png' %}
+                                <img src="{% static country_img %}" alt="{% trans request.session.country_name %}" />
+                            {% endwith %}
+                        </a>
+                        <h1>{% trans request.session.country_name %}</h1>
+                        <p>{% trans 'Your journey starts here. You will find below all the tools you need to organise your immigration plan.' %}</p>
+                    </div>
+                </header>
+
+                <div class="dashboard-panel">
+
+                    <div class="dashboard-menu">
+
+                        <ul>
+                            <li {% if dashboard_section == 'story' %}class="active"{% endif %}>
+                                <a href="{% url 'story:index' %}">Stories</a>
+                            </li>
+                            <li {% if dashboard_section == 'guide' %}class="active"{% endif %}>
+                                <a href="{% url 'guide:index' %}">Guide</a>
+                            </li>
+                            <li {% if dashboard_section == 'task' %}class="active"{% endif %}>
+                                <a href="{% url 'task:index' %}">Tasks</a>
+                            </li>
+                            <li {% if dashboard_section == 'doc' %}class="active"{% endif %}>
+                                <a href="{% url 'doc:index' %}">Docs</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        {% block dashboard_content %}{% endblock dashboard_content %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

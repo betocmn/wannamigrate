@@ -22,11 +22,11 @@ class ContactForm(BaseForm):
     Form for regular email/password login
     """
     email = EmailField(required=True, label=_('Your E-mail'), widget=EmailInput(
-        attrs={'placeholder': _('Your E-mail')}
+        attrs={'placeholder': _('barney.simpsom@gmail.com')}
     ))
     name = CharField(required=True, label=_('Your Name'), widget=TextInput(
-        attrs={'placeholder': _('Your Name')}
+        attrs={'placeholder': _('Barney Simpsom')}
     ))
     message = CharField(required=True, label=_('Your Message'), widget=Textarea(
-        attrs={'placeholder': _('Your Message')}
+        attrs={'placeholder': _('How can we help?'), 'rows': '5'}
     ))

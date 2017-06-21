@@ -54,6 +54,9 @@ WSGI_APPLICATION = 'wannamigrate.wsgi.application'
 # The base URL Conf
 ROOT_URLCONF = 'wannamigrate.urls'
 
+# Login URL
+LOGIN_URL = 'member:login'
+
 
 #########################################
 # INTERNATIONALIZATION AND LOCALIZATION
@@ -165,9 +168,28 @@ LOCAL_APPS = (
     'wannamigrate.member',
     'wannamigrate.order',
     'wannamigrate.quiz',
+    'wannamigrate.guide',
+    'wannamigrate.story',
+    'wannamigrate.task',
+    'wannamigrate.doc',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+
+#########################################
+# TECH ALERTS SETTINGS
+#########################################
+if IS_PROD:
+    ALERT_TECH_SLACK_URL = 'https://hooks.slack.com/services/' \
+                           'T2KE0H2Q5/B2KE617EC/3e0CO4HCsFEo8UNd3mzqUSeQ'
+    ALERT_ADMIN_SLACK_URL = 'https://hooks.slack.com/services/' \
+                            'T2KE0H2Q5/B2KFY9J9Y/5uTg3HUDbvZlPeIAnv2ssbHk'
+else:
+    ALERT_TECH_SLACK_URL = 'https://hooks.slack.com/services/' \
+                           'T2KE0H2Q5/B2KEKDKHQ/OfUZzmx7rzrrfrVctZPM9kru'
+    ALERT_ADMIN_SLACK_URL = 'https://hooks.slack.com/services/' \
+                            'T2KE0H2Q5/B2KEKDKHQ/OfUZzmx7rzrrfrVctZPM9kru'
 
 
 #########################################
@@ -178,7 +200,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -268,8 +290,9 @@ DB_ID_SUBSCRIPTION_STATUS_NEVER_ACTIVATED = 1
 DB_ID_SUBSCRIPTION_STATUS_ACTIVE = 2
 DB_ID_SUBSCRIPTION_STATUS_EXPIRED = 3
 DB_ID_SUBSCRIPTION_STATUS_CANCELLED = 4
-DB_ID_SUBSCRIPTION_STATUS_SKIP = 5
-DB_ID_SUBSCRIPTION_STATUS_PAUSE = 6
+
+# DB IDS - Products
+DB_ID_PRODUCT_SUBSCRIPTION_1_YEAR = 1
 
 # EMAIL SETTINGS
 EMAIL_DEFAULT_TO_ADDRESS = 'contact@wannamigrate.com'
@@ -285,3 +308,4 @@ TRACKING_EVENT_REQUESTED_PASSWORD_RESET = 'requested_password_reset'
 TRACKING_EVENT_PLACED_ORDER = 'placed_order'
 TRACKING_EVENT_VIEWED_CONTENT = 'viewed_content'
 TRACKING_EVENT_PROCEEDED_TO_PAYMENT = 'proceeded_to_payment'
+TRACKING_EVENT_COMPLETED_QUIZ = 'completed_quiz'

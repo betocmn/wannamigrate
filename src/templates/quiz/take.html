@@ -24,14 +24,14 @@
         {% endblock head %}
     </head>
 
-	<body class="is-loading-0 is-loading-1">
+	<body class="quiz-wrapper is-loading-0 is-loading-1">
 
         <form method="post" action="">
 
             {% csrf_token %}
 
 		    <!-- Wrapper -->
-			<div id="wrapper" class="quiz-wrapper">
+			<div id="wrapper">
 
                 {% for quiz_question in quiz_questions %}
 
@@ -83,7 +83,6 @@
                                     {{ forloop.counter }} of {{ total_questions }}
                                 </div>
                             </div>
-
                         </div>
                     </article>
 
@@ -112,7 +111,9 @@
 
 				<!-- Footer -->
                 <footer id="footer">
-                    <p class="copyright">&copy; Wanna Migrate</p>
+                    <p class="copyright">
+                        &copy; Wanna Migrate
+                    </p>
                 </footer>
 
 			</div>

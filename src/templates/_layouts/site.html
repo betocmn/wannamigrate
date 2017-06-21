@@ -23,14 +23,14 @@
     {% endblock head %}
     </head>
 
-    <body class="{% block body_css %}{% endblock body_css %}">
+    <body class="{% block body_css_class %}{% endblock body_css_class %}">
 
         <div id="page-wrapper">
 
             {% block header %}
 
                 <!-- Header -->
-                <header id="header">
+                <header id="header" class="{% block header_css_class %}{% endblock header_css_class %}">
                     <a href="{% url 'landing:home' %}" class="logo">
                       <span>Wanna Migrate</span>
                     </a>
@@ -53,12 +53,12 @@
                 <nav id="menu">
                     <ul class="links">
                         <li><a href="{% url 'landing:home' %}">{% trans "HOME" %}</a></li>
-                        <li><a href="{% url 'company:how_it_works' %}">{% trans "HOW IT WORKS" %}</a></li>
+                        <li><a href="{% url 'company:about' %}">{% trans "ABOUT US" %}</a></li>
                         <li><a href="{% url 'company:contact' %}">{% trans "CONTACT US" %}</a></li>
                     </ul>
                     {% if not user or not user.is_authenticated %}
                         <ul class="actions vertical">
-                            <li><a href="{% url 'company:how_it_works' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
+                            <li><a href="{% url 'quiz:take' 'australia' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
                             <li><a href="{% url 'member:login' %}" class="button fit">{% trans "LOG IN" %}</a></li>
                         </ul>
                     {% else %}
@@ -83,17 +83,17 @@
                             <div class="3u 6u(small)">
                                 <ul class="links">
                                     <li><a href="{% url 'landing:home' %}">{% trans "Home" %}</a> </li>
-                                    <li><a href="{% url 'company:how_it_works' %}">{% trans "How it works" %}</a> </li>
+                                    <li><a href="{% url 'quiz:take' 'australia' %}">{% trans "Immigration Quiz" %}</a> </li>
                                     <li><a href="{% url 'member:signup' %}">{% trans "Sign up" %}</a> </li>
                                     <li><a href="{% url 'member:login' %}">{% trans "Log in" %}</a> </li>
                                 </ul>
                             </div>
                             <div class="3u 6u$(small)">
                                 <ul class="links">
+                                    <li><a href="{% url 'company:about' %}">{% trans "About us" %}</a> </li>
                                     <li><a href="{% url 'company:contact' %}">{% trans "Contact us" %}</a> </li>
                                     <li><a href="{% url 'company:terms' %}">{% trans "Terms" %}</a> </li>
                                     <li><a href="{% url 'company:privacy' %}">{% trans "Privacy" %}</a> </li>
-                                    <li><a href="http://www.border.gov.au/">{% trans "Australian Government" %}</a> </li>
                                 </ul>
                             </div>
                             <div class="6u 12u$(small)">
@@ -114,7 +114,11 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <p class="copyright">&copy; 2017 Wannamigrate.com. {% trans "Made in Sydney - Australia" %}</p>
+                                <p class="copyright">
+                                    &copy; 2017 Wanna Migrate. {% trans "Made in Sydney - Australia" %}
+                                    <br />{% trans "28 Rothschild Avenue, Rosebery, NSW 2018" %}
+                                    <br />{% trans "ABN: 48316158565" %}
+                                </p>
                             </div>
                         </div>
                     </div>

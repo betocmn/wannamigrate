@@ -1,0 +1,53 @@
+{% extends "_layouts/dashboard.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+<section id="banner" class="home-wrapper"></section>
+
+{% block dashboard_content %}
+
+    <div class="guide details">
+
+        <h1 class="align-center">{{ chapter.sort_order }}- {{ chapter.title }}</h1>
+
+        {% for section in sections %}
+
+            <div class="section">
+
+                <h2 class="align-left">{{ section.title }}</h2>
+
+                <p>
+                    {{ section.html_content|safe|linebreaksbr }}
+                </p>
+
+                <span class="image main align-center">
+                    <img src="{{ section.image.large.url }}" alt="{{ section.title }}" />
+                </span>
+
+            </div>
+
+        {% endfor %}
+
+        <div class="align-center">
+            <ul class="actions">
+                <li><a href="{% url 'guide:index' %}" class="button">Go Back</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock dashboard_content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+    </script>
+
+{% endblock scripts %}

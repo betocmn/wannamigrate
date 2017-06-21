@@ -17,7 +17,10 @@ def my_view(request):
 # Imports
 ##########################
 from functools import wraps
+from django.utils.translation import ugettext_lazy as _
+from django.contrib import messages
 from django.conf import settings
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import available_attrs
 
@@ -80,11 +83,11 @@ def subscription_required(view_func):
     """
     Wraps an check to see if there's an active subscription in the session
     """
-    """
     def _wrapped_view(request, *args, **kwargs):
-        if 'subscription' not in request.session or request.session['subscription'] is None:
-            return HttpResponseRedirect(reverse('marketplace:immi_box'))
+        if 'subscription_id' not in request.session or not request.session['subscription_id']:
+            messages.error(request, _('Sorry, you need an active subscription!'))
+            return redirect('member:dashboard')
         else:
             return view_func(request, *args, **kwargs)
     return _wrapped_view
-    """
+

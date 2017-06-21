@@ -1,0 +1,68 @@
+{% extends "_layouts/dashboard.html" %}
+{% load staticfiles %}
+
+<section id="banner" class="home-wrapper"></section>
+
+{% block dashboard_content %}
+
+    <div class="stories">
+
+        <p class="align-center">
+            Every two weeks we tell the story from a fellow immigrant who has successfully settled in Australia. You can then join the
+            <strong><em>AMA</em> Sessions</strong> ("Ask Me Anything") where you can interact directly with our guests.
+        </p>
+
+        <article>
+            <h3>Interdum aenean</h3>
+            <a href="#" class="image">
+                <span class="image fit">
+                    <img src="{% static 'site/img/wanna-migrate-about-us-sydney.jpg' %}" alt="Wanna Migrate - From Australia" />
+                </span>
+            </a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+            <ul class="actions">
+                <li><a href="#" class="button">Read Full Story</a></li>
+            </ul>
+        </article>
+        <article>
+            <h3>Interdum aenean</h3>
+            <a href="#" class="image">
+                <span class="image fit">
+                    <img src="{% static 'site/img/wanna-migrate-about-us-sydney.jpg' %}" alt="Wanna Migrate - From Australia" />
+                </span>
+            </a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+            <ul class="actions">
+                <li><a href="#" class="button">Read Full Story</a></li>
+            </ul>
+        </article>
+        <article>
+            <h3>Interdum aenean</h3>
+            <a href="#" class="image">
+                <span class="image fit">
+                    <img src="{% static 'site/img/wanna-migrate-about-us-sydney.jpg' %}" alt="Wanna Migrate - From Australia" />
+                </span>
+            </a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+            <ul class="actions">
+                <li><a href="#" class="button">Read Full Story</a></li>
+            </ul>
+        </article>
+
+    </div>
+
+{% endblock dashboard_content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+    </script>
+
+{% endblock scripts %}

@@ -100,13 +100,17 @@
                                 <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <p class="disabled">Manage Orders</p>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <p class="disabled">Manage Promo Codes</p>
-                                </li>
+                                {% if perms.order.admin_view_order %}
+                                    <li>
+                                        <a href="{% url 'admin:order:list' %}">Orders</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                {% endif %}
+                                {% if perms.order.admin_view_promo_code %}
+                                    <li>
+                                        <a href="{% url 'admin:promo_code:list' %}">Promo Codes</a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
 
@@ -142,6 +146,34 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-pencil-square-o fa-fw"></i>
+                                    Content
+                                    <i class="fa fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    {% if perms.quiz.admin_view_post %}
+                                        <li>
+                                            <a href="{% url 'admin:post:list' %}">Stories</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                    {% if perms.quiz.admin_view_chapter %}
+                                        <li>
+                                            <a href="{% url 'admin:chapter:list' %}">Guide Chapters</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                    {% if perms.quiz.admin_view_section %}
+                                        <li>
+                                            <a href="{% url 'admin:section:list' %}">Guide Sections</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

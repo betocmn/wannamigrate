@@ -1,0 +1,55 @@
+{% extends "_layouts/dashboard.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+<section id="banner" class="home-wrapper"></section>
+
+{% block dashboard_content %}
+
+    <div class="stories">
+
+        <p class="intro align-center">
+            {% blocktrans %}
+                Every two weeks we tell the story from a fellow immigrant who has successfully settled in Australia. You can then join the
+                <strong><em>AMA</em> Sessions</strong> ("Ask Me Anything") where you can interact directly with our guests.
+            {% endblocktrans %}
+        </p>
+
+        {% for post in posts %}
+            <div class="row listing-post">
+                <div class="4u 12u$(small)">
+                    <a href="{% url 'story:details' post.slug %}" class="image">
+                        <span class="image fit">
+                            <img src="{{ post.image.small.url }}" alt="{{ post.title }}" />
+                        </span>
+                    </a>
+                </div>
+                <div class="8u 12u$(small)">
+                    <h3>{{ post.title }}</h3>
+                    <p>
+                        {{ post.description|safe|truncatechars_html:180 }}
+                    </p>
+                    <ul class="actions">
+                        <li><a href="{% url 'story:details' post.slug %}" class="button fit small">Read Full Story</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock dashboard_content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+    </script>
+
+{% endblock scripts %}

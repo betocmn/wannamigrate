@@ -29,14 +29,20 @@
                             <div class="row uniform">
 
                                 <!-- Break -->
-                                <div class="12u$ {% if form.email.errors %}has-error{% endif %}">
-                                    {{ form.email }}
+                                <div class="12u$ form-field {% if form.email.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ form.email }}
+                                        <span><span>{{ form.email.label }}</span></span>
+                                    </label>
                                     {{ form.email.errors }}
                                 </div>
 
                                 <!-- Break -->
-                                <div class="12u$ {% if form.password.errors %}has-error{% endif %}">
-                                    {{ form.password }}
+                                <div class="12u$ form-field {% if form.password.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ form.password }}
+                                        <span><span>{{ form.password.label }}</span></span>
+                                    </label>
                                     {{ form.password.errors }}
                                 </div>
 

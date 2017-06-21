@@ -19,6 +19,10 @@ urlpatterns = [
     # Admin Users
     url(r'^\/admin_users/', include('wannamigrate.admin.admin_user.urls',
                                     namespace="admin_user")),
+
+    # Chapters
+    url(r'^\/chapters/', include('wannamigrate.admin.chapter.urls', namespace="chapter")),
+
     # Groups
     url(r'^\/groups/', include('wannamigrate.admin.group.urls', namespace="group")),
 
@@ -33,8 +37,24 @@ urlpatterns = [
     # Members
     url(r'^\/members/', include('wannamigrate.admin.member.urls', namespace="member")),
 
+    # Orders
+    url(r'^\/orders/', include('wannamigrate.admin.order.urls', namespace="order")),
+
+    # Posts
+    url(r'^\/posts/', include('wannamigrate.admin.post.urls', namespace="post")),
+
+    # Promo Codes
+    url(r'^\/promo_codes/', include('wannamigrate.admin.promo_code.urls',
+        namespace="promo_code")),
+
     # Quiz
     url(r'^\/quiz/', include('wannamigrate.admin.quiz.urls', namespace="quiz")),
 
+    # Sections
+    url(r'^\/sections/', include('wannamigrate.admin.section.urls', namespace="section")),
+
+    # Subscriptions
+    url(r'^\/subscriptions/', include('wannamigrate.admin.subscription.urls',
+        namespace="subscription")),
 
 ]

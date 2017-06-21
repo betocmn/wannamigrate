@@ -20,6 +20,7 @@ from django.db import transaction
 from wannamigrate.admin.member.forms import (
     MemberForm, UserForm
 )
+from wannamigrate.order.models import OrderItem, Subscription
 from wannamigrate.core.decorators import restrict_internal_ips
 from wannamigrate.core.util import build_datatable_json, get_object_or_false
 from wannamigrate.member.models import Member
@@ -40,41 +41,9 @@ def add(request):
     :return: String
     """
 
-    # Checks if any field of SHIPPING ADDRESS was given
-    shipping_address_fields = [
-        'shipping-country', 'shipping-line_1', 'shipping-line_2', 'shipping-city',
-        'shipping-state', 'shipping-postcode'
-    ]
-    shipping_address_form_empty = True
-    shipping_post_data = None
-    for key in shipping_address_fields:
-        field = request.POST.get(key, None)
-        if field is not None and field != '':
-            shipping_address_form_empty = False
-            shipping_post_data = request.POST
-            break
-
-    # Checks if any field of BILLING ADDRESS was given
-    billing_address_fields = [
-        'billing-country', 'billing-line_1', 'billing-line_2', 'billing-city',
-        'billing-state', 'billing-postcode'
-    ]
-    billing_address_form_empty = True
-    billing_post_data = None
-    for key in billing_address_fields:
-        field = request.POST.get(key, None)
-        if field is not None and field != '':
-            billing_address_form_empty = False
-            billing_post_data = request.POST
-            break
-
     # Instantiates FORMs
     user_form = UserForm(request.POST or None)
     member_form = MemberForm(request.POST or None, request.FILES or None)
-    shipping_form = ShippingAddressForm(shipping_post_data, prefix="shipping")
-    billing_form = BillingAddressForm(billing_post_data, prefix="billing")
-    shipping_address = None
-    billing_address = None
 
     # If forms were submitted
     if request.method == 'POST':
@@ -82,25 +51,8 @@ def add(request):
         # Starts a DB transaction so that one failure cancels all previous operations
         with transaction.atomic():
 
-            # Saves Shipping Address (Not Required)
-            shipping_address_form_errors = False
-            if not shipping_address_form_empty:
-                if shipping_form.is_valid():
-                    shipping_address = shipping_form.save()
-                else:
-                    shipping_address_form_errors = True
-
-            # Saves Billing Address (not required)
-            billing_address_form_errors = False
-            if not billing_address_form_empty:
-                if billing_form.is_valid():
-                    billing_address = billing_form.save()
-                else:
-                    billing_address_form_errors = True
-
             # Validates and Saves the User Form
-            if not shipping_address_form_errors and not billing_address_form_errors and \
-                    user_form.is_valid():
+            if user_form.is_valid():
 
                 # Sets additional data
                 user_form.is_active = True
@@ -112,16 +64,6 @@ def add(request):
                 if member_form.is_valid():
                     member = member_form.save()
 
-                    # Saves Addresses
-                    if shipping_address or billing_address:
-                        member.shipping_address = shipping_address if shipping_address else None
-                        member.billing_address = billing_address if billing_address else None
-                        member.save()
-
-                    # Sends Welcome Email to User
-                    # TODO Change this to a celery/signal background task
-                    #Mailer.send_welcome_email(user)
-
                     # Redirects with success message
                     messages.success(request, 'Member was successfully added.')
                     return HttpResponseRedirect(reverse('admin:member:details', args=(member.id,)))
@@ -132,7 +74,6 @@ def add(request):
     # Template data
     context = {
         'user_form': user_form, 'member_form': member_form,
-        'shipping_form': shipping_form, 'billing_form': billing_form,
         'cancel_url': reverse('admin:member:list')
     }
 
@@ -178,39 +119,21 @@ def details(request, member_id):
     """
 
     # Identifies database record
-    member = Member.objects.annotate(
-        average_rating=Avg(
-            'winerating__score',
-            output_field=DecimalField(max_digits=3, decimal_places=2)
-        )
-    ).filter(id=member_id).first()
+    member = Member.objects.filter(id=member_id).first()
     if not member:
         return redirect('admin:member:list')
 
-    # Gifts received
-    gifts_given = Gift.objects.filter(from_member_id=member.id)
-    gifts_received = Gift.objects.filter(to_member_id=member.id)
-
     # Orders
     order_items = OrderItem.objects.select_related(
-        'order', 'product', 'order_item_source'
+        'order', 'product'
     ).filter(order__member=member).order_by('-order__created_date')
-
-    # Wine Ratings
-    wine_ratings = WineRating.objects.filter(member=member)
 
     # Template data
     context = {
         'member': member,
-        'wine_ratings': wine_ratings,
-        'gifts_given': gifts_given,
-        'gifts_received': gifts_received,
-        'member_credits': Credit.objects.select_related('credit_reason').filter(member_id=member.id),
         'user': member.user,
         'subscription': get_object_or_false(Subscription, member_id=member.id),
         'order_items': order_items,
-        'shipping_address': member.shipping_address,
-        'billing_address': member.billing_address,
         'urls': {
             'back': reverse('admin:member:list'),
             'add': reverse('admin:member:add'),
@@ -236,61 +159,10 @@ def edit(request, member_id):
     """
     # Identifies database record
     member = get_object_or_404(Member, pk=member_id)
-    wine_preference = get_object_or_false(WinePreference, member_id=member_id)
-
-    # Checks if any field of SHIPPING ADDRESS was given
-    shipping_address_fields = [
-        'shipping-country', 'shipping-line_1', 'shipping-line_2', 'shipping-city',
-        'shipping-state', 'shipping-postcode'
-    ]
-    shipping_address_form_empty = True
-    shipping_post_data = None
-    for key in shipping_address_fields:
-        field = request.POST.get(key, None)
-        if field is not None and field != '':
-            shipping_address_form_empty = False
-            shipping_post_data = request.POST
-            break
-
-    # Checks if any field of BILLING ADDRESS was given
-    billing_address_fields = [
-        'billing-country', 'billing-line_1', 'billing-line_2', 'billing-city',
-        'billing-state', 'billing-postcode'
-    ]
-    billing_address_form_empty = True
-    billing_post_data = None
-    for key in billing_address_fields:
-        field = request.POST.get(key, None)
-        if field is not None and field != '':
-            billing_address_form_empty = False
-            billing_post_data = request.POST
-            break
-
-    # Checks if any field of MEMBER WINE PREFERENCES was given
-    wine_preferences_fields = ['preferences-red_bottles', 'preferences-white_bottles']
-    wine_preferences_form_empty = True
-    wine_preferences_post_data = None
-    for key in wine_preferences_fields:
-        field = request.POST.get(key, None)
-        if field is not None and field != '':
-            wine_preferences_form_empty = False
-            wine_preferences_post_data = request.POST
-            break
 
     # Instantiates FORM
     user_form = UserForm(request.POST or None, instance=member.user)
     member_form = MemberForm(request.POST or None, request.FILES or None, instance=member)
-    shipping_form = ShippingAddressForm(
-        shipping_post_data, prefix="shipping", instance=member.shipping_address
-    )
-    billing_form = BillingAddressForm(
-        billing_post_data, prefix="billing", instance=member.billing_address
-    )
-    wine_preferences_form = MemberWinePreferencesForm(
-        wine_preferences_post_data, prefix="preferences", instance=wine_preference
-    )
-    shipping_address = None
-    billing_address = None
 
     # If forms were submitted
     if request.method == 'POST':
@@ -298,62 +170,8 @@ def edit(request, member_id):
         # Starts a DB transaction so that one failure cancels all previous operations
         with transaction.atomic():
 
-            # Saves Wine Preferences (Not Required)
-            wine_preferences_form_errors = False
-            if not wine_preferences_form_empty:
-                if wine_preferences_form.is_valid():
-
-                    # Validate min number of bottles
-                    min_total_bottles = settings.SUBSCRIPTION_MINIMUM_TOTAL_BOTTLES
-                    red_bottles = wine_preferences_form.cleaned_data.get('red_bottles', False)
-                    white_bottles = wine_preferences_form.cleaned_data.get('white_bottles', False)
-                    if red_bottles and white_bottles:
-
-                        # Validates input data
-                        red_bottles = int(red_bottles)
-                        white_bottles = int(white_bottles)
-                        total_bottles_selected = (red_bottles + white_bottles)
-                        if total_bottles_selected < min_total_bottles:
-                            messages.error(request, 'You need a minimum of 3 bottles in total')
-                            wine_preferences_form_errors = True
-                        elif total_bottles_selected > min_total_bottles and \
-                                not member.payment_api_customer_uuid:
-                            messages.error(request, 'Member needs to add a payment method '
-                                                    'to be charged for the extra bottles')
-                            wine_preferences_form_errors = True
-
-                        # Saves preferences
-                        if not wine_preferences_form_errors:
-                            wine_preferences_form.save()
-
-                            # Updates total bottles on subscription
-                            subscription = get_object_or_false(Subscription, member=member)
-                            if subscription:
-                                subscription.total_bottles = red_bottles + white_bottles
-                                subscription.save()
-
-                else:
-                    wine_preferences_form_errors = True
-
-            # Saves Shipping Address (Not Required)
-            shipping_address_form_errors = False
-            if not shipping_address_form_empty:
-                if shipping_form.is_valid():
-                    shipping_address = shipping_form.save()
-                else:
-                    shipping_address_form_errors = True
-
-            # Saves Billing Address (not required)
-            billing_address_form_errors = False
-            if not billing_address_form_empty:
-                if billing_form.is_valid():
-                    billing_address = billing_form.save()
-                else:
-                    billing_address_form_errors = True
-
             # Validates and Saves the User Form
-            if not shipping_address_form_errors and not billing_address_form_errors and \
-                    not wine_preferences_form_errors and user_form.is_valid():
+            if user_form.is_valid():
 
                 # Sets additional data
                 user_form.is_active = True
@@ -365,15 +183,6 @@ def edit(request, member_id):
                 if member_form.is_valid():
                     member = member_form.save()
 
-                    # Saves Addresses
-                    if shipping_address or billing_address:
-                        member.shipping_address = shipping_address if shipping_address else None
-                        member.billing_address = billing_address if billing_address else None
-                        member.save()
-
-                        # Celery task to update order address for pending orders
-                        update_pending_order_addresses.delay(member, shipping_address)
-
                     # Redirects with success message
                     messages.success(request, 'Member was successfully added.')
                     return HttpResponseRedirect(reverse('admin:member:details', args=(member.id,)))
@@ -384,8 +193,6 @@ def edit(request, member_id):
     # Template data
     context = {
         'user_form': user_form, 'member_form': member_form,
-        'shipping_form': shipping_form, 'billing_form': billing_form,
-        'wine_preferences_form': wine_preferences_form,
         'member': member,
         'cancel_url': reverse('admin:member:details', args=(member.id,))
     }
@@ -436,7 +243,6 @@ def list_json(request):
             output_field=CharField()
         ),
         subscription_status=F('subscription__subscription_status__name'),
-        subscription_month=F('subscription__month_count'),
     )
 
     # If subscription status filter was passed
@@ -450,7 +256,6 @@ def list_json(request):
     info = {
         'fields_to_select': [
             'id', 'full_name', 'user.email', 'created_date', 'subscription_status',
-            'subscription_month'
         ],
         'fields_to_search': [
             'id', 'full_name', 'user__email', 'subscription_status'

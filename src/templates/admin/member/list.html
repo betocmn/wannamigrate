@@ -18,7 +18,7 @@
 
             // Loads datatable plugin
             init_datatable(
-                $('#datatable_data'), [[3, "desc"]], [null, null, null, null, null, null, { "bSortable": false}],
+                $('#datatable_data'), [[3, "desc"]], [null, null, null, null, null, { "bSortable": false}],
                 "{% url 'admin:member:list_json' %}{{ querystring }}"
             );
 
@@ -71,7 +71,6 @@
                                             <th>Email</th>
                                             <th>Joined</th>
                                             <th>Subscription</th>
-                                            <th>Month</th>
                                             <th></th>
                                         </tr>
                                     </thead>

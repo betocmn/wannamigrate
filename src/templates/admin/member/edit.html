@@ -40,12 +40,6 @@
 
             {% include "admin/_common/status.html" with form=member_form %}
 
-            {% include "admin/_common/status.html" with form=shipping_form %}
-
-            {% include "admin/_common/status.html" with form=billing_form %}
-
-            {% include "admin/_common/status.html" with form=wine_preferences_form %}
-
             <form action="" method="post" id="main_form" enctype="multipart/form-data">
 
                 {% csrf_token %}
@@ -53,12 +47,6 @@
                 {% include "admin/_common/form.html" with form=user_form partial=True %}
 
                 {% include "admin/_common/form.html" with form=member_form partial=True %}
-
-                {% include "admin/_common/form.html" with form=wine_preferences_form partial=True title="Wine Preferences" %}
-
-                {% include "admin/_common/form.html" with form=shipping_form partial=True title="Shipping Address" %}
-
-                {% include "admin/_common/form.html" with form=billing_form partial=True title="Billing Address" %}
 
                 <div class="row">
                     <div class="col-lg-12 text-center buttons">

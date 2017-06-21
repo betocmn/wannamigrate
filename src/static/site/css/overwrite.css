@@ -3,21 +3,23 @@
 1- GENERAL
 2- HEADER
 3- FOOTER
-4- HOME
-5- SIGNUP
-6- LOGIN
-7- ABOUT
-8- CONTACT US
-9- QUIZ
+4- FORMS
+5- HOME
+6- SIGNUP
+7- LOGIN
+8- ABOUT
+9- CONTACT US
+10- QUIZ
+11- CHECKOUT
+12- THANK YOU
+13- DASHBOARD
+14- DASHBOARD STORIES
+15- DASHBOARD GUIDE
+
 
 */
 
 /***** 1- GENERAL ********/
-.errorlist li {
-    font-size: 1em;
-    color: #ed4e71;
-    padding-left: 0;
-}
 .ui-pnotify-title {
     font-size: 1.2em;
     font-weight: 500;
@@ -50,6 +52,35 @@
 .featherlight-content {
     max-width: 600px;
 }
+.flag {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+.flag.flag-au {
+    background-image: url('../img/wanna-migrate-flag-australia-square.png');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: 0 5px;
+}
+body {
+    color: #767676;
+}
+body.transparent #page-wrapper {
+    padding-top: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #494848;
+}
+#wrapper > * {
+    padding: 3em 0 3em 0;
+}
+@media screen and (max-width: 736px) {
+    #wrapper > * > .inner {
+        max-width: calc(100% - 2em);
+    }
+}
+
 
 
 /**** 2- HEADER *****/
@@ -86,16 +117,74 @@
 }
 
 
-/**** 4- HOME *****/
+/**** 4- FORMS *****/
+.form-field {
+    margin-bottom: 8px;
+}
+.errorlist li {
+    font-size: 1em;
+    color: #ed4e71;
+    padding-left: 0;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"], select, textarea {
+    color: #494848;
+    background-color: rgba(190, 189, 189, 0.075);
+}
+label {
+    position: relative;
+    color: #494848;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+label > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-weight: 300;
+    line-height: 32px;
+    color: #494848;
+    transition: border-bottom-color 200ms ease-in-out;
+    cursor: text;
+    pointer-events: none;
+}
+label > span span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0% 50%;
+    transition: transform 200ms ease-in-out;
+    cursor: text;
+}
+label span span {
+    transform: scale(0.68) translateY(-36px);
+    cursor: default;
+}
+input[type="checkbox"] + label, input[type="radio"] + label {
+    margin-top: 0;
+}
+@media screen and (max-width: 736px) {
+    .form-field {
+        margin-bottom: 15px;
+    }
+}
+
+
+/**** 5- HOME *****/
 @media screen and (min-width: 737px) {
-    #banner .inner {
+    #banner.home-wrapper .inner {
         max-width: 40%;
         margin-left: 45%;
         background-position-y: -136px;
     }
 }
 @media screen and (max-width: 480px) {
-    #banner{
+    #banner.home-wrapper {
         background-position-x: -136px;
     }
 }
@@ -105,9 +194,34 @@
 #four h3 span {
   font-weight: 700;
 }
+.home-wrapper .country-container {
+    min-width: 150px;
+}
+.home-wrapper .selectize-control  {
+    height: 48px;
+}
+#country-selectize-selectized {
+    display: none !important;
+}
+.home-wrapper .selectize-input {
+    padding: 0.3600em;
+    border-radius: 4px;
+}
+.home-wrapper .country-container div.flag {
+    float: left;
+}
+.home-wrapper .country-container div.name {
+    float: left;
+    height: 32px;
+    padding-top: 10px;
+    margin-left: 6px;
+    margin-right: 10px;
+}
 
-
-/**** 5- SIGNUP ****/
+/**** 6- SIGNUP ****/
+.signup-wrapper h3 {
+    margin-bottom: 30px;
+}
 .signup-wrapper .facebook {
     margin: auto;
     text-align: center;
@@ -129,7 +243,10 @@
 }
 
 
-/**** 6- LOGIN ****/
+/**** 7- LOGIN ****/
+.login-wrapper h3 {
+    margin-bottom: 30px;
+}
 .login-wrapper .facebook {
     margin: auto;
     text-align: center;
@@ -151,7 +268,7 @@
 }
 
 
-/**** 7- ABOUT ****/
+/**** 8- ABOUT ****/
 .about-wrapper .screens img {
     border: 1px solid #d3d3d3;
 }
@@ -185,18 +302,21 @@
 }
 
 
-/**** 8- CONTACT ****/
+/**** 9- CONTACT US ****/
 .contact-wrapper .address {
     margin: auto;
 }
 @media screen and (min-width: 737px) {
     .contact-wrapper .address {
-        padding: 8em;
+        padding: 7em;
     }
 }
 
 
-/**** 9- QUIZ ****/
+/**** 10- QUIZ ****/
+.quiz-wrapper #wrapper > * {
+    padding: 0.600em 0 0.600em 0;
+}
 .quiz-wrapper .inner h2 span {
     display: block;
     font-size: 2em;
@@ -227,4 +347,235 @@
     font-size: 0.5em;
     font-weight: 500;
     color: #777777;
+}
+
+
+/**** 11- CHECKOUT ****/
+.checkout-wrapper .form-container.active {
+    margin-top: 2em;
+}
+.checkout-wrapper section header.major {
+    margin: 0 0 1.500em 0;
+}
+.checkout-wrapper .row.sub-title {
+    margin-bottom: 20px;
+}
+.checkout-wrapper .summary {
+    text-align: center;
+}
+.checkout-wrapper .summary .content {
+    height: 40px;
+    margin: 0 auto 20px auto;
+    max-width: 460px;
+}
+.checkout-wrapper .summary .content .cards {
+    float: left;
+    margin-right: 5px;
+    padding-top: 2px;
+}
+.checkout-wrapper .summary .content .cards img {
+    margin-right: 5px;
+    max-width: 38px;
+    border-radius: 4px;
+}
+.checkout-wrapper .summary .content .total {
+    float: left;
+    margin-right: 5px;
+}
+.checkout-wrapper .summary .content .promo-link {
+    float: left;
+    font-size: 0.700em;
+    padding-top: 5px;
+}
+.checkout-wrapper #promo-success {
+    color: #4cac4c;
+    font-size: 0.8000em;
+    font-weight: 600;
+}
+.checkout-wrapper #promo-error {
+    color: #ed4e71;
+    font-size: 0.8000em;
+    font-weight: 600;
+}
+.checkout-wrapper .field {
+    background-color: rgba(190, 189, 189, 0.075);
+    box-sizing: border-box;
+    font-weight: 300;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    height: 44px;
+    line-height: 44px;
+    cursor: text;
+    width: 100%;
+    display: block;
+    padding: 0 20px 3px 20px;
+    transition: opacity 200ms ease-in-out;
+}
+.checkout-wrapper .field.field-icon {
+    padding-left: 40px;
+}
+
+.checkout-wrapper .field:focus,
+.field.StripeElement--focus {
+    border-color: #7bd2ed;
+    box-shadow: 0 0 0 1px #7bd2ed;
+}
+.checkout-wrapper label span.brand {
+    top: 8px;
+    left: 15px;
+}
+.checkout-wrapper label span.brand i.fa-cc-visa {
+    color: #3b58a4;
+}
+.checkout-wrapper label span.brand i.fa-cc-mastercard {
+    color: #164779;
+}
+.checkout-wrapper label span.brand i.fa-cc-amex {
+    color: #117aa8;
+}
+
+@media screen and (max-width: 480px) {
+    .checkout-wrapper .summary .content {
+        height: 80px;
+    }
+    .checkout-wrapper .summary .content .total,
+    .checkout-wrapper .summary .content .promo-link,
+    .checkout-wrapper .summary .content .cards {
+        float: none;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .jp-card .jp-card-front, .jp-card .jp-card-back {
+        max-width: 90% !important;
+    }
+}
+
+
+/**** 12- THANK YOU ****/
+.thankyou-wrapper .confirmation {
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+@media screen and (min-width: 737px) {
+    .thankyou-wrapper .confirmation {
+        padding: 5em;
+    }
+}
+
+
+/**** 13- DASHBOARD ****/
+.dashboard-wrapper {
+    background-image: url("../img/dashboard-overlay.png"), linear-gradient(45deg, #7bd2ed 15%, #8aaddb 85%)
+}
+.dashboard-wrapper header.major {
+    margin-bottom: 0;
+}
+.dashboard-wrapper header div.country {
+    border: 0;
+}
+.dashboard-wrapper header div.country a {
+    background-color: #FFFFFF;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 100%;
+    display: inline-block;
+    height: 5em;
+    line-height: 6.55em;
+    width: 5em;
+}
+.dashboard-wrapper header div.country a:hover {
+    background-color: #dffdff;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.dashboard-wrapper header div.country img {
+    display: inline;
+    width: 32px;
+}
+.dashboard-wrapper header div.country h1 {
+    color: #FFFFFF;
+    text-transform: capitalize;
+    letter-spacing: -0.025em;
+    font-weight: 300;
+    font-size: 3.25em;
+    margin: 10px auto;
+}
+.dashboard-wrapper header div.country p {
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 450px;
+}
+.dashboard-wrapper .dashboard-panel {
+    background: #FFFFFF;
+    border-radius: 6px;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu {
+    background-color: #f7f7f7;
+    width: 100%;
+    border-radius: 6px;
+    padding: 15px;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu ul li {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 3px 30px;
+    margin: 0 10px;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu ul li:hover{
+    background-color: #ececec;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu ul li.active{
+    background-color: #FFFFFF;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-menu ul li a{
+    border: 0;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-content {
+    padding: 50px 70px;
+}
+.dashboard-wrapper .dashboard-panel .dashboard-content .intro {
+    margin-bottom: 3.4em;
+}
+@media screen and (max-width: 737px) {
+    .dashboard-wrapper .dashboard-panel .dashboard-content {
+        padding: 30px;
+    }
+}
+
+/**** 14- DASHBOARD STORIES ****/
+.dashboard-content .stories .listing-post {
+    margin-bottom: 2em;
+}
+.dashboard-content .stories .listing-post h3 {
+    margin-bottom: 0.8em;
+}
+.dashboard-content .stories .listing-post p {
+    margin-bottom: 0.8em;
+    font-size: 0.8em;
+}
+.dashboard-content .stories .listing-post .image,
+.dashboard-content .stories .listing-post ul.actions {
+    margin-bottom: 0;
+}
+.dashboard-content .stories.details .image.main img {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+
+/**** 15- DASHBOARD GUIDE ****/
+.dashboard-content .guide .summary {
+    margin: 0 auto;
+    max-width: 300px;
+}
+.dashboard-content .guide .summary h3{
+    margin-bottom: 30px;
 }

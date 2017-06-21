@@ -1,0 +1,38 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Edit Guide Section</h1>
+        </div>
+
+    </div>
+
+    {% include "admin/_common/status.html" %}
+
+    <form action="" method="post" id="main_form" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% include "admin/_common/form.html" with partial=True %}
+
+        <div class="row">
+            <div class="col-lg-12 text-center buttons">
+                <button type="submit" id="main_form_submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock content %}
+
+
+
+
+
+
+

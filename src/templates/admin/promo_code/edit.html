@@ -1,0 +1,59 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Masked Input -->
+    <script src="{% static 'common/jquery-mask/js/jquery.mask.js' %}"></script>
+
+	<script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+            // Form masks
+            $("#id_expiry_date").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+            $('#id_discount_percentage, #id_discount_value').mask('###0.00', {reverse: true});
+
+            // Validation for low values
+            $('#id_discount_percentage, #id_discount_value').blur(function () {
+
+                if($(this).val() != '' && $(this).val() < 5){
+                    alert("You've entered a low discount value, make sure it's correct!")
+                }
+
+            });
+
+		});
+
+	</script>
+
+{% endblock head %}
+
+{% block content %}
+
+            <div class="row">
+            
+                <div class="col-lg-12">
+                    <h1 class="page-header">Edit Promo Code</h1>
+                </div>
+                
+            </div>
+            
+            {% include "admin/_common/status.html" %}
+            
+            {% include "admin/_common/form.html" %}
+
+{% endblock content %}
+
+
+
+
+
+
+

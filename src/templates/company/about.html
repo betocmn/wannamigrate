@@ -1,0 +1,90 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom CSS -->
+    <link href="{% static 'common/tooltipster/css/tooltipster.bundle.min.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="about-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "ABOUT US" %}</h1>
+                </header>
+
+                <h2 id="content">{% trans "TO IMMIGRANTS. BY IMMIGRANTS." %}</h2>
+                <p>
+                    {% blocktrans %}
+                        It all started in 2001, when I was a teenager in Brazil, dreaming
+                        about living in a more peaceful and developed country. I spent a few years
+                        researching about immigrating to different countries until finally writing
+                        an action plan. My end goal was to work and live in Australia.
+                        Fast forward to November 2016, after migrating
+                        temporarily to the USA, Chile and the UK, and I've obtained my
+                        Australian Permanent Residency Visa and now live (extremely happy) in Sydney.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}
+                        I've gone through a lot of immigration bureaucracy, not
+                        only on my own applications, but also helping out other people trying to move
+                        to Australia or Canada. By doing that, I was able to identify a few best
+                        practices and most common errors people make when trying to obtain a visa to move
+                        to a new country and, as a software developer, it was obvious I needed to
+                        build an online tool to help other people with similar dreams.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    <em>{% trans "- Humberto Moreira, Founder." %}</em>
+                </p>
+
+                 <span class="image main">
+                    <img src="{% static 'site/img/wanna-migrate-about-us-sydney.jpg' %}" alt="Wanna Migrate - From Australia" />
+                 </span>
+
+                <p class="align-center">
+                    <strong>{% trans "Wanna Migrate" %}</strong>
+                    <br />{% trans "28 Rothschild Avenue, Rosebery" %}
+                    <br />{% trans "Sydney - NSW - Australia" %}
+                    <br />{% trans "Australian Business Number: 48316158565" %}
+                    <br /><a href="{% url 'company:contact' %}">{% trans "Contact Us" %}</a>
+                </p>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'common/tooltipster/js/tooltipster.bundle.min.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Activates tooltips
+            $('.tooltip').tooltipster();
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

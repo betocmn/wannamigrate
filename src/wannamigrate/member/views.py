@@ -13,6 +13,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.files.base import ContentFile
 from django.contrib.auth import (
@@ -27,8 +28,9 @@ from wannamigrate.core.util import (
 from wannamigrate.member.forms import (
     LoginForm, SignupForm
 )
+from wannamigrate.core.models import Country
 from wannamigrate.member.models import Member
-from wannamigrate.core.tasks import track_event, track_user
+from wannamigrate.order.models import Subscription
 
 
 #######################
@@ -43,7 +45,7 @@ def login(request):
     """
 
     # Defines the next page to redirect
-    redirect_next = reverse('order:checkout')
+    redirect_next = reverse('member:dashboard')
     if 'next' in request.GET:
         redirect_next = request.GET.get('next', redirect_next)
     elif 'next' in request.POST:
@@ -71,17 +73,6 @@ def login(request):
 
             # Identifies member
             member = get_object_or_false(Member, user_id=user.id)
-
-            # Tracks user
-            track_user.delay(member)
-
-            # Tracks event
-            track_event.delay(member, settings.TRACKING_EVENT_LOGGED_IN, {
-                'auth': 'password',
-                'currency': 'AUD',
-                'value': 2,
-                'content_category': 'account',
-            })
 
             # Redirects to next page
             return redirect(redirect_next)
@@ -177,28 +168,9 @@ def login_facebook(request):
                 user.facebook_id = facebook_basic_data['id']
                 user.save()
 
-                # Checks if we need to do the tracking alias
-                user_is_pending_tracking_alias = False
-                if is_signup and 'user_is_pending_tracking_alias' not in request.session:
-                    user_is_pending_tracking_alias = True
-
                 # Logs user in
                 auth_user = authenticate(email=user.email, id=user.id, password_hash=user.password)
                 auth_login(request, auth_user)
-
-                # Tracks user
-                track_user.delay(member)
-                if user_is_pending_tracking_alias:
-                    request.session['user_is_pending_tracking_alias'] = True
-
-                # Tracks event
-                event = settings.TRACKING_EVENT_SIGNED_UP if is_signup else settings.TRACKING_EVENT_LOGGED_IN
-                track_event.delay(member, event, {
-                    'auth': 'facebook',
-                    'currency': 'AUD',
-                    'value': 2,
-                    'content_category': 'account',
-                })
 
                 # Return JSON success data
                 return JsonResponse({'status': 'success', 'message': _('user logged in')})
@@ -238,11 +210,15 @@ def signup(request):
         redirect_next = request.POST.get('next', redirect_next)
 
     # Checks if user is already logged and full-registered
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.has_updated_password:
         return redirect(redirect_next)
 
+    # If it's a user logged in with just email, pre-load it on the form
+    email = request.user.email if request.user.is_authenticated() else None
+    initial_data = None if request.POST else {'email': email}
+
     # Instantiates forms
-    form = SignupForm(request.POST or None)
+    form = SignupForm(request.POST or None, initial=initial_data)
 
     # if SIGNUP FORM was submitted and is valid
     if form.is_valid():
@@ -251,30 +227,12 @@ def signup(request):
         member = form.save()
         if member is not None:
 
-            # Checks if tracking alias was already done
-            user_is_pending_tracking_alias = False
-            if 'user_is_pending_tracking_alias' not in request.session:
-                user_is_pending_tracking_alias = True
-
             # Logs user in
             user = authenticate(
                 email=form.cleaned_data['email'].lower(),
                 password=form.cleaned_data['password']
             )
             auth_login(request, user)
-
-            # Tracks user
-            track_user.delay(member)
-            if user_is_pending_tracking_alias:
-                request.session['user_is_pending_tracking_alias'] = True
-
-            # Tracks event
-            track_event.delay(member, settings.TRACKING_EVENT_SIGNED_UP, {
-                'auth': 'password',
-                'currency': 'AUD',
-                'value': 2,
-                'content_category': 'account',
-            })
 
             # Redirects to next page
             return redirect(redirect_next)
@@ -289,3 +247,36 @@ def signup(request):
 
     # Displays HTML template
     return render(request, 'member/signup.html', template_data)
+
+
+@login_required
+def dashboard(request):
+    """
+    How it works
+
+    :param request:
+    :return: String
+    """
+
+    # Sets Australia as the default country
+    country = get_object_or_false(Country, id=settings.DB_ID_COUNTRY_AUSTRALIA)
+    request.session['country_id'] = country.id
+    request.session['country_name'] = country.name
+    request.session['country_slug'] = country.slug
+    request.session.modified = True
+
+    # Retrieves member
+    member = get_object_or_false(Member, user=request.user)
+    if not member:
+        return redirect('quiz:result', country.slug)
+
+    # Checks if there's an active subscription
+    subscription = get_object_or_false(Subscription, member=member)
+    active = settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE
+    if subscription and subscription.subscription_status_id == active:
+        request.session['subscription_id'] = subscription.id
+        return redirect('story:index')
+    else:
+        if 'subscription_id' in request.session:
+            del request.session['subscription_id']
+        return redirect('quiz:result', country.slug)

@@ -24,7 +24,7 @@
                                                 {% if 'password' in field.name %}
                                                     ********
                                                 {% elif '_date' in field.name %}
-                                                    {{ field.value|date:"d/m/Y P"|default:field.value }}
+                                                    {{ field.value|date:"d/m/Y"|default:field.value }}
                                                 {% elif 'client_notes' == field.name %}
                                                     <span class="alert-warning">{{ field.value|safe }}</span>
                                                 {% elif 'description' in field.name %}

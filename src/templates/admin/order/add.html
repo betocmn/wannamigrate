@@ -1,0 +1,141 @@
+{% extends "_layouts/admin.html" %}
+{% load staticfiles %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- PAGE EXTRA CSS -->
+    <link href="{% static 'common/selectize/css/selectize.css' %}" rel="stylesheet">
+    <link href="{% static 'common/selectize/css/selectize.bootstrap3.css' %}" rel="stylesheet">
+
+    <!-- PAGE EXTRA JS -->
+    <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
+    <script type="text/javascript" src="{% static 'common/selectize/js/selectize.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/jquery-formset/js/jquery.formset.js' %}"></script>
+
+    <script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+		    // Django Formset Generation
+            $( '#main_form div.order_items' ).formset({
+                prefix: "{{ order_item_formset.prefix }}",
+                addCssClass: 'btn btn-default {{ order_item_formset.prefix }}',
+                addText: 'add another',
+                deleteText: 'delete',
+                keepFieldValues: ''
+            });
+
+		    // Member Autocomplete selectize
+            $('#id_member').selectize({
+                valueField: 'id',
+                labelField: 'description',
+                searchField: 'description',
+                options: [],
+                create: false,
+                render: {
+                    option: function(item, escape) {
+                        return '<div>' +
+                            '<span class="title">' +
+                                '<span class="name">' + escape(item.description) + '</span>' +
+                            '</span>' +
+                        '</div>';
+                    }
+                },
+                load: function(query, callback) {
+                    if (!query.length) return callback();
+                    $.ajax({
+                        url: '{% url 'admin:member:search_json' %}?keyword=' + encodeURIComponent(query),
+                        type: 'GET',
+                        error: function() {
+                            callback();
+                        },
+                        success: function(res) {
+                            callback(res.members.slice(0, 10));
+                        }
+                    });
+                }
+            });
+
+		});
+
+	</script>
+
+{% endblock head %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Add Manual One-Off Order</h1>
+        </div>
+
+    </div>
+
+    {% include "admin/_common/status.html" %}
+
+    <form action="" method="post" id="main_form">
+
+        {% csrf_token %}
+
+        {% include "admin/_common/form.html" with partial=True %}
+
+        <div class="row fieldset" id="badge-rules-fieldset">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading bold">
+                        Order Items
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                {{ order_item_formset.management_form }}
+                                {% for order_item_form in order_item_formset %}
+                                    <div class="order_items row" id="{{ order_item_form.prefix }}-row">
+
+                                        <div class="form-group col-lg-11 {% if order_item_form.product.errors %}has-error{% endif %}">
+                                            <label class="control-label" for="{{ order_item_form.product.id_for_label }}">{{ order_item_form.product.label }}</label>
+                                            {{ order_item_form.product }}
+                                            {{ order_item_form.product.errors }}
+                                        </div>
+
+                                        {{ order_item_form.id }}
+                                        {% if order_item_form.instance.pk %}
+                                            {{ order_item_form.DELETE }}
+                                        {% endif %}
+
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center buttons">
+                <button type="submit" id="main_form_submit" class="btn btn-success"><i class="fa fa-check-square"></i>Save</button>
+                <a href="{{ cancel_url }}" class="btn btn-default"><i class="fa fa-times"></i>Cancel</a>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock content %}
+
+
+
+
+
+
+

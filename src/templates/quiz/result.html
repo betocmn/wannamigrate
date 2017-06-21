@@ -22,10 +22,18 @@
             <div class="inner">
                 <header class="major">
                     <h1>
-                        {% blocktrans %}
-                            <span>You've scored</span> {{ total_points }} points
-                            <span class="break">from a minimum of 60 required.</span>
-                        {% endblocktrans %}
+                        {% if not total_points %}
+                            {% blocktrans %}
+                                <span>You still haven't any points recorded.</span>
+                                <span class="break">The minimum required is 60 points.</span>
+                            {% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}
+                                <span>You've scored</span> {{ total_points }} points
+                                <span class="break">from a minimum of 60 required.</span>
+                            {% endblocktrans %}
+                        {% endif %}
+
                     </h1>
                     <div class="country">
                         <div>
@@ -39,15 +47,16 @@
                 <h2 id="content">{% trans "WHAT'S NEXT?" %}</h2>
                 <p>
                     {% blocktrans %}
-                        In addition to the points system, there are other ways to start a life in
+                        There are a few different ways to get extra points to speed up your process.
+                        Additionally, there are alternative paths you can take to move to
                         Australia. It's crucial you understand all possibilities so you can make the
-                        best planning and make it happen.
+                        best planning and make it happen without spending a fortune.
                     {% endblocktrans %}
                 </p>
                 <p>
                     {% blocktrans %}
                         If you are thinking about moving to Australia, we are a great place to start
-                        and we can help you to put and execute your immigration plan, starting today!
+                        as we can help you to put an immigration plan together, starting today!
                     {% endblocktrans %}
                 </p>
 
@@ -55,19 +64,20 @@
                 <p>
                     {% blocktrans %}
                         It all started in 2001, when I was a teenager in Brazil, dreaming
-                        about living in a better country. I spent those years researching about
-                        immigration and wrote down an initial action plan. My end goal was to work
-                        and live in Australia. Fast forward to November 2016, after migrating
+                        about living in a more peaceful and developed country. I spent a few years
+                        researching about immigrating to different countries until finally writing
+                        an action plan. My end goal was to work and live in Australia.
+                        Fast forward to November 2016, after migrating
                         temporarily to the USA, Chile and the UK, and I've obtained my
-                        Australian Permanent Residency Visa and now live in Sydney.
+                        Australian Permanent Residency Visa and now live (extremely happy) in Sydney.
                     {% endblocktrans %}
                 </p>
                 <p>
                     {% blocktrans %}
-                        In all these years I've gone through a lot of immigration bureaucracy, not
-                        just on my applications, but also helping out other people trying to move
-                        to Australia or Canada. With that, I was able to identify many best
-                        practices and common errors when trying to obtain a visa to move
+                        I've gone through a lot of immigration bureaucracy, not
+                        only on my own applications, but also helping out other people trying to move
+                        to Australia or Canada. By doing that, I was able to identify a few best
+                        practices and most common errors people make when trying to obtain a visa to move
                         to a new country and, as a software developer, it was obvious I needed to
                         build an online tool to help other people with similar dreams.
                     {% endblocktrans %}
@@ -79,7 +89,7 @@
                 <h2 id="content">{% trans "HOW IT WORKS" %}</h2>
                 <p>
                     {% blocktrans %}
-                        After joining, you will get <strong>1-year access</strong>
+                        After joining, you will get <strong>full-access for one year</strong>
                         to all tools on our immigration assistance platform, including free
                         upgrades to new features released and countries added.
                     {% endblocktrans %}
@@ -109,7 +119,7 @@
                         <li>
                             <span class="icon major fa-map-signs style1"></span>
                             <span class="title">{% trans "immi<strong>Guide</strong>" %}</span> -
-                            {% trans "Learn the key parts of the process on a step-by-step guide." %}
+                            {% trans "Learn the key parts of the process in a step-by-step guide." %}
                         </li>
                         <li>
                             <span class="icon major fa-tasks style2"></span>
@@ -124,7 +134,7 @@
                         <li>
                             <span class="icon major fa-hashtag style4"></span>
                             <span class="title">{% trans "immi<strong>Stories</strong>" %}</span> -
-                            {% trans "Get inspired! Every week a successful immigrant tells his story and answers questions from our members." %}
+                            {% trans "Get inspired! Every other week, a successful immigrant tells his story and answers questions from our members." %}
                         </li>
                         <!--
                         <li class="disabled">
@@ -181,26 +191,49 @@
                     </ul>
                 </div>
 
-                <div class="get-started top-15">
-                    <!--<h2 id="content">{% trans "I WANNA JOIN!" %}</h2>-->
-                    <div class="box">
-                        <p>
-                            {% blocktrans %}
-                                Ready to get to work and make a change in your life?
-                                Get <strong>1-year full-access</strong> for <code>$ 9.00</code> and
-                                start executing your plan today. You will also get free upgrades
-                                when we add new countries and features.
-                            {% endblocktrans %}
-                        </p>
-                        <ul class="actions vertical align-center">
-                            <li>
-                                <a href="{% url 'member:signup' %}" class="button special big">
-                                    {% trans "GET STARTED" %}
-                                </a>
-                            </li>
-                        </ul>
+                {% if request.session.subscription_status_id and request.session.subscription_status_id == subscription_status_active %}
+
+                    <div class="get-started top-15">
+                        <div class="box">
+                            <p>
+                                {% blocktrans %}
+                                    Ready to get to work and make a change in your life?
+                                    Head out to your <strong>immigration dashboard</strong>.
+                                {% endblocktrans %}
+                            </p>
+                            <ul class="actions vertical align-center">
+                                <li>
+                                    <a href="{% url 'member:dashboard' %}" class="button special big">
+                                        {% trans "GO TO YOUR DASHBOARD" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+
+                {% else %}
+
+                    <div class="get-started top-15">
+                        <div class="box">
+                            <p>
+                                {% blocktrans %}
+                                    Ready to get to work and make a change in your life?
+                                    Get <strong>one year full-access</strong> for <code>$ 15.00</code> and
+                                    start executing your plan today. You will also get free upgrades
+                                    when we add new countries and features.
+                                {% endblocktrans %}
+                            </p>
+                            <ul class="actions vertical align-center">
+                                <li>
+                                    <a href="{% url 'order:checkout' %}" class="button special big">
+                                        {% trans "GET FULL-ACCESS" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                {% endif %}
 
             </div>
         </section>
@@ -219,17 +252,13 @@
 
         $(document).ready(function(){
 
-            // Sends tracking event
-            track_event('{{ tracking_event_viewed_content }}', {
-                // Used by other services (e.g. Facebook pixel)
-                currency: 'AUD',
-                value: 0.1,
-                content_category: 'about',
-                content_name: 'How It Works',
-            });
-
             // Activates tooltips
             $('.tooltip').tooltipster();
+
+            // Tracks "quiz_completed"
+            {% if track_quiz_completion %}
+                track_event('{{ tracking_event_completed_quiz }}');
+            {% endif %}
 
         });
 

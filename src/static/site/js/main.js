@@ -120,6 +120,22 @@
 
 			}
 
+		// Body Transparent
+			var $body_transparent = $('body.transparent');
+			var $header_major = $('header.major');
+			if ($body_transparent.length > 0) {
+
+				// Header.
+					$header_major.scrollex({
+						mode: 'top',
+						top: '-100vh',
+						bottom: 10,
+						enter: function() { $header.addClass('alt'); },
+						leave: function() { $header.removeClass('alt'); }
+					});
+            }
+
+
 		// Spotlights.
 			var $spotlight = $('.spotlight');
 

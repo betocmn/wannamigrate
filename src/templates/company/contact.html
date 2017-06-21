@@ -20,8 +20,6 @@
                     <div class="6u 12u$(small)">
 
                         <!-- Form -->
-                        <h3>{% trans "SEND US A MESSAGE" %}</h3>
-
                         <form method="post" action="">
 
                             {% csrf_token %}
@@ -29,20 +27,29 @@
                             <div class="row uniform">
 
                                 <!-- Break -->
-                                <div class="12u$ {% if form.name.errors %}has-error{% endif %}">
-                                    {{ form.name }}
+                                <div class="12u$ form-field {% if form.name.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ form.name }}
+                                        <span><span>{{ form.name.label }}</span></span>
+                                    </label>
                                     {{ form.name.errors }}
                                 </div>
 
                                 <!-- Break -->
-                                <div class="12u$ {% if form.email.errors %}has-error{% endif %}">
-                                    {{ form.email }}
+                                <div class="12u$ form-field {% if form.email.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ form.email }}
+                                        <span><span>{{ form.email.label }}</span></span>
+                                    </label>
                                     {{ form.email.errors }}
                                 </div>
 
                                 <!-- Break -->
-                                <div class="12u$ {% if form.message.errors %}has-error{% endif %}">
-                                    {{ form.message }}
+                                <div class="12u$ form-field {% if form.message.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ form.message }}
+                                        <span><span>{{ form.message.label }}</span></span>
+                                    </label>
                                     {{ form.message.errors }}
                                 </div>
 
@@ -63,9 +70,10 @@
 
                         <div class="address">
                             <p>
-                                797 Botany Road.
-                                <br />Rosebery, NSW, 2018.
-                                <br />Sydney, Australia.
+                                <strong>{% trans "Wanna Migrate" %}</strong>
+                                <br />{% trans "28 Rothschild Avenue, Rosebery" %}
+                                <br />{% trans "Sydney - NSW - Australia" %}
+                                <br />{% trans "Australian Business Number: 48316158565" %}
                             </p>
                         </div>
 

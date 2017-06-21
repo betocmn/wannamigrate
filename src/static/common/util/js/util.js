@@ -10,35 +10,23 @@
 /**
  *  Track an event using a 3rd party library
  *
- *  Currently using Segment.com
+ *  Currently using Drip.co
  *
  */
 function track_event(event, data) {
-    analytics.track(event, data);
+    _dcq.push(["track", event, data]);
+
 }
 
-/**
- *  Track Facebook Pixel Events via Segment
- *
- *  Currently using Segment.com
- *
- */
-function track_duplicate_js_event(event, data) {
-    analytics.track(event, data, {
-        integrations: {
-            All: false,
-            'Facebook Pixel': true,
-        }
-    });
-}
+
 /**
  *  Clears tracking user using a 3rd party library
  *
- *  Currently using Segment.com
+ *  Currently using Drip.co
  *
  */
 function track_logout() {
-    analytics.reset();
+    return false;
 }
 
 /**
@@ -196,7 +184,7 @@ function remove_required_field(field, list ){
  */
 function validate_empty_fields(form, required, alert_message ){
 
-    // intial settings
+    // initial settings
     var error = false;
 
     // if we have a form and list of required fields
@@ -259,17 +247,19 @@ function is_integer(value) {
  *
  */
 function display_notification(type, title, msg) {
-    new PNotify({
-        title: title,
-        text: msg,
-        icon: false, // 'fa fa-warning'
-        delay: 5000,
-        opacity: 1,
-        type: type, // "notice", "info", "success", or "error".
-        buttons: {
-            sticker: false
-        }
-    });
+    if(typeof PNotify !== 'undefined') {
+        new PNotify({
+            title: title,
+            text: msg,
+            icon: false, // 'fa fa-warning'
+            delay: 5000,
+            opacity: 1,
+            type: type, // "notice", "info", "success", or "error".
+            buttons: {
+                sticker: false
+            }
+        });
+    }
 }
 
 
@@ -280,6 +270,7 @@ function display_notification(type, title, msg) {
 function display_error(msg) {
     $("#global_alert_error_msg").html(msg);
     $("#global_alert_error").show();
+    display_notification('error', 'Error', msg);
     window.scrollTo(0, 0);
 }
 
@@ -290,6 +281,7 @@ function display_error(msg) {
 function display_success(msg) {
     $("#global_alert_success_msg").html(msg);
     $("#global_alert_success").show();
+    display_notification('success', 'Success', msg);
     window.scrollTo(0, 0);
 }
 

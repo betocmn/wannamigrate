@@ -14,6 +14,7 @@ from django.contrib.auth import (
     login as auth_login, authenticate
 )
 from django.db.models import Sum
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
@@ -44,20 +45,40 @@ def result(request, slug):
     if not country:
         return redirect('quiz:take', slug=slug)
 
-    # Calculates total points from quiz answers
+    # Retrieves member
     member = get_object_or_false(Member, user=request.user)
+
+    # If there are quiz answers to be saved
+    if 'quiz_answers_to_save' in request.session:
+        member_answers = QuizAnswer.objects.filter(
+            id__in=request.session['quiz_answers_to_save'], quiz_question__country=country
+        )
+        member.quiz_answers = member_answers
+
+    # Calculates total points from quiz answers
     answers = member.quiz_answers.filter(
         quiz_question__country_id=country,
     ).aggregate(total_points=Sum('points'))
     if not answers['total_points']:
-        return redirect('quiz:take', slug=slug)
+        total_points = 0
+    else:
+        total_points = answers['total_points']
+
+    # If we need to track quiz completion
+    track_quiz_completion = False
+    if 'track_quiz_completion' in request.session:
+        track_quiz_completion = request.session['track_quiz_completion']
+        del request.session['track_quiz_completion']
 
     # Builds template data dictionary
     template_data = {
         'user': request.user,
-        'total_points': answers['total_points'],
+        'total_points': total_points,
+        'track_quiz_completion': track_quiz_completion,
+        'tracking_event_completed_quiz': settings.TRACKING_EVENT_COMPLETED_QUIZ,
         'country': country,
-        'meta_title': _('Quiz Results | Wanna Migrate'),
+        'subscription_status_active': settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE,
+        'meta_title': _('Quiz Results') + ' | %s | ' % _(country.name) + 'Wanna Migrate',
     }
 
     # Displays HTML template
@@ -84,7 +105,6 @@ def take(request, slug):
     member_answers = []
     if request.user.is_authenticated():
         member = Member.objects.get(user_id=request.user.id)
-        member_answers = member.quiz_answers.values_list('id', flat=True)
 
     # Instantiates signup form
     signup_form = SignupQuizForm(request.POST or None)
@@ -95,11 +115,9 @@ def take(request, slug):
         # Searches for all answers given by the user
         error = ''
         answer_id_list = [x for x in request.POST.getlist('answers') if x]
-        member_answers = QuizAnswer.objects.filter(
-            id__in=answer_id_list, quiz_question__country=country
-        )
 
         # Saves user if not existing
+        track_quiz_completion = False
         if not member:
             if signup_form.is_valid():
                 member = signup_form.save()
@@ -109,13 +127,7 @@ def take(request, slug):
                         email=user.email, id=user.id, password_hash=user.password
                     )
                     auth_login(request, auth_user)
-
-                    # Track quiz completion (only first time done)
-                    request.session['track_quiz_completion'] = True
-
-                    # Tracks user alias if first signup
-                    if 'user_is_pending_tracking_alias' not in request.session:
-                        request.session['user_is_pending_tracking_alias'] = True
+                    track_quiz_completion = True
 
             else:
 
@@ -136,9 +148,8 @@ def take(request, slug):
             # If existing member, save in session to ask for password first
             if existing_member:
 
-                request.session['quiz_answers_to_save'] = {
-                    'quiz_answers': member_answers
-                }
+                member_answer_ids = existing_member.quiz_answers.values_list('id', flat=True)
+                request.session['quiz_answers_to_save'] = list(member_answer_ids)
                 request.session.modified = True
                 messages.error(
                     request, "You already have an account. Please login to save your results"
@@ -153,7 +164,14 @@ def take(request, slug):
             else:
 
                 # Saves member quiz answers
+                member_answers = QuizAnswer.objects.filter(
+                    id__in=answer_id_list, quiz_question__country=country
+                )
                 member.quiz_answers = member_answers
+
+            # Sets up session to track quiz completion or not
+            if track_quiz_completion:
+                request.session['track_quiz_completion'] = True
 
             # Redirects to Quiz Results Pages
             return redirect("quiz:result", country.slug)
@@ -167,6 +185,10 @@ def take(request, slug):
     quiz_questions = QuizQuestion.objects.prefetch_related('quizanswer_set').filter(
         country=country
     ).order_by('sort_order')
+
+    # Retrieves current answers
+    if request.user.is_authenticated():
+        member_answers = member.quiz_answers.values_list('id', flat=True)
 
     # Passes data and renders html template
     template_data = {

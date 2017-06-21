@@ -1,0 +1,43 @@
+{% extends "_layouts/dashboard.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+<section id="banner" class="home-wrapper"></section>
+
+{% block dashboard_content %}
+
+    <div class="guide">
+
+        <p class="intro align-center">
+            {% blocktrans %}
+                To choose the best visa for your scenario you need to first understand all your options.
+                <br />Follow the guide below before executing your immigration plan.
+            {% endblocktrans %}
+        </p>
+
+        <div class="summary">
+            <h3 class="align-center">{% trans "Summary" %}</h3>
+            <ol>
+                {% for chapter in chapters %}
+                    <li><a href="{% url 'guide:chapter_details' chapter.slug %}">{{ chapter.title }}</a></li>
+                {% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+{% endblock dashboard_content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+    </script>
+
+{% endblock scripts %}
