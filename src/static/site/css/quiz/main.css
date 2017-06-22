@@ -964,7 +964,7 @@
 				-webkit-transition: opacity 0.2s ease;
 				-ms-transition: opacity 0.2s ease;
 				transition: opacity 0.2s ease;
-				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='112px' height='96px' viewBox='0 0 112 96' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23cccccc%3B stroke-width: 4px %7D%3C/style%3E%3Cline x1='0' y1='46' x2='112' y2='46' /%3E%3Cline x1='24' y1='22' x2='0' y2='46' /%3E%3Cline x1='24' y1='70' x2='0' y2='46' /%3E%3C/svg%3E");
+				background-image: url("../../img/quiz/arrow-back.svg");
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: contain;
@@ -988,7 +988,7 @@
 				-webkit-transition: opacity 0.2s ease;
 				-ms-transition: opacity 0.2s ease;
 				transition: opacity 0.2s ease;
-				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='112px' height='96px' viewBox='0 0 112 96' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %2349c8ff%3B stroke-width: 4px %7D%3C/style%3E%3Cline x1='0' y1='46' x2='112' y2='46' /%3E%3Cline x1='24' y1='22' x2='0' y2='46' /%3E%3Cline x1='24' y1='70' x2='0' y2='46' /%3E%3C/svg%3E");
+				background-image: url("../../img/quiz/arrow-back-hover.svg");
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: contain;
