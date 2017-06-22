@@ -40,6 +40,7 @@ class QuizAnswer(BaseModel):
     # META Options
     class Meta:
         default_permissions = []
+        ordering = ['id']
 
     # Method Definitions
     def __str__(self):
