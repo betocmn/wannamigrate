@@ -253,12 +253,9 @@ def thank_you(request):
     :return: String HTML
     """
 
-    request.session['thankyou_order_id'] = 9
-    request.session['thankyou_order_track_js'] = True
-
     # Makes sure order was completed
     if 'thankyou_order_id' not in request.session or not request.session['thankyou_order_id']:
-        return redirect('product:wine_list')
+        return redirect('landing:home')
 
     # Identifies order
     order = get_object_or_false(Order, pk=request.session['thankyou_order_id'])
