@@ -164,6 +164,8 @@ def login_facebook(request):
                     member.avatar.save('temp.jpg', photo)
 
                 # Update user settings
+                user.first_name = facebook_basic_data['first_name']
+                user.last_name = facebook_basic_data['last_name']
                 user.has_updated_password = True
                 user.facebook_id = facebook_basic_data['id']
                 user.save()

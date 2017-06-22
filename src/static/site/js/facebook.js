@@ -34,7 +34,7 @@ facebook = {
             FB.init({
                 appId: $attr.facebook_app_id,
                 cookie: true,
-                version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+                version: 'v2.9' // or v2.0, v2.1, v2.2, v2.3
             });
 
             // Ajax request to login facebook user on django
