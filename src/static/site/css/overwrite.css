@@ -574,8 +574,16 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 /**** 15- DASHBOARD GUIDE ****/
 .dashboard-content .guide .summary {
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 360px;
 }
 .dashboard-content .guide .summary h3{
     margin-bottom: 30px;
+}
+.dashboard-content .guide ol li {
+    margin-top: 0.6em;
+    color: #494848;
+}
+.dashboard-content .guide ol li a{
+    font-size: 1.1em;
+    color: #494848;
 }
