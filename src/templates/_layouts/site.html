@@ -52,6 +52,9 @@
                 <!-- Menu -->
                 <nav id="menu">
                     <ul class="links">
+                        {% if request.session.subscription_id %}
+                            <li><a href="{% url 'member:dashboard' %}">{% trans "IMMI DASHBOARD" %}</a></li>
+                        {% endif %}
                         <li><a href="{% url 'landing:home' %}">{% trans "HOME" %}</a></li>
                         <li><a href="{% url 'company:about' %}">{% trans "ABOUT US" %}</a></li>
                         <li><a href="{% url 'company:contact' %}">{% trans "CONTACT US" %}</a></li>

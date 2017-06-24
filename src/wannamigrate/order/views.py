@@ -237,6 +237,7 @@ def process_payment(request):
                 # Success! Redirects to thank you page
                 del request.session['checkout_order_id']
                 del request.session['checkout']
+                request.session['subscription_id'] = result['subscription'].id
                 request.session['thankyou_order_id'] = order.id
                 request.session['thankyou_order_track_js'] = True
                 return redirect("order:thank_you")
