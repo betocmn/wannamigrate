@@ -590,4 +590,5 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .dashboard-content .guide.details img {
     max-width: 99%;
     width: auto;
+    margin: 0 auto;
 }
