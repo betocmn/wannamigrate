@@ -20,9 +20,11 @@
                     {{ section.html_content|safe|linebreaksbr }}
                 </p>
 
-                <span class="image main align-center">
-                    <img src="{{ section.image.large.url }}" alt="{{ section.title }}" />
-                </span>
+                {% if section.image %}
+                    <span class="image main align-center">
+                        <img src="{{ section.image.large.url }}" alt="{{ section.title }}" />
+                    </span>
+                {% endif %}
 
             </div>
 
