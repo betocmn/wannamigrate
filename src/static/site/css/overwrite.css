@@ -587,3 +587,7 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     font-size: 1.1em;
     color: #494848;
 }
+.dashboard-content .guide.details img {
+    max-width: 99%;
+    width: auto;
+}
