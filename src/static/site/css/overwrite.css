@@ -579,11 +579,11 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .dashboard-content .guide .summary h3{
     margin-bottom: 30px;
 }
-.dashboard-content .guide ol li {
+.dashboard-content .guide .summary ol li {
     margin-top: 0.6em;
     color: #494848;
 }
-.dashboard-content .guide ol li a{
+.dashboard-content .guide .summary ol li a{
     font-size: 1.1em;
     color: #494848;
 }
