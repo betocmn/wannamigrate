@@ -6,19 +6,62 @@
 
 {% block dashboard_content %}
 
-    <div class="guide">
+    <div class="doc">
 
         <p class="intro align-center">
             {% blocktrans %}
-                Once you complete the guide, please send us an email and we will reply with our interview
-                questions to get your immigration plan started.
+                You will find below some examples or templates for documents required during your
+                immigration process. Feel free to use them as base, but don't forget to adapt it to
+                your circumstances.
             {% endblocktrans %}
         </p>
 
-        <div class="summary">
-            <h3 class="align-center">
-                <a href="{% url 'company:contact' %}">{% trans "Contact Us" %}</a>
-            </h3>
+        <div class="doc-listing">
+
+            {% regroup docs by doc_group as doc_group_list %}
+
+            {% for group in doc_group_list %}
+                {% with doc_group=group.grouper %}
+
+                    <h2>{{ doc_group.name }}</h2>
+                    <div class="table-wrapper">
+                        <table class="alt">
+                            <tbody>
+                                {% for doc in group.list %}
+                                    <tr>
+                                        <td width="50" align="center">
+                                            <a href="{{ doc.file.url }}" target="_blank">
+                                                {% if '.pdf' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-pdf.svg' %}" />
+                                                {% elif '.doc' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-word.svg' %}" />
+                                                {% elif '.xls' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-excel.svg' %}" />
+                                                {% elif '.jpg' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-jpg.svg' %}" />
+                                                {% elif '.png' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-png.svg' %}" />
+                                                {% elif '.rtf' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-rtf.svg' %}" />
+                                                {% elif '.zip' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-zip.svg' %}" />
+                                                {% elif '.txt' in doc.file.name %}
+                                                    <img src="{% static 'site/img/file-type-txt.svg' %}" />
+                                                {% else %}
+                                                    <img src="{% static 'site/img/file-type-general.svg' %}" />
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        <td>{{ doc.name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                {% endwith %}
+            {% endfor %}
+
         </div>
 
     </div>

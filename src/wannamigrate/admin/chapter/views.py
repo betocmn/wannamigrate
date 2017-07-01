@@ -169,7 +169,7 @@ def list_json(request):
 
     # settings
     info = {
-        'fields_to_select': ['id', 'country.name', 'title', 'is_enabled'],
+        'fields_to_select': ['id', 'country.name', 'title', 'sort_order', 'is_enabled'],
         'fields_to_search': ['id', 'title', 'country__name'],
         'default_order_by': 'name',
         'url_base_name': 'chapter',

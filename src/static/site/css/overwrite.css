@@ -15,6 +15,7 @@
 13- DASHBOARD
 14- DASHBOARD STORIES
 15- DASHBOARD GUIDE
+16- DASHBOARD DOCS
 
 
 */
@@ -591,4 +592,22 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     max-width: 99%;
     width: auto;
     margin: 0 auto;
+}
+
+
+
+/**** 16- DASHBOARD DOCS ****/
+.dashboard-content .doc .doc-listing table td {
+    padding: 0.2500em;
+    font-size: 0.800em;
+    vertical-align: middle;
+}
+.dashboard-content .doc .doc-listing a {
+    border: 0;
+    vertical-align: middle;
+}
+.dashboard-content .doc .doc-listing img {
+    max-width: 25px;
+    border: 0;
+    vertical-align: middle;
 }

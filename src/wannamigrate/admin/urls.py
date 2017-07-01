@@ -23,6 +23,12 @@ urlpatterns = [
     # Chapters
     url(r'^\/chapters/', include('wannamigrate.admin.chapter.urls', namespace="chapter")),
 
+    # Documents
+    url(r'^\/docs/', include('wannamigrate.admin.doc.urls', namespace="doc")),
+
+    # Document Groups
+    url(r'^\/doc_groups/', include('wannamigrate.admin.doc_group.urls', namespace="doc_group")),
+
     # Groups
     url(r'^\/groups/', include('wannamigrate.admin.group.urls', namespace="group")),
 

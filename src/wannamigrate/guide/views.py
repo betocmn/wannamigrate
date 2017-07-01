@@ -30,7 +30,7 @@ def index(request):
     :return: String
     """
 
-    # Retrieves latest stories
+    # Retrieves all chapters from the country in session
     chapters = Chapter.objects.filter(
         is_enabled=True,
         country_id=request.session['country_id']

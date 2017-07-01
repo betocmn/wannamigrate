@@ -154,21 +154,33 @@
                                     <i class="fa fa-caret-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
-                                    {% if perms.quiz.admin_view_post %}
+                                    {% if perms.story.admin_view_post %}
                                         <li>
                                             <a href="{% url 'admin:post:list' %}">Stories</a>
                                         </li>
                                         <li class="divider"></li>
                                     {% endif %}
-                                    {% if perms.quiz.admin_view_chapter %}
+                                    {% if perms.guide.admin_view_chapter %}
                                         <li>
                                             <a href="{% url 'admin:chapter:list' %}">Guide Chapters</a>
                                         </li>
                                         <li class="divider"></li>
                                     {% endif %}
-                                    {% if perms.quiz.admin_view_section %}
+                                    {% if perms.guide.admin_view_section %}
                                         <li>
                                             <a href="{% url 'admin:section:list' %}">Guide Sections</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                    {% if perms.doc.admin_view_doc_group %}
+                                        <li>
+                                            <a href="{% url 'admin:doc_group:list' %}">Document Groups</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                    {% if perms.doc.admin_view_doc %}
+                                        <li>
+                                            <a href="{% url 'admin:doc:list' %}">Documents</a>
                                         </li>
                                         <li class="divider"></li>
                                     {% endif %}
