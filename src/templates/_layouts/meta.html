@@ -34,8 +34,10 @@
 <meta name="msapplication-config" content="{% static "site/img/favicon/browserconfig.xml" %}">
 <meta name="theme-color" content="#ffffff">
 
-<!-- Tracking - Drip.co -->
+
 {% if is_prod %}
+
+    <!-- Tracking - Drip.co -->
     <script type="text/javascript">
         var _dcq = _dcq || [];
         var _dcs = _dcs || {};
@@ -60,5 +62,29 @@
 
         </script>
     {% endif %}
-{% endif %}
+    <!-- End Tracking - Drip.co -->
 
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '1911002899177257');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+     <img height="1" width="1"
+    src="https://www.facebook.com/tr?id=1911002899177257&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+{% endif %}
+<script type="text/javascript">
+    var IS_PROD = {% if is_prod %}true{% else %}false{% endif %};
+</script>

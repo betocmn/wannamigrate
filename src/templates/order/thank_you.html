@@ -62,7 +62,8 @@
                 track_event('{{ tracking_event_placed_order }}', {
                     value: {{ order.net_total }},
                     order_total: {{ order.net_total }},
-                    order_discount_code: '{{ order.discount_code }}'
+                    order_discount_code: '{{ order.discount_code }}',
+                    currency: 'AUD'
                 });
             {% endif %}
         });

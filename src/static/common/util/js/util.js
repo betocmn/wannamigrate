@@ -14,8 +14,14 @@
  *
  */
 function track_event(event, data) {
-    _dcq.push(["track", event, data]);
-
+    if(IS_PROD){
+        _dcq.push(["track", event, data]);
+        if(event == 'placed_order'){
+            fbq('track', 'Purchase', data);
+        }else if(event == 'completed_quiz'){
+            fbq('track', 'Lead');
+        }
+    }
 }
 
 
