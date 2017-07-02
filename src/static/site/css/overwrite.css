@@ -248,6 +248,16 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .login-wrapper h3 {
     margin-bottom: 30px;
 }
+.login-wrapper .forgot {
+    padding: 0;
+}
+.login-wrapper .forgot a{
+    font-size: 0.800em;
+    color: #7bd2ed !important;
+}
+.login-wrapper .forgot a:hover {
+    color: #7bd2ed !important;
+}
 .login-wrapper .facebook {
     margin: auto;
     text-align: center;

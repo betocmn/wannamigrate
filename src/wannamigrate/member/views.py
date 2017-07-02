@@ -16,6 +16,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.files.base import ContentFile
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import (
     login as auth_login, authenticate, logout as auth_logout,
     get_user_model
@@ -26,7 +31,7 @@ from wannamigrate.core.util import (
     get_object_or_false, date_to_string, date_from_string
 )
 from wannamigrate.member.forms import (
-    LoginForm, SignupForm
+    LoginForm, SignupForm, PasswordRecoveryForm, PasswordResetForm
 )
 from wannamigrate.core.models import Country
 from wannamigrate.member.models import Member
@@ -249,6 +254,132 @@ def signup(request):
 
     # Displays HTML template
     return render(request, 'member/signup.html', template_data)
+
+
+def recover_password(request):
+    """
+    Sends a link to user redefine it password
+
+    :param: request
+    :return: String - The html page rendered
+    """
+
+    # Checks if the user is already authenticated.
+    if request.user.is_authenticated:
+        return redirect("member:dashboard")
+
+    # Instantiates the form
+    track_password_reset = False
+    password_reset_url = None
+    form = PasswordRecoveryForm(request.POST or None)
+
+    # if form was submitted and is valid
+    if form.is_valid():
+
+        email = form.cleaned_data['email']
+        user = get_object_or_false(get_user_model(), email__iexact=email)
+
+        if user and user.is_active:
+
+            # Activates flag to send out notification to reset password
+            track_password_reset = True
+
+            # builds reset link
+            token_generator = PasswordResetTokenGenerator()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            password_reset_url = settings.BASE_URL_SECURE + reverse(
+                'member:reset_password', args=(uid, token,)
+            )
+
+            # Return success message to template
+            messages.success(
+                request, 'Password reset instructions will be sent to your e-mail shortly.'
+            )
+
+        else:
+            messages.error(
+                request, 'No member found with email: %s.' % email
+            )
+
+    # Builds template data dictionary
+    template_data = {
+        'meta_title': 'Password Recovery | Wanna Migrate',
+        'track_password_reset': track_password_reset,
+        'password_reset_url': password_reset_url,
+        'tracking_event_requested_password_reset': settings.TRACKING_EVENT_REQUESTED_PASSWORD_RESET,
+        'form': form
+    }
+
+    # Displays HTML template
+    return render(request, 'member/recover_password.html', template_data)
+
+
+@sensitive_post_parameters()
+@never_cache
+def reset_password(request, uidb64=None, token=None):
+    """
+    Page to set a new password after clicking on a link from email
+    sent by 'recover password feature'
+
+    :param: request
+    :param: uidb64
+    :param: token
+    :return: String - The html page rendered
+    """
+
+    # If user is already authenticated, logout
+    if request.user.is_authenticated:
+        auth_logout(request)
+
+    # Tries to find user by the uid given
+    uid = urlsafe_base64_decode(uidb64)
+    user = get_object_or_false(get_user_model(), pk=uid)
+    if not user:
+        return redirect('member:recover_password')
+
+    # Checks if token is valid
+    token_generator = PasswordResetTokenGenerator()
+    if user is None or not token_generator.check_token(user, token):
+        return redirect('member:recover_password')
+
+    # Create form
+    form = PasswordResetForm(request.POST or None)
+
+    # If form was submitted, it tries to validate and save new password
+    if form.is_valid():
+
+        # Saves New password for user
+        email = user.email
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+
+        # Logs user in
+        user = authenticate(
+            email=email, password=form.cleaned_data['password']
+        )
+        auth_login(request, user)
+
+        # Identifies member
+        member = get_object_or_false(Member, user_id=user.id)
+
+        # Checks if member has active subscription
+        subscription = get_object_or_false(Subscription, member_id=member.id)
+        active = settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE
+        if subscription and subscription.subscription_status_id == active:
+            request.session['is_subscription_active'] = True
+        else:
+            request.session['is_subscription_active'] = False
+
+        # marks in the template that it was successfully finished
+        messages.success(request, 'You password has been updated.')
+        return redirect("member:dashboard")
+
+    # Builds template data dictionary
+    template_data = {'meta_title': 'Password Reset | Wanna Migrate', 'form': form}
+
+    # Displays HTML template
+    return render(request, 'member/reset_password.html', template_data)
 
 
 @login_required
