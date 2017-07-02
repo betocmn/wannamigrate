@@ -182,14 +182,14 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 #########################################
 if IS_PROD:
     ALERT_TECH_SLACK_URL = 'https://hooks.slack.com/services/' \
-                           'T2KE0H2Q5/B2KE617EC/3e0CO4HCsFEo8UNd3mzqUSeQ'
+                           'T63J5TZBR/B63HN7ZV4/DgDgfOnCV064P6uBOEqnx2Hm'
     ALERT_ADMIN_SLACK_URL = 'https://hooks.slack.com/services/' \
-                            'T2KE0H2Q5/B2KFY9J9Y/5uTg3HUDbvZlPeIAnv2ssbHk'
+                            'T63J5TZBR/B63HN7ZV4/DgDgfOnCV064P6uBOEqnx2Hm'
 else:
     ALERT_TECH_SLACK_URL = 'https://hooks.slack.com/services/' \
-                           'T2KE0H2Q5/B2KEKDKHQ/OfUZzmx7rzrrfrVctZPM9kru'
+                           'T63J5TZBR/B63HNBS9L/RqD7IkpG4VGgBEJ8cUIeWMIJ'
     ALERT_ADMIN_SLACK_URL = 'https://hooks.slack.com/services/' \
-                            'T2KE0H2Q5/B2KEKDKHQ/OfUZzmx7rzrrfrVctZPM9kru'
+                            'T63J5TZBR/B63HNBS9L/RqD7IkpG4VGgBEJ8cUIeWMIJ'
 
 
 #########################################
@@ -226,22 +226,47 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
+        'file_django': {
             'level': 'DEBUG',
             'formatter': 'verbose',
-            'class': 'logging.FileHandler',
-            'filename': '/wannamigrate/debug.log',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/wannamigrate/log/django.log',
+            'maxBytes': 5*1024*1024,
+            'backupCount': 3,
         },
+        'file_celery': {
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/wannamigrate/log/celery.log',
+            'maxBytes': 5*1024*1024,
+            'backupCount': 3,
+        },
+        'slack': {
+            'level': 'ERROR',
+            'formatter': 'simple',
+            'class': 'wannamigrate.core.logging_handlers.SlackHandler'
+        }
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['file_django', 'slack'],
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['file'],
-            'level': 'ERROR',
+            'handlers': ['file_django', 'slack'],
+            'level': 'DEBUG',
             'propagate': True,
+        },
+        'celery': {
+            'handlers': ['file_celery', 'slack'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'celery.task': {
+            'handlers': ['file_celery', 'slack'],
+            'level': 'DEBUG',
+            'propagate': True
         },
     },
 }

@@ -26,7 +26,6 @@ def create_alert(title, message, mode='tech', **kwargs):
     :param mode: 'tech' or 'admin'
     :return: Boolean
     """
-    return None
     return AlertProcessor.create(title, message, mode, **kwargs)
 
 

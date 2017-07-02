@@ -4,7 +4,8 @@
 */.idea
 */.idea/*
 infra/.vagrant
-wiki/*
+log/
+log/*
 src/wannamigrate/_settings/local.py
 debug.log
 src/upload/*
