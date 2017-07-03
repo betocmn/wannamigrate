@@ -145,9 +145,6 @@
                             return false;
                         }
 
-                        // Tracks "started quiz"
-                        track_event('{{ tracking_event_started_quiz }}');
-
                     });
 
                     // Lazy load non-crucial css
@@ -157,6 +154,13 @@
             {% endcompress %}
 
             <!--[if lte IE 8]><script src="{% static 'site/js/quiz/ie/respond.min.js' %}"></script><![endif]-->
+
+            <script type="text/javascript">
+
+                // Tracks "started quiz"
+                track_event('{{ tracking_event_started_quiz }}');
+
+            </script>
 
         {% endblock scripts %}
 
