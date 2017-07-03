@@ -269,7 +269,7 @@ def recover_password(request):
         return redirect("member:dashboard")
 
     # Instantiates the form
-    track_password_reset = False
+    track_password_reset_email = None
     password_reset_url = None
     form = PasswordRecoveryForm(request.POST or None)
 
@@ -282,7 +282,7 @@ def recover_password(request):
         if user and user.is_active:
 
             # Activates flag to send out notification to reset password
-            track_password_reset = True
+            track_password_reset_email = user.email
 
             # builds reset link
             token_generator = PasswordResetTokenGenerator()
@@ -305,7 +305,7 @@ def recover_password(request):
     # Builds template data dictionary
     template_data = {
         'meta_title': 'Password Recovery | Wanna Migrate',
-        'track_password_reset': track_password_reset,
+        'track_password_reset_email': track_password_reset_email,
         'password_reset_url': password_reset_url,
         'tracking_event_requested_password_reset': settings.TRACKING_EVENT_REQUESTED_PASSWORD_RESET,
         'form': form

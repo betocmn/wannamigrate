@@ -221,6 +221,88 @@
                 }
             };
 
+            // Creates instances of card Elements
+            var card_number = elements.create('cardNumber', {style: style});
+            var card_expiry = elements.create('cardExpiry', {style: style});
+            var card_cvc = elements.create('cardCvc', {style: style});
+            card_number.mount('#card-number-element');
+            card_expiry.mount('#card-expiry-element');
+            card_cvc.mount('#card-cvc-element');
+
+            // Sets up credit-card brand
+            var cardBrandToPfClass = {
+                'visa': 'fa-cc-visa',
+                'mastercard': 'fa-cc-mastercard',
+                'amex': 'fa-cc-amex',
+                'discover': 'fa-cc-discover',
+                'diners': 'fa-cc-diners',
+                'jcb': 'fa-cc-jcb',
+                'unknown': 'fa-credit-card',
+            }
+            function set_brand_icon(brand) {
+                var brandIconElement = document.getElementById('brand-icon');
+                var pfClass = 'fa-credit-card';
+                if (brand in cardBrandToPfClass) {
+                    pfClass = cardBrandToPfClass[brand];
+                }
+                for (var i = brandIconElement.classList.length - 1; i >= 0; i--) {
+                    brandIconElement.classList.remove(brandIconElement.classList[i]);
+                }
+                brandIconElement.classList.add('fa');
+                brandIconElement.classList.add(pfClass);
+            }
+
+            // On change event for card number
+            var track_typed_payment_details = false;
+            card_number.addEventListener('change', function(event) {
+
+                // Tracks "typed payment details"
+                if(!track_typed_payment_details){
+                    track_event('{{ tracking_event_typed_payment_details }}');
+                    track_typed_payment_details = true;
+                }
+
+                // Sets brand card (if any)
+                if (event.brand) {
+                    set_brand_icon(event.brand);
+                }
+            });
+
+            // Submits payment
+            $("#payment-form").submit(function(e){
+
+                // initial settings
+                event.preventDefault();
+                var $button = $("#payment-button");
+                var $loading = $(".payment-loading");
+                var $form = $(this);
+                $button.hide();
+                $loading.show();
+
+                // Sends data to stripe
+                var extra_details = {
+                    name: $('input[name=cardholder-name]').val(),
+                    address_zip: $('input[name=address-zip]').val(),
+                    address_country: $('input[name=address-country]').val(),
+                };
+                stripe.createToken(card_number, extra_details).then(function(result) {
+                    if (result.error) {
+                        display_notification('error', 'Error', result.error.message);
+                        $loading.hide();
+                        $button.show();
+                    } else {
+                        $form.append($('<input type="hidden" name="token" />').val(result.token.id));
+                        $form.get(0).submit();
+                    }
+                });
+
+                // Stops form submission
+                return false;
+            })
+
+            // Tracks "proceeded to payment"
+            track_event('{{ tracking_event_proceeded_to_payment }}');
+
             // Toggles promo box
             $('#promo-link').click(function () {
                 $('#promo_code').focus();
@@ -258,76 +340,6 @@
 
                 });
             });
-
-            // Creates instances of card Elements
-            var card_number = elements.create('cardNumber', {style: style});
-            var card_expiry = elements.create('cardExpiry', {style: style});
-            var card_cvc = elements.create('cardCvc', {style: style});
-            card_number.mount('#card-number-element');
-            card_expiry.mount('#card-expiry-element');
-            card_cvc.mount('#card-cvc-element');
-
-            // Sets up credit-card brand
-            var cardBrandToPfClass = {
-                'visa': 'fa-cc-visa',
-                'mastercard': 'fa-cc-mastercard',
-                'amex': 'fa-cc-amex',
-                'discover': 'fa-cc-discover',
-                'diners': 'fa-cc-diners',
-                'jcb': 'fa-cc-jcb',
-                'unknown': 'fa-credit-card',
-            }
-            function set_brand_icon(brand) {
-                var brandIconElement = document.getElementById('brand-icon');
-                var pfClass = 'fa-credit-card';
-                if (brand in cardBrandToPfClass) {
-                    pfClass = cardBrandToPfClass[brand];
-                }
-                for (var i = brandIconElement.classList.length - 1; i >= 0; i--) {
-                    brandIconElement.classList.remove(brandIconElement.classList[i]);
-                }
-                brandIconElement.classList.add('fa');
-                brandIconElement.classList.add(pfClass);
-            }
-
-            // On change events for each stripe element
-            card_number.addEventListener('change', function(event) {
-                if (event.brand) {
-                    set_brand_icon(event.brand);
-                }
-            });
-
-            // Submits payment
-            $("#payment-form").submit(function(e){
-
-                // initial settings
-                event.preventDefault();
-                var $button = $("#payment-button");
-                var $loading = $(".payment-loading");
-                var $form = $(this);
-                $button.hide();
-                $loading.show();
-
-                // Sends data to stripe
-                var extra_details = {
-                    name: $('input[name=cardholder-name]').val(),
-                    address_zip: $('input[name=address-zip]').val(),
-                    address_country: $('input[name=address-country]').val(),
-                };
-                stripe.createToken(card_number, extra_details).then(function(result) {
-                    if (result.error) {
-                        display_notification('error', 'Error', result.error.message);
-                        $loading.hide();
-                        $button.show();
-                    } else {
-                        $form.append($('<input type="hidden" name="token" />').val(result.token.id));
-                        $form.get(0).submit();
-                    }
-                });
-
-                // Stops form submission
-                return false;
-            })
 
 
         });

@@ -20,7 +20,25 @@ function track_event(event, data) {
             fbq('track', 'Purchase', data);
         }else if(event == 'completed_quiz'){
             fbq('track', 'Lead');
+        }else if(event == 'proceeded_to_payment'){
+            fbq('track', 'InitiateCheckout');
+        }else if(event == 'typed_payment_details'){
+            fbq('track', 'AddPaymentInfo');
         }
+    }
+}
+
+
+/**
+ *  Sends tracking event for reset passowrd
+ *
+ */
+function track_reset_password(email, event, data) {
+    if(IS_PROD){
+        _dcq.push(["identify", {
+            email: email,
+        }]);
+        _dcq.push(["track", event, data]);
     }
 }
 

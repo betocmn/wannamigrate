@@ -145,6 +145,9 @@
                             return false;
                         }
 
+                        // Tracks "started quiz"
+                        track_event('{{ tracking_event_started_quiz }}');
+
                     });
 
                     // Lazy load non-crucial css

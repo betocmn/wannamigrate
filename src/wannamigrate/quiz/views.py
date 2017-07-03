@@ -195,6 +195,7 @@ def take(request, slug):
         'country': country,
         'quiz_questions': quiz_questions,
         'member_answers': member_answers,
+        'tracking_event_started_quiz': settings.TRACKING_EVENT_STARTED_QUIZ,
         'total_questions': quiz_questions.count(),
         'meta_title': _('Immigration Quiz') + ' | %s | ' % _(country.name) + 'Wanna Migrate',
     }

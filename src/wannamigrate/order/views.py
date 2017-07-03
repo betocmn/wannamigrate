@@ -83,6 +83,8 @@ def checkout(request):
         'order_total': order_total,
         'discount_value': discount_value,
         'payment_error': payment_error,
+        'tracking_event_typed_payment_details': settings.TRACKING_EVENT_TYPED_PAYMENT_DETAILS,
+        'tracking_event_proceeded_to_payment': settings.TRACKING_EVENT_PROCEEDED_TO_PAYMENT,
         'meta_title': _('Checkout | Wanna Migrate'),
         'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY,
     }
