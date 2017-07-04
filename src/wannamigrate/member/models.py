@@ -55,7 +55,7 @@ class Member(BaseModel):
             'fields': [
                 'avatar', 'country', 'gender', 'birth_date',
                 'is_newsletter_subscribed', 'payment_api_customer_uuid', 'referral_code',
-                'staff_notes'
+                'staff_notes', 'quiz_answers'
             ]
         }
     ]

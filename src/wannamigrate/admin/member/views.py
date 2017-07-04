@@ -9,7 +9,7 @@ the crud operations.
 # Imports
 ##########################
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import CharField, Value, Q, F, Avg, DecimalField
+from django.db.models import CharField, Value, Q, F, Sum, DecimalField
 from django.db.models.functions import Concat
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -119,9 +119,16 @@ def details(request, member_id):
     """
 
     # Identifies database record
-    member = Member.objects.filter(id=member_id).first()
+    member = Member.objects.filter(id=member_id).annotate(
+        total_points=Sum(
+            'quiz_answers__points',
+            output_field=DecimalField(max_digits=3, decimal_places=2)
+        ),
+    ).filter(id=member_id).first()
     if not member:
         return redirect('admin:member:list')
+
+    member.fieldsets[0]['fields'].append('total_points')
 
     # Orders
     order_items = OrderItem.objects.select_related(

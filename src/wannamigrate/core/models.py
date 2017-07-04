@@ -11,6 +11,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.template.defaultfilters import slugify
+from django.core.exceptions import FieldDoesNotExist
 import itertools
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
@@ -80,9 +81,14 @@ class BaseModel(models.Model):
                         new.append(str(item))
                     value = " / ".join(new)
 
+                try:
+                    label = self._meta.get_field(field).verbose_name
+                except FieldDoesNotExist:
+                    label = field
+
                 temp['fields'].append({
                     'name': field,
-                    'label': self._meta.get_field(field).verbose_name.capitalize(),
+                    'label': label.capitalize(),
                     'value': value
                 })
             fieldsets_new.append(temp)

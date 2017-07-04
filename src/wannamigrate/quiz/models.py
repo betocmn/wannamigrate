@@ -32,7 +32,7 @@ class QuizAnswer(BaseModel):
         {
             'title': 'Quiz Answers',
             'fields': [
-                'description', 'points'
+                'quiz_question', 'description', 'points'
             ]
         }
     ]
