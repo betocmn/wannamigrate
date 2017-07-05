@@ -25,7 +25,7 @@ from wannamigrate.order.tasks import process_order, create_alert
 #######################
 # HOME-PAGE VIEWS
 #######################
-@login_required
+@login_required(login_url='member:signup')
 def checkout(request):
     """
     Checkout
