@@ -380,18 +380,17 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     max-width: 460px;
 }
 .checkout-wrapper .summary .content .cards {
-    float: left;
     margin-right: 5px;
     padding-top: 2px;
 }
 .checkout-wrapper .summary .content .cards img {
-    margin-right: 5px;
-    max-width: 38px;
+    max-width: 220px;
     border-radius: 4px;
 }
 .checkout-wrapper .summary .content .total {
     float: left;
     margin-right: 5px;
+    margin-left: 60px;
 }
 .checkout-wrapper .summary .content .promo-link {
     float: left;
@@ -425,7 +424,14 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .checkout-wrapper .field.field-icon {
     padding-left: 40px;
 }
-
+.checkout-wrapper .company-info {
+    padding-top: 2em;
+}
+.checkout-wrapper .company-info p {
+    font-size: 0.7000em;
+    max-width: 520px;
+    margin: 0 auto;
+}
 .checkout-wrapper .field:focus,
 .field.StripeElement--focus {
     border-color: #7bd2ed;
@@ -444,7 +450,6 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .checkout-wrapper label span.brand i.fa-cc-amex {
     color: #117aa8;
 }
-
 @media screen and (max-width: 480px) {
     .checkout-wrapper .summary .content {
         height: 80px;
@@ -455,6 +460,7 @@ input[type="checkbox"] + label, input[type="radio"] + label {
         float: none;
         text-align: center;
         margin-bottom: 5px;
+        margin-left: 0;
     }
     .jp-card .jp-card-front, .jp-card .jp-card-back {
         max-width: 90% !important;

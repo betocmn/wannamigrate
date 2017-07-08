@@ -21,7 +21,7 @@
 
             <div class="inner">
                 <header class="major">
-                    <h1>{% trans "YOU'RE ALMOST IN" %}</h1>
+                    <h1>{% trans "ORDER SUMMARY" %}</h1>
                 </header>
 
                 <form action="{% url 'order:process_payment' %}" method="POST" id="payment-form">
@@ -31,20 +31,14 @@
                     <div class="row sub-title">
                         <div class="8u -2u 12u$(small) align-center">
                             {% blocktrans %}
-                                Once your payment is confirmed, you will get <strong>one year</strong> instant access
-                                to the immigration dashboard, including free upgrades to new features and countries.
+                                Once your payment is confirmed, you will get <strong>one year</strong> unlimited access
+                                to all our immigration tools, including free upgrades to new features and countries.
                             {% endblocktrans %}
                         </div>
                     </div>
-
-                    <div class="row summary">
+<div class="row summary">
                         <div class="8u -2u 12u$(small) align-center">
                             <div class="content">
-                                <div class="cards">
-                                    <img src="{% static 'site/img/credit-card-visa-dark.png' %}" />
-                                    <img src="{% static 'site/img/credit-card-mastercard-dark.png' %}"  />
-                                    <img src="{% static 'site/img/credit-card-american-express-dark.png' %}" />
-                                </div>
                                 <div class="total">
                                     <code>
                                         Order Total: $<span id="order_total">{{ order_total|floatformat }}</span> (AUD)
@@ -58,6 +52,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row summary">
+                        <div class="8u -2u 12u$(small) align-center">
+                            <div class="content">
+                                <div class="cards">
+                                    <img src="{% static 'site/img/payment-methods.png' %}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="row forms">
 
@@ -159,6 +164,14 @@
                                     </div>
                                 </li>
                             </ul>
+                        </div>
+
+                        <div class="12u$ company-info">
+                            <p class="align-center">
+                                <strong>Wanna Migrate</strong> is based in Sydney and registered under
+                                <strong>Australian Business Number</strong>: 48316158565.
+                                Our address: 28 Rothschild Avenue, Rosebery, NSW 2018.
+                            </p>
                         </div>
 
                     </div>
