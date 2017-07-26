@@ -1,6 +1,35 @@
 {% extends "_layouts/admin.html" %}
 {% load staticfiles %}
 
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- PAGE EXTRA CSS -->
+    <link href="{% static 'common/trumbowyg/css/trumbowyg.css' %}" rel="stylesheet">
+
+    <!-- PAGE EXTRA JS -->
+    <script src="{% static 'common/trumbowyg/js/trumbowyg.js' %}"></script>
+
+	<script type="text/javascript">
+
+		/**
+		 * Jquery On Load
+		 *
+		 */
+		$(document).ready(function() {
+
+            // HTML Editor
+            $('textarea').trumbowyg({
+                svgPath: '{% static 'common/trumbowyg/css/icons.svg' %}',
+            });
+
+		});
+
+	</script>
+
+{% endblock head %}
+
 {% block content %}
 
     <div class="row">

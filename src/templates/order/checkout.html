@@ -21,22 +21,60 @@
 
             <div class="inner">
                 <header class="major">
-                    <h1>{% trans "ORDER SUMMARY" %}</h1>
+                    <h1>{% trans "PREMIUM ACCESS" %}</h1>
                 </header>
 
                 <form action="{% url 'order:process_payment' %}" method="POST" id="payment-form">
 
                     {% csrf_token %}
 
+                    <div class="row plans">
+
+                        <div class="8u -2u 12u$(small) align-center">
+
+                            <div class="row align-center">
+                                <div class="6u 12u$(small) align-center">
+                                    <div class="box">
+                                        <p>
+                                            {% blocktrans %}
+                                                <strong>3 Month</strong> unlimited access
+                                            {% endblocktrans %}
+                                        </p>
+                                        <div class="align-center">
+                                            <input type="radio" id="product_id_2" name="product_id" value="2" />
+                                            <label for="product_id_2">$<span id="product_price_2">7</span> <span class="currency">(AUD)</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="6u 12u$(small) align-center">
+                                    <div class="box">
+                                        <p>
+                                            {% blocktrans %}
+                                                <strong>1 Year</strong> unlimited access
+                                            {% endblocktrans %}
+                                        </p>
+                                        <div class="align-center">
+                                            <input type="radio" id="product_id_1" name="product_id" checked value="1" />
+                                            <label for="product_id_1">$<span id="product_price_1">15</span> <span class="currency">(AUD)</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <div class="row sub-title">
                         <div class="8u -2u 12u$(small) align-center">
                             {% blocktrans %}
-                                Once your payment is confirmed, you will get <strong>one year</strong> unlimited access
-                                to all our immigration tools, including free upgrades to new features and countries.
+                                By choosing any of the options above, you will unlock all immigration tools,
+                                including free upgrades to new features and countries.
                             {% endblocktrans %}
                         </div>
                     </div>
-<div class="row summary">
+
+                    <div class="row summary">
                         <div class="8u -2u 12u$(small) align-center">
                             <div class="content">
                                 <div class="total">
@@ -49,20 +87,16 @@
                                         <a href="javascript:;">(add discount code)</a>
                                     </div>
                                 {% endif %}
+                                <span id="promo-error"></span>
+                                <span id="promo-success" {% if not discount_value %}style="display: none;"{% endif %}>
+                                    $<span id="discount_total">
+                                        {{ discount_value }}
+                                    </span>
+                                    Discount Applied :)
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="row summary">
-                        <div class="8u -2u 12u$(small) align-center">
-                            <div class="content">
-                                <div class="cards">
-                                    <img src="{% static 'site/img/payment-methods.png' %}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
 
                     <div class="row forms">
 
@@ -74,13 +108,9 @@
                                         <div class="row uniform">
                                             <div class="6u 12u$(xsmall) form-field">
                                                 <label>
-                                                    <input type="text" name="promo_code" id="promo_code" class="field" />
+                                                    <input type="text" name="promo_code" id="promo_code" class="field" value="{{ discount_code|default:'' }}" />
                                                     <span><span>{% trans "Discount Code" %}</span></span>
                                                 </label>
-                                                <p>
-                                                    <span id="promo-error"></span>
-                                                    <span id="promo-success">{% if discount_value %}${{ discount_value }} Discount Applied :){% endif %}</span>
-                                                </p>
                                             </div>
                                             <div class="6u$ 12u$(xsmall) form-field">
                                                 {% if not discount_value %}
@@ -98,6 +128,12 @@
                                 </div>
                             </div>
 
+                        </div>
+
+                        <div class="8u -2u 12u$(small) align-center">
+                            <div class="payment-methods">
+                                <img src="{% static 'site/img/payment-methods.png' %}" />
+                            </div>
                         </div>
 
                         <div class="8u -2u 12u$(small)">
@@ -168,9 +204,11 @@
 
                         <div class="12u$ company-info">
                             <p class="align-center">
-                                <strong>Wanna Migrate</strong> is based in Sydney and registered under
-                                <strong>Australian Business Number</strong>: 48316158565.
-                                Our address: 28 Rothschild Avenue, Rosebery, NSW 2018.
+                                {% blocktrans %}
+                                    <strong>Wanna Migrate</strong> is based in Sydney and registered under
+                                    <strong>Australian Business Number</strong>: 48316158565.
+                                    Our address: 28 Rothschild Avenue, Rosebery, NSW 2018.
+                                {% endblocktrans %}
                             </p>
                         </div>
 
@@ -316,11 +354,22 @@
             // Tracks "proceeded to payment"
             track_event('{{ tracking_event_proceeded_to_payment }}');
 
+            // Updates product plan
+            $("input[name=product_id]").change(function () {
+                var product_id = $(this).val();
+                var product_price = parseFloat($('#product_price_' + product_id).html());
+                $("#order_total").html(product_price);
+                var promo_code = $("#promo_code").val();
+                if(promo_code){
+                    $("#promo-button").trigger("click");
+                }
+            })
+
+
             // Toggles promo box
             $('#promo-link').click(function () {
                 $('#promo_code').focus();
                 $('#promo-container').fadeIn();
-                $(this).hide();
             });
 
             // Promo Code Submission
@@ -329,25 +378,28 @@
                 var $loading = $(".promo-loading");
                 $button.hide();
                 $loading.show();
+                var product_id = $('input[name=product_id]:checked').val();
+                var product_price = parseFloat($('#product_price_' + product_id).html());
                 var url = '{% url "order:get_promo_info" %}';
                 var promo_code = $("#promo_code").val();
-                var params = {code: promo_code};
+                var params = {code: promo_code, order_total: product_price};
                 $.get(url, params, function(data) {
                     $loading.hide();
                     var $promo_error = $("#promo-error");
                     var $promo_success = $("#promo-success");
-                    $promo_error.html('');
-                    $promo_success.html('');
+                    $promo_error.hide();
+                    $promo_success.hide();
                     if(data.status == 'success'){
                         var $total = $("#order_total");
                         var new_total = parseFloat($total.html()) - parseFloat(data.discount);
                         $total.html(number_format (new_total, 2, '.', ''));
-                        var discount_html = '$' + data.discount + ' Discount Applied :)';
-                        $promo_success.html(discount_html);
                         $("#discount_total").html(data.discount);
-                        $("#discount_row").show();
+                        $('#promo-link').hide();
+                        $promo_success.show();
                     } else {
                         $promo_error.html(data.message);
+                        $('#promo-link').hide();
+                        $promo_error.show();
                         $button.show();
                     }
 

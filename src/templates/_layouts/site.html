@@ -34,37 +34,123 @@
                     <a href="{% url 'landing:home' %}" class="logo">
                       <span>Wanna Migrate</span>
                     </a>
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="#menu">
-                                    {% if user and user.is_authenticated %}
-                                        {{ user.first_name|default:'me' }}
-                                    {% else %}
-                                        MENU
-                                    {% endif %}
-                                </a>
-                            </li>
-                        </ul>
+                    <nav id="menu-top-bar">
+                        {% if user and user.is_authenticated %}
+                            <ul class="logged-in">
+                                <li class="desktop-only">
+                                    <a href="{% url 'discussion:index' request.session.country_slug %}">
+                                        <span>{% trans "Member Cases" %}</span>
+                                    </a>
+                                </li>
+                                <li class="desktop-only">
+                                    <a href="{% url 'story:index' request.session.country_slug %}">
+                                        <span>{% trans "Stories" %}</span>
+                                    </a>
+                                </li>
+                                <li class="desktop-only">
+                                    <a href="{% url 'guide:index' request.session.country_slug %}">
+                                        <span>{% trans "Guide" %}</span>
+                                    </a>
+                                </li>
+                                <li class="desktop-only">
+                                    <a href="{% url 'task:index' request.session.country_slug %}">
+                                        <span>{% trans "Planning" %}</span>
+                                    </a>
+                                </li>
+                                <li class="desktop-only">
+                                    <a href="{% url 'doc:index' request.session.country_slug %}">
+                                        <span>{% trans "Docs" %}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#menu-content">
+                                        <img src="{% static 'site/img/wanna-migrate-flag-australia-square.png' %}" alt="{% trans "Australia" %}" />
+                                        <span>{% trans "Migrating to Australia" %}</span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#menu-account">
+                                        <img src="{{ request.session.avatar_url }}" />
+                                        <span>{{ user.first_name|default:'me' }}</span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <ul class="logged-out">
+                                <li>
+                                    <a href="#menu-content">
+                                        <img src="{% static 'site/img/wanna-migrate-flag-australia-square.png' %}" alt="{% trans "Australia" %}" />
+                                        <span>{% trans "Migrating to Australia" %}</span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>How It Works</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'member:login' %}">
+                                        <span>Log In</span>
+                                    </a>
+                                </li>
+                                <li class="sign-up">
+                                    <ul class="actions">
+                                        <li>
+                                            <a href="{% url 'quiz:take' request.session.country_slug %}" class="button special small">
+                                                {% trans "GET STARTED FREE" %}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="mobile-only menu-mobile-icon">
+                                    <a href="#menu-account">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endif %}
                     </nav>
                 </header>
 
                 <!-- Menu -->
-                <nav id="menu">
+                <nav id="menu-content">
                     <ul class="links">
-                        {% if request.session.subscription_id %}
-                            <li><a href="{% url 'member:dashboard' %}">{% trans "IMMI DASHBOARD" %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'landing:home' %}">{% trans "HOME" %}</a></li>
-                        <li><a href="{% url 'company:about' %}">{% trans "ABOUT US" %}</a></li>
-                        <li><a href="{% url 'company:contact' %}">{% trans "CONTACT US" %}</a></li>
+                        <li><a href="{% url 'story:index' request.session.country_slug %}">{% trans "Cases Discussion" %}</a></li>
+                        <li><a href="{% url 'story:index' request.session.country_slug %}">{% trans "Immi Stories" %}</a></li>
+                        <li><a href="{% url 'guide:index' request.session.country_slug %}">{% trans "Step-by-Step Guide" %}</a></li>
+                        <li><a href="{% url 'task:index' request.session.country_slug %}">{% trans "Visa Tasks Organiser" %}</a></li>
+                        <li><a href="{% url 'doc:index' request.session.country_slug %}">{% trans "Document Templates" %}</a></li>
                     </ul>
+                    <ul class="actions vertical">
+                        <li>
+                            <label for="country-selectize" class="align-center">Change Country</label>
+                            <div class="country-container">
+                                <select id="country-selectize" name="country-selectize" placeholder="Select a Country">
+                                    <option value="au" selected="selected">Australia</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <nav id="menu-account">
                     {% if not user or not user.is_authenticated %}
+                        <ul class="links">
+                            <li><a href="{% url 'landing:home' %}">{% trans "HOME" %}</a></li>
+                            <li><a href="{% url 'company:about' %}">{% trans "ABOUT US" %}</a></li>
+                            <li><a href="{% url 'company:contact' %}">{% trans "CONTACT US" %}</a></li>
+                        </ul>
                         <ul class="actions vertical">
-                            <li><a href="{% url 'quiz:take' 'australia' %}" class="button special fit">{% trans "GET STARTED" %}</a></li>
+                            <li><a href="{% url 'quiz:take' request.session.country_slug %}" class="button special fit">{% trans "GET STARTED FREE" %}</a></li>
                             <li><a href="{% url 'member:login' %}" class="button fit">{% trans "LOG IN" %}</a></li>
                         </ul>
                     {% else %}
+                        <ul class="links">
+                            <li><a href="{% url 'member:dashboard' %}">{% trans "MY DASHBOARD" %}</a></li>
+                            <li><a href="#">{% trans "MY ACCOUNT" %}</a></li>
+                        </ul>
                         <ul class="actions vertical">
                             <li><a href="{% url 'member:logout' %}" class="button fit">{% trans "LOGOUT" %}</a></li>
                         </ul>
@@ -83,23 +169,50 @@
                 <footer id="footer">
                     <div class="inner">
                         <div class="row">
-                            <div class="3u 6u(small)">
-                                <ul class="links">
-                                    <li><a href="{% url 'landing:home' %}">{% trans "Home" %}</a> </li>
-                                    <li><a href="{% url 'quiz:take' 'australia' %}">{% trans "Immigration Quiz" %}</a> </li>
-                                    <li><a href="{% url 'member:signup' %}">{% trans "Sign up" %}</a> </li>
-                                    <li><a href="{% url 'member:login' %}">{% trans "Log in" %}</a> </li>
-                                </ul>
-                            </div>
                             <div class="3u 6u$(small)">
                                 <ul class="links">
+                                    <li>{% trans "Company" %}</li>
                                     <li><a href="{% url 'company:about' %}">{% trans "About us" %}</a> </li>
                                     <li><a href="{% url 'company:contact' %}">{% trans "Contact us" %}</a> </li>
                                     <li><a href="{% url 'company:terms' %}">{% trans "Terms" %}</a> </li>
                                     <li><a href="{% url 'company:privacy' %}">{% trans "Privacy" %}</a> </li>
                                 </ul>
                             </div>
-                            <div class="6u 12u$(small)">
+                            <div class="3u 6u(small)">
+                                <ul class="links">
+                                    <li>{% trans "Get Started" %}</li>
+                                    <li><a href="#">{% trans "How It Works" %}</a> </li>
+                                    <li><a href="{% url 'quiz:take' request.session.country_slug %}">{% trans "Skilled Migration Quiz" %}</a> </li>
+                                    <li><a href="{% url 'member:signup' %}">{% trans "Sign Up Free" %}</a> </li>
+                                    <li><a href="{% url 'member:login' %}">{% trans "Log In" %}</a> </li>
+                                </ul>
+                            </div>
+                            <div class="3u 6u$(small)">
+                                <ul class="links">
+                                    <li>{% trans "Learn" %}</li>
+                                    <li><a href="{% url 'story:index' request.session.country_slug %}">{% trans "Immigrant Stories" %}</a> </li>
+                                    <li><a href="{% url 'guide:index' request.session.country_slug %}">{% trans "Immigration Step-By-Step Guide" %}</a> </li>
+                                    <li><a href="#">{% trans "Immigration Cases Discussion" %}</a> </li>
+                                    <li><a href="#">{% trans "Our Blog" %}</a> </li>
+                                </ul>
+                            </div>
+                            <div class="3u 6u(small)">
+                                <ul class="links">
+                                    <li>{% trans "Plan & Execute" %}</li>
+                                    <li><a href="{% url 'task:index' request.session.country_slug %}">{% trans "Visa Tasks Organiser" %}</a> </li>
+                                    <li><a href="{% url 'doc:index' request.session.country_slug %}">{% trans "Visa Document Templates" %}</a> </li>
+                                    <li><a href="#">{% trans "Ask a Private Question" %}</a> </li>
+                                    <li><a href="http://www.border.gov.au/" target="_blank">{% trans "Australian Immigration" %}</a> </li>
+                                </ul>
+                            </div>
+                            <div class="12u$">
+                                <a href="{% url 'landing:home' %}" class="logo">
+                                    <img src="{% static 'site/img/logo-wanna-migrate-alt.png' %}" alt="Wanna Migrate" />
+                                </a>
+                                <p class="copyright">
+                                    &copy; 2017 Wanna Migrate. {% trans "Made in Sydney - Australia" %}
+                                    <br />{% trans "28 Rothschild Avenue, Rosebery, NSW 2018" %}
+                                </p>
                                 <ul class="icons">
                                     <li>
                                         <a href="https://www.facebook.com/wannamigrate" class="icon alt fa-facebook">
@@ -117,11 +230,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <p class="copyright">
-                                    &copy; 2017 Wanna Migrate. {% trans "Made in Sydney - Australia" %}
-                                    <br />{% trans "28 Rothschild Avenue, Rosebery, NSW 2018" %}
-                                    <br />{% trans "ABN: 48316158565" %}
-                                </p>
+
                             </div>
                         </div>
                     </div>
@@ -144,8 +253,10 @@
                 <script type="text/javascript" src="{% static 'common/pnotify/js/pnotify.js' %}"></script>
                 <script type="text/javascript" src="{% static 'common/util/js/util.js' %}"></script>
                 <script type="text/javascript" src="{% static 'site/js/layout.js' %}"></script>
+                <script type="text/javascript" src="{% static 'common/selectize/js/selectize.js' %}"></script>
                 <script type="text/javascript" src="{% static 'site/js/main.js' %}"></script>
                 <script type="text/javascript">
+                    loadCSS('{% static 'common/selectize/css/selectize.css' %}');
                     loadCSS('{% static 'common/font-awesome/css/font-awesome.css' %}');
                     loadCSS('{% static 'common/pnotify/css/pnotify.css' %}');
                 </script>

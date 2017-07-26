@@ -1,0 +1,128 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="discussion-wrapper update">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "My Immigration Case" %}</h1>
+                </header>
+
+                <div class="row">
+
+                    <div class="6u 12u$(small)">
+
+                        <!-- Form -->
+                        <form method="post" action="">
+
+                            {% csrf_token %}
+
+                            <div class="row uniform">
+
+                                <div class="6u 12u$(xsmall) form-field {% if user_form.first_name.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ user_form.first_name }}
+                                        <span><span>{{ user_form.first_name.label }}</span></span>
+                                    </label>
+                                    {{ user_form.first_name.errors }}
+                                </div>
+
+                                <div class="6u$ 12u$(xsmall) form-field {% if user_form.last_name.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ user_form.last_name }}
+                                        <span><span>{{ user_form.last_name.label }}</span></span>
+                                    </label>
+                                    {{ user_form.last_name.errors }}
+                                </div>
+
+                                <div class="6u 12u$(xsmall) form-field {% if member_form.stage.errors %}has-error{% endif %}">
+                                    <label>
+                                        <div class="select-wrapper">{{ member_form.stage }}</div>
+                                        <span><span>{{ member_form.stage.label }}</span></span>
+                                    </label>
+                                    {{ member_form.stage.errors }}
+                                </div>
+
+                                <div class="6u$ 12u$(xsmall) form-field {% if member_form.visa.errors %}has-error{% endif %}">
+                                    <label>
+                                        <div class="select-wrapper">{{ member_form.visa }}</div>
+                                        <span><span>{{ member_form.visa.label }}</span></span>
+                                    </label>
+                                    {{ member_form.visa.errors }}
+                                </div>
+
+                                <div class="12u$ form-field {% if discussion_form.description.errors %}has-error{% endif %}">
+                                    <label>
+                                        {{ discussion_form.description }}
+                                        <span><span>{{ discussion_form.description.label }}</span></span>
+                                    </label>
+                                    {{ discussion_form.description.errors }}
+                                </div>
+
+                                <div class="12u$">
+                                    <ul class="actions">
+                                        <li>
+                                            <input type="submit" value="{% trans "Save My Case" %}" class="special" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="6u 12u$(small)">
+
+                        <div class="help-text">
+                            <p>
+                                {% blocktrans %}
+
+                                    Introduce yourself describing your current life situation in
+                                    your home-country. Then talk about when and why you want to
+                                    move to Australia and if it's a temporary or permanent move.
+
+                                {% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}
+
+                                    Try to be brief and ask just your initial questions. You can
+                                    always come back and ask new ones on the comments.
+
+                                {% endblocktrans %}
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

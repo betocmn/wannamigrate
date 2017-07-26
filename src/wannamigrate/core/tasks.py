@@ -26,7 +26,8 @@ def create_alert(title, message, mode='tech', **kwargs):
     :param mode: 'tech' or 'admin'
     :return: Boolean
     """
-    return AlertProcessor.create(title, message, mode, **kwargs)
+    return None
+    #return AlertProcessor.create(title, message, mode, **kwargs)
 
 
 @shared_task

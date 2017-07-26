@@ -1,32 +1,40 @@
-{% extends "_layouts/dashboard.html" %}
+{% extends "_layouts/site.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-<section id="banner" class="home-wrapper"></section>
+{% block content %}
 
-{% block dashboard_content %}
+    <!-- Wrapper -->
+    <div id="wrapper" class="stories-wrapper details">
 
-    <div class="stories details">
+        <!-- Main -->
+        <section id="main" class="main">
 
-        <h2 class="align-center">{{ post.title }}</h2>
+            <div class="inner">
 
-        <span class="image main align-center">
-            <img src="{{ post.image.large.url }}" alt="{{ post.title }}" />
-        </span>
+                <h1>{{ post.title }}</h1>
 
-        <p>
-            {{ post.html_content|safe|linebreaksbr }}
-        </p>
+                <div class="reading-text">
+                    {{ story_html_content|safe|linebreaks }}
+                </div>
 
-        <div class="align-center">
-            <ul class="actions">
-                <li><a href="{% url 'story:index' %}" class="button">Go Back</a></li>
-            </ul>
-        </div>
+                <div class="align-center">
+                    <ul class="actions">
+                        <li>
+                            <a href="{% url 'story:index' request.session.country_slug %}" class="button">
+                                {% trans "Check Out Other Stories" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
 
     </div>
 
-{% endblock dashboard_content %}
+{% endblock content %}
 
 {% block scripts %}
 

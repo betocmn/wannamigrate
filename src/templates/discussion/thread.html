@@ -1,0 +1,273 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="discussion-wrapper thread">
+
+        <!-- Main -->
+        <section id="main" class="main grey">
+
+            <div class="inner">
+
+                <header class="major">
+                    <h1>{% trans "Member Cases" %} - {{ request.session.country_name }}</h1>
+                </header>
+
+                <div class="row discussion-listing">
+
+                    <div class="8u -2u 12u$(small)">
+
+                        <div class="box">
+
+                            <div class="content">
+
+                                <div class="row">
+
+                                    <div class="2u 12u$(small) member align-center">
+
+                                        {% if discussion.member.avatar %}
+                                            <img class="avatar" src="{{ discussion.member.avatar.thumbnail.url }}" />
+                                        {% else %}
+                                            <img class="avatar" src="{% static 'site/img/avatar-default.png' %}" />
+                                        {% endif %}
+
+                                        <div class="country-name">{{ discussion.member.country.name }}</div>
+
+                                        {% with img='site/img/wanna-migrate-flag-'|add:discussion.member.country.code|lower|add:'.png' %}
+                                            <img class="flag" src="{% static img %}" align="{{ discussion.member.country.name }}" title="{{ discussion.member.country.name }}" />
+                                        {% endwith %}
+
+                                    </div>
+                                    <div class="10u 12u$(small)">
+                                        <h2>{{ discussion.member.user.get_full_name }}</h2>
+                                        <span>{{ discussion.content_modified_date }}</span>
+                                        <div class="reading-text">
+                                            {{ discussion.description|linebreaks }}
+                                        </div>
+                                    </div>
+
+                                    <div class="12u 12u$(small) footer">
+
+                                        <div class="row">
+
+                                            <div class="6u 12u$(small) align-left">
+                                                <ul>
+                                                    {% if discussion.member.stage %}
+                                                        <li>
+                                                            <span class="tag">{{ discussion.member.stage.name }}</span>
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if discussion.member.visa %}
+                                                        <li>
+                                                            <span class="tag">{{ discussion.member.visa.name }}</span>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+
+                                            <div class="6u 12u$(small) align-right">
+                                                {% if can_edit_discussion %}
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{% url 'discussion:update' request.session.country_slug %}" class="button icon fa-edit">
+                                                                {% trans 'Edit My Case' %}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row post-reply">
+
+                    <div class="8u -2u 12u$(small)">
+
+                        <h3>{% trans "Responses" %}</h3>
+
+                        <!-- Form -->
+                        {% if not form %}
+                            <p>{% trans "You need to log in to write a response." %}</p>
+                        {% else %}
+                            <form method="post" action="">
+
+                                {% csrf_token %}
+
+                                <div class="row uniform">
+
+                                    <!-- Break -->
+                                    <div class="12u$ form-field {% if form.description.errors %}has-error{% endif %}">
+                                        <label>
+                                            {{ form.description }}
+                                        </label>
+                                        {{ form.description.errors }}
+                                    </div>
+
+                                    <!-- Break -->
+                                    <div class="12u$ align-right" style="display: none;" id="submit-row">
+                                        <ul class="actions">
+                                            <li>
+                                                <input type="submit" value="{% trans "Post a Reply" %}" class="special small" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="row discussion-listing replies">
+
+                    {% for discussion_reply in discussion_replies %}
+
+                        <div class="8u -2u 12u$(small)" id="reply-{{ discussion_reply.id }}">
+
+                            <div class="box">
+
+                                <div class="content">
+
+                                    <div class="row">
+
+                                        <div class="2u 12u$(small) member align-center">
+
+                                            <a href="{% url 'discussion:thread' request.session.country_slug discussion_reply.member.user.slug %}">
+                                                {% if discussion_reply.member.avatar %}
+                                                    <img class="avatar" src="{{ discussion_reply.member.avatar.thumbnail.url }}" />
+                                                {% else %}
+                                                    <img class="avatar" src="{% static 'site/img/avatar-default.png' %}" />
+                                                {% endif %}
+                                            </a>
+
+                                            <div class="country-name">{{ discussion_reply.member.country.name }}</div>
+
+                                            {% with img='site/img/wanna-migrate-flag-'|add:discussion_reply.member.country.code|lower|add:'.png' %}
+                                                <img class="flag" src="{% static img %}" align="{{ discussion_reply.member.country.name }}" title="{{ discussion_reply.member.country.name }}" />
+                                            {% endwith %}
+
+                                        </div>
+                                        <div class="10u 12u$(small)">
+                                            <a href="{% url 'discussion:thread' request.session.country_slug discussion_reply.member.user.slug %}">
+                                                <h2>{{ discussion_reply.member.user.get_full_name }}</h2>
+                                            </a>
+                                            <span>{{ discussion_reply.created_date }}</span>
+                                            <div class="reading-text">
+                                                {{ discussion_reply.description|linebreaks }}
+                                            </div>
+                                        </div>
+
+                                        <div class="12u 12u$(small) footer align-right">
+                                            <ul>
+                                                {% if discussion_reply.member == member %}
+                                                <li>
+                                                    <a href="{% url 'discussion:update_reply' request.session.country_slug discussion_reply.id %}" class="button icon fa-edit">
+                                                        {% trans "Edit" %}
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                <li>
+                                                     <a href="javascript:;" class="button icon fa-arrow-circle-up upvote {% if discussion_reply.id in discussion_reply_ids %}upvoted{% endif %}" data-value="{{ discussion_reply.id }}" data-total="{{ discussion_reply.total_upvotes }}">
+                                                        {% if discussion_reply.id in discussion_reply_ids %}
+                                                            {% trans "Upvoted" %}
+                                                        {% else %}
+                                                            {% trans "Upvote" %}
+                                                        {% endif %}
+                                                        {% if discussion_reply.total_upvotes >= 1 %}
+                                                            | {{ discussion_reply.total_upvotes }}
+                                                        {% endif %}
+                                                     </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Upvotes a reply
+            $('textarea').focus(function () {
+                $('#submit-row').fadeIn();
+                $(this).addClass('active');
+            });
+
+            // Upvotes a reply
+            $('.button.upvote').click(function () {
+
+                {% if not request.user.is_authenticated %}
+                    display_notification('error', 'Error!', 'You need to be logged-in to save your vote.');
+                    return false;
+                {% endif %}
+
+                // Updates button content and style
+                var total_upvotes = parseInt($(this).data('total'));
+                if($(this).hasClass('upvoted')){
+                    $(this).removeClass('upvoted');
+                    total_upvotes--;
+                    var label = 'Upvote'
+                } else {
+                    $(this).addClass('upvoted');
+                    total_upvotes++;
+                    var label = 'Upvoted'
+                }
+                $(this).data('total', total_upvotes);
+                $(this).html(label + ' | ' + total_upvotes);
+
+                // Sends ajax request to update the DB
+                var url = '{% url "discussion:upvote" request.session.country_slug %}';
+                var params = {
+                    discussion_reply_id: parseInt($(this).data('value')),
+                };
+                $.post(url, params, function (data) {
+                    if(data.status == 'error'){
+                        display_notification('error', 'Error!', data.message);
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+
+{% endblock scripts %}

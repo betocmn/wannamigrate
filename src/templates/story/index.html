@@ -1,52 +1,75 @@
-{% extends "_layouts/dashboard.html" %}
+{% extends "_layouts/site.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-<section id="banner" class="home-wrapper"></section>
+{% block content %}
 
-{% block dashboard_content %}
+    <!-- Wrapper -->
+    <div id="wrapper" class="stories-wrapper">
 
-    <div class="stories">
+        <!-- Main -->
+        <section id="main" class="main grey">
 
-        <p class="intro align-center">
-            {% blocktrans %}
-                Every two weeks we tell the story from a fellow immigrant who has successfully settled in Australia. You can then join the
-                <strong><em>AMA</em> Sessions</strong> ("Ask Me Anything") where you can interact directly with our guests.
-            {% endblocktrans %}
-        </p>
+            <div class="inner">
 
-        {% for post in posts %}
-            <div class="row listing-post">
-                <div class="4u 12u$(small)">
-                    <a href="{% url 'story:details' post.slug %}" class="image">
-                        <span class="image fit">
-                            <img src="{{ post.image.small.url }}" alt="{{ post.title }}" />
-                        </span>
-                    </a>
-                </div>
-                <div class="8u 12u$(small)">
-                    <h3>{{ post.title }}</h3>
-                    <p>
-                        {{ post.description|safe|truncatechars_html:180 }}
-                    </p>
-                    <ul class="actions">
-                        <li><a href="{% url 'story:details' post.slug %}" class="button fit small">Read Full Story</a></li>
-                    </ul>
-                </div>
+                <header class="major">
+                    <h1>{% trans "Immi Stories" %} - {{ request.session.country_name }}</h1>
+                </header>
+
+                <p class="intro align-center">
+                    {% blocktrans %}
+                        A new series about real immigrants in the country they
+                        chose to live. <br />The decision to leave, the immigration process, the job
+                        hunting and many other challenges they faced until settling down.
+                    {% endblocktrans %}
+                </p>
+
+                {% for post in posts %}
+                    <div class="row listing-post">
+
+                        <div class="4u 12u$(small)">
+                            <div class="box">
+                                <span class="image fit">
+                                    <a href="{% url 'story:details' request.session.country_slug post.slug %}" title="{{ post.title }}">
+                                        <img src="{{ post.image_1.small.url }}" alt="{{ post.title }}" />
+                                    </a>
+                                </span>
+                                <div class="content">
+                                    <a href="{% url 'story:details' request.session.country_slug post.slug %}" title="{{ post.title }}">
+                                        <h3>{{ post.title|truncatechars:95 }}</h3>
+                                        <p>
+                                            {{ post.html_content|safe|striptags|truncatechars_html:140 }}
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
             </div>
-        {% endfor %}
+
+        </section>
 
     </div>
 
-{% endblock dashboard_content %}
+{% endblock content %}
 
 {% block scripts %}
 
     {{ block.super }}
 
+    <script type="text/javascript" src="{% static 'common/jquery-match-height/js/jquery.matchHeight.js' %}"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function(){
+
+            // For Keeping equal heights of homepage blocks
+            $('.box').matchHeight({
+                property: 'height'
+            });
 
         });
 

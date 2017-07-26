@@ -129,7 +129,7 @@ TEMPLATES = [
 
 
 #########################################
-# MIDDLEWARES
+# MIDDLEWARE
 #########################################
 MIDDLEWARE_CLASSES = (
     'htmlmin.middleware.HtmlMinifyMiddleware',
@@ -142,6 +142,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wannamigrate.core.middleware.SetupMiddleware',
 )
 
 
@@ -172,6 +173,7 @@ LOCAL_APPS = (
     'wannamigrate.story',
     'wannamigrate.task',
     'wannamigrate.doc',
+    'wannamigrate.discussion',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -200,7 +202,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -296,6 +298,7 @@ BOOLEAN_CHOICES = (
 TIMEZONES = [(tz, tz) for tz in pytz.common_timezones]
 
 # DB IDS - Countries
+DB_ID_COUNTRIES_ENABLED = [117,]
 DB_ID_COUNTRY_AUSTRALIA = 117
 
 # DB IDS - Payment Types
@@ -318,6 +321,7 @@ DB_ID_SUBSCRIPTION_STATUS_CANCELLED = 4
 
 # DB IDS - Products
 DB_ID_PRODUCT_SUBSCRIPTION_1_YEAR = 1
+DB_ID_PRODUCT_SUBSCRIPTION_3_MONTHS = 2
 
 # EMAIL SETTINGS
 EMAIL_DEFAULT_TO_ADDRESS = 'contact@wannamigrate.com'

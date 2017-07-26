@@ -1,44 +1,60 @@
-{% extends "_layouts/dashboard.html" %}
+{% extends "_layouts/site.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-<section id="banner" class="home-wrapper"></section>
+{% block content %}
 
-{% block dashboard_content %}
+    <!-- Wrapper -->
+    <div id="wrapper" class="guide-wrapper details">
 
-    <div class="guide details">
+        <!-- Main -->
+        <section id="main" class="main">
 
-        <h1 class="align-center">{{ chapter.sort_order }}- {{ chapter.title }}</h1>
+            <div class="inner">
 
-        {% for section in sections %}
 
-            <div class="section">
+                <header class="major">
+                    <h1>{{ chapter.sort_order }}- {{ chapter.title }}</h1>
+                </header>
 
-                <h2 class="align-left">{{ chapter.sort_order }}.{{ section.sort_order }}- {{ section.title }}</h2>
+                {% for section in sections %}
 
-                <p>
-                    {{ section.html_content|safe|linebreaks }}
-                </p>
+                    <div class="section" id="section-{{ section.id }}">
 
-                {% if section.image %}
-                    <span class="image main align-center">
-                        <img src="{{ section.image.medium.url }}" alt="{{ section.title }}" />
-                    </span>
-                {% endif %}
+                        <h2 class="align-left">{{ chapter.sort_order }}.{{ section.sort_order }}- {{ section.title }}</h2>
+
+                        <div class="reading-text">
+                            {{ section.html_content|safe|linebreaks }}
+                        </div>
+
+                        {% if section.image %}
+                            <span class="image main align-center">
+                                <img src="{{ section.image.medium.url }}" alt="{{ section.title }}" />
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+                <div class="align-center">
+                    <ul class="actions">
+                        <li>
+                            <a href="{% url 'guide:index' request.session.country_slug %}" class="button">
+                                {% trans "Check Out The Full Guide" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
 
             </div>
 
-        {% endfor %}
-
-        <div class="align-center">
-            <ul class="actions">
-                <li><a href="{% url 'guide:index' %}" class="button">Go Back</a></li>
-            </ul>
-        </div>
+        </section>
 
     </div>
 
-{% endblock dashboard_content %}
+{% endblock content %}
 
 {% block scripts %}
 

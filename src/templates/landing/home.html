@@ -2,28 +2,19 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head %}
-
-    {{ block.super }}
-
-    <!-- PAGE EXTRA CSS -->
-    <link href="{% static 'common/selectize/css/selectize.css' %}" rel="stylesheet">
-
-{% endblock head %}
-
 {% block content %}
 
     <!-- Banner -->
     <section id="banner" class="home-wrapper">
         <div class="inner">
             <header>
-                <h1>{% trans "Change your life in a new country" %}</h1>
-                <p>
+                <h1>{% trans "Just Go!" %}</h1>
+                <h2>
                     {% blocktrans %}
-                        Learn step-by-step how to make the move.
-                        <br />From immigrants - To immigrants.
+                        Learn step-by-step how to immigrate to your dream country.
+                        From immigrants - To immigrants.
                     {% endblocktrans %}
-                </p>
+                </h2>
             </header>
             <ul class="actions">
                 <li>
@@ -34,7 +25,9 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{% url 'quiz:take' 'australia' %}" class="button special big">{% trans "Get Started" %}</a>
+                    <a href="{% url 'quiz:take' request.session.country_slug %}" class="button special big">
+                        {% trans "Get Started Free" %}
+                    </a>
                 </li>
             </ul>
         </div>
@@ -110,7 +103,7 @@
         <section id="four" class="main special">
             <div class="inner">
                 <header>
-                    <h2>{% trans "HOW IT WORKS" %}</h2>
+                    <h2>{% trans "How It Works" %}</h2>
                 </header>
                 <div class="features">
                     <section>
@@ -167,7 +160,7 @@
                     {% endblocktrans %}
                 </p>
                 <ul class="actions vertical">
-                    <li><a href="{% url 'quiz:take' 'australia' %}" class="button special big">{% trans "GET STARTED" %}</a></li>
+                    <li><a href="{% url 'quiz:take' request.session.country_slug %}" class="button special big">{% trans "GET STARTED" %}</a></li>
                     <li><a href="{% url 'company:about' %}" class="button big">{% trans "ABOUT US" %}</a></li>
                 </ul>
             </div>
@@ -183,30 +176,9 @@
     {{ block.super }}
 
     <!-- PAGE EXTRA JS -->
-    <script type="text/javascript" src="{% static 'common/selectize/js/selectize.js' %}"></script>
-
     <script type="text/javascript">
 
         $(document).ready(function(){
-
-            $('#country-selectize').selectize({
-                maxItems: 1,
-                labelField: 'name',
-                valueField: 'code',
-                plugins: [],
-                searchField: ['name'],
-                options: [{ code:"au", name:"{% trans "Australia" %}"},],
-                preload: true,
-                persist: false,
-                render: {
-                    item: function(item, escape) {
-                        return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
-                    },
-                    option: function(item, escape) {
-                        return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
-                    }
-                },
-            });
 
             // If it's a logout, clear tracking analytics user
             {% if has_logged_out %}

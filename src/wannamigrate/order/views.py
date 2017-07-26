@@ -50,25 +50,15 @@ def checkout(request):
 
         # Setups dict
         request.session['checkout'] = {
-            'total': None, 'discount': None, 'discount_code': None, 'products': []
+            'total': 15, 'discount': None, 'discount_code': None, 'products': []
         }
-
-        # Builds the product dict
-        product = get_object_or_false(Product, id=settings.DB_ID_PRODUCT_SUBSCRIPTION_1_YEAR)
-        products = [{
-            'product_id': product.id, 'product_name': product.name,
-            'product_price': float(product.price)
-        }]
-        request.session['checkout']['products'] = products
-
-        # Calculates order total and saves in the session
-        request.session['checkout']['total'] = float(product.price)
-        request.session.modified = True
 
     # Retrieves order total and discount
     order_total = request.session['checkout']['total']
     discount_value = None
+    discount_code = None
     if 'discount' in request.session['checkout'] and request.session['checkout']['discount']:
+        discount_code = request.session['checkout']['discount_code']
         discount_value = request.session['checkout']['discount']
         order_total -= discount_value
 
@@ -81,6 +71,7 @@ def checkout(request):
     template_data = {
         'member': member,
         'order_total': order_total,
+        'discount_code': discount_code,
         'discount_value': discount_value,
         'payment_error': payment_error,
         'tracking_event_typed_payment_details': settings.TRACKING_EVENT_TYPED_PAYMENT_DETAILS,
@@ -104,10 +95,11 @@ def get_promo_info(request):
 
     # Checks if a code was given
     code = request.GET.get('code', False)
+    order_total = request.GET.get('order_total', False)
     discount_value = None
     discount_percentage = None
     response = {'status': 'error', 'message': 'Invalid code'}
-    if code:
+    if code and order_total:
 
         # Searches for PROMO Code
         code = code.upper()
@@ -122,16 +114,14 @@ def get_promo_info(request):
         # Calculates the discount
         if discount_value or discount_percentage:
             if 'checkout' in request.session:
-                if 'discount' not in request.session['checkout'] \
-                        or not request.session['checkout']['discount']:
-                    if discount_percentage:
-                        total = format_monetary(request.session['checkout']['total'])
-                        discount_percentage = format_monetary(discount_percentage)
-                        discount_value = format_monetary(total * (discount_percentage / 100))
-                    request.session['checkout']['discount'] = float(discount_value)
-                    request.session['checkout']['discount_code'] = code
-                    request.session.modified = True
-                    response = {'status': 'success', 'discount': discount_value}
+                if discount_percentage:
+                    total = format_monetary(order_total)
+                    discount_percentage = format_monetary(discount_percentage)
+                    discount_value = format_monetary(total * (discount_percentage / 100))
+                request.session['checkout']['discount'] = float(discount_value)
+                request.session['checkout']['discount_code'] = code
+                request.session.modified = True
+                response = {'status': 'success', 'discount': discount_value}
 
     return JsonResponse(response, safe=False)
 
@@ -158,15 +148,6 @@ def process_payment(request):
     # Retrieves member
     member = get_object_or_404(Member, user=request.user)
 
-    # Checks if checkout session is not empty
-    if 'checkout' not in request.session or len(request.session['checkout']['products']) == 0:
-        messages.error(request, _('Your Shopping-Cart is empty. Please try again.'))
-        create_alert.delay(
-            "Process Order Error",
-            "Shopping-Cart empty.\nMember: %s" % member
-        )
-        return redirect("order:checkout")
-
     # If form was submitted
     if request.method == 'POST':
 
@@ -179,6 +160,28 @@ def process_payment(request):
                 "No payment details provided.\nMember: %s" % member
             )
             return redirect("order:checkout")
+
+        # Builds the product dict
+        product_id = request.POST.get('product_id', False)
+        product = None
+        if product_id:
+            product = get_object_or_false(Product, id=product_id)
+        if not product:
+            messages.error(request, _('No product details provided.'))
+            create_alert.delay(
+                "Process Order Error",
+                "No product details provided.\nMember: %s" % member
+            )
+            return redirect("order:checkout")
+        products = [{
+            'product_id': product.id, 'product_name': product.name,
+            'product_price': float(product.price)
+        }]
+        request.session['checkout']['products'] = products
+
+        # Calculates order total and saves in the session
+        request.session['checkout']['total'] = float(product.price)
+        request.session.modified = True
 
         # Initial Order data
         order = None

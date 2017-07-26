@@ -56,7 +56,7 @@ def contact(request):
 
 def about(request):
     """
-    How it works
+    About Us
 
     :param request:
     :return: String
@@ -70,6 +70,42 @@ def about(request):
 
     # Displays HTML template
     return render(request, 'company/about.html', template_data)
+
+
+def how_it_works(request):
+    """
+    How it works
+
+    :param request:
+    :return: String
+    """
+
+    # Builds template data dictionary
+    template_data = {
+        'user': request.user,
+        'meta_title': _('How It Works | Wanna Migrate'),
+    }
+
+    # Displays HTML template
+    return render(request, 'company/how_it_works.html', template_data)
+
+
+def pricing(request):
+    """
+    Pricing
+
+    :param request:
+    :return: String
+    """
+
+    # Builds template data dictionary
+    template_data = {
+        'user': request.user,
+        'meta_title': _('Pricing | Wanna Migrate'),
+    }
+
+    # Displays HTML template
+    return render(request, 'company/pricing.html', template_data)
 
 
 def terms(request):

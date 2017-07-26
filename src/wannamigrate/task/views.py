@@ -21,11 +21,12 @@ from wannamigrate.core.util import get_object_or_false
 #######################
 @login_required
 @subscription_required
-def index(request):
+def index(request, country_slug):
     """
     How it works
 
     :param request:
+    :param country_slug:
     :return: String
     """
 

@@ -1,0 +1,155 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="discussion-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main grey">
+
+            <div class="inner">
+
+                <header class="major">
+                    <h1>{% trans "Member Cases" %} - {{ request.session.country_name }}</h1>
+                </header>
+
+                <p class="intro align-center">
+                    {% blocktrans %}
+                        What's your migration plan? Share your ideas, ask questions and learn from others.
+                    {% endblocktrans %}
+                </p>
+
+                <ul class="actions align-center">
+                    <li>
+                        {% if member_discussion %}
+                            <a href="{% url 'discussion:thread' request.session.country_slug request.user.slug %}" class="button small icon fa-commenting">
+                                {% trans 'View My Case' %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'discussion:update' request.session.country_slug %}" class="button small icon fa-plus-square">
+                                {% trans 'Add My Case' %}
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+
+                <div class="row discussion-listing">
+
+                    {% for discussion in discussions %}
+
+                        <div class="8u -2u 12u$(small)">
+
+                            <a href="{% url 'discussion:thread' request.session.country_slug discussion.member.user.slug %}">
+
+                                <div class="box">
+
+                                    <div class="content">
+
+                                        <div class="row">
+
+                                            <div class="2u 12u$(small) member align-center">
+
+                                                {% if discussion.member.avatar %}
+                                                    <img class="avatar" src="{{ discussion.member.avatar.thumbnail.url }}" />
+                                                {% else %}
+                                                    <img class="avatar" src="{% static 'site/img/avatar-default.png' %}" />
+                                                {% endif %}
+
+                                                <div class="country-name">{{ discussion.member.country.name }}</div>
+
+                                                {% with img='site/img/wanna-migrate-flag-'|add:discussion.member.country.code|lower|add:'.png' %}
+                                                    <img class="flag" src="{% static img %}" align="{{ discussion.member.country.name }}" title="{{ discussion.member.country.name }}" />
+                                                {% endwith %}
+
+                                            </div>
+                                            <div class="10u 12u$(small)">
+                                                <h2>{{ discussion.member.user.get_full_name }}</h2>
+                                                <span>{{ discussion.content_modified_date }}</span>
+                                                <div class="reading-text no-margin"><p>
+                                                    {{ discussion.description|striptags|truncatechars:200 }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="12u 12u$(small) footer">
+
+                                                <div class="row">
+
+                                                    <div class="6u 12u$(small) align-left">
+                                                        <ul>
+                                                            {% if discussion.member.stage %}
+                                                                <li>
+                                                                    <span class="tag">{{ discussion.member.stage.name }}</span>
+                                                                </li>
+                                                            {% endif %}
+                                                            {% if discussion.member.visa %}
+                                                                <li>
+                                                                    <span class="tag">{{ discussion.member.visa.name }}</span>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="6u 12u$(small) align-right">
+                                                        <ul>
+                                                            <li>
+                                                                <i class="fa fa-eye"></i>
+                                                                {{ discussion.total_views }}
+                                                                {% if discussion.total_views == 1 %}
+                                                                    {% trans "view" %}
+                                                                {% else %}
+                                                                    {% trans "views" %}
+                                                                {% endif %}
+                                                            </li>
+                                                            <li>
+                                                                <i class="fa fa-comments-o"></i>
+                                                                {{ discussion.total_replies }}
+                                                                {% if discussion.total_replies == 1 %}
+                                                                    {% trans "reply" %}
+                                                                {% else %}
+                                                                    {% trans "replies" %}
+                                                                {% endif %}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </a>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        });
+
+    </script>
+
+{% endblock scripts %}

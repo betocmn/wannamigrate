@@ -184,6 +184,21 @@ class Language(BaseModel):
         return tuple([('', _('Select Language'))] + result )
 
 
+class Stage(BaseModel):
+    """
+    Stage
+    """
+
+    # Model Attributes
+    name = models.CharField(_("name"), max_length=100)
+    is_enabled = models.BooleanField(_("is enabled"), default=True)
+    sort_order = models.PositiveSmallIntegerField(_("sort order"), default=1)
+
+    # Method Definitions
+    def __str__(self):
+        return '%s- %s' % (self.sort_order, _(self.name))
+
+
 class UserManager(BaseUserManager):
     """
     User Manager - part of custom auth
@@ -314,3 +329,18 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Visa(BaseModel):
+    """
+    Visa
+    """
+
+    # Model Attributes
+    name = models.CharField(_("name"), max_length=100)
+    is_enabled = models.BooleanField(_("is enabled"), default=True)
+    sort_order = models.PositiveSmallIntegerField(_("sort order"), default=1)
+
+    # Method Definitions
+    def __str__(self):
+        return '%s' % (_(self.name))

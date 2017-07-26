@@ -50,12 +50,12 @@
                                                         [not uploaded]
                                                     {% endif %}
                                                 {% else %}
-                                                    {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|truncatechars_html:200 }}
+                                                    {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|striptags|truncatechars:200 }}
                                                 {% endif %}
 
                                             {% else %}
 
-                                                {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|truncatechars_html:200 }}
+                                                {{ field.value|boolean_yes_or_no|default_empty_or_zero|safe|striptags|truncatechars:200 }}
 
                                             {% endif %}
 

@@ -12,7 +12,7 @@
 
             <div class="inner">
                 <header class="major">
-                    <h1>{% trans "SIGN UP" %}</h1>
+                    <h1>{% trans "Sign Up" %}</h1>
                 </header>
 
                 <div class="row">
@@ -20,7 +20,7 @@
                     <div class="6u 12u$(small)">
 
                         <!-- Form -->
-                        <h3>{% trans "CREATE YOUR ACCOUNT" %}</h3>
+                        <h3>{% trans "Create Your Account" %}</h3>
 
                         <form method="post" action="">
 
@@ -145,7 +145,7 @@
 
             facebook.setup_login({
                 facebook_login_url: "{% url "member:login_facebook" %}",
-                redirect_url: "{{ next }}",
+                redirect_url: "{% url 'member:dashboard' %}?next={{ next }}",
                 facebook_app_id: '{{ facebook_app_id }}',
                 facebook_button_element: '.facebook-button',
                 facebook_loading_element: '.facebook-loading',

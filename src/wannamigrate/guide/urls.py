@@ -17,6 +17,6 @@ from . import views
 urlpatterns = [
 
     url(r'^$', views.index, name='index'),
-    url(r'^\/(?P<slug>[-\w]+)/$', views.chapter_details, name='chapter_details'),
+    url(r'^(?P<chapter_slug>[-\w]+)/$', views.chapter_details, name='chapter_details'),
 
 ]

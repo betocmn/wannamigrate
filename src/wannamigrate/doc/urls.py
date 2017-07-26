@@ -17,5 +17,6 @@ from . import views
 urlpatterns = [
 
     url(r'^$', views.index, name='index'),
+    url(r'^download/(?P<doc_id>\d+)$', views.download, name='download'),
 
 ]

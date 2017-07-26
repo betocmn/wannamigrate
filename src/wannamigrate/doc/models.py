@@ -62,6 +62,7 @@ class Doc(BaseModel):
     doc_group = models.ForeignKey("DocGroup", verbose_name=_("doc group"))
     name = models.CharField(_("name"), max_length=200)
     is_enabled = models.BooleanField(_("is enabled"), default=True)
+    is_free = models.BooleanField(_("is free"), default=True)
     file = models.FileField(upload_to=CustomUploadToAutoSlugClassNameDir(populate_from='name'))
     sort_order = models.PositiveSmallIntegerField(_("sort order"), default=1)
 
@@ -70,7 +71,7 @@ class Doc(BaseModel):
         {
             'title': 'Doc Details',
             'fields': [
-                'doc_group', 'name', 'is_enabled', 'file', 'sort_order'
+                'doc_group', 'name', 'is_enabled', 'is_free', 'file', 'sort_order'
             ]
         }
     ]

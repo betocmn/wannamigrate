@@ -1,0 +1,52 @@
+{% extends "_layouts/site.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+
+    {{ block.super }}
+
+    <!-- Custom CSS -->
+    <link href="{% static 'common/tooltipster/css/tooltipster.bundle.min.css' %}" rel="stylesheet">
+
+{% endblock head %}
+
+{% block content %}
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="about-wrapper">
+
+        <!-- Main -->
+        <section id="main" class="main">
+
+            <div class="inner">
+                <header class="major">
+                    <h1>{% trans "How It Works" %}</h1>
+                </header>
+
+            </div>
+        </section>
+
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    {{ block.super }}
+
+    <script type="text/javascript" src="{% static 'common/tooltipster/js/tooltipster.bundle.min.js' %}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            // Activates tooltips
+            $('.tooltip').tooltipster();
+
+        });
+
+
+    </script>
+
+{% endblock scripts %}

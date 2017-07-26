@@ -85,8 +85,8 @@ def subscription_required(view_func):
     """
     def _wrapped_view(request, *args, **kwargs):
         if 'subscription_id' not in request.session or not request.session['subscription_id']:
-            messages.error(request, _('Sorry, you need an active subscription!'))
-            return redirect('member:dashboard')
+            messages.error(request, _('Sorry, you need to be in a premium plan to access this!'))
+            return redirect('company:pricing')
         else:
             return view_func(request, *args, **kwargs)
     return _wrapped_view

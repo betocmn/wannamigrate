@@ -33,16 +33,16 @@
 
                         <ul>
                             <li {% if dashboard_section == 'story' %}class="active"{% endif %}>
-                                <a href="{% url 'story:index' %}">Stories</a>
+                                <a href="{% url 'story:index' request.session.country_slug %}">Stories</a>
                             </li>
                             <li {% if dashboard_section == 'guide' %}class="active"{% endif %}>
-                                <a href="{% url 'guide:index' %}">Guide</a>
+                                <a href="{% url 'guide:index' request.session.country_slug %}">Guide</a>
                             </li>
                             <li {% if dashboard_section == 'task' %}class="active"{% endif %}>
-                                <a href="{% url 'task:index' %}">Tasks</a>
+                                <a href="{% url 'task:index' request.session.country_slug %}">Tasks</a>
                             </li>
                             <li {% if dashboard_section == 'doc' %}class="active"{% endif %}>
-                                <a href="{% url 'doc:index' %}">Docs</a>
+                                <a href="{% url 'doc:index' request.session.country_slug %}">Docs</a>
                             </li>
                         </ul>
 

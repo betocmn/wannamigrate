@@ -25,6 +25,8 @@ class Member(BaseModel):
     # Model Attributes (DB fields)
     user = models.ForeignKey("core.User", verbose_name=_("user"), related_name="member")
     country = models.ForeignKey("core.Country", verbose_name=_("country"), null=True, blank=True)
+    stage = models.ForeignKey("core.Stage", verbose_name=_("stage"), null=True, blank=True)
+    visa = models.ForeignKey("core.Visa", verbose_name=_("visa"), null=True, blank=True)
     gender = models.CharField(
         _("gender"), max_length=1, choices=settings.GENDER_CHOICES,
         blank=True, null=True, default=None
@@ -53,7 +55,7 @@ class Member(BaseModel):
         {
             'title': 'Member Information',
             'fields': [
-                'avatar', 'country', 'gender', 'birth_date',
+                'avatar', 'country', 'stage', 'visa', 'gender', 'birth_date',
                 'is_newsletter_subscribed', 'payment_api_customer_uuid', 'referral_code',
                 'staff_notes', 'quiz_answers'
             ]
@@ -100,3 +102,4 @@ class PaymentMethod(BaseModel):
     # Method definitions
     def __str__(self):
         return '%s %s' % (self.payment_type.name, self.identifier)
+

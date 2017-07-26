@@ -8,23 +8,24 @@ the html templates
 ##########################
 # Imports
 ##########################
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
-from wannamigrate.core.decorators import subscription_required
 from wannamigrate.doc.models import Doc
+from wannamigrate.core.util import get_object_or_false
 
 
 #######################
 # View Methods
 #######################
 @login_required
-@subscription_required
-def index(request):
+def index(request, country_slug):
     """
     How it works
 
     :param request:
+    :param country_slug:
     :return: String
     """
 
@@ -44,3 +45,28 @@ def index(request):
 
     # Displays HTML template
     return render(request, 'doc/index.html', template_data)
+
+
+@login_required
+def download(request, country_slug, doc_id):
+    """
+    Downloads a doc file
+
+    :param request:
+    :param country_slug:
+    :param doc_id:
+    :return: String
+    """
+
+    # Retrieves chapter
+    doc = get_object_or_false(Doc, id=doc_id)
+    if not doc:
+        return redirect('doc:index')
+
+    # If restricted for premium subscribers
+    if not doc.is_free and 'subscription_id' not in request.session:
+        messages.error(request, 'Sorry, this is only available for premium members.')
+        return redirect('company:pricing')
+
+    # Redirects to file download
+    return redirect(doc.file.url)

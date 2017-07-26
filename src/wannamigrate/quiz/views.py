@@ -31,19 +31,19 @@ from wannamigrate.quiz.models import QuizAnswer
 # Methods
 #######################
 @login_required
-def result(request, slug):
+def result(request, country_slug):
     """
     Quiz Result
 
     :param request:
-    :param slug:
+    :param country_slug:
     :return: String
     """
 
     # Identifies country
-    country = get_object_or_false(Country, slug=slug)
+    country = get_object_or_false(Country, slug=country_slug)
     if not country:
-        return redirect('quiz:take', slug=slug)
+        return redirect('quiz:take', slug=country_slug)
 
     # Retrieves member
     member = get_object_or_false(Member, user=request.user)
@@ -85,17 +85,17 @@ def result(request, slug):
     return render(request, 'quiz/result.html', template_data)
 
 
-def take(request, slug):
+def take(request, country_slug):
     """
     Quiz landing-page.
 
     :param request:
-    :param slug:
+    :param country_slug:
     :return: String
     """
 
     # Identifies country
-    country = get_object_or_false(Country, slug=slug)
+    country = get_object_or_false(Country, slug=country_slug)
     if not country:
         return redirect('landing:home')
 

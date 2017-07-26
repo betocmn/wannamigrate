@@ -56,7 +56,7 @@ def login(request):
     elif 'next' in request.POST:
         redirect_next = request.POST.get('next', redirect_next)
 
-    # Checks if user is already logged and full-registered
+    # Checks if user is already logged and fully registered
     if request.user.is_authenticated:
         return redirect(redirect_next)
 
@@ -76,11 +76,8 @@ def login(request):
             # Logs user in
             auth_login(request, user)
 
-            # Identifies member
-            member = get_object_or_false(Member, user_id=user.id)
-
-            # Redirects to next page
-            return redirect(redirect_next)
+            # Redirects dashboard to retrieve subscription info and then to next page
+            return redirect('%s?next=%s' % (reverse("member:dashboard"), redirect_next))
 
         else:
             messages.error(request, _('Invalid login. Please try again.'))
@@ -242,7 +239,7 @@ def signup(request):
             auth_login(request, user)
 
             # Redirects to next page
-            return redirect(redirect_next)
+            return redirect('%s?next=%s' % (reverse("member:dashboard"), redirect_next))
 
     # Builds template data dictionary
     template_data = {
@@ -360,17 +357,6 @@ def reset_password(request, uidb64=None, token=None):
         )
         auth_login(request, user)
 
-        # Identifies member
-        member = get_object_or_false(Member, user_id=user.id)
-
-        # Checks if member has active subscription
-        subscription = get_object_or_false(Subscription, member_id=member.id)
-        active = settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE
-        if subscription and subscription.subscription_status_id == active:
-            request.session['is_subscription_active'] = True
-        else:
-            request.session['is_subscription_active'] = False
-
         # marks in the template that it was successfully finished
         messages.success(request, 'You password has been updated.')
         return redirect("member:dashboard")
@@ -391,25 +377,37 @@ def dashboard(request):
     :return: String
     """
 
-    # Sets Australia as the default country
-    country = get_object_or_false(Country, id=settings.DB_ID_COUNTRY_AUSTRALIA)
-    request.session['country_id'] = country.id
-    request.session['country_name'] = country.name
-    request.session['country_slug'] = country.slug
-    request.session.modified = True
-
     # Retrieves member
     member = get_object_or_false(Member, user=request.user)
     if not member:
-        return redirect('quiz:result', country.slug)
+        return redirect('quiz:result', request.session['country_slug'])
 
     # Checks if there's an active subscription
     subscription = get_object_or_false(Subscription, member=member)
     active = settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE
     if subscription and subscription.subscription_status_id == active:
         request.session['subscription_id'] = subscription.id
-        return redirect('story:index')
     else:
         if 'subscription_id' in request.session:
             del request.session['subscription_id']
-        return redirect('quiz:result', country.slug)
+
+    # Updates the avatar URL
+    if member.avatar:
+        request.session['avatar_url'] = member.avatar.thumbnail.url
+
+    # Redirects to the next page if not the dashboard
+    redirect_next = None
+    if 'next' in request.GET:
+        redirect_next = request.GET.get('next', redirect_next)
+    elif 'next' in request.POST:
+        redirect_next = request.POST.get('next', redirect_next)
+    if redirect_next and redirect_next != reverse('member:dashboard'):
+        return redirect(redirect_next)
+
+    # Builds template data dictionary
+    template_data = {
+        'meta_title': 'Dashboard | Wanna Migrate',
+    }
+
+    # Displays HTML template
+    return render(request, 'member/dashboard.html', template_data)

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900|Roboto:300,500");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900');
 
 /* Reset */
 
@@ -1638,7 +1638,7 @@
 	}
 
 	body, input, select, textarea {
-		font-family: "Roboto", Helvetica, sans-serif;
+		font-family: "Source Sans Pro", sans-serif;
 		font-size: 16pt;
 		font-weight: 300;
 		line-height: 1.65;
@@ -3155,33 +3155,16 @@
 					position: relative;
 				}
 
-					#header nav ul li a[href="#menu"] {
+					#header nav ul li a[href="#menu-content"],
+					#header nav ul li a[href="#menu-account"], {
 						padding-right: 3em;
 					}
-
-						#header nav ul li a[href="#menu"]:before {
-							content: '';
-							background-image: url("../img/menu.svg");
-							background-position: center;
-							background-repeat: no-repeat;
-							display: block;
-							height: 100%;
-							position: absolute;
-							right: 1.5em;
-							text-align: center;
-							top: 0;
-							width: 1em;
-						}
 
 		#header.alt {
 			background-color: transparent;
 			border-bottom-color: transparent;
 			color: #ffffff;
 		}
-
-			#header.alt nav ul li a[href="#menu"]:before {
-				background-image: url("../img/menu-alt.svg");
-			}
 
 		#header.with-banner + #banner {
 			margin-top: -3.5em;
@@ -3199,11 +3182,13 @@
 					padding: 0 0.75em 0 0.75em;
 				}
 
-					#header nav ul li a[href="#menu"] {
+					#header nav ul li a[href="#menu-content"],
+					#header nav ul li a[href="#menu-account"] {
 						padding-right: 2.5em;
 					}
 
-						#header nav ul li a[href="#menu"]:before {
+						#header nav ul li a[href="#menu-content"]:before,
+						#header nav ul li a[href="#menu-account"]:before {
 							right: 1em;
 						}
 
@@ -3215,17 +3200,12 @@
 				display: none;
 			}
 
-			#header nav ul li a[href="#menu"]:only-child {
-				width: 6em;
-				text-indent: 6em;
-				white-space: nowrap;
-			}
-
 		}
 
 /* Menu */
 
-	#menu {
+	#menu-content,
+	#menu-account {
 		-moz-transform: translateX(20em);
 		-webkit-transform: translateX(20em);
 		-ms-transform: translateX(20em);
@@ -3249,22 +3229,26 @@
 		z-index: 10002;
 	}
 
-		#menu > ul {
+		#menu-content > ul,
+		#menu-account > ul {
 			margin: 0 0 1em 0;
 		}
 
-			#menu > ul.links {
+			#menu-content > ul.links,
+			#menu-account > ul.links {
 				list-style: none;
 				padding: 0;
 			}
 
-				#menu > ul.links > li {
+				#menu-content > ul.links > li,
+				#menu-account > ul.links > li {
 					padding: 0;
 				}
 
-					#menu > ul.links > li > a:not(.button) {
+					#menu-content > ul.links > li > a:not(.button),
+					#menu-account > ul.links > li > a:not(.button) {
 						border: 0;
-						border-top: solid 1px #eaeaea;
+						border-bottom: solid 1px #eaeaea;
 						color: inherit;
 						display: block;
 						font-size: 0.8em;
@@ -3274,16 +3258,19 @@
 						text-transform: uppercase;
 					}
 
-					#menu > ul.links > li > .button {
+					#menu-content > ul.links > li > .button,
+					#menu-account > ul.links > li > .button,
 						display: block;
 						margin: 0.5em 0 0 0;
 					}
 
-					#menu > ul.links > li:first-child > a:not(.button) {
+					#menu-content > ul.links > li:first-child > a:not(.button),
+					#menu-account > ul.links > li:first-child > a:not(.button) {
 						border-top: 0 !important;
 					}
 
-		#menu .close {
+		#menu-content .close,
+		#menu-account .close {
 			-webkit-tap-highlight-color: transparent;
 			background-image: url("../img/close.svg");
 			background-position: 75% 50%;
@@ -3303,13 +3290,15 @@
 			width: 7em;
 		}
 
-			#menu .close:before {
+			#menu-content .close:before,
+			#menu-account .close:before {
 				font-size: 1.25em;
 			}
 
 			@media screen and (max-width: 736px) {
 
-				#menu .close {
+				#menu-content .close,
+				#menu-account .close {
 					height: 4em;
 					line-height: 4em;
 				}
@@ -3318,13 +3307,15 @@
 
 		@media screen and (max-width: 736px) {
 
-			#menu {
+			#menu-content,
+			#menu-account {
 				padding: 2.5em 1.75em;
 			}
 
 		}
 
-	body.is-menu-visible #page-wrapper {
+	body.is-menu-content-visible #page-wrapper,
+	body.is-menu-account-visible #page-wrapper {
 		-moz-pointer-events: none;
 		-webkit-pointer-events: none;
 		-ms-pointer-events: none;
@@ -3332,7 +3323,8 @@
 		opacity: 0.5;
 	}
 
-	body.is-menu-visible #menu {
+	body.is-menu-content-visible #menu-content,
+	body.is-menu-account-visible #menu-account {
 		-moz-transform: translateX(0);
 		-webkit-transform: translateX(0);
 		-ms-transform: translateX(0);

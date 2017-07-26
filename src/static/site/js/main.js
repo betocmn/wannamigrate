@@ -1,9 +1,3 @@
-/*
-	Formula by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
-*/
-
 (function($) {
 
 	skel.breakpoints({
@@ -50,11 +44,24 @@
 			});
 
 		// Menu.
-			$('#menu')
-				.append('<a href="#menu" class="close"></a>')
+			$('#menu-content')
+				.append('<a href="#menu-content" class="close"></a>')
 				.appendTo($body)
 				.panel({
-					visibleClass: 'is-menu-visible',
+					visibleClass: 'is-menu-content-visible',
+					target: $body,
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'right'
+				});
+			$('#menu-account')
+				.append('<a href="#menu-account" class="close"></a>')
+				.appendTo($body)
+				.panel({
+					visibleClass: 'is-menu-account-visible',
 					target: $body,
 					delay: 500,
 					hideOnClick: true,
@@ -180,6 +187,26 @@
 		// Initial scroll.
 			$window.on('load', function() {
 				$window.trigger('scroll');
+			});
+
+		// Country Dropdown
+			$('#country-selectize').selectize({
+				maxItems: 1,
+				labelField: 'name',
+				valueField: 'code',
+				plugins: [],
+				searchField: ['name'],
+				options: [{ code:"au", name:"Australia"},],
+				preload: true,
+				persist: false,
+				render: {
+					item: function(item, escape) {
+						return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
+					},
+					option: function(item, escape) {
+						return "<div><div class='flag flag-" + escape(item.code) + "'></div><div class='name'>" + escape(item.name) + "</div></div>";
+					}
+				},
 			});
 
 	});

@@ -8,7 +8,7 @@ the templates on landing pages
 ##########################
 # Imports
 ##########################
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -22,6 +22,10 @@ def home(request):
     :param request:
     :return: String
     """
+
+    # If logged in, send to dashboard
+    if request.user.is_authenticated:
+        return redirect('member:dashboard')
 
     # If coming from a logout
     has_logged_out = request.GET.get('logout', False)

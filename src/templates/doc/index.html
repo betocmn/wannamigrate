@@ -1,72 +1,99 @@
-{% extends "_layouts/dashboard.html" %}
+{% extends "_layouts/site.html" %}
 {% load staticfiles %}
 {% load i18n %}
 
-<section id="banner" class="home-wrapper"></section>
+{% block content %}
 
-{% block dashboard_content %}
+    <!-- Wrapper -->
+    <div id="wrapper" class="doc-wrapper">
 
-    <div class="doc">
+        <!-- Main -->
+        <section id="main" class="main grey">
 
-        <p class="intro align-center">
-            {% blocktrans %}
-                You will find below some examples or templates for documents required during your
-                immigration process. Feel free to use them as base, but don't forget to adapt it to
-                your circumstances.
-            {% endblocktrans %}
-        </p>
+            <div class="inner">
 
-        <div class="doc-listing">
+                <header class="major">
+                    <h1>{% trans "Visa Document Templates" %} - {{ request.session.country_name }}</h1>
+                </header>
 
-            {% regroup docs by doc_group as doc_group_list %}
+                <p class="intro align-center">
+                    {% blocktrans %}
+                        You will find below some examples or templates for documents required during your
+                        immigration process. Feel free to use them as base, but don't forget to adapt it to
+                        your circumstances.
+                    {% endblocktrans %}
+                </p>
 
-            {% for group in doc_group_list %}
-                {% with doc_group=group.grouper %}
+                <div class="row doc-listing">
 
-                    <h2>{{ doc_group.name }}</h2>
-                    <div class="table-wrapper">
-                        <table class="alt">
-                            <tbody>
+                    {% regroup docs by doc_group as doc_group_list %}
+
+                    {% for group in doc_group_list %}
+                        {% with doc_group=group.grouper %}
+
+                            <div class="8u -2u 12u$(small)">
+
+                                <h2>{{ doc_group.name }}</h2>
+
                                 {% for doc in group.list %}
-                                    <tr>
-                                        <td width="50" align="center">
-                                            <a href="{{ doc.file.url }}" target="_blank">
-                                                {% if '.pdf' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-pdf.svg' %}" />
-                                                {% elif '.doc' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-word.svg' %}" />
-                                                {% elif '.xls' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-excel.svg' %}" />
-                                                {% elif '.jpg' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-jpg.svg' %}" />
-                                                {% elif '.png' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-png.svg' %}" />
-                                                {% elif '.rtf' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-rtf.svg' %}" />
-                                                {% elif '.zip' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-zip.svg' %}" />
-                                                {% elif '.txt' in doc.file.name %}
-                                                    <img src="{% static 'site/img/file-type-txt.svg' %}" />
-                                                {% else %}
-                                                    <img src="{% static 'site/img/file-type-general.svg' %}" />
+
+                                    <a href="{% url 'doc:download' request.session.country_slug doc.id %}" target="_blank">
+
+                                        <div class="{% if not doc.is_free %}locked{% endif %}">
+                                            <div class="box">
+
+                                                {% if not doc.is_free %}
+                                                    <div class="lock">
+                                                        <i class="fa fa-lock"></i>
+                                                    </div>
                                                 {% endif %}
-                                            </a>
-                                        </td>
-                                        <td>{{ doc.name }}</td>
-                                    </tr>
+                                                <div class="content">
+
+                                                    {% if '.pdf' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-pdf.svg' %}" />
+                                                    {% elif '.doc' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-word.svg' %}" />
+                                                    {% elif '.xls' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-excel.svg' %}" />
+                                                    {% elif '.jpg' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-jpg.svg' %}" />
+                                                    {% elif '.png' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-png.svg' %}" />
+                                                    {% elif '.rtf' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-rtf.svg' %}" />
+                                                    {% elif '.zip' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-zip.svg' %}" />
+                                                    {% elif '.txt' in doc.file.name %}
+                                                        <img src="{% static 'site/img/file-type-txt.svg' %}" />
+                                                    {% else %}
+                                                        <img src="{% static 'site/img/file-type-general.svg' %}" />
+                                                    {% endif %}
+
+                                                    {{ doc.name }}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
 
-                {% endwith %}
-            {% endfor %}
+                            </div>
 
-        </div>
+                        {% endwith %}
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
 
     </div>
 
-{% endblock dashboard_content %}
+{% endblock content %}
 
 {% block scripts %}
 

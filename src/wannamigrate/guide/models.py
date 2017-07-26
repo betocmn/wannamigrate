@@ -26,6 +26,7 @@ class Chapter(BaseModel):
     country = models.ForeignKey("core.Country", verbose_name=_("country"))
     title = models.CharField(_("title"), max_length=200)
     is_enabled = models.BooleanField(_("is enabled"), default=True)
+    is_free = models.BooleanField(_("is free"), default=True)
     slug = models.SlugField(max_length=200, unique=True)
     sort_order = models.PositiveSmallIntegerField(_("sort order"), default=1)
 
@@ -34,7 +35,7 @@ class Chapter(BaseModel):
         {
             'title': 'Chapter Details',
             'fields': [
-                'country', 'title', 'slug', 'is_enabled', 'sort_order'
+                'country', 'title', 'slug', 'is_enabled', 'is_free', 'sort_order'
             ]
         }
     ]

@@ -98,7 +98,10 @@ def process_order(member, products=None, gross_total=None, order=None, payment_t
         if payment_ok:
             subscription.subscription_status_id = settings.DB_ID_SUBSCRIPTION_STATUS_ACTIVE
             # TODO: Retrieve from product table when using more products
-            subscription.expiry_date = date_add(date_now(), years=1)
+            if products[0]['product_id'] == settings.DB_ID_PRODUCT_SUBSCRIPTION_1_YEAR:
+                subscription.expiry_date = date_add(date_now(), years=1)
+            elif products[0]['product_id'] == settings.DB_ID_PRODUCT_SUBSCRIPTION_3_MONTHS:
+                subscription.expiry_date = date_add(date_now(), months=3)
         else:
             subscription.subscription_status_id = settings.DB_ID_SUBSCRIPTION_STATUS_NEVER_ACTIVATED
         subscription.save()

@@ -16,7 +16,7 @@ from django.conf import settings
 ##########################
 # Function definitions
 ##########################
-def add_global_template_data( request ):
+def add_global_template_data(request):
 
     template_data = {
         'meta_title': None, 'meta_description': None,  'meta_image': None,

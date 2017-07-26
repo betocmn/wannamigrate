@@ -16,7 +16,7 @@ from . import views
 ##########################
 urlpatterns = [
 
-    url(r'^\/(?P<slug>[-\w]+)/$', views.take, name='take'),
-    url(r'^\/(?P<slug>[-\w]+)/result/$', views.result, name='result'),
+    url(r'^$', views.take, name='take'),
+    url(r'^result/$', views.result, name='result'),
 
 ]

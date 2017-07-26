@@ -23,13 +23,12 @@ from wannamigrate.story.models import Post
 #######################
 # VIEW METHODS
 #######################
-@login_required
-@subscription_required
-def index(request):
+def index(request, country_slug):
     """
     How it works
 
     :param request:
+    :param country_slug:
     :return: String
     """
 
@@ -51,26 +50,38 @@ def index(request):
     return render(request, 'story/index.html', template_data)
 
 
-@login_required
-@subscription_required
-def details(request, slug):
+def details(request, country_slug, story_slug):
     """
     How it works
 
     :param request:
-    :param slug:
+    :param country_slug:
+    :param story_slug:
     :return: String
     """
 
     # Retrieves post
-    post = get_object_or_false(Post, slug=slug)
+    post = get_object_or_false(Post, slug=story_slug)
     if not post:
-        return redirect('story:index')
+        return redirect('story:index', country_slug)
+
+    # Insert images on content text
+    image_1 = ''
+    image_2 = ''
+    img = '<div class="image main"><img src="{0}" alt="{1}" /><div class="legend">{1}</div></div>'
+    if post.image_1:
+        image_1 = img.format(post.image_1.large.url, post.image_description_1)
+    if post.image_2:
+        image_2 = img.format(post.image_2.large.url, post.image_description_2)
+    story_html_content = post.html_content.format(
+        image_1=image_1, image_2=image_2
+    )
 
     # Builds template data dictionary
     template_data = {
         'user': request.user,
         'post': post,
+        'story_html_content': story_html_content,
         'dashboard_section': 'story',
         'meta_title': _('%s | Wanna Migrate' % post.title),
     }

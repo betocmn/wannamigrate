@@ -12,7 +12,7 @@
 
             <div class="inner">
                 <header class="major">
-                    <h1>{% trans "LOG IN" %}</h1>
+                    <h1>{% trans "Log In" %}</h1>
                 </header>
 
                 <div class="row">
@@ -20,7 +20,7 @@
                     <div class="6u 12u$(small)">
 
                         <!-- Form -->
-                        <h3>{% trans "YOUR LOGIN DETAILS" %}</h3>
+                        <h3>{% trans "Your Login Details" %}</h3>
 
                         <form method="post" action="">
 
@@ -48,14 +48,14 @@
 
                                 <div class="12u$">
                                     <div class="row">
-                                        <div class="6u 12u$(small)">
+                                        <div class="6u">
                                             <ul class="actions">
                                                 <li>
                                                     <input type="submit" value="{% trans "Log in" %}" class="special" />
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="6u 12u$(small) align-right forgot">
+                                        <div class="6u align-right forgot">
                                             <a href="{% url 'member:recover_password' %}" class="pink">Forgot your password?</a>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
 
             facebook.setup_login({
                 facebook_login_url: "{% url "member:login_facebook" %}",
-                redirect_url: "{{ next }}",
+                redirect_url: "{% url 'member:dashboard' %}?next={{ next }}",
                 facebook_app_id: '{{ facebook_app_id }}',
                 facebook_button_element: '.facebook-button',
                 facebook_loading_element: '.facebook-loading',
