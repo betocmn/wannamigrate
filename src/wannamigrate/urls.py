@@ -8,6 +8,7 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 # Imports
 ##########################
 from django.conf.urls import include, url
+from django.views.generic import RedirectView
 
 
 ##########################
@@ -16,12 +17,20 @@ from django.conf.urls import include, url
 # Include all desired apps that will have URLs
 urlpatterns = [
 
+
+
+
+    url(r'^.*$', RedirectView.as_view(
+        url='https://www.duoflag.com', permanent=True
+    )),
+
+    """
     url(r'^admin', include('wannamigrate.admin.urls', namespace="admin")),
     url(r'^(?P<country_slug>[-\w]+)/quiz/', include('wannamigrate.quiz.urls', namespace="quiz")),
     url(r'^(?P<country_slug>[-\w]+)/stories/', include('wannamigrate.story.urls',
                                                        namespace="story")),
     url(r'^(?P<country_slug>[-\w]+)/guide/', include('wannamigrate.guide.urls', namespace="guide")),
-    url(r'^(?P<country_slug>[-\w]+)/tasks/', include('wannamigrate.task.urls', namespace="task")),
+    url(r'^(?P<country_slug>[-\w]+)/plan/', include('wannamigrate.plan.urls', namespace="plan")),
     url(r'^(?P<country_slug>[-\w]+)/docs/', include('wannamigrate.doc.urls', namespace="doc")),
     url(r'^(?P<country_slug>[-\w]+)/discussion/', include('wannamigrate.discussion.urls',
                                                           namespace="discussion")),
@@ -29,5 +38,6 @@ urlpatterns = [
     url(r'^', include('wannamigrate.company.urls', namespace="company")),
     url(r'^', include('wannamigrate.order.urls', namespace="order")),
     url(r'^', include('wannamigrate.member.urls', namespace="member")),
+    """
 
 ]
